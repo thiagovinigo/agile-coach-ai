@@ -1,0 +1,206 @@
+Total IDs: 228
+
+--- Sections found ---
+ID: ng-agil | Tag: h2 | Title: 🔄 Transformação Ágil
+ID: s-digital | Tag: h2 | Title: 💡 Transformação Digital
+ID: s-diff | Tag: h2 | Title: ⚖️ Diferenças Lado a Lado
+ID: s-passo-agil | Tag: h2 | Title: 🔄 Transformação Ágil — 6 Fases
+ID: pa-nav | Tag: h3 | Title: Diagnóstico Organizacional
+ID: pa-1 | Tag: h3 | Title: Visão & Sponsorship Executivo
+ID: pa-2 | Tag: h3 | Title: Times Piloto & Primeiros Sprints
+ID: pa-3 | Tag: h3 | Title: Escala para a Organização
+ID: pa-4 | Tag: h3 | Title: Sustentação & Cultura
+ID: pa-5 | Tag: h3 | Title: Métricas de Sucesso
+ID: s-passo-digital | Tag: h2 | Title: 💡 Transformação Digital — 6 Fases
+ID: pd-0 | Tag: h3 | Title: Diagnóstico Digital
+ID: pd-1 | Tag: h3 | Title: Estratégia & Visão Digital
+ID: pd-2 | Tag: h3 | Title: Fundação Tecnológica
+ID: pd-3 | Tag: h3 | Title: Produtos Digitais & Experiência
+ID: pd-4 | Tag: h3 | Title: Dados & Inteligência Artificial
+ID: pd-5 | Tag: h3 | Title: Escala, Ecossistema & ROI
+ID: s-nubank | Tag: h2 | Title: 💜 Nubank: De Startup a Maior Fintech do Mundo
+ID: nu-0 | Tag: h3 | Title: 🚀 MVP & Lista de Espera (2013–2014)
+ID: nu-2 | Tag: h3 | Title: 🔄 Transformação Ágil no DNA (2015–2018)
+ID: nu-3 | Tag: h3 | Title: 💡 Transformação Digital Full (2018–2022)
+ID: nu-4 | Tag: h3 | Title: 🌍 O que um Agile Coach faria em escala (8.000+ funcionários)
+ID: nu-5 | Tag: h3 | Title: 📊 Resultados (2013–2024)
+ID: s-scrum | Tag: h2 | Title: 🔵 Scrum — explicação refinada
+ID: s-kanban | Tag: h2 | Title: 🩵 Kanban — explicação refinada
+ID: s-kanban-valores | Tag: h2 | Title: 💎 Os 9 Valores do Kanban
+ID: s-kanban-praticas | Tag: h2 | Title: 🛠️ As 6 Práticas do Kanban — Guia Profundo
+ID: s-kanban-upstream | Tag: h2 | Title: ⬆️ Upstream & Downstream Kanban
+ID: s-kanban-principios | Tag: h2 | Title: ⚙️ Os 6 Princípios Fundamentais do Kanban
+ID: s-kanban-agendas | Tag: h2 | Title: 🎯 As 3 Agendas do Kanban
+ID: s-kanban-statik | Tag: h2 | Title: 🔬 STATIK — Como Introduzir Kanban nas Organizações
+ID: s-kanban-classes | Tag: h2 | Title: 🎫 Classes de Serviço e Custo do Atraso
+ID: s-kanban-previsao | Tag: h2 | Title: 🎲 Previsão Probabilística e Monte Carlo
+ID: s-kanban-escala | Tag: h2 | Title: 🌐 Escalando Kanban — Largura, Altura e Profundidade
+ID: s-kanban-casos | Tag: h2 | Title: 🏭 Kanban no Mundo Real — Casos com Resultados
+ID: s-po | Tag: h2 | Title: 🧑‍💼 Product Owner, Backlog & Hierarquia
+ID: s-po-quebrando | Tag: h2 | Title: ✂️ Quebrando Features em User Stories
+ID: s-po-pbb | Tag: h2 | Title: 🗂️ PBB — Product Backlog Building
+ID: s-po-storymap | Tag: h2 | Title: 🗺️ Story Map & Step Maps do PBB
+ID: s-po-ia-dev | Tag: h2 | Title: 🤖 Refinamento & Dev com IA
+ID: ia-output-area | Tag: h3 | Title: 🧩 O que cada skill gera — saída esperada
+ID: s-po-refinamento | Tag: h2 | Title: 🔬 Refinamento Eficaz
+ID: s-po-priorizacao | Tag: h2 | Title: ⚖️ Priorização do Backlog
+ID: s-po-formatos | Tag: h2 | Title: ✍️ Formatos de Escrita de Histórias
+ID: s-po-roadmap | Tag: h2 | Title: 🗓️ Roadmap Ágil
+ID: s-po-ac | Tag: h2 | Title: ✅ Critérios de Aceite &amp; BDD
+ID: s-oque | Tag: h2 | Title: 🔀 O que é Scrumban
+ID: s-vs | Tag: h2 | Title: ⚖️ Scrum vs Kanban vs Scrumban
+ID: s-board | Tag: h2 | Title: 📋 Board Completo
+ID: s-politicas | Tag: h2 | Title: 📜 Políticas Explícitas
+ID: s-commitment | Tag: h2 | Title: 🎯 Commitment Point & Delivery Point
+ID: s-fluxo | Tag: h2 | Title: 🌊 Fluxo Completo de um Item
+ID: s-scrumban-simulacao | Tag: h2 | Title: 🎮 Simulação Pull Flow
+ID: overflow-banner | Tag: h2 | Title: 🔁 Sistema de Cadências do Scrumban
+ID: s-wip | Tag: h2 | Title: 🚦 Limites de WIP (Work in Progress)
+ID: s-daily | Tag: h2 | Title: ☀️ Daily no Scrumban
+ID: s-demo | Tag: h2 | Title: 🎬 Demo no Scrumban
+ID: s-bloqueios | Tag: h2 | Title: 🚧 Gestão de Bloqueios
+ID: s-cos | Tag: h2 | Title: 🎯 Classes de Serviço
+ID: s-tradeoffs | Tag: h2 | Title: ⚖️ Trade-offs do Scrumban
+ID: s-avancado | Tag: h2 | Title: 🔬 Itens Avançados
+ID: s-quando | Tag: h2 | Title: 🗓️ Quando Usar Scrumban
+ID: s-anti | Tag: h2 | Title: ⚠️ Anti-Padrões do Scrumban
+ID: s-scrumban-papeis | Tag: h2 | Title: 👥 Papéis no Scrumban
+ID: s-scrumban-start | Tag: h2 | Title: 🌱 Primeiros 30 Dias — Time Novo
+ID: s-scrumban-maturidade | Tag: h2 | Title: 📈 Modelo de Maturidade Scrumban
+ID: s-scrumban-okr | Tag: h2 | Title: 🎯 Scrumban + OKRs e Roadmap
+ID: s-scrumban-remotos | Tag: h2 | Title: 🌐 Scrumban com Times Remotos e Distribuídos
+ID: s-scrumban-transicao | Tag: h2 | Title: 🔄 Guia de Transição para Scrumban
+ID: s-metricas-fluxo | Tag: h2 | Title: 📊 Métricas de Fluxo — Dicionário Completo
+ID: s-metricas-graficos | Tag: h2 | Title: 🔬 Gráficos Kanban — Como Ler e Interpretar
+ID: s-metricas-clevel | Tag: h2 | Title: 👔 Visão Executiva — Kanban para C-Level
+ID: s-metricas-dora | Tag: h2 | Title: ⚙️ Métricas DORA — Engenharia de Alta Performance
+ID: s-healthcheck | Tag: h2 | Title: 🏥 Health Check do Time — Diagnóstico 360°
+ID: s-exemplo | Tag: h2 | Title: 🏦 Squad de Open Banking — Banco Digital
+ID: s-story | Tag: h2 | Title: 🎬 Uma Semana no Squad Open Banking
+ID: sk10 | Tag: h2 | Title: 🌊 Fluxo vs. Pessoas — A maior virada mental do Scrumban
+ID: s-teach-wip | Tag: h2 | Title: 🚦 Por que limitar o WIP é a coisa mais contraintuitiva e mais poderosa do Scrumban
+ID: s-teach-daily | Tag: h2 | Title: ☀️ A Daily centrada no board — não nas pessoas
+ID: s-teach-politicas | Tag: h2 | Title: 📜 Políticas Explícitas — o contrato que elimina o conflito
+ID: s-teach-metricas | Tag: h2 | Title: 📊 Métricas de Fluxo — medir o sistema, não as pessoas
+ID: s-teach-cultura | Tag: h2 | Title: 🧬 Cultura de Melhoria Contínua — o que significa na prática
+ID: s-teach-cos | Tag: h2 | Title: 🎯 Classes de Serviço — quando tudo é urgente, nada é
+ID: s-teach-commitment | Tag: h2 | Title: 🎯 Commitment Point — prometer menos, entregar mais
+ID: s-fac-daily | Tag: h2 | Title: ☀️ Daily no Board
+ID: s-fac-replenishment | Tag: h2 | Title: 🔁 Replenishment
+ID: s-fac-wip | Tag: h2 | Title: 🚦 WIP Estourou
+ID: s-fac-bloqueio | Tag: h2 | Title: 🚧 Nomeando um Bloqueio
+ID: s-fac-expedite | Tag: h2 | Title: 🚨 Chegou um Expedite
+ID: s-fac-retro | Tag: h2 | Title: 📊 Retro de Fluxo
+ID: s-lider-fluxo | Tag: h2 | Title: 🌊 Ensinando o Novo Fluxo
+ID: s-lider-transicao | Tag: h2 | Title: 🔄 Regras de Transição
+ID: s-lider-politicas | Tag: h2 | Title: 📜 Políticas Explícitas
+ID: s-lider-misto | Tag: h2 | Title: 👥 Nivelando o Time Misto
+ID: s-lider-90dias | Tag: h2 | Title: 📅 Plano de 90 Dias
+ID: s-lider-checklist | Tag: h2 | Title: ✅ Checklist Semanal do Líder
+ID: s-lider-resistencia | Tag: h2 | Title: 🛡️ Gestão de Resistência
+ID: s-elite-politicas | Tag: h2 | Title: 📜 Regras do Board
+ID: s-elite-flow | Tag: h2 | Title: ⏱️ Touch Time vs Wait Time
+ID: s-elite-sla | Tag: h2 | Title: 🎯 SLA por Classe de Serviço
+ID: s-elite-cadencias | Tag: h2 | Title: 🔄 Cadências do Scrumban
+ID: s-elite-metricas | Tag: h2 | Title: 📈 Métricas Avançadas de Fluxo
+ID: s-elite-board | Tag: h1 | Title: 🗂️ Board Completo — Políticas, Pull Rules e Cenários
+ID: policy-panel | Tag: h3 | Title: 
+ID: policy-body | Tag: h2 | Title: 📋 Quem Puxa, de Onde e Quando
+ID: sc1 | Tag: h2 | Title: 🎙️ Perguntas da Daily por Coluna
+ID: dq-pills | Tag: h2 | Title: 🤖 Agente de Daily
+ID: agent-grid | Tag: h1 | Title: 🎭 Simulação — Refinamento Funcional
+ID: simf-container | Tag: h1 | Title: ⚙️ Simulação — Refinamento Técnico
+ID: simt-container | Tag: h1 | Title: 📐 Tamanho de Demandas &amp; Previsibilidade
+ID: mc-inputs | Tag: h2 | Title: 📊 3 Métricas de Transparência — Simples e Poderosas
+ID: replen-check | Tag: h2 | Title: 🗓️ Plano de 4 Iterações para Estabilizar o Seu Time
+
+--- All 's-*' IDs ---
+s-agil
+s-digital
+s-diff
+s-passo-agil
+s-passo-digital
+s-nubank
+s-scrum
+s-kanban
+s-kanban-valores
+s-kanban-praticas
+s-kanban-upstream
+s-kanban-principios
+s-kanban-agendas
+s-kanban-statik
+s-kanban-classes
+s-kanban-previsao
+s-kanban-escala
+s-kanban-casos
+s-po
+s-po-quebrando
+s-po-pbb
+s-po-storymap
+s-po-ia-dev
+s-po-refinamento
+s-po-priorizacao
+s-po-formatos
+s-po-roadmap
+s-po-ac
+s-oque
+s-vs
+s-board
+s-politicas
+s-commitment
+s-fluxo
+s-scrumban-simulacao
+s-cadencias
+s-wip
+s-daily
+s-demo
+s-bloqueios
+s-cos
+s-tradeoffs
+s-avancado
+s-quando
+s-anti
+s-scrumban-papeis
+s-scrumban-start
+s-scrumban-maturidade
+s-scrumban-okr
+s-scrumban-remotos
+s-scrumban-transicao
+s-metricas-fluxo
+s-metricas-graficos
+s-metricas-clevel
+s-metricas-dora
+s-healthcheck
+s-exemplo
+s-story
+s-prod-extra
+s-teach-fluxo
+s-teach-wip
+s-teach-daily
+s-teach-politicas
+s-teach-metricas
+s-teach-cultura
+s-teach-cos
+s-teach-commitment
+s-fac-daily
+s-fac-replenishment
+s-fac-wip
+s-fac-bloqueio
+s-fac-expedite
+s-fac-retro
+s-lider-fluxo
+s-lider-transicao
+s-lider-politicas
+s-lider-misto
+s-lider-90dias
+s-lider-checklist
+s-lider-resistencia
+s-elite-politicas
+s-elite-flow
+s-elite-sla
+s-elite-cadencias
+s-elite-metricas
+s-elite-board
+s-elite-sim-func
+s-elite-sim-tec
+s-elite-tamanho

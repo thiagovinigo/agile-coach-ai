@@ -1,0 +1,15 @@
+ng-agil: 🔄 Transformação Ágil
+pa-nav: 💡 Transformação Digital — 6 Fases
+pd-0: 💜 Nubank: De Startup a Maior Fintech do Mundo
+nu-0: 🔵 Scrum — explicação refinada
+ia-output-area: 🔬 Refinamento Eficaz
+overflow-banner: 🔁 Sistema de Cadências do Scrumban
+sk10: 🌊 Fluxo vs. Pessoas — A maior virada mental do Scrumban
+policy-panel: 📋 Quem Puxa, de Onde e Quando
+sc1: 🎙️ Perguntas da Daily por Coluna
+dq-pills: 🤖 Agente de Daily
+agent-grid: 🎭 Simulação — Refinamento Funcional
+simf-container: ⚙️ Simulação — Refinamento Técnico
+simt-container: 📐 Tamanho de Demandas &amp; Previsibilidade
+mc-inputs: 📊 3 Métricas de Transparência — Simples e Poderosas
+replen-check: 🗓️ Plano de 4 Iterações para Estabilizar o Seu Time

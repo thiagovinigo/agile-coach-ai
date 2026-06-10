@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agile Coach AI Portal</title>
+    <link rel="stylesheet" href="index.css?v=9">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🚀</span>
+                    <h1>Agile Coach AI</h1>
+                </div>
+                <p class="subtitle">Portal de Excelência</p>
+            </div>
+            
+            <nav class="sidebar-nav" id="sidebar-nav">
+                <div class="nav-group">
+                    <div class="nav-group-title">Portal Principal</div>
+                    <a href="#agents" class="nav-item active" data-target="agents-view">
+                        <span class="icon">🤖</span> AI Agents
+                    </a>
+                    <a href="#tfs" class="nav-item" data-target="tfs-view">
+                        <span class="icon">⚙️</span> Especialista TFS
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">Agentes & Ferramentas</div>
+                    <a href="#skills" class="nav-item" data-target="skills-view">
+                        <span class="icon">💻</span> Flowgrammers Skills
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">Base de Conhecimento</div>
+                    <a href="#agil" class="nav-item" data-target="agil-view">
+                        <span class="icon">🔄</span> Transf. Ágil & Digital
+                    </a>
+                    <a href="#kanban" class="nav-item" data-target="kanban-view">
+                        <span class="icon">🩵</span> Guia Kanban
+                    </a>
+                    <a href="#scrum" class="nav-item" data-target="scrum-view">
+                        <span class="icon">🔵</span> Scrum
+                    </a>
+                    <a href="#scrumban" class="nav-item" data-target="scrumban-view">
+                        <span class="icon">🔀</span> Tópicos Scrumban
+                    </a>
+                    <a href="#po" class="nav-item" data-target="po-view">
+                        <span class="icon">🧑‍💼</span> Product Owner
+                    </a>
+                    <a href="#metricas" class="nav-item" data-target="metricas-view">
+                        <span class="icon">📊</span> Métricas C-Level
+                    </a>
+                    <a href="#lider" class="nav-item" data-target="lider-view">
+                        <span class="icon">👑</span> Guia do Líder
+                    </a>
+                    <a href="#elite" class="nav-item" data-target="elite-view">
+                        <span class="icon">🏆</span> Time de Elite
+                    </a>
+                    <a href="#case" class="nav-item" data-target="case-view">
+                        <span class="icon">🏦</span> Case Open Banking
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <h2 id="current-section-title">AI Agents</h2>
+                <div class="user-profile">
+                    <div class="avatar">AC</div>
+                </div>
+            </header>
+
+            <div class="content-area" id="content-area">
+                <!-- Views -->
+                <div id="agents-view" class="view active"></div>
+                <div id="tfs-view" class="view"></div>
+                <div id="skills-view" class="view kb-view"></div>
+                
+                <div id="agil-view" class="view kb-view"><div class="kb-content-container" id="kb-agil"></div></div>
+                <div id="kanban-view" class="view kb-view"><div class="kb-content-container" id="kb-kanban"></div></div>
+                <div id="scrum-view" class="view kb-view"><div class="kb-content-container" id="kb-scrum"></div></div>
+                <div id="scrumban-view" class="view kb-view"><div class="kb-content-container" id="kb-scrumban"></div></div>
+                <div id="po-view" class="view kb-view"><div class="kb-content-container" id="kb-po"></div></div>
+                <div id="metricas-view" class="view kb-view"><div class="kb-content-container" id="kb-metricas"></div></div>
+                <div id="lider-view" class="view kb-view"><div class="kb-content-container" id="kb-lider"></div></div>
+                <div id="elite-view" class="view kb-view"><div class="kb-content-container" id="kb-elite"></div></div>
+                <div id="case-view" class="view kb-view"><div class="kb-content-container" id="kb-case"></div></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="legacy-scripts.js?v=8"></script>
+    <script src="skills-data.js?v=8"></script>
+    <script src="app.js?v=8"></script>
+    <script src="agents.js?v=8"></script>
+    <script src="tfs_expert.js?v=8"></script>
+</body>
+</html>

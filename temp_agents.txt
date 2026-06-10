@@ -1,0 +1,416 @@
+--- s-po-ia-dev ---
+<div id="s-po-ia-dev" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#0f0f1a,#1e1b4b)">
+    <div class="tag">PRODUCT OWNER</div>
+    <h2>🤖 Refinamento & Dev com IA</h2>
+    <p>História bem escrita → PRD completo → Spec técnica → código — como a IA amplifica cada etapa sem substituir o raciocínio do PO</p>
+  </div>
+
+  <div class="card" style="background:#1e1b4b;color:#e2e8f0;border:none;margin-bottom:20px">
+    <div class="card-title" style="color:#a5b4fc">🔑 O novo paradigma</div>
+    <p style="color:#e2e8f0">Uma história bem escrita é o melhor prompt que existe. Quando o PO investe 20 minutos escrevendo uma história com contexto real, persona clara, critérios testáveis e restrições explícitas, um agente de IA consegue gerar em segundos: o PRD completo, a spec técnica, os testes, e até iniciar o desenvolvimento. <strong style="color:#a5b4fc">A habilidade do PO não diminui — ela se multiplica.</strong></p>
+  </div>
+
+  <!-- Fluxo completo -->
+  <h3 style="margin:20px 0 12px">🔁 O fluxo completo: história → código</h3>
+  <div style="background:#fff;border:2px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px">
+    <div style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center">
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px">
+        <div style="font-size:28px;margin-bottom:6px">✍️</div>
+        <div style="font-size:12px;font-weight:800;color:#1e293b">HISTÓRIA</div>
+        <div style="font-size:11px;color:#6b7280;margin-top:2px">PO escreve<br>as 6 seções</div>
+      </div>
+
+      <div style="font-size:24px;color:#94a3b8;padding:0 4px">→</div>
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px;background:#ede9fe;border-radius:10px">
+        <div style="font-size:28px;margin-bottom:6px">🤖</div>
+        <div style="font-size:12px;font-weight:800;color:#7c3aed">SKILL<br>userstory</div>
+        <div style="font-size:11px;color:#5b21b6;margin-top:2px">UserStory.md<br>estruturado</div>
+      </div>
+
+      <div style="font-size:24px;color:#94a3b8;padding:0 4px">→</div>
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px;background:#dbeafe;border-radius:10px">
+        <div style="font-size:28px;margin-bottom:6px">📄</div>
+        <div style="font-size:12px;font-weight:800;color:#1d4ed8">SKILL<br>prd</div>
+        <div style="font-size:11px;color:#1e40af;margin-top:2px">PRD.md<br>completo</div>
+      </div>
+
+      <div style="font-size:24px;color:#94a3b8;padding:0 4px">→</div>
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px;background:#dcfce7;border-radius:10px">
+        <div style="font-size:28px;margin-bottom:6px">⚙️</div>
+        <div style="font-size:12px;font-weight:800;color:#15803d">SPEC<br>técnica</div>
+        <div style="font-size:11px;color:#166534;margin-top:2px">Tasks, testes<br>arquitetura</div>
+      </div>
+
+      <div style="font-size:24px;color:#94a3b8;padding:0 4px">→</div>
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px;background:#fef9c3;border-radius:10px">
+        <div style="font-size:28px;margin-bottom:6px">🏗️</div>
+        <div style="font-size:12px;font-weight:800;color:#92400e">SKILL<br>construção</div>
+        <div style="font-size:11px;color:#78350f;margin-top:2px">Claude Code<br>desenvolve</div>
+      </div>
+
+      <div style="font-size:24px;color:#94a3b8;padding:0 4px">→</div>
+
+      <div style="text-align:center;padding:12px 16px;min-width:110px">
+        <div style="font-size:28px;margin-bottom:6px">🚀</div>
+        <div style="font-size:12px;font-weight:800;color:#1e293b">ENTREGUE</div>
+        <div style="font-size:11px;color:#6b7280;margin-top:2px">PR aberto<br>testes verdes</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Formato da história para IA -->
+  <h3 style="margin:20px 0 12px">📋 O formato de história que a IA entende (6 seções)</h3>
+  <div class="alert alert-blue" style="margin-bottom:14px"><span>💡</span><span>Quanto mais completas as 6 seções, mais preciso o output do agente. Seção em branco = decisão que a IA vai tomar por você — às vezes certo, às vezes não.</span></div>
+
+  <div style="display:grid;gap:8px;margin-bottom:20px">
+
+    <div style="border:2px solid #7c3aed;border-radius:8px;overflow:hidden">
+      <div style="background:#7c3aed;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>① TÍTULO E CONTEXTO</span><span style="opacity:.7">obrigatório</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>Formato:</strong> "Como [persona], quero [ação], para [benefício]"</p>
+        <p style="margin:6px 0 0;color:#475569"><strong>Inclui:</strong> nome da feature, épico-pai, contexto de negócio em 1–2 frases.</p>
+        <div style="background:#f5f3ff;border-radius:6px;padding:8px;margin-top:6px;font-family:monospace;font-size:12px;color:#4c1d95">
+          <strong>Título:</strong> Solicitação de Férias Self-Service<br>
+          <strong>Épico:</strong> Automação RH — Gestão de Ausências<br>
+          <strong>História:</strong> Como colaborador CLT, quero solicitar minhas férias pelo portal, para não precisar enviar e-mail ao RH e ter confirmação imediata.
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #1d4ed8;border-radius:8px;overflow:hidden">
+      <div style="background:#1d4ed8;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>② PROBLEMA ATUAL</span><span style="opacity:.7">obrigatório</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>Como o processo funciona hoje?</strong> Descreva a dor real, com frequência e impacto.</p>
+        <div style="background:#eff6ff;border-radius:6px;padding:8px;margin-top:6px;font-size:12px;color:#1e3a5f;font-family:monospace">
+          Hoje o colaborador envia e-mail ao RH. O RH encaminha para o gestor. O gestor aprova por reply. O RH lança manualmente no TOTVS. Processo demora 5–7 dias, gera 30% de erros de lançamento e 15 chamados/mês de dúvida.
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #047857;border-radius:8px;overflow:hidden">
+      <div style="background:#047857;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>③ CRITÉRIOS DE ACEITE</span><span style="opacity:.7">mín. 3 cenários</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>Dado/Quando/Então</strong> ou lista. Cada critério deve ser testável automaticamente.</p>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;margin-top:6px;font-size:12px;color:#14532d;font-family:monospace">
+          ✅ Dado colaborador com saldo ≥ período solicitado, Quando submete pedido, Então status muda para "Aguardando gestor" em &lt;3s<br>
+          ✅ Dado gestor aprova, Então colaborador recebe notificação em &lt;1min e TOTVS é atualizado automaticamente<br>
+          ✅ Dado período &lt; 30 dias de antecedência, Então sistema bloqueia com mensagem específica (regra CLT)
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #b45309;border-radius:8px;overflow:hidden">
+      <div style="background:#b45309;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>④ RESTRIÇÕES E REGRAS</span><span style="opacity:.7">obrigatório</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>O que o sistema nunca pode violar?</strong> Leis, políticas, limites técnicos.</p>
+        <div style="background:#fff7ed;border-radius:6px;padding:8px;margin-top:6px;font-size:12px;color:#7c2d12;font-family:monospace">
+          • CLT: mínimo 30 dias de antecedência; máximo 30 dias corridos por vez<br>
+          • Saldo não pode ser negativo<br>
+          • Integração obrigatória com TOTVS Protheus (REST API existente)<br>
+          • LGPD: log de auditoria de todas as aprovações
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #0284c7;border-radius:8px;overflow:hidden">
+      <div style="background:#0284c7;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>⑤ DEFINIÇÃO DE PRONTO (DoD)</span><span style="opacity:.7">obrigatório</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>O que precisa ser verdade para a história ser considerada "done"?</strong></p>
+        <div style="background:#e0f2fe;border-radius:6px;padding:8px;margin-top:6px;font-size:12px;color:#0c4a6e;font-family:monospace">
+          • Todos os critérios de aceite passando em staging<br>
+          • Cobertura de testes ≥ 80% (unitários + integração)<br>
+          • PO validou fluxo completo no ambiente de homologação<br>
+          • Documentação de API atualizada (Swagger)<br>
+          • Zero vulnerabilidades críticas no SAST
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #475569;border-radius:8px;overflow:hidden">
+      <div style="background:#475569;color:#fff;padding:7px 14px;font-weight:800;font-size:13px;display:flex;justify-content:space-between">
+        <span>⑥ CONTEXTO TÉCNICO</span><span style="opacity:.7">opcional mas valioso</span>
+      </div>
+      <div style="padding:10px 14px;font-size:13px">
+        <p style="margin:0"><strong>O que o agente deve saber sobre a stack e integrações?</strong></p>
+        <div style="background:#f8fafc;border-radius:6px;padding:8px;margin-top:6px;font-size:12px;color:#1e293b;font-family:monospace">
+          • Stack: NestJS (backend) + React (frontend) + PostgreSQL<br>
+          • TOTVS: endpoint POST /v2/ferias já existe (auth Bearer)<br>
+          • Notificações: usar serviço de e-mail já implementado (EmailService)<br>
+          • Módulo de saldo de férias: FeriasModule (calcular saldo existente)
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WIDGET INTERATIVO -->
+  <h3 style="margin:20px 0 12px">🤖 Agente Interativo — gere o prompt certo para cada skill</h3>
+  <div style="background:#0f0f1a;border-radius:12px;padding:20px;margin-bottom:20px">
+
+    <!-- Story input -->
+    <div style="margin-bottom:14px">
+      <label style="color:#a5b4fc;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:6px">✍️ Cole ou edite sua história aqui</label>
+      <textarea id="ia-story-input" rows="8" style="width:100%;box-sizing:border-box;background:#1e1b4b;border:1px solid #3730a3;border-radius:8px;color:#e2e8f0;font-family:monospace;font-size:12px;padding:12px;resize:vertical;line-height:1.6" placeholder="Cole o texto da sua história aqui...">Título: Solicitação de Férias Self-Service
+Épico: Automação RH — Gestão de Ausências
+História: Como colaborador CLT, quero solicitar minhas férias pelo portal, para não precisar enviar e-mail ao RH e ter confirmação imediata do gestor.
+
+Problema atual: Hoje o colaborador envia e-mail ao RH, que encaminha para o gestor, que aprova por reply. O RH lança manualmente no TOTVS. Processo demora 5–7 dias e gera 30% de erros de lançamento.
+
+Critérios de aceite:
+✅ Dado colaborador com saldo suficiente, Quando submete pedido, Então status muda para "Aguardando gestor" em <3s e gestor recebe notificação
+✅ Dado gestor aprova, Então TOTVS é atualizado automaticamente em <1 min
+✅ Dado período com <30 dias de antecedência, Então sistema bloqueia com mensagem de erro (regra CLT)
+✅ Dado saldo insuficiente, Então sistema exibe saldo disponível e bloqueia o pedido
+
+Restrições: CLT mínimo 30 dias antecedência; máximo 30 dias corridos. Integração obrigatória TOTVS Protheus REST. LGPD: log de auditoria obrigatório.
+
+DoD: todos os CAs passando em staging; cobertura ≥80%; PO validou em homologação; Swagger atualizado.
+
+Stack: NestJS + React + PostgreSQL. TOTVS endpoint POST /v2/ferias já existe.</textarea>
+    </div>
+
+    <!-- Botões -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+      <button onclick="gerarPromptIA('userstory')" style="background:#7c3aed;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px">
+        🤖 Skill: User Story Autônoma
+      </button>
+      <button onclick="gerarPromptIA('prd')" style="background:#1d4ed8;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px">
+        📄 Skill: Gerar PRD.md
+      </button>
+      <button onclick="gerarPromptIA('spec')" style="background:#047857;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px">
+        ⚙️ Gerar Spec Técnica
+      </button>
+      <button onclick="gerarPromptIA('code')" style="background:#b45309;color:#fff;border:none;border-radius:8px;padding:10px 16px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px">
+        🏗️ Skill: Construção (Claude Code)
+      </button>
+    </div>
+
+    <!-- Output -->
+    <div id=
+
+--- s-elite-board ---
+<div id="s-elite-board" class="section">
+  <h1>🗂️ Board Completo — Políticas, Pull Rules e Cenários</h1>
+  <p>Este board representa um time Scrumban de elite com upstream de descoberta e downstream de entrega. Cada coluna tem WIP limit, política de entrada (DoR), política de saída (DoD), responsável e SLA. Clique em qualquer coluna para ver sua política completa.</p>
+
+  <!-- LEGENDA -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#dbeafe;border:2px solid #3b82f6;display:inline-block"></span> Upstream (discovery)</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#fef3c7;border:2px solid #f59e0b;display:inline-block"></span> Downstream ativo</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#f3f4f6;border:2px solid #9ca3af;display:inline-block"></span> Fila (queue)</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#fee2e2;border:2px solid #ef4444;display:inline-block"></span> Bloquei/espera</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#d1fae5;border:2px solid #10b981;display:inline-block"></span> Done</span>
+  </div>
+
+  <!-- BOARD VISUAL -->
+  <div style="overflow-x:auto;padding-bottom:12px;">
+    <div style="display:flex;gap:0;min-width:1600px;">
+
+      <!-- ZONA UPSTREAM -->
+      <div style="flex:1;min-width:0;">
+        <div style="background:#eff6ff;border:2px solid #3b82f6;border-radius:10px 10px 0 0;padding:6px 10px;font-size:11px;font-weight:700;color:#1d4ed8;text-align:center;letter-spacing:.05em;">UPSTREAM — Descoberta & Refinamento</div>
+        <div style="display:flex;gap:4px;padding:8px;background:#eff6ff;border:2px solid #3b82f6;border-top:none;border-radius:0 0 10px 10px;">
+
+          <div class="bcol" data-col="new" onclick="showPolicy('new')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:4px;">NEW</div>
+            <div style="font-size:11px;color:#374151;">Buffer de entrada</div>
+            <div style="margin-top:6px;font-size:10px;background:#bfdbfe;border-radius:4px;padding:2px 5px;display:inline-block;color:#1e3a8a;">♾ sem WIP</div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="ref-func" onclick="showPolicy('ref-func')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:4px;">REFINAMENTO FUNCIONAL</div>
+            <div style="font-size:11px;color:#374151;">PO + Dev Lead</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#bbf7d0;border-radius:4px;padding:2px 5px;color:#14532d;">3/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="ref-tec" onclick="showPolicy('ref-tec')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:4px;">REFINAMENTO TÉCNICO</div>
+            <div style="font-size:11px;color:#374151;">Dev Team</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#bbf7d0;border-radius:4px;padding:2px 5px;color:#14532d;">1/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="aprov-po" onclick="showPolicy('aprov-po')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:4px;">APROVAÇÃO PO</div>
+            <div style="font-size:11px;color:#374151;">PO sign-off</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#bbf7d0;border-radius:4px;padding:2px 5px;color:#14532d;">2/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="pronto-replen" onclick="showPolicy('pronto-replen')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#1e40af;margin-bottom:4px;">PRONTO PARA REPLENISHMENT</div>
+            <div style="font-size:11px;color:#374151;">Fila aguardando</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#e0e7ff;border-radius:4px;padding:2px 5px;color:#3730a3;">0/5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETA UP→DOWN -->
+      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 6px;gap:4px;">
+        <div style="font-size:10px;font-weight:700;color:#6b7280;text-align:center;writing-mode:vertical-lr;transform:rotate(180deg);letter-spacing:.08em;">UP→DOWN</div>
+        <div style="font-size:20px;color:#6b7280;">⇒</div>
+      </div>
+
+      <!-- ZONA DOWNSTREAM DEV -->
+      <div style="flex:1.6;min-width:0;">
+        <div style="background:#fffbeb;border:2px solid #f59e0b;border-radius:10px 10px 0 0;padding:6px 10px;font-size:11px;font-weight:700;color:#b45309;text-align:center;letter-spacing:.05em;">DOWNSTREAM — Desenvolvimento & QA</div>
+        <div style="display:flex;gap:4px;padding:8px;background:#fffbeb;border:2px solid #f59e0b;border-top:none;border-radius:0 0 10px 10px;">
+
+          <div class="bcol" data-col="backlog" onclick="showPolicy('backlog')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #6b728080'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:4px;">BACKLOG</div>
+            <div style="font-size:11px;color:#6b7280;">Fila priorizada</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#bbf7d0;border-radius:4px;padding:2px 5px;color:#14532d;">1/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="dev" onclick="showPolicy('dev')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #fcd34d;background:#fef3c7;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #f59e0b80'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#92400e;margin-bottom:4px;">DESENVOLVIMENTO</div>
+            <div style="font-size:11px;color:#374151;">Dev ativo</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#bbf7d0;border-radius:4px;padding:2px 5px;color:#14532d;">1/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="dev-dep" onclick="showPolicy('dev-dep')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #fca5a5;background:#fee2e2;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #ef444480'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#991b1b;margin-bottom:4px;">DEV FINALIZADO / DEPENDÊNCIA</div>
+            <div style="font-size:11px;color:#374151;">Aguardando</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+              <span style="font-size:10px;background:#fee2e2;border-radius:4px;padding:2px 5px;color:#991b1b;">1/5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="ready-test" onclick="showPolicy('ready-test')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #6b728080'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:4px;">READY TO TEST</div>
+            <div style="font-size:11px;color:#6b7280;">Fila QA</div>
+            <div style="margin-top:6px;">
+              <span style="font-size:10px;background:#e0e7ff;border-radius:4px;padding:2px 5px;color:#3730a3;">♾ queue</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="tests" onclick="showPolicy('tests')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #fcd34d;background:#fef3c7;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #f59e0b80'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#92400e;margin-bottom:4px;">TESTS</div>
+            <div style="font-size:11px;color:#374151;">QA ativo</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 1/QA</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="testes-fin" onclick="showPolicy('testes-fin')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #6b728080'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:4px;">TESTES FINALIZADOS</div>
+            <div style="font-size:11px;color:#6b7280;">Aguarda PO</div>
+            <div style="margin-top:6px;">
+              <span style="font-size:10px;background:#e0e7ff;border-radius:4px;padding:2px 5px;color:#3730a3;">♾ queue</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZONA DOWNSTREAM HOMOLOG + DEPLOY -->
+      <div style="flex:1.1;min-width:0;">
+        <div style="background:#f0fdf4;border:2px solid #22c55e;border-radius:10px 10px 0 0;padding:6px 10px;font-size:11px;font-weight:700;color:#15803d;text-align:center;letter-spacing:.05em;">DOWNSTREAM — Homologação & Deploy</div>
+        <div style="display:flex;gap:4px;padding:8px;background:#f0fdf4;border:2px solid #22c55e;border-top:none;border-radius:0 0 10px 10px;">
+
+          <div class="bcol" data-col="validacao-po" onclick="showPolicy('validacao-po')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #fcd34d;background:#fef3c7;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #f59e0b80'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#92400e;margin-bottom:4px;">EM VALIDAÇÃO PO</div>
+            <div style="font-size:11px;color:#374151;">PO revisa</div>
+            <div style="margin-top:6px;display:flex;gap:4px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 2</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div style="display:flex;flex-direction:column;gap:4px;flex:1;min-width:80px;">
+            <div class="bcol" data-col="homologado" onclick="showPolicy('homologado')" style="cursor:pointer;border-radius:8px;border:2px solid #86efac;background:#dcfce7;padding:6px;transition:box-shadow .15s;flex:1;" onmouseover="this.style.boxShadow='0 0 0 3px #22c55e80'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:10px;font-weight:700;color:#14532d;margin-bottom:2px;">✅ HOMOLOGADO</div>
+              <div style="font-size:10px;color:#374151;">→ Libera instalar</div>
+            </div>
+            <div class="bcol" data-col="nao-homologado" onclick="showPolicy('nao-homologado')" style="cursor:pointer;border-radius:8px;border:2px solid #fca5a5;background:#fee2e2;padding:6px;transition:box-shadow .15s;flex:1;" onmouseover="this.style.boxShadow='0 0 0 3px #ef444480'" onmouseout="this.style.boxShadow='none'">
+              <div style="font-size:10px;font-weight:700;color:#991b1b;margin-bottom:2px;">❌ NÃO HOMOLOGADO</div>
+              <div style="font-size:10px;color:#374151;">→ Volta ao Backlog</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="liberada" onclick="showPolicy('liberada')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #d1d5db;background:#f9fafb;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #6b728080'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:4px;">LIBERADA PARA INSTALAR</div>
+            <div style="font-size:11px;color:#6b7280;">Aguarda janela</div>
+            <div style="margin-top:6px;">
+              <span style="font-size:10px;background:#e0e7ff;border-radius:4px;padding:2px 5px;color:#3730a3;">♾ queue</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="em-producao" onclick="showPolicy('em-producao')" style="flex:1;min-width:80px;cursor:pointer;border-radius:8px;border:2px solid #fcd34d;background:#fef3c7;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #f59e0b80'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#92400e;margin-bottom:4px;">EM PRODUÇÃO</div>
+            <div style="font-size:11px;color:#374151;">Observação 24h</div>
+            <div style="margin-top:6px;">
+              <span style="font-size:10px;background:#fef08a;border-radius:4px;padding:2px 5px;color:#713f12;">WIP 5</span>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;color:#94a3b8;font-size:16px;padding:0 2px;">›</div>
+
+          <div class="bcol" data-col="done" onclick="showPolicy('done')" style="flex:0.7;min-width:70px;cursor:pointer;border-radius:8px;border:2px solid #86efac;background:#d1fae5;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #10b98180'" onmouseout="this.style.boxShadow='none'">
+            <div style="font-size:10px;font-weight:700;color:#064e3b;margin-bottom:4px;">✅ DONE</div>
+            <div style="font-size:11px;color:#374151;">Entregue</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAINEL DE POLÍTICAS (mostra quando clica na coluna) -->
+  <div id=

@@ -1,0 +1,61 @@
+<div id="s-cadencias" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#ea580c,#9a3412)">
+    <div class="tag">CADÊNCIAS</div><h2>🔁 Sistema de Cadências do Scrumban</h2>
+    <p>Cada cadência resolve um tipo diferente de problema — nenhuma é opcional</p>
+  </div>
+  <div class="card orange"><p>Scrumban usa <strong>8 cadências formais</strong>, cada uma respondendo uma pergunta diferente. Quando uma não existe, o sistema perde um loop de feedback crítico.</p></div>
+
+  <!-- 8 CADÊNCIAS OFICIAIS -->
+  <div class="st">As 8 Cadências Kanban/Scrumban</div>
+  <table class="tbl">
+    <thead><tr>
+      <th style="background:var(--dark);color:#fff">Cadência</th>
+      <th style="background:#1d4ed8;color:#fff">Freq.</th>
+      <th style="background:#065f46;color:#fff">Duração</th>
+      <th style="background:#92400e;color:#fff">Pergunta Central</th>
+    </tr></thead>
+    <tbody>
+      <tr style="background:#fef3c7"><td>☀️ <strong>Kanban Meeting</strong></td><td>Diária</td><td>15 min</td><td>O que impede o fluxo?</td></tr>
+      <tr style="background:#fef3c7"><td>🔄 <strong>Replenishment</strong></td><td>Semanal</td><td>20-30 min</td><td>O que puxamos para as vagas?</td></tr>
+      <tr style="background:#dbeafe"><td>📊 <strong>Flow Review</strong></td><td>2×/mês</td><td>30 min</td><td>O que os dados mostram sobre capacidade?</td></tr>
+      <tr style="background:#dbeafe"><td>🚧 <strong>Blocker Clustering</strong></td><td>Mensal</td><td>1 hora</td><td>Quais bloqueios se repetem? Causa sistêmica?</td></tr>
+      <tr style="background:#d1fae5"><td>📦 <strong>Service Delivery Review (SDR)</strong></td><td>2×/mês</td><td>30 min</td><td>O cliente está satisfeito? Honramos o SLE?</td></tr>
+      <tr style="background:#d1fae5"><td>📅 <strong>Delivery Planning</strong></td><td>Por release</td><td>1-2h</td><td>Quais itens chegarão a tempo?</td></tr>
+      <tr style="background:#f3e8ff"><td>🔭 <strong>Operations Review</strong></td><td>Mensal</td><td>2h</td><td>Como o sistema de sistemas está operando?</td></tr>
+      <tr style="background:#f3e8ff"><td>⚠️ <strong>Risk Review</strong></td><td>Mensal</td><td>1-2h</td><td>Quais riscos afetam a entrega?</td></tr>
+    </tbody>
+  </table>
+
+  <!-- MAPA SCRUM → SCRUMBAN -->
+  <div class="st" style="margin-top:18px">Mapeamento Scrum → Scrumban</div>
+  <div class="g2">
+    <div class="card dark"><div class="card-title">📅 Sprint Planning → Replenishment</div>
+      <p>Sem sprint goal fixo. Sem comprometimento de escopo. Fila reabastecida quando cai abaixo do limiar — contínuo e leve.</p></div>
+    <div class="card dark"><div class="card-title">☀️ Daily Scrum → Kanban Meeting</div>
+      <p>Foco no board, não nas pessoas. 3 perguntas: "O que bloqueia o fluxo? Tem WIP no limite? Algo próximo da entrega precisa de ajuda?"</p></div>
+    <div class="card dark"><div class="card-title">🔬 Sprint Review → SDR + Flow Review</div>
+      <p>SDR para o cliente (SLE honrado?). Flow Review para o time (capacidade, throughput, lead time).</p></div>
+    <div class="card dark"><div class="card-title">🔄 Retrospectiva → Flow Review + Blocker Clustering</div>
+      <p>Flow Review analisa dados. Blocker Clustering agrupa impedimentos recorrentes e ataca causa raiz sistêmica.</p></div>
+  </div>
+
+  <!-- MVP TIP -->
+  <div class="info-box" style="margin-top:12px;border-left-color:#065f46">
+    <strong>💡 MVP das cadências — comece com apenas 3:</strong><br>
+    <strong>① Kanban Meeting</strong> (diária) → <strong>② Replenishment</strong> (semanal) → <strong>③ Flow Review</strong> (quinzenal). Adicione as demais conforme o time amadurece. Adotar as 8 de uma vez afoga o time — é uma das 5 armadilhas de migração.
+  </div>
+  <div class="st">🔍 Queue Replenishment — a mais importante e mais ignorada</div>
+  <div class="card orange">
+    <p><strong>Quando acontece:</strong> Quando "Pronto para Puxar" cai abaixo do limiar (ex: &lt;4 itens). Pode ser sob demanda ou em horário fixo 2×/semana.</p>
+    <p><strong>O que acontece:</strong> ① PO apresenta próximos itens priorizados → ② Time valida DoR → ③ Time estima tamanho P/M/G → ④ Itens G são quebrados → ⑤ Dependências sinalizadas → ⑥ Fila completada até o limiar máximo</p>
+    <p><strong>Diferença do Sprint Planning:</strong> Não existe sprint goal. Não existe comprometimento de escopo. É planejamento contínuo e leve — não uma cerimônia pesada de 3 horas.</p>
+  </div>
+  <div class="st">📊 Retrospectiva de Fluxo — diferente da retro do Scrum</div>
+  <div class="g2">
+    <div class="card dark"><div class="card-title">❌ Retro sem dados (Scrum comum)</div><p>"O que foi bom?" → Post-its<br>"O que foi ruim?" → Post-its<br>"O que melhorar?" → Lista de 10 coisas<br>Resultado: mesmos problemas todo mês</p></div>
+    <div class="card green"><div class="card-title">✅ Retro de fluxo (Scrumban)</div><p>CFD mostra acúmulo em QA → causa raiz<br>Lead time de itens G: 14 dias vs M: 4 dias → decisão<br>Throughput caiu semana 3 → férias? débito técnico?<br>1 experimento com hipótese e critério de sucesso</p></div>
+  </div>
+  <div class="card orange"><div class="card-title">📋 Estrutura da Retro de Fluxo (75 min)</div><p>① Análise do CFD — onde acumulou? (10 min) → ② Lead time por tipo (10 min) → ③ Causa raiz do maior problema (20 min) → ④ 1 experimento: hipótese + métrica + prazo (15 min) → ⑤ Revisão do experimento anterior (10 min)</p></div>
+  <div class="alert alert-orange"><span>⚠️</span><span><strong>Erro clássico:</strong> Times em Scrumban têm daily e replenishment, mas abandonam retro e strategy review. Resultado: fluxo eficiente sem direção. É rodar muito rápido no lugar errado.</span></div>
+</div>
+

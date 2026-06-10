@@ -1,0 +1,33 @@
+.kb-page-content .page-header h2,
+.kb-page-content .page-header p,
+.kb-page-content .page-header .tag {
+    color: #ffffff !important;
+}
+
+.kb-page-content .page-header h3 {
+    color: #ffffff !important;
+}
+
+.kb-page-content .card.red {
+    background: #fee2e2 !important;
+    border-color: #fca5a5 !important;
+    color: #991b1b !important;
+}
+
+.kb-page-content .card.red .card-title,
+.kb-page-content .card.red p,
+.kb-page-content .card.red ul {
+    color: #7f1d1d !important;
+}
+
+.kb-page-content .card.dark {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+}
+
+.kb-page-content .card.dark .card-title,
+.kb-page-content .card.dark p,
+.kb-page-content .card.dark ul {
+    color: #f1f5f9 !important;
+}

@@ -1,0 +1,715 @@
+<div id="s-elite-tamanho" class="section">
+<h1>📐 Tamanho de Demandas &amp; Previsibilidade</h1>
+<p style="color:var(--text-muted,#64748b);font-size:1rem;margin:0 0 28px;">Seu time entrega 3 a 8 itens por iteração de 15 dias — e isso é um sinal, não um problema aleatório. Aqui você vai entender por que isso acontece e como trazer previsibilidade sem estimar.</p>
+
+<!-- ── DIAGNÓSTICO ─────────────────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">🔍 O Diagnóstico: 166% de Variação</h2>
+  <p style="color:var(--text-muted,#64748b);margin:0 0 20px;font-size:.95rem;">Você disse: <em>"entregamos de 3 a 8 itens por iteração de 15 dias."</em> Vamos colocar isso em perspectiva.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:20px;">
+    <div style="background:linear-gradient(135deg,#fee2e2,#fecaca);border-radius:10px;padding:18px;text-align:center;">
+      <div style="font-size:2rem;font-weight:800;color:#b91c1c;">166%</div>
+      <div style="font-size:.8rem;color:#7f1d1d;margin-top:4px;">variação entre<br>mínimo e máximo</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:10px;padding:18px;text-align:center;">
+      <div style="font-size:2rem;font-weight:800;color:#92400e;">5,3</div>
+      <div style="font-size:.8rem;color:#78350f;margin-top:4px;">média estimada<br>(sem dados reais)</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-radius:10px;padding:18px;text-align:center;">
+      <div style="font-size:2rem;font-weight:800;color:#166534;">10</div>
+      <div style="font-size:.8rem;color:#14532d;margin-top:4px;">dias úteis por<br>iteração</div>
+    </div>
+    <div style="background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-radius:10px;padding:18px;text-align:center;">
+      <div style="font-size:2rem;font-weight:800;color:#5b21b6;">5 itens</div>
+      <div style="font-size:.8rem;color:#4c1d95;margin-top:4px;">de variação<br>(máx − mín)</div>
+    </div>
+  </div>
+
+  <!-- variability bar chart -->
+  <p style="color:var(--text-muted,#64748b);font-size:.85rem;margin:0 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">Exemplo de histórico real (10 iterações):</p>
+  <div style="display:flex;align-items:flex-end;gap:8px;height:90px;padding:0 4px;">
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(3/8*80px);min-height:4px;"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">3</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(7/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">7</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(4/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">4</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#ef4444;border-radius:4px 4px 0 0;width:100%;height:calc(8/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">8</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(3/8*80px);min-height:4px;"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">3</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(6/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">6</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(5/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">5</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#ef4444;border-radius:4px 4px 0 0;width:100%;height:calc(3/8*80px);min-height:4px;"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">3</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(7/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">7</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+      <div style="background:#3b82f6;border-radius:4px 4px 0 0;width:100%;height:calc(4/8*80px);"></div>
+      <div style="font-size:.7rem;color:#64748b;margin-top:3px;">4</div>
+    </div>
+  </div>
+  <div style="border-top:2px solid #94a3b8;margin-top:2px;"></div>
+  <div style="display:flex;gap:16px;margin-top:8px;">
+    <span style="font-size:.75rem;color:#64748b;">🔴 = iterações baixas (outliers de bloqueio)</span>
+    <span style="font-size:.75rem;color:#64748b;">Linhas P50≈5 / P85≈7 / P95≈8</span>
+  </div>
+</div>
+
+<!-- ── POR QUE VARIA ───────────────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 16px;font-size:1.15rem;color:var(--text,#1e293b);">🧩 Por Que a Variação Acontece</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 16px;">Variação de throughput tem <strong>causas identificáveis</strong>. Não é "a iteração foi ruim" — é sistema mal calibrado.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;">
+    <div style="border:1px solid #fecaca;border-radius:8px;padding:14px;background:#fef9f9;">
+      <div style="font-weight:700;color:#dc2626;margin-bottom:6px;">📦 Mistura de Tamanhos</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Uma iteração com 3 itens pode ter entregado o mesmo esforço que outra com 8. Itens heterogêneos tornam throughput uma métrica enganosa — o problema não é a quantidade, é o tamanho desigual das demandas.</p>
+    </div>
+    <div style="border:1px solid #fde68a;border-radius:8px;padding:14px;background:#fffdf0;">
+      <div style="font-weight:700;color:#d97706;margin-bottom:6px;">🚧 Bloqueios e Dependências</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Uma demanda bloqueada no meio da iteração "ocupa espaço" sem avançar. WIP alto amplifica esse efeito: mais itens em voo = mais chance de bloqueio simultâneo.</p>
+    </div>
+    <div style="border:1px solid #bfdbfe;border-radius:8px;padding:14px;background:#f0f7ff;">
+      <div style="font-weight:700;color:#1d4ed8;margin-bottom:6px;">🔄 Refinamento Tardio</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Demanda entra na iteração sem DoR completa. O dev descobre ambiguidade no meio do desenvolvimento e precisa parar para resolver — descoberta tardia é o maior vilão.</p>
+    </div>
+    <div style="border:1px solid #d1fae5;border-radius:8px;padding:14px;background:#f0fdf4;">
+      <div style="font-weight:700;color:#065f46;margin-bottom:6px;">🎯 Ausência de WIP Limit</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Sem limite, o time puxa tudo no início da iteração e fica com múltiplas demandas "quase prontas" que não chegam a Done. Throughput cai mesmo com muita atividade.</p>
+    </div>
+    <div style="border:1px solid #ede9fe;border-radius:8px;padding:14px;background:#faf5ff;">
+      <div style="font-weight:700;color:#6b21a8;margin-bottom:6px;">📅 Demanda Não Planejada</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Bugs críticos, suporte, pedidos urgentes entram sem planejamento e competem com as demandas da iteração — perturbação não controlada reduz o throughput sem que o time perceba o motivo.</p>
+    </div>
+    <div style="border:1px solid #e2e8f0;border-radius:8px;padding:14px;background:#f8fafc;">
+      <div style="font-weight:700;color:#475569;margin-bottom:6px;">🏖️ Variação de Capacidade</div>
+      <p style="font-size:.85rem;color:#64748b;margin:0;">Férias, doenças, reuniões pesadas — capacidade real varia iteração a iteração. Sem visibilidade de capacidade, o volume comprometido não tem fundamento.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── ANALOGIA DO ZOOLÓGICO ──────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">🐾 O Zoológico do Board: Cachorros, Camelos, Elefantes e Ratos</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 24px;">Uma analogia do Kanban para entender de uma vez o que deve — e o que <em>não deve</em> — entrar no seu fluxo de trabalho.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px;">
+
+    <!-- CACHORRO -->
+    <div style="border:2px solid #16a34a;border-radius:12px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;padding:14px 16px;text-align:center;">
+        <div style="font-size:2.5rem;line-height:1;">🐕</div>
+        <div style="font-weight:900;font-size:1rem;margin-top:4px;">CACHORRO</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:2px;">O item ideal</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:.8rem;font-weight:700;color:#16a34a;margin-bottom:8px;">✅ ACEITE SEMPRE</div>
+        <ul style="font-size:.82rem;color:#374151;margin:0;padding-left:14px;line-height:1.9;">
+          <li>Escopo fechado e claro</li>
+          <li>Entregável de forma independente</li>
+          <li>Critério de done óbvio</li>
+          <li>Tamanho similar aos outros itens</li>
+          <li>Não gera surpresa no meio do caminho</li>
+        </ul>
+        <div style="margin-top:10px;background:#f0fdf4;border-radius:6px;padding:8px;font-size:.78rem;color:#14532d;">
+          <strong>Exemplo:</strong> "Adicionar filtro de data no relatório de vendas" — comportamento claro, AC testável, 2-3 dias.
+        </div>
+      </div>
+    </div>
+
+    <!-- CAMELO -->
+    <div style="border:2px solid #d97706;border-radius:12px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#d97706,#b45309);color:#fff;padding:14px 16px;text-align:center;">
+        <div style="font-size:2.5rem;line-height:1;">🐪</div>
+        <div style="font-weight:900;font-size:1rem;margin-top:4px;">CAMELO</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:2px;">O item um pouco maior</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:.8rem;font-weight:700;color:#d97706;margin-bottom:8px;">⚠️ ACEITE COM ATENÇÃO</div>
+        <ul style="font-size:.82rem;color:#374151;margin:0;padding-left:14px;line-height:1.9;">
+          <li>Um pouco maior que o usual</li>
+          <li>Ainda cabe dentro da iteração</li>
+          <li>Pode ter 1-2 dependências internas</li>
+          <li>Time consegue estimar com confiança</li>
+          <li>Vale questionar: "dá pra quebrar?"</li>
+        </ul>
+        <div style="margin-top:10px;background:#fffbeb;border-radius:6px;padding:8px;font-size:.78rem;color:#78350f;">
+          <strong>Exemplo:</strong> "Tela de checkout com validações e integração de pagamento" — possível em 1 iteração, mas carrega risco. Aceita se o time tiver confiança.
+        </div>
+      </div>
+    </div>
+
+    <!-- ELEFANTE -->
+    <div style="border:2px solid #dc2626;border-radius:12px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:14px 16px;text-align:center;">
+        <div style="font-size:2.5rem;line-height:1;">🐘</div>
+        <div style="font-weight:900;font-size:1rem;margin-top:4px;">ELEFANTE</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:2px;">O item grande demais</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:.8rem;font-weight:700;color:#dc2626;margin-bottom:8px;">🚫 NUNCA ENTRE NO BOARD</div>
+        <ul style="font-size:.82rem;color:#374151;margin:0;padding-left:14px;line-height:1.9;">
+          <li>Não cabe em 1 iteração</li>
+          <li>WIP inflado, board mentiroso</li>
+          <li>Progresso invisível por semanas</li>
+          <li>Bloqueia capacidade do time todo</li>
+          <li>Stakeholder nunca sabe quando sai</li>
+        </ul>
+        <div style="margin-top:10px;background:#fef2f2;border-radius:6px;padding:8px;font-size:.78rem;color:#991b1b;">
+          <strong>Tratamento:</strong> Volte para o refinamento. Use SPIDR para fatiar. Quebre em cachorros antes do Commitment Point.
+        </div>
+      </div>
+    </div>
+
+    <!-- RATO -->
+    <div style="border:2px solid #6b7280;border-radius:12px;overflow:hidden;">
+      <div style="background:linear-gradient(135deg,#475569,#334155);color:#fff;padding:14px 16px;text-align:center;">
+        <div style="font-size:2.5rem;line-height:1;">🐀</div>
+        <div style="font-weight:900;font-size:1rem;margin-top:4px;">RATO</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:2px;">O item trivial demais</div>
+      </div>
+      <div style="padding:14px 16px;">
+        <div style="font-size:.8rem;font-weight:700;color:#475569;margin-bottom:8px;">⚡ AGRUPE OU DESCARTE</div>
+        <ul style="font-size:.82rem;color:#374151;margin:0;padding-left:14px;line-height:1.9;">
+          <li>Horas, não dias — muito trivial</li>
+          <li>Cria overhead de cerimônia por item</li>
+          <li>Polui o throughput real</li>
+          <li>Gera context-switching desnecessário</li>
+          <li>Infla artificialmente a contagem de itens</li>
+        </ul>
+        <div style="margin-top:10px;background:#f8fafc;border-radius:6px;padding:8px;font-size:.78rem;color:#475569;">
+          <strong>Tratamento:</strong> Agrupe em um único item ("Ajustes de texto e UI — Sprint X"), trate como task interna de outro item, ou defina um limiar mínimo de entrada no board.
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Régua visual -->
+  <div style="margin-bottom:20px;">
+    <div style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;">Régua de tamanho ideal para o seu fluxo</div>
+    <div style="background:linear-gradient(to right, #94a3b8 0%, #475569 8%, #16a34a 25%, #16a34a 60%, #d97706 75%, #dc2626 100%);border-radius:8px;height:20px;position:relative;margin-bottom:6px;"></div>
+    <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#64748b;">
+      <span>🐀 Muito pequeno<br>(horas)</span>
+      <span style="text-align:center;">🐕 Zona ideal<br>(1–5 dias)</span>
+      <span style="text-align:center;">🐪 Aceitável<br>(6–8 dias)</span>
+      <span style="text-align:right;">🐘 Muito grande<br>(+1 iteração)</span>
+    </div>
+  </div>
+
+  <!-- Política do board -->
+  <div style="background:linear-gradient(135deg,#1e293b,#0f172a);color:#e2e8f0;border-radius:10px;padding:16px 20px;">
+    <div style="font-weight:800;font-size:.85rem;color:#94a3b8;letter-spacing:.08em;margin-bottom:10px;">POLÍTICA DO BOARD — REGRA DO ZOOLÓGICO</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;font-size:.82rem;">
+      <div style="background:#16a34a20;border:1px solid #16a34a40;border-radius:6px;padding:8px 10px;">
+        <strong style="color:#4ade80">🐕 Cachorro</strong><br>
+        <span style="color:#94a3b8">Entra direto após DoR</span>
+      </div>
+      <div style="background:#d9770620;border:1px solid #d9770640;border-radius:6px;padding:8px 10px;">
+        <strong style="color:#fb923c">🐪 Camelo</strong><br>
+        <span style="color:#94a3b8">Entra com revisão extra no refinamento — "dá pra quebrar?"</span>
+      </div>
+      <div style="background:#dc262620;border:1px solid #dc262640;border-radius:6px;padding:8px 10px;">
+        <strong style="color:#f87171">🐘 Elefante</strong><br>
+        <span style="color:#94a3b8">Devolve ao PO. Não passa do Commitment Point.</span>
+      </div>
+      <div style="background:#47556920;border:1px solid #47556940;border-radius:6px;padding:8px 10px;">
+        <strong style="color:#94a3b8">🐀 Rato</strong><br>
+        <span style="color:#94a3b8">Agrupa com outros ratos ou encapsula como task.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CALIBRADOR DE TAMANHO ──────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">📏 Calibrador de Tamanho — O que é "1 Item"?</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 20px;">A alavanca mais poderosa para reduzir variação <strong>não é estimar</strong> — é <strong>uniformizar o tamanho</strong> das demandas que entram no fluxo. Quanto mais parecidas entre si, mais estável o throughput.</p>
+
+  <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:10px;padding:20px;margin-bottom:20px;border-left:4px solid #3b82f6;">
+    <div style="font-weight:700;color:#1e40af;font-size:1rem;margin-bottom:10px;">🎯 Definição: 1 item = 1 demanda de trabalho</div>
+    <p style="color:#1e40af;font-size:.9rem;margin:0 0 8px;">Um item é uma demanda discreta — uma história de usuário, uma task técnica, um bug com escopo definido. O que importa <strong>não é quantos dias ele leva</strong>, mas sim que ele tenha:</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="background:#fff;border:1px solid #93c5fd;border-radius:20px;padding:4px 12px;font-size:.82rem;color:#1e40af;">✓ Escopo fechado</span>
+      <span style="background:#fff;border:1px solid #93c5fd;border-radius:20px;padding:4px 12px;font-size:.82rem;color:#1e40af;">✓ Critério de done claro</span>
+      <span style="background:#fff;border:1px solid #93c5fd;border-radius:20px;padding:4px 12px;font-size:.82rem;color:#1e40af;">✓ Entregável de forma independente</span>
+      <span style="background:#fff;border:1px solid #93c5fd;border-radius:20px;padding:4px 12px;font-size:.82rem;color:#1e40af;">✓ Tamanho similar aos outros itens</span>
+    </div>
+    <p style="color:#1e40af;font-size:.85rem;margin:10px 0 0;">A variação de 3–8 itens/iteração some quando as demandas ficam similares entre si — não quando o time passa a estimar.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+    <div>
+      <div style="font-weight:700;color:#dc2626;margin-bottom:10px;font-size:.95rem;">❌ Itens que CAUSAM variação</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="background:#fef2f2;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#7f1d1d;">
+          <strong>"Implementar sistema de notificações"</strong> — vaga, pode ser 2h ou 4 semanas
+        </div>
+        <div style="background:#fef2f2;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#7f1d1d;">
+          <strong>"Migrar banco de dados"</strong> — épico disfarçado de história
+        </div>
+        <div style="background:#fef2f2;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#7f1d1d;">
+          <strong>"Melhorar performance"</strong> — sem critério de done definido
+        </div>
+        <div style="background:#fef2f2;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#7f1d1d;">
+          <strong>"Fazer tudo que o cliente pediu"</strong> — múltiplos entregáveis em 1 card
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight:700;color:#16a34a;margin-bottom:10px;font-size:.95rem;">✅ Itens que ESTABILIZAM o fluxo</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="background:#f0fdf4;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#14532d;">
+          <strong>"Notif. por e-mail quando pedido aprovado"</strong> — 1 tipo, 1 trigger, 1 canal
+        </div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#14532d;">
+          <strong>"Migrar tabela users para nova estrutura"</strong> — escopo cirúrgico
+        </div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#14532d;">
+          <strong>"Query de listagem &lt; 200ms no P95"</strong> — done mensurável
+        </div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:10px 12px;font-size:.85rem;color:#14532d;">
+          <strong>"Tela de perfil — campo de avatar"</strong> — 1 feature atomic
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#f8fafc;border-radius:8px;padding:16px;border:1px solid #e2e8f0;">
+    <div style="font-weight:700;color:#374151;margin-bottom:10px;">🔪 Quando um item é GRANDE demais — use SPIDR</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span style="background:#dbeafe;color:#1e40af;padding:5px 10px;border-radius:20px;font-size:.8rem;font-weight:600;">S — Spike (investigar primeiro)</span>
+      <span style="background:#fce7f3;color:#9d174d;padding:5px 10px;border-radius:20px;font-size:.8rem;font-weight:600;">P — Caminho (por fluxo do usuário)</span>
+      <span style="background:#dcfce7;color:#166534;padding:5px 10px;border-radius:20px;font-size:.8rem;font-weight:600;">I — Interface (UI separado de lógica)</span>
+      <span style="background:#fef3c7;color:#92400e;padding:5px 10px;border-radius:20px;font-size:.8rem;font-weight:600;">D — Dados (crud por crud)</span>
+      <span style="background:#ede9fe;color:#5b21b6;padding:5px 10px;border-radius:20px;font-size:.8rem;font-weight:600;">R — Regras (por caso de negócio)</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── 3 AÇÕES ─────────────────────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 16px;font-size:1.15rem;color:var(--text,#1e293b);">⚡ 3 Ações Para Estabilizar o Fluxo do Seu Time</h2>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:10px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-left:4px solid #2563eb;">
+      <div style="font-size:2rem;min-width:40px;">1️⃣</div>
+      <div>
+        <div style="font-weight:700;color:#1e40af;font-size:1rem;margin-bottom:6px;">Implante o "Critério de Tamanho" no Replenishment</div>
+        <p style="font-size:.9rem;color:#1e40af;margin:0 0 8px;">Na sua daily replenishment (ou replenishment semanal), antes de qualquer item entrar no backlog pronto, o time responde:</p>
+        <div style="background:#ffffff80;border-radius:6px;padding:10px 14px;font-size:.85rem;color:#1e3a8a;">
+          <strong>"Essa demanda tem escopo fechado e dá para entregar completa dentro da iteração?"</strong><br>
+          Se a resposta for NÃO → quebrar antes de entrar na iteração.
+        </div>
+        <p style="font-size:.85rem;color:#1e40af;margin:8px 0 0;"><strong>Impacto esperado:</strong> redução de 40-60% na variação de throughput nas primeiras 4 iterações.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:10px;background:linear-gradient(135deg,#fefce8,#fef9c3);border-left:4px solid #ca8a04;">
+      <div style="font-size:2rem;min-width:40px;">2️⃣</div>
+      <div>
+        <div style="font-weight:700;color:#92400e;font-size:1rem;margin-bottom:6px;">Limite o WIP por Pessoa (não por coluna)</div>
+        <p style="font-size:.9rem;color:#78350f;margin:0 0 8px;">Para um time de 3-4 devs, a regra mais simples e eficaz:</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:8px;">
+          <div style="background:#ffffff80;border-radius:6px;padding:10px;text-align:center;font-size:.85rem;color:#92400e;">
+            <div style="font-size:1.3rem;font-weight:800;">1</div>
+            <div>item em progress<br>por dev</div>
+          </div>
+          <div style="background:#ffffff80;border-radius:6px;padding:10px;text-align:center;font-size:.85rem;color:#92400e;">
+            <div style="font-size:1.3rem;font-weight:800;">+1</div>
+            <div>item bloqueado<br>tolerado</div>
+          </div>
+          <div style="background:#ffffff80;border-radius:6px;padding:10px;text-align:center;font-size:.85rem;color:#92400e;">
+            <div style="font-size:1.3rem;font-weight:800;">0</div>
+            <div>itens "quase<br>prontos" no ar</div>
+          </div>
+        </div>
+        <p style="font-size:.85rem;color:#78350f;margin:0;"><strong>Stop starting, start finishing.</strong> Se alguém está bloqueado, ajuda o colega a terminar em vez de puxar um novo item.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-left:4px solid #16a34a;">
+      <div style="font-size:2rem;min-width:40px;">3️⃣</div>
+      <div>
+        <div style="font-weight:700;color:#166534;font-size:1rem;margin-bottom:6px;">Coloque o Item Aging no Board</div>
+        <p style="font-size:.9rem;color:#166534;margin:0 0 8px;">Na daily, o SM/Lead exibe quantos dias cada item está em andamento. Regra simples:</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+          <span style="background:#d1fae5;color:#065f46;padding:5px 12px;border-radius:20px;font-size:.82rem;">🟢 1-2 dias → normal</span>
+          <span style="background:#fef3c7;color:#92400e;padding:5px 12px;border-radius:20px;font-size:.82rem;">🟡 3-4 dias → atenção, tem bloqueio?</span>
+          <span style="background:#fee2e2;color:#991b1b;padding:5px 12px;border-radius:20px;font-size:.82rem;">🔴 5+ dias → escalação imediata</span>
+        </div>
+        <p style="font-size:.85rem;color:#166534;margin:0;">Aging visível elimina o efeito "demanda esquecida" — principal razão para iterações com apenas 3 itens entregues.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── MONTE CARLO ─────────────────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">🎲 Forecasting por Throughput — Sem Estimativa</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 20px;">Monte Carlo usa seu histórico de throughput para simular milhares de futuros possíveis. O resultado é uma probabilidade, não uma promessa. <strong>Muito mais honesto do que uma data única.</strong></p>
+
+  <div style="background:#f8fafc;border-radius:10px;padding:20px;margin-bottom:20px;border:1px solid #e2e8f0;">
+    <div style="font-weight:700;color:#374151;margin-bottom:12px;font-size:.95rem;">📊 Edite seu histórico de throughput (itens por iteração de 15 dias):</div>
+    <div id="mc-inputs" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S1<input type="number" class="mc-val" value="3" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S2<input type="number" class="mc-val" value="7" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S3<input type="number" class="mc-val" value="4" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S4<input type="number" class="mc-val" value="8" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S5<input type="number" class="mc-val" value="3" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S6<input type="number" class="mc-val" value="6" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S7<input type="number" class="mc-val" value="5" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S8<input type="number" class="mc-val" value="3" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S9<input type="number" class="mc-val" value="7" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+      <label style="display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.75rem;color:#64748b;">S10<input type="number" class="mc-val" value="4" min="0" max="30" style="width:48px;padding:6px;text-align:center;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;"></label>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <label style="font-size:.9rem;color:#374151;font-weight:600;display:flex;align-items:center;gap:8px;">
+        Quantos itens preciso entregar?
+        <input type="number" id="mc-target" value="20" min="1" max="200" style="width:70px;padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-size:.9rem;background:white;">
+      </label>
+      <button onclick="runMonteCarlo()" style="background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:.9rem;font-weight:600;cursor:pointer;">▶ Simular 10.000 cenários</button>
+    </div>
+  </div>
+
+  <div id="mc-result" style="display:none;"></div>
+
+  <!-- mini throughput stats -->
+  <div id="mc-stats" style="background:#f0f9ff;border-radius:8px;padding:14px;margin-top:12px;display:none;">
+    <div style="font-weight:700;color:#0c4a6e;margin-bottom:8px;font-size:.85rem;">📈 Estatísticas do seu throughput histórico:</div>
+    <div id="mc-stats-content" style="display:flex;flex-wrap:wrap;gap:12px;"></div>
+  </div>
+</div>
+
+<!-- ── 3 MÉTRICAS DE TRANSPARÊNCIA ────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">📊 3 Métricas de Transparência — Simples e Poderosas</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 20px;">Você não precisa de um dashboard complexo. <strong>Essas 3 métricas coladas na parede mudam a conversa com o time e os stakeholders.</strong></p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;">
+
+    <div style="border-radius:10px;padding:20px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px solid #bae6fd;">
+      <div style="font-size:1.6rem;margin-bottom:6px;">📈</div>
+      <div style="font-weight:800;color:#0c4a6e;font-size:1.1rem;margin-bottom:6px;">Throughput Run Chart</div>
+      <div style="font-size:.85rem;color:#075985;margin-bottom:10px;"><strong>O quê:</strong> itens entregues por iteração, plotados ao longo do tempo.</div>
+      <div style="background:#ffffff80;border-radius:6px;padding:10px;font-size:.82rem;color:#0c4a6e;">
+        <strong>Como usar:</strong> mostre na retro. Se a linha está caindo, há um problema sistêmico — não de esforço.
+      </div>
+    </div>
+
+    <div style="border-radius:10px;padding:20px;background:linear-gradient(135deg,#fefce8,#fef9c3);border:1px solid #fde68a;">
+      <div style="font-size:1.6rem;margin-bottom:6px;">⏱️</div>
+      <div style="font-weight:800;color:#78350f;font-size:1.1rem;margin-bottom:6px;">Lead Time Scatterplot</div>
+      <div style="font-size:.85rem;color:#92400e;margin-bottom:10px;"><strong>O quê:</strong> cada ponto = 1 item entregue, posicionado pelo tempo que levou (commitment → done).</div>
+      <div style="background:#ffffff80;border-radius:6px;padding:10px;font-size:.82rem;color:#78350f;">
+        <strong>Como usar:</strong> trace a linha P85. Itens acima = outliers. Pergunte: o que os tornou especiais?
+      </div>
+    </div>
+
+    <div style="border-radius:10px;padding:20px;background:linear-gradient(135deg,#fdf2f8,#fce7f3);border:1px solid #f9a8d4;">
+      <div style="font-size:1.6rem;margin-bottom:6px;">⏳</div>
+      <div style="font-weight:800;color:#831843;font-size:1.1rem;margin-bottom:6px;">Item Aging</div>
+      <div style="font-size:.85rem;color:#9d174d;margin-bottom:10px;"><strong>O quê:</strong> para cada item em andamento, há quantos dias ele está parado naquela coluna?</div>
+      <div style="background:#ffffff80;border-radius:6px;padding:10px;font-size:.82rem;color:#831843;">
+        <strong>Como usar:</strong> exiba na daily. Qualquer item acima do P85 de lead time fica marcado em vermelho.
+      </div>
+    </div>
+
+  </div>
+
+  <div style="background:#f1f5f9;border-radius:8px;padding:14px;margin-top:16px;border-left:3px solid #64748b;">
+    <div style="font-weight:700;color:#334155;margin-bottom:6px;">💡 Como apresentar para stakeholders</div>
+    <p style="font-size:.88rem;color:#475569;margin:0;">Em vez de "vai ficar pronto na semana X", use: <em>"Com base nos últimos 10 sprints, temos 85% de confiança de entregar esse conjunto de 20 itens em 4 sprints (2 meses). Se priorizarmos os 12 itens mais críticos, subimos para 95% de confiança em 3 sprints."</em></p>
+  </div>
+</div>
+
+<!-- ── CHECKLIST REPLENISHMENT ─────────────────────────────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">✅ Checklist do Daily Replenishment — Inspeção de Tamanho</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 16px;">Para cada item candidato a entrar no sprint, o time responde:</p>
+  <div id="replen-check" style="display:flex;flex-direction:column;gap:10px;">
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>Cabe em 1-2 dias?</strong> Se não, quebrar agora antes de entrar no backlog pronto.</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>Tem critérios de done claros?</strong> O dev sabe exatamente quando pode mover para "Feito"?</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>Dependências mapeadas?</strong> Há algo externo (outra squad, infra, PO decision) que pode bloquear?</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>Quem vai pegar?</strong> Tem dev com capacity para assumir sem ultrapassar WIP?</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>É menor que P85 do lead time?</strong> Se algo claramente vai durar mais que o lead time P85 histórico → quebrar.</span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:12px 14px;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0;transition:background .2s;" onmouseover="this.style.background='#eff6ff'" onmouseout="this.style.background='#f8fafc'">
+      <input type="checkbox" style="margin-top:2px;accent-color:#3b82f6;width:16px;height:16px;min-width:16px;">
+      <span style="font-size:.9rem;color:#374151;"><strong>Protege a capacidade de demanda não planejada?</strong> Deixar 20-30% da iteração livre para bugs e urgências reduz disrupção.</span>
+    </label>
+  </div>
+  <div id="replen-score" style="margin-top:14px;padding:12px 16px;border-radius:8px;background:#f0f9ff;font-size:.9rem;color:#0c4a6e;font-weight:600;display:none;">
+    ✅ 6/6 — Demanda pronta para entrar na iteração!
+  </div>
+</div>
+
+<!-- ── PLANO DE 4 ITERAÇÕES ─────────────────────────────────────────── -->
+<div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:12px;padding:28px;margin-bottom:24px;color:#fff;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:#f1f5f9;">🗓️ Plano de 4 Iterações para Estabilizar o Seu Time</h2>
+  <p style="color:#94a3b8;font-size:.9rem;margin:0 0 20px;">Aplicando as 3 ações acima nessa sequência, a maioria dos times sai de "3-8 itens" para "5-7 itens" (variação aceitável) em 2 meses de iterações de 15 dias.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;">
+    <div style="background:#1e40af20;border:1px solid #3b82f680;border-radius:8px;padding:16px;">
+      <div style="color:#60a5fa;font-weight:700;margin-bottom:8px;">Iteração 1-2</div>
+      <div style="font-size:.85rem;color:#cbd5e1;line-height:1.5;">Instalar o critério de tamanho no replenishment. Medir throughput atual. Visualizar item aging na daily.</div>
+    </div>
+    <div style="background:#92400e20;border:1px solid #d97706;border-radius:8px;padding:16px;">
+      <div style="color:#fbbf24;font-weight:700;margin-bottom:8px;">Iteração 3-4</div>
+      <div style="font-size:.85rem;color:#cbd5e1;line-height:1.5;">Implantar WIP limit por pessoa. Fazer o throughput run chart aparecer na retro. Primeiros forecasts Monte Carlo para stakeholders.</div>
+    </div>
+    <div style="background:#16653420;border:1px solid #22c55e80;border-radius:8px;padding:16px;">
+      <div style="color:#4ade80;font-weight:700;margin-bottom:8px;">Iteração 5-8</div>
+      <div style="font-size:.85rem;color:#cbd5e1;line-height:1.5;">Calibrar com dados reais. Ajustar WIP limits. Iniciar lead time scatterplot. Convidar stakeholders para ver a previsibilidade crescendo.</div>
+    </div>
+    <div style="background:#5b21b620;border:1px solid #8b5cf680;border-radius:8px;padding:16px;">
+      <div style="color:#a78bfa;font-weight:700;margin-bottom:8px;">Iteração 9+</div>
+      <div style="font-size:.85rem;color:#cbd5e1;line-height:1.5;">Time em regime de fluxo estável. Throughput P85-P50 ≤ 2 itens. Forecasts com 85%+ de acurácia. Capacidade para absorver SLAs por classe de serviço.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CENÁRIO: item que ocupa o sprint inteiro de dev ────────────── -->
+<div style="background:var(--bg-card,#fff);border:1px solid var(--border,#e2e8f0);border-radius:12px;padding:28px;margin-bottom:24px;">
+  <h2 style="margin:0 0 6px;font-size:1.15rem;color:var(--text,#1e293b);">❓ "E se a demanda levar a iteração inteira de dev? Quando o QA testa?"</h2>
+  <p style="color:var(--text-muted,#64748b);font-size:.95rem;margin:0 0 20px;">Essa dúvida revela o problema de sizing na raiz: <strong>uma demanda que ocupa 10 dias úteis de dev não tem espaço para QA no mesmo ciclo.</strong> Você tem 3 caminhos — um correto e dois de emergência.</p>
+
+  <div style="background:#fee2e2;border-left:4px solid #dc2626;border-radius:8px;padding:14px 18px;margin-bottom:20px;">
+    <div style="font-weight:700;color:#991b1b;margin-bottom:4px;">⚠️ O que times fazem de errado</div>
+    <p style="font-size:.9rem;color:#7f1d1d;margin:0;">Esperam o dev terminar no <strong>último dia da iteração</strong> e pedem para o QA testar tudo de uma vez. QA não dá conta, a demanda vai para a próxima iteração sem teste real — e é chamada de "Done" quando não está.</p>
+  </div>
+
+  <!-- 3 caminhos -->
+  <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+
+    <div style="border-radius:10px;border:2px solid #22c55e;padding:20px;background:#f0fdf4;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="background:#16a34a;color:white;border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:700;">✅ CAMINHO CERTO</span>
+        <span style="font-weight:700;color:#166534;font-size:1rem;">Quebrar o item antes de entrar no sprint</span>
+      </div>
+      <p style="font-size:.9rem;color:#166534;margin:0 0 12px;">Qualquer demanda que ocupa a iteração inteira de dev é um <strong>épico disfarçado de história</strong>. A regra é simples:</p>
+      <div style="background:white;border-radius:8px;padding:12px 16px;border:1px solid #86efac;font-size:.9rem;color:#166534;margin-bottom:12px;">
+        <strong>Se a demanda precisa de mais de 60% da iteração para dev, ela deve ser quebrada antes de entrar.</strong><br>
+        Com 10 dias úteis: qualquer coisa acima de 6 dias de dev = quebrar.
+      </div>
+      <p style="font-size:.88rem;color:#166534;margin:0 0 10px;">Use SPIDR para dividir em demandas menores, cada uma com critério de aceite próprio e testável. O QA testa cada parte assim que fica pronta, <strong>ainda dentro da iteração</strong>.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <div style="background:#dcfce7;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#166534;flex:1;min-width:140px;">
+          <strong>Resultado:</strong><br>Lead time: 2-3 dias por fatia<br>QA no mesmo ciclo ✓<br>Bugs encontrados cedo ✓
+        </div>
+        <div style="background:#dcfce7;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#166534;flex:1;min-width:140px;">
+          <strong>Exemplo:</strong><br>"Integração com gateway de pagamento" (10 dias)<br>→ 4 fatias de 2 dias cada ✓
+        </div>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;border:1px solid #fde68a;padding:20px;background:#fffbeb;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="background:#d97706;color:white;border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:700;">⚠️ EMERGÊNCIA 1</span>
+        <span style="font-weight:700;color:#92400e;font-size:1rem;">Shift-Left: QA entra junto com dev</span>
+      </div>
+      <p style="font-size:.9rem;color:#78350f;margin:0 0 12px;">Quando não dá para quebrar a história, QA se envolve <strong>durante o desenvolvimento</strong>, não depois.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div style="background:white;border-radius:8px;padding:12px;border:1px solid #fde68a;font-size:.82rem;color:#78350f;">
+          <strong>Dias 1-3 (Dev faz tarefas 1-3)</strong><br>
+          QA: escreve casos de teste com base nos ACs, prepara ambiente, testa qualquer entrega parcial disponível
+        </div>
+        <div style="background:white;border-radius:8px;padding:12px;border:1px solid #fde68a;font-size:.82rem;color:#78350f;">
+          <strong>Dias 4-5 (Sprint fechando)</strong><br>
+          QA e Dev trabalham juntos no mesmo item. Dev corrige bugs em tempo real. Evita o "teste de última hora"
+        </div>
+      </div>
+      <div style="background:#fef3c7;border-radius:6px;padding:10px 14px;font-size:.85rem;color:#92400e;">
+        <strong>Pré-requisito:</strong> a história precisa ter tasks técnicas bem definidas e o ambiente de teste disponível desde o dia 1 do sprint.
+      </div>
+    </div>
+
+    <div style="border-radius:10px;border:1px solid #e2e8f0;padding:20px;background:#f8fafc;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="background:#64748b;color:white;border-radius:20px;padding:3px 12px;font-size:.75rem;font-weight:700;">⚠️ EMERGÊNCIA 2</span>
+        <span style="font-weight:700;color:#374151;font-size:1rem;">Staggered Testing: QA testa na próxima iteração</span>
+      </div>
+      <p style="font-size:.9rem;color:#475569;margin:0 0 12px;">Aceitar explicitamente que itens grandes vão para QA no próximo sprint. <strong>Funciona, mas tem custos sérios.</strong></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="background:#f1f5f9;border-radius:8px;padding:12px;border:1px solid #e2e8f0;font-size:.82rem;color:#64748b;">
+          <strong style="color:#374151;">Como implementar:</strong><br>
+          Iteração N: dev entrega<br>
+          Iteração N+1: QA testa<br>
+          Reserve capacity do QA no início da N+1
+        </div>
+        <div style="background:#fee2e2;border-radius:8px;padding:12px;border:1px solid #fca5a5;font-size:.82rem;color:#991b1b;">
+          <strong>Custos:</strong><br>
+          Lead time dobra (4 semanas)<br>
+          Bug encontrado = dev em context-switch<br>
+          "Done" na demo da iteração N é mentira
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- decisão tree -->
+  <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:10px;padding:20px;color:#fff;">
+    <div style="font-weight:700;color:#f1f5f9;margin-bottom:14px;font-size:.95rem;">🌳 Árvore de Decisão — O que fazer com o item grande?</div>
+    <div style="display:flex;flex-direction:column;gap:10px;font-size:.85rem;">
+      <div style="background:#1e40af30;border-radius:8px;padding:12px;border-left:3px solid #60a5fa;">
+        <strong style="color:#93c5fd;">Pergunta 1:</strong> <span style="color:#cbd5e1;">Dá para quebrar essa demanda em partes menores, cada uma com AC independente e entregável sozinha?</span><br>
+        <span style="color:#4ade80;">→ SIM:</span> <span style="color:#cbd5e1;">Use SPIDR agora. Não coloque o épico na iteração.</span>
+      </div>
+      <div style="background:#1e40af30;border-radius:8px;padding:12px;border-left:3px solid #60a5fa;">
+        <strong style="color:#93c5fd;">Pergunta 2 (se não deu para quebrar):</strong> <span style="color:#cbd5e1;">O QA consegue entrar junto nos últimos dias de dev da iteração?</span><br>
+        <span style="color:#4ade80;">→ SIM:</span> <span style="color:#cbd5e1;">Shift-left — defina as tasks e envolva o QA desde o dia 1 da iteração.</span>
+      </div>
+      <div style="background:#1e40af30;border-radius:8px;padding:12px;border-left:3px solid #60a5fa;">
+        <strong style="color:#93c5fd;">Pergunta 3 (última opção):</strong> <span style="color:#cbd5e1;">O negócio aceita que a demanda só vai estar "Done de verdade" na próxima iteração?</span><br>
+        <span style="color:#4ade80;">→ SIM:</span> <span style="color:#cbd5e1;">Staggered — planeje a capacity de QA na próxima iteração explicitamente.</span><br>
+        <span style="color:#f87171;">→ NÃO:</span> <span style="color:#cbd5e1;">Volte para o PO e quebre a demanda. Não tem atalho.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* ── Monte Carlo Simulation ── */
+  window.runMonteCarlo = function() {
+    const inputs = Array.from(document.querySelectorAll('#s-elite-tamanho .mc-val'));
+    const history = inputs.map(i => parseInt(i.value) || 0).filter(v => v >= 0);
+    const target = parseInt(document.getElementById('mc-target').value) || 20;
+    if(history.length === 0) return;
+
+    const N = 10000;
+    const sprintCounts = [];
+
+    for(let sim = 0; sim < N; sim++){
+      let total = 0, sprints = 0;
+      while(total < target){
+        const idx = Math.floor(Math.random() * history.length);
+        total += history[idx];
+        sprints++;
+        if(sprints > 500) break; // safety
+      }
+      sprintCounts.push(sprints);
+    }
+
+    sprintCounts.sort((a,b) => a-b);
+    const p50 = sprintCounts[Math.floor(N*0.50)];
+    const p75 = sprintCounts[Math.floor(N*0.75)];
+    const p85 = sprintCounts[Math.floor(N*0.85)];
+    const p95 = sprintCounts[Math.floor(N*0.95)];
+
+    const daysPerSprint = 10;
+    const sprintDays = 15;
+
+    // Build result HTML
+    const resultDiv = document.getElementById('mc-result');
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `
+      <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:10px;padding:20px;border:1px solid #86efac;">
+        <div style="font-weight:700;color:#166534;margin-bottom:4px;font-size:1rem;">🎲 Resultado: Para entregar <strong>${target} itens</strong>...</div>
+        <p style="color:#166534;font-size:.85rem;margin:0 0 16px;">Baseado em ${N.toLocaleString()} simulações com seu histórico de ${history.length} iterações.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:16px;">
+          <div style="background:#ffffff90;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:.7rem;color:#166534;font-weight:600;text-transform:uppercase;margin-bottom:4px;">P50 — Otimista</div>
+            <div style="font-size:2rem;font-weight:800;color:#166534;">${p50}</div>
+            <div style="font-size:.75rem;color:#166534;">iteraç${p50>1?'ões':'ão'} ≈ ${Math.round(p50*sprintDays/daysPerSprint)}sem</div>
+            <div style="font-size:.7rem;color:#4ade80;margin-top:4px;">50% de chance</div>
+          </div>
+          <div style="background:#ffffff90;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:.7rem;color:#166534;font-weight:600;text-transform:uppercase;margin-bottom:4px;">P75 — Realista</div>
+            <div style="font-size:2rem;font-weight:800;color:#166534;">${p75}</div>
+            <div style="font-size:.75rem;color:#166534;">iteraç${p75>1?'ões':'ão'} ≈ ${Math.round(p75*sprintDays/daysPerSprint)}sem</div>
+            <div style="font-size:.7rem;color:#4ade80;margin-top:4px;">75% de chance</div>
+          </div>
+          <div style="background:#3b82f620;border:2px solid #3b82f6;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:.7rem;color:#1e40af;font-weight:700;text-transform:uppercase;margin-bottom:4px;">⭐ P85 — Recomendado</div>
+            <div style="font-size:2rem;font-weight:800;color:#1e40af;">${p85}</div>
+            <div style="font-size:.75rem;color:#1e40af;">iteraç${p85>1?'ões':'ão'} ≈ ${Math.round(p85*sprintDays/daysPerSprint)}sem</div>
+            <div style="font-size:.75rem;color:#3b82f6;margin-top:4px;font-weight:600;">85% de chance</div>
+          </div>
+          <div style="background:#ffffff90;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:.7rem;color:#166534;font-weight:600;text-transform:uppercase;margin-bottom:4px;">P95 — Conservador</div>
+            <div style="font-size:2rem;font-weight:800;color:#166534;">${p95}</div>
+            <div style="font-size:.75rem;color:#166534;">iteraç${p95>1?'ões':'ão'} ≈ ${Math.round(p95*sprintDays/daysPerSprint)}sem</div>
+            <div style="font-size:.7rem;color:#4ade80;margin-top:4px;">95% de chance</div>
+          </div>
+        </div>
+        <div style="background:#ffffff70;border-radius:8px;padding:12px;font-size:.85rem;color:#166534;">
+          💬 <strong>Script para stakeholders:</strong> "Com 85% de confiança, entregamos os ${target} itens em ${p85} iteraç${p85>1?'ões':'ão'} de 15 dias — isso é ${Math.round(p85*sprintDays/7)} semanas. Se priorizarmos os itens críticos e mantivermos o fluxo estável, podemos melhorar para ${p75} iterações."
+        </div>
+      </div>`;
+
+    // Stats
+    const avg = (history.reduce((a,b)=>a+b,0)/history.length).toFixed(1);
+    const sorted = [...history].sort((a,b)=>a-b);
+    const sMin = sorted[0], sMax = sorted[sorted.length-1];
+    const sP85th = sorted[Math.min(Math.floor(sorted.length*0.85), sorted.length-1)];
+    const statsDiv = document.getElementById('mc-stats');
+    const statsContent = document.getElementById('mc-stats-content');
+    statsDiv.style.display = 'block';
+    statsContent.innerHTML = `
+      <span style="background:#e0f2fe;color:#0c4a6e;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600;">Mín: ${sMin} itens/sprint</span>
+      <span style="background:#e0f2fe;color:#0c4a6e;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600;">Máx: ${sMax} itens/sprint</span>
+      <span style="background:#e0f2fe;color:#0c4a6e;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600;">Média: ${avg} itens/sprint</span>
+      <span style="background:#bfdbfe;color:#1e40af;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:700;">P85: ${sP85th} itens/sprint (use para SLA)</span>
+      <span style="background:${sMax-sMin>4?'#fee2e2':'#dcfce7'};color:${sMax-sMin>4?'#991b1b':'#166534'};padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600;">Variação: ${sMax-sMin} itens (${sMax-sMin>4?'alta — uniformize tamanhos':'ok — fluxo estável'})</span>`;
+  };
+
+  /* ── Checklist interativo ── */
+  document.addEventListener('change', function(e){
+    if(!e.target.closest('#replen-check')) return;
+    const checks = document.querySelectorAll('#s-elite-tamanho #replen-check input[type=checkbox]');
+    const checked = Array.from(checks).filter(c=>c.checked).length;
+    const score = document.getElementById('replen-score');
+    if(checked > 0){
+      score.style.display = 'block';
+      const msgs = ['','','','','', '🔍 Quase lá — 1 item restante para confirmar!','✅ 6/6 — Demanda pronta para entrar na iteração!'];
+      const colors = ['','','','','','#fef3c7','#dcfce7'];
+      const textColors = ['','','','','','#92400e','#166534'];
+      score.style.background = colors[checked] || '#dcfce7';
+      score.style.color = textColors[checked] || '#166534';
+      score.textContent = msgs[checked] || `✅ ${checked}/6 checado${checked>1?'s':''}`;
+    } else {
+      score.style.display = 'none';
+    }
+  });
+})();
+</script>
+</div>
+
+</body>
+</html>

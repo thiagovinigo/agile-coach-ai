@@ -1,0 +1,15 @@
+        return 'Prompt para gerar Spec Técnica (use no Claude Code após ter o PRD):\n\n---\n\nBaseado na história e PRD do projeto, gere uma Spec Técnica completa para esta história:\n\n' + story + '\n\nA Spec deve cobrir:\n\n**1. Abordagem de Implementação**\n- Componentes e módulos afetados\n- Padrão arquitetural a seguir\n- Decisões de design com justificativa\n\n**2. Contratos de API**\n- Endpoints (método, path, request body, response, status codes)\n- Schemas de dados (criação/alteração de tabelas)\n\n**3. Plano de Testes**\n- Testes unitários obrigatórios (listar casos)\n- Testes de integração (listar cenários)\n- Testes E2E críticos\n\n**4. Riscos e Considerações**\n- Pontos de atenção de segurança\n- Impactos em outros módulos\n- Necessidade de migration ou rollback\n\n**5. Tasks de Desenvolvimento**\n- Lista ordenada de tasks com estimativa P/M/G\n- Dependências entre tasks\n\n---\n\n💡 Com a Spec pronta, você pode passar para o agente de construção.';
+  window.toggleScenario = function(id) {
+  // toggle
+function toggleGroup(id) {
+  grp.classList.toggle('collapsed');
+      item.classList.toggle('hidden-search', !match);
+function toggleAcc(header) { header.parentElement.classList.toggle('open'); }
+function show(id, el) {
+  section.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+  section.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  if(extrato) { extrato.classList.toggle('s-hi', idx === 0); extrato.classList.toggle('s-done', idx >= 2); }
+  if(rate) rate.classList.toggle('s-done', idx >= 1);
+  window.simToggle=function(){
+    delivered:{emoji:'✓', desc:'Item entregue e contabilizado. Cycle Time registrado, P85 calculado, Throughput incrementado. <strong>Lei de Little</strong>: tudo que aparece aqui mais rápido = WIP menor ou Throughput maior.'}
+      '<strong>🟢 Cenário 1 — Fluxo Saudável</strong><br>📌 <strong>O que observar:</strong> WIP limits criam backpressure natural. Quando "Em Dev" atinge o limite, novos cards aguardam em "Pronto p/ Commit". O Cycle Time se estabiliza. Workers bloqueados (⏳) sinalizam o gargalo — corrija o gargalo, não aumente o WIP.',

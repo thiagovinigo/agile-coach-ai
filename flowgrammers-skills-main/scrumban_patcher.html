@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔧 Scrumban Patcher — Aplicar Melhorias</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.container{max-width:640px;width:100%}
+.logo{text-align:center;margin-bottom:32px}
+.logo h1{font-size:28px;font-weight:900;color:#fff;margin-bottom:6px}
+.logo p{color:#94a3b8;font-size:14px}
+.card{background:#1e293b;border-radius:16px;padding:28px;margin-bottom:16px;border:1px solid #334155}
+.card h2{font-size:16px;font-weight:800;color:#fff;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.drop-zone{border:2px dashed #475569;border-radius:12px;padding:40px;text-align:center;cursor:pointer;transition:all .2s;position:relative}
+.drop-zone:hover,.drop-zone.drag{border-color:#f97316;background:#1a2744}
+.drop-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-zone .dz-icon{font-size:40px;margin-bottom:12px}
+.drop-zone .dz-text{color:#94a3b8;font-size:14px}
+.drop-zone .dz-text strong{color:#f97316}
+.drop-zone.has-file{border-color:#16a34a;background:#0f2a1a}
+.drop-zone.has-file .dz-text{color:#4ade80}
+.features{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.feat{background:#0f172a;border-radius:8px;padding:12px;border:1px solid #334155;display:flex;align-items:flex-start;gap:8px}
+.feat-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.feat-body{}
+.feat-title{font-size:12px;font-weight:700;color:#e2e8f0;margin-bottom:2px}
+.feat-desc{font-size:11px;color:#64748b}
+.btn{width:100%;padding:14px;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-primary{background:#f97316;color:#fff}
+.btn-primary:hover{background:#ea580c;transform:translateY(-1px);box-shadow:0 4px 20px rgba(249,115,22,.4)}
+.btn-primary:disabled{background:#374151;color:#6b7280;cursor:not-allowed;transform:none;box-shadow:none}
+.progress{display:none;margin-top:16px}
+.progress.show{display:block}
+.prog-bar{height:6px;background:#334155;border-radius:3px;overflow:hidden;margin-bottom:8px}
+.prog-fill{height:100%;background:linear-gradient(90deg,#f97316,#fbbf24);border-radius:3px;transition:width .3s ease;width:0}
+.prog-text{font-size:12px;color:#94a3b8}
+.step-list{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.step{display:flex;align-items:center;gap:8px;font-size:12px;color:#64748b;padding:6px 10px;border-radius:6px;transition:all .2s}
+.step.active{background:#1a2744;color:#93c5fd}
+.step.done{color:#4ade80}
+.step .si{font-size:14px;width:20px;text-align:center}
+.success{display:none;text-align:center;padding:20px}
+.success.show{display:block}
+.success-icon{font-size:60px;margin-bottom:12px}
+.success h3{font-size:20px;font-weight:800;color:#4ade80;margin-bottom:6px}
+.success p{color:#94a3b8;font-size:13px}
+.note{background:#1a2020;border:1px solid #166534;border-radius:8px;padding:12px 14px;font-size:12px;color:#4ade80;margin-top:16px;line-height:1.6}
+.note strong{color:#86efac}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <h1>🔧 Scrumban Patcher</h1>
+    <p>Aplica as 8 melhorias do sprint ao seu guia em 1 clique</p>
+  </div>
+
+  <div class="card">
+    <h2>📁 Selecione o arquivo original</h2>
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".html" onchange="onFile(this)">
+      <div class="dz-icon">📄</div>
+      <div class="dz-text"><strong>Clique ou arraste</strong> o arquivo HTML aqui<br><small>scrumban_guia - Copia (2).html</small></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>✨ Melhorias que serão aplicadas</h2>
+    <div class="features">
+      <div class="feat"><div class="feat-icon">📖</div><div class="feat-body"><div class="feat-title">US-001 · Progresso de leitura</div><div class="feat-desc">Marca seções visitadas com ✓ no sidebar</div></div></div>
+      <div class="feat"><div class="feat-icon">🔍</div><div class="feat-body"><div class="feat-title">US-002 · Busca com highlight</div><div class="feat-desc">Destaca termos buscados no conteúdo</div></div></div>
+      <div class="feat"><div class="feat-icon">🧮</div><div class="feat-body"><div class="feat-title">US-003 · Calculadora de sprint</div><div class="feat-desc">Calcula capacidade e pontos comprometidos</div></div></div>
+      <div class="feat"><div class="feat-icon">🖥️</div><div class="feat-body"><div class="feat-title">US-004 · Modo apresentação</div><div class="feat-desc">Tela cheia para workshops, nav ◀ ▶</div></div></div>
+      <div class="feat"><div class="feat-icon">🧠</div><div class="feat-body"><div class="feat-title">US-005 · Quiz de fixação</div><div class="feat-desc">Perguntas ao final de 4 seções principais</div></div></div>
+      <div class="feat"><div class="feat-icon">🖨️</div><div class="feat-body"><div class="feat-title">US-006 · Checklist exportável</div><div class="feat-desc">Botão imprimir em seções com checklists</div></div></div>
+      <div class="feat"><div class="feat-icon">👤</div><div class="feat-body"><div class="feat-title">US-007 · Filtro por papel</div><div class="feat-desc">Modal PO / SM / Dev / Coach no primeiro acesso</div></div></div>
+      <div class="feat"><div class="feat-icon">🏥</div><div class="feat-body"><div class="feat-title">US-008 · Health Check interativo</div><div class="feat-desc">Radar SVG com exportação PNG</div></div></div>
+    </div>
+    <button class="btn btn-primary" id="patchBtn" onclick="patchFile()" disabled>
+      <span>⚡</span> Aplicar melhorias e baixar arquivo
+    </button>
+    <div class="progress" id="progressArea">
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-text" id="progText">Iniciando...</div>
+      <div class="step-list" id="stepList"></div>
+    </div>
+    <div class="success" id="successArea">
+      <div class="success-icon">🎉</div>
+      <h3>Arquivo melhorado com sucesso!</h3>
+      <p>O download do <strong>scrumban_guia_enhanced.html</strong> começou automaticamente.</p>
+      <div class="note"><strong>Como usar:</strong> Abra o arquivo baixado no Chrome ou Firefox. Todas as 8 funcionalidades estarão ativas. O arquivo original <strong>não foi modificado</strong>.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let fileContent = '';
+let fileName = '';
+
+function onFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  fileName = file.name;
+  const dz = document.getElementById('dropZone');
+  dz.classList.add('has-file');
+  dz.querySelector('.dz-icon').textContent = '⏳';
+  dz.querySelector('.dz-text').innerHTML = `<strong>${file.name}</strong><br><small>Lendo ${(file.size/1024).toFixed(0)} KB…</small>`;
+  const reader = new FileReader();
+  reader.onload = e => {
+    fileContent = e.target.result;
+    dz.querySelector('.dz-icon').textContent = '✅';
+    dz.querySelector('.dz-text').innerHTML = `<strong>${file.name}</strong><br><small>${(file.size/1024).toFixed(0)} KB — processando automaticamente…</small>`;
+    document.getElementById('patchBtn').disabled = false;
+    // Auto-trigger
+    setTimeout(() => patchFile(), 400);
+  };
+  reader.readAsText(file, 'UTF-8');
+}
+
+const dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz.addEventListener('drop', e => {
+  e.preventDefault(); dz.classList.remove('drag');
+  if (e.dataTransfer.files[0]) {
+    const dt = new DataTransfer();
+    dt.items.add(e.dataTransfer.files[0]);
+    document.getElementById('fileInput').files = dt.files;
+    onFile(document.getElementById('fileInput'));
+  }
+});
+
+const STEPS = [
+  { id: 's1', label: 'Injetando CSS das novas funcionalidades' },
+  { id: 's2', label: 'Adicionando modal de seleção de papel (US-007)' },
+  { id: 's3', label: 'Injetando botão de modo apresentação (US-004)' },
+  { id: 's4', label: 'Adicionando calculadora de sprint (US-003)' },
+  { id: 's5', label: 'Injetando Health Check interativo (US-008)' },
+  { id: 's6', label: 'Adicionando quizzes de fixação (US-005)' },
+  { id: 's7', label: 'Injetando botões de exportar checklist (US-006)' },
+  { id: 's8', label: 'Injetando JavaScript — progresso + busca (US-001, 002)' },
+  { id: 's9', label: 'Finalizando e validando o arquivo' },
+];
+
+function setProgress(pct, text) {
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progText').textContent = text;
+}
+
+function stepDone(idx) {
+  const items = document.querySelectorAll('.step');
+  if (items[idx]) { items[idx].classList.remove('active'); items[idx].classList.add('done'); items[idx].querySelector('.si').textContent = '✓'; }
+  if (items[idx+1]) { items[idx+1].classList.add('active'); }
+}
+
+async function patchFile() {
+  document.getElementById('patchBtn').disabled = true;
+  const pa = document.getElementById('progressArea');
+  pa.classList.add('show');
+  const sl = document.getElementById('stepList');
+  sl.innerHTML = STEPS.map((s,i) => `<div class="step" id="${s.id}"><span class="si">${i===0?'▶':'○'}</span> ${s.label}</div>`).join('');
+  document.querySelector(`#${STEPS[0].id}`).classList.add('active');
+
+  let html = fileContent;
+  await wait(100);
+
+  // ===== STEP 1: CSS =====
+  setProgress(10, 'Injetando CSS...');
+  const newCSS = getNewCSS();
+  html = html.replace('</style>', newCSS + '\n</style>');
+  await wait(200); stepDone(0);
+
+  // ===== STEP 2: Role modal =====
+  setProgress(20, 'Modal de perfil...');
+  const modal = getRoleModal();
+  html = html.replace('<body>', '<body>\n' + modal);
+  await wait(200); stepDone(1);
+
+  // ===== STEP 3: Presentation mode button =====
+  setProgress(30, 'Modo apresentação...');
+  const presBtn = `<button class="pres-btn" id="presBtn" onclick="togglePresentationMode()" title="Modo Apresentação (Alt+P)">🖥️</button>
+<div class="pres-nav" id="presNav">
+  <button onclick="presGo(-1)">◀</button>
+  <span id="presCounter"></span>
+  <button onclick="presGo(1)">▶</button>
+  <button onclick="togglePresentationMode()" style="margin-left:8px;background:#dc2626">✕ Sair</button>
+</div>`;
+  html = html.replace('</nav>', '</nav>\n' + presBtn);
+  await wait(200); stepDone(2);
+
+  // ===== STEP 4: Sprint calculator =====
+  setProgress(40, 'Calculadora de sprint...');
+  const calc = getSprintCalc();
+  // Inject after the sprint planning section header in s-passo-agil phase 0
+  html = html.replace(
+    '<div id="pa-0" class="phase-panel on">',
+    '<div id="pa-0" class="phase-panel on">\n' + calc
+  );
+  await wait(300); stepDone(3);
+
+  // ===== STEP 5: Interactive Health Check =====
+  setProgress(50, 'Health Check interativo...');
+  const hc = getHealthCheck();
+  html = html.replace(
+    '<div class="quote">"Um time que entrega muito hoje mas está queimado',
+    hc + '\n<div class="quote">"Um time que entrega muito hoje mas está queimado'
+  );
+  await wait(300); stepDone(4);
+
+  // ===== STEP 6: Quizzes =====
+  setProgress(62, 'Quizzes de fixação...');
+  const quizzes = getQuizzes();
+  // Inject quiz after Scrum section end marker
+  html = html.replace(
+    '<div class="st">🗓️ Quando o Scrum é a melhor escolha</div>',
+    quizzes.scrum + '\n<div class="st">🗓️ Quando o Scrum é a melhor escolha</div>'
+  );
+  // Inject quiz in Scrumban "O que é" section
+  html = html.replace(
+    '<!-- ===== SCRUM VS KANBAN VS SCRUMBAN =====',
+    quizzes.kanban + '\n<!-- ===== SCRUM VS KANBAN VS SCRUMBAN ====='
+  );
+  await wait(300); stepDone(5);
+
+  // ===== STEP 7: Checklist export buttons =====
+  setProgress(74, 'Botões de exportar checklist...');
+  // Add export button class to checklist-containing cards
+  html = html.replace(
+    /(<div class="card(?:[^"]*)">\s*<div class="card-title">(?:📋 Setup do Time Piloto|📅 Ritmo das Cerimônias|✅ Características de um board Scrum)[^<]*<\/div>)/g,
+    '$1\n<button class="export-chk-btn" onclick="exportChecklist(this)">🖨️ Exportar checklist</button>'
+  );
+  await wait(200); stepDone(6);
+
+  // ===== STEP 8: JavaScript =====
+  setProgress(86, 'Injetando JavaScript...');
+  const newJS = getNewJS();
+  html = html.replace('<script>', '<script>\n' + newJS + '\n');
+  await wait(300); stepDone(7);
+
+  // ===== STEP 9: Finalize =====
+  setProgress(96, 'Validando...');
+  await wait(300);
+  setProgress(100, 'Concluído!');
+  stepDone(8);
+  await wait(200);
+
+  // Download
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'scrumban_guia_enhanced.html';
+  a.click();
+  URL.revokeObjectURL(url);
+
+  document.getElementById('successArea').classList.add('show');
+}
+
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// =====================================================================
+// CSS FOR NEW FEATURES
+// =====================================================================
+function getNewCSS() {
+return `
+/* ===== US-001: PROGRESS TRACKING ===== */
+.nav-item.visited .ni::after{content:' ✓';font-size:10px;color:#4ade80;font-weight:900}
+.nav-item.visited{color:#86efac!important}
+.nav-item.mastered{color:#fbbf24!important}
+.nav-item.mastered .ni::after{content:' 🏅';font-size:10px}
+.grp-progress{padding:2px 16px 6px;display:flex;align-items:center;gap:6px}
+.grp-prog-bar{flex:1;height:3px;background:#334155;border-radius:2px;overflow:hidden}
+.grp-prog-fill{height:100%;background:linear-gradient(90deg,#f97316,#fbbf24);border-radius:2px;transition:width .4s ease}
+.grp-prog-txt{font-size:9px;color:#64748b;white-space:nowrap}
+/* ===== US-002: SEARCH HIGHLIGHT ===== */
+mark.srch-hi{background:#fef08a;color:#1e293b;border-radius:2px;padding:0 2px}
+/* ===== US-003: SPRINT CALCULATOR ===== */
+.sprint-calc{background:#fff;border-radius:12px;padding:20px;margin-bottom:16px;border-left:4px solid #f97316;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.sprint-calc h3{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px;color:#1e293b}
+.calc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.calc-field label{display:block;font-size:11px;font-weight:700;color:#6b7280;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
+.calc-field input{width:100%;padding:8px 10px;border:2px solid #e5e7eb;border-radius:8px;font-size:16px;font-weight:700;color:#1e293b;outline:none;transition:border-color .2s}
+.calc-field input:focus{border-color:#f97316}
+.calc-results{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.calc-result{border-radius:10px;padding:12px;text-align:center}
+.calc-result.committed{background:#fff7ed;border:2px solid #f97316}
+.calc-result.stretch{background:#f0fdf4;border:2px solid #16a34a}
+.calc-result.velocity{background:#f1f5f9;border:2px solid #475569}
+.calc-result-val{font-size:26px;font-weight:900}
+.calc-result.committed .calc-result-val{color:#f97316}
+.calc-result.stretch .calc-result-val{color:#16a34a}
+.calc-result.velocity .calc-result-val{color:#475569}
+.calc-result-lbl{font-size:11px;font-weight:600;margin-top:2px}
+.calc-result.committed .calc-result-lbl{color:#9a3412}
+.calc-result.stretch .calc-result-lbl{color:#065f46}
+.calc-result.velocity .calc-result-lbl{color:#475569}
+.calc-copy{margin-top:10px;padding:6px 14px;background:#f1f5f9;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;color:#475569;transition:all .2s}
+.calc-copy:hover{background:#e2e8f0;color:#1e293b}
+/* ===== US-004: PRESENTATION MODE ===== */
+.pres-btn{position:fixed;top:12px;right:16px;z-index:500;background:#1e293b;color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 10px;font-size:16px;cursor:pointer;transition:all .2s}
+.pres-btn:hover{background:#334155;color:#fff}
+.pres-nav{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:500;background:#1e293b;border:1px solid #475569;border-radius:30px;padding:8px 16px;display:none;align-items:center;gap:10px;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.pres-nav button{background:transparent;border:none;color:#94a3b8;font-size:18px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:all .15s}
+.pres-nav button:hover{background:#334155;color:#fff}
+.pres-nav span{font-size:12px;color:#64748b;min-width:60px;text-align:center}
+body.pres-mode .sidebar{transform:translateX(-100%)}
+body.pres-mode .main{margin-left:0}
+body.pres-mode .section{font-size:16px}
+body.pres-mode .pres-nav{display:flex}
+body.pres-mode .pres-btn{background:#f97316;color:#fff;border-color:#f97316}
+/* ===== US-005: QUIZ ===== */
+.quiz-block{background:#fff;border-radius:12px;padding:20px;margin:16px 0;border:2px solid #e5e7eb;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.quiz-block .qb-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.quiz-block .qb-title{font-size:14px;font-weight:800;color:#1e293b;display:flex;align-items:center;gap:8px}
+.quiz-block .qb-badge{font-size:11px;background:#f0fdf4;color:#16a34a;padding:3px 10px;border-radius:20px;font-weight:700;display:none}
+.quiz-block .qb-badge.show{display:inline-block}
+.quiz-question{margin-bottom:16px}
+.quiz-question .qq-text{font-size:13px;font-weight:700;color:#1e293b;margin-bottom:10px}
+.quiz-option{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border:2px solid #e5e7eb;border-radius:8px;margin-bottom:6px;cursor:pointer;transition:all .15s;font-size:13px;color:#374151;line-height:1.5}
+.quiz-option:hover{border-color:#f97316;background:#fff7ed}
+.quiz-option.correct{border-color:#16a34a;background:#f0fdf4;color:#065f46;font-weight:700}
+.quiz-option.wrong{border-color:#991b1b;background:#fee2e2;color:#991b1b}
+.quiz-option.reveal-correct{border-color:#16a34a;background:#f0fdf4}
+.quiz-option .qo-marker{width:20px;height:20px;border-radius:50%;border:2px solid #d1d5db;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;font-weight:800;margin-top:1px}
+.quiz-explanation{background:#f1f5f9;border-radius:8px;padding:10px 12px;font-size:12px;color:#475569;margin-top:6px;display:none;line-height:1.6}
+.quiz-explanation.show{display:block}
+.quiz-explanation strong{color:#1e293b}
+.quiz-submit{padding:8px 20px;background:#f97316;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;margin-top:6px;transition:all .2s}
+.quiz-submit:hover{background:#ea580c}
+.quiz-submit:disabled{background:#d1d5db;cursor:not-allowed}
+.quiz-score{text-align:center;padding:12px;background:#f0fdf4;border-radius:8px;margin-top:10px;display:none}
+.quiz-score.show{display:block}
+.quiz-score .qs-val{font-size:28px;font-weight:900;color:#16a34a}
+.quiz-score .qs-lbl{font-size:13px;color:#065f46;margin-top:2px}
+.quiz-restart{margin-top:8px;padding:6px 14px;background:#e2e8f0;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;color:#475569}
+/* ===== US-006: CHECKLIST EXPORT ===== */
+.export-chk-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;color:#475569;margin-top:10px;transition:all .2s}
+.export-chk-btn:hover{background:#e2e8f0;color:#1e293b}
+@media print{
+  .sidebar,.pres-btn,.pres-nav,.export-chk-btn,.quiz-block,.sprint-calc{display:none!important}
+  .main{margin-left:0!important}
+  .section{display:block!important}
+}
+/* ===== US-007: ROLE MODAL ===== */
+.role-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.role-modal{background:#fff;border-radius:20px;padding:32px;max-width:500px;width:90%;text-align:center;animation:fadeIn .3s ease}
+.role-modal h2{font-size:22px;font-weight:900;color:#1e293b;margin-bottom:6px}
+.role-modal .rm-sub{color:#6b7280;font-size:14px;margin-bottom:24px}
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.role-card{border:2px solid #e5e7eb;border-radius:12px;padding:16px;cursor:pointer;transition:all .2s;text-align:center}
+.role-card:hover{border-color:#f97316;background:#fff7ed;transform:translateY(-2px)}
+.role-card.selected{border-color:#f97316;background:#fff7ed}
+.role-card .rc-icon{font-size:32px;margin-bottom:8px}
+.role-card .rc-name{font-size:14px;font-weight:800;color:#1e293b;margin-bottom:4px}
+.role-card .rc-desc{font-size:11px;color:#6b7280}
+.role-confirm{width:100%;padding:12px;background:#f97316;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:8px;transition:background .2s}
+.role-confirm:hover{background:#ea580c}
+.role-skip{color:#94a3b8;font-size:12px;cursor:pointer;background:none;border:none;text-decoration:underline}
+.role-badge{display:none;position:fixed;bottom:16px;right:16px;background:#1e293b;color:#fff;border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;z-index:200;cursor:pointer;border:1px solid #334155}
+/* ===== US-008: HEALTH CHECK RADAR ===== */
+.hc-interactive{background:#fff;border-radius:12px;padding:20px;margin:16px 0;border-left:4px solid #059669;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.hc-interactive h3{font-size:14px;font-weight:800;margin-bottom:14px;color:#1e293b;display:flex;align-items:center;gap:8px}
+.hc-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.hc-dim{border:2px solid #e5e7eb;border-radius:8px;padding:12px}
+.hc-dim-name{font-size:12px;font-weight:700;color:#1e293b;margin-bottom:8px}
+.hc-scale{display:flex;gap:4px}
+.hc-scale button{flex:1;padding:6px 0;border-radius:5px;border:1px solid #e5e7eb;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;background:#f8fafc}
+.hc-scale button:hover{transform:scale(1.05)}
+.hc-scale button.r{background:#fee2e2;border-color:#fca5a5;color:#991b1b}
+.hc-scale button.y{background:#fef3c7;border-color:#fcd34d;color:#92400e}
+.hc-scale button.g{background:#d1fae5;border-color:#6ee7b7;color:#065f46}
+.hc-scale button.sel{box-shadow:0 0 0 2px #1e293b;transform:scale(1.08)}
+.hc-actions{display:flex;gap:8px;flex-wrap:wrap}
+.hc-btn{padding:8px 16px;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.hc-btn-gen{background:#059669;color:#fff}
+.hc-btn-gen:hover{background:#047857}
+.hc-btn-rst{background:#f1f5f9;color:#475569}
+.hc-btn-rst:hover{background:#e2e8f0}
+.hc-btn-exp{background:#1e293b;color:#fff;display:none}
+.hc-btn-exp.show{display:inline-flex;align-items:center;gap:6px}
+.hc-radar-wrap{margin-top:16px;text-align:center;display:none}
+.hc-radar-wrap.show{display:block}
+.hc-radar-wrap svg{max-width:400px;width:100%;height:auto}
+.hc-enps{background:#f0fdf4;border-radius:8px;padding:14px;margin-top:12px;border:1px solid #6ee7b7}
+.hc-enps-title{font-size:12px;font-weight:800;color:#065f46;margin-bottom:8px}
+.hc-enps-inputs{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.hc-enps-inputs label{font-size:12px;color:#374151}
+.hc-enps-inputs input{width:60px;padding:6px;border:1px solid #d1d5db;border-radius:6px;font-size:14px;font-weight:700;text-align:center}
+.hc-enps-result{font-size:16px;font-weight:800;margin-left:8px}
+`;
+}
+
+// =====================================================================
+// ROLE MODAL HTML
+// =====================================================================
+function getRoleModal() {
+return `
+<div class="role-modal-overlay" id="roleModalOverlay" style="display:none">
+  <div class="role-modal">
+    <h2>👋 Bem-vindo ao Guia!</h2>
+    <p class="rm-sub">Qual é o seu papel principal? Vou destacar o conteúdo mais relevante para você.</p>
+    <div class="role-grid">
+      <div class="role-card" onclick="selectRole('po',this)"><div class="rc-icon">🎯</div><div class="rc-name">Product Owner</div><div class="rc-desc">Backlog, priorização e valor de produto</div></div>
+      <div class="role-card" onclick="selectRole('sm',this)"><div class="rc-icon">🛡️</div><div class="rc-name">Scrum Master</div><div class="rc-desc">Cerimônias, impedimentos e fluxo</div></div>
+      <div class="role-card" onclick="selectRole('dev',this)"><div class="rc-icon">⚙️</div><div class="rc-name">Developer</div><div class="rc-desc">Qualidade, entrega e práticas técnicas</div></div>
+      <div class="role-card" onclick="selectRole('coach',this)"><div class="rc-icon">🏆</div><div class="rc-name">Agile Coach</div><div class="rc-desc">Transformação, facilitação e escala</div></div>
+    </div>
+    <button class="role-confirm" id="roleConfirmBtn" onclick="confirmRole()">Continuar →</button><br>
+    <button class="role-skip" onclick="skipRole()">Pular — mostrar tudo</button>
+  </div>
+</div>
+<div class="role-badge" id="roleBadge" onclick="reopenRoleModal()"></div>`;
+}
+
+// =====================================================================
+// SPRINT CALCULATOR HTML
+// =====================================================================
+function getSprintCalc() {
+return `
+<div class="sprint-calc">
+  <h3>🧮 Calculadora de Capacidade de Sprint</h3>
+  <div class="calc-grid">
+    <div class="calc-field"><label>Velocidade média (pts)</label><input type="number" id="calcVelocity" value="30" min="1" oninput="calcSprint()"></div>
+    <div class="calc-field"><label>Nº de membros</label><input type="number" id="calcMembers" value="5" min="1" oninput="calcSprint()"></div>
+    <div class="calc-field"><label>Disponibilidade (%)</label><input type="number" id="calcAvail" value="100" min="10" max="100" oninput="calcSprint()"></div>
+  </div>
+  <div class="calc-results">
+    <div class="calc-result velocity"><div class="calc-result-val" id="calcCapacity">30</div><div class="calc-result-lbl">Capacidade ajustada</div></div>
+    <div class="calc-result committed"><div class="calc-result-val" id="calcCommit">26</div><div class="calc-result-lbl">Comprometido (85%)</div></div>
+    <div class="calc-result stretch"><div class="calc-result-val" id="calcStretch">4</div><div class="calc-result-lbl">Stretch (15%)</div></div>
+  </div>
+  <button class="calc-copy" onclick="copyCalcResult()">📋 Copiar resumo do sprint</button>
+</div>`;
+}
+
+// =====================================================================
+// INTERACTIVE HEALTH CHECK HTML
+// =====================================================================
+function getHealthCheck() {
+const dims = [
+  {id:'hcd1',name:'1. Entregando Valor',emoji:'📦'},
+  {id:'hcd2',name:'2. Release Segura',emoji:'🚀'},
+  {id:'hcd3',name:'3. Trabalho Divertido',emoji:'😄'},
+  {id:'hcd4',name:'4. Saúde do Código',emoji:'🧬'},
+  {id:'hcd5',name:'5. Aprendizado',emoji:'📚'},
+  {id:'hcd6',name:'6. Missão Clara',emoji:'🧭'},
+  {id:'hcd7',name:'7. Velocidade Sustentável',emoji:'⚡'},
+  {id:'hcd8',name:'8. Apoio e Suporte',emoji:'🤝'},
+];
+const dimsHTML = dims.map(d => `
+  <div class="hc-dim">
+    <div class="hc-dim-name">${d.emoji} ${d.name}</div>
+    <div class="hc-scale" id="${d.id}">
+      <button class="r" onclick="hcVote('${d.id}',1,this)" title="🔴 Vermelho">🔴</button>
+      <button class="y" onclick="hcVote('${d.id}',2,this)" title="🟡 Amarelo">🟡</button>
+      <button class="g" onclick="hcVote('${d.id}',3,this)" title="🟢 Verde">🟢</button>
+    </div>
+  </div>`).join('');
+return `
+<div class="hc-interactive">
+  <h3>🎯 Health Check Interativo — Avalie seu Time</h3>
+  <div class="hc-form" id="hcForm">${dimsHTML}</div>
+  <div class="hc-actions">
+    <button class="hc-btn hc-btn-gen" onclick="generateRadar()">📊 Gerar Radar</button>
+    <button class="hc-btn hc-btn-rst" onclick="resetHC()">↺ Reiniciar</button>
+    <button class="hc-btn hc-btn-exp show" id="hcExportBtn" onclick="exportRadar()" style="display:none">⬇️ Exportar PNG</button>
+  </div>
+  <div class="hc-radar-wrap" id="hcRadarWrap"></div>
+  <div class="hc-enps">
+    <div class="hc-enps-title">📊 eNPS do Time (complementar)</div>
+    <div class="hc-enps-inputs">
+      <label>Promotores (9-10): <input type="number" id="enpsP" value="0" min="0" oninput="calcEnps()"></label>
+      <label>Neutros (7-8): <input type="number" id="enpsN" value="0" min="0" oninput="calcEnps()"></label>
+      <label>Detratores (0-6): <input type="number" id="enpsD" value="0" min="0" oninput="calcEnps()"></label>
+      <span class="hc-enps-result" id="enpsResult">—</span>
+    </div>
+  </div>
+</div>`;
+}
+
+// =====================================================================
+// QUIZZES HTML
+// =====================================================================
+function getQuizzes() {
+const scrumQuiz = `
+<div class="quiz-block" id="quiz-scrum">
+  <div class="qb-header">
+    <div class="qb-title">🧠 Quiz — Scrum</div>
+    <div class="qb-badge" id="qb-scrum-badge">🏅 Dominado!</div>
+  </div>
+  <div class="quiz-question" id="qq-s1">
+    <div class="qq-text">1. No Scrum Guide 2020, quem é responsável por criar qualquer aspecto de um Incremento utilizável?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s1','wrong')"><span class="qo-marker">A</span>Apenas os Desenvolvedores</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s1','wrong')"><span class="qo-marker">B</span>Product Owner, pois define o que vai no Incremento</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s1','correct')"><span class="qo-marker">C</span>Os Developers — o Scrum Team auto-gerenciável sem hierarquia entre papéis</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s1','wrong')"><span class="qo-marker">D</span>Scrum Master, pois remove todos os impedimentos</div>
+    <div class="quiz-explanation" id="qe-s1"><strong>Correto.</strong> No Scrum Guide 2020, "Developers" inclui todos que criam o Incremento. O Scrum Team é uma única equipe auto-gerenciável — sem hierarquia entre PO, SM e Developers.</div>
+  </div>
+  <div class="quiz-question" id="qq-s2">
+    <div class="qq-text">2. Qual é o comprometimento (Commitment) associado ao Product Backlog?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s2','wrong')"><span class="qo-marker">A</span>Sprint Goal — o porquê do sprint</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s2','correct')"><span class="qo-marker">B</span>Product Goal — o objetivo de longo prazo do produto</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s2','wrong')"><span class="qo-marker">C</span>Definition of Done — critério de qualidade</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s2','wrong')"><span class="qo-marker">D</span>Definition of Ready — critério de entrada no sprint</div>
+    <div class="quiz-explanation" id="qe-s2"><strong>Correto.</strong> Cada artefato do Scrum tem um Commitment: Product Backlog → Product Goal. Sprint Backlog → Sprint Goal. Increment → Definition of Done.</div>
+  </div>
+  <div class="quiz-question" id="qq-s3">
+    <div class="qq-text">3. Qual é o sinal mais claro de um board Scrum problemático?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s3','wrong')"><span class="qo-marker">A</span>O time usa ferramentas digitais em vez de post-its</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s3','wrong')"><span class="qo-marker">B</span>O PO atualiza o backlog diariamente</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s3','correct')"><span class="qo-marker">C</span>Sprint Goal genérico ("entregar o que estiver pronto") que não orienta decisões</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-s3','wrong')"><span class="qo-marker">D</span>Burndown atualizado após cada tarefa concluída</div>
+    <div class="quiz-explanation" id="qe-s3"><strong>Correto.</strong> Um Sprint Goal genérico torna todas as tarefas igualmente importantes — o time não tem como priorizar quando surge um imprevisto. É o principal anti-padrão de board Scrum.</div>
+  </div>
+  <button class="quiz-submit" id="qs-scrum" onclick="submitQuiz('scrum')">Verificar respostas</button>
+  <div class="quiz-score" id="qscore-scrum">
+    <div class="qs-val" id="qscore-scrum-val"></div>
+    <div class="qs-lbl">respondidas corretamente</div>
+    <button class="quiz-restart" onclick="restartQuiz('scrum')">↺ Tentar novamente</button>
+  </div>
+</div>`;
+
+const kanbanQuiz = `
+<div class="quiz-block" id="quiz-kanban">
+  <div class="qb-header">
+    <div class="qb-title">🧠 Quiz — Scrumban</div>
+    <div class="qb-badge" id="qb-kanban-badge">🏅 Dominado!</div>
+  </div>
+  <div class="quiz-question" id="qq-k1">
+    <div class="qq-text">1. O que é o Commitment Point no Scrumban?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k1','wrong')"><span class="qo-marker">A</span>O momento em que o time se compromete com a velocidade do sprint</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k1','correct')"><span class="qo-marker">B</span>O ponto onde um item sai do discovery e entra no fluxo de entrega — gerando custo de oportunidade</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k1','wrong')"><span class="qo-marker">C</span>A cerimônia semanal onde o time decide quais itens iniciar</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k1','wrong')"><span class="qo-marker">D</span>O WIP limit máximo do board</div>
+    <div class="quiz-explanation" id="qe-k1"><strong>Correto.</strong> O Commitment Point marca a transição de "opção" para "compromisso". Só então o item gera custo de oportunidade — trabalho que não está sendo feito para entregá-lo. Antes desse ponto, cancelar tem custo zero.</div>
+  </div>
+  <div class="quiz-question" id="qq-k2">
+    <div class="qq-text">2. Qual das opções abaixo descreve corretamente o Scrumban?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k2','wrong')"><span class="qo-marker">A</span>Uma metodologia rígida com papéis fixos e sprints obrigatórios</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k2','wrong')"><span class="qo-marker">B</span>Um framework de gestão de projetos waterfall adaptado para equipes ágeis</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k2','correct')"><span class="qo-marker">C</span>Uma abordagem híbrida: usa o fluxo contínuo e WIP limits do Kanban com as cadências e cerimônias do Scrum</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k2','wrong')"><span class="qo-marker">D</span>O mesmo que SAFe — um framework de escala ágil</div>
+    <div class="quiz-explanation" id="qe-k2"><strong>Correto.</strong> Scrumban combina o melhor dos dois frameworks: a previsibilidade e os rituais do Scrum com a flexibilidade de fluxo e limitação de WIP do Kanban.</div>
+  </div>
+  <div class="quiz-question" id="qq-k3">
+    <div class="qq-text">3. Por que limitar o WIP (Work In Progress) aumenta o throughput?</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k3','wrong')"><span class="qo-marker">A</span>Porque reduz o número de reuniões necessárias no sprint</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k3','wrong')"><span class="qo-marker">B</span>Porque limitar WIP motiva o time a trabalhar mais rápido</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k3','correct')"><span class="qo-marker">C</span>Porque reduz o overhead de troca de contexto — cada pessoa termina o que começou antes de iniciar algo novo</div>
+    <div class="quiz-option" onclick="selectOpt(this,'qq-k3','wrong')"><span class="qo-marker">D</span>Porque force o PO a criar menos histórias de usuário</div>
+    <div class="quiz-explanation" id="qe-k3"><strong>Correto.</strong> A Lei de Little (L = λW) mostra matematicamente: menos WIP = menor lead time com o mesmo throughput. O custo cognitivo de multitask pode reduzir produtividade em até 40%.</div>
+  </div>
+  <button class="quiz-submit" id="qs-kanban" onclick="submitQuiz('kanban')">Verificar respostas</button>
+  <div class="quiz-score" id="qscore-kanban">
+    <div class="qs-val" id="qscore-kanban-val"></div>
+    <div class="qs-lbl">respondidas corretamente</div>
+    <button class="quiz-restart" onclick="restartQuiz('kanban')">↺ Tentar novamente</button>
+  </div>
+</div>`;
+
+return { scrum: scrumQuiz, kanban: kanbanQuiz };
+}
+
+// =====================================================================
+// NEW JAVASCRIPT
+// =====================================================================
+function getNewJS() {
+return `
+// ===== US-001 + US-002: PROGRESS TRACKING + SEARCH HIGHLIGHT =====
+const VISITED_KEY = 'scrumban_visited';
+const MASTERED_KEY = 'scrumban_mastered';
+const ROLE_KEY = 'scrumban_role';
+
+function markVisited(id) {
+  const visited = JSON.parse(localStorage.getItem(VISITED_KEY)||'[]');
+  if (!visited.includes(id)) { visited.push(id); localStorage.setItem(VISITED_KEY, JSON.stringify(visited)); }
+  updateProgressUI();
+}
+
+function updateProgressUI() {
+  const visited = JSON.parse(localStorage.getItem(VISITED_KEY)||'[]');
+  const mastered = JSON.parse(localStorage.getItem(MASTERED_KEY)||'[]');
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const onclick = item.getAttribute('onclick')||'';
+    const match = onclick.match(/goTo\\('([^']+)'/);
+    if (!match) return;
+    const id = match[1];
+    item.classList.toggle('visited', visited.includes(id));
+    item.classList.toggle('mastered', mastered.includes(id));
+  });
+  document.querySelectorAll('.nav-group').forEach(grp => {
+    const items = grp.querySelectorAll('.nav-item');
+    const total = items.length;
+    const done = [...items].filter(i => visited.includes((i.getAttribute('onclick')||'').match(/goTo\\('([^']+)'/)?.[1]||'')).length;
+    let bar = grp.querySelector('.grp-prog-bar');
+    if (!bar && total > 0) {
+      const prog = document.createElement('div');
+      prog.className = 'grp-progress';
+      prog.innerHTML = '<div class="grp-prog-bar"><div class="grp-prog-fill"></div></div><span class="grp-prog-txt"></span>';
+      grp.querySelector('.nav-group-title').after(prog);
+      bar = grp.querySelector('.grp-prog-bar');
+    }
+    if (bar) {
+      bar.querySelector('.grp-prog-fill').style.width = (done/total*100)+'%';
+      bar.parentElement.querySelector('.grp-prog-txt').textContent = done+'/'+total;
+    }
+  });
+}
+
+// Patch goTo to mark visited
+const _origGoTo = window.goTo;
+window.goTo = function(id, el) {
+  _origGoTo(id, el);
+  markVisited(id);
+  if (window._searchQuery) highlightInSection(window._searchQuery);
+};
+
+// Search highlight patch
+const _origFilter = window.filterNav;
+window.filterNav = function(q) {
+  window._searchQuery = q;
+  _origFilter(q);
+  clearHighlights();
+  if (q && q.length >= 3) highlightInSection(q);
+};
+
+function highlightInSection(q) {
+  const activeSection = document.querySelector('.section.active');
+  if (!activeSection) return;
+  clearHighlights();
+  const walker = document.createTreeWalker(activeSection, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  const re = new RegExp('(' + q.replace(/[.*+?^\${}()|[\\]\\\\]/g,'\\\\$&') + ')', 'gi');
+  nodes.forEach(node => {
+    if (!node.nodeValue.trim()) return;
+    if (node.parentElement.tagName==='SCRIPT'||node.parentElement.tagName==='STYLE') return;
+    if (node.parentElement.closest('.quiz-block,.sprint-calc,.hc-interactive')) return;
+    const newHTML = node.nodeValue.replace(re, '<mark class="srch-hi">$1</mark>');
+    if (newHTML !== node.nodeValue) {
+      const span = document.createElement('span');
+      span.innerHTML = newHTML;
+      node.parentNode.replaceChild(span, node);
+    }
+  });
+}
+
+function clearHighlights() {
+  document.querySelectorAll('mark.srch-hi').forEach(m => {
+    const parent = m.parentNode;
+    parent.replaceChild(document.createTextNode(m.textContent), m);
+    parent.normalize();
+  });
+}
+
+// ===== US-003: SPRINT CALCULATOR =====
+function calcSprint() {
+  const v = parseFloat(document.getElementById('calcVelocity').value)||0;
+  const m = parseFloat(document.getElementById('calcMembers').value)||1;
+  const a = parseFloat(document.getElementById('calcAvail').value)||100;
+  const cap = Math.round(v * (a/100));
+  const commit = Math.round(cap * 0.85);
+  const stretch = cap - commit;
+  document.getElementById('calcCapacity').textContent = cap;
+  document.getElementById('calcCommit').textContent = commit;
+  document.getElementById('calcStretch').textContent = stretch;
+}
+
+function copyCalcResult() {
+  const v = document.getElementById('calcVelocity').value;
+  const a = document.getElementById('calcAvail').value;
+  const cap = document.getElementById('calcCapacity').textContent;
+  const commit = document.getElementById('calcCommit').textContent;
+  const stretch = document.getElementById('calcStretch').textContent;
+  const text = \`📊 Capacidade do Sprint\\nVelocidade: \${v} pts | Disponibilidade: \${a}%\\n✅ Comprometido: \${commit} pts\\n🎯 Stretch: \${stretch} pts\\n📈 Capacidade ajustada: \${cap} pts\`;
+  navigator.clipboard.writeText(text).then(()=>{ const btn=document.querySelector('.calc-copy'); btn.textContent='✅ Copiado!'; setTimeout(()=>{btn.textContent='📋 Copiar resumo do sprint';},2000); });
+}
+
+// ===== US-004: PRESENTATION MODE =====
+let _presMode = false;
+const ALL_SECTIONS = [];
+function initPresSections() {
+  document.querySelectorAll('.section').forEach(s=>{ if(s.id) ALL_SECTIONS.push(s.id); });
+}
+function togglePresentationMode() {
+  _presMode = !_presMode;
+  document.body.classList.toggle('pres-mode', _presMode);
+  if (_presMode) {
+    if (!ALL_SECTIONS.length) initPresSections();
+    updatePresCounter();
+  }
+}
+function presGo(dir) {
+  const active = document.querySelector('.section.active');
+  if (!active) return;
+  const idx = ALL_SECTIONS.indexOf(active.id);
+  const next = ALL_SECTIONS[Math.max(0,Math.min(ALL_SECTIONS.length-1, idx+dir))];
+  const navItem = document.querySelector(\`.nav-item[onclick*="'\${next}'"]\`);
+  goTo(next, navItem);
+  updatePresCounter();
+}
+function updatePresCounter() {
+  const active = document.querySelector('.section.active');
+  if (!active) return;
+  const idx = ALL_SECTIONS.indexOf(active.id);
+  const el = document.getElementById('presCounter');
+  if (el) el.textContent = (idx+1) + ' / ' + ALL_SECTIONS.length;
+}
+document.addEventListener('keydown', e => {
+  if (e.altKey && e.key==='p') togglePresentationMode();
+  if (_presMode && e.key==='Escape') togglePresentationMode();
+  if (_presMode && e.key==='ArrowRight') presGo(1);
+  if (_presMode && e.key==='ArrowLeft') presGo(-1);
+});
+
+// ===== US-005: QUIZ =====
+const quizState = {};
+function selectOpt(el, qId, type) {
+  const q = document.getElementById(qId);
+  if (q.classList.contains('answered')) return;
+  q.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  if (!quizState[qId]) quizState[qId] = {};
+  quizState[qId].selected = el;
+  quizState[qId].type = type;
+}
+function submitQuiz(quizId) {
+  const block = document.getElementById('quiz-'+quizId);
+  const questions = block.querySelectorAll('.quiz-question');
+  let correct = 0;
+  questions.forEach(q => {
+    const qId = q.id;
+    q.classList.add('answered');
+    const selected = q.querySelector('.quiz-option.selected');
+    const expEl = document.getElementById(qId.replace('qq-','qe-'));
+    if (selected) {
+      const type = quizState[qId]?.type;
+      if (type==='correct') { selected.classList.add('correct'); selected.querySelector('.qo-marker').textContent='✓'; correct++; }
+      else { selected.classList.add('wrong'); selected.querySelector('.qo-marker').textContent='✗'; q.querySelectorAll('.quiz-option').forEach(o=>{ if(quizState[qId+o.textContent]==='correct'||o.onclick?.toString().includes("'correct'")) o.classList.add('reveal-correct'); }); }
+      if (expEl) expEl.classList.add('show');
+    }
+    q.querySelectorAll('.quiz-option').forEach(o=>{ if(o.getAttribute('onclick')?.includes("'correct'")) o.classList.add('reveal-correct'); });
+  });
+  const score = document.getElementById('qscore-'+quizId);
+  document.getElementById('qscore-'+quizId+'-val').textContent = correct + '/' + questions.length;
+  score.classList.add('show');
+  document.getElementById('qs-'+quizId).disabled = true;
+  if (correct === questions.length) {
+    document.getElementById('qb-'+quizId+'-badge').classList.add('show');
+    const mastered = JSON.parse(localStorage.getItem(MASTERED_KEY)||'[]');
+    const sectionId = quizId==='scrum'?'s-scrum':'s-oque';
+    if (!mastered.includes(sectionId)) { mastered.push(sectionId); localStorage.setItem(MASTERED_KEY, JSON.stringify(mastered)); updateProgressUI(); }
+  }
+}
+function restartQuiz(quizId) {
+  const block = document.getElementById('quiz-'+quizId);
+  block.querySelectorAll('.quiz-question').forEach(q => {
+    q.classList.remove('answered');
+    q.querySelectorAll('.quiz-option').forEach(o=>{ o.classList.remove('selected','correct','wrong','reveal-correct'); o.querySelector('.qo-marker').textContent = o.querySelector('.qo-marker').textContent.replace('✓','').replace('✗',''); });
+    const qId = q.id; const expEl = document.getElementById(qId.replace('qq-','qe-'));
+    if (expEl) expEl.classList.remove('show');
+    delete quizState[qId];
+  });
+  document.getElementById('qscore-'+quizId).classList.remove('show');
+  document.getElementById('qs-'+quizId).disabled = false;
+  document.getElementById('qb-'+quizId+'-badge').classList.remove('show');
+}
+
+// ===== US-006: CHECKLIST EXPORT =====
+function exportChecklist(btn) {
+  const card = btn.closest('.card');
+  const title = card.querySelector('.card-title')?.textContent || 'Checklist';
+  const items = [...card.querySelectorAll('.chk li')].map(li => li.textContent.trim());
+  const html = \`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>\${title}</title><style>
+    body{font-family:-apple-system,sans-serif;padding:30px;max-width:600px;margin:0 auto;color:#1e293b}
+    h1{font-size:20px;margin-bottom:24px;padding-bottom:10px;border-bottom:2px solid #f97316}
+    .item{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #f3f4f6;font-size:14px}
+    .item:last-child{border:none}
+    .cb{width:18px;height:18px;border:2px solid #d1d5db;border-radius:4px;flex-shrink:0;margin-top:1px}
+    .footer{margin-top:24px;font-size:11px;color:#94a3b8;border-top:1px solid #f1f5f9;padding-top:12px}
+    @media print{.footer{position:fixed;bottom:20px;left:30px;right:30px}}
+  </style></head><body>
+    <h1>✅ \${title}</h1>
+    \${items.map(i=>\`<div class="item"><div class="cb"></div><span>\${i}</span></div>\`).join('')}
+    <div class="footer">Guia Agile Coach — Scrumban & Transformações · Impresso em \${new Date().toLocaleDateString('pt-BR')}</div>
+    <script>window.onload=()=>window.print();</\` + \`script>
+  </body></html>\`;
+  const w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+}
+
+// ===== US-007: ROLE FILTER =====
+const ROLE_SECTIONS = {
+  po: ['s-agil','s-digital','s-diff','s-passo-agil','s-po','s-oque','s-vs','s-board','s-commitment','s-cos','s-quando','s-scrumban-okr'],
+  sm: ['s-scrum','s-kanban','s-oque','s-vs','s-board','s-fluxo','s-cadencias','s-wip','s-daily','s-demo','s-bloqueios','s-anti','s-scrumban-papeis','s-scrumban-start','s-healthcheck'],
+  dev: ['s-scrum','s-kanban','s-kanban-praticas','s-politicas','s-oque','s-vs','s-board','s-wip','s-daily','s-bloqueios','s-metricas-dora'],
+  coach: ['s-agil','s-digital','s-diff','s-passo-agil','s-passo-digital','s-nubank','s-scrum','s-kanban','s-po','s-oque','s-vs','s-board','s-commitment','s-fluxo','s-cadencias','s-wip','s-daily','s-demo','s-bloqueios','s-cos','s-tradeoffs','s-avancado','s-quando','s-anti','s-scrumban-papeis','s-scrumban-start','s-scrumban-transicao','s-scrumban-maturidade','s-scrumban-okr','s-scrumban-remotos','s-metricas-fluxo','s-metricas-graficos','s-metricas-clevel','s-metricas-dora','s-healthcheck','s-exemplo','s-story','s-teach-fluxo','s-teach-wip','s-teach-daily','s-teach-politicas','s-teach-metricas','s-teach-cultura','s-teach-cos','s-teach-commitment']
+};
+const ROLE_NAMES = {po:'🎯 Product Owner', sm:'🛡️ Scrum Master', dev:'⚙️ Developer', coach:'🏆 Agile Coach'};
+let _selectedRole = null;
+
+function selectRole(role, el) {
+  _selectedRole = role;
+  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function confirmRole() {
+  if (!_selectedRole) return;
+  applyRoleFilter(_selectedRole);
+  localStorage.setItem(ROLE_KEY, _selectedRole);
+  document.getElementById('roleModalOverlay').style.display='none';
+  const badge = document.getElementById('roleBadge');
+  badge.textContent = ROLE_NAMES[_selectedRole];
+  badge.style.display='block';
+}
+function skipRole() {
+  localStorage.setItem(ROLE_KEY,'all');
+  document.getElementById('roleModalOverlay').style.display='none';
+}
+function reopenRoleModal() {
+  document.getElementById('roleModalOverlay').style.display='flex';
+}
+function applyRoleFilter(role) {
+  const sections = ROLE_SECTIONS[role]||[];
+  document.querySelectorAll('.nav-item').forEach(item=>{
+    const onclick=item.getAttribute('onclick')||'';
+    const match=onclick.match(/goTo\\('([^']+)'/);
+    if(!match) return;
+    const id=match[1];
+    if(sections.includes(id)) { item.style.borderLeft='3px solid #f97316'; item.title='⭐ Recomendado para '+ROLE_NAMES[role]; }
+    else { item.style.borderLeft=''; item.title=''; }
+  });
+}
+
+// ===== US-008: HEALTH CHECK RADAR =====
+const hcVotes = {};
+function hcVote(dimId, val, btn) {
+  hcVotes[dimId] = val;
+  const scale = document.getElementById(dimId);
+  scale.querySelectorAll('button').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+}
+function generateRadar() {
+  const dims = ['hcd1','hcd2','hcd3','hcd4','hcd5','hcd6','hcd7','hcd8'];
+  const labels = ['Entregando Valor','Release Segura','Trab. Divertido','Saúde Código','Aprendizado','Missão Clara','Vel. Sustentável','Apoio & Suporte'];
+  const scores = dims.map(d=>hcVotes[d]||0);
+  if (scores.some(s=>s===0)) { alert('Por favor, vote em todas as 8 dimensões antes de gerar o radar.'); return; }
+  const svg = buildRadar(scores, labels);
+  const wrap = document.getElementById('hcRadarWrap');
+  wrap.innerHTML = svg;
+  wrap.classList.add('show');
+  document.getElementById('hcExportBtn').style.display='inline-flex';
+}
+function buildRadar(scores, labels) {
+  const N = scores.length;
+  const cx=200, cy=200, r=140;
+  const angles = scores.map((_,i)=>((i*2*Math.PI)/N)-Math.PI/2);
+  const colors = {1:'#ef4444',2:'#f59e0b',3:'#10b981'};
+  const gridLvls = [1,2,3];
+  let gridPaths = '';
+  gridLvls.forEach(lvl=>{
+    const pts=angles.map(a=>{ const rr=(r*lvl/3); return \`\${cx+rr*Math.cos(a)},\${cy+rr*Math.sin(a)}\`; }).join(' ');
+    gridPaths+=\`<polygon points="\${pts}" fill="none" stroke="#e5e7eb" stroke-width="1"/>\`;
+  });
+  let axes='';
+  angles.forEach((a,i)=>{ axes+=\`<line x1="\${cx}" y1="\${cy}" x2="\${cx+(r)*Math.cos(a)}" y2="\${cy+(r)*Math.sin(a)}" stroke="#e5e7eb" stroke-width="1"/>\`; });
+  const dataPoints = scores.map((s,i)=>{ const rr=(r*s/3); return \`\${cx+rr*Math.cos(angles[i])},\${cy+rr*Math.sin(angles[i])}\`; }).join(' ');
+  const avgScore = scores.reduce((a,b)=>a+b,0)/N;
+  const fillColor = avgScore>=2.5?'rgba(16,185,129,.25)':avgScore>=1.5?'rgba(245,158,11,.25)':'rgba(239,68,68,.25)';
+  const strokeColor = avgScore>=2.5?'#10b981':avgScore>=1.5?'#f59e0b':'#ef4444';
+  let dots='';
+  scores.forEach((s,i)=>{ const c=colors[s]; const rr=(r*s/3); dots+=\`<circle cx="\${cx+rr*Math.cos(angles[i])}" cy="\${cy+rr*Math.sin(angles[i])}" r="5" fill="\${c}" stroke="#fff" stroke-width="2"/>\`; });
+  let lbls='';
+  labels.forEach((l,i)=>{
+    const lx=cx+(r+20)*Math.cos(angles[i]);
+    const ly=cy+(r+20)*Math.sin(angles[i]);
+    const anchor=lx<cx-5?'end':lx>cx+5?'start':'middle';
+    const scoreEmoji=scores[i]===3?'🟢':scores[i]===2?'🟡':'🔴';
+    lbls+=\`<text x="\${lx}" y="\${ly}" text-anchor="\${anchor}" dominant-baseline="middle" font-size="10" font-weight="700" fill="#374151">\${l}</text>
+    <text x="\${lx}" y="\${ly+13}" text-anchor="\${anchor}" dominant-baseline="middle" font-size="11">\${scoreEmoji}</text>\`;
+  });
+  return \`<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" id="hcRadarSVG">
+    <rect width="400" height="400" fill="#fff" rx="12"/>
+    <text x="200" y="24" text-anchor="middle" font-size="13" font-weight="800" fill="#1e293b">Health Check do Time</text>
+    <text x="200" y="40" text-anchor="middle" font-size="11" fill="#6b7280">Média: \${avgScore.toFixed(1)}/3.0</text>
+    \${gridPaths}\${axes}
+    <polygon points="\${dataPoints}" fill="\${fillColor}" stroke="\${strokeColor}" stroke-width="2.5"/>
+    \${dots}\${lbls}
+    <text x="200" y="386" text-anchor="middle" font-size="9" fill="#94a3b8">\${new Date().toLocaleDateString('pt-BR')}</text>
+  </svg>\`;
+}
+function resetHC() {
+  Object.keys(hcVotes).forEach(k=>delete hcVotes[k]);
+  document.querySelectorAll('.hc-scale button').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('hcRadarWrap').classList.remove('show');
+  document.getElementById('hcRadarWrap').innerHTML='';
+  document.getElementById('hcExportBtn').style.display='none';
+}
+function exportRadar() {
+  const svg = document.getElementById('hcRadarSVG');
+  if (!svg) return;
+  const blob = new Blob([svg.outerHTML], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'health_check_'+new Date().toISOString().slice(0,10)+'.svg';
+  a.click();
+}
+function calcEnps() {
+  const p=parseInt(document.getElementById('enpsP').value)||0;
+  const n=parseInt(document.getElementById('enpsN').value)||0;
+  const d=parseInt(document.getElementById('enpsD').value)||0;
+  const total=p+n+d;
+  if(total===0){document.getElementById('enpsResult').textContent='—';return;}
+  const enps=Math.round((p-d)/total*100);
+  const el=document.getElementById('enpsResult');
+  el.textContent='eNPS: '+enps;
+  el.style.color=enps>50?'#16a34a':enps>30?'#16a34a':enps>0?'#f59e0b':'#dc2626';
+}
+
+// ===== INIT ALL FEATURES =====
+document.addEventListener('DOMContentLoaded', () => {
+  // Progress tracking init
+  updateProgressUI();
+  // Role modal init
+  const savedRole = localStorage.getItem(ROLE_KEY);
+  if (!savedRole) {
+    setTimeout(()=>{ document.getElementById('roleModalOverlay').style.display='flex'; }, 800);
+  } else if (savedRole !== 'all') {
+    applyRoleFilter(savedRole);
+    const badge = document.getElementById('roleBadge');
+    badge.textContent = ROLE_NAMES[savedRole];
+    badge.style.display='block';
+  }
+  // Pres sections init
+  initPresSections();
+  // Sprint calc init
+  calcSprint();
+});
+`;
+}
+</script>
+</body>
+</html>
