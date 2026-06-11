@@ -1,0 +1,142 @@
+--- s-elite-board ---
+id="s-elite-board" class="section">
+  <h1>🗂️ Board Completo — Políticas, Pull Rules e Cenários</h1>
+  <p>Este board representa um time Scrumban de elite com upstream de descoberta e downstream de entrega. Cada coluna tem WIP limit, política de entrada (DoR), política de saída (DoD), responsável e SLA. Clique em qualquer coluna para ver sua política completa.</p>
+
+  <!-- LEGENDA -->
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;">
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#dbeafe;border:2px solid #3b82f6;display:inline-block"></span> Upstream (discovery)</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#fef3c7;border:2px solid #f59e0b;display:inline-block"></span> Downstream ativo</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#f3f4f6;border:2px solid #9ca3af;display:inline-block"></span> Fila (queue)</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#fee2e2;border:2px solid #ef4444;display:inline-block"></span> Bloquei/espera</span>
+    <span style="display:flex;align-items:center;gap:6px;font-size:13px;"><span style="width:14px;height:14px;border-radius:3px;background:#d1fae5;border:2px solid #10b981;display:inline-block"></span> Done</span>
+  </div>
+
+  <!-- BOARD VISUAL -->
+  <div style="overflow-x:auto;padding-bottom:12px;">
+    <div style="display:flex;gap:0;min-width:1600px;">
+
+      <!-- ZONA UPSTREAM -->
+      <div style="flex:1;min-width:0;">
+        <div style="background:#eff6ff;border:2px solid #3b82f6;border-radius:10px 10px 0 0;padding:6px 10px;font-size:11px;font-weight:700;color:#1d4ed8;text-align:center;letter-spacing:.05em;">UPSTREAM — Descoberta & Refinamento</div>
+        <div style="display:flex;gap:4px;padding:8px;background:#eff6ff;border:2px solid #3b82f6;border-top:none;border-radius:0 0 10px 10px;">
+
+          <div class="bcol" data-col="new" onclick="showPolicy('new')" style="flex:1;min-width:90px;cursor:pointer;border-radius:8px;border:2px solid #93c5fd;background:#dbeafe;padding:8px 6px;transition:box-shadow .15s;" onmouseover="this.style.boxShadow='0 0 0 3px #3b82f680'" onmouseout="this.style.boxShadow='none'">
+           
+--- s-elite-politicas ---
+id="s-elite-politicas" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#3d1a6e,#5b21b6)">
+    <div class="tag">TIME DE ELITE</div>
+    <h2>📜 Regras do Board</h2>
+    <p>Políticas explícitas coluna por coluna — o contrato que tira o trabalho da cabeça e coloca no quadro</p>
+  </div>
+
+  <div class="card orange" style="margin-bottom:20px">
+    <div class="card-title">🎯 Por que políticas explícitas importam</div>
+    <p>Sem política escrita, cada pessoa tem uma versão diferente do que "pronto" significa. Resultado: conflitos por item, decisões inconsistentes e dependência de quem "sabe as regras". Com política escrita no quadro, o time discute <strong>a regra</strong> — não a decisão individual. Mudar uma regra vira uma conversa única.</p>
+    <p><strong>Regra de ouro:</strong> se a política não couber numa etiqueta colada na coluna, está longa demais.</p>
+  </div>
+
+  <!-- Commitment e Delivery Points -->
+  <h3 style="margin:20px 0 12px">🎯 Os dois pontos que tornam o fluxo previsível</h3>
+  <div class="g2" style="margin-bottom:20px">
+    <div class="card" style="border-left:5px solid #f59e0b">
+      <div class="card-title">🎯 Commitment Point — "Pronto p/ Dev"</div>
+      <p><strong>Antes:</strong> o item é opção, removível sem custo. O lead time não conta. Ninguém deve nada.</p>
+      <p><strong>Depois:</strong> compromisso assumido. Lead time correndo. SLA da classe ativo.</p>
+      <p style="font-size:13px;color:#6b7280;margin-top:8px"><em>Sem DoR de negócio E técnico, o item não entra. Sem exceção.</em></p>
+    </div>
+    <div class="card" style="border-left:5px solid #10b981">
+      <div class="card-title">🚀 Delivery Point — "Em Produção"</div>
+      <p><strong>É aqui que o cliente recebeu valor</strong> — não em staging, não em "desenvolvido".</p>
+      <p>A distância entre os dois pontos é o <strong>lead time comprometido</strong> — o número que você promete ao stakeholder.</p>
+      <p style="font-size:13px;color:#6b7280;margin-top:8px"><em>Staging ≠ entregue. Feature flag rollout 1% → 100% conta.</em></p>
+    </div>
+  </div>
+
+  <!-- Políticas coluna por coluna -->
+  <h3 style="margin:20px 0 12px">📋 Políticas coluna por coluna</h3>
+
+  <div style="border:2px solid #7c3aed;border-radius:8px;overflow:hidden;margin-bottom:12px">
+    <div style="background:#7c3aed;color:#fff;padding:8px 16px;font-weight:800;font-size:14px">📥 BACKLOG — Entrada e Gestão</div>
+    <div style="padding:12px 16px">
+      <ul class="chk" style="
+--- s-elite-cadencias ---
+id="s-elite-cadencias" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#064e3b,#065f46)">
+    <div class="tag">TIME DE ELITE</div>
+    <h2>🔄 Cadências do Scrumban</h2>
+    <p>Loops de feedback em ritmos diferentes — cada cadência com um propósito, participantes e duração definidos</p>
+  </div>
+
+  <div class="card orange" style="margin-bottom:20px">
+    <div class="card-title">🎯 Princípio das cadências</div>
+    <p>Não implemente todas de uma vez. Comece pelas primeiras duas (Daily + Replenishment) e adicione as demais conforme a dor real. Uma cadência que ninguém segue é pior do que não ter nenhuma.</p>
+    <p>Cada cadência tem uma pergunta central: <strong>o que inspecionamos e o que adaptamos neste ritmo?</strong></p>
+  </div>
+
+  <!-- Tabela de cadências -->
+  <div style="overflow-x:auto;margin-bottom:24px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="background:#064e3b;color:#fff">
+          <th style="padding:10px 12px;text-align:left">Cadência</th>
+          <th style="padding:10px 12px;text-align:center">Ritmo</th>
+          <th style="padding:10px 12px;text-align:center">Duração</th>
+          <th style="padding:10px 12px;text-align:left">Para quê</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#f0fdf4;border-bottom:1px solid #a7f3d0">
+          <td style="padding:10px 12px;font-weight:700">☀️ Kanban Meeting (daily)</td>
+          <td style="padding:10px 12px;text-align:center">Diária</td>
+          <td style="padding:10px 12px;text-align:center">15 min</td>
+          <td style="padding:10px 12px">Coordenar o fluxo: desbloquear, olhar aging, puxar</td>
+        </tr>
+        <tr style="background:#fff;border-bottom:1px solid #e2e8f0">
+          <td style="padding:10px 12px;font-weight:700">🔁 Replenishment</td>
+          <td style="padding:10px 12px;text-align:center">Semanal ou quinzenal</td>
+          <td style="padding:10px 12px;text-align:center">20–30 min</td>
+          <td style="padding:10px 12px">Comprometer os próximos itens — ponto de compromisso</td>
+        </tr>
+        <tr style="background:#f0fdf4;border-bottom:1px solid #a7f3d0">
+          <td style="padding:10px 12px;font-weight:700">📊 Flow Review</td>
+          <td style="padding:10px 12px;text-align:center">Quinzenal</td>
+          <td style="padding:10px 12px;text-align:center">30 min</td>
+          <td style="padding:10px 12px">Análise quantitativa: cycle 
+--- s-elite-flow ---
+id="s-elite-flow" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#0c4a6e,#075985)">
+    <div class="tag">TIME DE ELITE</div>
+    <h2>⏱️ Touch Time vs Wait Time</h2>
+    <p>O que acontece com o tempo do item entre o pedido e a entrega — e por que 85% é espera</p>
+  </div>
+
+  <!-- Anatomia do Lead Time -->
+  <h3 style="margin:20px 0 12px">🔬 Anatomia do Lead Time</h3>
+  <div style="background:#fff;border:2px solid #e2e8f0;border-radius:8px;padding:20px;margin-bottom:20px">
+    <div style="position:relative;height:80px;margin-bottom:24px">
+      <!-- Lead time bar -->
+      <div style="position:absolute;top:0;left:0;right:0;height:20px;background:rgba(107,112,69,.15);border-radius:4px;border:1px solid #6b7045">
+        <div style="position:absolute;top:50%;left:4px;transform:translateY(-50%);font-size:11px;font-weight:700;color:#6b7045">LEAD TIME — do pedido à entrega (o que o cliente sente)</div>
+      </div>
+      <!-- Wait time bar -->
+      <div style="position:absolute;top:28px;left:0;width:75%;height:18px;background:rgba(196,155,94,.3);border-radius:4px;border:1px solid #c49b5e">
+        <div style="position:absolute;top:50%;left:4px;transform:translateY(-50%);font-size:11px;font-weight:700;color:#8c6a2c">WAIT TIME — aguardando capacidade, especialista, dependência (≈75%)</div>
+      </div>
+      <!-- Touch time bar -->
+      <div style="position:absolute;top:28px;left:75%;width:25%;height:18px;background:rgba(46,94,102,.25);border-radius:4px;border:1px solid #2e5e66">
+        <div style="position:absolute;top:50%;left:4px;transform:translateY(-50%);font-size:10px;font-weight:700;color:#2e5e66">TOUCH TIME (≈25%)</div>
+      </div>
+      <!-- Points -->
+      <div style="position:absolute;bottom:-20px;left:0;font-size:10px;color:#6b7280;font-weight:600">nasce a demanda</div>
+      <div style="position:absolute;bottom:-20px;left:73%;font-size:10px;color:#e8633a;font-weight:600">commitment point</div>
+      <div style="position:absolute;bottom:-20px;right:0;font-size:10px;color:#065f46;font-weight:600">entrega</div>
+    </div>
+  </div>
+
+  <div class="g3" style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-title">⏱️ Touch Time</div>
+      <p>Tempo em que alguém está <strong>ativamente trabalhando</strong> no item. Digitando código, fazendo review, testando.</p>
+      <p style="font-size:13px;color:#6b7280;margin-top:8px">Também chamado de <em>tempo de serviço</em> ou <em>service time</em>. É a parte

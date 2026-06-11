@@ -1,0 +1,742 @@
+id="s-po-quebrando" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#4c1d95,#5b21b6)">
+    <div class="tag">PRODUCT OWNER</div>
+    <h2>✂️ Quebrando Features em User Stories</h2>
+    <p>A habilidade mais prática do PO — transformar features grandes e vagas em histórias entregáveis e testáveis</p>
+  </div>
+
+  <div class="card orange" style="margin-bottom:20px">
+    <div class="card-title">🎯 Por que isso importa mais do que tudo</div>
+    <p>Histórias grandes são a causa raiz de 80% dos problemas de fluxo: estimativas imprecisas, arrastamento de sprint, bloqueios ocultos e falta de feedback. A habilidade de quebrar bem é o que diferencia um PO mediano de um PO de alto desempenho. <strong>Não é uma habilidade técnica — é uma habilidade de raciocínio sobre valor.</strong></p>
+  </div>
+
+  <!-- Por que histórias pequenas -->
+  <h3 style="margin:20px 0 12px">📐 A regra dos tamanhos</h3>
+  <div class="g3" style="margin-bottom:20px">
+    <div class="card" style="border-top:4px solid #16a34a">
+      <div class="card-title" style="color:#15803d">✅ História P/M (ideal)</div>
+      <ul class="chk" style="margin:0;font-size:13px">
+        <li>Cabe em 1–3 dias de trabalho</li>
+        <li>Entregável de forma independente</li>
+        <li>Criterios de aceite testáveis</li>
+        <li>Feedback rápido — falha ou acerta cedo</li>
+        <li>Estimativa confiável</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:4px solid #f59e0b">
+      <div class="card-title" style="color:#b45309">⚠️ História G (atenção)</div>
+      <ul class="chk" style="margin:0;font-size:13px">
+        <li>Mais de 1 semana de trabalho</li>
+        <li>Estimativa pouco confiável</li>
+        <li>Progresso invisível por vários dias</li>
+        <li>Cobre mais de uma responsabilidade</li>
+        <li>Deve ser quebrada antes do commitment</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:4px solid #dc2626">
+      <div class="card-title" style="color:#dc2626">❌ Épico no board (problema)</div>
+      <ul class="chk" style="margin:0;font-size:13px">
+        <li>Mais de 2 semanas — é um épico disfarçado</li>
+        <li>WIP inflado, board mentiroso</li>
+        <li>Ninguém sabe quando vai sair</li>
+        <li>Impossível dar previsão ao stakeholder</li>
+        <li>Volte ao refinamento e quebre</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SPIDR -->
+  <h3 style="margin:20px 0 12px">🕷️ SPIDR — Os 5 padrões de quebra (Mike Cohn)</h3>
+  <div class="alert alert-blue" style="margin-bottom:16px"><span>💡</span><span>SPIDR é um mnemônico: <strong>S</strong>pike, <strong>P</strong>ath, <strong>I</strong>nterface, <strong>D</strong>ata, <strong>R</strong>ules. Cada letra é uma dimensão pela qual uma história grande pode ser fatiada em histórias menores independentes.</span></div>
+
+  <div style="display:grid;gap:12px;margin-bottom:20px">
+
+    <div style="border:2px solid #7c3aed;border-radius:8px;overflow:hidden">
+      <div style="background:#7c3aed;color:#fff;padding:8px 16px;font-weight:800;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🔬</span>
+        <span>S — Spike (Investigação)</span>
+      </div>
+      <div style="padding:12px 16px">
+        <p style="font-size:14px;margin-bottom:8px">Quando a história envolve incerteza técnica ou de negócio. <strong>Separe a investigação da implementação.</strong></p>
+        <div class="g2">
+          <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#dc2626">Antes (grande):</strong><br>
+            "Implementar login com biometria"
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#16a34a">Depois (quebrado):</strong><br>
+            1. Spike: investigar SDKs de biometria disponíveis (time-box 2 dias)<br>
+            2. Implementar login por Face ID (iOS)<br>
+            3. Implementar login por Face ID (Android)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #1d4ed8;border-radius:8px;overflow:hidden">
+      <div style="background:#1d4ed8;color:#fff;padding:8px 16px;font-weight:800;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🛤️</span>
+        <span>P — Path (Caminho / Fluxo de trabalho)</span>
+      </div>
+      <div style="padding:12px 16px">
+        <p style="font-size:14px;margin-bottom:8px">Separe pelo fluxo do usuário: <strong>caminho feliz primeiro</strong>, alternativas depois.</p>
+        <div class="g2">
+          <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#dc2626">Antes (grande):</strong><br>
+            "Fluxo de checkout completo"
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#16a34a">Depois (quebrado):</strong><br>
+            1. Checkout — caminho feliz (cartão + endereço cadastrado)<br>
+            2. Checkout — novo endereço<br>
+            3. Checkout — boleto bancário<br>
+            4. Checkout — recuperação de carrinho abandonado
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #0284c7;border-radius:8px;overflow:hidden">
+      <div style="background:#0284c7;color:#fff;padding:8px 16px;font-weight:800;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🖥️</span>
+        <span>I — Interface (Canal / Plataforma)</span>
+      </div>
+      <div style="padding:12px 16px">
+        <p style="font-size:14px;margin-bottom:8px">Separe por canal, plataforma ou interface de usuário. <strong>Entregue em um canal e aprenda antes de expandir.</strong></p>
+        <div class="g2">
+          <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#dc2626">Antes (grande):</strong><br>
+            "Notificações de pedido no app"
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#16a34a">Depois (quebrado):</strong><br>
+            1. Notificação por e-mail (já existe infraestrutura)<br>
+            2. Push notification iOS<br>
+            3. Push notification Android<br>
+            4. Notificação in-app (banner)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #047857;border-radius:8px;overflow:hidden">
+      <div style="background:#047857;color:#fff;padding:8px 16px;font-weight:800;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">📊</span>
+        <span>D — Data (Variações de dados)</span>
+      </div>
+      <div style="padding:12px 16px">
+        <p style="font-size:14px;margin-bottom:8px">Separe pela variação dos dados de entrada. <strong>Primeiro o caso mais comum, depois os casos especiais.</strong></p>
+        <div class="g2">
+          <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#dc2626">Antes (grande):</strong><br>
+            "Relatório financeiro exportável"
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#16a34a">Depois (quebrado):</strong><br>
+            1. Relatório mensal básico (texto)<br>
+            2. Exportar em PDF<br>
+            3. Exportar em Excel com gráficos<br>
+            4. Filtros por categoria e período
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:2px solid #b45309;border-radius:8px;overflow:hidden">
+      <div style="background:#b45309;color:#fff;padding:8px 16px;font-weight:800;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">📋</span>
+        <span>R — Rules (Regras de negócio)</span>
+      </div>
+      <div style="padding:12px 16px">
+        <p style="font-size:14px;margin-bottom:8px">Separe por variação de regras de negócio. <strong>Implemente a regra mais simples e adicione complexidade depois.</strong></p>
+        <div class="g2">
+          <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#dc2626">Antes (grande):</strong><br>
+            "Cálculo de desconto para clientes"
+          </div>
+          <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px">
+            <strong style="color:#16a34a">Depois (quebrado):</strong><br>
+            1. Desconto fixo por código promocional<br>
+            2. Desconto progressivo por volume<br>
+            3. Desconto para clientes recorrentes (regra de pontos)<br>
+            4. Combinação de descontos (prioridade)
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Os 7 padrões clássicos (Richard Lawrence) -->
+  <h3 style="margin:20px 0 12px">📖 Os 7 Padrões Clássicos de Quebra (Richard Lawrence)</h3>
+  <div style="overflow-x:auto;margin-bottom:20px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="background:#1e293b;color:#fff">
+          <th style="padding:10px 12px;text-align:left">Padrão</th>
+          <th style="padding:10px 12px;text-align:left">Como usar</th>
+          <th style="padding:10px 12px;text-align:left">Exemplo rápido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:10px 12px;font-weight:700;color:#7c3aed">1. Passos do fluxo</td>
+          <td style="padding:10px 12px">Separe em etapas sequenciais do processo</td>
+          <td style="padding:10px 12px">Cadastro → Verificação → Ativação</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+          <td style="padding:10px 12px;font-weight:700;color:#1d4ed8">2. Variações de regra</td>
+          <td style="padding:10px 12px">Implemente regra simples, adicione complexidade</td>
+          <td style="padding:10px 12px">Desconto fixo → Desconto variável → Desconto por perfil</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:10px 12px;font-weight:700;color:#047857">3. Esforço do critério de aceite</td>
+          <td style="padding:10px 12px">Cada AC pode ser uma história separada</td>
+          <td style="padding:10px 12px">Cada cenário "Dado/Quando/Então" vira uma história</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+          <td style="padding:10px 12px;font-weight:700;color:#b45309">4. Variações de dados</td>
+          <td style="padding:10px 12px">Primeiro dado padrão, depois casos especiais</td>
+          <td style="padding:10px 12px">Upload JPG → Upload PNG → Upload PDF → Upload em lote</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:10px 12px;font-weight:700;color:#0284c7">5. Tipo de usuário / Papel</td>
+          <td style="padding:10px 12px">Separe por persona ou nível de permissão</td>
+          <td style="padding:10px 12px">Dashboard admin → Dashboard cliente → Dashboard leitura</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+          <td style="padding:10px 12px;font-weight:700;color:#dc2626">6. Separar CRUD</td>
+          <td style="padding:10px 12px">Create, Read, Update, Delete como histórias separadas</td>
+          <td style="padding:10px 12px">Listar produtos → Criar produto → Editar → Deletar</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 12px;font-weight:700;color:#475569">7. Adiar performance / qualidade</td>
+          <td style="padding:10px 12px">Funcione primeiro, otimize depois</td>
+          <td style="padding:10px 12px">Busca funcional → Busca com &lt;200ms → Busca com sugestões</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Padrões que não funcionam -->
+  <h3 style="margin:20px 0 12px">🚫 Como NÃO quebrar histórias</h3>
+  <div class="g2" style="margin-bottom:20px">
+    <div class="card" style="border-top:4px solid #dc2626">
+      <div class="card-title" style="color:#dc2626">❌ Fatia horizontal (por camada técnica)</div>
+      <p style="font-size:14px">Quebrar por camada de tecnologia — "frontend", "backend", "banco" — não gera valor independente. Nenhuma fatia sozinha é entregável ao usuário.</p>
+      <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px;margin-top:8px">
+        <strong>Errado:</strong><br>
+        1. Criar tabela no banco de dados<br>
+        2. Criar API REST /pedidos<br>
+        3. Criar tela de pedidos no frontend
+      </div>
+      <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px;margin-top:6px">
+        <strong>Certo (fatia vertical):</strong><br>
+        1. Listar pedidos do cliente (end-to-end, sem filtros)<br>
+        2. Filtrar pedidos por status<br>
+        3. Detalhe do pedido com rastreamento
+      </div>
+    </div>
+    <div class="card" style="border-top:4px solid #dc2626">
+      <div class="card-title" style="color:#dc2626">❌ Dividir por componente</div>
+      <p style="font-size:14px">Quebrar por componente de interface ("modal", "tabela", "formulário") também não gera valor entregável por si só.</p>
+      <div style="background:#fef2f2;border-radius:6px;padding:10px;font-size:13px;margin-top:8px">
+        <strong>Errado:</strong><br>
+        1. Criar componente de modal<br>
+        2. Criar tabela de resultados<br>
+        3. Criar formulário de filtro
+      </div>
+      <div style="background:#f0fdf4;border-radius:6px;padding:10px;font-size:13px;margin-top:6px">
+        <strong>Certo:</strong><br>
+        1. Buscar produto por nome (resultado em lista básica)<br>
+        2. Filtrar resultados por categoria<br>
+        3. Ver detalhes do produto em modal
+      </div>
+    </div>
+  </div>
+
+  <!-- Teste de boa história -->
+  <h3 style="margin:20px 0 12px">✅ Checklist: a história está pronta para quebrar?</h3>
+  <div class="card" style="margin-bottom:20px">
+    <p style="font-size:14px;margin-bottom:10px">Faça estas perguntas antes de afirmar que a quebra ficou boa:</p>
+    <div class="g2">
+      <ul class="chk" style="font-size:13px;margin:0">
+        <li>Cada história tem valor <strong>independente</strong> para o usuário?</li>
+        <li>Cada história é <strong>testável</strong> sozinha (tem AC)?</li>
+        <li>Alguma história pode ser <strong>descartada</strong> sem prejudicar as outras?</li>
+        <li>Posso entregar a primeira sem precisar da segunda pronta?</li>
+      </ul>
+      <ul class="chk" style="font-size:13px;margin:0">
+        <li>O tamanho está <strong>P ou M</strong>? (se M, pode quebrar mais?)</li>
+        <li>Cada história cabe dentro de <strong>1 ciclo</strong>?</li>
+        <li>O time consegue <strong>estimar</strong> cada uma com confiança?</li>
+        <li>Cada uma passa no critério <strong>INVEST</strong>?</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- INVEST completo -->
+  <h3 style="margin:20px 0 12px">🏆 INVEST — O padrão de qualidade de uma história</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-bottom:24px">
+    <div style="border:2px solid #1d4ed8;border-radius:10px;overflow:hidden">
+      <div style="background:#1d4ed8;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">I — Independent (Independente)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">A história não depende da entrega de outra para funcionar. Evite sequências obrigatórias.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ "História B só funciona após História A" — dependência forte</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ Cada história tem valor próprio e pode ser testada isoladamente</div>
+      </div>
+    </div>
+    <div style="border:2px solid #7c3aed;border-radius:10px;overflow:hidden">
+      <div style="background:#7c3aed;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">N — Negotiable (Negociável)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">O escopo da história pode ser ajustado — não é um contrato fechado. O Card é um convite à conversa.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ "Tem que ser exatamente assim, não aceito mudança"</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ PO, Dev e QA refinam juntos o melhor caminho para o valor</div>
+      </div>
+    </div>
+    <div style="border:2px solid #047857;border-radius:10px;overflow:hidden">
+      <div style="background:#047857;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">V — Valuable (Valiosa)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">A história entrega valor real para o usuário ou para o negócio. "Componente técnico" sem valor observável não é uma história.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ "Criar tabela de banco de dados para o módulo X"</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ "Como gerente, consigo ver o relatório consolidado de vendas"</div>
+      </div>
+    </div>
+    <div style="border:2px solid #b45309;border-radius:10px;overflow:hidden">
+      <div style="background:#b45309;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">E — Estimable (Estimável)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">O time consegue dar uma ideia de tamanho. Se não consegue, é porque falta informação ou a história é grande demais.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ "A integração com o ERP pode levar de 3 dias a 3 meses"</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ Spike técnico para descobrir → nova história com estimativa confiável</div>
+      </div>
+    </div>
+    <div style="border:2px solid #0e7490;border-radius:10px;overflow:hidden">
+      <div style="background:#0e7490;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">S — Small (Pequena)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">Cabe em 1 iteração no máximo (para o seu contexto: 10 dias úteis). Histórias grandes são épicos disfarçados.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ História que "a gente termina no próximo sprint" — já saiu do fluxo</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ Se não cabe, quebre usando SPIDR antes de entrar no board</div>
+      </div>
+    </div>
+    <div style="border:2px solid #dc2626;border-radius:10px;overflow:hidden">
+      <div style="background:#dc2626;color:#fff;padding:10px 14px;font-weight:800;font-size:15px">T — Testable (Testável)</div>
+      <div style="padding:12px 14px;font-size:13px">
+        <p style="margin:0 0 8px">Existe uma condição objetiva para saber se está pronto. Se não há critério de aceite, não é uma história — é uma intenção.</p>
+        <div style="background:#fef2f2;border-radius:6px;padding:8px;font-size:12px;color:#7f1d1d;margin-bottom:6px">❌ "Melhorar a experiência do usuário" — o que é "melhor"?</div>
+        <div style="background:#f0fdf4;border-radius:6px;padding:8px;font-size:12px;color:#14532d">✅ "NPS pós-onboarding ≥ 7 em 70% das respostas"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story Smells -->
+  <h3 style="margin:20px 0 12px">🦨 Story Smells — quando uma história tem problema</h3>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:24px">
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">🐘 Épico disfarçado</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: "Como usuário, quero um módulo completo de relatórios"</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: decomponha com SPIDR — comece pelo fluxo principal, depois adicione variações</div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">🔧 História técnica sem valor</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: "Criar índice no banco" / "Refatorar service X"</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: encapsule como task de uma história com valor, ou faça spike com critério de aceite mensurável</div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">🍰 Slice horizontal</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: "Front-end do cadastro" / "Back-end do cadastro" / "Banco de dados do cadastro"</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: story = fatia vertical (ponta a ponta). Um slice de tela a banco que entrega algo testável</div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">💬 Historia sem "Para quê"</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: "Como usuário, quero ver os dados" [sem benefício]</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: o "Para" é obrigatório — sem ele, a equipe não sabe o que sacrificar quando o escopo apertar</div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">🎭 Persona genérica</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: "Como usuário do sistema..." (qualquer um)</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: defina a persona real. Quem especificamente? Gerente financeiro? Operador de caixa? Cada persona tem necessidades diferentes</div>
+    </div>
+    <div style="background:#fef2f2;border-left:4px solid #dc2626;border-radius:8px;padding:14px">
+      <div style="font-weight:700;color:#dc2626;font-size:13px;margin-bottom:6px">🔗 Dependência implícita</div>
+      <p style="font-size:12px;margin:0 0 6px;color:#7f1d1d">Sinal: dois itens que "precisam sair juntos" mas estão em histórias separadas</p>
+      <div style="font-size:12px;color:#991b1b;font-style:italic">Tratamento: ou une em uma história, ou sequencia explicitamente com bloqueio visível no board</div>
+    </div>
+  </div>
+
+  <!-- Hierarquia Épico → Feature → História → Task -->
+  <h3 style="margin:20px 0 12px">🏗️ Hierarquia de Trabalho: Épico → Feature → História → Task</h3>
+  <div style="background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px">
+    <div style="display:grid;gap:12px">
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
+        <div style="background:#7c3aed;color:#fff;border-radius:8px;padding:10px;text-align:center;font-weight:800">
+          🗺️ ÉPICO<br><span style="font-size:11px;font-weight:400">semanas a meses</span>
+        </div>
+        <div style="font-size:13px;padding-top:4px">
+          <strong>Iniciativa estratégica com múltiplas features.</strong> Nunca entra no board diretamente.<br>
+          <em style="color:#6b7280">Ex: "Sistema de gestão de estoque" · "Módulo financeiro completo" · "App mobile v2.0"</em><br>
+          <span style="color:#dc2626;font-size:12px">⚡ Critério de saída: definir features MoSCoW que o compõem</span>
+        </div>
+      </div>
+      <div style="height:1px;background:#e2e8f0"></div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
+        <div style="background:#1d4ed8;color:#fff;border-radius:8px;padding:10px;text-align:center;font-weight:800">
+          🧩 FEATURE<br><span style="font-size:11px;font-weight:400">dias a semanas</span>
+        </div>
+        <div style="font-size:13px;padding-top:4px">
+          <strong>Conjunto coeso de histórias com um objetivo de negócio claro.</strong> Pode entrar no roadmap.<br>
+          <em style="color:#6b7280">Ex: "Checkout com Pix" · "Relatório de inadimplência" · "Onboarding de novos vendedores"</em><br>
+          <span style="color:#dc2626;font-size:12px">⚡ Critério de saída: Step Map completo com histórias identificadas (DoR parcial)</span>
+        </div>
+      </div>
+      <div style="height:1px;background:#e2e8f0"></div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
+        <div style="background:#047857;color:#fff;border-radius:8px;padding:10px;text-align:center;font-weight:800">
+          📝 HISTÓRIA<br><span style="font-size:11px;font-weight:400">1 a 10 dias</span>
+        </div>
+        <div style="font-size:13px;padding-top:4px">
+          <strong>Menor unidade de valor entregável de ponta a ponta.</strong> O que entra e sai do board.<br>
+          <em style="color:#6b7280">Ex: "Como comprador, pago com Pix e recebo confirmação em tempo real"</em><br>
+          <span style="color:#dc2626;font-size:12px">⚡ Critério de entrada no board: passa no INVEST + tem AC + cabe em 1 iteração</span>
+        </div>
+      </div>
+      <div style="height:1px;background:#e2e8f0"></div>
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:12px;align-items:start">
+        <div style="background:#475569;color:#fff;border-radius:8px;padding:10px;text-align:center;font-weight:800">
+          🔩 TASK<br><span style="font-size:11px;font-weight:400">horas a 1 dia</span>
+        </div>
+        <div style="font-size:13px;padding-top:4px">
+          <strong>Passo técnico para completar uma história.</strong> Gerenciado pelo Dev, não visível para o PO.<br>
+          <em style="color:#6b7280">Ex: "Criar endpoint POST /payments/pix" · "Implementar webhook de confirmação" · "Escrever testes unitários"</em><br>
+          <span style="color:#dc2626;font-size:12px">⚡ Nunca vira item do board Scrumban — fica dentro da história como sub-tarefa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote">"O objetivo da quebra não é ter histórias menores — é ter fatias verticais de valor que você possa entregar, aprender e decidir se continua." — Jeff Patton</div>
+
+  <!-- ====================================================
+       EXEMPLOS PRÁTICOS DE FATIAMENTO
+  ===================================================== -->
+  <h3 style="margin:24px 0 16px">🧪 Exemplos Práticos de Fatiamento por Padrão</h3>
+  <p style="font-size:13px;color:#64748b;margin:0 0 20px">Cada exemplo mostra a feature original, o padrão de corte aplicado e as histórias resultantes — prontas para entrar no board.</p>
+
+  <!-- Tabs de navegação -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:0" id="split-tabs">
+    <button onclick="showSplit('s1')" id="st-s1" style="background:#4c1d95;color:#fff;border:none;border-radius:6px 6px 0 0;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">📋 PBB: Publicar Trabalho</button>
+    <button onclick="showSplit('s2')" id="st-s2" style="background:#e2e8f0;color:#475569;border:none;border-radius:6px 6px 0 0;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">🛒 Checkout E-commerce</button>
+    <button onclick="showSplit('s3')" id="st-s3" style="background:#e2e8f0;color:#475569;border:none;border-radius:6px 6px 0 0;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">🔍 Busca de Produtos</button>
+    <button onclick="showSplit('s4')" id="st-s4" style="background:#e2e8f0;color:#475569;border:none;border-radius:6px 6px 0 0;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">📊 Dashboard de Relatórios</button>
+    <button onclick="showSplit('s5')" id="st-s5" style="background:#e2e8f0;color:#475569;border:none;border-radius:6px 6px 0 0;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer">🔐 Gestão de Usuários</button>
+  </div>
+
+  <!-- Conteúdo dos tabs -->
+  <div style="border:2px solid #4c1d95;border-radius:0 8px 8px 8px;padding:20px;background:#faf5ff">
+
+    <!-- S1: PBB Publicar Trabalho -->
+    <div id="split-s1">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-bottom:16px">
+        <div style="background:#4c1d95;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800">PADRÃO: PASSO DE FLUXO (PBB STEP MAP)</div>
+        <div style="font-size:13px;color:#4c1d95;font-weight:700">Feature: Disponibilizar Conteúdo · Persona: Palestrante</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px">
+        <!-- Feature original -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Feature original (elefante 🐘)</div>
+          <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;color:#7f1d1d">
+            <strong>"Como palestrante, quero publicar meu trabalho para que outros possam acessar meu conteúdo"</strong>
+            <div style="margin-top:8px;font-size:11px;color:#991b1b">⚠️ Scope enorme — impossível em 1 iteração</div>
+          </div>
+        </div>
+        <div style="font-size:24px;color:#6b7280;padding-top:30px">→</div>
+        <!-- Resultado -->
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Step Map (ARO) → Histórias geradas</div>
+          <div style="display:grid;gap:6px">
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-01:</strong> Como palestrante, posso <em>realizar meu cadastro</em> na plataforma para ter acesso à área restrita
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-02:</strong> Como palestrante, posso <em>acessar minha área</em> com login para gerenciar meus trabalhos
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-03:</strong> Como palestrante, posso <em>realizar a publicação do meu trabalho</em> para disponibilizar o conteúdo ao público
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-04:</strong> Como palestrante, posso <em>fazer associação de co-autores</em> para compartilhar crédito com colaboradores
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-05:</strong> Como palestrante, posso <em>linkar material externo</em> ao meu trabalho para enriquecer o conteúdo com referências
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-06:</strong> Como palestrante, posso <em>verificar notificações de convite</em> de eventos para aceitar ou recusar participações
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#ede9fe;border-radius:8px;padding:12px;font-size:12px;color:#4c1d95">
+        <strong>💡 Lição do padrão PBB Step Map:</strong> cada passo da jornada do usuário vira uma história independente. O MVP cobre apenas os passos mínimos para que a feature funcione de ponta a ponta. Passos opcionais ou de enriquecimento vão para versões posteriores.
+      </div>
+    </div>
+
+    <!-- S2: Checkout E-commerce -->
+    <div id="split-s2" style="display:none">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-bottom:16px">
+        <div style="background:#1d4ed8;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800">PADRÃO: PASSO DE FLUXO + VARIAÇÃO DE INTERFACE</div>
+        <div style="font-size:13px;color:#1d4ed8;font-weight:700">Feature: Checkout · Persona: Comprador</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Feature original (elefante 🐘)</div>
+          <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;color:#7f1d1d">
+            <strong>"Como comprador, quero fazer o checkout da minha compra para receber o pedido em casa"</strong>
+            <div style="margin-top:8px;font-size:11px;color:#991b1b">⚠️ Envolve endereço, frete, pagamento, confirmação, e-mail — itens demais</div>
+          </div>
+        </div>
+        <div style="font-size:24px;color:#6b7280;padding-top:30px">→</div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Fatiado por passo de fluxo</div>
+          <div style="display:grid;gap:6px">
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-01:</strong> Como comprador, posso <em>informar meu endereço de entrega</em> para que o pedido chegue no local correto
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-02:</strong> Como comprador, posso <em>selecionar a opção de frete</em> para escolher prazo e custo que me atendem
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-03:</strong> Como comprador, posso <em>pagar com cartão de crédito</em> para finalizar minha compra com segurança
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-04:</strong> Como comprador, posso <em>pagar com Pix</em> para ter confirmação instantânea e evitar juros
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-05:</strong> Como comprador, posso <em>aplicar um cupom de desconto</em> no checkout para pagar menos
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-06:</strong> Como comprador recorrente, posso <em>usar endereço e cartão salvos</em> para fazer checkout em 1 clique
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#eff6ff;border-radius:8px;padding:12px;font-size:12px;color:#1e40af">
+        <strong>💡 Lição:</strong> pagamento com cartão e Pix são <em>variações do mesmo passo</em> — entram em iterações separadas. MVP entrega o fluxo mínimo funcional; V2 adiciona métodos de pagamento alternativos.
+      </div>
+    </div>
+
+    <!-- S3: Busca de Produtos -->
+    <div id="split-s3" style="display:none">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-bottom:16px">
+        <div style="background:#047857;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800">PADRÃO: VARIAÇÃO DE DADOS / REGRA DE NEGÓCIO</div>
+        <div style="font-size:13px;color:#047857;font-weight:700">Feature: Busca de Produtos · Persona: Cliente da loja</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Feature original (camelo 🐪 → pode ser elefante)</div>
+          <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;color:#7f1d1d">
+            <strong>"Como cliente, quero buscar produtos na loja para encontrar o que preciso rapidamente"</strong>
+            <div style="margin-top:8px;font-size:11px;color:#991b1b">⚠️ "Buscar" esconde 6 tipos de critério diferentes — cada um com regra distinta</div>
+          </div>
+        </div>
+        <div style="font-size:24px;color:#6b7280;padding-top:30px">→</div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Fatiado por variação de dado/critério</div>
+          <div style="display:grid;gap:6px">
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-01:</strong> Como cliente, posso <em>buscar produtos por nome ou palavra-chave</em> para encontrar o que procuro diretamente
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-02:</strong> Como cliente, posso <em>filtrar por categoria</em> nos resultados para navegar sem saber o nome exato
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-03:</strong> Como cliente, posso <em>filtrar por faixa de preço</em> para ver apenas produtos no meu orçamento
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-04:</strong> Como cliente, posso <em>ordenar resultados por avaliação</em> para escolher produtos mais bem avaliados
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-05:</strong> Como cliente recorrente, posso <em>ver sugestões baseadas no meu histórico</em> para descobrir produtos relevantes
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:12px;font-size:12px;color:#166534">
+        <strong>💡 Lição — Variação de Dados:</strong> quando uma feature esconde múltiplos critérios de filtragem/ordenação, cada critério é um candidato a história separada. MVP entrega busca básica funcional; refinamentos de filtro agregam valor iterativamente sem bloquear o lançamento.
+      </div>
+    </div>
+
+    <!-- S4: Dashboard de Relatórios -->
+    <div id="split-s4" style="display:none">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-bottom:16px">
+        <div style="background:#b45309;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800">PADRÃO: VARIAÇÃO DE PERFIL DE USUÁRIO (PAPEL)</div>
+        <div style="font-size:13px;color:#b45309;font-weight:700">Feature: Dashboard · Personas: Admin, Gerente, Vendedor</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Feature original (elefante 🐘)</div>
+          <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;color:#7f1d1d">
+            <strong>"Como usuário do sistema, quero ver um dashboard com relatórios de vendas para acompanhar o desempenho"</strong>
+            <div style="margin-top:8px;font-size:11px;color:#991b1b">⚠️ "Usuário" cobre 3 perfis diferentes com visibilidades radicalmente distintas</div>
+          </div>
+        </div>
+        <div style="font-size:24px;color:#6b7280;padding-top:30px">→</div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Fatiado por perfil/papel</div>
+          <div style="display:grid;gap:6px">
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-01 · Vendedor:</strong> Como vendedor, posso <em>ver meu resumo de vendas da iteração atual</em> para saber se estou atingindo minha meta
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-02 · Gerente:</strong> Como gerente, posso <em>ver o desempenho consolidado da minha equipe</em> para identificar quem precisa de suporte
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-03 · Admin:</strong> Como administrador, posso <em>ver o relatório completo de todas as regiões</em> para tomar decisões estratégicas
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-04 · Admin:</strong> Como administrador, posso <em>exportar relatórios em CSV/Excel</em> para análise fora do sistema
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fffbeb;border-radius:8px;padding:12px;font-size:12px;color:#92400e">
+        <strong>💡 Lição — Variação de Papel:</strong> persona genérica ("usuário do sistema") é um story smell. Cada papel tem necessidades e permissões distintas. Comece sempre pelo papel mais frequente e com mais impacto — normalmente o usuário operacional, não o admin.
+      </div>
+    </div>
+
+    <!-- S5: Gestão de Usuários -->
+    <div id="split-s5" style="display:none">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;margin-bottom:16px">
+        <div style="background:#dc2626;color:#fff;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:800">PADRÃO: FATIAMENTO POR CRUD</div>
+        <div style="font-size:13px;color:#dc2626;font-weight:700">Feature: Gestão de Usuários · Persona: Administrador</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px">
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Feature original (elefante 🐘)</div>
+          <div style="background:#fef2f2;border:2px solid #fca5a5;border-radius:8px;padding:14px;font-size:13px;color:#7f1d1d">
+            <strong>"Como admin, quero gerenciar os usuários do sistema para controlar quem tem acesso a cada recurso"</strong>
+            <div style="margin-top:8px;font-size:11px;color:#991b1b">⚠️ "Gerenciar" esconde Create + Read + Update + Delete + permissões — 5 histórias distintas</div>
+          </div>
+        </div>
+        <div style="font-size:24px;color:#6b7280;padding-top:30px">→</div>
+        <div>
+          <div style="font-size:11px;font-weight:800;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Fatiado por operação CRUD + valor</div>
+          <div style="display:grid;gap:6px">
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP · CREATE</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-01:</strong> Como admin, posso <em>criar um novo usuário com papel definido</em> para que ele acesse apenas o que precisa
+            </div>
+            <div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#16a34a;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">MVP · READ</span>
+              <strong style="color:#14532d;display:block;margin-top:4px">US-02:</strong> Como admin, posso <em>listar todos os usuários com status ativo/inativo</em> para ter visibilidade do time
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2 · UPDATE</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-03:</strong> Como admin, posso <em>editar o papel de um usuário existente</em> quando ele muda de função
+            </div>
+            <div style="background:#eff6ff;border-left:3px solid #1d4ed8;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#1d4ed8;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V2 · DELETE</span>
+              <strong style="color:#1e3a5f;display:block;margin-top:4px">US-04:</strong> Como admin, posso <em>desativar (não excluir) um usuário</em> para revogar acesso preservando o histórico
+            </div>
+            <div style="background:#faf5ff;border-left:3px solid #7c3aed;border-radius:4px;padding:8px 10px;font-size:12px">
+              <span style="background:#7c3aed;color:#fff;border-radius:3px;padding:1px 6px;font-size:10px;font-weight:700">V3 · PERMISSÕES</span>
+              <strong style="color:#4c1d95;display:block;margin-top:4px">US-05:</strong> Como admin, posso <em>definir permissões granulares por módulo</em> para controle de acesso avançado
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#fef2f2;border-radius:8px;padding:12px;font-size:12px;color:#991b1b">
+        <strong>💡 Lição — CRUD:</strong> "Gerenciar", "Administrar", "Configurar" são palavras-elefante. Sempre pergunte: quais operações são Must para o MVP? Normalmente Create + List básico são suficientes para o lançamento. Update e Delete entram depois.
+      </div>
+    </div>
+
+  </div><!-- fim do container de tabs -->
+
+  <!-- Mapa resumo dos padrões -->
+  <h3 style="margin:28px 0 12px">🗺️ Mapa Rápido: Qual Padrão Usar?</h3>
+  <div style="overflow-x:auto;margin-bottom:20px">
+    <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <thead>
+        <tr style="background:#1e293b;color:#fff">
+          <th style="padding:10px 14px">Sinal na feature</th>
+          <th style="padding:10px 14px">Padrão de corte</th>
+          <th style="padding:10px 14px">Exemplo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:9px 14px">Fluxo com 4+ passos sequenciais</td>
+          <td style="padding:9px 14px;font-weight:700;color:#4c1d95">Step Map (PBB)</td>
+          <td style="padding:9px 14px;color:#64748b">Publicar Trabalho, Checkout, Onboarding</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+          <td style="padding:9px 14px">Mesma ação com dados/critérios diferentes</td>
+          <td style="padding:9px 14px;font-weight:700;color:#047857">Variação de Dados</td>
+          <td style="padding:9px 14px;color:#64748b">Busca por nome/categoria/preço, Filtros</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:9px 14px">Palavra "gerenciar", "administrar", "controlar"</td>
+          <td style="padding:9px 14px;font-weight:700;color:#dc2626">CRUD explícito</td>
+          <td style="padding:9px 14px;color:#64748b">Gestão de usuários, produtos, configurações</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
+          <td style="padding:9px 14px">Persona genérica ("usuário do sistema")</td>
+          <td style="padding:9px 14px;font-weight:700;color:#b45309">Variação de Papel</td>
+          <td style="padding:9px 14px;color:#64748b">Dashboard, relatórios, aprovações</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e2e8f0">
+          <td style="padding:9px 14px">Mesma feature em canais distintos</td>
+          <td style="padding:9px 14px;font-weight:700;color:#0e7490">Variação de Interface</td>
+          <td style="padding:9px 14px;color:#64748b">Notificação por push / e-mail / SMS</td>
+        </tr>
+        <tr style="background:#f8fafc">
+          <td style="padding:9px 14px">Regra com "se… então…" múltiplos</td>
+          <td style="padding:9px 14px;font-weight:700;color:#1d4ed8">Variação de Regra de Negócio</td>
+          <td style="padding:9px 14px;color:#64748b">Descontos, permissões, limites de crédito</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+  function showSplit(id) {
+    ['s1','s2','s3','s4','s5'].forEach(function(k) {
+      var el = document.getElementById('split-'+k);
+      var btn = document.getElementById('st-'+k);
+      if (el) el.style.display = (k===id) ? '' : 'none';
+      if (btn) {
+        btn.style.background = (k===id) ? '#4c1d95' : '#e2e8f0';
+        btn.style.color = (k===id) ? '#fff' : '#475569';
+      }
+    });
+    // update border color to match active tab
+    var colors = {s1:'#4c1d95',s2:'#1d4ed8',s3:'#047857',s4:'#b45309',s5:'#dc2626'};
+    var container = document.querySelector('#split-tabs + div');
+    if (container) container.style.borderColor = colors[id] || '#4c1d95';
+  }
+  </script>
+
+  <div class="quote">"O objetivo da quebra não é ter histórias menores — é ter fatias verticais de valor que você possa entregar, aprender e decidir se continua." — Jeff Patton</div>
+</div>
+
+<!-- ===== PO: PRODUCT BACKLOG BUILDING (PBB) ===== -->
+<div id="s-po-pbb" 

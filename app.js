@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndMigrateContent() {
     try {
-        const response = await fetch('./contexto/scrumban_guia.html?v=11');
+        const response = await fetch('./contexto/scrumban_guia.html?v=12');
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
@@ -111,7 +111,8 @@ async function loadAndMigrateContent() {
                     { title: 'O que é Kanban', parts: [ { id: 's-kanban', context: 'Guia Profundo' } ] },
                     { title: 'Os 9 Valores', parts: [ { id: 's-kanban-valores', context: 'Guia Profundo' } ] },
                     { title: 'Os 6 Princípios', parts: [ { id: 's-kanban-principios', context: 'Guia Profundo' } ] },
-                    { title: 'As 6 Práticas', parts: [ { id: 's-kanban-praticas', context: 'Guia Profundo' } ] },
+                    { title: 'As 6 Práticas', parts: [ { id: 's-kanban-praticas', context: 'Guia Profundo' },
+                    { title: 'Papéis do Fluxo', parts: [ { id: 's-kanban-papeis', context: 'Kanban' } ] } ] },
                     { title: 'As 3 Agendas', parts: [ { id: 's-kanban-agendas', context: 'Guia Profundo' } ] },
                     { title: 'Upstream & Downstream', parts: [ { id: 's-kanban-upstream', context: 'Guia Profundo' } ] },
                     { title: 'O Framework STATIK', parts: [ { id: 's-kanban-statik', context: 'Guia Profundo' } ] },
@@ -141,11 +142,14 @@ async function loadAndMigrateContent() {
                 ];
             } else if(viewId === 'kb-apresentacao') {
                 sectionsToExtract = [
+                    { title: 'O que é Scrumban', parts: [ { id: 's-oque', context: 'Apresentação' } ] },
+                    { title: 'Scrum vs Kanban vs Scrumban', parts: [ { id: 's-vs', context: 'Apresentação' } ] },
                     { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Apresentação' } ] },
                     { title: 'Regras do Board', parts: [ { id: 's-elite-politicas', context: 'Apresentação' } ] },
                     { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Apresentação' } ] },
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Apresentação' } ] },
-                    { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' } ] }
+                    { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' },
+                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Apresentação' } ] } ] }
                 ];
             } else if(viewId === 'kb-metricas') {
                 sectionsToExtract = [
@@ -162,7 +166,8 @@ async function loadAndMigrateContent() {
                     { title: 'Nivelando o Time Misto', parts: [ { id: 's-lider-misto', context: 'Guia do Líder' } ] },
                     { title: 'Plano de 90 Dias', parts: [ { id: 's-lider-90dias', context: 'Guia do Líder' } ] },
                     { title: 'Checklist Semanal', parts: [ { id: 's-lider-checklist', context: 'Guia do Líder' } ] },
-                    { title: 'Gestão de Resistência', parts: [ { id: 's-lider-resistencia', context: 'Guia do Líder' } ] }
+                    { title: 'Gestão de Resistência', parts: [ { id: 's-lider-resistencia', context: 'Guia do Líder' },
+                    { title: 'Cadências do Scrumban', parts: [ { id: 's-cadencias', context: 'Guia do Líder' } ] } ] }
                 ];
             } else if(viewId === 'kb-case') {
                 sectionsToExtract = [
