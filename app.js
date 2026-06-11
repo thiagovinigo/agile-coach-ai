@@ -251,6 +251,7 @@ async function loadAndMigrateContent() {
         extractSection('kb-metricas', 'kb-metricas');
         extractSection('kb-lider', 'kb-lider');
         extractSection('kb-case', 'kb-case');
+        extractSection('kb-tfs', 'kb-tfs');
 
     } catch (error) {
         console.error('Erro ao carregar o conteúdo HTML:', error);
