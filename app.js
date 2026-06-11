@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndMigrateContent() {
     try {
-        const response = await fetch('./contexto/scrumban_guia.html?v=9');
+        const response = await fetch('./contexto/scrumban_guia.html?v=10');
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
@@ -138,6 +138,13 @@ async function loadAndMigrateContent() {
                     { title: 'Roadmap Ágil', parts: [ { id: 's-po-roadmap', context: 'Gestão de Produto' } ] },
                     { title: 'Critérios de Aceite & BDD', parts: [ { id: 's-po-ac', context: 'Gestão de Produto' } ] },
                     { title: 'Engenharia e IA no PRD', parts: [ { id: 's-po-ia-dev', context: 'Engenharia / PO' } ] }
+                ];
+            } else if(viewId === 'kb-apresentacao') {
+                sectionsToExtract = [
+                    { title: 'O Paradigma do Fluxo', parts: [ { id: 's-apresentacao-fluxo', context: 'Apresentação' } ] },
+                    { title: 'Touch vs Wait (Sistema Puxado)', parts: [ { id: 's-apresentacao-pull', context: 'Apresentação' } ] },
+                    { title: 'O Quadro Completo', parts: [ { id: 's-apresentacao-board', context: 'Apresentação' } ] },
+                    { title: 'Acordos & Cerimônias', parts: [ { id: 's-apresentacao-cerimonias', context: 'Apresentação' } ] }
                 ];
             } else if(viewId === 'kb-metricas') {
                 sectionsToExtract = [
