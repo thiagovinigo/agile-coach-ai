@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndMigrateContent() {
     try {
-        const response = await fetch('./contexto/scrumban_guia.html?v=10');
+        const response = await fetch('./contexto/scrumban_guia.html?v=11');
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
@@ -141,10 +141,11 @@ async function loadAndMigrateContent() {
                 ];
             } else if(viewId === 'kb-apresentacao') {
                 sectionsToExtract = [
-                    { title: 'O Paradigma do Fluxo', parts: [ { id: 's-apresentacao-fluxo', context: 'Apresentação' } ] },
-                    { title: 'Touch vs Wait (Sistema Puxado)', parts: [ { id: 's-apresentacao-pull', context: 'Apresentação' } ] },
-                    { title: 'O Quadro Completo', parts: [ { id: 's-apresentacao-board', context: 'Apresentação' } ] },
-                    { title: 'Acordos & Cerimônias', parts: [ { id: 's-apresentacao-cerimonias', context: 'Apresentação' } ] }
+                    { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Apresentação' } ] },
+                    { title: 'Regras do Board', parts: [ { id: 's-elite-politicas', context: 'Apresentação' } ] },
+                    { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Apresentação' } ] },
+                    { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Apresentação' } ] },
+                    { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' } ] }
                 ];
             } else if(viewId === 'kb-metricas') {
                 sectionsToExtract = [
