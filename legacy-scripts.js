@@ -22,22 +22,39 @@
       code: '🏗️ Prompt para skill: ons-construcao (Claude Code)'
     };
 
-    window.gerarPromptIA = function(tipo) {
-      var story = document.getElementById('ia-story-input').value.trim();
+    window.gerarPromptIA = function(tipo, btn) {
+      var container = btn ? (btn.closest('.aggregated-part') || btn.closest('.section') || document) : document;
+      var inputEl = container.querySelector('.ia-story-input') || document.getElementById('ia-story-input');
+      var story = inputEl ? inputEl.value.trim() : '';
       if (!story) { alert('Cole o texto da história primeiro.'); return; }
       var output = prompts[tipo](story);
-      document.getElementById('ia-output-label').textContent = labels[tipo];
-      document.getElementById('ia-output-text').textContent = output;
-      document.getElementById('ia-output-area').style.display = 'block';
-      document.getElementById('ia-copy-ok').style.display = 'none';
-      document.getElementById('ia-output-area').scrollIntoView({behavior:'smooth', block:'nearest'});
+      
+      var labelEl = container.querySelector('.ia-output-label') || document.getElementById('ia-output-label');
+      var textEl = container.querySelector('.ia-output-text') || document.getElementById('ia-output-text');
+      var areaEl = container.querySelector('.ia-output-area') || document.getElementById('ia-output-area');
+      var copyOkEl = container.querySelector('.ia-copy-ok') || document.getElementById('ia-copy-ok');
+      
+      if(labelEl) labelEl.textContent = labels[tipo];
+      if(textEl) textEl.textContent = output;
+      if(areaEl) {
+          areaEl.style.display = 'block';
+          areaEl.scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+      if(copyOkEl) copyOkEl.style.display = 'none';
     };
 
-    window.copiarPromptIA = function() {
-      var text = document.getElementById('ia-output-text').textContent;
+    window.copiarPromptIA = function(btn) {
+      var container = btn ? (btn.closest('.aggregated-part') || btn.closest('.section') || document) : document;
+      var textEl = container.querySelector('.ia-output-text') || document.getElementById('ia-output-text');
+      var copyOkEl = container.querySelector('.ia-copy-ok') || document.getElementById('ia-copy-ok');
+      
+      if(!textEl) return;
+      var text = textEl.textContent;
       navigator.clipboard.writeText(text).then(function() {
-        document.getElementById('ia-copy-ok').style.display = 'block';
-        setTimeout(function(){ document.getElementById('ia-copy-ok').style.display = 'none'; }, 3000);
+        if(copyOkEl) {
+            copyOkEl.style.display = 'block';
+            setTimeout(function(){ copyOkEl.style.display = 'none'; }, 3000);
+        }
       });
     };
   })();
