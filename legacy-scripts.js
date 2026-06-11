@@ -258,20 +258,45 @@
   window.showPolicy = function(colId) {
     var policy = policies[colId];
     if (!policy) return;
+    
+    var dqKeyMap = {
+      'pronto-replen': 'pronto-rep',
+      'dev-dep': 'dev-fin',
+      'testes-fin': 'tests-fin',
+      'validacao-po': 'valid-po',
+      'nao-homologado': 'nao-homol',
+      'liberada': 'lib-instalar',
+      'em-producao': 'em-prod'
+    };
+    var dqKey = dqKeyMap[colId] || colId;
+    
     var panel = document.getElementById('policy-panel');
     var title = document.getElementById('policy-title');
     var body = document.getElementById('policy-body');
     title.textContent = policy.title;
     title.style.color = policy.color;
-    body.innerHTML = policy.fields.map(function(f) {
+    
+    var html = policy.fields.map(function(f) {
       return '<div style="background:var(--bg-primary,#fff);border:1px solid var(--border,#e2e8f0);border-radius:8px;padding:12px 14px;">' +
         '<div style="font-size:12px;font-weight:700;color:' + policy.color + ';margin-bottom:4px;">' + f.label + '</div>' +
         '<div style="font-size:13px;line-height:1.5;color:var(--text-primary,#1e293b);">' + f.value + '</div>' +
         '</div>';
     }).join('');
+    
+    if (window.DQ && window.DQ[dqKey] && window.DQ[dqKey].questions && window.DQ[dqKey].questions.length > 0) {
+      html += '<div style="margin-top:16px;background:#f8fafc;border:2px dashed #94a3b8;border-radius:8px;padding:12px 14px;">' +
+              '<div style="font-size:14px;font-weight:800;color:#334155;margin-bottom:8px;">❓ Perguntas sugeridas para a Daily:</div>' +
+              '<ul style="margin:0;padding-left:20px;font-size:13px;color:#475569;">' +
+              window.DQ[dqKey].questions.map(function(q){ return '<li style="margin-bottom:6px;">' + q.q + '</li>'; }).join('') +
+              '</ul></div>';
+    }
+    
+    body.innerHTML = html;
+    
     panel.style.display = 'block';
     panel.style.borderColor = policy.color;
     panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    
     // highlight active column
     document.querySelectorAll('.bcol').forEach(function(el){ el.style.outline = 'none'; });
     var activeCol = document.querySelector('[data-col="' + colId + '"]');
@@ -484,6 +509,7 @@ var DQ = {
 };
 
 /* ── 2. Daily Questions pill click ── */
+window.DQ = DQ;
 var currentDQCol = null;
 document.addEventListener('click', function(e){
   var pill = e.target.closest('.dq-pill');
