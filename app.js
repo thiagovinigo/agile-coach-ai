@@ -45,7 +45,7 @@ async function loadAndMigrateContent() {
             let sectionsToExtract = [];
             if(viewId === 'kb-scrumban') {
                 sectionsToExtract = [
-                    { title: 'O que é', parts: [ { id: 's-oque', context: 'Teoria Base' } ] },
+                    { title: 'O que é (Visão KCP)', parts: [ { id: 's-oque', context: 'Teoria Base' } ] },
                     { title: 'Scrum vs Kanban vs Scrumban', parts: [ { id: 's-vs', context: 'Teoria Base' } ] },
                     { title: 'Board Completo', parts: [ { id: 's-board', context: 'Teoria Base' } ] },
                     { title: 'Commitment Point', parts: [ { id: 's-commitment', context: 'Teoria Base' }, { id: 's-teach-commitment', context: 'Para Ensinar' } ] },
