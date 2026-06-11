@@ -227,64 +227,47 @@ function initEccSkillsView() {
                 document.querySelectorAll('.kb-nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
-                contentArea.innerHTML = '';
+                const triggersList = (skill.triggers || []).map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px;">${t}</span>`).join('');
                 
-                const titleNode = document.createElement('h3');
-                titleNode.textContent = skill.title;
-                contentArea.appendChild(titleNode);
+                contentArea.innerHTML = `
+                <div class="card" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:2.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.02); max-width: 900px;">
+                    <div style="text-transform: uppercase; font-size: 0.85rem; color: #0078d4; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;">📁 ${category}</div>
+                    <h3 style="margin-bottom:1.2rem; color:#1a202c; font-size:2rem; border-bottom:1px solid #eee; padding-bottom: 1rem;">${skill.title}</h3>
+                    <p style="color:#4a5568; margin-bottom:2rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
+                    
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
+                        <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#0078d4; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;">
+                            ⬇️ Baixar Arquivo da Skill
+                        </a>
+                        <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f3f2f1; color:#323130; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #edebe9; font-size:1rem; transition: background 0.2s;">
+                            👀 Ver Arquivo
+                        </a>
+                    </div>
 
-                if(skill.path) {
-                    const pathNode = document.createElement('div');
-                    pathNode.innerHTML = `<strong>Localização:</strong> <code>${skill.path}</code>`;
-                    pathNode.style.marginBottom = '10px';
-                    pathNode.style.fontSize = '14px';
-                    pathNode.style.color = '#605e5c';
-                    contentArea.appendChild(pathNode);
-                }
+                    <div style="background:#f7fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="margin-top:0; margin-bottom:1rem; font-size:1.1rem; color:#2d3748; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🎯 Quando Chamar (Triggers)</h4>
+                        <div>${triggersList || '<span style="color:#a0aec0; font-size:0.95rem;">Nenhum trigger explícito. Aja de acordo com a descrição.</span>'}</div>
+                    </div>
+                    
+                    
+                    ${skill.dependencies && skill.dependencies.length > 0 ? `
+                    <div style="background:#f0f8ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0078d4; margin-bottom: 2rem;">
+                        <h4 style="margin-top:0; margin-bottom:1rem; font-size:1.1rem; color:#0078d4; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🔗 Skills Vinculadas (Sub-Skills)</h4>
+                        <p style="font-size:0.95rem; color:#4a5568; margin-bottom:1rem;">Esta skill possui conexões diretas ou invoca o conhecimento das seguintes skills:</p>
+                        <div>
+                            ${skill.dependencies.map(d => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:4px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; font-weight:bold;">${d}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
 
-                if(skill.description) {
-                    const descNode = document.createElement('p');
-                    descNode.textContent = skill.description;
-                    contentArea.appendChild(descNode);
-                }
-
-                if(skill.dependencies && skill.dependencies.length > 0) {
-                    const depTitle = document.createElement('h4');
-                    depTitle.textContent = 'Dependências:';
-                    depTitle.style.marginTop = '20px';
-                    contentArea.appendChild(depTitle);
-
-                    const depList = document.createElement('ul');
-                    skill.dependencies.forEach(d => {
-                        const li = document.createElement('li');
-                        li.textContent = d;
-                        depList.appendChild(li);
-                    });
-                    contentArea.appendChild(depList);
-                }
-
-                if(skill.triggers && skill.triggers.length > 0) {
-                    const triggerTitle = document.createElement('h4');
-                    triggerTitle.textContent = 'Triggers Recomendados:';
-                    triggerTitle.style.marginTop = '20px';
-                    contentArea.appendChild(triggerTitle);
-
-                    const triggerCont = document.createElement('div');
-                    triggerCont.style.display = 'flex';
-                    triggerCont.style.flexWrap = 'wrap';
-                    triggerCont.style.gap = '8px';
-
-                    skill.triggers.forEach(t => {
-                        const tSpan = document.createElement('span');
-                        tSpan.textContent = t;
-                        tSpan.style.backgroundColor = '#e1dfdd';
-                        tSpan.style.padding = '4px 8px';
-                        tSpan.style.borderRadius = '4px';
-                        tSpan.style.fontSize = '12px';
-                        triggerCont.appendChild(tSpan);
-                    });
-                    contentArea.appendChild(triggerCont);
-                }
+                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🛠️ Como Instalar (Claude Code):</h4>
+                    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1.2rem; border-radius:8px; font-family:monospace; overflow-x:auto; margin-bottom:2rem; font-size:1.05rem;">/read ${skill.path}</pre>
+                    
+                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar:</h4>
+                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, simplesmente peça a tarefa na linguagem natural correspondente a um dos <strong>Triggers</strong>. O Claude Code automaticamente engatilhará as instruções do arquivo <code>SKILL.md</code> correspondente.</p>
+                </div>
+                `;
             });
 
             skillsContainer.appendChild(btn);
