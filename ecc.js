@@ -61,12 +61,15 @@ function openAgentInfo(btnElement) {
     const title = btnElement.getAttribute('data-title');
     const icon = btnElement.getAttribute('data-icon');
     const desc = decodeURIComponent(btnElement.getAttribute('data-desc'));
+    openInfoModalDirect(title, icon, desc);
+}
 
+function openInfoModalDirect(title, icon, desc) {
     document.getElementById('info-modal-title').innerText = title;
     document.getElementById('info-modal-icon').innerText = icon;
     document.getElementById('info-modal-content').innerHTML = `
         <p><strong>Descrição:</strong><br>${desc}</p>
-        <p style="font-size:12px; color:#a19f9d; margin-top:16px;">*Este é um resumo extraído da base de conhecimento.</p>
+        <p style="font-size:12px; color:#a19f9d; margin-top:16px;">*Detalhes carregados do catálogo ECC.</p>
     `;
     
     document.getElementById('agent-info-modal').style.display = 'flex';
