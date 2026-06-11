@@ -1626,3 +1626,21 @@ function gDay(idx, btn) {
     }
   });
 })();
+
+window.showSplit = function(id) {
+    for(let i=1; i<=5; i++) {
+        const content = document.getElementById('split-s' + i);
+        const btn = document.getElementById('st-s' + i);
+        if(content && btn) {
+            if('s' + i === id) {
+                content.style.display = 'block';
+                btn.style.background = '#4c1d95';
+                btn.style.color = '#fff';
+            } else {
+                content.style.display = 'none';
+                btn.style.background = '#e2e8f0';
+                btn.style.color = '#475569';
+            }
+        }
+    }
+};
