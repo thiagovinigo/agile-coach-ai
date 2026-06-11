@@ -258,6 +258,7 @@ async function loadAndMigrateContent() {
         extractSection('kb-kanban', 'kb-kanban');
         extractSection('kb-scrum', 'kb-scrum');
         extractSection('kb-po', 'kb-po');
+        extractSection('kb-apresentacao', 'kb-apresentacao');
         extractSection('kb-metricas', 'kb-metricas');
         extractSection('kb-lider', 'kb-lider');
         extractSection('kb-case', 'kb-case');
