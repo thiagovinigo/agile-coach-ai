@@ -112,6 +112,20 @@
         </main>
     </div>
 
+    <!-- Agent Info Modal -->
+    <div id="agent-info-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#fff; width:90%; max-width:600px; max-height:80vh; border-radius:8px; padding:24px; overflow-y:auto; position:relative;">
+            <button onclick="document.getElementById('agent-info-modal').style.display='none'" style="position:absolute; top:16px; right:16px; background:none; border:none; font-size:24px; cursor:pointer; color:#605e5c;">&times;</button>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                <span id="info-modal-icon" style="font-size:32px;">🤖</span>
+                <h3 id="info-modal-title" style="margin:0; color:#0078d4;">Agent Name</h3>
+            </div>
+            <div id="info-modal-content" style="color:#323130; line-height:1.6;">
+                <!-- Description content goes here -->
+            </div>
+        </div>
+    </div>
+
     <script src="legacy-scripts.js?v=11"></script>
     <script src="skills-data.js?v=8"></script>
     <script src="ecc-skills-data.js?v=1"></script>

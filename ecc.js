@@ -17,11 +17,12 @@ function initEccAgentsView() {
 
     eccAgentsData.forEach(agent => {
         html += `
-            <div class="card">
+            <div class="card" style="position:relative;">
+                <button onclick="openAgentInfo(this)" data-title="${agent.title}" data-icon="${agent.icon || '🤖'}" data-desc="${encodeURIComponent(agent.description)}" style="position:absolute; top:12px; right:12px; background:transparent; border:1px solid #c8c6c4; border-radius:50%; width:24px; height:24px; color:#605e5c; cursor:pointer; font-weight:bold; display:flex; justify-content:center; align-items:center;" title="Ver detalhes">?</button>
                 <div class="card-icon">${agent.icon || '🤖'}</div>
                 <div class="card-title">${agent.title}</div>
                 <div class="card-desc">${agent.description || 'Especialista em tarefas da arquitetura ECC.'}</div>
-                <button class="card-action" onclick="openEccChat('${agent.title}', '${agent.icon || '🤖'}')">
+                <button class="card-action" onclick="openEccChat('${agent.title}', '${agent.icon || '🤖'}', '${encodeURIComponent(agent.description)}')">
                     Conversar
                 </button>
             </div>
@@ -54,11 +55,30 @@ function initEccAgentsView() {
     container.innerHTML = html;
 }
 
-function openEccChat(agentName, icon) {
+let currentAgentSystemPrompt = '';
+
+function openAgentInfo(btnElement) {
+    const title = btnElement.getAttribute('data-title');
+    const icon = btnElement.getAttribute('data-icon');
+    const desc = decodeURIComponent(btnElement.getAttribute('data-desc'));
+
+    document.getElementById('info-modal-title').innerText = title;
+    document.getElementById('info-modal-icon').innerText = icon;
+    document.getElementById('info-modal-content').innerHTML = `
+        <p><strong>Descrição:</strong><br>${desc}</p>
+        <p style="font-size:12px; color:#a19f9d; margin-top:16px;">*Este é um resumo extraído da base de conhecimento.</p>
+    `;
+    
+    document.getElementById('agent-info-modal').style.display = 'flex';
+}
+
+function openEccChat(agentName, icon, encodedDesc) {
+    currentAgentSystemPrompt = \`Você é o agente \${agentName}. \${decodeURIComponent(encodedDesc)}\`;
+    
     document.getElementById('ecc-chat-modal').style.display = 'block';
     document.getElementById('ecc-chat-title').innerText = agentName;
     document.getElementById('ecc-chat-icon').innerText = icon;
-    document.getElementById('ecc-chat-messages').innerHTML = `<div class="msg ai">Olá! Sou o <strong>${agentName}</strong>. Como posso te ajudar hoje na nossa arquitetura ECC?</div>`;
+    document.getElementById('ecc-chat-messages').innerHTML = \`<div class="msg ai">Olá! Sou o <strong>\${agentName}</strong>. Como posso te ajudar hoje na nossa arquitetura ECC?</div>\`;
     document.getElementById('ecc-chat-modal').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -66,7 +86,7 @@ function closeEccChat() {
     document.getElementById('ecc-chat-modal').style.display = 'none';
 }
 
-function sendEccMessage() {
+async function sendEccMessage() {
     const input = document.getElementById('ecc-chat-input-field');
     const msgText = input.value.trim();
     if(!msgText) return;
@@ -81,13 +101,45 @@ function sendEccMessage() {
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    setTimeout(() => {
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'msg ai';
+    loadingMsg.innerHTML = '<span style="color:#0078d4;">Processando resposta... ⏳</span>';
+    chatBox.appendChild(loadingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                systemPrompt: currentAgentSystemPrompt,
+                messages: [{ role: 'user', content: msgText }]
+            })
+        });
+
+        const data = await response.json();
+        
+        chatBox.removeChild(loadingMsg);
+
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        aiMsg.innerHTML = `Processando a requisição na base de conhecimento do ECC...<br><br>*(Simulação: Integração real não conectada)*`;
+        if (response.ok) {
+            aiMsg.innerText = data.reply;
+        } else {
+            aiMsg.innerHTML = `<span style="color:var(--danger);">Erro: \${data.error}</span>`;
+        }
+        
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
+
+    } catch(err) {
+        chatBox.removeChild(loadingMsg);
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'msg ai';
+        aiMsg.innerHTML = `<span style="color:var(--danger);">Erro de Conexão: O backend Serverless não respondeu (você está rodando o 'vercel dev'?).</span>`;
+        chatBox.appendChild(aiMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 }
 
 function initEccSkillsView() {

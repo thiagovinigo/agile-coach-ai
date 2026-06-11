@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             <div class="grid-cards">
                 <!-- Agent 1 -->
-                <div class="card">
+                <div class="card" style="position:relative;">
+                    <button onclick="openAgentInfo(this)" data-title="Scrum Master Bot" data-icon="🧙‍♂️" data-desc="${encodeURIComponent('Especialista em facilitação de cerimônias, resolução de conflitos e remoção de impedimentos no nível do time.')}" style="position:absolute; top:12px; right:12px; background:transparent; border:1px solid #c8c6c4; border-radius:50%; width:24px; height:24px; color:#605e5c; cursor:pointer; font-weight:bold; display:flex; justify-content:center; align-items:center;" title="Ver detalhes">?</button>
                     <div class="card-icon">🧙‍♂️</div>
                     <div class="card-title">Scrum Master Bot</div>
                     <div class="card-desc">Especialista em facilitação de cerimônias, resolução de conflitos e remoção de impedimentos no nível do time.</div>
@@ -20,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <!-- Agent 2 -->
-                <div class="card">
+                <div class="card" style="position:relative;">
+                    <button onclick="openAgentInfo(this)" data-title="Flow Metrics AI" data-icon="📊" data-desc="${encodeURIComponent('Análise preditiva de fluxo, cálculo de previsibilidade probabilística, throughput e identificação de gargalos.')}" style="position:absolute; top:12px; right:12px; background:transparent; border:1px solid #c8c6c4; border-radius:50%; width:24px; height:24px; color:#605e5c; cursor:pointer; font-weight:bold; display:flex; justify-content:center; align-items:center;" title="Ver detalhes">?</button>
                     <div class="card-icon">📊</div>
                     <div class="card-title">Flow Metrics AI</div>
                     <div class="card-desc">Análise preditiva de fluxo, cálculo de previsibilidade probabilística, throughput e identificação de gargalos.</div>
@@ -30,7 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <!-- Agent 3 -->
-                <div class="card">
+                <div class="card" style="position:relative;">
+                    <button onclick="openAgentInfo(this)" data-title="PO Copilot" data-icon="🧑‍💼" data-desc="${encodeURIComponent('Apoio para fatiar épicos, escrever histórias de usuário com critérios de aceite e priorizar backlog.')}" style="position:absolute; top:12px; right:12px; background:transparent; border:1px solid #c8c6c4; border-radius:50%; width:24px; height:24px; color:#605e5c; cursor:pointer; font-weight:bold; display:flex; justify-content:center; align-items:center;" title="Ver detalhes">?</button>
                     <div class="card-icon">🧑‍💼</div>
                     <div class="card-title">Product Owner Copilot</div>
                     <div class="card-desc">Apoio para fatiar épicos, escrever histórias de usuário com critérios de aceite e priorizar backlog.</div>
@@ -65,7 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAgentsUI();
 });
 
+let currentAgileAgentPrompt = '';
+
 function openChat(agentName, icon) {
+    // Generate a simple system prompt based on the agent name
+    currentAgileAgentPrompt = `Você é o agente ágil especializado: ${agentName}. Ajude o usuário respondendo de forma concisa e direta baseada em práticas de Scrum/Kanban.`;
+
     document.getElementById('chat-modal').style.display = 'block';
     document.getElementById('chat-title').innerText = agentName;
     document.getElementById('chat-icon').innerText = icon;
@@ -78,7 +86,7 @@ function closeChat() {
     document.getElementById('chat-modal').style.display = 'none';
 }
 
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById('chat-input-field');
     const msgText = input.value.trim();
     if(!msgText) return;
@@ -94,12 +102,43 @@ function sendMessage() {
     input.value = '';
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Simulate AI response
-    setTimeout(() => {
+    const loadingMsg = document.createElement('div');
+    loadingMsg.className = 'msg ai';
+    loadingMsg.innerHTML = '<span style="color:#0078d4;">Processando resposta... ⏳</span>';
+    chatBox.appendChild(loadingMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    try {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                systemPrompt: currentAgileAgentPrompt,
+                messages: [{ role: 'user', content: msgText }]
+            })
+        });
+
+        const data = await response.json();
+        
+        chatBox.removeChild(loadingMsg);
+
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        aiMsg.innerHTML = "<em>(Resposta simulada do Agente)</em> Compreendo seu ponto. Para lidar com isso, sugiro revisitar as Políticas Explícitas do seu board ou facilitar uma retrospectiva focada em Gargalos de Fluxo. Quer que eu te dê um template para essa dinâmica?";
+        if (response.ok) {
+            aiMsg.innerText = data.reply;
+        } else {
+            aiMsg.innerHTML = `<span style="color:var(--danger);">Erro: \${data.error}</span>`;
+        }
+        
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
-    }, 1000);
+
+    } catch(err) {
+        chatBox.removeChild(loadingMsg);
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'msg ai';
+        aiMsg.innerHTML = `<span style="color:var(--danger);">Erro de Conexão: O backend Serverless não respondeu (você está rodando o 'vercel dev'?).</span>`;
+        chatBox.appendChild(aiMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 }
