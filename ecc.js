@@ -76,12 +76,12 @@ function openInfoModalDirect(title, icon, desc) {
 }
 
 function openEccChat(agentName, icon, encodedDesc) {
-    currentAgentSystemPrompt = \`Você é o agente \${agentName}. \${decodeURIComponent(encodedDesc)}\`;
+    currentAgentSystemPrompt = `Você é o agente ${agentName}. ${decodeURIComponent(encodedDesc)}`;
     
     document.getElementById('ecc-chat-modal').style.display = 'block';
     document.getElementById('ecc-chat-title').innerText = agentName;
     document.getElementById('ecc-chat-icon').innerText = icon;
-    document.getElementById('ecc-chat-messages').innerHTML = \`<div class="msg ai">Olá! Sou o <strong>\${agentName}</strong>. Como posso te ajudar hoje na nossa arquitetura ECC?</div>\`;
+    document.getElementById('ecc-chat-messages').innerHTML = `<div class="msg ai">Olá! Sou o <strong>${agentName}</strong>. Como posso ajudar com sua engenharia ágil hoje?</div>`;
     document.getElementById('ecc-chat-modal').scrollIntoView({ behavior: 'smooth' });
 }
 
