@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndMigrateContent() {
     try {
-        const response = await fetch('./contexto/scrumban_guia.html?v=4');
+        const response = await fetch('./contexto/scrumban_guia.html?v=5');
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
@@ -127,6 +127,8 @@ async function loadAndMigrateContent() {
             } else if(viewId === 'kb-po') {
                 sectionsToExtract = [
                     { title: 'O Papel do PO', parts: [ { id: 's-po', context: 'Gestão de Produto' } ] },
+                    { title: 'Lean Inception', parts: [ { id: 's-po-lean-inception', context: 'Descoberta de Produto' } ] },
+                    { title: 'Continuous Discovery', parts: [ { id: 's-po-continuous-discovery', context: 'Descoberta de Produto' } ] },
                     { title: 'Visão de Produto (Story Map)', parts: [ { id: 's-po-storymap', context: 'Product Owner' } ] },
                     { title: 'Quebrando Features (PBB)', parts: [ { id: 's-po-pbb', context: 'Product Owner' } ] },
                     { title: 'Quebrando Histórias', parts: [ { id: 's-po-quebrando', context: 'Gestão de Produto' } ] },
