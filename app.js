@@ -148,8 +148,8 @@ async function loadAndMigrateContent() {
                     { title: 'Regras do Board', parts: [ { id: 's-elite-politicas', context: 'Apresentação' } ] },
                     { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Apresentação' } ] },
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Apresentação' } ] },
-                    { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' },
-                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Apresentação' } ] } ] }
+                    { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' } ] },
+                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Apresentação' } ] }
                 ];
             } else if(viewId === 'kb-metricas') {
                 sectionsToExtract = [
