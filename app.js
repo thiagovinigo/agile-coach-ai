@@ -91,6 +91,12 @@ async function loadAndMigrateContent() {
                     { title: 'Métricas DORA', parts: [ { id: 's-metricas-dora', context: 'Engenharia / Métricas' } ] },
                     { title: 'Health Check do Time', parts: [ { id: 's-healthcheck', context: 'Agile Coach / Métricas' } ] }
                 ];
+            } else if(viewId === 'kb-tfs') {
+                sectionsToExtract = [
+                    { title: 'Hierarquia e Links', parts: [ { id: 's-tfs-links', context: 'Especialista TFS' } ] },
+                    { title: 'Configuração de Boards Kanban', parts: [ { id: 's-tfs-boards', context: 'Especialista TFS' } ] },
+                    { title: 'Migração TFS para Cloud', parts: [ { id: 's-tfs-cloud', context: 'Especialista TFS' } ] }
+                ];
             } else if(viewId === 'kb-agil') {
                 sectionsToExtract = [
                     { title: 'Transformação Ágil', parts: [ { id: 's-agil', context: 'Transf. Ágil' } ] },
