@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadAndMigrateContent() {
     try {
-        const response = await fetch('./contexto/scrumban_guia.html?v=5');
+        const response = await fetch('./contexto/scrumban_guia.html?v=6');
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
