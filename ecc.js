@@ -64,12 +64,35 @@ function openAgentInfo(btnElement) {
     openInfoModalDirect(title, icon, desc);
 }
 
-function openInfoModalDirect(title, icon, desc) {
+function openInfoModalDirect(title, icon, desc, type, path) {
+    let extraHtml = '';
+    if (type === 'skill' && path) {
+        extraHtml = `
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <a href="${path}" download style="display:inline-block; background:#0078d4; color:#fff; padding:8px 16px; border-radius:4px; text-decoration:none; font-weight:bold;">⬇️ Baixar Skill</a>
+                <a href="${path}" target="_blank" style="display:inline-block; background:#f3f2f1; color:#323130; padding:8px 16px; border-radius:4px; text-decoration:none; border:1px solid #ccc; font-weight:bold;">👀 Ver Arquivo</a>
+            </div>
+            <div style="margin-top:15px; background:#f4f4f4; padding:10px; border-radius:6px; border-left:4px solid #0078d4;">
+                <strong style="display:block; margin-bottom:5px;">Como instalar (Claude Code):</strong>
+                <code style="background:#fff; padding:4px 8px; border-radius:4px; border:1px solid #ddd;">/read ${path}</code>
+            </div>
+        `;
+    } else if (type === 'agent') {
+        extraHtml = `
+            <div style="margin-top: 20px;">
+                <button onclick="openEccChat('${title}', '${icon}', '${encodeURIComponent(desc)}'); document.getElementById('agent-info-modal').style.display='none';" style="background:#0078d4; color:#fff; padding:8px 16px; border-radius:4px; border:none; cursor:pointer; font-weight:bold;">
+                    💬 Conversar com Agente
+                </button>
+            </div>
+        `;
+    }
+
     document.getElementById('info-modal-title').innerText = title;
     document.getElementById('info-modal-icon').innerText = icon;
     document.getElementById('info-modal-content').innerHTML = `
-        <p><strong>Descrição:</strong><br>${desc}</p>
-        <p style="font-size:12px; color:#a19f9d; margin-top:16px;">*Detalhes carregados do catálogo ECC.</p>
+        <p style="font-size:1.1rem; color:#4a5568; line-height:1.6;"><strong>Descrição:</strong><br>${desc}</p>
+        ${extraHtml}
+        <p style="font-size:12px; color:#a19f9d; margin-top:16px;">*Detalhes carregados do catálogo real ECC.</p>
     `;
     
     document.getElementById('agent-info-modal').style.display = 'flex';

@@ -1,4 +1,18 @@
 
+window.getActiveElement = function(id) {
+  var activeView = document.querySelector('.view.active');
+  if (activeView) {
+    var el = activeView.querySelector('[id="' + id + '"]');
+    if (el) return el;
+  }
+  return getActiveElement(id);
+};
+
+window.getActiveContainer = function() {
+  return document.querySelector('.view.active') || document;
+};
+
+
   (function() {
     var prompts = {
       userstory: function(story) {
@@ -24,15 +38,15 @@
 
     window.gerarPromptIA = function(tipo, btn) {
       var container = btn ? (btn.closest('.aggregated-part') || btn.closest('.section') || document) : document;
-      var inputEl = container.querySelector('.ia-story-input') || document.getElementById('ia-story-input');
+      var inputEl = container.querySelector('.ia-story-input') || getActiveElement('ia-story-input');
       var story = inputEl ? inputEl.value.trim() : '';
       if (!story) { alert('Cole o texto da história primeiro.'); return; }
       var output = prompts[tipo](story);
       
-      var labelEl = container.querySelector('.ia-output-label') || document.getElementById('ia-output-label');
-      var textEl = container.querySelector('.ia-output-text') || document.getElementById('ia-output-text');
-      var areaEl = container.querySelector('.ia-output-area') || document.getElementById('ia-output-area');
-      var copyOkEl = container.querySelector('.ia-copy-ok') || document.getElementById('ia-copy-ok');
+      var labelEl = container.querySelector('.ia-output-label') || getActiveElement('ia-output-label');
+      var textEl = container.querySelector('.ia-output-text') || getActiveElement('ia-output-text');
+      var areaEl = container.querySelector('.ia-output-area') || getActiveElement('ia-output-area');
+      var copyOkEl = container.querySelector('.ia-copy-ok') || getActiveElement('ia-copy-ok');
       
       if(labelEl) labelEl.textContent = labels[tipo];
       if(textEl) textEl.textContent = output;
@@ -45,8 +59,8 @@
 
     window.copiarPromptIA = function(btn) {
       var container = btn ? (btn.closest('.aggregated-part') || btn.closest('.section') || document) : document;
-      var textEl = container.querySelector('.ia-output-text') || document.getElementById('ia-output-text');
-      var copyOkEl = container.querySelector('.ia-copy-ok') || document.getElementById('ia-copy-ok');
+      var textEl = container.querySelector('.ia-output-text') || getActiveElement('ia-output-text');
+      var copyOkEl = container.querySelector('.ia-copy-ok') || getActiveElement('ia-copy-ok');
       
       if(!textEl) return;
       var text = textEl.textContent;
@@ -287,9 +301,9 @@
     };
     var dqKey = dqKeyMap[colId] || colId;
     
-    var panel = document.getElementById('policy-panel');
-    var title = document.getElementById('policy-title');
-    var body = document.getElementById('policy-body');
+    var panel = getActiveElement('policy-panel');
+    var title = getActiveElement('policy-title');
+    var body = getActiveElement('policy-body');
     title.textContent = policy.title;
     title.style.color = policy.color;
     
@@ -315,14 +329,14 @@
     panel.scrollIntoView({behavior:'smooth', block:'nearest'});
     
     // highlight active column
-    document.querySelectorAll('.bcol').forEach(function(el){ el.style.outline = 'none'; });
-    var activeCol = document.querySelector('[data-col="' + colId + '"]');
+    getActiveContainer().querySelectorAll('.bcol').forEach(function(el){ el.style.outline = 'none'; });
+    var activeCol = getActiveContainer().querySelector('[data-col="' + colId + '"]');
     if (activeCol) activeCol.style.outline = '3px solid ' + policy.color;
   };
 
   window.toggleScenario = function(id) {
-    var el = document.getElementById(id);
-    var arrow = document.getElementById(id + '-arrow');
+    var el = getActiveElement(id);
+    var arrow = getActiveElement(id + '-arrow');
     if (el.style.display === 'none') {
       el.style.display = 'block';
       arrow.style.transform = 'rotate(180deg)';
@@ -536,20 +550,20 @@ document.addEventListener('click', function(e){
 
   // toggle
   if(currentDQCol === col){
-    document.getElementById('dq-panel').style.display = 'none';
+    getActiveElement('dq-panel').style.display = 'none';
     currentDQCol = null;
-    document.querySelectorAll('.dq-pill').forEach(p=>p.style.opacity='1');
+    getActiveContainer().querySelectorAll('.dq-pill').forEach(p=>p.style.opacity='1');
     return;
   }
   currentDQCol = col;
-  document.querySelectorAll('.dq-pill').forEach(p=>p.style.opacity=p.dataset.col===col?'1':'0.5');
+  getActiveContainer().querySelectorAll('.dq-pill').forEach(p=>p.style.opacity=p.dataset.col===col?'1':'0.5');
 
   var data = DQ[col];
   if(!data) return;
-  var panel = document.getElementById('dq-panel');
-  var titleEl = document.getElementById('dq-title');
-  var listEl = document.getElementById('dq-list');
-  var flagEl = document.getElementById('dq-flag');
+  var panel = getActiveElement('dq-panel');
+  var titleEl = getActiveElement('dq-title');
+  var listEl = getActiveElement('dq-list');
+  var flagEl = getActiveElement('dq-flag');
 
   panel.style.display = 'block';
   panel.style.borderColor = data.border;
@@ -588,21 +602,21 @@ var agentState = {
 };
 
 window.agentStart = function(){
-  var col = document.getElementById('agent-col').value;
-  var desc = document.getElementById('agent-desc').value.trim();
-  var days = parseInt(document.getElementById('agent-days').value)||1;
+  var col = getActiveElement('agent-col').value;
+  var desc = getActiveElement('agent-desc').value.trim();
+  var days = parseInt(getActiveElement('agent-days').value)||1;
   if(!col){ alert('Selecione a coluna da demanda.'); return; }
   if(!desc){ alert('Descreva brevemente a demanda.'); return; }
 
   var data = DQ[col];
   agentState = { col:col, desc:desc, days:days, questions: data.questions.slice(), currentQ:0, answers:[], flags:[] };
 
-  document.getElementById('agent-start-btn').style.display = 'none';
-  document.getElementById('agent-reset-btn').style.display = 'block';
-  document.getElementById('agent-col').disabled = true;
-  document.getElementById('agent-desc').disabled = true;
-  document.getElementById('agent-days').disabled = true;
-  document.getElementById('agent-status-label').textContent = 'Sessão ativa — '+data.label;
+  getActiveElement('agent-start-btn').style.display = 'none';
+  getActiveElement('agent-reset-btn').style.display = 'block';
+  getActiveElement('agent-col').disabled = true;
+  getActiveElement('agent-desc').disabled = true;
+  getActiveElement('agent-days').disabled = true;
+  getActiveElement('agent-status-label').textContent = 'Sessão ativa — '+data.label;
 
   agentClearChat();
 
@@ -634,18 +648,18 @@ function agentNextQ(){
   var num = agentState.currentQ + 1;
   var total = agentState.questions.length;
   agentBubble('agent', '('+ num +'/'+total+') '+q.q);
-  document.getElementById('agent-input-area').style.display = 'block';
-  document.getElementById('agent-answer').value = '';
-  document.getElementById('agent-answer').focus();
+  getActiveElement('agent-input-area').style.display = 'block';
+  getActiveElement('agent-answer').value = '';
+  getActiveElement('agent-answer').focus();
   agentQuickBtns(q);
 }
 
 function agentAnswer(){
-  var val = document.getElementById('agent-answer').value.trim();
+  var val = getActiveElement('agent-answer').value.trim();
   if(!val) return;
   agentBubble('user', escHtml(val));
-  document.getElementById('agent-input-area').style.display = 'none';
-  document.getElementById('agent-quick').innerHTML = '';
+  getActiveElement('agent-input-area').style.display = 'none';
+  getActiveElement('agent-quick').innerHTML = '';
 
   // check for risk keywords
   var q = agentState.questions[agentState.currentQ];
@@ -664,7 +678,7 @@ function agentAnswer(){
 window.agentAnswer = agentAnswer;
 
 function agentQuickBtns(q){
-  var quickEl = document.getElementById('agent-quick');
+  var quickEl = getActiveElement('agent-quick');
   var opts = ['Sim, está ok', 'Não, há bloqueio', 'Em andamento', 'Não sei ainda'];
   quickEl.innerHTML = opts.map(function(o){
     return '<button onclick="(function(){document.getElementById(\'agent-answer\').value=\''+o+'\';agentAnswer();})()" style="background:#f1f5f9;color:#374151;border:1px solid #e2e8f0;border-radius:20px;padding:4px 12px;font-size:.78rem;cursor:pointer;">'+o+'</button>';
@@ -672,7 +686,7 @@ function agentQuickBtns(q){
 }
 
 function agentDiagnosis(flags){
-  document.getElementById('agent-input-area').style.display = 'none';
+  getActiveElement('agent-input-area').style.display = 'none';
   var hasCritical = flags.some(function(f){ return f.includes('Risco') || f.includes('Aging'); });
   var status = flags.length === 0 ? 'ok' : hasCritical ? 'blocked' : 'attention';
 
@@ -708,36 +722,36 @@ function agentDiagnosis(flags){
 
   diagHtml += '</div>';
 
-  var dEl = document.getElementById('agent-diagnosis');
+  var dEl = getActiveElement('agent-diagnosis');
   dEl.style.display = 'block';
   dEl.innerHTML = diagHtml;
   dEl.scrollIntoView({behavior:'smooth', block:'nearest'});
-  document.getElementById('agent-status-label').textContent = 'Diagnóstico: '+s.label;
+  getActiveElement('agent-status-label').textContent = 'Diagnóstico: '+s.label;
   agentBubble('agent', 'Diagnóstico concluído! Veja o resumo abaixo. 👇');
 }
 
 window.agentReset = function(){
-  document.getElementById('agent-start-btn').style.display = 'block';
-  document.getElementById('agent-reset-btn').style.display = 'none';
-  document.getElementById('agent-col').disabled = false;
-  document.getElementById('agent-desc').disabled = false;
-  document.getElementById('agent-days').disabled = false;
-  document.getElementById('agent-col').value = '';
-  document.getElementById('agent-desc').value = '';
-  document.getElementById('agent-days').value = '1';
-  document.getElementById('agent-status-label').textContent = 'Aguardando configuração...';
-  document.getElementById('agent-input-area').style.display = 'none';
-  document.getElementById('agent-diagnosis').style.display = 'none';
-  document.getElementById('agent-quick').innerHTML = '';
+  getActiveElement('agent-start-btn').style.display = 'block';
+  getActiveElement('agent-reset-btn').style.display = 'none';
+  getActiveElement('agent-col').disabled = false;
+  getActiveElement('agent-desc').disabled = false;
+  getActiveElement('agent-days').disabled = false;
+  getActiveElement('agent-col').value = '';
+  getActiveElement('agent-desc').value = '';
+  getActiveElement('agent-days').value = '1';
+  getActiveElement('agent-status-label').textContent = 'Aguardando configuração...';
+  getActiveElement('agent-input-area').style.display = 'none';
+  getActiveElement('agent-diagnosis').style.display = 'none';
+  getActiveElement('agent-quick').innerHTML = '';
   agentClearChat();
 };
 
 function agentClearChat(){
-  document.getElementById('agent-chat').innerHTML = '';
+  getActiveElement('agent-chat').innerHTML = '';
 }
 
 function agentBubble(role, html){
-  var chat = document.getElementById('agent-chat');
+  var chat = getActiveElement('agent-chat');
   var isAgent = role === 'agent';
   var div = document.createElement('div');
   div.style.cssText = 'display:flex;gap:8px;align-items:flex-start;'+(isAgent?'':'flex-direction:row-reverse;');
@@ -770,10 +784,10 @@ function escHtml(s){
     simfStep++;
     var next = document.getElementById('simf-step-' + simfStep);
     if (next) { next.style.display = 'block'; next.scrollIntoView({behavior:'smooth', block:'nearest'}); }
-    var btn = document.getElementById('simf-btn');
+    var btn = getActiveElement('simf-btn');
     if (simfStep >= simfTotal) {
       btn.style.display = 'none';
-      document.getElementById('simf-done').style.display = 'block';
+      getActiveElement('simf-done').style.display = 'block';
     } else {
       btn.textContent = '▶ Próximo Passo (' + (simfStep+1) + '/' + simfTotal + ')';
     }
@@ -783,7 +797,7 @@ function escHtml(s){
     var checked = 0;
     boxes.forEach(function(b){ if(b.checked) checked++; });
     var pct = Math.round(checked / boxes.length * 100);
-    var scoreEl = document.getElementById(groupId + '-score');
+    var scoreEl = getActiveElement(groupId + '-score');
     if (scoreEl) {
       if (pct === 100) {
         scoreEl.style.color = '#059669';
@@ -807,10 +821,10 @@ function escHtml(s){
     simtStep++;
     var next = document.getElementById('simt-step-' + simtStep);
     if (next) { next.style.display = 'block'; next.scrollIntoView({behavior:'smooth', block:'nearest'}); }
-    var btn = document.getElementById('simt-btn');
+    var btn = getActiveElement('simt-btn');
     if (simtStep >= simtTotal) {
       btn.style.display = 'none';
-      document.getElementById('simt-done').style.display = 'block';
+      getActiveElement('simt-done').style.display = 'block';
     } else {
       btn.textContent = '▶ Próximo Passo (' + (simtStep+1) + '/' + simtTotal + ')';
     }
@@ -820,7 +834,7 @@ function escHtml(s){
     var checked = 0;
     boxes.forEach(function(b){ if(b.checked) checked++; });
     var pct = Math.round(checked / boxes.length * 100);
-    var scoreEl = document.getElementById('dort-score');
+    var scoreEl = getActiveElement('dort-score');
     if (scoreEl) {
       if (pct === 100) {
         scoreEl.style.color = '#059669';
@@ -841,7 +855,7 @@ function escHtml(s){
 
 
 function goTo(id, el) {
-  const target = document.getElementById(id);
+  const target = getActiveElement(id);
   if (!target) return;
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -860,7 +874,7 @@ function goTo(id, el) {
   window.scrollTo(0, 0);
 }
 function toggleGroup(id) {
-  const grp = document.getElementById(id);
+  const grp = getActiveElement(id);
   if (!grp) return;
   grp.classList.toggle('collapsed');
   const items = grp.querySelector('.nav-group-items');
@@ -920,12 +934,12 @@ function gDay(idx, btn) {
   document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('s-active'));
   document.getElementById('sd-' + idx).classList.add('s-on');
   btn.classList.add('s-active');
-  const expProg = document.getElementById('sexp-prog');
-  const prod = document.getElementById('s-prod-extra');
+  const expProg = getActiveElement('sexp-prog');
+  const prod = getActiveElement('s-prod-extra');
   if(expProg) expProg.innerHTML = '';
   if(prod) prod.innerHTML = '';
-  const extrato = document.getElementById('st-extrato');
-  const rate = document.getElementById('st-rate');
+  const extrato = getActiveElement('st-extrato');
+  const rate = getActiveElement('st-rate');
   if(extrato) { extrato.classList.toggle('s-hi', idx === 0); extrato.classList.toggle('s-done', idx >= 2); }
   if(rate) rate.classList.toggle('s-done', idx >= 1);
   if(idx === 0 && expProg) {
@@ -993,7 +1007,7 @@ function gDay(idx, btn) {
   function inCol(colId,cls){return Object.values(cards).filter(c=>c.col===colId&&(!cls||c.cls===cls));}
   function wipActive(colId){return Object.values(cards).filter(c=>c.col===colId&&c.worker).length;}
   function expWip(){return Object.values(cards).filter(c=>c.cls==='expedite'&&!['ideas','backlog','delivered'].includes(c.col)).length;}
-  function eid(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+  function eid(id,v){const e=getActiveElement(id);if(e)e.textContent=v;}
   function fmtMs(ms){const s=Math.round(ms/1000);return s<60?s+'s':Math.round(s/60)+'m';}
 
   /* advance card to next col; returns true if moved */
@@ -1111,7 +1125,7 @@ function gDay(idx, btn) {
 
     /* banners */
     const expW=expWip();
-    const ob=document.getElementById('overflow-banner');
+    const ob=getActiveElement('overflow-banner');
     if(ob)ob.style.display=expW>=2?'block':'none';
 
     if(statsTimer>500){statsTimer=0;updateStats();}
@@ -1254,7 +1268,7 @@ function gDay(idx, btn) {
 
   /* ── RENDER WORKERS ── */
   function renderWorkers(all,chaos){
-    const wp=document.getElementById('sim-workers');
+    const wp=getActiveElement('sim-workers');
     if(!wp)return;
     const groups=[
       {label:'👩‍💻 Dev Team',role:'dev',ws:WORKERS.filter(w=>w.role==='dev')},
@@ -1304,7 +1318,7 @@ function gDay(idx, btn) {
 
   /* ── RENDER BOARD ── */
   function render(){
-    const board=document.getElementById('sim-board');
+    const board=getActiveElement('sim-board');
     if(!board)return;
     const all=Object.values(cards);
     const chaos=wipMode==='chaos';
@@ -1374,7 +1388,7 @@ function gDay(idx, btn) {
   /* ── PUBLIC API ── */
   window.simToggle=function(){
     simRunning=!simRunning;
-    const btn=document.getElementById('sim-btn-pause');
+    const btn=getActiveElement('sim-btn-pause');
     if(btn)btn.textContent=simRunning?'⏸ Pausar':'▶ Retomar';
     if(simRunning){lastTick=performance.now();requestAnimationFrame(tick);}
   };
@@ -1382,14 +1396,14 @@ function gDay(idx, btn) {
   window.simReset=function(){
     simRunning=false;cards={};nextId=1;deliveredLog=[];tickCount=0;simStartReal=0;
     spawnTimer=0;expTimer=0;statsTimer=0;simStarted=false;focusedColIdx=0;
-    const btn=document.getElementById('sim-btn-pause');
+    const btn=getActiveElement('sim-btn-pause');
     if(btn)btn.textContent='⏸ Pausar';
     ['stat-delivered','stat-wip','stat-ct','stat-tp','stat-exp-wip','stat-wait-qa'].forEach(id=>{
-      const e=document.getElementById(id);if(e)e.textContent='0';
+      const e=getActiveElement(id);if(e)e.textContent='0';
     });
-    const ob=document.getElementById('overflow-banner');if(ob)ob.style.display='none';
-    const brd=document.getElementById('sim-board');if(brd)brd.innerHTML='';
-    const wp=document.getElementById('sim-workers');if(wp)wp.innerHTML='';
+    const ob=getActiveElement('overflow-banner');if(ob)ob.style.display='none';
+    const brd=getActiveElement('sim-board');if(brd)brd.innerHTML='';
+    const wp=getActiveElement('sim-workers');if(wp)wp.innerHTML='';
     setTimeout(simInit,100);
   };
 
@@ -1403,9 +1417,9 @@ function gDay(idx, btn) {
 
   window.simSetMode=function(mode){
     wipMode=mode;
-    const bw=document.getElementById('btn-mode-wip');
-    const bc=document.getElementById('btn-mode-chaos');
-    const cb=document.getElementById('chaos-banner');
+    const bw=getActiveElement('btn-mode-wip');
+    const bc=getActiveElement('btn-mode-chaos');
+    const cb=getActiveElement('chaos-banner');
     if(mode==='wip'){
       if(bw){bw.style.background='#065f46';bw.style.color='#fff';}
       if(bc){bc.style.background='#f1f5f9';bc.style.color='#64748b';}
@@ -1433,7 +1447,7 @@ function gDay(idx, btn) {
   };
 
   function scrollToFocused(){
-    const board=document.getElementById('sim-board');
+    const board=getActiveElement('sim-board');
     if(!board)return;
     const inner=board.firstElementChild;
     if(!inner)return;
@@ -1453,22 +1467,22 @@ function gDay(idx, btn) {
     const info=COL_DESC[col.id]||{emoji:'',desc:col.label};
     const isUp=col.zone==='up';
     /* indicator bar */
-    const ind=document.getElementById('sim-col-indicator');
+    const ind=getActiveElement('sim-col-indicator');
     if(ind){
       ind.innerHTML=`<span style="font-weight:800;color:#1e293b;font-size:13px">${info.emoji} ${col.label}</span>&nbsp;&nbsp;<span style="color:#94a3b8;font-size:11px">${focusedColIdx+1} / ${COLS.length}</span>`;
       ind.style.background=isUp?'#f5f3ff':'#f0fdf4';
       ind.style.borderColor=isUp?'#c4b5fd':'#86efac';
     }
     /* description */
-    const desc=document.getElementById('sim-col-desc');
+    const desc=getActiveElement('sim-col-desc');
     if(desc){
       desc.style.display='block';
       desc.innerHTML=`<strong style="color:#1e293b">${info.emoji} ${col.label}</strong> — ${info.desc}`;
       desc.style.borderLeftColor=col.color||'#334155';
     }
     /* nav arrows opacity */
-    const prev=document.getElementById('sim-nav-prev');
-    const next=document.getElementById('sim-nav-next');
+    const prev=getActiveElement('sim-nav-prev');
+    const next=getActiveElement('sim-nav-next');
     if(prev)prev.style.opacity=focusedColIdx>0?'1':'0.3';
     if(next)next.style.opacity=focusedColIdx<COLS.length-1?'1':'0.3';
   }
@@ -1501,14 +1515,14 @@ function gDay(idx, btn) {
         b.style.boxShadow=i===n?'0 0 0 3px rgba(255,255,255,.4) inset':'none';
       }
     });
-    const hd=document.getElementById('cenario-hint');
+    const hd=getActiveElement('cenario-hint');
     if(hd){hd.style.display='block';hd.innerHTML=hints[n-1];}
     if(n===3){setTimeout(()=>simSetMode('chaos'),250);}
     if(n===2){setTimeout(()=>{simInjectExpedite();},4000);}
   };
 
   /* auto-start when section becomes visible */
-  const section=document.getElementById('s-scrumban-simulacao');
+  const section=getActiveElement('s-scrumban-simulacao');
   if(section){
     const obs=new MutationObserver(ms=>{
       ms.forEach(m=>{if(m.attributeName==='class'&&section.classList.contains('active'))simInit();});
@@ -1527,7 +1541,7 @@ function gDay(idx, btn) {
   window.runMonteCarlo = function() {
     const inputs = Array.from(document.querySelectorAll('#s-elite-tamanho .mc-val'));
     const history = inputs.map(i => parseInt(i.value) || 0).filter(v => v >= 0);
-    const target = parseInt(document.getElementById('mc-target').value) || 20;
+    const target = parseInt(getActiveElement('mc-target').value) || 20;
     if(history.length === 0) return;
 
     const N = 10000;
@@ -1554,7 +1568,7 @@ function gDay(idx, btn) {
     const sprintDays = 15;
 
     // Build result HTML
-    const resultDiv = document.getElementById('mc-result');
+    const resultDiv = getActiveElement('mc-result');
     resultDiv.style.display = 'block';
     resultDiv.innerHTML = `
       <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:10px;padding:20px;border:1px solid #86efac;">
@@ -1596,8 +1610,8 @@ function gDay(idx, btn) {
     const sorted = [...history].sort((a,b)=>a-b);
     const sMin = sorted[0], sMax = sorted[sorted.length-1];
     const sP85th = sorted[Math.min(Math.floor(sorted.length*0.85), sorted.length-1)];
-    const statsDiv = document.getElementById('mc-stats');
-    const statsContent = document.getElementById('mc-stats-content');
+    const statsDiv = getActiveElement('mc-stats');
+    const statsContent = getActiveElement('mc-stats-content');
     statsDiv.style.display = 'block';
     statsContent.innerHTML = `
       <span style="background:#e0f2fe;color:#0c4a6e;padding:5px 12px;border-radius:20px;font-size:.82rem;font-weight:600;">Mín: ${sMin} itens/sprint</span>
@@ -1612,7 +1626,7 @@ function gDay(idx, btn) {
     if(!e.target.closest('#replen-check')) return;
     const checks = document.querySelectorAll('#s-elite-tamanho #replen-check input[type=checkbox]');
     const checked = Array.from(checks).filter(c=>c.checked).length;
-    const score = document.getElementById('replen-score');
+    const score = getActiveElement('replen-score');
     if(checked > 0){
       score.style.display = 'block';
       const msgs = ['','','','','', '🔍 Quase lá — 1 item restante para confirmar!','✅ 6/6 — Demanda pronta para entrar na iteração!'];

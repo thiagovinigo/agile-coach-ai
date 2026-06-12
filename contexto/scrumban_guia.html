@@ -6747,10 +6747,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="background:#fff;border:2px solid #7c3aed;border-radius:12px;padding:20px;margin-bottom:20px">
     <p>O Product Owner precisa transformar uma demanda abstrata ("Quero pagar com PIX") em um PRD (Product Requirements Document) e Histórias de Usuário formatadas em BDD.</p>
     <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Product Manager Copilot', '🧑‍💼', 'Agente interativo de IA treinado para atuar como Product Manager. Apoio para fatiar épicos, escrever histórias de usuário com critérios de aceite e priorizar backlog.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Planner', '🤖', 'Expert planning specialist for complex features and refactoring. Use PROACTIVELY when users request feature implementation, architectural changes, ou para fatiar épicos.', 'agent')">
         🤖 Info do Agente (PM Copilot)
       </button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: prd / userstory', '🧰', 'Instruções em markdown projetadas para serem instaladas na IDE (Claude Code, Cursor). Elas forçam a IA a estruturar histórias de usuário vagas no formato BDD e gerar PRDs rigorosos.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: blueprint', '🧰', 'Gera um blueprint de sistema detalhado mapeando domínios, entidades e especificações do PRD antes de codar.', 'skill', 'contexto/ECC-main/skills/blueprint/SKILL.md')">
         🧰 Info das Skills (PRD / User Story)
       </button>
     </div>
@@ -6767,10 +6767,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="background:#fff;border:2px solid #1d4ed8;border-radius:12px;padding:20px;margin-bottom:20px">
     <p>O Tech Lead recebe o PRD e precisa desenhar a arquitetura, as integrações e decidir como o sistema lidará com o alto volume de webhooks do Banco Central.</p>
     <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Software Architecture Specialist', '🏗️', 'Agente especialista em design de sistemas, trade-offs de infraestrutura, escolha de banco de dados e desenho de arquiteturas de microsserviços. Auxilia na escrita de ADRs.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Architect', '🤖', 'Software architecture specialist for system design, scalability, and technical decision-making.', 'agent')">
         🤖 Info do Agente (Architect)
       </button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: system-design', '🧰', 'Arquivo de skill que guia o LLM a analisar requisitos e desenhar uma topologia de nuvem apropriada, incluindo os diagramas Mermaid necessários para visualização da arquitetura.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: architecture-decision-records', '🧰', 'Escreve ADRs padronizados usando markdown e decisões técnicas baseadas em contexto.', 'skill', 'contexto/ECC-main/skills/architecture-decision-records/SKILL.md')">
         🧰 Info da Skill (System Design)
       </button>
     </div>
@@ -6786,10 +6786,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="background:#fff;border:2px solid #047857;border-radius:12px;padding:20px;margin-bottom:20px">
     <p>O Desenvolvedor instala a skill na sua própria IDE (Cursor ou Claude Code). Em vez de digitar linha por linha, ele injeta a Arquitetura e o PRD na Skill e exige o desenvolvimento orientado a testes (TDD).</p>
     <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Senior Developer', '💻', 'Agente codificador sênior. Conhece padrões Clean Code, Solid, e arquiteturas hexagonais. Focado em código legível, testável e de alta performance.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Typescript Reviewer', '🤖', 'Expert TypeScript/JavaScript code reviewer specializing in type safety, async correctness, and idiomatic patterns.', 'agent')">
         🤖 Info do Agente (Dev)
       </button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: TDD & Clean Code', '🧰', 'Skills de engenharia para IDE. A skill test-driven-development força a IA a escrever os arquivos .spec primeiro e falhar intencionalmente antes de escrever a implementação.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: tdd-workflow', '🧰', 'Força o TDD: Escreve o teste, roda o teste (que deve falhar), escreve o código, faz o teste passar, e refatora.', 'skill', 'contexto/ECC-main/skills/tdd-workflow/SKILL.md')">
         🧰 Info das Skills (TDD / Clean Code)
       </button>
     </div>
@@ -6810,10 +6810,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div style="background:#fff;border:2px solid #b45309;border-radius:12px;padding:20px;margin-bottom:20px">
     <p>Antes do Merge Request, o código passa pelo crivo dos especialistas de Qualidade e Segurança. O objetivo é bloquear vulnerabilidades e garantir aderência aos princípios SOLID antes de ir para PRD.</p>
     <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Security Auditor', '🛡️', 'Agente de DevSecOps para auditoria de código, detecção das vulnerabilidades OWASP Top 10 e modelagem de ameaças antes do código ir para a esteira de CI/CD.')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Security Reviewer', '🤖', 'Security vulnerability detection and remediation specialist. Flags secrets, SSRF, injection, and OWASP vulnerabilities.', 'agent')">
         🤖 Info do Agente (Sec)
       </button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: devsecops', '🧰', 'Instalação local na IDE para revisar os Pull Requests e arquivos alterados, rodando scripts SAST simulados via IA para achar brechas (ex: injeção de SQL, falhas de criptografia).')">
+      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: security-review', '🧰', 'Efetua revisão focada em segurança, OWASP Top 10, sanitização de inputs e vazamento de secrets.', 'skill', 'contexto/ECC-main/skills/security-review/SKILL.md')">
         🧰 Info da Skill (DevSecOps)
       </button>
     </div>
