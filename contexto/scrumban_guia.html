@@ -12086,295 +12086,285 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="page-header" style="background:linear-gradient(135deg,#3d1a6e,#5b21b6)">
     <div class="tag">TIME DE ELITE</div>
     <h2>📜 Tudo Sobre o Board (Como o Scrumban Funciona)</h2>
-    <p>O guia consolidado para todo o time entender as regras, o fluxo e as cadências do nosso sistema.</p>
+    <p>O guia consolidado para todo o time entender as regras, a anatomia do quadro e as cadências do nosso sistema.</p>
   </div>
 
-  <!-- 1. SPRINT vs ITERAÇÕES -->
+  <!-- 1. PARA QUE SERVE O QUADRO -->
+  <h3 style="margin:20px 0 12px">🗺️ Para que serve o Quadro? (Do Início ao Fim)</h3>
+  <div class="card flat" style="border:1px solid #d8b4fe; background:#faf5ff; margin-bottom:20px;">
+    <p style="font-size:14px; color:#4c1d95; margin-top:0;">O quadro Kanban/Scrumban não é um repositório de tarefas, é o <strong>mapa do nosso fluxo de valor</strong>. Ele existe para dar visibilidade a como uma demanda nasce (Upstream) e como ela viaja até chegar nas mãos do cliente (Downstream).</p>
+    <ul style="font-size:13px; color:#5b21b6; padding-left:15px;">
+      <li><strong>Upstream (Discovery):</strong> Onde ideias são triadas, refinadas e fatiadas. É aqui que decidimos <em>o que</em> não fazer e preparamos os itens valiosos.</li>
+      <li><strong>Commitment Point (Ponto de Compromisso):</strong> A linha mágica. Uma vez que o item cruza essa linha, o time se compromete a entregá-lo.</li>
+      <li><strong>Downstream (Delivery):</strong> A execução (Dev, QA, Deploy). O objetivo aqui é fluidez e velocidade. O item não volta; se houver problema, ele é bloqueado e corrigido ali mesmo.</li>
+    </ul>
+    <p style="font-size:13px; color:#4c1d95; margin-bottom:0; font-weight:bold;">O objetivo do quadro é um só: fazer o trabalho fluir da esquerda para a direita o mais rápido possível, com qualidade.</p>
+  </div>
+
+  <!-- 2. ANATOMIA DO QUADRO: ATIVIDADE, FILA E BUFFER -->
+  <h3 style="margin:20px 0 12px">🏗️ Anatomia do Quadro: Nem toda coluna é igual</h3>
+  <div class="g3" style="margin-bottom:20px;">
+    <div class="card flat" style="border-top:4px solid #65a30d; background:#f7fee7;">
+      <strong style="color:#4d7c0f; font-size:12px; letter-spacing:1px; text-transform:uppercase;">Atividade</strong>
+      <h4 style="margin:5px 0 10px 0; color:#3f6212;">Alguém está fazendo</h4>
+      <p style="font-size:12px; color:#4d7c0f; margin:0;">Verbo no gerúndio — "desenvolvendo", "em review". Tem limite de WIP e Definição de Pronto (DoD) local para sair.</p>
+    </div>
+    <div class="card flat" style="border-top:4px solid #0f766e; background:#f0fdfa;">
+      <strong style="color:#0f766e; font-size:12px; letter-spacing:1px; text-transform:uppercase;">Fila / Wait</strong>
+      <h4 style="margin:5px 0 10px 0; color:#115e59;">Ninguém trabalha</h4>
+      <p style="font-size:12px; color:#0f766e; margin:0;">"Feito esperando", "pronto para". O item aguarda a próxima etapa puxar. Só tem política de entrada.</p>
+    </div>
+    <div class="card flat" style="border-top:4px solid #ea580c; background:#fff7ed;">
+      <strong style="color:#c2410c; font-size:12px; letter-spacing:1px; text-transform:uppercase;">Buffer</strong>
+      <h4 style="margin:5px 0 10px 0; color:#9a3412;">Fila deliberada</h4>
+      <p style="font-size:12px; color:#c2410c; margin:0;">Pequena fila mantida de propósito antes de um gargalo, para que ele nunca fique ocioso. Protege o recurso mais escasso.</p>
+    </div>
+  </div>
+  <div style="background:#f3f4f6; padding:12px; border-radius:6px; font-size:13px; color:#374151; margin-bottom:20px;">
+    <strong>Por que importa:</strong> Fila e buffer <em>não têm trabalho acontecendo</em> — todo o tempo ali é puro lead time, é espera. A maioria dos times só desenha colunas de atividade e por isso não enxerga onde o prazo vai embora.
+  </div>
+
+  <!-- 3. FAZENDO / FEITO -->
+  <h3 style="margin:20px 0 12px">✂️ Dividir a coluna em Fazendo/Feito revela o handoff</h3>
+  <div class="card flat" style="border:1px solid #e5e7eb; margin-bottom:20px;">
+    <p style="font-size:13px; color:#374151; margin-top:0;"><strong>Fazendo</strong> = trabalho ativo. <strong>Feito</strong> = terminou aqui, mas ainda não foi puxado adiante.</p>
+    <p style="font-size:13px; color:#374151;">Sem dividir, os dois estados se misturam e o <em>handoff</em> (passagem de bastão) fica invisível. Com a divisão (split), uma sub-coluna "Feito" lotada grita para o time: <strong style="color:#65a30d;">o gargalo está na próxima etapa, não no dev!</strong></p>
+    <div style="background:#f7fee7; color:#4d7c0f; padding:10px; border-radius:4px; font-size:12px; margin-top:10px;">
+      <strong>Regra de bolso:</strong> Só divida a coluna depois de 2 semanas medindo o lead time — e quando houver um handoff real entre pessoas diferentes.
+    </div>
+  </div>
+
+  <!-- 4. POLÍTICAS EXPLÍCITAS -->
+  <h3 style="margin:20px 0 12px">📝 Tire as regras da cabeça das pessoas</h3>
+  <div class="g2" style="margin-bottom:20px;">
+    <div>
+      <p style="font-size:14px; color:#1f2937;">Toda decisão que se repete deve estar <strong style="color:#ea580c;">escrita e visível</strong> no quadro: o que entra em cada coluna, quem pode mover, o que precisa estar feito.</p>
+      <p style="font-size:13px; color:#4b5563;">Sem políticas explícitas, cada pessoa segue uma regra diferente — e o quadro vira uma mentira coletiva.</p>
+    </div>
+    <div style="background:#fff; border:1px solid #d1d5db; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <strong style="font-size:13px; color:#111827;">Exemplo · Política da coluna "Em dev"</strong>
+      <ul style="font-size:12px; color:#374151; padding-left:15px; margin-top:8px;">
+        <li style="margin-bottom:4px;">Só entra se tiver critérios de aceite escritos.</li>
+        <li style="margin-bottom:4px;">Só entra se a pessoa tiver capacidade — WIP por pessoa ≤ 1.</li>
+        <li style="margin-bottom:4px;">Sai para "Review" só com testes verdes e PR aberto.</li>
+        <li>Se ficar > 5 dias parado, vira ponto de discussão na daily.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. SPRINT vs ITERAÇÕES -->
   <h3 style="margin:20px 0 12px">⏱️ Diferença entre Sprint e Iterações (Scrumban)</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card flat" style="border:2px solid #4f46e5; background:#eef2ff;">
       <h4 style="color:#3730a3;margin-top:0;">No Scrum (Sprints Fixas)</h4>
-      <p style="font-size:13px;color:#312e81;">O time estima e se compromete com um <strong>lote fechado de itens</strong> para entregar em 2 semanas. Mudanças e urgências destroem a Sprint. O foco acaba sendo "entregar o pacote", mesmo que a qualidade sofra no fim da Sprint.</p>
+      <p style="font-size:13px;color:#312e81;">O time estima e se compromete com um <strong>lote fechado de itens</strong> para entregar em 2 semanas. Foco em "entregar o pacote", mesmo que a qualidade sofra no fim da Sprint.</p>
     </div>
     <div class="card flat" style="border:2px solid #0ea5e9; background:#f0f9ff;">
       <h4 style="color:#075985;margin-top:0;">No Scrumban (Fluxo Contínuo)</h4>
-      <p style="font-size:13px;color:#0c4a6e;">As iterações de planejamento, execução e entrega são <strong>desacopladas</strong>. Não empurramos um lote enorme. O time <strong>puxa sob demanda</strong>. Mantemos o ritmo (cadências do Scrum), mas o trabalho flui continuamente. Foco no ciclo de vida de cada item individualmente.</p>
+      <p style="font-size:13px;color:#0c4a6e;">As iterações de planejamento, execução e entrega são <strong>desacopladas</strong>. Não empurramos um lote enorme. O time <strong>puxa sob demanda</strong>. O trabalho flui continuamente focando no item.</p>
     </div>
   </div>
 
-  <!-- 2. REGRAS DE TRANSIÇÃO -->
+  <!-- 6. REGRAS DE TRANSIÇÃO E PUXADA -->
   <h3 style="margin:20px 0 12px">✋ Regras de Transição e Puxada</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card blue">
       <div class="card-title">📥 Puxar (Pull System)</div>
-      <p>O trabalho <strong>nunca é empurrado</strong> para a próxima etapa. A regra é clara: o responsável pela etapa seguinte (ex: QA) puxa o item da etapa anterior ("Pronto para Teste") quando tem <strong>capacidade livre</strong> (vaga no WIP).</p>
+      <p>O trabalho <strong>nunca é empurrado</strong> para a próxima etapa. A regra é clara: o responsável pela etapa seguinte (ex: QA) puxa o item da etapa anterior quando tem <strong>capacidade livre</strong>.</p>
     </div>
     <div class="card orange">
       <div class="card-title">🌊 Overflow (Transbordo)</div>
-      <p>O que fazer quando o limite de WIP estourou? <strong>Nenhum item novo entra.</strong> Todos param e fazem o <em>Swarming</em> (enxame) para desafogar a coluna estourada, mesmo que não seja a sua especialidade principal.</p>
+      <p>O que fazer quando o limite de WIP estourou? <strong>Nenhum item novo entra.</strong> Todos param e fazem o <em>Swarming</em> (enxame) para desafogar a coluna estourada.</p>
     </div>
   </div>
-  <div style="background:#fff7ed; border:2px solid #f59e0b; border-radius:12px; padding:20px; margin-top:20px;">
+
+  <div style="background:#fff7ed; border:2px solid #f59e0b; border-radius:12px; padding:20px; margin-bottom:20px;">
     <h4 style="color:#b45309; margin-top:0; font-size:18px;">WIP cheio? Não puxe mais itens. Veja onde pode ajudar.</h4>
-    
     <div style="display:flex; flex-direction:column; gap:15px; margin-top:15px;">
       <div style="display:flex; align-items:flex-start; gap:10px;">
         <span style="background:#ef4444; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">X</span>
         <div>
           <strong style="color:#991b1b; font-size:14px;">Errado:</strong>
-          <span style="font-size:13px; color:#451a03;"> Puxar novo item do backlog porque "meu WIP está cheio e não tenho o que fazer". O problema não é sua falta de trabalho — é o gargalo à frente.</span>
+          <span style="font-size:13px; color:#451a03;"> Puxar novo item porque "meu WIP está cheio e não tenho o que fazer". O problema não é sua falta de trabalho — é o gargalo à frente.</span>
         </div>
       </div>
-      
       <div style="display:flex; align-items:flex-start; gap:10px;">
         <span style="background:#10b981; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">✓</span>
         <div>
           <strong style="color:#065f46; font-size:14px;">Certo:</strong>
-          <span style="font-size:13px; color:#451a03;"> Olhe para a direita do quadro. Quem está sobrecarregado? QA com fila crescendo? Review parado? <strong>Vá ajudar a destravar.</strong></span>
+          <span style="font-size:13px; color:#451a03;"> Olhe para a direita do quadro. Quem está sobrecarregado? QA com fila crescendo? <strong>Vá ajudar a destravar.</strong></span>
         </div>
       </div>
-      
       <div style="display:flex; align-items:flex-start; gap:10px;">
         <span style="background:#3b82f6; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">➔</span>
         <div>
-          <span style="font-size:13px; color:#1e3a8a;"> O WIP limit <strong>força a colaboração</strong> porque é impossível ignorar um bloqueio e puxar outro item. A pressão é sistêmica — e proposital.</span>
+          <span style="font-size:13px; color:#1e3a8a;"> O WIP limit <strong>força a colaboração</strong> porque é impossível ignorar um bloqueio. A pressão é sistêmica — e proposital.</span>
         </div>
       </div>
-      
       <div style="border-top:1px solid #fcd34d; padding-top:10px; margin-top:5px;">
-        <p style="font-size:12px; color:#b45309; margin:0;"><strong>Perguntas da daily:</strong> "Preciso de ajuda?" · "Posso ajudar alguém?" · "O que impede alguém de avançar?" — e não "O que fiz ontem?"</p>
+        <p style="font-size:12px; color:#b45309; margin:0;"><strong>Perguntas da daily mudam:</strong> "Preciso de ajuda?" · "Posso ajudar alguém?" · "O que impede alguém de avançar?"</p>
       </div>
     </div>
   </div>
 
-
-  <!-- 3. TAMANHO DO LOTE, SAÚDE DO FLUXO, GARGALO -->
+  <!-- 7. TAMANHO DO LOTE E FILAS -->
   <h3 style="margin:20px 0 12px">📈 Tamanho do Lote, Estimativa e Saúde do Fluxo</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card flat" style="border-left:5px solid #10b981; background:#f8fafc;">
       <strong style="color:#047857;">📏 Tamanho do Lote e Estimativa</strong>
-      <p style="font-size:13px;margin:5px 0;">No Scrumban, <strong>a estimativa serve como calibrador do lote</strong>, não como promessa cega. Usamos <strong>T-Shirt Sizes (P, M, G)</strong> para nivelar o fluxo. Itens "G" devem ser fatiados. Quanto menor e mais padronizado o tamanho do lote, mais rápido ele atravessa o board (Cycle Time menor).</p>
+      <p style="font-size:13px;margin:5px 0;">No Scrumban, <strong>a estimativa serve como calibrador do lote</strong>, não como promessa cega. Usamos <strong>T-Shirt Sizes (P, M, G)</strong> para nivelar o fluxo. Itens "G" devem ser fatiados para fluírem rápido.</p>
     </div>
     <div class="card flat" style="border-left:5px solid #f59e0b; background:#f8fafc;">
       <strong style="color:#b45309;">🚧 Gargalos e Saúde do Fluxo</strong>
-      <p style="font-size:13px;margin:5px 0;">Um gargalo (bottleneck) é onde a fila cresce (Wait Time explode). A saúde do fluxo depende de observarmos essas filas invisíveis. Se a coluna de "Code Review" tem 10 itens esperando, o sistema adoeceu ali. <strong>Regra de Saúde:</strong> Proteger o gargalo limitando o que entra antes dele.</p>
+      <p style="font-size:13px;margin:5px 0;">Um gargalo é onde a fila cresce invisivelmente. A saúde do fluxo depende de observarmos essas filas. <strong>Regra de Saúde:</strong> Proteger o gargalo limitando o que entra antes dele.</p>
     </div>
   </div>
 
-  
-  <!-- 4. FLUXO E FILAS -->
-  <h3 style="margin:20px 0 12px">🌊 Processo, Fluxo e o Custo das Filas</h3>
-  
   <div class="card flat" style="border:1px solid #d1d5db; background:#f9fafb; margin-bottom:20px;">
     <h4 style="margin-top:0; color:#1f2937; font-size:18px;">Processo é a sequência. <em>Fluxo</em> é o movimento dentro dela.</h4>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:15px;">
       <div style="background:#111827; color:white; padding:15px; border-radius:8px;">
         <strong style="font-size:12px; letter-spacing:1px;">PROCESSO</strong>
-        <p style="font-size:13px; margin-top:10px; color:#d1d5db;">As etapas pelas quais o trabalho passa — analisar, desenvolver, revisar, entregar. É o <strong>mapa</strong> do caminho.</p>
+        <p style="font-size:13px; margin-top:10px; color:#d1d5db;">As etapas pelas quais o trabalho passa. É o <strong>mapa</strong> do caminho.</p>
       </div>
       <div style="background:#4b5563; color:white; padding:15px; border-radius:8px;">
         <strong style="font-size:12px; letter-spacing:1px;">FLUXO</strong>
-        <p style="font-size:13px; margin-top:10px; color:#e5e7eb;">Quão bem o trabalho <strong>se move</strong> por esse mapa: sem paradas, filas ou retrabalho. Um processo pode estar desenhado e o fluxo, parado.</p>
+        <p style="font-size:13px; margin-top:10px; color:#e5e7eb;">Quão bem o trabalho <strong>se move</strong> por esse mapa: sem paradas. O processo pode estar desenhado e o fluxo, parado.</p>
       </div>
     </div>
-    <p style="font-size:13px; color:#4b5563; margin-top:15px;">Gerir fluxo é olhar para o <strong>movimento</strong>, não só para as caixas. A maioria dos times otimiza etapas isoladas e ignora o que acontece <em>entre</em> elas — que é onde o tempo se perde.</p>
   </div>
 
   <div class="card flat" style="border:1px solid #111827; background:#111827; color:white; margin-bottom:20px;">
     <h4 style="margin-top:0; color:#f3f4f6; font-size:18px;">Filas são as maiores causadoras de processos de <em>baixa performance</em>.</h4>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:15px;">
       <div>
-        <div style="background:#991b1b; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; letter-spacing:1px;">AS FILAS AUMENTAM</div>
-        <ul style="font-size:13px; color:#fca5a5; padding-left:20px; margin:0;">
-          <li>Lead time e custo do processo</li>
-          <li>Variabilidade e risco</li>
-          <li>Lentidão do feedback</li>
-        </ul>
+        <div style="background:#991b1b; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; color:white;">AS FILAS AUMENTAM</div>
+        <ul style="font-size:13px; color:#fca5a5; padding-left:20px; margin:0;"><li>Lead time e custo</li><li>Variabilidade e risco</li><li>Lentidão do feedback</li></ul>
       </div>
       <div>
-        <div style="background:#b45309; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; letter-spacing:1px; color:#fffbeb;">AS FILAS REDUZEM</div>
-        <ul style="font-size:13px; color:#fde68a; padding-left:20px; margin:0;">
-          <li>Qualidade do trabalho</li>
-          <li>Eficiência do processo</li>
-          <li>Motivação da equipe</li>
-        </ul>
+        <div style="background:#b45309; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; color:white;">AS FILAS REDUZEM</div>
+        <ul style="font-size:13px; color:#fde68a; padding-left:20px; margin:0;"><li>Qualidade do trabalho</li><li>Eficiência do processo</li><li>Motivação da equipe</li></ul>
       </div>
     </div>
-    <p style="font-size:13px; color:#9ca3af; margin-top:15px; border-top:1px solid #374151; padding-top:10px;">Repare: nada disso aparece num relatório de ocupação. O time parece "cheio", mas o trabalho está parado em fila — e é a fila, não a falta de esforço, que derruba a performance.</p>
   </div>
 
-  <!-- 5. TEORIA DA VARIAÇÃO -->
-  <h3 style="margin:20px 0 12px">🎲 Teoria da Variação</h3>
-  <p style="font-size:14px;"><strong>Donald Reinertsen</strong> — entender de onde vem a variação é o primeiro passo para gerenciá-la. As 3 fontes:</p>
-  
+  <!-- 8. TEORIA DA VARIAÇÃO -->
+  <h3 style="margin:20px 0 12px">🎲 Teoria da Variação (As 3 Fontes)</h3>
   <div class="g3" style="margin-bottom:20px;">
     <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
-      <span style="font-size:20px;">🔄</span>
-      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade da demanda</h4>
-      <p style="font-size:12px; color:#4b5563;">Taxa de chegada e tipo de demanda variam — bugs, features, urgências chegam em ritmos diferentes.</p>
+      <span style="font-size:20px;">🔄</span><h4 style="margin:5px 0; color:#1f2937;">Demanda</h4>
+      <p style="font-size:12px; color:#4b5563;">Bugs, features, urgências chegam em ritmos diferentes.</p>
     </div>
     <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
-      <span style="font-size:20px;">↘️</span>
-      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade do tamanho</h4>
-      <p style="font-size:12px; color:#4b5563;">Itens grandes e pequenos no mesmo fluxo distorcem a previsibilidade.</p>
+      <span style="font-size:20px;">↘️</span><h4 style="margin:5px 0; color:#1f2937;">Tamanho</h4>
+      <p style="font-size:12px; color:#4b5563;">Itens grandes e pequenos distorcem a previsibilidade.</p>
     </div>
     <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
-      <span style="font-size:20px;">⚙️</span>
-      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade do esforço</h4>
-      <p style="font-size:12px; color:#4b5563;">O mesmo tipo de item pode exigir esforços muito diferentes para concluir.</p>
+      <span style="font-size:20px;">⚙️</span><h4 style="margin:5px 0; color:#1f2937;">Esforço</h4>
+      <p style="font-size:12px; color:#4b5563;">O mesmo tipo de item pode exigir esforços muito diferentes.</p>
     </div>
   </div>
 
-  <div class="card flat" style="background:#f3f4f6; border-left:4px solid #4b5563;">
-    <h4 style="margin-top:0; color:#1f2937;">A variação <em>sempre vai existir</em> — gerencie, não lute.</h4>
-    <p style="font-size:13px; color:#4b5563; margin-bottom:10px;">Os quatro princípios da Teoria da Variação (John Seddon):</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px;">
-      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
-        <strong style="color:#65a30d; font-size:16px;">01</strong><br>Espere que as coisas variem — elas sempre variam.
-      </div>
-      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
-        <strong style="color:#65a30d; font-size:16px;">02</strong><br>Compreender a variação diz o que esperar.
-      </div>
-      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
-        <strong style="color:#65a30d; font-size:16px;">03</strong><br>Trabalhe sobre as causas que estão no sistema.
-      </div>
-      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
-        <strong style="color:#65a30d; font-size:16px;">04</strong><br>A variação mostra quando algo realmente aconteceu.
-      </div>
-    </div>
-    <p style="font-size:13px; color:#4d7c0f; margin-top:15px; font-weight:bold;">O objetivo não é zerar a variação — é mantê-la dentro de limites que deem previsibilidade.</p>
+  <div class="card flat" style="background:#f3f4f6; border-left:4px solid #4b5563; margin-bottom:20px;">
+    <h4 style="margin-top:0; color:#1f2937;">A variação sempre vai existir — gerencie, não lute (John Seddon)</h4>
+    <p style="font-size:13px; color:#4b5563; font-weight:bold;">O objetivo não é zerar a variação — é mantê-la dentro de limites que deem previsibilidade.</p>
   </div>
 
-
-  <!-- 6. TIPOS DE IMPEDIMENTOS -->
+  <!-- 9. IMPEDIMENTOS -->
   <h3 style="margin:20px 0 12px">🛑 Tipos de Impedimentos e Dependências</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card flat" style="border:1px solid #fca5a5; background:#fef2f2;">
       <h4 style="color:#b91c1c; margin-top:0;">1. Impedimentos Internos (Bloqueios)</h4>
-      <p style="font-size:13px;">O item não avança por um problema <strong>dentro</strong> do próprio time.</p>
-      <ul style="font-size:12px; color:#7f1d1d; padding-left:15px; margin-bottom:0;">
-        <li>Ambiente local quebrado ou código legado complexo.</li>
-        <li>Falta de conhecimento técnico específico.</li>
-      </ul>
-      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> "Tag de Bloqueio". Todo o time foca em remover esse impedimento antes de puxar coisas novas.</p>
+      <p style="font-size:13px;">O item não avança por um problema <strong>dentro</strong> do próprio time (ex: ambiente quebrado).</p>
+      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> "Tag de Bloqueio". Todo o time foca em remover esse impedimento.</p>
     </div>
     <div class="card flat" style="border:1px solid #fcd34d; background:#fffbeb;">
       <h4 style="color:#b45309; margin-top:0;">2. Dependências Externas (Pendências)</h4>
-      <p style="font-size:13px;">O item precisa de ação de <strong>terceiros</strong> para avançar.</p>
-      <ul style="font-size:12px; color:#78350f; padding-left:15px; margin-bottom:0;">
-        <li>Aprovação de Infra ou Segurança.</li>
-        <li>API de outro time que ainda não subiu.</li>
-      </ul>
-      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> Registrar um "Dono da Resolução" para cobrar diariamente, fora do WIP principal.</p>
+      <p style="font-size:13px;">Precisa de ação de <strong>terceiros</strong> para avançar (ex: aprovação de infra).</p>
+      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> Registrar um "Dono da Resolução" para cobrar diariamente.</p>
     </div>
   </div>
 
-  <!-- 7. CADÊNCIAS COM EXEMPLOS -->
-  <h3 style="margin:20px 0 12px">🔄 O Ritmo (Daily, Replenishment e Retro)</h3>
+  <!-- 10. CADÊNCIAS E RITMO -->
+  <h3 style="margin:20px 0 12px">🔄 O Ritmo e as Cadências (Sem feedback regular, não há evolução)</h3>
   
+  <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; margin-bottom:20px;">
+    <div style="background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:15px;">
+      <strong style="color:#111827;">Diário (Standup)</strong>
+      <p style="font-size:12px; color:#4b5563; margin-top:5px;">Focada no fluxo: o que está bloqueando? o que envelhece?</p>
+    </div>
+    <div style="background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:15px;">
+      <strong style="color:#111827;">Sob demanda / Semanal</strong>
+      <p style="font-size:12px; color:#4b5563; margin-top:5px;">Replenishment e Delivery Planning: reabastecer quando o fluxo pedir.</p>
+    </div>
+    <div style="background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:15px;">
+      <strong style="color:#111827;">Quinzenal (Flow/Delivery Review)</strong>
+      <p style="font-size:12px; color:#4b5563; margin-top:5px;">Com cliente: estamos honrando os acordos de lead time?</p>
+    </div>
+  </div>
+
   <div class="card flat" style="border-left:5px solid #3b82f6; margin-bottom:15px; background:#fff;">
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:20px;">☀️</span><strong style="color:#1d4ed8;font-size:16px;">Daily Kanban (Reunião Diária - 15 min)</strong>
+      <span style="font-size:20px;">☀️</span><strong style="color:#1d4ed8;font-size:16px;">Daily Kanban na Prática</strong>
     </div>
-    <p style="font-size:13px;color:#1e3a8a;margin-top:8px;">Lemos o quadro da <strong>direita para a esquerda</strong> (do que está quase pronto para o Backlog). Foco no card, não na pessoa.</p>
+    <p style="font-size:13px;color:#1e3a8a;margin-top:8px;">Lemos o quadro da <strong>direita para a esquerda</strong>. Foco no card, não na pessoa.</p>
     <div style="background:#eff6ff;padding:10px;border-radius:4px;font-size:12px;color:#1e40af;margin-top:5px;">
-      <strong>Exemplo prático:</strong> <em>"O Card-12 (Login) está parado no Review há 3 dias (Aging). Ana, você consegue revisar com o Pedro agora cedo para desafogarmos essa etapa e entregarmos ainda hoje?"</em>
+      <strong>Exemplo:</strong> <em>"O Card-12 (Login) está parado no Review há 3 dias. Ana, você consegue revisar com o Pedro agora cedo?"</em>
     </div>
   </div>
 
   <div class="card flat" style="border-left:5px solid #10b981; margin-bottom:15px; background:#fff;">
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:20px;">🔁</span><strong style="color:#047857;font-size:16px;">Replenishment (Reabastecimento - Semanal/Quinzenal)</strong>
+      <span style="font-size:20px;">🔁</span><strong style="color:#047857;font-size:16px;">Replenishment na Prática</strong>
     </div>
     <p style="font-size:13px;color:#022c22;margin-top:8px;">Substitui a pesada Sprint Planning. Serve apenas para "encher a geladeira" com o que cabe.</p>
     <div style="background:#f0fdf4;padding:10px;border-radius:4px;font-size:12px;color:#065f46;margin-top:5px;">
-      <strong>Exemplo prático:</strong> <em>"Nosso WIP de 'Pronto p/ Dev' é 5, mas temos apenas 2 cards lá. Temos 3 vagas abertas. PO, quais são os 3 itens de maior valor para puxarmos e assumirmos compromisso agora?"</em>
+      <strong>Exemplo:</strong> <em>"Nosso WIP de 'Pronto p/ Dev' é 5, mas temos 2 cards lá. Temos 3 vagas abertas. Quais são os 3 itens para puxarmos?"</em>
     </div>
   </div>
 
-  <div class="card flat" style="border-left:5px solid #8b5cf6; margin-bottom:15px; background:#fff;">
+  <div class="card flat" style="border-left:5px solid #8b5cf6; margin-bottom:20px; background:#fff;">
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-size:20px;">📊</span><strong style="color:#5b21b6;font-size:16px;">Flow Review / Retrospectiva (Quinzenal/Mensal)</strong>
+      <span style="font-size:20px;">📊</span><strong style="color:#5b21b6;font-size:16px;">Flow Review na Prática</strong>
     </div>
     <p style="font-size:13px;color:#4c1d95;margin-top:8px;">Analisamos os dados do fluxo para mudar o sistema e melhorar.</p>
     <div style="background:#f5f3ff;padding:10px;border-radius:4px;font-size:12px;color:#5b21b6;margin-top:5px;">
-      <strong>Exemplo prático:</strong> <em>"Nosso Flow Efficiency foi de apenas 15%. Notamos no CFD que o gargalo foi homologação. Como experimento para este mês, vamos reduzir nosso Limite de WIP em DEV. Como o sistema é puxado, DEV não "empurra" o código, a fila apenas se acumula na frente de Homologação. Com o WIP de DEV menor, os desenvolvedores terão que parar de iniciar novos itens (evitando o estoque inflado) e passarão a fazer Swarming (ajudar a testar) para destravar a Homologação."</em>
+      <strong>Exemplo:</strong> <em>"A fila de homologação não para de crescer. Como experimento, vamos reduzir nosso Limite de WIP em DEV. Com o WIP menor, passaremos a fazer Swarming na Homologação."</em>
+    </div>
+  </div>
+
+  <!-- 11. EVOLUA EXPERIMENTALMENTE -->
+  <h3 style="margin:20px 0 12px">🧪 Evolua Experimentalmente: Toda mudança é uma hipótese</h3>
+  <div class="card flat" style="background:#f9fafb; border:1px solid #d1d5db;">
+    <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <div style="flex:1; min-width:120px; text-align:center; background:#fff; padding:15px 10px; border-radius:6px; border:1px solid #e5e7eb;">
+        <strong style="color:#111827; display:block; margin-bottom:5px;">Identifique</strong>
+        <span style="font-size:11px; color:#4b5563;">Onde está o desperdício, o gargalo, o atrito.</span>
+      </div>
+      <div style="flex:1; min-width:120px; text-align:center; background:#fff; padding:15px 10px; border-radius:6px; border:1px solid #e5e7eb;">
+        <strong style="color:#111827; display:block; margin-bottom:5px;">Hipotetize</strong>
+        <span style="font-size:11px; color:#4b5563;">"Se mudarmos X, esperamos Y melhorar."</span>
+      </div>
+      <div style="flex:1; min-width:120px; text-align:center; background:#fff; padding:15px 10px; border-radius:6px; border:1px solid #e5e7eb;">
+        <strong style="color:#111827; display:block; margin-bottom:5px;">Experimente</strong>
+        <span style="font-size:11px; color:#4b5563;">Mudança pequena, reversível, prazo curto.</span>
+      </div>
+      <div style="flex:1; min-width:120px; text-align:center; background:#fff; padding:15px 10px; border-radius:6px; border:1px solid #e5e7eb;">
+        <strong style="color:#111827; display:block; margin-bottom:5px;">Meça</strong>
+        <span style="font-size:11px; color:#4b5563;">Compare métrica antes e depois.</span>
+      </div>
+      <div style="flex:1; min-width:120px; text-align:center; background:#fff; padding:15px 10px; border-radius:6px; border:1px solid #e5e7eb;">
+        <strong style="color:#111827; display:block; margin-bottom:5px;">Decida</strong>
+        <span style="font-size:11px; color:#4b5563;">Manter, reverter ou ajustar.</span>
+      </div>
+    </div>
+    <div style="margin-top:20px; text-align:center; font-size:14px; color:#4b5563; font-style:italic;">
+      "O quadro vai mudar ao longo do tempo. Não fixe o layout em ferro." — Mattias Skarin
     </div>
   </div>
 
 </div>
 
-<!-- ===== TIME DE ELITE: SLA POR CLASSE DE SERVIÇO ===== -->
-
-<div id="s-elite-flow" class="section">
-  <div class="page-header" style="background:linear-gradient(135deg,#0c4a6e,#075985)">
-    <div class="tag">TIME DE ELITE</div>
-    <h2>⏱️ Fluxo, Touch Time vs Wait Time e Métricas</h2>
-    <p>O que acontece com o item entre o pedido e a entrega, as transições, e a saúde do board.</p>
-  </div>
-
-  <h3 style="margin:20px 0 12px">🔬 Touch Time vs Wait Time</h3>
-  <div class="g3" style="margin-bottom:20px">
-    <div class="card">
-      <div class="card-title">⏱️ Touch Time</div>
-      <p>Tempo em que o item é <strong>ativamente trabalhado</strong> (código, testes, review).</p>
-      <p style="font-size:13px;color:#6b7280;margin-top:8px">Apenas 15-25% do tempo total.</p>
-    </div>
-    <div class="card">
-      <div class="card-title">⏳ Wait Time</div>
-      <p>Tempo <strong>parado em fila</strong> aguardando capacidade, aprovação ou deploy.</p>
-      <p style="font-size:13px;color:#6b7280;margin-top:8px">É a maior parte do Lead Time.</p>
-    </div>
-    <div class="card" style="background:#1e3a5f;color:#fff">
-      <div class="card-title" style="color:#93c5fd">🎯 Flow Efficiency</div>
-      <p style="color:#e2e8f0">Touch Time ÷ Lead Time Total × 100.</p>
-      <p style="font-size:13px;color:#93c5fd;margin-top:8px">Descobrir que a eficiência é 15% (85% espera) choca a equipe pela 1ª vez.</p>
-    </div>
-  </div>
-
-  <h3 style="margin:20px 0 12px">🚧 Gargalos e Estouro de WIP</h3>
-  <div class="g2">
-    <div class="card orange">
-      <div class="card-title">Bottlenecks (Gargalos)</div>
-      <p>Ponto do sistema onde o trabalho se acumula porque a capacidade é menor que a demanda. <strong>Exemplo clássico:</strong> Devs entregam muito rápido, mas só existe 1 QA para testar, ou o ambiente de homologação está quebrado.</p>
-      <p style="font-size:13px; margin-top:8px;"><em>Solução:</em> Proteger o gargalo e usar o time todo para resolvê-lo (swarming).</p>
-    </div>
-    <div class="card blue">
-      <div class="card-title">Estouro de WIP</div>
-      <p>Ocorre quando o limite imposto na coluna é atingido. A regra suprema: <strong>Nenhum item novo pode ser puxado da etapa anterior.</strong> Todos param o que estão fazendo e focam em "desafogar" a etapa estourada.</p>
-    </div>
-  </div>
-
-  <h3 style="margin:20px 0 12px">🔄 Transições e Commitment Point</h3>
-  <div class="g2">
-    <div class="card" style="border-left:5px solid #f59e0b">
-      <div class="card-title">🎯 Commitment Point</div>
-      <p>A linha onde o item deixa de ser uma "opção" no Backlog e o time se <strong>compromete</strong> a entregá-lo. É aqui que o Lead Time começa a ser contado.</p>
-    </div>
-    <div class="card" style="border-left:5px solid #10b981">
-      <div class="card-title">✋ Transições (Quem Puxa?)</div>
-      <p>Responsáveis pelas próximas etapas <strong>puxam</strong>. Ex: O QA puxa da coluna "Pronto p/ Teste" para "Testando". Ninguém "empurra" código goela abaixo do testador.</p>
-    </div>
-  </div>
-
-  <h3 style="margin:20px 0 12px">📊 As 3 Métricas Essenciais do Fluxo</h3>
-  <div class="g3">
-    <div class="card flat" style="background:#f1f5f9; padding:15px; border-radius:8px;">
-      <h4 style="color:#0f172a;margin-top:0;">1. Lead Time</h4>
-      <p style="font-size:13px;">O tempo total desde o Commitment Point até a entrega (produção). O que o cliente sente na pele.</p>
-    </div>
-    <div class="card flat" style="background:#f1f5f9; padding:15px; border-radius:8px;">
-      <h4 style="color:#0f172a;margin-top:0;">2. Cycle Time</h4>
-      <p style="font-size:13px;">Tempo de um item dentro de uma etapa específica ou ciclo interno de engenharia. (Ex: "Cycle Time de Dev").</p>
-    </div>
-    <div class="card flat" style="background:#f1f5f9; padding:15px; border-radius:8px;">
-      <h4 style="color:#0f172a;margin-top:0;">3. Throughput</h4>
-      <p style="font-size:13px;">Taxa de vazão. Quantos itens entregamos por semana. Importante medir a distribuição (simulações) e não apenas a média (Velocity).</p>
-    </div>
-  </div>
-</div>
-
-<!-- ===== TIME DE ELITE: SLA POR CLASSE DE SERVIÇO ===== -->
 <div id="s-elite-sla" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#7f1d1d,#991b1b)">
     <div class="tag">TIME DE ELITE</div>
