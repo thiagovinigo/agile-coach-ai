@@ -1,0 +1,300 @@
+--- Scrumban Specialist ---
+Do Sprint travado<br>ao <span class="serif-it">fluxo previsível</span>.
+O mapa do curso.
+A base: Scrum e Kanban
+Fundamentos do fluxo
+O que é Scrumban
+Anatomia do quadro
+Migração em 3 Sprints
+Métricas de fluxo
+Cadências
+Economia do atraso
+Implementação
+Walkthrough guiado
+Armadilhas e playbook
+Para quem é este nível — e o que assumimos que você já sabe.
+<b>Assumimos que você já domina</b>
+<b>Você vai sair sabendo</b>
+Scrum em uma página: <span class="serif-it accent">papéis, eventos, artefatos</span>.
+Os cinco eventos do Scrum — e o que <span class="serif-it accent">cada um decide</span>.
+Os cinco valores que fazem o Scrum <span class="serif-it accent">funcionar</span>.
+Sem eles, os eventos viram cerimônia vazia. O Scrumban os preserva.
+Compromisso
+Foco
+Abertura
+Respeito
+Coragem
+As seis práticas gerais do Kanban.
+Visualizar
+Limitar o WIP
+Gerenciar o fluxo
+Políticas explícitas
+Loops de feedback
+Evoluir por experimento
+As cadências do Kanban: <span class="serif-it accent">loops de feedback</span> com ritmo.
+A 5ª prática em detalhe. Os slides seguintes explicam cada uma. Adote as que resolvem uma dor real — nunca todas de uma vez.
+Os princípios e os <span class="serif-it accent">nove valores</span> do Kanban.
+Eventos do Scrum <span class="serif-it" style="color:var(--sand)">↔</span> cadências do Kanban.
+É deste mapa que o Scrumban nasce: mantém os eventos úteis, adota as cadências que faltam.
+O Penny Game: o lote parece eficiente, o <span class="serif-it accent">fluxo entrega antes</span>.
+Mesmo trabalho, 5 etapas. Muda só o tamanho do lote — e o tempo até a primeira entrega despenca.
+Processo é a sequência. <span class="serif-it accent">Fluxo</span> é o movimento dentro dela.
+Anatomia do lead time: <span class="accent-orange">espera</span> + <span class="accent-teal">execução</span>.
+Filas são as maiores causadoras de processos de <span class="serif-it accent" style="color:var(--sand)">baixa performance</span>.
+O DNA das filas: <span class="accent-orange">tempo de fila</span> + <span class="accent-teal">tempo de serviço</span>.
+Filas individuais escondem o que importa.
+Quando cada pessoa gerencia a própria fila de entrada e saída, três problemas aparecem.
+Falta de visibilidade
+Otimização local
+Sem priorização comum
+A fila nasce de dois fatores: <span class="accent">utilização</span> e <span class="accent-orange">variabilidade</span>.
+Utilização do sistema
+Variabilidade do sistema
+As três fontes de variabilidade.
+Donald Reinertsen — entender de onde vem a variação é o primeiro passo para gerenciá-la.
+Variabilidade da demanda
+Variabilidade do tamanho
+Variabilidade do esforço
+A variação <span class="serif-it accent">sempre vai existir</span> — gerencie, não lute.
+Os quatro princípios da Teoria da Variação (John Seddon).
+No desenvolvimento de produto, <span class="serif-it" style="color:var(--sand)">zerar a variabilidade zera a inovação</span>.
+Na manufatura
+No produto digital
+Quanto maior a utilização, <span class="serif-it accent">maior a fila</span>.
+Quatro estratégias para gerenciar filas.
+Aumentar capacidade
+Gerenciar demanda
+Reduzir variabilidade
+Usar controle
+Scrumban é a <span class="serif-it accent">estrutura do Scrum</span> com a gestão de fluxo do Kanban.
+Não é um terceiro framework. É uma combinação deliberada de duas coisas que você já conhece.
+O ritmo e a disciplina
+O fluxo e a visibilidade
+Mais flexível, ainda estruturado
+O que você <span class="accent-orange">mantém do Scrum</span>, o que <span class="accent-teal">traz do Kanban</span>.
+Quando migrar faz sentido.
+Se você reconhece cinco dos seis abaixo, seu time já é meio Scrumban — só falta formalizar.
+Os seis sinais de que seu Scrum <span class="serif-it accent">já virou</span> Scrumban mal feito.
+Três ou mais? Pare de empurrar o Scrum e planeje a migração deliberada.
+Sprints terminam<br>com itens quase prontos
+A daily virou<br>status report
+Estimar<br>virou política
+Urgências quebram<br>o Sprint Goal
+A retro traz sempre<br>os mesmos problemas
+Velocity virou<br>critério individual
+Scrumban não é desculpa para não fazer <span class="serif-it accent">nem um nem outro</span>.
+Numa régua de prescrição, o Scrumban fica <span class="serif-it accent">no meio</span>.
+O time que <span class="serif-it accent">quebra o Scrum puro</span> toda semana.
+Segunda
+Quarta
+Com Scrumban
+Upstream e downstream: onde fica o <span class="serif-it accent">ponto de compromisso</span>.
+Nem toda coluna é igual: <span class="accent">atividade</span>, <span class="accent-teal">fila</span> e <span class="accent-orange">buffer</span>.
+Alguém está fazendo
+Ninguém trabalha
+Fila deliberada
+WIP por coluna é o que torna o sistema <span class="serif-it accent">puxado</span>.
+Como o item anda: <span class="accent">puxado</span> quando há vaga, <span class="accent-orange">parado</span> quando não há.
+Regra: quem vai trabalhar <b>puxa</b> o item da fila anterior. Ao terminar, o <b>próprio responsável move</b> o cartão para a sua fila de "feito" — ele nunca empurra para a etapa seguinte.
+O primeiro WIP não precisa ser perfeito — só <span class="serif-it accent">menor que o atual</span>.
+Cinco tipos de limite de WIP.
+Por coluna
+Por pessoa
+Por classe de serviço
+Por raia
+Por sistema
+O que o excesso de WIP <span class="serif-it accent" style="color:var(--sand)">custa</span> ao time.
+Quatro classes de serviço e a <span class="serif-it accent">distribuição saudável</span>.
+Nem todo trabalho merece o mesmo tratamento. Tratar tudo igual é injusto com o que mais importa.
+Expedite
+Fixed date
+Standard
+Intangível
+Um quadro Scrumban completo, comentado.
+Classe de serviço: <span class="serif-it accent">do card à política</span>.
+Por que o buffer existe: <span class="serif-it accent">proteger o gargalo</span>.
+entrega irregular
+fila pequena
+nunca ocioso
+Dividir a coluna em <span class="serif-it accent">Fazendo | Feito</span> revela o handoff.
+Políticas explícitas: o <span class="serif-it accent">contrato do time</span>, afixado no board.
+Cada coluna tem uma política de entrada e de saída, visível ao lado dela. Ninguém precisa perguntar a regra.
+Sem políticas escritas
+Com políticas explícitas
+Backlog e Refinamento de Negócio.
+Refinamento Técnico — o <span class="serif-it accent">DoR técnico</span>.
+Pronto para Puxar e Em Progresso.
+Bloqueado e Code Review.
+QA / Teste e Em Produção.
+Os dois pontos que tornam o Scrumban <span class="serif-it accent">previsível sem ser rígido</span>.
+🎯 Commitment Point
+🚀 Delivery Point
+A tabela de <span class="serif-it accent">SLA por classe de serviço</span>.
+As políticas de classe do <span class="serif-it accent">livro do Kanban</span> — Expedite e Data Fixa.
+Padrão e Intangível — e o <span class="serif-it accent">SLA típico</span>.
+Cinco passos, três Sprints, cada passo um <span class="serif-it accent">experimento</span>.
+Adicione WIP e pare de resetar o quadro.
+Mantenha o quadro do Scrum, mas conte o WIP atual
+Pare de zerar o quadro no fim da Sprint
+Hipótese mensurável da Sprint 1
+Replenishment, cycle time e a classe Expedite.
+Troque o Sprint Planning por Replenishment quinzenal
+Comece a medir cycle time
+Introduza a classe Expedite
+Service Delivery Review e as cadências externas.
+Mantenha review e retro; adicione a Service Delivery Review
+Avalie Operations e Risk Review conforme a dor real
+O que muda em cada evento.
+Políticas explícitas: tire as regras <span class="serif-it accent">da cabeça das pessoas</span>.
+Se não cabe numa etiqueta no topo da coluna, está longa demais.
+Pronto p/ dev
+Sai de "Desenvolvendo"
+Regra escrita
+Migração Scrum→Scrumban, em uma página.
+Fundações
+Fluxo
+Feedback
+Cycle time substitui velocity como <span class="serif-it accent">métrica-mãe</span>.
+Lead time e cycle time medem <span class="serif-it accent">dores diferentes</span>.
+A Lei de Little é o que dá <span class="serif-it accent" style="color:var(--sand)">previsibilidade</span>.
+Mesma capacidade
+10 → 20 cartões
+A conclusão
+Throughput: olhe a <span class="serif-it accent">distribuição</span>, não a média.
+Aging WIP mostra o problema <span class="serif-it accent">antes</span> de virar atraso.
+O CFD é o <span class="serif-it accent">eletrocardiograma</span> do fluxo.
+Scatterplot: troque a data falsa pela <span class="serif-it accent">faixa de confiança</span>.
+Monte Carlo: <span class="serif-it accent">simule o futuro</span> em vez de prometê-lo.
+Reembaralhe milhares de vezes o seu histórico de throughput e leia a resposta como probabilidade.
+simulações
+vira faixa
+item a item
+Throughput na prática: <span class="serif-it accent">conte itens</span>, semana a semana.
+A distribuição do cycle time vira <span class="serif-it accent">compromisso honesto</span>.
+Flow efficiency: o número que <span class="serif-it accent">choca</span> quem mede pela primeira vez.
+lead time da feature
+trabalho efetivo
+flow efficiency
+Lendo um CFD: a faixa que <span class="serif-it accent">engorda</span> é o gargalo.
+Monte Carlo: "quando entregamos 40 itens?" vira <span class="serif-it accent">faixa</span>.
+Aging na daily: a pergunta muda de "o que fez" para <span class="serif-it accent">"o que trava"</span>.
+Como instrumentar o fluxo em um mês.
+Throughput
+Cycle time
+Percentis
+Comunicar
+Scatterplot mostra o <span class="serif-it accent">item</span>; CFD mostra o <span class="serif-it accent-teal">agregado</span>.
+Scatterplot
+CFD
+Métrica que não muda uma decisão é <span class="serif-it accent">vaidade</span>.
+As cadências do Scrumban: o que vem do <span class="accent-orange">Scrum</span>, o que entra do <span class="accent-teal">Kanban</span>.
+Daily · diária
+Retrospective · mensal
+Replenishment · quinzenal
+Service Delivery Review · quinzenal
+Operations & Risk Review · mensal
+Replenishment substitui o <span class="serif-it accent">Sprint Planning</span>.
+Service Delivery, Operations e Risk Review.
+Service Delivery Review
+Operations Review
+Risk Review
+Replenishment: o roteiro de <span class="serif-it accent">30 minutos</span>.
+Quantas vagas abriram? (5 min)
+Ordene os candidatos por classe e CD3/WSJF (15 min)
+Puxe só o que cabe nas vagas (10 min)
+Retro de fluxo: <span class="serif-it accent">60 minutos com dados</span> na mesa.
+As oito cadências do Kanban — 8 loops de feedback.
+Quatro olham para fora (o negócio); três para dentro (o fluxo).
+Comece com o <span class="serif-it accent">mínimo viável</span> — não as sete de uma vez.
+A daily, da <span class="serif-it accent">direita para a esquerda</span>.
+Siga o fluxo, não as pessoas. 15 minutos, em pé, mesmo horário.
+Quase entregues (direita)
+Bloqueados
+Envelhecendo (acima do P85) e filas crescendo
+Cost of Delay: o que custa <span class="serif-it accent">não entregar</span> agora.
+Quanto valor por semana você perde enquanto este item não está em produção?
+Expedite
+Fixed date
+Standard
+Intangível
+CD3 prioriza pelo custo do atraso <span class="serif-it accent">dividido pela duração</span>.
+WSJF: a versão do <span class="accent-teal">SAFe</span> para sequenciar a fila.
+Weighted Shortest Job First — o mesmo princípio do CD3, com o Cost of Delay decomposto em três parcelas estimáveis.
+Cost of Delay
+Job size
+Maior WSJF primeiro
+Quatro perfis de urgência — o <span class="serif-it accent">formato</span> da curva é o Cost of Delay.
+WSJF na prática: <span class="serif-it accent">maior pontuação primeiro</span>.
+Levando a economia do atraso ao <span class="serif-it accent">Replenishment</span>.
+Classifique cada candidato por classe de serviço
+Para os standard, ordene por CD3 ou WSJF
+Puxe só o que cabe nas vagas de WIP abertas
+CD3 ou WSJF: qual usar?
+CD3
+WSJF (SAFe)
+STATIK: desenhe o sistema Kanban <span class="serif-it accent">a partir do serviço</span>.
+Systems Thinking Approach to Introducing Kanban — comece pela demanda e pela insatisfação, não pelo quadro.
+Kanban Maturity Model: do <span class="serif-it accent">caótico</span> ao otimizado.
+Pessoal / orientado a equipe
+Orientado a cliente
+Orientado a fluxo / otimizado
+Do quadro físico ao digital — nessa ordem.
+Comece físico
+Digitalize quando doer
+O que exigir
+O time, antes da migração.
+pessoas
+do trabalho não planejado
+de 2 semanas
+A linha de base que <span class="serif-it accent">justificou mudar</span>.
+Quatro semanas medindo antes de tocar no processo — para saber se a mudança funcionou.
+As três Sprints, com os <span class="serif-it accent">números</span>.
+A Black Friday com <span class="serif-it accent" style="color:var(--sand)">zero atrasos</span>.
+A squad em números: o CFD <span class="serif-it accent">antes e depois</span>.
+A promessa que mudou: <span class="serif-it accent">percentis da squad</span>.
+Um Replenishment real da squad.
+Duas vagas abriram. O que puxar?
+Cinco armadilhas que <span class="serif-it accent">matam</span> uma migração.
+Três times, três contextos, três resultados.
+Demanda mista
+Sprint virou ritual
+100% reativo
+Playbook do especialista.
+<b class="accent">Antes de migrar</b>
+<b class="accent">Durante e depois</b>
+Checklist de saúde do fluxo.
+Passe os olhos uma vez por mês. Vermelho em qualquer linha = pauta de retro.
+Você reconhece os <span class="serif-it accent" style="color:var(--sand)">sinais</span>?
+Sistema Puxado + Swimlane <span style="color:#C94040">Expedite</span>: prioridade e estouro de WIP.
+Scrumban = <span class="serif-it accent">estrutura do Scrum</span> + gestão de fluxo do Kanban.
+Anatomia do quadro: <span class="serif-it accent">tipos de coluna, WIP e fluxo puxado</span>.
+As 4 classes de serviço: cada uma é uma <span class="serif-it accent">política de fluxo</span>.
+Lei de Little + Flow Efficiency: as duas equações que explicam tudo.
+Migração Scrum→Scrumban: <span class="serif-it accent">5 passos, 3 Sprints</span>, cada passo um experimento.
+As 8 cadências Kanban: <span class="serif-it accent">cada uma responde uma pergunta diferente</span>.
+As 6 métricas essenciais e o que cada uma <span class="serif-it accent">responde</span>.
+Troque a data falsa pela <span class="serif-it accent" style="color:var(--sand)">faixa de confiança</span>.
+Mediana
+Compromisso
+Garantia
+Economia do atraso: priorize pelo <span class="serif-it accent">custo de não entregar agora</span>.
+Evento Scrum <span class="serif-it accent">↔</span> Cadência Kanban <span class="serif-it accent">↔</span> No Scrumban.
+STATIK: o quadro é a <span class="serif-it accent">última coisa</span> que você desenha.
+<b>STATIK — 6 passos</b>
+<b>Kanban Maturity Model</b>
+Squad Pagamentos: 3 Sprints, <span class="serif-it accent" style="color:var(--sand)">números reais</span>.
+5 armadilhas que <span class="serif-it accent">matam</span> uma migração Scrumban.
+Checklist de migração — o que fazer <span class="serif-it accent">na segunda-feira</span>.
+<b class="accent">Antes de migrar</b>
+<b class="accent">Durante (3 Sprints)</b>
+<b class="accent">Saúde mensal</b>
+Glossário: os 18 termos que você mais usará.
+WIP cheio? <span class="serif-it accent">Não puxe mais itens.</span> Veja onde pode ajudar.
+Política explícita: o <span class="serif-it accent">contrato escrito</span> de cada coluna do quadro.
+Formato padrão de política
+Sem política explícita
+WIP limit: impacto no fluxo, na <span class="serif-it accent">previsibilidade</span> e na equipe.
+O que lembrar quando tudo estiver esquecido.
+
+--- Treinamento ---
+
