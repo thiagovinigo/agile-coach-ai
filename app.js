@@ -75,7 +75,7 @@ async function loadAndMigrateContent() {
                     // 0. Fundamentos
                     { title: 'O que é Kanban & Scrumban', parts: [ { id: 's-oque', context: 'Time de Elite' } ] },
                     // 1. Fundação e Acordos
-                    { title: 'Regras do Board', parts: [ { id: 's-elite-politicas', context: 'Time de Elite' } ] },
+                    { title: 'Tudo Sobre o Board (Regras)', parts: [ { id: 's-elite-politicas', context: 'Time de Elite' } ] },
                     { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Time de Elite' } ] },
                     { title: 'Tamanho & Previsibilidade', parts: [ { id: 's-elite-tamanho', context: 'Time de Elite' } ] },
                     // 2. Upstream: Produto e Engenharia

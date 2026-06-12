@@ -12085,71 +12085,108 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-elite-politicas" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#3d1a6e,#5b21b6)">
     <div class="tag">TIME DE ELITE</div>
-    <h2>📜 Regras do Board e Políticas Explícitas</h2>
-    <p>O contrato que tira o trabalho da cabeça e coloca no quadro de forma transparente.</p>
+    <h2>📜 Tudo Sobre o Board (Como o Scrumban Funciona)</h2>
+    <p>O guia consolidado para todo o time entender as regras, o fluxo e as cadências do nosso sistema.</p>
   </div>
 
-  <div class="card orange" style="margin-bottom:20px">
-    <div class="card-title">🎯 Por que políticas explícitas importam?</div>
-    <p>Sem política escrita, cada pessoa tem uma versão diferente do que "pronto" significa. Com política escrita no quadro, o time discute <strong>a regra</strong> — não a decisão individual. <strong>Regra de ouro:</strong> se a política não couber numa etiqueta colada na coluna, está longa demais.</p>
+  <!-- 1. SPRINT vs ITERAÇÕES -->
+  <h3 style="margin:20px 0 12px">⏱️ Diferença entre Sprint e Iterações (Scrumban)</h3>
+  <div class="g2" style="margin-bottom:20px;">
+    <div class="card flat" style="border:2px solid #4f46e5; background:#eef2ff;">
+      <h4 style="color:#3730a3;margin-top:0;">No Scrum (Sprints Fixas)</h4>
+      <p style="font-size:13px;color:#312e81;">O time estima e se compromete com um <strong>lote fechado de itens</strong> para entregar em 2 semanas. Mudanças e urgências destroem a Sprint. O foco acaba sendo "entregar o pacote", mesmo que a qualidade sofra no fim da Sprint.</p>
+    </div>
+    <div class="card flat" style="border:2px solid #0ea5e9; background:#f0f9ff;">
+      <h4 style="color:#075985;margin-top:0;">No Scrumban (Fluxo Contínuo)</h4>
+      <p style="font-size:13px;color:#0c4a6e;">As iterações de planejamento, execução e entrega são <strong>desacopladas</strong>. Não empurramos um lote enorme. O time <strong>puxa sob demanda</strong>. Mantemos o ritmo (cadências do Scrum), mas o trabalho flui continuamente. Foco no ciclo de vida de cada item individualmente.</p>
+    </div>
   </div>
 
-  <h3 style="margin:20px 0 12px">📋 Políticas do Dia a Dia</h3>
-  <div class="g2">
+  <!-- 2. REGRAS DE TRANSIÇÃO -->
+  <h3 style="margin:20px 0 12px">✋ Regras de Transição e Puxada</h3>
+  <div class="g2" style="margin-bottom:20px;">
     <div class="card blue">
-      <div class="card-title">📥 Puxar (Pull) e Replenishment</div>
-      <p>Trabalho não é "empurrado" para a pessoa. A regra é: quando a coluna da direita tem espaço (WIP não estourou), o membro puxa o item da coluna anterior. O <strong>Replenishment</strong> dita a frequência de abastecimento da fila inicial baseando-se nos espaços vazios.</p>
+      <div class="card-title">📥 Puxar (Pull System)</div>
+      <p>O trabalho <strong>nunca é empurrado</strong> para a próxima etapa. A regra é clara: o responsável pela etapa seguinte (ex: QA) puxa o item da etapa anterior ("Pronto para Teste") quando tem <strong>capacidade livre</strong> (vaga no WIP).</p>
     </div>
     <div class="card orange">
       <div class="card-title">🌊 Overflow (Transbordo)</div>
-      <p>Para onde vai o trabalho quando o WIP está no limite e não há capacidade, mas algo urgente surge? A política de overflow dita se usamos um <em>buffer</em> temporário, retiramos um item de menor valor, ou simplesmente dizemos "Não". A lixeira de ideias no board ajuda a manter o foco.</p>
+      <p>O que fazer quando o limite de WIP estourou? <strong>Nenhum item novo entra.</strong> Todos param e fazem o <em>Swarming</em> (enxame) para desafogar a coluna estourada, mesmo que não seja a sua especialidade principal.</p>
     </div>
   </div>
 
-    <h3 style="margin:20px 0 12px">🛑 Tipos de Impedimentos e Dependências</h3>
+  <!-- 3. TAMANHO DO LOTE, SAÚDE DO FLUXO, GARGALO -->
+  <h3 style="margin:20px 0 12px">📈 Tamanho do Lote, Estimativa e Saúde do Fluxo</h3>
+  <div class="g2" style="margin-bottom:20px;">
+    <div class="card flat" style="border-left:5px solid #10b981; background:#f8fafc;">
+      <strong style="color:#047857;">📏 Tamanho do Lote e Estimativa</strong>
+      <p style="font-size:13px;margin:5px 0;">No Scrumban, <strong>a estimativa serve como calibrador do lote</strong>, não como promessa cega. Usamos <strong>T-Shirt Sizes (P, M, G)</strong> para nivelar o fluxo. Itens "G" devem ser fatiados. Quanto menor e mais padronizado o tamanho do lote, mais rápido ele atravessa o board (Cycle Time menor).</p>
+    </div>
+    <div class="card flat" style="border-left:5px solid #f59e0b; background:#f8fafc;">
+      <strong style="color:#b45309;">🚧 Gargalos e Saúde do Fluxo</strong>
+      <p style="font-size:13px;margin:5px 0;">Um gargalo (bottleneck) é onde a fila cresce (Wait Time explode). A saúde do fluxo depende de observarmos essas filas invisíveis. Se a coluna de "Code Review" tem 10 itens esperando, o sistema adoeceu ali. <strong>Regra de Saúde:</strong> Proteger o gargalo limitando o que entra antes dele.</p>
+    </div>
+  </div>
+
+  <!-- 4. TIPOS DE IMPEDIMENTOS -->
+  <h3 style="margin:20px 0 12px">🛑 Tipos de Impedimentos e Dependências</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card flat" style="border:1px solid #fca5a5; background:#fef2f2;">
       <h4 style="color:#b91c1c; margin-top:0;">1. Impedimentos Internos (Bloqueios)</h4>
-      <p style="font-size:13px;">O item não pode avançar por um problema dentro do próprio time ou sistema.</p>
+      <p style="font-size:13px;">O item não avança por um problema <strong>dentro</strong> do próprio time.</p>
       <ul style="font-size:12px; color:#7f1d1d; padding-left:15px; margin-bottom:0;">
-        <li>Falta de conhecimento técnico (ninguém sabe como resolver).</li>
-        <li>Ambiente local de desenvolvimento quebrado.</li>
-        <li>Código legado impenetrável que gera bugs paralelos.</li>
+        <li>Ambiente local quebrado ou código legado complexo.</li>
+        <li>Falta de conhecimento técnico específico.</li>
       </ul>
-      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> Colar "tag de Bloqueio". Todo o time para o que está fazendo para focar na remoção deste impedimento.</p>
+      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> "Tag de Bloqueio". Todo o time foca em remover esse impedimento antes de puxar coisas novas.</p>
     </div>
     <div class="card flat" style="border:1px solid #fcd34d; background:#fffbeb;">
       <h4 style="color:#b45309; margin-top:0;">2. Dependências Externas (Pendências)</h4>
-      <p style="font-size:13px;">O item precisa de uma ação de alguém fora do controle direto da equipe para avançar.</p>
+      <p style="font-size:13px;">O item precisa de ação de <strong>terceiros</strong> para avançar.</p>
       <ul style="font-size:12px; color:#78350f; padding-left:15px; margin-bottom:0;">
-        <li>Aprovação de Infraestrutura ou Segurança.</li>
-        <li>API de terceiros (ex: parceiro de pagamento não enviou a chave).</li>
-        <li>Aguardando design ou texto do marketing.</li>
+        <li>Aprovação de Infra ou Segurança.</li>
+        <li>API de outro time que ainda não subiu.</li>
       </ul>
-      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> Registrar um "Dono da Resolução". Essa pessoa vira o cobrador oficial, entrando em contato diariamente até liberar.</p>
+      <p style="font-size:12px; margin-top:10px;"><strong>Ação:</strong> Registrar um "Dono da Resolução" para cobrar diariamente, fora do WIP principal.</p>
     </div>
   </div>
 
-  <h3 style="margin:20px 0 12px">🚦 Classes de Serviço (O Acordo de Tratamento)</h3>
-  <div class="g2" style="margin-bottom:20px">
-    <div style="background:#fef2f2;border:2px solid #ef4444;border-radius:8px;padding:12px">
-      <strong style="color:#b91c1c;">🚨 Expedite (Urgente / Bala de Prata)</strong>
-      <p style="font-size:13px;margin:5px 0;">Fura-fila oficial. Limite: Apenas 1 no board. Todo o time foca em remover esse problema (ex: servidor caiu). Para o resto.</p>
+  <!-- 5. CADÊNCIAS COM EXEMPLOS -->
+  <h3 style="margin:20px 0 12px">🔄 O Ritmo (Daily, Replenishment e Retro)</h3>
+  
+  <div class="card flat" style="border-left:5px solid #3b82f6; margin-bottom:15px; background:#fff;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">☀️</span><strong style="color:#1d4ed8;font-size:16px;">Daily Kanban (Reunião Diária - 15 min)</strong>
     </div>
-    <div style="background:#fff7ed;border:2px solid #f97316;border-radius:8px;padding:12px">
-      <strong style="color:#c2410c;">📅 Fixed Date (Data Fixa)</strong>
-      <p style="font-size:13px;margin:5px 0;">Obrigação contratual, regulatória ou sazonal (Ex: Black Friday). Estimado de trás para frente para entrar na fila na data exata.</p>
-    </div>
-    <div style="background:#f0fdfa;border:2px solid #14b8a6;border-radius:8px;padding:12px">
-      <strong style="color:#0f766e;">🟢 Standard (Padrão)</strong>
-      <p style="font-size:13px;margin:5px 0;">Trabalho normal do dia a dia. Tratado como FIFO (First In, First Out). SLA de ex: 15 dias para entrega de 80% dos casos.</p>
-    </div>
-    <div style="background:#f8fafc;border:2px solid #94a3b8;border-radius:8px;padding:12px">
-      <strong style="color:#475569;">⚙️ Intangible (Intangível)</strong>
-      <p style="font-size:13px;margin:5px 0;">Manutenção, refatoração, documentação. Baixo custo de atraso hoje, mas que estoura amanhã se ignorado. Preenche as folgas do fluxo.</p>
+    <p style="font-size:13px;color:#1e3a8a;margin-top:8px;">Lemos o quadro da <strong>direita para a esquerda</strong> (do que está quase pronto para o Backlog). Foco no card, não na pessoa.</p>
+    <div style="background:#eff6ff;padding:10px;border-radius:4px;font-size:12px;color:#1e40af;margin-top:5px;">
+      <strong>Exemplo prático:</strong> <em>"O Card-12 (Login) está parado no Review há 3 dias (Aging). Ana, você consegue revisar com o Pedro agora cedo para desafogarmos essa etapa e entregarmos ainda hoje?"</em>
     </div>
   </div>
+
+  <div class="card flat" style="border-left:5px solid #10b981; margin-bottom:15px; background:#fff;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">🔁</span><strong style="color:#047857;font-size:16px;">Replenishment (Reabastecimento - Semanal/Quinzenal)</strong>
+    </div>
+    <p style="font-size:13px;color:#022c22;margin-top:8px;">Substitui a pesada Sprint Planning. Serve apenas para "encher a geladeira" com o que cabe.</p>
+    <div style="background:#f0fdf4;padding:10px;border-radius:4px;font-size:12px;color:#065f46;margin-top:5px;">
+      <strong>Exemplo prático:</strong> <em>"Nosso WIP de 'Pronto p/ Dev' é 5, mas temos apenas 2 cards lá. Temos 3 vagas abertas. PO, quais são os 3 itens de maior valor para puxarmos e assumirmos compromisso agora?"</em>
+    </div>
+  </div>
+
+  <div class="card flat" style="border-left:5px solid #8b5cf6; margin-bottom:15px; background:#fff;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">📊</span><strong style="color:#5b21b6;font-size:16px;">Flow Review / Retrospectiva (Quinzenal/Mensal)</strong>
+    </div>
+    <p style="font-size:13px;color:#4c1d95;margin-top:8px;">Analisamos os dados do fluxo para mudar o sistema e melhorar.</p>
+    <div style="background:#f5f3ff;padding:10px;border-radius:4px;font-size:12px;color:#5b21b6;margin-top:5px;">
+      <strong>Exemplo prático:</strong> <em>"Nosso Flow Efficiency foi de apenas 15%. Notamos no CFD que o gargalo foi homologação. Como experimento para este mês, vamos alterar nosso Limite de WIP em DEV para evitar empurrar muito trabalho para Homologação de uma vez."</em>
+    </div>
+  </div>
+
 </div>
+
+<!-- ===== TIME DE ELITE: SLA POR CLASSE DE SERVIÇO ===== -->
 
 <div id="s-elite-flow" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#0c4a6e,#075985)">
