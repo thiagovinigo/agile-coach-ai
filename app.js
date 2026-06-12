@@ -149,7 +149,8 @@ async function loadAndMigrateContent() {
                     { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Apresentação' } ] },
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Apresentação' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Apresentação' } ] },
-                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Apresentação' } ] }
+                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Apresentação' } ] },
+                    { title: 'Scrumban Avançado', parts: [ { id: 's-scrumban-avancado', context: 'Apresentação' } ] }
                 ];
             } else if(viewId === 'kb-metricas') {
                 sectionsToExtract = [
