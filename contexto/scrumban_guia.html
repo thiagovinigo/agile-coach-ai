@@ -12114,6 +12114,39 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <p>O que fazer quando o limite de WIP estourou? <strong>Nenhum item novo entra.</strong> Todos param e fazem o <em>Swarming</em> (enxame) para desafogar a coluna estourada, mesmo que não seja a sua especialidade principal.</p>
     </div>
   </div>
+  <div style="background:#fff7ed; border:2px solid #f59e0b; border-radius:12px; padding:20px; margin-top:20px;">
+    <h4 style="color:#b45309; margin-top:0; font-size:18px;">WIP cheio? Não puxe mais itens. Veja onde pode ajudar.</h4>
+    
+    <div style="display:flex; flex-direction:column; gap:15px; margin-top:15px;">
+      <div style="display:flex; align-items:flex-start; gap:10px;">
+        <span style="background:#ef4444; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">X</span>
+        <div>
+          <strong style="color:#991b1b; font-size:14px;">Errado:</strong>
+          <span style="font-size:13px; color:#451a03;"> Puxar novo item do backlog porque "meu WIP está cheio e não tenho o que fazer". O problema não é sua falta de trabalho — é o gargalo à frente.</span>
+        </div>
+      </div>
+      
+      <div style="display:flex; align-items:flex-start; gap:10px;">
+        <span style="background:#10b981; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">✓</span>
+        <div>
+          <strong style="color:#065f46; font-size:14px;">Certo:</strong>
+          <span style="font-size:13px; color:#451a03;"> Olhe para a direita do quadro. Quem está sobrecarregado? QA com fila crescendo? Review parado? <strong>Vá ajudar a destravar.</strong></span>
+        </div>
+      </div>
+      
+      <div style="display:flex; align-items:flex-start; gap:10px;">
+        <span style="background:#3b82f6; color:white; padding:4px 8px; border-radius:4px; font-weight:bold;">➔</span>
+        <div>
+          <span style="font-size:13px; color:#1e3a8a;"> O WIP limit <strong>força a colaboração</strong> porque é impossível ignorar um bloqueio e puxar outro item. A pressão é sistêmica — e proposital.</span>
+        </div>
+      </div>
+      
+      <div style="border-top:1px solid #fcd34d; padding-top:10px; margin-top:5px;">
+        <p style="font-size:12px; color:#b45309; margin:0;"><strong>Perguntas da daily:</strong> "Preciso de ajuda?" · "Posso ajudar alguém?" · "O que impede alguém de avançar?" — e não "O que fiz ontem?"</p>
+      </div>
+    </div>
+  </div>
+
 
   <!-- 3. TAMANHO DO LOTE, SAÚDE DO FLUXO, GARGALO -->
   <h3 style="margin:20px 0 12px">📈 Tamanho do Lote, Estimativa e Saúde do Fluxo</h3>
@@ -12128,7 +12161,92 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 
-  <!-- 4. TIPOS DE IMPEDIMENTOS -->
+  
+  <!-- 4. FLUXO E FILAS -->
+  <h3 style="margin:20px 0 12px">🌊 Processo, Fluxo e o Custo das Filas</h3>
+  
+  <div class="card flat" style="border:1px solid #d1d5db; background:#f9fafb; margin-bottom:20px;">
+    <h4 style="margin-top:0; color:#1f2937; font-size:18px;">Processo é a sequência. <em>Fluxo</em> é o movimento dentro dela.</h4>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:15px;">
+      <div style="background:#111827; color:white; padding:15px; border-radius:8px;">
+        <strong style="font-size:12px; letter-spacing:1px;">PROCESSO</strong>
+        <p style="font-size:13px; margin-top:10px; color:#d1d5db;">As etapas pelas quais o trabalho passa — analisar, desenvolver, revisar, entregar. É o <strong>mapa</strong> do caminho.</p>
+      </div>
+      <div style="background:#4b5563; color:white; padding:15px; border-radius:8px;">
+        <strong style="font-size:12px; letter-spacing:1px;">FLUXO</strong>
+        <p style="font-size:13px; margin-top:10px; color:#e5e7eb;">Quão bem o trabalho <strong>se move</strong> por esse mapa: sem paradas, filas ou retrabalho. Um processo pode estar desenhado e o fluxo, parado.</p>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#4b5563; margin-top:15px;">Gerir fluxo é olhar para o <strong>movimento</strong>, não só para as caixas. A maioria dos times otimiza etapas isoladas e ignora o que acontece <em>entre</em> elas — que é onde o tempo se perde.</p>
+  </div>
+
+  <div class="card flat" style="border:1px solid #111827; background:#111827; color:white; margin-bottom:20px;">
+    <h4 style="margin-top:0; color:#f3f4f6; font-size:18px;">Filas são as maiores causadoras de processos de <em>baixa performance</em>.</h4>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:15px;">
+      <div>
+        <div style="background:#991b1b; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; letter-spacing:1px;">AS FILAS AUMENTAM</div>
+        <ul style="font-size:13px; color:#fca5a5; padding-left:20px; margin:0;">
+          <li>Lead time e custo do processo</li>
+          <li>Variabilidade e risco</li>
+          <li>Lentidão do feedback</li>
+        </ul>
+      </div>
+      <div>
+        <div style="background:#b45309; padding:5px 10px; border-radius:4px; font-size:11px; font-weight:bold; margin-bottom:10px; letter-spacing:1px; color:#fffbeb;">AS FILAS REDUZEM</div>
+        <ul style="font-size:13px; color:#fde68a; padding-left:20px; margin:0;">
+          <li>Qualidade do trabalho</li>
+          <li>Eficiência do processo</li>
+          <li>Motivação da equipe</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#9ca3af; margin-top:15px; border-top:1px solid #374151; padding-top:10px;">Repare: nada disso aparece num relatório de ocupação. O time parece "cheio", mas o trabalho está parado em fila — e é a fila, não a falta de esforço, que derruba a performance.</p>
+  </div>
+
+  <!-- 5. TEORIA DA VARIAÇÃO -->
+  <h3 style="margin:20px 0 12px">🎲 Teoria da Variação</h3>
+  <p style="font-size:14px;"><strong>Donald Reinertsen</strong> — entender de onde vem a variação é o primeiro passo para gerenciá-la. As 3 fontes:</p>
+  
+  <div class="g3" style="margin-bottom:20px;">
+    <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
+      <span style="font-size:20px;">🔄</span>
+      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade da demanda</h4>
+      <p style="font-size:12px; color:#4b5563;">Taxa de chegada e tipo de demanda variam — bugs, features, urgências chegam em ritmos diferentes.</p>
+    </div>
+    <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
+      <span style="font-size:20px;">↘️</span>
+      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade do tamanho</h4>
+      <p style="font-size:12px; color:#4b5563;">Itens grandes e pequenos no mesmo fluxo distorcem a previsibilidade.</p>
+    </div>
+    <div class="card flat" style="border:1px solid #e5e7eb; background:#fff;">
+      <span style="font-size:20px;">⚙️</span>
+      <h4 style="margin:5px 0; color:#1f2937;">Variabilidade do esforço</h4>
+      <p style="font-size:12px; color:#4b5563;">O mesmo tipo de item pode exigir esforços muito diferentes para concluir.</p>
+    </div>
+  </div>
+
+  <div class="card flat" style="background:#f3f4f6; border-left:4px solid #4b5563;">
+    <h4 style="margin-top:0; color:#1f2937;">A variação <em>sempre vai existir</em> — gerencie, não lute.</h4>
+    <p style="font-size:13px; color:#4b5563; margin-bottom:10px;">Os quatro princípios da Teoria da Variação (John Seddon):</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px;">
+      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
+        <strong style="color:#65a30d; font-size:16px;">01</strong><br>Espere que as coisas variem — elas sempre variam.
+      </div>
+      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
+        <strong style="color:#65a30d; font-size:16px;">02</strong><br>Compreender a variação diz o que esperar.
+      </div>
+      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
+        <strong style="color:#65a30d; font-size:16px;">03</strong><br>Trabalhe sobre as causas que estão no sistema.
+      </div>
+      <div style="background:#fff; padding:10px; border-radius:4px; border:1px solid #e5e7eb; font-size:11px; color:#374151;">
+        <strong style="color:#65a30d; font-size:16px;">04</strong><br>A variação mostra quando algo realmente aconteceu.
+      </div>
+    </div>
+    <p style="font-size:13px; color:#4d7c0f; margin-top:15px; font-weight:bold;">O objetivo não é zerar a variação — é mantê-la dentro de limites que deem previsibilidade.</p>
+  </div>
+
+
+  <!-- 6. TIPOS DE IMPEDIMENTOS -->
   <h3 style="margin:20px 0 12px">🛑 Tipos de Impedimentos e Dependências</h3>
   <div class="g2" style="margin-bottom:20px;">
     <div class="card flat" style="border:1px solid #fca5a5; background:#fef2f2;">
@@ -12151,7 +12269,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 
-  <!-- 5. CADÊNCIAS COM EXEMPLOS -->
+  <!-- 7. CADÊNCIAS COM EXEMPLOS -->
   <h3 style="margin:20px 0 12px">🔄 O Ritmo (Daily, Replenishment e Retro)</h3>
   
   <div class="card flat" style="border-left:5px solid #3b82f6; margin-bottom:15px; background:#fff;">
