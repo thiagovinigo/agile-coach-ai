@@ -160,7 +160,7 @@ async function loadAndMigrateContent() {
                 ];
             } else if(viewId === 'kb-lider') {
                 sectionsToExtract = [
-                    { title: 'O que é (Visão KCP)', parts: [ { id: 's-oque', context: 'Visão Sistêmica' } ] },
+                    { title: 'O que é Scrumban (Visão KCP)', parts: [ { id: 's-oque', context: 'Visão Sistêmica' } ] },
                     { title: 'Ensinando o Novo Fluxo', parts: [ { id: 's-lider-fluxo', context: 'Guia do Líder' } ] },
                     { title: 'Regras de Transição', parts: [ { id: 's-lider-transicao', context: 'Guia do Líder' } ] },
                     { title: 'Políticas Explícitas', parts: [ { id: 's-lider-politicas', context: 'Guia do Líder' } ] },
