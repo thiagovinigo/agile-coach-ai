@@ -72,6 +72,8 @@ async function loadAndMigrateContent() {
                 ];
             } else if(viewId === 'kb-elite') {
                 sectionsToExtract = [
+                    // 0. Fundamentos
+                    { title: 'O que é Kanban & Scrumban', parts: [ { id: 's-oque', context: 'Time de Elite' } ] },
                     // 1. Fundação e Acordos
                     { title: 'Regras do Board', parts: [ { id: 's-elite-politicas', context: 'Time de Elite' } ] },
                     { title: 'SLA por Classe de Serviço', parts: [ { id: 's-elite-sla', context: 'Time de Elite' } ] },
@@ -79,6 +81,7 @@ async function loadAndMigrateContent() {
                     // 2. Upstream: Produto e Engenharia
                     { title: 'Visão de Produto (Story Map)', parts: [ { id: 's-po-storymap', context: 'Product Owner' } ] },
                     { title: 'Quebrando Features (PBB)', parts: [ { id: 's-po-pbb', context: 'Product Owner' } ] },
+                    { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Time de Elite' } ] },
                     { title: 'Sim. Ref. Funcional', parts: [ { id: 's-elite-sim-func', context: 'Time de Elite' } ] },
                     { title: 'Sim. Ref. Técnico', parts: [ { id: 's-elite-sim-tec', context: 'Time de Elite' } ] },
                     { title: 'Engenharia e IA no PRD', parts: [ { id: 's-po-ia-dev', context: 'Engenharia / PO' } ] },
@@ -88,6 +91,7 @@ async function loadAndMigrateContent() {
                     // 4. Avaliação e Melhoria Contínua
                     { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Time de Elite' } ] },
                     { title: 'Métricas Avançadas', parts: [ { id: 's-elite-metricas', context: 'Time de Elite' } ] },
+                    { title: 'Scrumban Avançado', parts: [ { id: 's-scrumban-avancado', context: 'Time de Elite' } ] },
                     { title: 'Métricas DORA', parts: [ { id: 's-metricas-dora', context: 'Engenharia / Métricas' } ] },
                     { title: 'Health Check do Time', parts: [ { id: 's-healthcheck', context: 'Agile Coach / Métricas' } ] }
                 ];
