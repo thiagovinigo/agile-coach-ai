@@ -6743,6 +6743,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <p style="font-size:13px; color:#9a3412; margin:0;">A integração via MCP (Model Context Protocol) permite que as Skills do Kiro tenham acesso direto de leitura e escrita no TFS. O agente não é apenas um assistente de código; ele atua como membro do time: pega o ticket, lê o que falta, gera a documentação, anexa no TFS e <strong>arrasta o card para a próxima coluna sozinho</strong>.</p>
   </div>
 
+    <div class="card flat" style="background:#f0fdfa; border:1px solid #14b8a6; margin-bottom:20px;">
+    <strong style="color:#0f766e; font-size:15px; display:block; margin-bottom:8px;">⚙️ Sob o Capô: Como a IA move o PBI sozinha?</strong>
+    <p style="font-size:13px; color:#115e59; margin:0 0 10px 0;">O Kiro não "clica" na interface do TFS. O servidor MCP conectado à sua máquina local expõe ferramentas (tool calls) para o modelo de linguagem. Para mover o card, assim que a Skill termina de gerar os artefatos (PRD, código ou teste), ela invoca a ferramenta <code>update_work_item</code>. Por baixo dos panos, o MCP traduz essa chamada para a API REST do Azure DevOps usando o método HTTP PATCH:</p>
+    <div style="background:#134e4a; color:#ccfbf1; padding:10px; border-radius:6px; font-family:monospace; font-size:11px; overflow-x:auto;">
+      <span style="color:#5eead4;">// PATCH https://{sua-url}/_apis/wit/workitems/{id}?api-version=6.0</span><br>
+      [<br>
+      &nbsp;&nbsp;{<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"op": "add",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"path": "/fields/System.State",<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;"value": "Refinamento Técnico"<br>
+      &nbsp;&nbsp;}<br>
+      ]<br>
+      <br>
+      <span style="color:#99f6e4;">// A Skill faz isso autonomamente como última etapa instruída pelo seu Steering File.</span>
+    </div>
+  </div>
+
   <h3 style="margin:20px 0 12px">🔁 O Nosso Board Completo: Skills Autônomas</h3>
   
   <div style="display:flex; flex-direction:column; gap:10px;">
