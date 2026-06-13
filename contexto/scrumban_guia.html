@@ -6822,8 +6822,86 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <strong style="color:#334155; font-size:13px;">Relatório de Fim de Esteira</strong>
     <p style="font-size:12px; color:#475569; margin-top:5px; margin-bottom:0;">Na coluna de <strong>Validação PO</strong>, a máquina repassa o bastão. A Skill apenas gera um relatório executivo humano consolidando tudo o que foi construído desde a Coluna 1. O PO entra unicamente para assinar embaixo e liberar o deploy.</p>
   </div>
-</div>
+  <h3 style="margin:30px 0 12px">🗺️ Desenhando o Processo: Como Fazer e Por Que Fazer</h3>
+  
+  <!-- POR QUE FAZER -->
+  <div style="display:flex; gap:15px; margin-bottom:20px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:250px; background:#f0fdf4; border:1px solid #22c55e; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <strong style="color:#166534; font-size:16px; display:block; margin-bottom:10px;">🎯 Por que fazer? (O Valor)</strong>
+      <ul style="font-size:13px; color:#14532d; padding-left:20px; margin:0; line-height:1.6;">
+        <li style="margin-bottom:8px;"><strong>Políticas Vivas:</strong> As regras do board deixam de ser apenas combinados num post-it e viram código executável (Steering) que a IA é forçada a obedecer.</li>
+        <li style="margin-bottom:8px;"><strong>Governança Transparente:</strong> Toda ação da IA (o que pensou e o que gerou) fica documentada no card do TFS. Se a IA errar, a evidência está lá. Se acertar, o ganho reflete automaticamente nas métricas de Lead Time.</li>
+        <li><strong>Fim do Atrito Burocrático:</strong> O ser humano foca apenas na aprovação e raciocínio crítico (Gates). A IA cuida do trabalho pesado de criar branch, documentar spec, atualizar status e vincular Pull Requests.</li>
+      </ul>
+    </div>
+    
+    <!-- COMO FAZER -->
+    <div style="flex:1; min-width:250px; background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <strong style="color:#1e3a8a; font-size:16px; display:block; margin-bottom:10px;">🛠️ Como fazer? (O Caminho)</strong>
+      <ul style="font-size:13px; color:#1e3a8a; padding-left:20px; margin:0; line-height:1.6;">
+        <li style="margin-bottom:8px;"><strong>Passo 1: Conexão (Servidor MCP):</strong> Subir o servidor MCP local configurado com um token PAT (Personal Access Token) do seu TFS/Azure DevOps com permissão de leitura/escrita.</li>
+        <li style="margin-bottom:8px;"><strong>Passo 2: O Cérebro (Steering):</strong> Criar a pasta <code>.kiro/steering/</code> no repositório. Lá dentro, escrever arquivos Markdown simples mapeando o seu fluxo (ex: <code>politicas-refinamento.md</code>).</li>
+        <li><strong>Passo 3: As Skills:</strong> Configurar 1 Skill para cada etapa (Gerador de PRD, Code Reviewer, Auditor). Na última linha do comando da Skill, instruir explicitamente: "Ao terminar com aprovação, invoque <code>update_work_item</code> para a próxima coluna."</li>
+      </ul>
+    </div>
+  </div>
 
+  <!-- O FLUXOGRAMA (CSS) -->
+  <div style="background:linear-gradient(135deg, #0f172a, #1e1b4b); border-radius:12px; padding:25px; color:white; overflow-x:auto; margin-bottom:20px; box-shadow:0 4px 10px rgba(0,0,0,0.15);">
+    <strong style="color:#a5b4fc; display:block; text-align:center; margin-bottom:25px; font-size:16px;">🔄 O Ciclo de Vida Autônomo (Mapeamento do Processo)</strong>
+    
+    <div style="display:flex; justify-content:space-between; align-items:center; min-width:700px; gap:12px; font-size:12px; position:relative;">
+      
+      <!-- Box 1 -->
+      <div style="flex:1; background:#1e293b; padding:15px; border-radius:8px; text-align:center; border:2px solid #475569; position:relative; z-index:2;">
+        <div style="font-size:26px; margin-bottom:8px;">📋</div>
+        <strong style="color:#f8fafc; font-size:14px;">1. Gatilho TFS</strong><br>
+        <span style="color:#94a3b8; font-size:11px;">Novo PBI é puxado para a coluna de trabalho</span>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="color:#6366f1; font-size:20px; z-index:2;">➔</div>
+      
+      <!-- Box 2 -->
+      <div style="flex:1; background:#2e1065; padding:15px; border-radius:8px; text-align:center; border:2px solid #8b5cf6; position:relative; z-index:2;">
+        <div style="font-size:26px; margin-bottom:8px;">🧠</div>
+        <strong style="color:#f8fafc; font-size:14px;">2. Steering</strong><br>
+        <span style="color:#c4b5fd; font-size:11px;">IA ingere os limites e políticas do board</span>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="color:#6366f1; font-size:20px; z-index:2;">➔</div>
+      
+      <!-- Box 3 -->
+      <div style="flex:1; background:#064e3b; padding:15px; border-radius:8px; text-align:center; border:2px solid #10b981; position:relative; z-index:2;">
+        <div style="font-size:26px; margin-bottom:8px;">🤖</div>
+        <strong style="color:#f8fafc; font-size:14px;">3. Skill Atua</strong><br>
+        <span style="color:#6ee7b7; font-size:11px;">Gera PRD, Spec, Código ou audita Segurança</span>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="color:#6366f1; font-size:20px; z-index:2;">➔</div>
+      
+      <!-- Box 4 -->
+      <div style="flex:1; background:#7c2d12; padding:15px; border-radius:8px; text-align:center; border:2px solid #f97316; position:relative; z-index:2;">
+        <div style="font-size:26px; margin-bottom:8px;">🧑‍💻</div>
+        <strong style="color:#f8fafc; font-size:14px;">4. Gate Humano</strong><br>
+        <span style="color:#fdba74; font-size:11px;">Líder aprova a qualidade da entrega gerada</span>
+      </div>
+      
+      <!-- Arrow -->
+      <div style="color:#6366f1; font-size:20px; z-index:2;">➔</div>
+      
+      <!-- Box 5 -->
+      <div style="flex:1; background:#1e3a8a; padding:15px; border-radius:8px; text-align:center; border:2px dashed #60a5fa; position:relative; z-index:2; box-shadow: 0 0 15px rgba(59,130,246,0.3);">
+        <div style="font-size:26px; margin-bottom:8px;">🔌</div>
+        <strong style="color:#f8fafc; font-size:14px;">5. MCP (Patch)</strong><br>
+        <span style="color:#bfdbfe; font-size:11px;">A própria IA dispara o update e move a coluna</span>
+      </div>
+
+    </div>
+  </div>
+</div>
 <!-- ===== PO: REFINAMENTO EFICAZ ===== -->
 <div id="s-po-refinamento" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#065f46,#047857)">
