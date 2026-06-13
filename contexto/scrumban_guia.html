@@ -6734,92 +6734,76 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-po-ia-dev" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#0f0f1a,#1e1b4b)">
     <div class="tag">ENGENHARIA DE ELITE</div>
-    <h2>🤖 Arquitetura Agêntica: TFS + Kiro via MCP</h2>
-    <p>Como integrar o ecossistema de agentes em cada etapa do seu fluxo, otimizando entendimento, desenvolvimento, qualidade e segurança.</p>
-  </div>
-
-  <div class="g2" style="margin-bottom:20px;">
-    <div class="card flat" style="border-left:4px solid #6366f1;">
-      <strong style="color:#4f46e5; font-size:15px;">1. Camada de Integração (A Fundação)</strong>
-      <p style="font-size:13px; margin-top:8px;">O Kiro fala com o <strong>TFS via servidor MCP local</strong> (autenticação por PAT). Isso permite ler e escrever Work Items, Git, Test Plans e Pipelines diretamente no seu ambiente on-premise, mantendo os dados sensíveis seguros sem proxy de nuvem.</p>
-    </div>
-    <div class="card flat" style="border-left:4px solid #8b5cf6;">
-      <strong style="color:#7c3aed; font-size:15px;">2. Camada de Conhecimento (Steering)</strong>
-      <p style="font-size:13px; margin-top:8px;">O acordo do board vira <em>steering files</em> (.kiro/steering/): <code>fluxo-politicas.md</code> (DoR/DoD e WIP), <code>tags-dependencias.md</code> (quando usar DEP-Negocio, BLK-Externa) e <code>padroes-codigo.md</code>. É assim que a IA obedece as normas do time.</p>
-    </div>
+    <h2>🤖 Automação de Fluxo: 1 Skill por Coluna via MCP</h2>
+    <p>Veja como integrar Kiro + MCP do TFS no nosso board completo. Cada coluna possui uma Skill específica que analisa o card, gera os artefatos necessários (PRD, Spec) e move o item sozinha para a próxima etapa.</p>
   </div>
 
   <div class="card flat" style="background:#fff7ed; border:1px solid #f97316; margin-bottom:20px;">
-    <strong style="color:#c2410c; font-size:15px; display:block; margin-bottom:8px;">⚠️ 4 Princípios de Ouro do Processo Agêntico</strong>
-    <ul style="font-size:13px; color:#9a3412; padding-left:20px; margin:0;">
-      <li style="margin-bottom:5px;"><strong>A Spec nasce antes do Dev:</strong> <code>requirements.md</code> no refinamento funcional, <code>design.md</code> no técnico. Não pule etapas.</li>
-      <li style="margin-bottom:5px;"><strong>A Regra dos Gates Humanos:</strong> O agente <em>prepara</em>, o humano <em>aprova</em>. Aprovação PO e Code Review são barreiras inegociáveis.</li>
-      <li style="margin-bottom:5px;"><strong>Tag em vez de Coluna:</strong> "Desenvolvido pela IA" é uma tag (<code>AI-Generated</code>) anexada ao card com o relatório, não uma coluna nova (para não quebrar as métricas).</li>
-      <li><strong>Quem testa não é quem codifica:</strong> O agente QA roda em contexto separado, lendo apenas a spec para evitar o "viés de validação da própria intenção".</li>
-    </ul>
+    <strong style="color:#c2410c; font-size:15px; display:block; margin-bottom:8px;">⚠️ A Mágica do MCP no TFS</strong>
+    <p style="font-size:13px; color:#9a3412; margin:0;">A integração via MCP (Model Context Protocol) permite que as Skills do Kiro tenham acesso direto de leitura e escrita no TFS. O agente não é apenas um assistente de código; ele atua como membro do time: pega o ticket, lê o que falta, gera a documentação, anexa no TFS e <strong>arrasta o card para a próxima coluna sozinho</strong>.</p>
   </div>
 
-  <h3 style="margin:20px 0 12px">🔁 Fluxo Completo: O Agente certo na Coluna certa</h3>
+  <h3 style="margin:20px 0 12px">🔁 O Nosso Board Completo: Skills Autônomas</h3>
   
-  <!-- Refinamento Funcional -->
-  <div style="background:#fff;border:1px solid #d1d5db;border-left:4px solid #8b5cf6;border-radius:6px;padding:15px;margin-bottom:15px">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <strong style="color:#111827; font-size:15px;">1. Refinamento Funcional</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:3px 8px; border-radius:12px;">Agente de Entendimento</span>
+  <div style="display:flex; flex-direction:column; gap:10px;">
+    
+    <!-- Coluna 1: Discovery -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-left:4px solid #8b5cf6; border-radius:6px; padding:15px; display:flex; gap:15px; flex-wrap:wrap;">
+      <div style="min-width:140px; text-align:center;">
+        <div style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:5px; border-radius:4px; font-weight:bold; margin-bottom:10px;">COLUNA</div>
+        <strong style="font-size:14px; color:#6b21a8; display:block;">Refinamento Funcional</strong>
+      </div>
+      <div style="flex:1; min-width:250px;">
+        <strong style="font-size:14px; color:#111827;">🛠️ Skill: Gerador de PRD</strong>
+        <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill acorda quando o card entra na coluna. Ela analisa a ideia crua, cria o <code>PRD.md</code> com Critérios de Aceite em BDD. Se faltar regra de negócio, tagueia como <code>DEP-Negócio</code>. Se estiver completo, <strong>move o card sozinho para "Refinamento Técnico"</strong>.</p>
+        <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: blueprint', '🧰', 'Analisa a demanda abstrata e gera requisitos técnicos BDD rastreáveis e mapeamento de PRD.', 'skill', 'contexto/ECC-main/skills/blueprint/SKILL.md')">🧰 Ver Skill de PRD</button>
+      </div>
     </div>
-    <p style="font-size:13px; color:#4b5563; margin-top:8px;">Lê a descrição do item via MCP, verifica o DoR e gera o artefato <code>requirements.md</code> (Critérios de Aceite em BDD). Se identificar lacunas, aplica a tag <code>DEP-Negocio</code> no TFS registrando a dúvida.</p>
-    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Planner', '🤖', 'Expert planning specialist. Analisa a demanda abstrata e gera requisitos técnicos BDD rastreáveis.', 'agent')">🤖 Info do Agente</button>
-      <div style="background:#f0fdf4; color:#166534; padding:5px 10px; font-size:11px; border-radius:4px; font-weight:bold; display:flex; align-items:center;">Gate: PO aprova o escopo (Sim/Não)</div>
+
+    <!-- Coluna 2: Refinamento Técnico -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-left:4px solid #3b82f6; border-radius:6px; padding:15px; display:flex; gap:15px; flex-wrap:wrap;">
+      <div style="min-width:140px; text-align:center;">
+        <div style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:5px; border-radius:4px; font-weight:bold; margin-bottom:10px;">COLUNA</div>
+        <strong style="font-size:14px; color:#1d4ed8; display:block;">Refinamento Técnico</strong>
+      </div>
+      <div style="flex:1; min-width:250px;">
+        <strong style="font-size:14px; color:#111827;">🛠️ Skill: Gerador de Spec</strong>
+        <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill lê o PRD recém-criado. Analisa a arquitetura, gera o <code>design_spec.md</code> (banco de dados, contratos de API) e quebra o trabalho em subtarefas técnicas no TFS. Ao terminar, <strong>move o card sozinho para "Pronto para Dev"</strong>.</p>
+        <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: architecture-decision-records', '🧰', 'Escreve ADRs padronizados usando markdown e decisões técnicas baseadas em contexto.', 'skill', 'contexto/ECC-main/skills/architecture-decision-records/SKILL.md')">🧰 Ver Skill de Spec</button>
+      </div>
     </div>
+
+    <!-- Coluna 3: Em Dev -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-left:4px solid #10b981; border-radius:6px; padding:15px; display:flex; gap:15px; flex-wrap:wrap;">
+      <div style="min-width:140px; text-align:center;">
+        <div style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:5px; border-radius:4px; font-weight:bold; margin-bottom:10px;">COLUNA</div>
+        <strong style="font-size:14px; color:#047857; display:block;">Em Dev</strong>
+      </div>
+      <div style="flex:1; min-width:250px;">
+        <strong style="font-size:14px; color:#111827;">🛠️ Skill: Executor TDD & Código</strong>
+        <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill usa a Spec para codar. Força o ciclo TDD: cria o teste, falha, implementa, passa, refatora. No final do processo, gera o Pull Request, adiciona a tag <code>AI-Generated</code> e <strong>move o card sozinho para "Code Review"</strong>.</p>
+        <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: tdd-workflow', '🧰', 'Força o TDD: Escreve o teste, roda o teste (que deve falhar), escreve o código, faz o teste passar, e refatora.', 'skill', 'contexto/ECC-main/skills/tdd-workflow/SKILL.md')">🧰 Ver Skill TDD</button>
+      </div>
+    </div>
+
+    <!-- Coluna 4: QA -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-left:4px solid #f59e0b; border-radius:6px; padding:15px; display:flex; gap:15px; flex-wrap:wrap;">
+      <div style="min-width:140px; text-align:center;">
+        <div style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:5px; border-radius:4px; font-weight:bold; margin-bottom:10px;">COLUNA</div>
+        <strong style="font-size:14px; color:#b45309; display:block;">QA / Testes</strong>
+      </div>
+      <div style="flex:1; min-width:250px;">
+        <strong style="font-size:14px; color:#111827;">🛠️ Skill: Auditor e Segurança</strong>
+        <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">Uma Skill independente (que não codou a feature) cruza o código com os Critérios de Aceite do PRD. Roda os testes, verifica brechas OWASP e anexa as evidências no TFS. Se aprovado, <strong>move o card sozinho para "Validação PO"</strong>.</p>
+        <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: security-review', '🧰', 'Efetua revisão focada em segurança, OWASP Top 10, sanitização de inputs e vazamento de secrets.', 'skill', 'contexto/ECC-main/skills/security-review/SKILL.md')">🧰 Ver Skill de Sec</button>
+      </div>
+    </div>
+
   </div>
 
-  <!-- Refinamento Técnico -->
-  <div style="background:#fff;border:1px solid #d1d5db;border-left:4px solid #3b82f6;border-radius:6px;padding:15px;margin-bottom:15px">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <strong style="color:#111827; font-size:15px;">2. Refinamento Técnico</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:3px 8px; border-radius:12px;">Agente de Design</span>
-    </div>
-    <p style="font-size:13px; color:#4b5563; margin-top:8px;">Com o escopo aprovado, o agente gera o <code>design.md</code> (arquitetura/integrações), aplica tag <code>DEP-Tecnica</code> se faltar dados, e quebra o item em <code>tasks.md</code> (tasks ≤ 16h).</p>
-    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Architect', '🤖', 'Software architecture specialist. Decide stack, desenha o system design e estrutura a divisão do trabalho técnico.', 'agent')">🤖 Info do Agente</button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: architecture-decision-records', '🧰', 'Escreve ADRs padronizados usando markdown e decisões técnicas baseadas em contexto.', 'skill', 'contexto/ECC-main/skills/architecture-decision-records/SKILL.md')">🧰 Info da Skill</button>
-      <div style="background:#f0fdf4; color:#166534; padding:5px 10px; font-size:11px; border-radius:4px; font-weight:bold; display:flex; align-items:center;">Gate: Tech Lead revisa Design/DEP</div>
-    </div>
-  </div>
-
-  <!-- Desenvolvimento -->
-  <div style="background:#fff;border:1px solid #d1d5db;border-left:4px solid #10b981;border-radius:6px;padding:15px;margin-bottom:15px">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <strong style="color:#111827; font-size:15px;">3. Desenvolvimento</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:3px 8px; border-radius:12px;">Kiro Executor + Hooks</span>
-    </div>
-    <p style="font-size:13px; color:#4b5563; margin-top:8px;">O Kiro implementa as tasks. Agent hooks rodam a cada save: lint, testes unitários, scan de secrets, pegando problemas no loop de edição (antes do commit). O card no TFS recebe tag <code>AI-Generated</code> e um relatório de atividades anexado.</p>
-    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Typescript Reviewer', '🤖', 'Garante que a execução de código do Kiro segue padrões de type safety e boas práticas no nível da linguagem.', 'agent')">🤖 Info do Agente</button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: tdd-workflow', '🧰', 'Força o TDD: Escreve o teste, roda o teste (que deve falhar), escreve o código, faz o teste passar, e refatora.', 'skill', 'contexto/ECC-main/skills/tdd-workflow/SKILL.md')">🧰 Info da Skill</button>
-      <div style="background:#f0fdf4; color:#166534; padding:5px 10px; font-size:11px; border-radius:4px; font-weight:bold; display:flex; align-items:center;">Gate: Code Review Humano</div>
-    </div>
-  </div>
-
-  <!-- Testes e Qualidade -->
-  <div style="background:#fff;border:1px solid #d1d5db;border-left:4px solid #f59e0b;border-radius:6px;padding:15px;margin-bottom:15px">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <strong style="color:#111827; font-size:15px;">4. Testes & Segurança</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:11px; padding:3px 8px; border-radius:12px;">Agente QA / Security</span>
-    </div>
-    <p style="font-size:13px; color:#4b5563; margin-top:8px;">O Agente QA opera em contexto isolado (não lê o código base), gerando testes a partir dos AC da spec. O Agente de Security revisa vulnerabilidades OWASP no diff. Atualiza o <em>Test Plans</em> do TFS com evidências de execução e bloqueia PRs em caso de riscos críticos.</p>
-    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Security Reviewer', '🤖', 'Security vulnerability detection specialist. Procura SSRF, injection e vazamentos nos diffs.', 'agent')">🤖 Info do Agente (Sec)</button>
-      <button class="kb-nav-btn" onclick="openInfoModalDirect('Skill: security-review', '🧰', 'Efetua revisão focada em segurança, OWASP Top 10, sanitização de inputs e vazamento de secrets.', 'skill', 'contexto/ECC-main/skills/security-review/SKILL.md')">🧰 Info da Skill (Sec)</button>
-      <div style="background:#f0fdf4; color:#166534; padding:5px 10px; font-size:11px; border-radius:4px; font-weight:bold; display:flex; align-items:center;">Gate: QA e PO Validam Relatórios</div>
-    </div>
-  </div>
-
-  <!-- Fechamento -->
-  <div style="background:#f8fafc;border:1px dashed #cbd5e1;border-radius:6px;padding:15px;">
-    <strong style="color:#334155; font-size:13px;">O Ganho de Medição no Piloto</strong>
-    <p style="font-size:12px; color:#475569; margin-top:5px; margin-bottom:0;">Como os agentes aplicam as tags de bloqueio, geram relatórios e registram tudo via MCP de forma nativa no TFS, as métricas do piloto (Lead Time, Throughput, Tempo de Bloqueio por motivo) saem de graça, sem depender de disciplina manual exaustiva da equipe.</p>
+  <div style="background:#f8fafc;border:1px dashed #cbd5e1;border-radius:6px;padding:15px;margin-top:20px;">
+    <strong style="color:#334155; font-size:13px;">Relatório de Fim de Esteira</strong>
+    <p style="font-size:12px; color:#475569; margin-top:5px; margin-bottom:0;">Na coluna de <strong>Validação PO</strong>, a máquina repassa o bastão. A Skill apenas gera um relatório executivo humano consolidando tudo o que foi construído desde a Coluna 1. O PO entra unicamente para assinar embaixo e liberar o deploy.</p>
   </div>
 </div>
 
