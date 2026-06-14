@@ -85,8 +85,8 @@ async function loadAndMigrateContent() {
                     { title: 'Sim. Ref. Funcional', parts: [ { id: 's-elite-sim-func', context: 'Time de Elite' } ] },
                     { title: 'Sim. Ref. Técnico', parts: [ { id: 's-elite-sim-tec', context: 'Time de Elite' } ] },
                     { title: 'Engenharia e IA no PRD', parts: [ { id: 's-po-ia-dev', context: 'Engenharia / PO' } ] },
-                    { title: 'Simulador: Kiro no Board', parts: [ { id: 's-simulacao-kiro', context: 'Engenharia / PO' } ] },
-                    { title: 'Laboratório: Criando Skills', parts: [ { id: 's-lab-skills', context: 'Engenharia / PO' } ] },
+                    
+                    { title: 'Kiro: Simulador Hands-on', parts: [ { id: 's-kiro-hub', context: 'Engenharia / PO' } ] },
                     // 3. Operação e Execução
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Time de Elite' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Time de Elite' } ] },

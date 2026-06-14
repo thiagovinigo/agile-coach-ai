@@ -7020,527 +7020,218 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 </div>
 
 
-<!-- ===== SIMULADOR KIRO ===== -->
-<div id="s-simulacao-kiro" class="section">
+
+
+
+
+<!-- ===== KIRO HUB ===== -->
+<div id="s-kiro-hub" class="section">
+  
   <div class="page-header" style="background:linear-gradient(135deg,#000000,#111827)">
     <div class="tag" style="background:#3b82f6;">MÃO NA MASSA</div>
-    <h2>💻 Simulador: Kiro no Board (Ciclo de Vida)</h2>
-    <p>Acompanhe o passo a passo completo de um Work Item (PBI) cruzando as 10 colunas do nosso board, demonstrando exatamente a tela da IDE do Kiro e o comportamento no TFS via MCP.</p>
+    <h2>💻 Kiro: Simulador Hands-on e Laboratório</h2>
+    <p>Simule o ciclo de vida de um card sendo operado por IA no Board em tempo real, e depois aprenda como fabricar essas automações para sua equipe.</p>
   </div>
 
-  <p style="font-size:14px; color:#4b5563; margin-bottom:30px;">Cenário: A diretoria pediu a feature <strong>"Login via OTP (Token SMS)"</strong>. Veja como o fluxo autônomo opera etapa por etapa.</p>
-
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 1 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">New</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: New</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
+  <!-- PARTE 1: SIMULADOR JS -->
+  <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:20px; margin-bottom:40px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+      <div>
+        <h3 style="margin:0; color:#0f172a;">Simulador Interativo</h3>
+        <p style="margin:5px 0 0 0; font-size:12px; color:#475569;">Clique no botão para avançar o card (#101 Login OTP) pelas 10 colunas e veja o comportamento da IDE.</p>
       </div>
+      <button id="btn-next-step" onclick="kiroSim.nextStep()" style="background:#3b82f6; color:white; border:none; padding:10px 20px; border-radius:6px; font-weight:bold; cursor:pointer; font-size:14px; box-shadow:0 2px 4px rgba(59,130,246,0.3); transition: background 0.2s;">
+        ▶ Próximo Passo: Rodar IA
+      </button>
     </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+
+    <!-- O Board Kanban (Horizontal) -->
+    <div style="display:flex; gap:10px; overflow-x:auto; padding-bottom:15px; min-height:180px;" id="sim-board">
+      
+      <!-- Colunas serão geradas via JS, mas deixamos a estrutura base -->
+      <style>
+        .sim-col { flex: 0 0 160px; background:#e2e8f0; border-radius:6px; padding:8px; display:flex; flex-direction:column; border: 1px solid #cbd5e1; }
+        .sim-col-title { font-size:11px; font-weight:bold; color:#334155; text-align:center; margin-bottom:10px; min-height:30px; display:flex; align-items:center; justify-content:center; }
+        .sim-card { background:white; border-left:4px solid #3b82f6; border-radius:4px; padding:8px; box-shadow:0 2px 4px rgba(0,0,0,0.1); font-size:12px; color:#0f172a; transition: all 0.3s ease; animation: pulseCard 2s infinite; }
+        .sim-card .tag { font-size:9px; background:#fef08a; padding:2px 4px; border-radius:4px; color:#854d0e; display:inline-block; margin-top:5px; }
+        .active-col { background: #dbeafe; border-color: #93c5fd; }
+        @keyframes pulseCard { 0% { box-shadow: 0 1px 3px rgba(0,0,0,0.1); } 50% { box-shadow: 0 0 8px rgba(59,130,246,0.6); } 100% { box-shadow: 0 1px 3px rgba(0,0,0,0.1); } }
+      </style>
+
+    </div>
+
+    <!-- O Terminal Kiro -->
+    <div style="background:#0f172a; border-radius:8px; margin-top:20px; border:1px solid #334155; display:flex; flex-direction:column; overflow:hidden;">
+      <div style="background:#1e293b; padding:8px 15px; font-size:11px; color:#94a3b8; font-weight:bold; display:flex; align-items:center; gap:8px; border-bottom:1px solid #334155;">
         <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
         <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
         <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
+        <span style="margin-left:10px;">IDE / KIRO TERMINAL - PASSO <span id="sim-step-num">1</span>/10</span>
       </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
+      <div id="sim-terminal" style="padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; min-height:120px; line-height:1.6;">
         <div style="color:#fde047; margin-bottom:10px;"># Ambiente Kiro Idle</div>
-        <div style="line-height:1.5;">
-          <span style='color:#6b7280;'>// O PO acaba de criar a ideia bruta no TFS.</span><br><span style='color:#6b7280;'>// O Kiro aguarda o item ser puxado para a esteira (Pull).</span>
-        </div>
+        <div style="color:#6b7280;">// O PO acaba de criar a ideia bruta no TFS.</div>
+        <div style="color:#6b7280;">// O Kiro aguarda o item ser puxado para a esteira (Pull).</div>
       </div>
     </div>
-
   </div>
 
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 2 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Refinamento Funcional pela IA</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Ref. Funcional (IA)</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
+  <script>
+    const kiroSim = {
+      currentStep: 0,
+      columns: [
+        { id: 'c1', name: 'New' },
+        { id: 'c2', name: 'Ref. Funcional (IA)' },
+        { id: 'c3', name: 'Ag. Ref Técnico' },
+        { id: 'c4', name: 'Em Ref. (IA)' },
+        { id: 'c5', name: 'Aguardando PO' },
+        { id: 'c6', name: 'Em Dev (IA)' },
+        { id: 'c7', name: 'Em Teste (IA)' },
+        { id: 'c8', name: 'Ag. PO (Final)' },
+        { id: 'c9', name: 'Lib. Instalar' },
+        { id: 'c10', name: 'Done' }
+      ],
+      steps: [
+        { col: 0, cmd: "# Ambiente Kiro Idle", out: "<span style='color:#6b7280;'>// O PO acaba de criar a ideia bruta no TFS.</span><br><span style='color:#6b7280;'>// O Kiro aguarda o item ser puxado para a esteira (Pull).</span>" },
+        { col: 1, cmd: "> kiro run ecc/blueprint --work-item=101", out: "<span style='color:#3b82f6;'>[MCP TFS]</span> Lendo Descrição do Work Item 101...<br><span style='color:#a855f7;'>[Steering]</span> Aplicando Política: 'Gerar PRD e Critérios BDD'.<br><span style='color:#10b981;'>[Kiro]</span> Artefato 'PRD.md' gerado.<br><span style='color:#3b82f6;'>[MCP TFS]</span> PATCH System.State = 'Aguardando Refinamento Técnico'" },
+        { col: 2, cmd: "# Fila de Transição", out: "<span style='color:#6b7280;'>// O card está em uma fila (buffer). A IA terminou o trabalho funcional.</span><br><span style='color:#6b7280;'>// O Kiro Architect aguarda capacidade para puxar.</span>" },
+        { col: 3, cmd: "> kiro run ecc/architecture-decision-records --work-item=101", out: "<span style='color:#3b82f6;'>[MCP TFS]</span> Lendo PRD.md...<br><span style='color:#10b981;'>[Kiro]</span> Artefato 'Design_Spec.md' gerado.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Quebrando Work Item 101 em 3 sub-tasks.<br><span style='color:#3b82f6;'>[MCP TFS]</span> PATCH System.State = 'Aguardando Avaliação PO'" },
+        { col: 4, cmd: "@Kiro, aprovar spec.", out: "<span style='color:#f59e0b;'>[Gate Humano]</span> O Kiro parou de processar.<br><span style='color:#a855f7;'>[Usuário]</span> Digita '/approve'.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Movendo para 'Em Desenvolvimento'." },
+        { col: 5, cmd: "> kiro run ecc/tdd-workflow", out: "<span style='color:#ef4444;'>[Kiro Test]</span> Executando login.spec.ts -> <b>FALHA</b>.<br><span style='color:#10b981;'>[Kiro Code]</span> Implementando login.ts -> <b>PASSOU</b>.<br><span style='color:#eab308;'>[Git]</span> Commit automático: 'feat: add OTP login'.<br><span style='color:#3b82f6;'>[MCP TFS]</span> PATCH System.State = 'Em Teste'." },
+        { col: 6, cmd: "> kiro run ecc/security-review", out: "<span style='color:#10b981;'>[Kiro QA]</span> Executando testes E2E.<br><span style='color:#a855f7;'>[Kiro Security]</span> Scan OWASP: 0 vulnerabilidades.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Inserindo evidências no Test Plan.<br><span style='color:#3b82f6;'>[MCP TFS]</span> PATCH System.State = 'Aguardando Avaliação PO'." },
+        { col: 7, cmd: "@Kiro, aprovar QA.", out: "<span style='color:#f59e0b;'>[Gate Final]</span> O PO analisa evidências.<br><span style='color:#a855f7;'>[Usuário]</span> Digita '/approve-deploy'.<br><span style='color:#3b82f6;'>[MCP TFS]</span> PATCH System.State = 'Liberado para Instalar'." },
+        { col: 8, cmd: "# Azure Pipelines Trigger", out: "<span style='color:#10b981;'>[Pipeline]</span> Gatilho detectado via Webhook.<br><span style='color:#6b7280;'>// Pipeline executando build e deploy.</span><br><span style='color:#3b82f6;'>[MCP TFS]</span> Ao sucesso do deploy, move para 'Done'." },
+        { col: 9, cmd: "# Concluído", out: "<span style='color:#10b981;'>✅ Ciclo de vida encerrado.</span><br><span style='color:#6b7280;'>// Métricas de Lead Time registradas nativamente no TFS.</span>" }
+      ],
+      init() {
+        const board = document.getElementById('sim-board');
+        board.innerHTML = '';
+        this.columns.forEach((c, idx) => {
+          board.innerHTML += `
+            <div class="sim-col ${idx===0 ? 'active-col' : ''}" id="col-${idx}">
+              <div class="sim-col-title">${c.name}</div>
+              ${idx === 0 ? this.getCardHTML() : ''}
+            </div>
+          `;
+        });
+      },
+      getCardHTML() {
+        return `
+          <div class="sim-card" id="simulated-card">
+            <div style="font-size:10px; color:#94a3b8;">ID: #101</div>
+            <strong>Login via OTP</strong>
+            <div class="tag">AI-Guided</div>
           </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">> kiro run ecc/blueprint --work-item=101</div>
-        <div style="line-height:1.5;">
-          <span style='color:#3b82f6;'>[MCP TFS]</span> Lendo Descrição do Work Item 101...<br><span style='color:#a855f7;'>[Steering]</span> Aplicando Política: 'Gerar PRD e Critérios BDD'.<br><span style='color:#10b981;'>[Kiro]</span> Artefato 'PRD.md' gerado com sucesso.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Atualizando <code>System.State</code> para 'Aguardando Refinamento Técnico' e anexando artefato.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 3 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Aguardando Refinamento Técnico</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Aguardando Ref. Técnico</div>
+        `;
+      },
+      nextStep() {
+        if (this.currentStep >= this.steps.length - 1) {
+          alert("O ciclo já foi concluído e chegou em Done!");
+          return;
+        }
         
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;"># Fila de Transição</div>
-        <div style="line-height:1.5;">
-          <span style='color:#6b7280;'>// O card está em uma fila (buffer). A IA terminou o trabalho funcional.</span><br><span style='color:#6b7280;'>// O Kiro Architect (Skill de Spec) está aguardando capacidade para puxar o card.</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 4 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Em Refinamento pela IA (Técnico)</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Em Ref. pela IA</div>
+        this.currentStep++;
+        const step = this.steps[this.currentStep];
         
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">> kiro run ecc/architecture-decision-records --work-item=101</div>
-        <div style="line-height:1.5;">
-          <span style='color:#3b82f6;'>[MCP TFS]</span> Lendo PRD.md anexado no Work Item 101...<br><span style='color:#a855f7;'>[Steering]</span> Aplicando Política: 'Gerar Spec Técnica e ADR'.<br><span style='color:#10b981;'>[Kiro]</span> Artefato 'Design_Spec.md' (Contratos API, DB) gerado.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Quebrando Work Item 101 em 3 sub-tasks (Backend, Frontend, Infra).<br><span style='color:#3b82f6;'>[MCP TFS]</span> Atualizando <code>System.State</code> para 'Aguardando Avaliação PO'.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 5 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Aguardando Avaliação PO (Gate Humano)</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Aguardando Avaliação PO</div>
+        // Remove card from previous columns
+        for(let i=0; i<this.columns.length; i++){
+          document.getElementById('col-'+i).classList.remove('active-col');
+          const card = document.getElementById('col-'+i).querySelector('.sim-card');
+          if(card) card.remove();
+        }
         
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">@Kiro, aprovar a especificação técnica e funcional.</div>
-        <div style="line-height:1.5;">
-          <span style='color:#f59e0b;'>[Gate Humano]</span> O Kiro parou de processar. O Product Owner precisa ler os artefatos no TFS.<br><br><br><span style='color:#a855f7;'>[Usuário]</span> Digita '/approve' no chat ou clica no botão Aprovar.<br><span style='color:#3b82f6;'>[MCP TFS]</span> O Kiro move o card para 'Em Desenvolvimento'.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 6 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Em Desenvolvimento</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Em Desenvolvimento</div>
+        // Add card to new column
+        const targetCol = document.getElementById('col-'+step.col);
+        targetCol.classList.add('active-col');
+        targetCol.innerHTML += this.getCardHTML();
         
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
+        // Update Terminal
+        document.getElementById('sim-step-num').innerText = (this.currentStep + 1);
+        document.getElementById('sim-terminal').innerHTML = `
+          <div style="color:#fde047; margin-bottom:10px;">${step.cmd}</div>
+          <div>${step.out}</div>
+        `;
+
+        // Update button text if Done
+        if(this.currentStep === this.steps.length - 1) {
+          document.getElementById('btn-next-step').innerText = "✅ Fluxo Concluído";
+          document.getElementById('btn-next-step').style.background = "#10b981";
+        }
+      }
+    };
     
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">> kiro run ecc/tdd-workflow</div>
-        <div style="line-height:1.5;">
-          <span style='color:#a855f7;'>[Steering]</span> Forçando workflow TDD.<br><span style='color:#ef4444;'>[Kiro Test]</span> Escrevendo <code>login.spec.ts</code> -> Executando -> <b>FALHA (Esperado)</b>.<br><span style='color:#10b981;'>[Kiro Code]</span> Implementando código em <code>login.ts</code> -> Executando -> <b>PASSOU</b>.<br><span style='color:#eab308;'>[Git]</span> Commit automático gerado: 'feat: add OTP login'.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Atualizando <code>System.State</code> para 'Em Teste'.
-        </div>
-      </div>
-    </div>
+    // Auto-init when DOM loads or script runs
+    setTimeout(() => { kiroSim.init(); }, 500);
+  </script>
 
-  </div>
+  <hr style="border:0; border-top:1px solid #e2e8f0; margin:40px 0;">
 
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 7 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Em Teste</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Em Teste</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">> kiro run ecc/security-review --diff</div>
-        <div style="line-height:1.5;">
-          <span style='color:#10b981;'>[Kiro QA]</span> Lendo Critérios de Aceite do PRD...<br><span style='color:#10b981;'>[Kiro QA]</span> Executando testes End-to-End no diff recente.<br><span style='color:#a855f7;'>[Kiro Security]</span> Scan OWASP: Nenhuma injeção SQL detectada.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Inserindo evidências de teste (Logs) no Test Plan do TFS.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Atualizando <code>System.State</code> para 'Aguardando Avaliação PO'.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 8 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Aguardando Avaliação PO (Final)</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Aguardando Avaliação PO</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;">@Kiro, feature testada. Pode prosseguir para release.</div>
-        <div style="line-height:1.5;">
-          <span style='color:#f59e0b;'>[Gate Humano]</span> Kiro pausado.<br>O PO analisa o relatório executivo e as evidências de QA.<br><br><br><span style='color:#a855f7;'>[Usuário]</span> Digita '/approve-deploy'.<br><span style='color:#3b82f6;'>[MCP TFS]</span> Atualizando <code>System.State</code> para 'Liberado para Instalar'.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 9 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Liberado para Instalar</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Liberado p/ Instalar</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;"># CI/CD Pipeline Agent</div>
-        <div style="line-height:1.5;">
-          <span style='color:#10b981;'>[Azure Pipelines]</span> Gatilho detectado via Webhook.<br><span style='color:#6b7280;'>// Pipeline executando build e deploy no ambiente de Staging/Prod.</span><br><span style='color:#3b82f6;'>[MCP TFS]</span> Ao sucesso do deploy, a pipeline move o estado para 'Done'.
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div style="display:flex; margin-bottom:25px; border-radius:10px; overflow:hidden; box-shadow:0 4px 6px rgba(0,0,0,0.1); border:1px solid #d1d5db; flex-wrap:wrap;">
-    
-    <!-- Esquerda: Visão TFS Board -->
-    <div style="flex:1; min-width:250px; background:#f8fafc; padding:20px; border-right:1px solid #e2e8f0;">
-      <div style="font-size:11px; color:#64748b; font-weight:bold; letter-spacing:1px; margin-bottom:10px;">PASSO 10 • TFS BOARD</div>
-      <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px;">Done</strong>
-      
-      <!-- Simulação de Coluna Kanban -->
-      <div style="background:#e2e8f0; border-radius:6px; padding:10px; min-height:100px;">
-        <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:10px;">Coluna: Done</div>
-        
-        <!-- Card -->
-        <div style="background:#ffffff; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); position:relative; animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #101</div>
-          <strong style="font-size:13px; color:#1e293b;">Login via OTP (Token SMS)</strong>
-          <div style="margin-top:8px; display:flex; gap:5px;">
-            <span style="background:#dbeafe; color:#1e40af; font-size:9px; padding:2px 6px; border-radius:10px;">Security</span>
-            <span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">AI-Guided</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Direita: Visão IDE / Kiro -->
-    <div style="flex:1.5; min-width:300px; background:#0f172a; padding:20px; display:flex; flex-direction:column;">
-      <div style="font-size:11px; color:#94a3b8; font-weight:bold; letter-spacing:1px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
-        <span style="margin-left:10px;">IDE / KIRO TERMINAL</span>
-      </div>
-      
-      <div style="flex:1; background:#1e293b; border-radius:6px; padding:15px; font-family:'Courier New', Courier, monospace; font-size:13px; color:#e2e8f0; overflow-y:auto; border:1px solid #334155;">
-        <div style="color:#fde047; margin-bottom:10px;"># Concluído</div>
-        <div style="line-height:1.5;">
-          <span style='color:#10b981;'>✅ Ciclo de vida encerrado.</span><br><span style='color:#6b7280;'>// O PBI foi refinado, especificado, codificado, testado e feito deploy num fluxo contínuo.</span><br><span style='color:#6b7280;'>// Métricas de Lead Time registradas nativamente no TFS.</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <style>
-    @keyframes pulseCard {
-      0% { box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-      50% { box-shadow: 0 0 8px rgba(59,130,246,0.6); }
-      100% { box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    }
-  </style>
-</div>
-<!-- ===== FIM SIMULADOR KIRO ===== -->
-
-
-<!-- ===== LABORATÓRIO SKILLS ===== -->
-<div id="s-lab-skills" class="section">
+  <!-- PARTE 2: ESTUDO E IMPLEMENTAÇÃO -->
   <div class="page-header" style="background:linear-gradient(135deg,#1e1b4b,#4c1d95)">
     <div class="tag" style="background:#8b5cf6;">LABORATÓRIO</div>
     <h2>🧪 Criando Skills e Operando em Lote</h2>
-    <p>Conheça os Agentes do time de Engenharia, aprenda como criar o seu próprio Agente do zero (End-to-End) e veja como processar múltiplos itens de uma só vez puxando da fila.</p>
+    <p>Aprenda como fabricar a automação que você acabou de ver no simulador acima.</p>
   </div>
 
   <!-- 1. Catálogo de Agentes -->
-  <h3 style="margin:30px 0 15px; color:#1e293b; border-bottom:2px solid #8b5cf6; padding-bottom:8px;">👥 1. Catálogo de Agentes (O Time)</h3>
+  <h3 style="margin:30px 0 15px; color:#1e293b; border-bottom:2px solid #8b5cf6; padding-bottom:8px;">👥 1. Catálogo de Agentes Prontos</h3>
   <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:30px;">
     
     <div style="flex:1; min-width:200px; background:#fff; border:1px solid #d1d5db; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05); text-align:center;">
       <div style="font-size:36px; margin-bottom:10px;">📋</div>
       <strong style="color:#111827; font-size:15px; display:block;">Agente Planner</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:10px; padding:3px 8px; border-radius:12px;">Refinamento Funcional</span>
-      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Lê a demanda bruta, entende o escopo e escreve o PRD em formato BDD (Given/When/Then). Tagueia dependências de negócio.</p>
+      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Lê a demanda bruta, entende o escopo e escreve o PRD em formato BDD.</p>
     </div>
 
     <div style="flex:1; min-width:200px; background:#fff; border:1px solid #d1d5db; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05); text-align:center;">
       <div style="font-size:36px; margin-bottom:10px;">📐</div>
       <strong style="color:#111827; font-size:15px; display:block;">Agente Architect</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:10px; padding:3px 8px; border-radius:12px;">Refinamento Técnico</span>
-      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Transforma o PRD em Spec Técnica. Define banco de dados, contratos de API e quebra o trabalho em subtarefas no TFS.</p>
+      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Transforma o PRD em Spec Técnica e quebra subtarefas.</p>
     </div>
 
     <div style="flex:1; min-width:200px; background:#fff; border:1px solid #d1d5db; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05); text-align:center;">
       <div style="font-size:36px; margin-bottom:10px;">🧑‍💻</div>
       <strong style="color:#111827; font-size:15px; display:block;">Agente TDD / Coder</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:10px; padding:3px 8px; border-radius:12px;">Desenvolvimento</span>
-      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Codifica feature. Segue a regra rígida de primeiro escrever o teste (falhar), depois implementar (passar), e então criar o PR.</p>
+      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Codifica a feature seguindo a regra Red-Green-Refactor.</p>
     </div>
 
     <div style="flex:1; min-width:200px; background:#fff; border:1px solid #d1d5db; border-radius:8px; padding:15px; box-shadow:0 2px 4px rgba(0,0,0,0.05); text-align:center;">
       <div style="font-size:36px; margin-bottom:10px;">🛡️</div>
       <strong style="color:#111827; font-size:15px; display:block;">Agente QA & Sec</strong>
-      <span style="background:#f3f4f6; color:#4b5563; font-size:10px; padding:3px 8px; border-radius:12px;">Validação</span>
-      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Varre o código em busca de vulnerabilidades OWASP. Bate o código final contra os ACs originais do PRD. Gera evidência no Test Plan.</p>
+      <p style="font-size:12px; color:#475569; margin-top:10px; line-height:1.4;">Varre o código contra OWASP e testa os Acceptance Criteria.</p>
     </div>
 
   </div>
 
   <!-- 2. Criando uma Skill End-to-End -->
-  <h3 style="margin:30px 0 15px; color:#1e293b; border-bottom:2px solid #8b5cf6; padding-bottom:8px;">🛠️ 2. Como criar um Agente (End-to-End)</h3>
-  <p style="font-size:14px; color:#475569; margin-bottom:20px;">Você não precisa "programar" Inteligência Artificial. Você só precisa <strong>escrever políticas claras</strong> usando Markdown. Veja como fabricamos uma Skill em 3 passos:</p>
-
+  <h3 style="margin:30px 0 15px; color:#1e293b; border-bottom:2px solid #8b5cf6; padding-bottom:8px;">🛠️ 2. Como criar um Agente (O Código)</h3>
+  
   <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:8px; padding:20px; margin-bottom:30px;">
     
     <div style="margin-bottom:20px;">
-      <strong style="color:#0f172a; font-size:15px; display:block; margin-bottom:5px;">Passo A: O Arquivo Base</strong>
-      <p style="font-size:13px; color:#475569; margin:0 0 10px 0;">Crie um arquivo chamado <code>SKILL.md</code> dentro do seu repositório de agentes (ex: <code>ecc/skills/gerador-prd/SKILL.md</code>).</p>
-    </div>
-
-    <div style="margin-bottom:20px;">
-      <strong style="color:#0f172a; font-size:15px; display:block; margin-bottom:5px;">Passos B e C: O Prompt Real (Production-Grade)</strong>
-      <p style="font-size:13px; color:#475569; margin:0 0 10px 0;">Diferente de um chat comum (ChatGPT), agentes autônomos profissionais usam marcações XML, chamadas explícitas de ferramentas (Tool Calls) e regras de Governança estritas. Copie esta estrutura abaixo, ela é 100% real, testada e pronta para rodar no Kiro/Claude:</p>
+      <strong style="color:#0f172a; font-size:15px; display:block; margin-bottom:5px;">O Arquivo SKILL.md (O Prompt Real)</strong>
+      <p style="font-size:13px; color:#475569; margin:0 0 10px 0;">Copie esta estrutura abaixo, ela é 100% real, usa marcações XML, chamadas de ferramentas e regras de Governança estritas para o Kiro/Claude:</p>
+      
       <div style="background:#1e293b; color:#f8fafc; padding:15px; border-radius:6px; font-family:monospace; font-size:12px; border-left:4px solid #a855f7; line-height: 1.5; overflow-x: auto; white-space: pre;"><span style="color:#a855f7;">&lt;role&gt;</span>
 Você é o Agente Planner, especialista em Engenharia de Requisitos e BDD.
 Sua missão é extrair a intenção bruta do Work Item do TFS e formatá-la em um PRD formal.
 <span style="color:#a855f7;">&lt;/role&gt;</span>
 
 <span style="color:#3b82f6;">&lt;instructions&gt;</span>
-1. Use a ferramenta `azure-devops_get_work_item` do MCP para ler o ID recebido no gatilho.
+1. Use a ferramenta `azure-devops_get_work_item` do MCP para ler o ID.
 2. Analise o conteúdo do campo `System.Description`.
-3. Escreva um artefato no projeto chamado `PRD.md` contendo:
-   - Resumo Executivo da Demanda
-   - Critérios de Aceite (formato GIVEN / WHEN / THEN)
-   - Edge Cases levantados
+3. Escreva um artefato no projeto chamado `PRD.md`.
 <span style="color:#3b82f6;">&lt;/instructions&gt;</span>
 
 <span style="color:#ef4444;">&lt;governance_rules&gt;</span>
-- NUNCA alucine regras de negócio. Se a descrição contiver menos de 20 palavras ou faltar informações vitais, PARE a geração do PRD.
-- Em caso de parada por falta de info, use OBRIGATORIAMENTE a ferramenta `azure-devops_update_work_item` enviando este JSON Patch para travar o card:
+- NUNCA alucine regras de negócio. Se a descrição for curta, PARE.
+- Use OBRIGATORIAMENTE a ferramenta `azure-devops_update_work_item` para travar o card:
   [ { "op": "add", "path": "/fields/System.Tags", "value": "DEP-Negocio" } ]
 <span style="color:#ef4444;">&lt;/governance_rules&gt;</span>
 
 <span style="color:#10b981;">&lt;mcp_trigger&gt;</span>
-Se (e somente se) o arquivo `PRD.md` for gerado com sucesso e todos os critérios forem atendidos, você deve DEVOLVER O BASTÃO movendo o card. 
-Use a ferramenta `azure-devops_update_work_item` com o seguinte payload PATCH:
+Se o arquivo `PRD.md` for gerado, DEVOLVA O BASTÃO movendo o card. 
+Use a ferramenta `azure-devops_update_work_item` com o PATCH:
 [ { "op": "add", "path": "/fields/System.State", "value": "Aguardando Refinamento Técnico" } ]
 <span style="color:#10b981;">&lt;/mcp_trigger&gt;</span></div>
     </div>
@@ -7548,13 +7239,13 @@ Use a ferramenta `azure-devops_update_work_item` com o seguinte payload PATCH:
 
   <!-- 3. Executando Múltiplos Itens (Lote) -->
   <h3 style="margin:30px 0 15px; color:#1e293b; border-bottom:2px solid #8b5cf6; padding-bottom:8px;">🏭 3. Processamento em Lote (Limpando a Fila)</h3>
-  <p style="font-size:14px; color:#475569; margin-bottom:20px;">No mundo real, o PO não coloca 1 item na coluna "New". Ele coloca 5 ou 10. Veja como o <strong>Agente de Ronda (Batch)</strong> acorda e puxa vários itens em paralelo.</p>
+  <p style="font-size:14px; color:#475569; margin-bottom:20px;">No mundo real, o PO coloca 5 ou 10 itens na coluna "New". O <strong>Agente de Ronda (Cron Job)</strong> acorda e puxa vários itens em paralelo.</p>
 
   <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:20px;">
     
     <!-- Esquerda: Fila Visual -->
     <div style="flex:1; min-width:250px; background:#fff7ed; padding:20px; border:1px solid #fdba74; border-radius:8px;">
-      <strong style="color:#9a3412; font-size:15px; display:block; margin-bottom:10px;">Coluna: New (Entrada de Demandas)</strong>
+      <strong style="color:#9a3412; font-size:15px; display:block; margin-bottom:10px;">Coluna: New (Entrada)</strong>
       
       <div style="background:#fff; border-left:4px solid #9ca3af; padding:8px; margin-bottom:8px; font-size:12px; border-radius:4px; box-shadow:0 1px 2px rgba(0,0,0,0.05);">
         <strong style="color:#374151;">#101</strong> - Login via OTP <span style="float:right; color:#a855f7;">[Na fila]</span>
@@ -7580,21 +7271,16 @@ Use a ferramenta `azure-devops_update_work_item` com o seguinte payload PATCH:
         <span style="color:#9ca3af;">[Thread 3]</span> Card #103 processando PRD...<br>
         <br>
         <span style="color:#3b82f6;">[MCP Patch]</span> #101 Movido -> Ref. Funcional.<br>
-        <span style="color:#ef4444;">[MCP Patch]</span> #102 REJEITADO (Regra Governance): Descrição vazia. Tag <b>DEP-Negocio</b> aplicada.<br>
+        <span style="color:#ef4444;">[MCP Patch]</span> #102 REJEITADO (Regra Governance). Tag <b>DEP-Negocio</b> aplicada.<br>
         <span style="color:#3b82f6;">[MCP Patch]</span> #103 Movido -> Ref. Funcional.<br>
         <br>
         <span style="color:#10b981;">✅ Execução em Lote Finalizada (Tempo: 42s).</span>
       </div>
     </div>
   </div>
-  
-  <p style="font-size:13px; color:#475569; background:#f1f5f9; padding:15px; border-radius:6px; border-left:4px solid #cbd5e1;">
-    <strong>O Poder da Escala:</strong> Em menos de 1 minuto, a IA limpou a coluna de entrada, empurrou dois itens mastigados com PRD pronto para o refinamento técnico, e bloqueou automaticamente um item mal especificado, cobrando o PO diretamente no card do TFS. Esse é o fluxo contínuo na prática!
-  </p>
 
 </div>
-<!-- ===== FIM LABORATÓRIO SKILLS ===== -->
-
+<!-- ===== FIM KIRO HUB ===== -->
 
 <!-- ===== PO: REFINAMENTO EFICAZ ===== -->
 <div id="s-po-refinamento" class="section">
