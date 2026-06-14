@@ -6902,6 +6902,93 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
   </div>
 </div>
+
+  <!-- PLAYBOOK DE IMPLANTAÇÃO -->
+  <h3 style="margin:30px 0 12px; color:#1e1b4b; border-bottom:2px solid #6366f1; padding-bottom:8px;">🚀 Guia de Implantação Prática (O Playbook do Piloto)</h3>
+  
+  <p style="font-size:14px; color:#4b5563; margin-bottom:20px;">Use este manual técnico para plugar os cabos da sua primeira automação Kiro + TFS.</p>
+  
+  <div style="display:flex; flex-direction:column; gap:20px;">
+    
+    <!-- Fase 1: Infra -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <div style="background:#f8fafc; border-bottom:1px solid #e2e8f0; padding:15px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">1️⃣</span>
+        <strong style="color:#0f172a; font-size:16px;">Infraestrutura: O Servidor MCP</strong>
+      </div>
+      <div style="padding:15px;">
+        <p style="font-size:13px; color:#334155; margin-top:0;">O agente precisa de uma "ponte" para falar com o seu TFS de forma segura. Não usaremos APIs de nuvem públicas; usaremos o servidor MCP oficial instalado localmente.</p>
+        <ul style="font-size:13px; color:#475569; padding-left:20px; line-height:1.6;">
+          <li><strong>Ferramenta:</strong> Utilize o servidor <a href="https://github.com/microsoft/azure-devops-mcp" target="_blank" style="color:#2563eb; font-weight:bold;">azure-devops-mcp</a> (versão oficial da Microsoft para integração LLM).</li>
+          <li><strong>Autenticação (TFS On-Premise):</strong> Vá no painel do TFS > Security > Personal Access Tokens. Crie um PAT com os escopos: <code>Work Items (Read & Write)</code> e <code>Code (Read)</code>. Nunca dê permissão <em>Full Access</em> para o piloto.</li>
+          <li><strong>Configuração Kiro/Claude:</strong> Edite o arquivo <code>claude_desktop_config.json</code> (ou a config do Kiro) para plugar o MCP:</li>
+        </ul>
+        <div style="background:#1e293b; color:#f8fafc; padding:12px; border-radius:6px; font-family:monospace; font-size:12px; margin-top:10px; overflow-x:auto;">
+          "mcpServers": {<br>
+          &nbsp;&nbsp;"azure-devops": {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"command": "npx",<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"args": ["-y", "@microsoft/azure-devops-mcp"],<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;"env": {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"AZURE_DEVOPS_ORG": "sua-colecao-tfs",<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"AZURE_DEVOPS_PAT": "seu-token-aqui"<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;}<br>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Fase 2: Steering -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <div style="background:#f8fafc; border-bottom:1px solid #e2e8f0; padding:15px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">2️⃣</span>
+        <strong style="color:#0f172a; font-size:16px;">O Cérebro: Criando o Steering</strong>
+      </div>
+      <div style="padding:15px;">
+        <p style="font-size:13px; color:#334155; margin-top:0;">O Kiro não adivinha suas regras. Você precisa injetar o processo do seu Board na mente do agente.</p>
+        <ul style="font-size:13px; color:#475569; padding-left:20px; line-height:1.6;">
+          <li><strong>A Pasta:</strong> Crie a pasta oculta <code>.kiro/steering/</code> na raiz do seu repositório Git.</li>
+          <li><strong>Os Arquivos:</strong> Crie um arquivo Markdown para cada etapa. Exemplo: <code>politica-refinamento.md</code>.</li>
+        </ul>
+        <div style="background:#fefce8; border-left:4px solid #eab308; padding:12px; border-radius:4px; font-family:monospace; font-size:12px; margin-top:10px; color:#854d0e;">
+          <strong>// Exemplo de Conteúdo (politica-refinamento.md)</strong><br><br>
+          Você é o Agente de Refinamento.<br>
+          1. Sua tarefa é ler a descrição do Work Item atual.<br>
+          2. Escreva o artefato PRD.md contendo Critérios de Aceite no formato BDD.<br>
+          3. SE faltar regra de negócio clara, use a ferramenta <code>update_work_item</code> para adicionar a tag "DEP-Negocio". Pare a execução.<br>
+          4. SE o PRD estiver completo, use <code>update_work_item</code> para mudar o System.State para "Refinamento Técnico".
+        </div>
+      </div>
+    </div>
+
+    <!-- Fase 3 e 4: Skills e Execução -->
+    <div style="background:#fff; border:1px solid #d1d5db; border-radius:8px; overflow:hidden; box-shadow:0 2px 4px rgba(0,0,0,0.05);">
+      <div style="background:#f8fafc; border-bottom:1px solid #e2e8f0; padding:15px; display:flex; align-items:center; gap:10px;">
+        <span style="font-size:20px;">3️⃣</span>
+        <strong style="color:#0f172a; font-size:16px;">Skills & Execução: O Gatilho</strong>
+      </div>
+      <div style="padding:15px;">
+        <p style="font-size:13px; color:#334155; margin-top:0;">Com o MCP e o Steering prontos, o desenvolvedor ou PO precisa acionar a automação para aquele card específico.</p>
+        <ul style="font-size:13px; color:#475569; padding-left:20px; line-height:1.6;">
+          <li><strong>Instalando as Skills:</strong> Garanta que as Skills do catálogo ECC (ex: <code>tdd-workflow</code>, <code>blueprint</code>) estão instaladas na sua IDE Kiro via <code>kiro install ecc/tdd-workflow</code>. Elas fornecem as ferramentas de parsing de código.</li>
+          <li><strong>O Acionamento (Humano-iniciado no Piloto):</strong> Como o TFS on-premise não aciona o Kiro sozinho, o fluxo começa na máquina de quem puxou o card. O comando na CLI ou no chat do Kiro é direto:</li>
+        </ul>
+        <div style="background:#1e293b; color:#f8fafc; padding:12px; border-radius:6px; font-family:monospace; font-size:12px; margin-top:10px; border-left:4px solid #10b981;">
+          <span style="color:#6ee7b7;">></span> kiro run refinamento --work-item=12345<br><br>
+          <span style="color:#94a3b8;">/* O Kiro: 
+          1. Lê o Work Item 12345 via MCP
+          2. Lê o arquivo .kiro/steering/politica-refinamento.md
+          3. Gera o PRD.md
+          4. Roda o HTTP PATCH via MCP para mover o card
+          */</span>
+        </div>
+        <p style="font-size:13px; color:#166534; margin-top:15px; font-weight:bold;">🎉 Pronto! O card foi movido magicamente no board do TFS sem o usuário abrir o navegador.</p>
+      </div>
+    </div>
+
+  </div>
+
+
 <!-- ===== PO: REFINAMENTO EFICAZ ===== -->
 <div id="s-po-refinamento" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#065f46,#047857)">
