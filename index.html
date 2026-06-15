@@ -51,10 +51,21 @@ Linha: " + line);
             
             <nav class="sidebar-nav" id="sidebar-nav">
                 <div class="nav-group">
-                                        <div class="nav-group-title">Portal Principal</div>
-                    <a href="#fluxo-ia" class="nav-item" data-target="fluxo-ia-view">
-                        <span class="icon">🚀</span> Fluxo com IA
+                <div class="nav-group">
+                    <div class="nav-group-title">Ecossistema Kiro & IA</div>
+                    <a href="#kiro-doc" class="nav-item" data-target="kiro-doc-view">
+                        <span class="icon">📖</span> Tudo sobre Kiro
                     </a>
+                    <a href="#fluxo-ia" class="nav-item" data-target="fluxo-ia-view">
+                        <span class="icon">⚙️</span> Simulador Kanban
+                    </a>
+                    <a href="#claude-code" class="nav-item" data-target="claude-code-view">
+                        <span class="icon">💻</span> Claude Code
+                    </a>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-group-title">Portal Principal</div>
                     <a href="#agents" class="nav-item active" data-target="agents-view">
                         <span class="icon">🤖</span> AI Agents
                     </a>
@@ -123,7 +134,9 @@ Linha: " + line);
 
             <div class="content-area" id="content-area">
                                 <!-- Views -->
+                <div id="kiro-doc-view" class="view"></div>
                 <div id="fluxo-ia-view" class="view"></div>
+                <div id="claude-code-view" class="view"></div>
                 <div id="agents-view" class="view active"></div>
                 <div id="ecc-agents-view" class="view"></div>
                 <div id="tfs-view" class="view kb-view"><div class="kb-content-container" id="kb-tfs"></div></div>
@@ -163,6 +176,8 @@ Linha: " + line);
     <script src="ecc-skills-data.js?v=2"></script>
     <script src="ecc-agents-data.js?v=2"></script>
     <script src="fluxo_ia.js?v=5"></script>
+    <script src="kiro_doc.js?v=1"></script>
+    <script src="claude_code_doc.js?v=1"></script>
     <script src="app.js?v=21"></script>
     <script src="agents.js?v=9"></script>
     <script src="ecc.js?v=2"></script>
