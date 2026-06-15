@@ -102,7 +102,7 @@ function initKiroDocView() {
                 <p>Em ambientes corporativos como Bancos e Seguradoras, IAs não podem ter acesso SSH ilimitado a servidores ou gravar diretamente no banco de dados principal sem supervisão severa.</p>
 
                 <h4 style="color:#1e293b; margin-top:20px;">1. Sandboxes Efêmeras (Docker)</h4>
-                <p>Quando o Agente Engenheiro (Coder) roda `npm install` ou compila testes de integração, o Kiro não executa isso na máquina host. Ele cria um container Docker isolado que morre em 15 minutos.</p>
+                <p>Quando o Agente Engenheiro (Coder) roda <code>npm install</code> ou compila testes de integração, o Kiro não executa isso na máquina host. Ele cria um container Docker isolado que morre em 15 minutos.</p>
                 <div class="mc-callout" style="border-color:#ef4444; background:#fef2f2;">
                     <strong>Segurança Ofensiva (Red Teaming):</strong> O Kiro intercepta qualquer tentativa do Agente de chamar APIs externas não autorizadas (ex: vazamento de código enviando dados para <code>pastebin.com</code>) usando regras estritas de <code>egress-firewall</code> na sandbox.
                 </div>
@@ -144,14 +144,14 @@ function initKiroDocView() {
         <details class="mc-accordion">
             <summary><span style="font-size:24px;">🏗️</span> Módulo 4: Padrões de Arquitetura de Skills</summary>
             <div class="mc-content">
-                <p>Construir a árvore `.kiro/skills/` requer padrões arquitetônicos. O padrão de ouro Enterprise é o <strong>Supervisor / Worker</strong>.</p>
+                <p>Construir a árvore <code>.kiro/skills/</code> requer padrões arquitetônicos. O padrão de ouro Enterprise é o <strong>Supervisor / Worker</strong>.</p>
 
                 <h4 style="color:#1e293b; margin-top:20px;">1. O Padrão Supervisor/Worker (Map-Reduce para IA)</h4>
                 <p>Em vez de um Agente com um prompt monstruoso tentando fazer o backend e o frontend ao mesmo tempo, dividimos as responsabilidades (Single Responsibility Principle).</p>
                 <ul style="margin-left:20px; margin-bottom:15px;">
                     <li><strong>Agente Arquiteto (Supervisor):</strong> Lê o ticket, divide o problema em 3 sub-tarefas (DB, API, UI). Mapeia as dependências e despacha para 3 instâncias Workers.</li>
                     <li><strong>Agentes Coder (Workers):</strong> 3 instâncias rodam em paralelo. Cada uma faz apenas sua parte. Quando terminam, enviam os diffs de volta ao Supervisor.</li>
-                    <li><strong>Agente Revisor (Supervisor):</strong> Pega as 3 partes, tenta o `npm run build` conjunto. Se quebrar, repreende os Workers e manda corrigirem.</li>
+                    <li><strong>Agente Revisor (Supervisor):</strong> Pega as 3 partes, tenta o <code>npm run build</code> conjunto. Se quebrar, repreende os Workers e manda corrigirem.</li>
                 </ul>
 
                 <h4 style="color:#1e293b; margin-top:20px;">2. Ferramentas Locais Privadas (Private MCPs)</h4>

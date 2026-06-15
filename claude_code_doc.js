@@ -135,7 +135,7 @@ A camada de Domínio deve ser 100% isolada e não ter dependências externas.
 > Ache o teste que mais falhou hoje. Abra o arquivo dele, 
 > descubra por que a Promise está vazando, e refatore.
                 </div>
-                <p>O Claude usa o MCP para buscar o JSON do Cypress, entende o nome do teste, usa a ferramenta `read_file` para achar o código, conserta a Promise e usa `write_file` para salvar. Tudo autônomo.</p>
+                <p>O Claude usa o MCP para buscar o JSON do Cypress, entende o nome do teste, usa a ferramenta <code>read_file</code> para achar o código, conserta a Promise e usa <code>write_file</code> para salvar. Tudo autônomo.</p>
             </div>
         </details>
 
