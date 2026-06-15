@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Função para carregar o conteúdo legado HTML e extrair as seções
     loadAndMigrateContent();
     initSkillsView();
+    if (typeof initFluxoIaView === 'function') initFluxoIaView();
 });
 
 async function loadAndMigrateContent() {
