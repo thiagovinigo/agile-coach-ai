@@ -23,15 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetEl = document.getElementById(targetId);
             if(targetEl) {
                 targetEl.classList.add('active');
-                if (targetId === 'fluxo-ia-view') {
-                    if (targetEl.innerHTML.trim() === '') {
-                        alert("DIAGNÓSTICO: A div fluxo-ia-view está VAZIA! typeof initFluxoIaView = " + typeof initFluxoIaView);
-                    } else {
-                        alert("DIAGNÓSTICO: A div tem " + targetEl.innerHTML.length + " bytes de conteudo. Display=" + window.getComputedStyle(targetEl).display);
-                    }
-                }
-            } else {
-                alert("DIAGNÓSTICO: elemento targetId nao encontrado: " + targetId);
             }
         });
     });
