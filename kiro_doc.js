@@ -3,132 +3,173 @@ function initKiroDocView() {
     if (!container) return;
 
     container.innerHTML = `
+        <style>
+            .mc-accordion {
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                overflow: hidden;
+            }
+            .mc-accordion summary {
+                padding: 20px 25px;
+                cursor: pointer;
+                font-size: 18px;
+                font-weight: 600;
+                color: #0f172a;
+                background: #f8fafc;
+                border-bottom: 1px solid #e2e8f0;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                transition: background 0.2s;
+            }
+            .mc-accordion summary:hover {
+                background: #f1f5f9;
+            }
+            .mc-accordion summary::-webkit-details-marker {
+                display: none;
+            }
+            .mc-accordion[open] summary {
+                background: #e0e7ff;
+                border-bottom: 2px solid #6366f1;
+            }
+            .mc-content {
+                padding: 25px;
+                color: #475569;
+                font-size: 14.5px;
+                line-height: 1.7;
+            }
+            .mc-code {
+                background: #0f172a;
+                color: #e2e8f0;
+                padding: 15px;
+                border-radius: 8px;
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 13px;
+                line-height: 1.5;
+                overflow-x: auto;
+                margin: 15px 0;
+            }
+            .mc-code-highlight { color: #a5b4fc; }
+            .mc-code-comment { color: #64748b; font-style: italic; }
+            .mc-callout {
+                background: #eff6ff;
+                border-left: 4px solid #3b82f6;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 15px 0;
+            }
+        </style>
+
         <div class="page-header" style="background:linear-gradient(135deg, #0f172a, #312e81);">
-            <div class="tag" style="background:#6366f1;">DOCUMENTAÇÃO OFICIAL</div>
-            <h2>📖 Kiro: O Maestro de Agentes</h2>
-            <p style="margin-top:10px;">O Kiro não é um Agente em si. Ele é o <strong>Motor de Orquestração (Daemon)</strong> que escuta eventos do mundo exterior (Azure DevOps, GitHub, Slack) e dispara os Agentes corretos (Planner, Architect, Coder) baseados em regras rígidas de Governança Corporativa.</p>
+            <div class="tag" style="background:#6366f1;">MASTERCLASS "10.000 HORAS"</div>
+            <h2>📖 Kiro: Engenharia de Orquestração</h2>
+            <p style="margin-top:10px;">Para dominar o nível Enterprise de Automação com IA, você não pode apenas rodar scripts locais. O Kiro é o seu <strong>Daemon de Governança</strong>. Abaixo estão os módulos avançados que separam os amadores dos Engenheiros de IA 10x.</p>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr; gap:20px; align-items:start;">
-            
-            <!-- Section 1: Core Concepts -->
-            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:25px; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
-                <strong style="color:#0f172a; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:15px; border-bottom:2px solid #6366f1; padding-bottom:10px;">
-                    <span style="font-size:24px;">🧠</span> 1. Arquitetura e Componentes
-                </strong>
-                <p style="color:#475569; font-size:14px; line-height:1.6; margin-bottom:15px;">
-                    A arquitetura do Kiro é dividida em 3 camadas principais:
-                </p>
-                <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:15px; margin-bottom:20px;">
-                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #cbd5e1;">
-                        <h4 style="color:#1e293b; margin-bottom:5px;">A) The Daemon (Motor)</h4>
-                        <p style="font-size:13px; color:#64748b;">Roda em background. Monitora triggers (cron jobs, webhooks). Lê o Kanban e decide quando ativar um agente respeitando limites de WIP.</p>
-                    </div>
-                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #cbd5e1;">
-                        <h4 style="color:#1e293b; margin-bottom:5px;">B) As Skills (Regras)</h4>
-                        <p style="font-size:13px; color:#64748b;">Arquivos YAML que definem <i>O QUE</i> deve ser feito. Conectam uma Trigger a um Agente (LLM) e fornecem as ferramentas (MCP) necessárias.</p>
-                    </div>
-                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #cbd5e1;">
-                        <h4 style="color:#1e293b; margin-bottom:5px;">C) Steering (Human-in-the-Loop)</h4>
-                        <p style="font-size:13px; color:#64748b;">Mecanismo de controle humano. O Kiro pausa o fluxo e pede permissão no Slack ou Teams antes de realizar ações destrutivas (Deploy, Merge).</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section 2: Folder Structure -->
-            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:25px; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
-                <strong style="color:#0f172a; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:15px; border-bottom:2px solid #10b981; padding-bottom:10px;">
-                    <span style="font-size:24px;">📁</span> 2. Estrutura de Pastas do Repositório
-                </strong>
-                <p style="color:#475569; font-size:14px; line-height:1.6; margin-bottom:15px;">
-                    O Kiro exige que você tenha uma pasta oculta chamada <code>.kiro/</code> na raiz do seu projeto. É lá que toda a inteligência e configuração reside.
-                </p>
-                <div style="background:#0f172a; padding:20px; border-radius:8px; color:#e2e8f0; font-family:monospace; font-size:13px; line-height:1.5; overflow-x:auto;">
-meu-projeto/
-├── .kiro/
-│   ├── config.yaml          <span style="color:#94a3b8;"># Configuração global (Tokens, LLM Provider)</span>
-│   ├── mcp.json             <span style="color:#94a3b8;"># Servidores MCP disponíveis globalmente</span>
-│   ├── /skills/             <span style="color:#94a3b8;"># Diretório de Inteligência</span>
-│   │   ├── planner.yaml     <span style="color:#94a3b8;"># Skill do Product Owner</span>
-│   │   ├── architect.yaml   <span style="color:#94a3b8;"># Skill do Tech Lead</span>
-│   │   └── coder.yaml       <span style="color:#94a3b8;"># Skill do Engenheiro (TDD)</span>
-│   └── /workflows/          <span style="color:#94a3b8;"># Orquestração (Pipelines de Agentes)</span>
-│       └── end-to-end.yaml  <span style="color:#94a3b8;"># Ex: Pipeline que liga o planner -> coder</span>
-├── src/                     <span style="color:#94a3b8;"># Código fonte real do seu app</span>
-└── package.json
-                </div>
-            </div>
-
-            <!-- Section 3: The Configurations -->
-            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:25px; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
-                <strong style="color:#0f172a; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:15px; border-bottom:2px solid #f59e0b; padding-bottom:10px;">
-                    <span style="font-size:24px;">⚙️</span> 3. Exemplo Prático de Configuração (Skill)
-                </strong>
-                <p style="color:#475569; font-size:14px; line-height:1.6; margin-bottom:15px;">
-                    Como transformamos um LLM genérico (Claude) em um <strong>Arquiteto Especialista no Projeto</strong>? Usando um arquivo de Skill no Kiro.
-                </p>
+        <!-- MÓDULO 1 -->
+        <details class="mc-accordion" open>
+            <summary><span style="font-size:24px;">⚙️</span> Módulo 1: O Motor Kiro (Daemon Internals)</summary>
+            <div class="mc-content">
+                <p>O Kiro opera como um Daemon persistente no servidor, monitorando ferramentas do mundo real (TFS, Jira, Slack). Entender seu "motor" é vital para escalar sua operação sem estourar limites de API.</p>
                 
-                <div style="background:#1e293b; border-left:4px solid #f59e0b; padding:15px; border-radius:6px; color:#e2e8f0; font-family:monospace; font-size:13px; white-space:pre-wrap; overflow-x:auto;">
-<span style="color:#cbd5e1;"># .kiro/skills/architect.yaml</span>
-<span style="color:#818cf8;">agent:</span>
-  <span style="color:#a5b4fc;">name:</span> "Architect"
-  <span style="color:#a5b4fc;">model:</span> "claude-3-5-sonnet-20241022"
-  <span style="color:#a5b4fc;">temperature:</span> 0.2
+                <h4 style="color:#1e293b; margin-top:20px;">1. Teoria de Filas e Little's Law</h4>
+                <p>Se você tem 50 tickets no Backlog e ativa o Kiro, o que acontece? Ele <strong>não</strong> cria 50 instâncias do Claude simultâneas. O Kiro usa um limitador de concorrência atrelado ao WIP (Work In Progress) do Kanban.</p>
+                <div class="mc-callout">
+                    <strong>Little's Law na Prática:</strong> <code>L = λW</code> (Itens na fila = Taxa de chegada x Tempo no sistema). O Kiro pausa novas "puxadas" (Pulls) da coluna 'New' se a taxa de Tokens/Minuto do seu provedor (Anthropic/OpenAI) atingir 80% do limite da sua tier.
+                </div>
 
-<span style="color:#818cf8;">mcp_servers:</span>
-  - <span style="color:#34d399;">name:</span> "azure-devops"
-  - <span style="color:#34d399;">name:</span> "github"
-
-<span style="color:#818cf8;">system_prompt:</span> |
-  &lt;role&gt;Você é o Tech Lead / Arquiteto de Software da empresa.&lt;/role&gt;
-  &lt;guidelines&gt;
-    1. Sempre gere diagramas Mermaid para as arquiteturas propostas.
-    2. Use banco de dados PostgreSQL (Padrão da empresa).
-    3. Para criar tabelas, obedeça as regras de LGPD vigentes lendo do Confluence.
-  &lt;/guidelines&gt;
-
-<span style="color:#818cf8;">on_success:</span>
-  <span style="color:#a5b4fc;">patch_state:</span> "Aguardando PO"
-  <span style="color:#a5b4fc;">create_children:</span> true
+                <h4 style="color:#1e293b; margin-top:20px;">2. Rate Limiting e Backoff Retries</h4>
+                <p>As APIs de LLM falham. Seja por Rate Limit (Erro 429) ou Timeout (Erro 504). O Kiro Engine tem resiliência nativa com <i>Exponential Backoff</i>.</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/config.yaml - Seção de Resiliência</span>
+<span class="mc-code-highlight">engine:</span>
+  <span class="mc-code-highlight">max_concurrent_agents:</span> 5
+  <span class="mc-code-highlight">retry_policy:</span>
+    <span class="mc-code-highlight">max_attempts:</span> 3
+    <span class="mc-code-highlight">backoff_multiplier:</span> 2.0  <span class="mc-code-comment"># Espera 2s, depois 4s, depois 8s...</span>
+  <span class="mc-code-highlight">fallback_model:</span> "claude-3-haiku-20240307" <span class="mc-code-comment"># Se Sonnet falhar, use o Haiku</span>
                 </div>
             </div>
+        </details>
 
-            <!-- Section 4: Steering -->
-            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:25px; box-shadow:0 4px 6px rgba(0,0,0,0.05);">
-                <strong style="color:#0f172a; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:15px; border-bottom:2px solid #ef4444; padding-bottom:10px;">
-                    <span style="font-size:24px;">🛑</span> 4. Steering (Intervenção Humana)
-                </strong>
-                <p style="color:#475569; font-size:14px; line-height:1.6; margin-bottom:15px;">
-                    O Kiro brilha em governança. Você não quer a IA subindo código em produção sem controle. O mecanismo de <strong>Strong Steering</strong> (Direcionamento Forte) pausa o fluxo e aguarda um humano tomar a decisão via Terminal ou Integração de Chat (Slack/Teams).
-                </p>
+        <!-- MÓDULO 2 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">🛡️</span> Módulo 2: Governança Corporativa e Segurança</summary>
+            <div class="mc-content">
+                <p>Em ambientes corporativos como Bancos e Seguradoras, IAs não podem ter acesso SSH ilimitado a servidores ou gravar diretamente no banco de dados principal sem supervisão severa.</p>
 
-                <div style="display:flex; gap:20px;">
-                    <div style="flex:1; background:#fee2e2; padding:15px; border-radius:8px; border:1px solid #fca5a5;">
-                        <h4 style="color:#991b1b; margin-bottom:8px;">Exemplo de Gate (YAML)</h4>
-                        <pre style="font-size:11px; color:#7f1d1d; margin:0; white-space:pre-wrap; font-family:monospace;">
-trigger: "StateChangedTo_QA"
-action: 
-  type: "pause_and_notify"
-  slack_channel: "#engineering-approvals"
+                <h4 style="color:#1e293b; margin-top:20px;">1. Sandboxes Efêmeras (Docker)</h4>
+                <p>Quando o Agente Engenheiro (Coder) roda `npm install` ou compila testes de integração, o Kiro não executa isso na máquina host. Ele cria um container Docker isolado que morre em 15 minutos.</p>
+                <div class="mc-callout" style="border-color:#ef4444; background:#fef2f2;">
+                    <strong>Segurança Ofensiva (Red Teaming):</strong> O Kiro intercepta qualquer tentativa do Agente de chamar APIs externas não autorizadas (ex: vazamento de código enviando dados para <code>pastebin.com</code>) usando regras estritas de <code>egress-firewall</code> na sandbox.
+                </div>
 
-commands_available:
-  - "/kiro approve {{id}}"
-  - "/kiro reject {{id}}"
-  - "/kiro grill-me {{id}}"
-                        </pre>
-                    </div>
-                    <div style="flex:1; background:#f8fafc; padding:15px; border-radius:8px; border:1px solid #cbd5e1;">
-                        <h4 style="color:#0f172a; margin-bottom:8px;">Ação no Slack (Visão Humano)</h4>
-                        <p style="font-size:13px; color:#475569; margin-bottom:10px;">🤖 <strong>Kiro Bot:</strong> A feature "Login OTP" está pronta para homologação. O Arquiteto pede revisão da Spec de Segurança.</p>
-                        <p style="font-size:13px; color:#3b82f6; font-family:monospace; margin-bottom:5px;">> /kiro grill-me 101</p>
-                        <p style="font-size:13px; color:#475569; margin-bottom:10px;">🤖 <strong>Kiro Bot:</strong> Estou aqui. Que dúvidas você tem sobre a Spec?</p>
-                        <p style="font-size:13px; color:#3b82f6; font-family:monospace; margin-bottom:5px;">> /kiro approve 101</p>
-                        <p style="font-size:13px; color:#10b981; font-weight:bold;">✅ Feature Aprovada. Movendo Kanban.</p>
-                    </div>
+                <h4 style="color:#1e293b; margin-top:20px;">2. Auditoria e Imutabilidade (Audit Trails)</h4>
+                <p>Toda decisão (Prompt enviado, Token Gasto, Mudança no TFS) é gravada num Log centralizado que pode ser exportado para o Datadog ou Splunk da empresa.</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># O log é JSON-Lines para fácil indexação</span>
+{"timestamp": "2026-06-15T10:00:00", "agent": "Planner", "action": "PATCH", "workItem": 101, "cost_usd": 0.045, "reasoning": "Ticket was lacking BDD acceptance criteria. Expanded using Confluence data."}
                 </div>
             </div>
+        </details>
 
-        </div>
+        <!-- MÓDULO 3 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">🚦</span> Módulo 3: Strong Steering (Direcionamento Avançado)</summary>
+            <div class="mc-content">
+                <p>O conceito de <i>Steering</i> vai além de "Aprovar" um código. Envolve gerenciar custos dinamicamente e exigir aprovações em múltiplas instâncias antes do Kiro continuar o fluxo autônomo.</p>
+
+                <h4 style="color:#1e293b; margin-top:20px;">1. Interrupções Baseadas em Custo (Cost Guards)</h4>
+                <p>O que acontece se o Agente Coder entrar num loop infinito de TDD, tentando consertar um teste e falhando por 50 iterações? Ele vai queimar todo seu orçamento de tokens! O Kiro introduz <code>Cost Guards</code>.</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/skills/coder.yaml</span>
+<span class="mc-code-highlight">cost_guard:</span>
+  <span class="mc-code-highlight">max_usd_per_run:</span> 2.00
+  <span class="mc-code-highlight">action_on_breach:</span> "pause_and_notify"
+  <span class="mc-code-highlight">notify:</span> "@tech-lead"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">2. Multi-Party Approval (Regra de 2 Chaves)</h4>
+                <p>Para fluxos críticos (ex: Mover card para 'Liberado para Instalar' em ambiente Produtivo), o Kiro pode exigir consenso de dois humanos de setores diferentes.</p>
+                <div class="mc-callout">
+                    <strong>Comando Slack:</strong> Quando o Bot avisa <code>"Deploy to Prod pending"</code>, o Kiro só destrava se receber <code>/kiro approve</code> de alguém do grupo <strong>@dev-ops</strong> E <code>/kiro approve</code> de alguém do grupo <strong>@product-managers</strong>.
+                </div>
+            </div>
+        </details>
+
+        <!-- MÓDULO 4 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">🏗️</span> Módulo 4: Padrões de Arquitetura de Skills</summary>
+            <div class="mc-content">
+                <p>Construir a árvore `.kiro/skills/` requer padrões arquitetônicos. O padrão de ouro Enterprise é o <strong>Supervisor / Worker</strong>.</p>
+
+                <h4 style="color:#1e293b; margin-top:20px;">1. O Padrão Supervisor/Worker (Map-Reduce para IA)</h4>
+                <p>Em vez de um Agente com um prompt monstruoso tentando fazer o backend e o frontend ao mesmo tempo, dividimos as responsabilidades (Single Responsibility Principle).</p>
+                <ul style="margin-left:20px; margin-bottom:15px;">
+                    <li><strong>Agente Arquiteto (Supervisor):</strong> Lê o ticket, divide o problema em 3 sub-tarefas (DB, API, UI). Mapeia as dependências e despacha para 3 instâncias Workers.</li>
+                    <li><strong>Agentes Coder (Workers):</strong> 3 instâncias rodam em paralelo. Cada uma faz apenas sua parte. Quando terminam, enviam os diffs de volta ao Supervisor.</li>
+                    <li><strong>Agente Revisor (Supervisor):</strong> Pega as 3 partes, tenta o `npm run build` conjunto. Se quebrar, repreende os Workers e manda corrigirem.</li>
+                </ul>
+
+                <h4 style="color:#1e293b; margin-top:20px;">2. Ferramentas Locais Privadas (Private MCPs)</h4>
+                <p>Sua empresa tem um sistema legado Mainframe que não tem API REST pública. O Kiro permite que você crie um MCP Server Privado em Node ou Python rodando na sua intranet.</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/mcp.json</span>
+{
+  "mcpServers": {
+    "mainframe-bridge": {
+      "command": "python3",
+      "args": ["/var/scripts/mcp_mainframe.py"]
+    }
+  }
+}
+<span class="mc-code-comment"># O LLM agora tem uma 'Tool' nova: "query_mainframe". O Kiro roteia o pedido do LLM localmente para seu script python.</span>
+                </div>
+            </div>
+        </details>
     `;
 }
 
