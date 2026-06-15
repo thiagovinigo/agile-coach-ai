@@ -134,7 +134,7 @@ NUNCA alucine. Se faltar dados, rejeite o card aplicando a tag DEP-Negocio via M
 <instructions>
 1. Escreva o teste.
 2. Implemente o código.
-3. Faça o commit usando \`git_commit\`.
+3. Faça o commit usando 'git_commit'.
 </instructions>
 <mcp_trigger>PATCH System.State = 'Em Teste'</mcp_trigger>`,
     log: `> kiro run ecc/tdd-workflow
@@ -307,11 +307,11 @@ function renderFluxoStep(index) {
   let tlHtml = '';
   fluxoIaData.forEach((step, idx) => {
     const isActive = idx === index;
-    tlHtml += \`
-      <button onclick="renderFluxoStep(\${idx})" style="
-        background: \${isActive ? '#3b82f6' : '#f1f5f9'};
-        color: \${isActive ? 'white' : '#475569'};
-        border: 1px solid \${isActive ? '#2563eb' : '#cbd5e1'};
+    tlHtml += `
+      <button onclick="renderFluxoStep(${idx})" style="
+        background: ${isActive ? '#3b82f6' : '#f1f5f9'};
+        color: ${isActive ? 'white' : '#475569'};
+        border: 1px solid ${isActive ? '#2563eb' : '#cbd5e1'};
         padding: 8px 12px;
         border-radius: 6px;
         font-size: 12px;
@@ -319,26 +319,26 @@ function renderFluxoStep(index) {
         cursor: pointer;
         min-width: fit-content;
         transition: all 0.2s;
-      ">\${step.title}</button>
-    \`;
+      ">${step.title}</button>
+    `;
   });
   tlContainer.innerHTML = tlHtml;
 
   // Render Board
-  const boardHtml = \`
-    <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:15px;">Coluna Atual: \${data.board.column}</div>
+  const boardHtml = `
+    <div style="font-size:12px; color:#475569; font-weight:bold; text-align:center; margin-bottom:15px;">Coluna Atual: ${data.board.column}</div>
     <div style="display:flex; flex-direction:column; gap:10px;">
-      \${data.board.cards.map(c => \`
+      ${data.board.cards.map(c => `
         <div style="background:white; border-left:4px solid #3b82f6; padding:10px; border-radius:4px; box-shadow:0 1px 3px rgba(0,0,0,0.1); animation: pulseCard 2s infinite;">
-          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #\${c.id}</div>
-          <strong style="font-size:13px; color:#1e293b;">\${c.title}</strong>
+          <div style="font-size:10px; color:#94a3b8; margin-bottom:4px;">ID: #${c.id}</div>
+          <strong style="font-size:13px; color:#1e293b;">${c.title}</strong>
           <div style="margin-top:8px; display:flex; gap:5px; flex-wrap:wrap;">
-            \${c.tags.map(t => \`<span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">\${t}</span>\`).join('')}
+            ${c.tags.map(t => `<span style="background:#fef08a; color:#854d0e; font-size:9px; padding:2px 6px; border-radius:10px;">${t}</span>`).join('')}
           </div>
         </div>
-      \`).join('')}
+      `).join('')}
     </div>
-  \`;
+  `;
   document.getElementById('fluxo-board').innerHTML = boardHtml;
 
   // Render Config
