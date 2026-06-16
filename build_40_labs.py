@@ -1,6 +1,7 @@
 import html
 from labs_data_kiro import kiro_basics, kiro_tfs
 from labs_data_claude import claude_basics, claude_tfs
+from labs_data_masterclass import masterclass_e2e
 
 def render_lab(lab):
     html_out = f'''
@@ -162,6 +163,7 @@ function initLabsView() {{
             <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs', this)">⚙️ Kiro: TFS Lifecycle (11-20)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
+            <button class="lab-tab-btn" style="background:#ffedd5; border:1px solid #fed7aa; color:#9a3412;" onclick="switchLabTab('tab-masterclass', this)">🌟 Projeto Final (E2E)</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -178,6 +180,14 @@ function initLabsView() {{
 
         <div id="tab-claude-tfs" class="lab-tab-content">
             {build_category(claude_tfs)}
+        </div>
+
+        <div id="tab-masterclass" class="lab-tab-content">
+            <div style="background:#fff7ed; padding:20px; border-left:4px solid #f97316; margin-bottom:30px; border-radius:6px;">
+                <h3 style="margin-top:0; color:#c2410c;">🌟 Masterclass: O Ciclo de Vida Completo</h3>
+                <p style="margin:0; color:#9a3412;">Abaixo, detalhamos o fluxo narrativo passo a passo <strong>(End-to-End)</strong> mostrando como as ferramentas Kiro e Claude se unem para construir um "AutoKanban" - validando, testando, codando e commitando de forma 100% autônoma.</p>
+            </div>
+            {build_category(masterclass_e2e)}
         </div>
 
     `;
