@@ -107,10 +107,10 @@ function initLabsView() {
         </div>
 
         <div class="lab-tabs" id="lab-tabs">
-            <button class="lab-tab-btn active" onclick="switchLabTab('tab-kiro-basic')">⚙️ Kiro: Básicos (1-10)</button>
-            <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs')">⚙️ Kiro: TFS Lifecycle (11-20)</button>
-            <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic')">💻 Claude: Básicos (1-10)</button>
-            <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs')">💻 Claude: TFS Lifecycle (11-20)</button>
+            <button class="lab-tab-btn active" onclick="switchLabTab('tab-kiro-basic', this)">⚙️ Kiro: Básicos (1-10)</button>
+            <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs', this)">⚙️ Kiro: TFS Lifecycle (11-20)</button>
+            <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
+            <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -1195,10 +1195,11 @@ Aumenta custo de infra, mas reduz carga no Postgres.
 }
 
 window.initLabsView = initLabsView;
-window.switchLabTab = function(tabId) {
+window.switchLabTab = function(tabId, btnElement) {
     document.querySelectorAll('.lab-tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.lab-tab-btn').forEach(btn => btn.classList.remove('active'));
     
-    document.getElementById(tabId).classList.add('active');
-    event.currentTarget.classList.add('active');
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) targetTab.classList.add('active');
+    if (btnElement) btnElement.classList.add('active');
 };
