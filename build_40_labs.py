@@ -14,6 +14,9 @@ def render_lab(lab):
 '''
     for idx, step in enumerate(lab["steps"]):
         code_escaped = html.escape(step["code"])
+        # Escape dollar signs to prevent JS template literal interpolation ReferenceError
+        code_escaped = code_escaped.replace("$", "\\$")
+        
         html_out += f'''
                 <div class="lab-step">
                     <div class="lab-step-number">{idx+1}</div>

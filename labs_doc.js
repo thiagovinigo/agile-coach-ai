@@ -364,7 +364,7 @@ logging:
     - type: &quot;file&quot;
       path: &quot;/var/log/kiro/audit.jsonl&quot;
     - type: &quot;datadog&quot;
-      api_key: &quot;${DD_API_KEY}&quot;
+      api_key: &quot;\${DD_API_KEY}&quot;
                         </div>
                     </div>
                 </div>
@@ -423,7 +423,7 @@ engine:
 # .kiro/triggers.yaml
 webhooks:
   - route: &quot;/api/webhooks/tfs&quot;
-    secret: &quot;${TFS_SECRET}&quot;
+    secret: &quot;\${TFS_SECRET}&quot;
     events:
       - &quot;workitem.created&quot;
     condition: &quot;payload.resource.fields[&#x27;System.WorkItemType&#x27;] == &#x27;Epic&#x27;&quot;
@@ -743,7 +743,7 @@ claude
 # .git/hooks/pre-commit
 
 npm test
-if [ $? -ne 0 ]; then
+if [ \$? -ne 0 ]; then
   echo &quot;Testes falharam! Claude não pode comitar.&quot;
   exit 1
 fi
