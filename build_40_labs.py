@@ -10,7 +10,15 @@ def render_lab(lab):
                 <h3>Lab {lab["id"]}: {lab["title"]}</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> {lab["desc"]}</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">{lab["oque"]}</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">{lab["porque"]}</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 '''
     for idx, step in enumerate(lab["steps"]):
         code_escaped = html.escape(step["code"])

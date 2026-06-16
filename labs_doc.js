@@ -121,7 +121,15 @@ function initLabsView() {
                 <h3>Lab 1: Setup & Daemon Initialization</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Inicializando o motor de orquestração no seu repositório local.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">É o comando inicial que instala o motor de orquestração do Kiro dentro do seu repositório local, criando a pasta oculta obrigatória <code>.kiro/</code>.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Sem essa estrutura inicial, os agentes não têm onde buscar suas regras corporativas. O Daemon atua como o 'Maestro' em background, lendo esse <code>config.yaml</code> constantemente para saber qual LLM usar e qual o limite de paralelismo da sua máquina.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -147,7 +155,15 @@ engine:
                 <h3>Lab 2: The Architect Blueprint</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Definindo a regra corporativa para o Tech Lead autônomo.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Um arquivo YAML que define o perfil, as ferramentas e as permissões de um 'Tech Lead' autônomo artificial.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Permite criar uma hierarquia inteligente. Em vez de uma IA que apenas escreve código cegamente, o Arquiteto lê a documentação, entende a Lei Geral de Proteção de Dados (via Confluence) e dita o desenho arquitetural para que os Coders apenas implementem. Isso garante padronização técnica.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -178,7 +194,15 @@ system_prompt: |
                 <h3>Lab 3: The Planner Blueprint</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Configurando um PO autônomo que lê épicos.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A configuração de um Agente Especialista em Produto (Product Owner/Analista de Negócios) que processa demandas brutas.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Desenvolvedores perdem horas preciosas desvendando requisitos mal escritos ou quebrando histórias gigantes. O Planner automatiza a etapa de refinamento, traduzindo desejos de negócio (Épicos) em tarefas acionáveis e formatadas no padrão que a Engenharia precisa.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -207,13 +231,21 @@ system_prompt: |
                 <h3>Lab 4: Cost Guards & Budgets</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Implementando Kill Switches de proteção financeira.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A implementação de Kill Switches (Gatilhos de Interrupção) baseados em orçamento financeiro por execução.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">IAs agentic são propensas a 'Loops Infinitos' quando tentam resolver bugs complexos. Deixadas sozinhas, elas podem consumir milhares de dólares em chamadas de API do provedor (OpenAI/Anthropic) em uma única madrugada. O Cost Guard corta a energia antes que o orçamento sangre.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Proteção Financeira</strong>
-                        <p>Se um loop infinito ocorrer, a conta de API pode explodir. Defina limites por run.</p>
+                        <p>Defina limites em Dólar por ciclo de execução.</p>
                         <div class="lab-code">
 # .kiro/skills/coder.yaml
 cost_guard:
@@ -233,7 +265,15 @@ cost_guard:
                 <h3>Lab 5: Multi-Party Slack Approvals (Steering)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Kiro pausa e aguarda humanos antes do Deploy.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Regras de Governança que obrigam a IA a pausar seu workflow e solicitar o 'Ok' humano via chat corporativo (Slack/Teams).</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Para ações altamente destrutivas (Deploy em Produção, DELETE em banco de dados), a máquina não pode ter autonomia absoluta. Essa configuração garante rastreabilidade humana (compliance) e evita apagões causados por alucinações (AI Hallucinations).</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -262,13 +302,21 @@ approval_gate:
                 <h3>Lab 6: Ephemeral Docker Sandboxes</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Execução isolada de comandos bash para o Agente Coder.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Uma cerca de proteção arquitetural que força a IA a executar seus testes e comandos bash apenas dentro de containeres Docker de curta duração.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Se a IA baixar um pacote NPM malicioso injetado via engenharia social ou rodar comandos destrutivos sem querer (ex: <code>rm -rf</code>), ela destruirá apenas o container efêmero, poupando a máquina do desenvolvedor (Host) e prevenindo vazamentos de segurança.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Isolamento Estrito</strong>
-                        <p>Nunca deixe a IA rodar scripts arbitrários no seu host local.</p>
+                        <p>Nunca deixe a IA rodar scripts arbitrários diretamente no seu SO.</p>
                         <div class="lab-code">
 # .kiro/config.yaml
 sandbox:
@@ -290,13 +338,21 @@ sandbox:
                 <h3>Lab 7: Roteamento de Private MCPs</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Conectando o Kiro a um servidor Python interno de banco de dados.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A ponte entre as ferramentas (Model Context Protocol) nativas da sua rede corporativa e a inteligência do agente.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">IAs em nuvem não enxergam seus servidores de banco de dados internos. Ao configurar um MCP privado local via stdio (Terminal), você permite que o Kiro seja as 'mãos' da nuvem trabalhando com dados sensíveis que nunca saem da sua VPN.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Declaração de Ferramenta Privada</strong>
-                        <p>O Kiro repassa o pedido do LLM para o script local via stdio.</p>
+                        <p>O Kiro repassa o pedido do LLM para o script local.</p>
                         <div class="lab-code">
 # .kiro/mcp.json
 {
@@ -320,7 +376,15 @@ sandbox:
                 <h3>Lab 8: Parallel Workers (Map-Reduce)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Arquiteto divide a tarefa e invoca Coders simultâneos.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A orquestração que permite ao agente 'Arquiteto' se ramificar, criando e controlando 2 ou mais agentes menores trabalhando ao mesmo tempo.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Escalabilidade. Em vez do LLM resolver uma tela de front-end, parar, e depois codar o backend de banco de dados, o orquestrador despacha a tarefa pesada para dois workers independentes, diminuindo o Lead Time brutalmente de horas para minutos.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -348,13 +412,21 @@ on_success:
                 <h3>Lab 9: Audit Trail Logging</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Onde o Kiro guarda a memória para conformidade ISO 27001.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O registro implacável e estruturado de todas as reflexões (Thoughts) e chamadas de ferramenta executadas pelo Agente.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Empresas com ISO 27001 ou SOC2 precisam provar QUEM tomou a decisão de apagar um arquivo ou fundir uma branch. O Audit Trail gera Logs JSON nativos que provam matematicamente os motivos pelos quais a IA agiu, essenciais para o Splunk ou Datadog.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Log Estruturado JSON</strong>
-                        <p>Configure o roteamento de logs para sistemas de monitoramento.</p>
+                        <p>Configure o roteamento de logs corporativos.</p>
                         <div class="lab-code">
 # .kiro/config.yaml
 logging:
@@ -378,13 +450,21 @@ logging:
                 <h3>Lab 10: Failover & Exponential Backoff</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Se o Provedor Principal falhar, o Kiro se recupera.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Políticas de resiliência que trocam automaticamente o LLM de raciocínio caso o provedor primário esteja fora do ar.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">APIs de IA são instáveis. Se o projeto inteiro depende do Anthropic Claude 3.5 e ele sofre instabilidade, sua esteira inteira congela. O Failover inteligente tenta reconectar progressivamente (Backoff) e, se falhar, assume um modelo secundário de outra empresa para não parar a produção.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Resiliência de API</strong>
-                        <p>Tolerância a falhas na infraestrutura de LLMs.</p>
+                        <p>Tolerância a falhas pesadas na infraestrutura.</p>
                         <div class="lab-code">
 # .kiro/config.yaml
 engine:
@@ -412,7 +492,15 @@ engine:
                 <h3>Lab 11: Webhook Listener do TFS</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Kiro precisa saber quando um ticket é criado. Configure o Webhook.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O 'Ouvido' do Kiro. Uma configuração de API que fica escutando os eventos disparados nativamente pelos servidores da Microsoft.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">O Kiro precisa ser reativo para ser invisível aos usuários corporativos. Quando o diretor da área cria um Épico no Board do TFS, o webhook acorda o Kiro de forma automática, garantindo zero atrito (nenhum comando de terminal necessário).</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -441,13 +529,21 @@ webhooks:
                 <h3>Lab 12: Agente Product Discovery</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Lendo o Épico e gerando User Stories detalhadas no Azure Boards.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Uma skill de Kiro focada exclusivamente em consumir Épicos enormes, fatiá-los com inteligência e enviar os novos cards para o TFS.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">O maior gargalo das empresas ágeis é o 'Upstream'. Filas enormes de ideias que não são detalhadas por falta de tempo. Este agente desobstrui o funil, adiantando 80% do trabalho de um Product Manager experiente.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Automação de Backlog</strong>
-                        <p>O agente usa a API do TFS para criar tickets filhos.</p>
+                        <p>O agente usa a API do TFS para criar tickets filhos tangíveis.</p>
                         <div class="lab-code">
 # .kiro/skills/discovery.yaml
 agent:
@@ -471,13 +567,21 @@ system_prompt: |
                 <h3>Lab 13: BDD & Acceptance Criteria</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Escrevendo Gherkin dentro dos tickets automaticamente.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A geração determinística de cenários de teste em formato Gherkin (Given/When/Then) atrelados à User Story original.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Testes devem ditar a construção do código (TDD), mas QAs são geralmente inseridos tarde demais no fluxo. Gerar os critérios de aceite no momento em que a história nasce garante alinhamento absoluto do 'Definition of Done'.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Geração de Cenários</strong>
-                        <p>O QA Planner avalia as histórias e gera os critérios Given-When-Then.</p>
+                        <p>O QA Planner avalia as histórias e anexa regras de negócio.</p>
                         <div class="lab-code">
 # .kiro/skills/qa-planner.yaml
 agent:
@@ -499,7 +603,15 @@ system_prompt: |
                 <h3>Lab 14: UX/UI Design Sync</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Sincronizando discussões técnicas com aprovações de Design.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Uma skill do orquestrador que converte discussões perdidas em comentários do TFS em especificações visuais de UI definitivas.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Desenvolvedores não deveriam inferir cores ou comportamentos cegamente. Ao forçar uma especificação de Design explícita com aprovação humana, eliminamos idas e vindas visuais caríssimas com o cliente.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -525,13 +637,21 @@ system_prompt: |
                 <h3>Lab 15: Sprint Planning Autônomo</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Agente preenche o campo Story Points baseado em histórico.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Um processo automatizado onde o LLM pondera arquitetura, integrações externas e dados passados para sugerir os Story Points de uma Task.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Cerimônias de Planning costumam consumir horas do time inteiro debatendo achismos. A IA traz uma estimativa matemática balizada (Ancoragem), permitindo que a equipe apenas valide o número, focando a reunião no que importa: impedimentos.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Estimação via IA</strong>
-                        <p>O Kiro analisa a complexidade baseada em um documento de regras.</p>
+                        <p>O Kiro analisa a complexidade baseada em regras explícitas.</p>
                         <div class="lab-code">
 # estimation-rules.md
 - Front-end + Back-end (CRUD simples): 3 Pontos
@@ -552,13 +672,21 @@ system_prompt: |
                 <h3>Lab 16: Rastreabilidade Obrigatória (Traceability)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Coder é forçado a linkar o código ao WorkItem do TFS.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Um 'Selo de Autenticidade'. O Kiro proíbe qualquer IA programadora local de salvar arquivos no Git sem carimbar de qual ticket originou a mudança.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Sem a rastreabilidade entre Código e Demanda, a empresa perde controle se sofrer uma auditoria de qualidade. Forçar a marcação <code>#[ID]</code> automatiza a ligação visual das branches ao Kanban do TFS.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
                         <strong>Validação de Mensagem de Commit</strong>
-                        <p>O Kiro intercepta as intenções de commit do Coder.</p>
+                        <p>O Kiro intercepta o Git da IA Coder.</p>
                         <div class="lab-code">
 # .kiro/skills/coder.yaml
 workspace_rules:
@@ -579,7 +707,15 @@ workspace_rules:
                 <h3>Lab 17: PR Review Automatizado (TFS Repos)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Kiro varre vulnerabilidades antes da aprovação do PR.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A injeção do Agente de Segurança no fluxo de Pull Requests da Microsoft. Ele comenta linhas perigosas da mesma forma que um sênior o faria.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Humanos sofrem de fadiga ocular em Pull Requests grandes e acabam aprovando vulnerabilidades grotescas. A IA atua como o Cão de Guarda incansável bloqueando vazamento de credenciais 24 horas por dia.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -609,7 +745,15 @@ system_prompt: |
                 <h3>Lab 18: CI/CD Handoff</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Entregando o bastão para as pipelines nativas.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O 'Passar do Bastão'. Quando o Kiro termina suas simulações locais, ele não faz deploy magicamente. Ele aciona as pipelines corporativas oficiais da empresa.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Usar IA não significa jogar fora as ferramentas de Infraestrutura sólidas da corporação. O Kiro respeita as barreiras de compliance repassando o trabalho para o Azure Pipelines original.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -642,7 +786,15 @@ steps:
                 <h3>Lab 19: Release Notes Generator</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Ao fim da Sprint, um Agente compila tudo o que foi entregue.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O trabalho glorificado do Gerente de Release. Um relatório elegante em Markdown detalhando todas as entregas do ciclo.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Montar notas de versão catando dezenas de tickets pelo Board consome muito tempo. A automação consolida o valor entregue da Sprint e divulga o sucesso do time sem esforço humano.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -672,7 +824,15 @@ steps:
                 <h3>Lab 20: Métricas de Fluxo (Lead Time)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Coletando inteligência do processo Kanabn.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A auditoria de tempo. O script lê cada fase em que o ticket esteve no TFS e calcula quanto tempo o time humano ou a IA levou ali.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Para aprimorar a maturidade ágil (Escala de Elite), precisamos saber os gargalos de fila (Wait Time). Extrair esses dados nativamente prova matematicamente a velocidade do time e se a adoção de IA Agentic cortou custos de verdade.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -706,7 +866,15 @@ def get_tfs_transitions(ticket_id):
                 <h3>Lab 1: CLI Autenticação e Primeiros Passos</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O fluxo básico de inicialização no terminal.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O fluxo básico de instalação via gerenciador de pacotes Node (NPM) e o login via terminal para obter o Token Auth da Anthropic.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Para desenvolvedores, alternar entre a IDE e o navegador (ChatGPT/Claude.ai) destrói o estado de foco mental ('Flow'). Trazer a IA para o Terminal, onde o desenvolvedor já trabalha os testes e o git, reduz o atrito de contexto em 90%.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -731,7 +899,15 @@ claude
                 <h3>Lab 2: Git Hooks de Defesa Ativa</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Bloqueando commits destrutivos da IA via Bash.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A escrita de um script em Bash (shell) executado sempre que o sistema operacional tentar consolidar um commit localmente.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Como o Claude é capaz de salvar arquivos e rodar o <code>git commit</code> sem você ver, você precisa de um campo de força. O <code>pre-commit</code> hook assegura mecanicamente que código quebrado por 'alucinação' nunca entre no seu histórico Git.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -761,7 +937,15 @@ exit 0
                 <h3>Lab 3: Context Window Management</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Evitando o estouro de limite de tokens usando escopos rígidos.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Táticas avançadas de controle de memória do LLM dentro da IDE agentic para limpar e condensar conversas muito longas.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Provedores cobram o Token em Dólares. Uma conversa de 50 turnos arrasta todo aquele histórico inútil a cada pergunta nova, estourando limites de contexto (Context Window Limit). O comando <code>/compact</code> salva a empresa de uma fatura de nuvem absurda no fim do mês.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -785,7 +969,15 @@ exit 0
                 <h3>Lab 4: DDD Conventions (.claudecode)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Configurando limites arquiteturais por diretório.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A injeção de documentos de restrição de regras de negócio em diretórios específicos usando a extensão <code>.claudecode</code> nativa.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Se você usa Clean Architecture ou Domain-Driven Design (DDD), sabe que o 'Dominio' é sagrado e isolado. O Claude, querendo ser 'prestativo', muitas vezes quebra camadas importando views no banco de dados. Essas regras param esse crime arquitetural na raiz.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -809,7 +1001,15 @@ A camada de Domínio deve ser pura e não ter dependências externas.
                 <h3>Lab 5: Refatoração em Lote (Batching)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O Claude alterando múltiplos arquivos via terminal.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A combinação do poder de Regex do Unix (Expressões regulares) aliada ao raciocínio em massa (Batch Processing) do Agente.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Atualizar padrões de sintaxe (como migrar de Classes para Hooks no React ou remover NullPointerExceptions em 50 arquivos legados) pode levar dias para um Dev Jr. A IA via terminal faz essa faxina monumental em 3 minutos sem errar a sintaxe do framework.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -833,7 +1033,15 @@ A camada de Domínio deve ser pura e não ter dependências externas.
                 <h3>Lab 6: Integração de Linter Automático</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Fazendo a IA limpar sua própria sujeira.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A configuração do Claude para reagir autonomamente a falhas reportadas pelas ferramentas de análise estática como o ESLint ou Prettier.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Devolver código cheio de avisos de aspas duplas, ponto-e-vírgula e chaves mal fechadas gera fricção na equipe de desenvolvimento e polui o Pull Request. Forçamos a IA a entregar a 'mesa limpa' sempre.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -856,7 +1064,15 @@ Após qualquer alteração em arquivos TypeScript, VOCÊ DEVE rodar &#x27;npm ru
                 <h3>Lab 7: Custom MCP: API de Testes Flaky</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Plugar uma ferramenta customizada para a IA resolver bugs intermitentes.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O uso de uma ponte entre o Claude e as APIs do framework de testes intermitentes (como Cypress ou Selenium) que reportam falhas sistêmicas.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Testes 'Flaky' (que passam de manhã e falham de tarde) destroem a credibilidade da automação e do QA. O Agente precisa ler o relatório do teste nativamente, analisar o print de erro na tela do Cypress e fixar com 'waits' inteligentes para parar de irritar o time.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -865,7 +1081,7 @@ Após qualquer alteração em arquivos TypeScript, VOCÊ DEVE rodar &#x27;npm ru
                         <p>Um servidor Python local que a IDE consome.</p>
                         <div class="lab-code">
 claude /plugin add local ./get_flaky_cypress.py
-&gt; Analise o teste mais flaky reportado pela tool e conserte-o usando explicitly waits.
+&gt; Analise o teste mais flaky reportado pela tool e conserte-o usando explicit waits em vez de cy.wait().
                         </div>
                     </div>
                 </div>
@@ -879,7 +1095,15 @@ claude /plugin add local ./get_flaky_cypress.py
                 <h3>Lab 8: O Loop TDD (Test-Driven AI)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Forçando a IA a escrever o teste antes da implementação.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Técnica de Prompting focada na disciplina do desenvolvimento orientado a testes. A IA deve primeiro entregar a falha estruturada e só depois a lógica.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Quando você pede o código completo de uma vez, a IA tende a escrever testes que são apenas 'espelhos felizes' (Happy Paths) que ela já sabe que vão passar. O TDD forçado prova a validade funcional do requisito de negócio antes que o código exista.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -903,7 +1127,15 @@ claude /plugin add local ./get_flaky_cypress.py
                 <h3>Lab 9: Revert & History Management</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> O que fazer quando a IA entra em loop infinito e destrói código.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Comandos vitais de escape e recuperação do terminal quando a IDE entra em colapso e cria dezenas de arquivos inúteis no projeto.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Às vezes, a tentativa de resolver um bug simples faz o Agente entrar em parafuso, onde cada correção gera outro erro. Saber usar o 'Ctrl+C' mental da IA garante que a arquitetura não vire 'código espaguete' na tentativa cega de fixar um problema.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -928,7 +1160,15 @@ claude /plugin add local ./get_flaky_cypress.py
                 <h3>Lab 10: Perfis de Prompt (Ask Before Write)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Travas de segurança para Desenvolvedores Juniores.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Trava de segurança na convenção do Claude que obriga o modelo a se comportar como um assistente verbal (que propõe o código e o explica via Diff Markdown) em vez de aplicar no disco.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Juniores que aceitam o código mágico de olhos fechados tornam-se incapazes de entender sua própria base de código com o passar do tempo. A IA, sendo tutora, estimula a aprendizagem passiva ao invés da mera automação irresponsável.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -956,7 +1196,15 @@ PARE. Só aplique o <code>write_file</code> após o Dev digitar &#x27;Aprovado&#
                 <h3>Lab 11: Prompting the Backlog</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Puxando tarefas do TFS diretamente no terminal.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A integração do Claude Code com as APIs do Microsoft Azure DevOps (TFS) via um Servidor MCP, permitindo buscas dinâmicas sem abrir o navegador.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">O contexto mental do Dev deve continuar no terminal. Sair do VS Code para abrir a aba do Chrome, logar no TFS, buscar a aba Kanban e achar a própria Task consome energia. Aqui, basta dar o comando e a IA lista as prioridades do dia para você codar de imediato.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -979,7 +1227,15 @@ PARE. Só aplique o <code>write_file</code> após o Dev digitar &#x27;Aprovado&#
                 <h3>Lab 12: Scaffolding a partir da User Story</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> A IA lê a história do TFS e monta a base do projeto.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O ato de ler uma História de Usuário bruta gerada pelos Agentes (Kiro) no TFS e transformá-la automaticamente em arquivos base na árvore local do projeto (pastas, pacotes, index).</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Montar a base chata (os chamados 'Boilerplates') requer muita digitação repetitiva de imports, configs e injeções React/Angular que agregam zero valor final. A IA traduz regras cruas e formata a casca inicial para o Dev apenas preencher o miolo intelectual.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1003,7 +1259,15 @@ PARE. Só aplique o <code>write_file</code> após o Dev digitar &#x27;Aprovado&#
                 <h3>Lab 13: Architecture Decision Records (ADR.md)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Gerando o documento oficial de arquitetura antes de programar.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A emissão e o salvamento formal de um documento estruturado listando e justificando o porquê escolhemos uma tecnologia (ex: Redis vs Postgres) para a User Story do TFS.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Se a equipe técnica mudar amanhã, o conhecimento do porquê certas bibliotecas e caches foram adotadas desaparece. Gerar o ADR mecanicamente pelo terminal atrelado ao número do card documenta o raciocínio sem o 'peso burocrático' odiado pelos Devs.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1031,7 +1295,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 14: TDD do Discovery ao Código</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Lendo o Gherkin BDD gerado pelo Kiro e programando.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O fluxo prático de consumir o critério BDD (Given, When, Then) atachado lá atrás pela ferramenta Discovery e transformar aquilo em testes interativos do tipo End-to-End no Cypress ou Jest.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Isso materializa o 'Pipeline de Qualidade Continua'. O 'Contrato' assinado com o PO no TFS se transforma no código executável real que previne as falhas e dita como a interface deve se comportar antes do deploy.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1054,7 +1326,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 15: O Loop de Refatoração e Status</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Atualizando o TFS em tempo real via terminal.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O envio da requisição (Patch Request) via LLM para a nuvem da Microsoft para atualizar os ponteiros de progresso ('Remaining Work' e estado do Ticket Kanban).</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Desenvolvedores não atualizam Kanban. Isso é um fato na indústria de TI. A integração garante que o burndown chart do Scrum Master permaneça liso e verde, pois a IA assina o ponto assim que o código compila na máquina.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1078,7 +1358,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 16: Mapeamento de Dívida Técnica</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Convertendo // TODOs no código em tickets reais no Kanban.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Um scanner reverso. A IA varre o código fonte atual, levanta todas as falhas pontuadas informalmente por humanos e cria Tickets explícitos no Backlog Técnico do TFS.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Comentários no código do tipo <code>// TODO: Refatorar isso porque tá muito lento</code> são ignorados para sempre. Se não virar Card na mesa do Líder Técnico, a dívida esmaga a arquitetura num futuro próximo. O Claude garante essa visibilidade agressiva.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1101,7 +1389,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 17: Linter Local vs SonarQube</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Corrigindo Code Smells antes que eles subam no PR.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">Instruir a IA via terminal a interagir com os logs do SonarQube para sanar os relatórios drásticos de Segurança (OWASP Top 10).</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">O SonarQube reprova o PR se notar injeção de dependências inseguras ou criptografia fraca, travando a pipeline inteira. Acionar o LLM no terminal localmente conserta o code-smell na sua máquina, garantindo aprovação verde lá no TFS de primeira.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1124,7 +1420,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 18: Automação do Pull Request (CLI)</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Abrindo o PR no Azure Repos diretamente do terminal local.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A formatação textual dos 'git logs' locais de maneira sofisticada e a criação programática do Pull Request via API Rest do Azure DevOps Repos.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Um PR 'TBD' ou 'Fix Bug' na descrição é o pesadelo do Arquiteto que vai revisar o código. A ferramenta analisa o que você codou no dia inteiro e formula o texto de envio explicando cada classe alterada e linkando a Task do Board perfeitamente.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1147,7 +1451,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 19: Peer Review Local</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Usando a IA como par crítico na branch de um colega.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O download da branch do colega de trabalho pela IDE e a análise do seu código por um modelo poderoso (Claude 3.5 Sonnet) buscando vulnerabilidades arquiteturais profundas.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Muitas vezes o colega Sênior está ocupado, e revisões no Github são rasas. Usar a IA para encontrar SQL Injection e Race Conditions invisíveis economiza horas de Code Review massante e blinda o projeto.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
@@ -1171,7 +1483,15 @@ Aumenta custo de infra, mas reduz carga no Postgres.
                 <h3>Lab 20: Post-Mortem de Incidentes</h3>
             </div>
             <div class="lab-content">
-                <p><strong>Cenário:</strong> Lendo dumps de erro e formalizando a correção no Azure DevOps.</p>
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A dissecação de logs mortos de servidores derrubados e a criação automática e estruturada do documento final RCA (Root Cause Analysis - Causa Raiz).</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Quando ocorre um Bug 911 e a aplicação sangra dinheiro, consertar não é suficiente. É vital fechar o ciclo do DevOps formalizando a falha, o responsável e a ação para evitar aquilo no futuro. O Agente encerra a novela anexando a paz de espírito estruturada no sistema Kanban.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
