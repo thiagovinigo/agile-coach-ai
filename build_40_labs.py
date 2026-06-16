@@ -1,7 +1,8 @@
 import html
 from labs_data_kiro import kiro_basics, kiro_tfs
 from labs_data_claude import claude_basics, claude_tfs
-from labs_data_masterclass import masterclass_e2e
+from labs_data_kiro_final import kiro_final
+from labs_data_claude_final import claude_final
 
 def render_lab(lab):
     html_out = f'''
@@ -161,9 +162,10 @@ function initLabsView() {{
         <div class="lab-tabs" id="lab-tabs">
             <button class="lab-tab-btn active" onclick="switchLabTab('tab-kiro-basic', this)">⚙️ Kiro: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs', this)">⚙️ Kiro: TFS Lifecycle (11-20)</button>
+            <button class="lab-tab-btn" style="background:#ffedd5; border:1px solid #fed7aa; color:#9a3412;" onclick="switchLabTab('tab-kiro-final', this)">🌟 Kiro: Projeto Final</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
-            <button class="lab-tab-btn" style="background:#ffedd5; border:1px solid #fed7aa; color:#9a3412;" onclick="switchLabTab('tab-masterclass', this)">🌟 Projeto Final (E2E)</button>
+            <button class="lab-tab-btn" style="background:#e0e7ff; border:1px solid #c7d2fe; color:#3730a3;" onclick="switchLabTab('tab-claude-final', this)">🌟 Claude: Projeto Final</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -174,6 +176,14 @@ function initLabsView() {{
             {build_category(kiro_tfs)}
         </div>
 
+        <div id="tab-kiro-final" class="lab-tab-content">
+            <div style="background:#fff7ed; padding:20px; border-left:4px solid #f97316; margin-bottom:30px; border-radius:6px;">
+                <h3 style="margin-top:0; color:#c2410c;">🌟 Kiro Masterclass: Orquestração e Upstream</h3>
+                <p style="margin:0; color:#9a3412;">Abaixo, detalhamos o fluxo narrativo passo a passo mostrando como o <strong>Kiro</strong> atua de forma autônoma recebendo o Épico, orquestrando as ferramentas e gerando a documentação e os sub-tickets no TFS. Repare nas Skills acionadas!</p>
+            </div>
+            {build_category(kiro_final)}
+        </div>
+
         <div id="tab-claude-basic" class="lab-tab-content">
             {build_category(claude_basics)}
         </div>
@@ -182,12 +192,12 @@ function initLabsView() {{
             {build_category(claude_tfs)}
         </div>
 
-        <div id="tab-masterclass" class="lab-tab-content">
-            <div style="background:#fff7ed; padding:20px; border-left:4px solid #f97316; margin-bottom:30px; border-radius:6px;">
-                <h3 style="margin-top:0; color:#c2410c;">🌟 Masterclass: O Ciclo de Vida Completo</h3>
-                <p style="margin:0; color:#9a3412;">Abaixo, detalhamos o fluxo narrativo passo a passo <strong>(End-to-End)</strong> mostrando como as ferramentas Kiro e Claude se unem para construir um "AutoKanban" - validando, testando, codando e commitando de forma 100% autônoma.</p>
+        <div id="tab-claude-final" class="lab-tab-content">
+            <div style="background:#eef2ff; padding:20px; border-left:4px solid #4f46e5; margin-bottom:30px; border-radius:6px;">
+                <h3 style="margin-top:0; color:#3730a3;">🌟 Claude Code Masterclass: Execução e Downstream</h3>
+                <p style="margin:0; color:#312e81;">Abaixo, demonstramos a execução pesada <strong>(Mão na Massa)</strong>. O Claude assume os tickets gerados pelo Kiro e inicia o Loop TDD para criar a funcionalidade de ponta a ponta, auto-corrigindo os erros e subindo o Pull Request.</p>
             </div>
-            {build_category(masterclass_e2e)}
+            {build_category(claude_final)}
         </div>
 
     `;

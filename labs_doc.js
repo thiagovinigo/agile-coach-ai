@@ -109,9 +109,10 @@ function initLabsView() {
         <div class="lab-tabs" id="lab-tabs">
             <button class="lab-tab-btn active" onclick="switchLabTab('tab-kiro-basic', this)">⚙️ Kiro: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs', this)">⚙️ Kiro: TFS Lifecycle (11-20)</button>
+            <button class="lab-tab-btn" style="background:#ffedd5; border:1px solid #fed7aa; color:#9a3412;" onclick="switchLabTab('tab-kiro-final', this)">🌟 Kiro: Projeto Final</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
-            <button class="lab-tab-btn" style="background:#ffedd5; border:1px solid #fed7aa; color:#9a3412;" onclick="switchLabTab('tab-masterclass', this)">🌟 Projeto Final (E2E)</button>
+            <button class="lab-tab-btn" style="background:#e0e7ff; border:1px solid #c7d2fe; color:#3730a3;" onclick="switchLabTab('tab-claude-final', this)">🌟 Claude: Projeto Final</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -859,6 +860,180 @@ def get_tfs_transitions(ticket_id):
 
         </div>
 
+        <div id="tab-kiro-final" class="lab-tab-content">
+            <div style="background:#fff7ed; padding:20px; border-left:4px solid #f97316; margin-bottom:30px; border-radius:6px;">
+                <h3 style="margin-top:0; color:#c2410c;">🌟 Kiro Masterclass: Orquestração e Upstream</h3>
+                <p style="margin:0; color:#9a3412;">Abaixo, detalhamos o fluxo narrativo passo a passo mostrando como o <strong>Kiro</strong> atua de forma autônoma recebendo o Épico, orquestrando as ferramentas e gerando a documentação e os sub-tickets no TFS. Repare nas Skills acionadas!</p>
+            </div>
+            
+        <div class="lab-card">
+            <div class="lab-header" style="border-bottom-color: #3b82f6;">
+                <span style="font-size:24px;">🛰️</span> 
+                <h3>Lab 41: Marco 1: O Gatilho do Orquestrador</h3>
+            </div>
+            <div class="lab-content">
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O ponto de partida do Upstream. O Kiro (Daemon) escuta um evento no TFS via Webhook e decide iniciar a esteira.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Demonstrar a automação total. Ninguém precisa abrir o terminal e digitar 'iniciar projeto'. A criação do Épico pelo Diretor no Azure DevOps já é o suficiente para acordar as Inteligências Artificiais.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">1</div>
+                    <div style="width: 100%;">
+                        <strong>A Skill de Webhook do Kiro</strong>
+                        <p>O Arquivo .yaml que diz ao Kiro como escutar o TFS.</p>
+                        <div class="lab-code">
+# .kiro/triggers.yaml
+webhooks:
+  - route: &quot;/api/webhooks/tfs&quot;
+    secret: &quot;\${TFS_SECRET}&quot;
+    events:
+      - &quot;workitem.created&quot;
+    condition: &quot;payload.resource.fields[&#x27;System.WorkItemType&#x27;] == &#x27;Epic&#x27;&quot;
+    trigger_skill: &quot;discovery.yaml&quot;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>A Saída do Kiro</strong>
+                        <p>O Daemon no servidor recebe o payload e inicia a operação.</p>
+                        <div class="lab-code">
+[Kiro Daemon] Webhook HTTP 200 OK. Épico #500 &#x27;Ferramenta Kanban Autônoma&#x27; criado.
+[Kiro Daemon] Condição &#x27;Epic&#x27; satisfeita.
+[Kiro Daemon] Engatilhando Skill &#x27;discovery.yaml&#x27;...
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header" style="border-bottom-color: #3b82f6;">
+                <span style="font-size:24px;">🔎</span> 
+                <h3>Lab 42: Marco 2: Product Discovery (Fatiamento)</h3>
+            </div>
+            <div class="lab-content">
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A invocação da Skill <code>discovery.yaml</code>. O Agente Product Owner assume o controle, lê a demanda bruta e divide em User Stories acionáveis via API.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Quebrar Épicos gigantes em fatias pequenas (User Stories) é a essência do Desenvolvimento Ágil. Mostrar a Skill provê a rastreabilidade do raciocínio.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">1</div>
+                    <div style="width: 100%;">
+                        <strong>O Perfil do Agente PO</strong>
+                        <p>Este é o YAML que define os poderes de leitura de backlog e as ferramentas de API que o PO possui.</p>
+                        <div class="lab-code">
+# .kiro/skills/discovery.yaml
+agent:
+  name: &quot;Product Owner&quot;
+  role: &quot;Discovery Specialist&quot;
+mcp_servers:
+  - name: &quot;azure-devops-board&quot;
+system_prompt: |
+  Você receberá um Epic ID.
+  Leia a descrição. Divida em pelo menos 3 User Stories focadas em entrega de valor.
+  Para cada Story, utilize a ferramenta <code>tfs_create_workitem</code> e faça o link hierárquico com o Épico Pai.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>A Execução (Logs de Orquestração)</strong>
+                        <p>A IA processa e executa os comandos na nuvem da Microsoft.</p>
+                        <div class="lab-code">
+[Agente PO] Analisando Épico #500...
+[Agente PO] Identificadas 3 frentes de trabalho: Validação Estática, Autocura de Código e Git Hooks.
+
+&gt; Invocando Tool: tfs_create_workitem({&quot;Title&quot;: &quot;Story #501: Motor de Linter e Sonar&quot;, &quot;Parent&quot;: 500})
+&gt; Invocando Tool: tfs_create_workitem({&quot;Title&quot;: &quot;Story #502: Loop TDD de Autocura&quot;, &quot;Parent&quot;: 500})
+&gt; Invocando Tool: tfs_create_workitem({&quot;Title&quot;: &quot;Story #503: Pipeline Pre-Commit Segura&quot;, &quot;Parent&quot;: 500})
+
+[Agente PO] Finalizado. Disparando Transição para Tech Lead.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="lab-card">
+            <div class="lab-header" style="border-bottom-color: #3b82f6;">
+                <span style="font-size:24px;">🏛️</span> 
+                <h3>Lab 43: Marco 3: Refinamento Arquitetural (ADR)</h3>
+            </div>
+            <div class="lab-content">
+                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                    <p style="margin: 5px 0 0 0; color: #166534;">A invocação da Skill <code>architect.yaml</code>. O Agente Tech Lead assume o controle da Story #501 e decide o design pattern e a stack tecnológica.</p>
+                </div>
+                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Garante a sustentabilidade do código. Mostra como o Kiro evita que os agentes de código tomem decisões globais de infraestrutura sozinhos.</p>
+                </div>
+                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">1</div>
+                    <div style="width: 100%;">
+                        <strong>A Skill do Arquiteto</strong>
+                        <p>Ele não tem permissão para escrever código fonte, apenas arquivos Markdown de documentação e anexos no TFS.</p>
+                        <div class="lab-code">
+# .kiro/skills/architect.yaml
+agent:
+  name: &quot;Tech Lead&quot;
+  role: &quot;Software Architect&quot;
+workspace_rules:
+  allow_write_code: false
+  allowed_extensions: [&quot;.md&quot;]
+system_prompt: |
+  Analise a User Story e redija um Architecture Decision Record (ADR).
+  Especifique a linguagem, framework e design pattern (Ex: Clean Architecture).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>A Saída (ADR Gerado)</strong>
+                        <p>O Arquiteto faz o upload da diretriz de código para a Task #501.</p>
+                        <div class="lab-code">
+# docs/adr/001-motor-validacao.md
+## Contexto
+A Story #501 exige um motor de validação assíncrona.
+## Decisão Técnica
+- Linguagem: TypeScript (Strict Mode)
+- Linter: ESLint Flat Config
+- Padrão: Strategy Pattern para injetar validadores diferentes (Linter, SonarQube).
+
+[Kiro Tech Lead] Fez upload do ADR para a Task #501.
+[Kiro Tech Lead] Mudando status do TFS para &#x27;Pronto para Desenvolvimento&#x27;.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+
         <div id="tab-claude-basic" class="lab-tab-content">
             
         <div class="lab-card">
@@ -1512,38 +1687,38 @@ Aumenta custo de infra, mas reduz carga no Postgres.
 
         </div>
 
-        <div id="tab-masterclass" class="lab-tab-content">
-            <div style="background:#fff7ed; padding:20px; border-left:4px solid #f97316; margin-bottom:30px; border-radius:6px;">
-                <h3 style="margin-top:0; color:#c2410c;">🌟 Masterclass: O Ciclo de Vida Completo</h3>
-                <p style="margin:0; color:#9a3412;">Abaixo, detalhamos o fluxo narrativo passo a passo <strong>(End-to-End)</strong> mostrando como as ferramentas Kiro e Claude se unem para construir um "AutoKanban" - validando, testando, codando e commitando de forma 100% autônoma.</p>
+        <div id="tab-claude-final" class="lab-tab-content">
+            <div style="background:#eef2ff; padding:20px; border-left:4px solid #4f46e5; margin-bottom:30px; border-radius:6px;">
+                <h3 style="margin-top:0; color:#3730a3;">🌟 Claude Code Masterclass: Execução e Downstream</h3>
+                <p style="margin:0; color:#312e81;">Abaixo, demonstramos a execução pesada <strong>(Mão na Massa)</strong>. O Claude assume os tickets gerados pelo Kiro e inicia o Loop TDD para criar a funcionalidade de ponta a ponta, auto-corrigindo os erros e subindo o Pull Request.</p>
             </div>
             
         <div class="lab-card">
             <div class="lab-header" style="border-bottom-color: #3b82f6;">
-                <span style="font-size:24px;">🎭</span> 
-                <h3>Lab 41: Marco 1: Discovery & Backlog</h3>
+                <span style="font-size:24px;">🖥️</span> 
+                <h3>Lab 44: Marco 1: Consumo do Backlog e Regras (IDE)</h3>
             </div>
             <div class="lab-content">
                 <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
                     <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                    <p style="margin: 5px 0 0 0; color: #166534;">A recepção da ideia crua (Épico) do sistema 'AutoKanban' via integração com o Azure DevOps e o fatiamento autônomo em User Stories técnicas.</p>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O desenvolvedor (ou automação) inicia o Claude Code localmente, que consome o ticket #501 preparado pelo Kiro, e carrega as convenções do projeto.</p>
                 </div>
                 <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
                     <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                    <p style="margin: 5px 0 0 0; color: #92400e;">Sem um refinamento claro de Upstream, o Desenvolvedor IA vai 'alucinar' tentando construir o sistema inteiro de uma vez. O Discovery traduz a visão de negócio para fatias mastigáveis, mantendo o controle no TFS.</p>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Demonstrar a esteira Downstream. O Claude Code atua como o 'Operário Sênior' que pega a especificação pronta do Arquiteto (ADR) e executa sem alucinar, balizado por regras locais.</p>
                 </div>
                 <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
-                        <strong>Webhook Trigger</strong>
-                        <p>O TFS avisa que o Diretor criou o Épico 'Construir Ferramenta Kanban Autônoma'.</p>
+                        <strong>O Arquivo de Convenção</strong>
+                        <p>As amarras locais que garantem que o Claude Code usará TDD.</p>
                         <div class="lab-code">
-POST /api/webhooks/tfs
-Payload: { &quot;WorkItemId&quot;: 500, &quot;Type&quot;: &quot;Epic&quot; }
-
-[Kiro Daemon] Webhook Recebido. Acordando Agente Product Owner.
+# .claudecode/CONVENTIONS.md
+- Você DEVE ler os ADRs da pasta <code>docs/adr/</code> antes de escrever código.
+- O Desenvolvimento deve ser ESTRITAMENTE guiado por testes (TDD).
+- Escreva o teste primeiro, rode (falhe), e só depois crie a classe.
                         </div>
                     </div>
                 </div>
@@ -1551,70 +1726,15 @@ Payload: { &quot;WorkItemId&quot;: 500, &quot;Type&quot;: &quot;Epic&quot; }
                 <div class="lab-step">
                     <div class="lab-step-number">2</div>
                     <div style="width: 100%;">
-                        <strong>Product Owner Agent - Fatiamento</strong>
-                        <p>A IA lê o Épico e usa as ferramentas (MCP) para criar as tarefas.</p>
+                        <strong>O Comando e o Download do Ticket</strong>
+                        <p>A execução no terminal da máquina do desenvolvedor.</p>
                         <div class="lab-code">
-[Agente PO] Lendo Épico #500...
-[Agente PO] O Épico contém Validação, TDD e Commit.
+&gt; claude /task tfs-get-story 501
 
-&gt; Executando Tool: tfs_create_workitem
-- Criada Story #501: &quot;Motor de Validação (Linter/Sonar)&quot;
-- Criada Story #502: &quot;Motor de Geração BDD&quot;
-- Criada Story #503: &quot;Pipeline de Auto-Commit Segura&quot;
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="lab-card">
-            <div class="lab-header" style="border-bottom-color: #3b82f6;">
-                <span style="font-size:24px;">🔬</span> 
-                <h3>Lab 42: Marco 2: Refinamento Técnico (BDD & Arquitetura)</h3>
-            </div>
-            <div class="lab-content">
-                <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
-                    <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                    <p style="margin: 5px 0 0 0; color: #166534;">O Agente Architect escolhendo a Stack do projeto via ADR, enquanto o QA Automation Planner escreve as regras de negócio em formato Gherkin.</p>
-                </div>
-                <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
-                    <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                    <p style="margin: 5px 0 0 0; color: #92400e;">Evitar retrabalho. Ao escrever os cenários de teste Gherkin antes da primeira linha de código ser digitada (Shift-Left Testing), nós engessamos o comportamento esperado. O ADR blindado garante que o Claude Code não escolha linguagens aleatórias.</p>
-                </div>
-                <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
-
-                <div class="lab-step">
-                    <div class="lab-step-number">1</div>
-                    <div style="width: 100%;">
-                        <strong>Geração do ADR (Tech Lead)</strong>
-                        <p>O Arquiteto emite o Documento de Decisão Formal para a Task #502.</p>
-                        <div class="lab-code">
-# docs/adr/001-motor-bdd.md
-## Contexto
-Precisamos de um parser Gherkin rápido e testável.
-## Decisão
-O AutoKanban será em TypeScript rodando em Node.js usando Jest e o pacote &#x27;cucumber-jest&#x27;.
-
-[Kiro Tech Lead] Fez upload do ADR.md no TFS #502.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lab-step">
-                    <div class="lab-step-number">2</div>
-                    <div style="width: 100%;">
-                        <strong>Geração BDD (QA Agent)</strong>
-                        <p>O agente de Qualidade traduz a história #502 em critérios rígidos.</p>
-                        <div class="lab-code">
-# feature.md (Anexado ao TFS #502)
-Feature: Motor de Geração BDD Automática
-
-Scenario: IA gera testes baseados em User Story
-  Given a IA leu o Épico do Kanban
-  When ela processa a funcionalidade de Validação
-  Then o arquivo validator.test.ts deve ser gerado no diretório /__tests__
-  And todos os testes devem estar falhando (RED phase)
+[Claude Code] Lendo Convenções: TDD mandatório.
+[Claude Code] Baixando a Story #501 do Azure DevOps...
+[Claude Code] Baixando o ADR &#x27;001-motor-validacao.md&#x27;.
+[Claude Code] O Arquiteto exige TypeScript e Strategy Pattern. Vamos iniciar.
                         </div>
                     </div>
                 </div>
@@ -1625,32 +1745,50 @@ Scenario: IA gera testes baseados em User Story
         <div class="lab-card">
             <div class="lab-header" style="border-bottom-color: #3b82f6;">
                 <span style="font-size:24px;">🔴</span> 
-                <h3>Lab 43: Marco 3: TDD Fase Vermelha (Red)</h3>
+                <h3>Lab 45: Marco 2: O Loop TDD (Fase Vermelha)</h3>
             </div>
             <div class="lab-content">
                 <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
                     <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                    <p style="margin: 5px 0 0 0; color: #166534;">A IDE Agentic (Claude Code) consome o <code>feature.md</code> e gera os testes unitários sem a implementação da funcionalidade, executando para provar que falham.</p>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O Claude Code escreve o teste unitário (Jest) para a classe <code>ValidationStrategy</code>, executa no terminal e garante que o teste quebra.</p>
                 </div>
                 <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
                     <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                    <p style="margin: 5px 0 0 0; color: #92400e;">É a base do Test-Driven Development (TDD). A IA comprova que o teste não é um 'Falso Positivo' (que sempre passa). Se a IA tentar codar logo de cara, nós ativamos um Gate Humano para pará-la.</p>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Provar que a IA não está fingindo. O teste vermelho garante que o código não existe e que a automação do ambiente está capturando as falhas.</p>
                 </div>
                 <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
-                        <strong>Consumo de Critérios</strong>
-                        <p>O Desenvolvedor usa a IDE (Claude Code) para puxar o Ticket.</p>
+                        <strong>A Geração do Teste (Jest)</strong>
+                        <p>A IA escreve o arquivo <code>.test.ts</code> sem a implementação real.</p>
                         <div class="lab-code">
-&gt; claude /task tfs-get-story 502
+// src/__tests__/validation.test.ts
+import { EslintValidator } from &#x27;../validators&#x27;;
 
-[Claude Code] Baixando ADR e feature.md de #502.
-&gt; De acordo com as diretrizes do Tech Lead, devo escrever primeiro o arquivo cucumber.test.ts que falha.
+test(&#x27;EslintValidator deve disparar erro se achar console.log&#x27;, () =&gt; {
+  const validator = new EslintValidator();
+  const result = validator.validate(&#x27;console.log(&quot;oi&quot;)&#x27;);
+  expect(result.isValid).toBe(false);
+});
+                        </div>
+                    </div>
+                </div>
 
-&gt; npm run test -- validator.test.ts
-❌ FAILED - Expected validation to occur, but no module found.
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>O Teste Quebrando no Terminal</strong>
+                        <p>A IDE roda o comando e falha.</p>
+                        <div class="lab-code">
+&gt; npm run test
+
+FAIL src/__tests__/validation.test.ts
+  ● EslintValidator deve disparar erro
+    TypeError: EslintValidator is not a constructor
+
+[Claude Code] Teste falhou como esperado. Iniciando fase Verde.
                         </div>
                     </div>
                 </div>
@@ -1661,33 +1799,53 @@ Scenario: IA gera testes baseados em User Story
         <div class="lab-card">
             <div class="lab-header" style="border-bottom-color: #3b82f6;">
                 <span style="font-size:24px;">🟢</span> 
-                <h3>Lab 44: Marco 4: Codificação e Autocura (Green & Refactor)</h3>
+                <h3>Lab 46: Marco 3: A Autocura (Green & Refactor)</h3>
             </div>
             <div class="lab-content">
                 <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
                     <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                    <p style="margin: 5px 0 0 0; color: #166534;">O Claude Code escreve a lógica TypeScript (Phase Green), os testes passam, e ele mesmo aciona o ESLint para corrigir o código (Refactor).</p>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O Claude Code escreve o código real, passa no teste, mas toma bronca do Linter. Ele lê a saída de erro e corrige o próprio código.</p>
                 </div>
                 <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
                     <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                    <p style="margin: 5px 0 0 0; color: #92400e;">É aqui que a 'Ferramenta que codifica sozinha' brilha. Ela usa seu próprio loop de erro para se autoconsertar. Se um <code>import</code> quebrar, a ferramenta lê a saída de erro do terminal e tenta de novo até compilar verde.</p>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">É a 'Autonomia Resiliente'. Um desenvolvedor humano perderia minutos consertando chaves e tipagens esquecidas. O agente entra em um loop infinito de <code>code -> lint -> fix</code> até estar impecável.</p>
                 </div>
                 <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
-                        <strong>Implementação e Linter</strong>
-                        <p>A mágica do loop de feedback da IA no terminal.</p>
+                        <strong>A Implementação Real</strong>
+                        <p>O código TypeScript escrito pelo Claude.</p>
                         <div class="lab-code">
-&gt; [Claude Code] Criando validator.ts para passar no teste...
-&gt; npm run test
-✅ PASS validator.test.ts
+// src/validators.ts
+export class EslintValidator {
+  validate(code: any) { // erro proposital de tipagem
+    if(code.includes(&#x27;console.log&#x27;)) return { isValid: false };
+    return { isValid: true };
+  }
+}
+                        </div>
+                    </div>
+                </div>
 
-&gt; [Claude Code] Executando Linter pós-código...
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>A Autocura do Terminal</strong>
+                        <p>A IA lê o erro do compilador e conserta.</p>
+                        <div class="lab-code">
+&gt; npm run test
+✅ PASS src/__tests__/validation.test.ts
+
 &gt; npm run lint
-❌ Warning: &#x27;any&#x27; is not allowed.
-&gt; [Claude Code] Entendido, alterando o tipagem para interfaces estritas...
+❌ Erro na linha 2: Unexpected &#x27;any&#x27;. Especifique o tipo &#x27;string&#x27;.
+
+[Claude Code] Corrigindo erro de ESLint...
+&gt; cat src/validators.ts
+export class EslintValidator {
+  validate(code: string) { ... }
+
 &gt; npm run lint
 ✅ Clean.
                         </div>
@@ -1700,36 +1858,50 @@ Scenario: IA gera testes baseados em User Story
         <div class="lab-card">
             <div class="lab-header" style="border-bottom-color: #3b82f6;">
                 <span style="font-size:24px;">🛡️</span> 
-                <h3>Lab 45: Marco 5: Validação Final e Pre-Commit</h3>
+                <h3>Lab 47: Marco 4: Validação Segura e Handoff</h3>
             </div>
             <div class="lab-content">
                 <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
                     <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                    <p style="margin: 5px 0 0 0; color: #166534;">A execução mandatória do Agente de Segurança Local (SonarQube) e do Hook do Git, finalizando com a criação de um Pull Request no Azure DevOps.</p>
+                    <p style="margin: 5px 0 0 0; color: #166534;">O bloqueio do Git Hook local e a criação do Pull Request direto via terminal.</p>
                 </div>
                 <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
                     <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                    <p style="margin: 5px 0 0 0; color: #92400e;">Automação sem governança é caos. A IA não pode empurrar código sujo. A ferramenta garante que não há senhas expostas, aprova o commit, assina a mensagem e atualiza o Kanban para 'Resolved' de forma autônoma.</p>
+                    <p style="margin: 5px 0 0 0; color: #92400e;">Termina a jornada E2E garantindo rastreabilidade e segurança. O código perfeito não serve de nada se quebrar o repositório central.</p>
                 </div>
                 <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                 <div class="lab-step">
                     <div class="lab-step-number">1</div>
                     <div style="width: 100%;">
-                        <strong>SonarQube & Commit</strong>
-                        <p>Bloqueando código antes de poluir a branch.</p>
+                        <strong>O Hook do Git</strong>
+                        <p>O script Bash local que barra commits sujos.</p>
                         <div class="lab-code">
-&gt; [Claude Code] Acionando SonarLint CLI...
-✅ 0 Vulnerabilidades detectadas no validator.ts
+#!/bin/sh
+# .git/hooks/pre-commit
 
+npm run lint &amp;&amp; npm run test
+if [ \$? -ne 0 ]; then
+  echo &quot;Bloqueado: Código não atende aos padrões.&quot;
+  exit 1
+fi
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lab-step">
+                    <div class="lab-step-number">2</div>
+                    <div style="width: 100%;">
+                        <strong>O Pull Request Criado</strong>
+                        <p>O encerramento majestoso com a integração de MCP.</p>
+                        <div class="lab-code">
 &gt; [Claude Code] Comitando código com rastreabilidade.
-&gt; git commit -m &quot;#[502] feat: implementa motor de validacao bdd&quot;
+&gt; git commit -m &quot;#[501] feat: motor de validacao Strategy&quot;
 
-&gt; [Claude Code] Atualizando TFS via MCP...
-PATCH /api/workitems/502
-{ &quot;State&quot;: &quot;Resolved&quot;, &quot;Remaining Work&quot;: 0 }
+&gt; [Claude Code] Acionando MCP TFS Repos...
+&gt; Criando PR na branch &#x27;master&#x27; linkando a Task #501.
 
-&gt; Pull Request criado e encaminhado para @tech-lead.
+[Claude Code] 🎉 Sucesso! Pull Request #900 criado. O Tech Lead foi notificado no Teams.
                         </div>
                     </div>
                 </div>
