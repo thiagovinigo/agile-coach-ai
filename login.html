@@ -109,10 +109,15 @@
     <div class="login-card">
         <div class="logo-icon">🚀</div>
         <h2>Agile Coach AI</h2>
-        <p>Acesse os Simuladores Vivos de IA</p>
+        <p>Acesse o Agile Coach AI</p>
 
         <div id="error-msg"></div>
         <div id="success-msg"></div>
+
+        <div class="input-group" id="name-group" style="display: none;">
+            <label>Nome Completo</label>
+            <input type="text" id="fullname" placeholder="Seu Nome">
+        </div>
 
         <div class="input-group">
             <label>E-mail Corporativo</label>
@@ -123,8 +128,8 @@
             <input type="password" id="password" placeholder="••••••••" required>
         </div>
 
-        <button class="btn btn-primary" onclick="handleLogin()">Entrar no Portal</button>
-        <button class="btn btn-secondary" onclick="handleSignUp()">Criar Conta Inicial</button>
+        <button class="btn btn-primary" id="btn-login" onclick="handleLogin()">Entrar no Portal</button>
+        <button class="btn btn-secondary" id="btn-signup" onclick="toggleSignUp()">Criar Conta Inicial</button>
     </div>
 
     <script>
@@ -145,6 +150,43 @@
             }
         }
 
+        let isSignUpMode = false;
+
+        function toggleSignUp() {
+            isSignUpMode = !isSignUpMode;
+            const nameGroup = document.getElementById('name-group');
+            const btnLogin = document.getElementById('btn-login');
+            const btnSignup = document.getElementById('btn-signup');
+
+            if (isSignUpMode) {
+                nameGroup.style.display = 'block';
+                btnLogin.style.display = 'none';
+                btnSignup.innerText = 'Confirmar Cadastro';
+                btnSignup.classList.remove('btn-secondary');
+                btnSignup.classList.add('btn-primary');
+                // Adiciona botão de voltar
+                if(!document.getElementById('btn-back')) {
+                    const btnBack = document.createElement('button');
+                    btnBack.id = 'btn-back';
+                    btnBack.className = 'btn btn-secondary';
+                    btnBack.innerText = 'Voltar para Login';
+                    btnBack.onclick = toggleSignUp;
+                    document.querySelector('.login-card').appendChild(btnBack);
+                } else {
+                    document.getElementById('btn-back').style.display = 'block';
+                }
+            } else {
+                nameGroup.style.display = 'none';
+                btnLogin.style.display = 'block';
+                btnSignup.innerText = 'Criar Conta Inicial';
+                btnSignup.classList.remove('btn-primary');
+                btnSignup.classList.add('btn-secondary');
+                if(document.getElementById('btn-back')) {
+                    document.getElementById('btn-back').style.display = 'none';
+                }
+            }
+        }
+
         async function handleLogin() {
             if(!supabase) {
                 showError("Erro fatal: Arquivo .env não configurado ou chaves ausentes. Preencha o .env e reinicie o servidor!");
@@ -157,29 +199,66 @@
             const { data, error } = await supabase.auth.signInWithPassword({ email, password });
             
             if (error) {
-                showError(error.message);
+                showError("Erro no login: " + error.message);
             } else {
                 localStorage.setItem('auth_token', data.session.access_token);
+                // Busca o perfil para salvar localmente (opcional, mas ajuda)
+                const { data: profile } = await supabase.from('profiles').select('*').eq('id', data.user.id).single();
+                if(profile) {
+                    localStorage.setItem('user_profile', JSON.stringify(profile));
+                }
                 window.location.href = 'index.html';
             }
         }
 
         async function handleSignUp() {
+            if (!isSignUpMode) {
+                toggleSignUp();
+                return;
+            }
+
             if(!supabase) {
                 showError("Erro fatal: Arquivo .env não configurado ou chaves ausentes. Preencha o .env e reinicie o servidor!");
                 return;
             }
+            const fullname = document.getElementById('fullname').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
+            if (!fullname || !email || !password) {
+                showError("Preencha todos os campos.");
+                return;
+            }
+
             showError("");
-            const { data, error } = await supabase.auth.signUp({ email, password });
+            const { data, error } = await supabase.auth.signUp({ 
+                email, 
+                password,
+                options: {
+                    data: {
+                        full_name: fullname
+                    }
+                }
+            });
             
             if (error) {
-                showError(error.message);
+                showError("Erro no cadastro: " + error.message);
             } else {
-                document.getElementById('success-msg').innerText = "Conta criada com sucesso! Faça login.";
-                document.getElementById('success-msg').style.display = "block";
+                // Ao criar conta, geralmente faz login automático se email confirmation for desligado.
+                if (data.session) {
+                    localStorage.setItem('auth_token', data.session.access_token);
+                    
+                    // Espera um pouco pro trigger criar o profile
+                    setTimeout(async () => {
+                        const { data: profile } = await supabase.from('profiles').select('*').eq('id', data.user.id).single();
+                        if(profile) localStorage.setItem('user_profile', JSON.stringify(profile));
+                        window.location.href = 'index.html';
+                    }, 500);
+                } else {
+                    document.getElementById('success-msg').innerText = "Conta criada com sucesso! Você já pode fazer login.";
+                    document.getElementById('success-msg').style.display = "block";
+                    toggleSignUp(); // Volta pro modo login
+                }
             }
         }
 
