@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // O portal agora é aberto.
+    // Apenas os simuladores exigirão autenticação (tratado dentro da view).
+
     const navItems = document.querySelectorAll('.nav-item');
     const views = document.querySelectorAll('.view');
     const sectionTitle = document.getElementById('current-section-title');
@@ -34,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initKiroDocView === 'function') initKiroDocView();
     if (typeof initClaudeCodeDocView === 'function') initClaudeCodeDocView();
     if (typeof initLabsView === 'function') initLabsView();
+    if (typeof initLiveSimView === 'function') initLiveSimView();
 });
 
 async function loadAndMigrateContent() {

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Agile Coach AI</title>
+    <link rel="stylesheet" href="index.css?v=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            background-color: #f3f2f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .login-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .logo-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #64748b;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        #error-msg {
+            color: #ef4444;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        #success-msg {
+            color: #10b981;
+            font-size: 13px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-icon">🚀</div>
+        <h2>Agile Coach AI</h2>
+        <p>Acesse os Simuladores Vivos de IA</p>
+
+        <div id="error-msg"></div>
+        <div id="success-msg"></div>
+
+        <div class="input-group">
+            <label>E-mail Corporativo</label>
+            <input type="email" id="email" placeholder="nome@empresa.com" required>
+        </div>
+        <div class="input-group">
+            <label>Senha</label>
+            <input type="password" id="password" placeholder="••••••••" required>
+        </div>
+
+        <button class="btn btn-primary" onclick="handleLogin()">Entrar no Portal</button>
+        <button class="btn btn-secondary" onclick="handleSignUp()">Criar Conta Inicial</button>
+    </div>
+
+    <script>
+        let supabase = null;
+
+        async function initSetup() {
+            try {
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                
+                if(config.SUPABASE_URL && config.SUPABASE_ANON_KEY) {
+                    supabase = window.supabase.createClient(config.SUPABASE_URL, config.SUPABASE_ANON_KEY);
+                } else {
+                    showError("Erro: Chaves do Supabase não configuradas no servidor.");
+                }
+            } catch (error) {
+                showError("Erro ao conectar no servidor local. Certifique-se de que o 'python server.py' está rodando.");
+            }
+        }
+
+        async function handleLogin() {
+            if(!supabase) {
+                showError("Erro fatal: Arquivo .env não configurado ou chaves ausentes. Preencha o .env e reinicie o servidor!");
+                return;
+            }
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            showError("");
+            const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+            
+            if (error) {
+                showError(error.message);
+            } else {
+                localStorage.setItem('auth_token', data.session.access_token);
+                window.location.href = 'index.html';
+            }
+        }
+
+        async function handleSignUp() {
+            if(!supabase) {
+                showError("Erro fatal: Arquivo .env não configurado ou chaves ausentes. Preencha o .env e reinicie o servidor!");
+                return;
+            }
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            showError("");
+            const { data, error } = await supabase.auth.signUp({ email, password });
+            
+            if (error) {
+                showError(error.message);
+            } else {
+                document.getElementById('success-msg').innerText = "Conta criada com sucesso! Faça login.";
+                document.getElementById('success-msg').style.display = "block";
+            }
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('error-msg');
+            el.innerText = msg;
+            el.style.display = msg ? "block" : "none";
+        }
+
+        // Checar setup ao carregar
+        initSetup();
+
+    </script>
+</body>
+</html>
