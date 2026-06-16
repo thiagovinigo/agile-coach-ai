@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initFluxoIaView === 'function') initFluxoIaView();
     if (typeof initKiroDocView === 'function') initKiroDocView();
     if (typeof initClaudeCodeDocView === 'function') initClaudeCodeDocView();
+    if (typeof initLabsView === 'function') initLabsView();
 });
 
 async function loadAndMigrateContent() {
