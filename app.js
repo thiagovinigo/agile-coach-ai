@@ -102,6 +102,7 @@ async function loadAndMigrateContent() {
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Time de Elite' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Time de Elite' } ] },
                     // 4. Avaliação e Melhoria Contínua
+                    { title: 'Gestão de Resistência & IA', parts: [ { id: 's-elite-resistencia', context: 'Time de Elite' } ] },
                     { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Time de Elite' } ] },
                     { title: 'Métricas Avançadas', parts: [ { id: 's-elite-metricas', context: 'Time de Elite' } ] },
                     { title: 'Scrumban Avançado', parts: [ { id: 's-scrumban-avancado', context: 'Time de Elite' } ] },
@@ -175,18 +176,7 @@ async function loadAndMigrateContent() {
                     { title: 'Gráficos Kanban', parts: [ { id: 's-metricas-graficos', context: 'Métricas' } ] },
                     { title: 'Visão Executiva (C-Level)', parts: [ { id: 's-metricas-clevel', context: 'Métricas' } ] }
                 ];
-            } else if(viewId === 'kb-lider') {
-                sectionsToExtract = [
-                    { title: 'O que é Scrumban (Visão KCP)', parts: [ { id: 's-oque', context: 'Visão Sistêmica' } ] },
-                    { title: 'Ensinando o Novo Fluxo', parts: [ { id: 's-lider-fluxo', context: 'Guia do Líder' } ] },
-                    { title: 'Regras de Transição', parts: [ { id: 's-lider-transicao', context: 'Guia do Líder' } ] },
-                    { title: 'Políticas Explícitas', parts: [ { id: 's-lider-politicas', context: 'Guia do Líder' } ] },
-                    { title: 'Nivelando o Time Misto', parts: [ { id: 's-lider-misto', context: 'Guia do Líder' } ] },
-                    { title: 'Plano de 90 Dias', parts: [ { id: 's-lider-90dias', context: 'Guia do Líder' } ] },
-                    { title: 'Checklist Semanal', parts: [ { id: 's-lider-checklist', context: 'Guia do Líder' } ] },
-                    { title: 'Gestão de Resistência', parts: [ { id: 's-lider-resistencia', context: 'Guia do Líder' },
-                    { title: 'Cadências do Scrumban', parts: [ { id: 's-cadencias', context: 'Guia do Líder' } ] } ] }
-                ];
+
             }            // Create layout structure for Light Mode + SubNav
             
             const layout = document.createElement('div');
@@ -276,7 +266,7 @@ async function loadAndMigrateContent() {
         extractSection('kb-po', 'kb-po');
         extractSection('kb-apresentacao', 'kb-apresentacao');
         extractSection('kb-metricas', 'kb-metricas');
-        extractSection('kb-lider', 'kb-lider');
+
 
         extractSection('kb-tfs', 'kb-tfs');
 
