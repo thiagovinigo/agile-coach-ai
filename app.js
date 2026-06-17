@@ -415,8 +415,18 @@ function initSkillsView() {
                     <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🛠️ Como Instalar (Claude Code):</h4>
                     <pre style="background:#1e1e1e; color:#d4d4d4; padding:1.2rem; border-radius:8px; font-family:monospace; overflow-x:auto; margin-bottom:2rem; font-size:1.05rem;">/read flowgrammers-skills-main/flowgrammers-skills-main/${skill.path}</pre>
                     
-                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar:</h4>
-                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, simplesmente peça a tarefa na linguagem natural correspondente a um dos <strong>Triggers</strong>. O Claude Code automaticamente engatilhará as instruções do arquivo <code>SKILL.md</code> correspondente.</p>
+                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar (Exemplos Práticos):</h4>
+                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural ou mencione os Triggers. Veja exemplos de acionamento:</p>
+                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
+                        <ul style="margin:0; padding-left:20px; color:#334155;">
+                            ${skill.triggers && skill.triggers.length > 0 
+                                ? skill.triggers.slice(0, 2).map(t => `<li style="margin-bottom:8px;"><code>"Por favor, execute o trigger ${t} neste arquivo."</code></li>`).join('') 
+                                : ''
+                            }
+                            <li style="margin-bottom:8px;"><code>"Com base nas regras e diretrizes da skill ${skill.title}, analise este código."</code></li>
+                            <li><code>"Atue como especialista em ${skill.title} e implemente a feature solicitada."</code></li>
+                        </ul>
+                    </div>
                 </div>
             `;
             contentArea.appendChild(wrapper);
