@@ -378,7 +378,12 @@ function initSkillsView() {
             wrapper.className = 'section-group sub-page';
             wrapper.style.display = 'none';
             
-            const triggersList = skill.triggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px;">${t}</span>`).join('');
+            let visibleTriggers = skill.triggers.slice(0, 8);
+            let extraCount = skill.triggers.length - 8;
+            let triggersList = visibleTriggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; word-break: break-all;">${t}</span>`).join('');
+            if (extraCount > 0) {
+                triggersList += `<span class="tag" style="display:inline-block; background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.1); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#4a5568; margin-right:5px; margin-bottom:5px;">+ ${extraCount} outros</span>`;
+            }
             
             wrapper.innerHTML = `
                 <div class="card" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:2.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.02); max-width: 900px;">
