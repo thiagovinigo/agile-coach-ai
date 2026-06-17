@@ -52,6 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
             simulation: "<strong>Cenário:</strong> O PM tem duas features: A (Valor R$100k, Esforço 10 meses) e B (Valor R$50k, Esforço 1 mês).<br/>1. Ele calcula o WSJF da Feature A: 100 / 10 = <strong>10</strong>.<br/>2. Ele calcula o WSJF da Feature B: 50 / 1 = <strong>50</strong>.<br/>3. A Feature B tem o maior WSJF! Embora valha menos dinheiro absoluto, ela traz o retorno 10x mais rápido. A Feature B sobe para o topo do Backlog."
         },
         {
+            title: "Estimativa Aumentada por IA (AI-Assisted)",
+            desc: "Uso de Agentes de IA (como o Claude Code ou Flowgrammers) para ler requisitos, sugerir quebras de tarefas, prever edge cases e propor uma 'âncora' inicial de tamanho baseada em complexidade algorítmica e escopo.",
+            when: "Refinamentos técnicos onde a equipe precisa de um 'co-piloto' para evitar fadiga mental ou para fazer o sizing de dezenas de itens rapidamente.",
+            pros: ["Acelera o refinamento em até 80%", "Impede que o time esqueça de estimar testes e cenários de erro", "Gera quebras de tarefas prontas"],
+            cons: ["A IA pode ignorar o débito técnico invisível do código legado", "Risco de ancoragem: a equipe não debater e só aceitar o número da máquina"],
+            simulation: "<strong>Cenário:</strong> O time aciona um Agente de Arquitetura no portal para analisar o épico 'Gateway de Pagamento'.<br/>1. A IA lê a SPEC e sugere: 'Dividam em 4 histórias. A história 1 tem alto risco de API rate-limit. Sugestão base: 8 Story Points'.<br/>2. Na planning, o time avalia a saída da IA.<br/>3. A Tech Lead diz: 'A IA acertou na quebra, mas não sabe que nossa rede de QA é instável. Vamos subir o risco para 13 pontos'.<br/>4. A IA serviu como ponto de partida acelerado e não como verdade absoluta."
+        },
+        {
             title: "#NoEstimates (Foco em Fluxo)",
             desc: "A filosofia de parar de tentar prever horas ou pontos. Em vez disso, a equipe quebra todas as tarefas para o menor tamanho possível (itens de mesmo tamanho) e mede o Throughput (itens entregues por semana) usando estatística (Simulação de Monte Carlo).",
             when: "Equipes de alta maturidade (Kanban/Flow) onde a previsibilidade estatística se mostra mais valiosa do que adivinhar tamanhos.",
