@@ -12460,27 +12460,113 @@ Use a ferramenta `azure-devops_update_work_item` com o PATCH:
     <span style="color:#7e22ce;">💡 <strong>Mentalidade do Elite:</strong> Resistência é informação, não sabotagem. Cada objeção revela uma crença limitante, uma experiência passada ruim ou um medo legítimo de obsolescência tecnológica. Responda com curiosidade.</span>
   </div>
 
-  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🤖 "A IA (Claude/Kiro) vai roubar meu emprego de Dev/QA."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
-    <p><strong>O que está por trás:</strong> Medo real de perda de relevância e obsolescência profissional.</p>
-    <p><strong>Resposta empática:</strong> "Eu entendo o receio, a tecnologia avança rápido. Mas a IA não rouba o emprego de quem sabe orquestrá-la; ela rouba de quem se recusa a aprender. Vamos juntos tornar a IA o seu 'estagiário incansável', tirando o trabalho braçal (testes repetitivos, boilerplate) para você focar em arquitetura e negócio."</p>
-    <p><strong>Ação concreta:</strong> Incentive a criação do primeiro "Servidor MCP" pela própria pessoa com medo. Quando ela vir que ela tem o controle, o medo vira entusiasmo.</p>
-  </div></div>
+  <h3 style="color:#4c1d95; margin-top:30px; margin-bottom:15px; border-bottom:1px solid #e9d5ff; padding-bottom:5px;">🧩 Bloco 1: Resistência ao Fluxo e Scrumban</h3>
 
-  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>😤 "Eu prefiro Scrum puro. Sprints me dão previsibilidade."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>😤 1. "Eu prefiro Scrum puro. Sprints me dão previsibilidade."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
     <p><strong>O que está por trás:</strong> Medo de perder estrutura. O "Scrum de livro" cria um ciclo familiar seguro.</p>
-    <p><strong>Resposta empática:</strong> "Concordo — sprints dão ritmo. O que vamos perder é a caixa de tempo artificial que nos força a replanejar a cada 2 semanas. O que vamos ganhar é a capacidade de fazer Deploy quando a demanda está pronta, e usar Agentes de IA para revisar Pull Requests sob demanda."</p>
-    <p><strong>Resposta com dados:</strong> "Nas últimas 4 semanas entregamos X itens no fluxo contínuo. No Scrum, entregávamos Y por sprint. O nosso Lead Time caiu." Os dados silenciam o achismo.</p>
+    <p><strong>Resposta empática:</strong> "Concordo — sprints dão ritmo. O que vamos perder é a caixa de tempo artificial que nos força a replanejar a cada 2 semanas. O que vamos ganhar é a capacidade de fazer Deploy quando a demanda está pronta."</p>
+    <p><strong>Resposta com dados:</strong> "Nas últimas 4 semanas entregamos X itens no fluxo contínuo. No Scrum, entregávamos Y por sprint. O nosso Lead Time caiu."</p>
   </div></div>
 
-  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🚧 "O WIP limit me trava. Fico esperando o colega ou a IA terminar."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
-    <p><strong>O que está por trás:</strong> Cultura de "utilização de recursos" vs "fluxo de valor". Trabalhar em silos parece produtivo individualmente.</p>
-    <p><strong>Reframe poderoso:</strong> "Ficar esperando com o WIP cheio significa que o sistema inteiro está pedindo ajuda (Swarming). Você não está parado — você acabou de identificar o gargalo arquitetural da nossa Squad. Pare de começar tarefas novas e vá ajudar o colega no Code Review ou rodar o Agente de testes no card travado."</p>
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🚧 2. "O WIP limit me trava. Fico esperando o colega terminar."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Cultura de "utilização de recursos" vs "fluxo de valor". Trabalhar em silos parece produtivo.</p>
+    <p><strong>Reframe poderoso:</strong> "Ficar esperando com o WIP cheio significa que o sistema inteiro está pedindo ajuda (Swarming). Você não está parado — você acabou de identificar o gargalo arquitetural da nossa Squad. Vá ajudar no Code Review."</p>
   </div></div>
 
-  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>📊 "Métricas e Agentes de Review são para me policiar."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
-    <p><strong>O que está por trás:</strong> Histórico tóxico de microgerenciamento em outras empresas.</p>
-    <p><strong>Resposta empática:</strong> "Faz total sentido desconfiar. Quando métricas viram punição, todo mundo começa a 'hackear' o board. Aqui, Throughput, Lead Time e a análise do Sonar/Kiro são ferramentas do time, não do seu gerente. Elas servem para sabermos se o nosso sistema de trabalho está saudável."</p>
-    <p><strong>Ação concreta:</strong> Nunca cite Throughput individual em sessões de 1:1. Meça o fluxo, não a pessoa.</p>
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>📅 3. "Daily sem o Scrum Master guiando não funciona."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Dependência de comando e controle. Falta de auto-organização do time.</p>
+    <p><strong>Ação concreta:</strong> "A Daily agora é guiada pelo Board (da direita para a esquerda). O foco não é 'o que você fez', mas sim 'por que este card está parado?'. Vamos testar 1 semana com a IA Kiro facilitando a leitura de bloqueios."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>📋 4. "Kanban é só usar as colunas To Do, Doing, Done."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Desconhecimento do Método Kanban (Leis de Little, Classes de Serviço, Políticas Explícitas).</p>
+    <p><strong>Reframe poderoso:</strong> "As colunas são apenas o mapa. O Scrumban real acontece nas regras invisíveis: qual card puxar primeiro? O que significa Done? Qual o limite da coluna Doing? Vamos desenhar as Políticas Mínimas hoje."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>😫 5. "Não temos tempo para melhorar o processo, temos que entregar."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> A armadilha da operação infinita. O time está "serrando com a serra cega".</p>
+    <p><strong>Ação concreta:</strong> Crie a política "10% de folga" ou uma "Classe de Serviço de Débito Técnico" limitada. "Se não pararmos 2 horas hoje para automatizar esse CI/CD, continuaremos perdendo 6 horas por semana."</p>
+  </div></div>
+
+  <h3 style="color:#4c1d95; margin-top:30px; margin-bottom:15px; border-bottom:1px solid #e9d5ff; padding-bottom:5px;">📊 Bloco 2: Resistência a Métricas e Previsibilidade</h3>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>⏱️ 6. "Estimar em Story Points ou Horas me dá mais segurança."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Ilusão de controle. O cérebro humano é péssimo em estimar complexidade de software.</p>
+    <p><strong>Resposta com dados:</strong> Mostre o gráfico de Dispersão (Scatterplot). "Veja, cards de 2 pontos demoraram entre 3 e 15 dias. Cards de 8 pontos demoraram entre 5 e 12 dias. A estimativa não está correlacionada com a entrega real. Vamos usar Percentil 85 (Lead Time)."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>👮 7. "Métricas são para a gestão me cobrar e policiar."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Histórico tóxico de microgerenciamento em empresas anteriores.</p>
+    <p><strong>Resposta empática:</strong> "Quando métricas viram punição, o time hackeia o board. Aqui, Throughput e Lead Time são ferramentas do time. Elas servem para sabermos se o nosso sistema está saudável, não para rankear pessoas."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🎲 8. "Cada tarefa nossa é muito diferente, métricas não funcionam pra gente."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Falta de refinamento técnico (Upstream). Os cards entram com tamanhos muito desproporcionais.</p>
+    <p><strong>Ação concreta:</strong> "Nossa lei de quebra agora é: nenhum card pode ser maior que 4 dias. Se acharmos que vai durar mais, cortamos no meio durante o Refinamento. O tamanho similar estabiliza a métrica."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🤷 9. "A culpa de não entregar não é nossa, são as dependências externas."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Fuga de responsabilidade e falta de gestão de dependências.</p>
+    <p><strong>Ação concreta:</strong> "Vamos medir o Tempo de Espera (Wait Time) x Tempo de Trabalho (Touch Time). Se provarmos com dados que 80% do tempo do card é esperando terceiros, levo isso para o C-Level resolver."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>📈 10. "Os stakeholders não vão aceitar previsões sem prazo fixo cravado."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Contratos tradicionais de escopo e tempo fixos.</p>
+    <p><strong>Resposta Executiva:</strong> "Stakeholders querem confiança, não apenas datas. Dizer 'Temos 85% de certeza que entregamos em até 14 dias' soa muito mais profissional e matemático do que 'Acho que entrego sexta'."</p>
+  </div></div>
+
+  <h3 style="color:#4c1d95; margin-top:30px; margin-bottom:15px; border-bottom:1px solid #e9d5ff; padding-bottom:5px;">🤖 Bloco 3: Resistência à IA e Automação (Agentes)</h3>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>😨 11. "A IA (Claude/Kiro) vai roubar meu emprego de Dev/QA."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Medo real de perda de relevância e obsolescência profissional.</p>
+    <p><strong>Resposta empática:</strong> "A IA não rouba o emprego de quem sabe orquestrá-la. Vamos transformar a IA no seu 'estagiário incansável', tirando testes repetitivos para você focar em arquitetura. Você vira de Pedreiro para Engenheiro Chefe."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🗑️ 12. "A IA gera muito lixo, perco mais tempo consertando o código dela."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Prompt engineering fraco. A pessoa está tratando o Claude como Google.</p>
+    <p><strong>Ação concreta:</strong> "IA sem contexto inventa. IA com contexto codifica. Vamos te ensinar a fornecer o 'Contexto de Arquitetura' (ex: arquivo CLAUDE.md) e usar ferramentas como o Repomix para ela ler seu repositório inteiro antes de responder."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🔒 13. "É perigoso colocar o código da empresa na IA (Segurança/LGPD)."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Preocupação genuína com propriedade intelectual.</p>
+    <p><strong>Resposta Corporativa:</strong> "Você tem razão. Por isso não usamos o ChatGPT gratuito. Usamos APIs Enterprise (onde os dados não treinam o modelo base) e omitimos chaves e dados sensíveis via scripts locais de sanitização. Nunca envie PII de clientes."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🧠 14. "Essas ferramentas MCP são complexas demais, não tenho tempo para aprender."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Curva de aprendizado intimidante em tecnologias muito recentes.</p>
+    <p><strong>Ação concreta:</strong> "Nós preparamos um 'Starter Kit'. Você só precisa rodar 1 comando no terminal e o Servidor MCP já levanta conectado ao seu Claude Desktop. O time de Plataforma abstraiu a complexidade para você."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>❌ 15. "Agentes autônomos revisando Pull Request nunca vão entender a regra de negócio."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Ceticismo sobre a capacidade de raciocínio lógico (LLM reasoning).</p>
+    <p><strong>Reframe poderoso:</strong> "Eles não precisam entender a intenção oculta do negócio, eles servem para garantir que a Regra de Lint, a injeção de SQL e os Code Smells não passem. O Agente faz o Review Tático, o Desenvolvedor Sênior faz o Review Estratégico (Negócio)."</p>
+  </div></div>
+
+  <h3 style="color:#4c1d95; margin-top:30px; margin-bottom:15px; border-bottom:1px solid #e9d5ff; padding-bottom:5px;">👑 Bloco 4: Cultura de Engenharia e Comportamento</h3>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>💤 16. "Ferramentas como Copilot me deixam 'preguiçoso' e esqueço a base."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Saudosismo do "craftsmanship" e preocupação com atrofia técnica.</p>
+    <p><strong>Resposta empática:</strong> "Usar calculadora não te faz esquecer matemática, te permite resolver física quântica. O Copilot escreve a sintaxe (o 'como'), mas a arquitetura de software (o 'o quê' e 'por quê') ainda exige 100% do seu intelecto. Eleve o nível do seu jogo."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>👥 17. "Pairing (Trabalho em Par) é pagar 2 pessoas para fazer o trabalho de 1."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Visão industrial de produtividade (medir tecladas vs medir valor e qualidade).</p>
+    <p><strong>Resposta com dados:</strong> "Pairing reduz os bugs em produção em até 15%, zera a necessidade de Code Review assíncrono (que leva dias de espera) e previne silos de conhecimento. Nós otimizamos pela eficiência da ENTREGA do card, não pela utilização das mãos."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🤖 18. "Documentação gerada por IA fica robótica e genérica."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Testaram criar PR descriptions com prompt fraco ("Resuma esse código").</p>
+    <p><strong>Ação concreta:</strong> "A IA escreve como um espelho. Se dermos um Template forte para ela (ex: 'Me dê o Por Quê da mudança, Riscos e Plano de Rollback em markdown'), ela será extremamente útil. Criei um prompt na nossa biblioteca corporativa para você testar hoje."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🧨 19. "Colocar agentes autônomos no CI/CD é pedir pra quebrar a produção."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Falta de confiança em processos de Sandbox e Human-in-the-loop.</p>
+    <p><strong>Resposta Arquitetural:</strong> "Os agentes nunca têm acesso root. Eles propõem o código e abrem o PR, mas o 'Merge' final e o 'Deploy' sempre exigem um 'Approve' manual de um humano (Human-in-the-loop). A IA sugere, você governa."</p>
+  </div></div>
+
+  <div class="acc-item"><div class="acc-header" onclick="toggleAcc(this)"><span>🌪️ 20. "Muda tudo toda hora, não consigo acompanhar tanta novidade (Burnout)."</span><span class="acc-arrow">▶</span></div><div class="acc-body">
+    <p><strong>O que está por trás:</strong> Fadiga cognitiva severa, FOMO (Fear of Missing Out) misturado com sobrecarga.</p>
+    <p><strong>Ação do Líder:</strong> "Pausa. Ninguém consegue adotar 5 ferramentas novas num mês. Vamos congelar as novidades. Este trimestre, a única meta de eficiência da Squad é dominar o 'Contexto' via Claude. Nada mais." Simplifique a visão para o time respirar.</p>
   </div></div>
 
   <div class="teach-quote">placeholder-end</div>
