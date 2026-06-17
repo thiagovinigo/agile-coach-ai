@@ -187,15 +187,7 @@ async function loadAndMigrateContent() {
                     { title: 'Gestão de Resistência', parts: [ { id: 's-lider-resistencia', context: 'Guia do Líder' },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-cadencias', context: 'Guia do Líder' } ] } ] }
                 ];
-            } else if(viewId === 'kb-case') {
-                sectionsToExtract = [
-                    { title: 'Squad Open Banking', parts: [ { id: 's-exemplo', context: 'Estudo de Caso' } ] },
-                    { title: 'Uma Semana no Squad', parts: [ { id: 's-story', context: 'Estudo de Caso' } ] },
-                    { title: 'Entregas em Produção', parts: [ { id: 's-prod-extra', context: 'Estudo de Caso' } ] }
-                ];
-            }
-
-            // Create layout structure for Light Mode + SubNav
+            }            // Create layout structure for Light Mode + SubNav
             
             const layout = document.createElement('div');
             layout.className = 'kb-layout';
@@ -285,7 +277,7 @@ async function loadAndMigrateContent() {
         extractSection('kb-apresentacao', 'kb-apresentacao');
         extractSection('kb-metricas', 'kb-metricas');
         extractSection('kb-lider', 'kb-lider');
-        extractSection('kb-case', 'kb-case');
+
         extractSection('kb-tfs', 'kb-tfs');
 
     } catch (error) {
