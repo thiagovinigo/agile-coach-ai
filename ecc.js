@@ -252,11 +252,13 @@ function initEccSkillsView() {
                 
                 let sTriggers = skill.triggers || [];
                 sTriggers = sTriggers.filter(t => {
+                    if (typeof t !== 'string') return false;
+                    t = t.trim();
                     if (t.length < 2 || t.length > 35) return false;
-                    if (t.includes('/') && t.split('/').length > 2) return false;
+                    if (!t.match(/^\/[a-z0-9-_]+$/i) && !t.match(/^[a-z0-9 ]+$/i)) return false;
                     if (['/var', '/etc', '/usr', '/bin', '/tmp', '/dev', '/opt'].includes(t)) return false;
                     return true;
-                });
+                }).map(t => t.trim());
                 let visibleTriggers = sTriggers.slice(0, 8);
                 let extraCount = sTriggers.length - 8;
                 let triggersList = visibleTriggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; word-break: break-all;">${t}</span>`).join('');
