@@ -292,6 +292,46 @@ function initSkillsView() {
     const container = document.getElementById('skills-view');
     if(!container || typeof skillsData === 'undefined') return;
 
+    function getContextualExamples(title) {
+        const t = title.toLowerCase();
+        if (t.includes('test') || t.includes('jest') || t.includes('cypress') || t.includes('playwright')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"Por favor, crie testes unitários para este arquivo usando as diretrizes da skill ${title}."</code></li>
+                <li><code>"Identifique os edge cases deste componente e gere testes de cobertura via ${title}."</code></li>
+            `;
+        } else if (t.includes('arch') || t.includes('defensive') || t.includes('securit') || t.includes('design') || t.includes('pattern')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"Faça uma revisão de arquitetura e segurança neste arquivo aplicando a skill ${title}."</code></li>
+                <li><code>"Quais padrões do ${title} estão sendo violados neste código? Sugira a refatoração."</code></li>
+            `;
+        } else if (t.includes('react') || t.includes('front') || t.includes('a11y') || t.includes('access') || t.includes('ui') || t.includes('css')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"Revise este componente garantindo aderência às boas práticas e regras visuais do ${title}."</code></li>
+                <li><code>"Atue como especialista em ${title} e melhore a estrutura e semântica deste código."</code></li>
+            `;
+        } else if (t.includes('review') || t.includes('lint') || t.includes('refactor') || t.includes('clean')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"Atue como ${title} e faça um code review severo buscando code smells neste código."</code></li>
+                <li><code>"Refatore esta função para deixá-la mais limpa, seguindo as regras de ${title}."</code></li>
+            `;
+        } else if (t.includes('build') || t.includes('error') || t.includes('debug') || t.includes('fix') || t.includes('resolve')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"O código está falhando. Como especialista em ${title}, analise o log de erro e sugira o fix."</code></li>
+                <li><code>"Invoque o conhecimento de ${title} para resolver este problema no projeto."</code></li>
+            `;
+        } else if (t.includes('data') || t.includes('sql') || t.includes('database') || t.includes('api') || t.includes('backend')) {
+            return `
+                <li style="margin-bottom:8px;"><code>"Otimize esta funcionalidade utilizando as diretrizes de performance do ${title}."</code></li>
+                <li><code>"Como especialista em ${title}, estruture os dados para esta nova feature."</code></li>
+            `;
+        } else {
+            return `
+                <li style="margin-bottom:8px;"><code>"Analise as modificações deste arquivo garantindo que não estamos violando as políticas da skill ${title}."</code></li>
+                <li><code>"Atue como especialista em ${title} e implemente a feature solicitada seguindo suas diretrizes."</code></li>
+            `;
+        }
+    }
+
     container.innerHTML = '';
 
     
@@ -430,8 +470,7 @@ function initSkillsView() {
                     <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural. Veja exemplos de acionamento:</p>
                     <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
                         <ul style="margin:0; padding-left:20px; color:#334155;">
-                            <li style="margin-bottom:8px;"><code>"Com base nas regras e diretrizes da skill ${skill.title}, analise este código."</code></li>
-                            <li><code>"Atue como especialista em ${skill.title} e implemente a feature solicitada."</code></li>
+                            ${getContextualExamples(skill.title)}
                         </ul>
                     </div>
                 </div>
