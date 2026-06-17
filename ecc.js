@@ -282,10 +282,7 @@ function initEccSkillsView() {
                         </a>
                     </div>
 
-                    <div style="background:#f7fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
-                        <h4 style="margin-top:0; margin-bottom:1rem; font-size:1.1rem; color:#2d3748; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🎯 Quando Chamar (Triggers)</h4>
-                        <div>${triggersList || '<span style="color:#a0aec0; font-size:0.95rem;">Nenhum trigger explícito. Aja de acordo com a descrição.</span>'}</div>
-                    </div>
+
                     
                     
                     ${skill.dependencies && skill.dependencies.length > 0 ? `
@@ -302,13 +299,9 @@ function initEccSkillsView() {
                     <pre style="background:#1e1e1e; color:#d4d4d4; padding:1.2rem; border-radius:8px; font-family:monospace; overflow-x:auto; margin-bottom:2rem; font-size:1.05rem;">/read ${skill.path}</pre>
                     
                     <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar (Exemplos Práticos):</h4>
-                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural ou mencione os Triggers. Veja exemplos de acionamento:</p>
+                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural. Veja exemplos de acionamento:</p>
                     <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
                         <ul style="margin:0; padding-left:20px; color:#334155;">
-                            ${sTriggers.length > 0 
-                                ? sTriggers.slice(0, 2).map(t => `<li style="margin-bottom:8px;"><code>"Por favor, execute o trigger ${t} neste arquivo."</code></li>`).join('') 
-                                : ''
-                            }
                             <li style="margin-bottom:8px;"><code>"Com base nas regras e diretrizes da skill ${skill.title}, analise este código."</code></li>
                             <li><code>"Atue como especialista em ${skill.title} e implemente a feature solicitada."</code></li>
                         </ul>
