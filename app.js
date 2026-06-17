@@ -378,8 +378,15 @@ function initSkillsView() {
             wrapper.className = 'section-group sub-page';
             wrapper.style.display = 'none';
             
-            let visibleTriggers = skill.triggers.slice(0, 8);
-            let extraCount = skill.triggers.length - 8;
+            let sTriggers = skill.triggers || [];
+            sTriggers = sTriggers.filter(t => {
+                if (t.length < 2 || t.length > 35) return false;
+                if (t.includes('/') && t.split('/').length > 2) return false;
+                if (['/var', '/etc', '/usr', '/bin', '/tmp', '/dev', '/opt'].includes(t)) return false;
+                return true;
+            });
+            let visibleTriggers = sTriggers.slice(0, 8);
+            let extraCount = sTriggers.length - 8;
             let triggersList = visibleTriggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; word-break: break-all;">${t}</span>`).join('');
             if (extraCount > 0) {
                 triggersList += `<span class="tag" style="display:inline-block; background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.1); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#4a5568; margin-right:5px; margin-bottom:5px;">+ ${extraCount} outros</span>`;
@@ -424,8 +431,8 @@ function initSkillsView() {
                     <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural ou mencione os Triggers. Veja exemplos de acionamento:</p>
                     <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
                         <ul style="margin:0; padding-left:20px; color:#334155;">
-                            ${skill.triggers && skill.triggers.length > 0 
-                                ? skill.triggers.slice(0, 2).map(t => `<li style="margin-bottom:8px;"><code>"Por favor, execute o trigger ${t} neste arquivo."</code></li>`).join('') 
+                            ${sTriggers.length > 0 
+                                ? sTriggers.slice(0, 2).map(t => `<li style="margin-bottom:8px;"><code>"Por favor, execute o trigger ${t} neste arquivo."</code></li>`).join('') 
                                 : ''
                             }
                             <li style="margin-bottom:8px;"><code>"Com base nas regras e diretrizes da skill ${skill.title}, analise este código."</code></li>
