@@ -156,6 +156,65 @@ A camada de Domínio deve ser 100% isolada e não ter dependências externas.
             </div>
         </details>
 
+        <!-- MÓDULO 5 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">💰</span> Módulo 5: Nunca Estoure Seus Limites de Tokens</summary>
+            <div class="mc-content">
+                <p>As ferramentas de código aberto e os hábitos gratuitos que você deve usar para parar de queimar tokens do Claude. Clone, adicione e salve contexto.</p>
+
+                <h4 style="color:#3b82f6; margin-top:20px;">🟦 Servidores MCP</h4>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Serena:</strong> Lê seu código por símbolo, não por arquivos inteiros.</li>
+                    <li><strong>Context7:</strong> Documentação atualizada sob demanda, sem desperdício de tokens em APIs ruins.</li>
+                    <li><strong>Claude Context:</strong> Busca semântica, traz apenas o código que importa.</li>
+                    <li><strong>Token Savior:</strong> Navegação por símbolos + memória de sessão.</li>
+                </ul>
+
+                <h4 style="color:#d946ef; margin-top:20px;">🟪 Skills & Plugins</h4>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>Caveman:</strong> Faz o Claude responder no modo curto, com menos tokens de saída.</li>
+                    <li><strong>Context Mode:</strong> Coloca a saída da ferramenta (sandbox) em SQLite, não no seu contexto.</li>
+                    <li><strong>Token Optimizer:</strong> Caça tokens fantasmas e compacta o contexto de forma inteligente.</li>
+                </ul>
+
+                <h4 style="color:#f97316; margin-top:20px;">🟧 Ferramentas de CLI</h4>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li><strong>MarkItDown:</strong> Converte PDFs e arquivos para Markdown limpo.</li>
+                    <li><strong>Repomix:</strong> Empacota um repositório inteiro em um único arquivo com contagem de tokens.</li>
+                    <li><strong>ccusage:</strong> Mostra uso de tokens e custo a partir de logs locais.</li>
+                    <li><strong>Code Review Graph:</strong> Mapa de árvore, carrega apenas o que importa.</li>
+                </ul>
+
+                <div class="mc-callout" style="border-color:#10b981; background:#ecfdf5;">
+                    <strong style="color:#065f46;">✅ HÁBITOS GRATUITOS (Nenhuma instalação necessária)</strong>
+                    <div style="display: flex; gap: 20px; margin-top: 10px; color: #064e3b; font-size: 13.5px;">
+                        <div style="flex: 1;">
+                            <strong>No Chat do Claude:</strong>
+                            <ul style="padding-left: 15px; margin-top: 5px;">
+                                <li>Edite sua última mensagem, não empilhe novas</li>
+                                <li>Inicie um chat novo a cada 15 mensagens</li>
+                                <li>Agrupe suas perguntas em um único prompt</li>
+                                <li>Desative Busca e Artefatos quando estiver ocioso</li>
+                                <li>Configure Memória para nunca reexplicar</li>
+                                <li>Use Projetos para carregar seus arquivos uma vez</li>
+                            </ul>
+                        </div>
+                        <div style="flex: 1;">
+                            <strong>No Código do Claude:</strong>
+                            <ul style="padding-left: 15px; margin-top: 5px;">
+                                <li>Escreva um CLAUDE.md direto na raiz do projeto</li>
+                                <li>Execute <code>/compact</code> quando o contexto atingir 50%</li>
+                                <li>Use <code>/clear</code> entre tarefas não relacionadas</li>
+                                <li>Leia o arquivo exato, não a pasta inteira</li>
+                                <li>Planeje antes de construir, não prescreva a correção</li>
+                                <li>Combine com o modelo: Sonnet executa, Opus estrategiza</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
         <!-- SEÇÃO: TABELA DE SKILLS (Requerido) -->
         <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:25px; box-shadow:0 4px 6px rgba(0,0,0,0.05); margin-top:30px;">
             <strong style="color:#0f172a; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:15px; border-bottom:2px solid #8b5cf6; padding-bottom:10px;">
