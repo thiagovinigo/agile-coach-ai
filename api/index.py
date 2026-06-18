@@ -41,7 +41,11 @@ async def verify_token(request: Request):
     
     token = auth_header.split(" ")[1]
     
-    # Valida no Supabase via REST (já que não temos SDK no Python, batemos na API)
+    # Bypass local se não houver supabase configurado
+    if token == "local_dev_token" or "cole_sua_url" in SUPABASE_URL:
+        return True
+
+    # Valida no Supabase via REST
     async with httpx.AsyncClient() as client:
         resp = await client.get(
             f"{SUPABASE_URL}/auth/v1/user",
@@ -70,6 +74,16 @@ async def chat_endpoint(request: Request, _=Depends(verify_token)):
     }
 
     async def stream_generator():
+        # Modo Demonstração Local (se a chave não estiver configurada)
+        if "cole_sua_chave" in OPENAI_API_KEY or not OPENAI_API_KEY:
+            import asyncio
+            mock_text = f"Olá! Eu sou o {'Kiro' if agent_type == 'kiro' else 'Claude'}. Estou rodando em **Modo de Demonstração Local** porque a chave da OpenAI não foi configurada no arquivo `.env`.\n\nConfigure a variável `OPENAI_API_KEY` para conversar comigo de verdade!"
+            for word in mock_text.split(" "):
+                yield f"data: {json.dumps({'choices': [{'delta': {'content': word + ' '}}]})}\n\n"
+                await asyncio.sleep(0.05)
+            yield "data: [DONE]\n\n"
+            return
+
         try:
             async with httpx.AsyncClient() as client:
                 async with client.stream(

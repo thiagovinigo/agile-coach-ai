@@ -71,7 +71,10 @@ class LiveSimulator {
         input.disabled = true;
 
         try {
-            const token = localStorage.getItem('auth_token');
+            let token = localStorage.getItem('auth_token');
+            if (!token && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+                token = "local_dev_token";
+            }
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
@@ -148,7 +151,12 @@ function initLiveSimView() {
     const container = document.getElementById('live-sim-view');
     if (!container) return;
 
-    const token = localStorage.getItem('auth_token');
+    let token = localStorage.getItem('auth_token');
+    
+    // Bypass local para demonstração
+    if (!token && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+        token = "local_dev_token";
+    }
 
     if (!token) {
         container.innerHTML = `
