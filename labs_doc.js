@@ -113,7 +113,7 @@ function initLabsView() {
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
             <button class="lab-tab-btn" style="background:#e0e7ff; border:1px solid #c7d2fe; color:#3730a3;" onclick="switchLabTab('tab-claude-final', this)">🌟 Claude: Projeto Final</button>
-            <button class="lab-tab-btn" style="background:#dcfce7; border:1px solid #86efac; color:#166534;" onclick="switchLabTab('tab-qa-delivery', this)">🎯 QA & Delivery (Playwright/PBIs)</button>
+            <button class="lab-tab-btn" style="background:#dcfce7; border:1px solid #86efac; color:#166534;" onclick="switchLabTab('tab-qa-delivery', this)">🎯 SecOps, QA & Delivery (TFS On-Premise)</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -1986,6 +1986,80 @@ fi
                             <strong>Orquestração do TFS (Anexar Artefato)</strong>
                             <p>Agora use as capacidades do MCP do agente para conectar essa evidência no Microsoft Azure DevOps (TFS).</p>
                             <div class="lab-code">@agente Use a skill de TFS. Encontre a Task/PBI #123. Anexe o arquivo 'evidence_QA_PBI_123.md' a ela. Em seguida, mude o estado da Task para "Ready for Prod / Done" adicionando o comentário: "Testes E2E validados com sucesso via Playwright."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-card">
+                <div class="lab-header" style="border-bottom-color: #ef4444;">
+                    <span style="font-size:24px;">🛡️</span> 
+                    <h3>Lab 3: Automação de SecOps (SAST e Auditoria CVE)</h3>
+                </div>
+                <div class="lab-content">
+                    <div style="background: #fef2f2; padding: 15px; border-left: 4px solid #ef4444; border-radius: 4px; margin-bottom: 15px;">
+                        <strong style="color: #991b1b; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                        <p style="margin: 5px 0 0 0; color: #991b1b;">Este laboratório usa o Agente para rodar análises estáticas de segurança (SAST) e cruzar dependências do projeto contra bancos de dados de vulnerabilidades (CVEs) antes do Delivery.</p>
+                    </div>
+                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                        <p style="margin: 5px 0 0 0; color: #92400e;">Segurança (DevSecOps) não deve ser uma etapa isolada no fim do processo. A IA pode auditar o código em tempo real e barrar envios para o TFS On-Premise caso sejam detectadas bibliotecas defasadas ou *secrets* vazados.</p>
+                    </div>
+                    
+                    <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">1</div>
+                        <div style="width: 100%;">
+                            <strong>Configuração de Hooks de Segurança</strong>
+                            <p>Instrua o Agente a configurar um Hook Pre-commit focado em segurança.</p>
+                            <div class="lab-code">@agente Crie um hook pre-commit (usando Husky ou hook nativo do git) que rode uma varredura de 'npm audit' e verifique se há chaves de API *hardcoded* no código modificado usando Regex (como 'sk-...').</div>
+                        </div>
+                    </div>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">2</div>
+                        <div style="width: 100%;">
+                            <strong>Teste Prático de Detecção</strong>
+                            <p>Forçe uma vulnerabilidade e veja o Agente bloquear o commit.</p>
+                            <div class="lab-code">No seu código, adicione uma variável: const MY_SECRET = "sk-OPENAI-TEST-12345". Depois, tente fazer o commit. O Hook disparado pelo Agente deve acusar a falha de segurança no console e abortar o processo.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-card">
+                <div class="lab-header" style="border-bottom-color: #8b5cf6;">
+                    <span style="font-size:24px;">🔗</span> 
+                    <h3>Lab 4: Code Control e Pull Requests via TFS On-Premise</h3>
+                </div>
+                <div class="lab-content">
+                    <div style="background: #f5f3ff; padding: 15px; border-left: 4px solid #8b5cf6; border-radius: 4px; margin-bottom: 15px;">
+                        <strong style="color: #5b21b6; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                        <p style="margin: 5px 0 0 0; color: #5b21b6;">Neste laboratório, testaremos a integração profunda do motor de IA com a rede legada corporativa (TFS On-Premise MCP) para fazer merge de código, Code Review autônomo e controle de branches (Git Flow).</p>
+                    </div>
+                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                        <p style="margin: 5px 0 0 0; color: #92400e;">Grandes corporações mantêm o código em redes privadas (TFS On-Premise). O MCP permite que a IA atue como um "Engenheiro Interno", lendo branches do servidor corporativo e fazendo reviews críticos sem que o código sensível vaze para serviços públicos em nuvem.</p>
+                    </div>
+                    
+                    <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">1</div>
+                        <div style="width: 100%;">
+                            <strong>Ativação do Motor de Review Local</strong>
+                            <p>Peça ao Agente para atuar como revisor em um Pull Request específico do TFS.</p>
+                            <div class="lab-code">@agente Conecte-se ao TFS On-Premise MCP. Encontre a Pull Request ativa associada à branch 'feature/login-sso'. Leia os diffs e forneça um Code Review nos comentários do TFS, apontando violações do guia de arquitetura.</div>
+                        </div>
+                    </div>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">2</div>
+                        <div style="width: 100%;">
+                            <strong>Automatização de Merge Seguro</strong>
+                            <p>Se o código passar no QA (Lab 2) e em Segurança (Lab 3), ordene o Delivery via Agente.</p>
+                            <div class="lab-code">@agente Já que os testes Playwright passaram e a auditoria de CVEs está verde, por favor, realize o Squash e Merge desta branch na master. Marque a tarefa associada como 'Delivered'.</div>
                         </div>
                     </div>
                 </div>

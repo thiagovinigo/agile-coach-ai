@@ -3,9 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
 
     const mcps = [
+        { name: "TFS On-Premise MCP", desc: "Conexão via VPN/Intranet para acessar o Team Foundation Server legado e gerenciar código e PBIs locais.", status: "Core", color: "blue" },
         { name: "GitHub MCP", desc: "Permite que os Agentes leiam PRs, abram issues e façam code review autônomo.", status: "Ativo", color: "green" },
         { name: "PostgreSQL / Supabase MCP", desc: "Conecta a IA ao banco de dados para rodar queries e modelar schemas.", status: "Beta", color: "yellow" },
-        { name: "Jira / Azure DevOps MCP", desc: "Integração bidirecional para atualizar o status das tarefas e estimativas.", status: "Planejado", color: "gray" },
+        { name: "Jira / Azure DevOps Cloud MCP", desc: "Integração bidirecional para atualizar o status das tarefas e estimativas em nuvem.", status: "Planejado", color: "gray" },
         { name: "Brave Search / Web MCP", desc: "Dá acesso à web em tempo real para pesquisa de documentação atualizada.", status: "Ativo", color: "green" }
     ];
 
