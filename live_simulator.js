@@ -94,23 +94,34 @@ class LiveSimulator {
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
             let aiText = '';
+            let buffer = '';
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
                 
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
+                buffer += decoder.decode(value, {stream: true});
+                const lines = buffer.split('\n');
+                
+                // O último elemento pode ser uma linha incompleta, então guardamos no buffer
+                buffer = lines.pop() || '';
                 
                 for (const line of lines) {
                     if (line.startsWith('data: ') && !line.includes('[DONE]')) {
                         try {
                             const data = JSON.parse(line.replace('data: ', ''));
-                            aiText += data.content;
+                            if (data.choices && data.choices[0] && data.choices[0].delta && data.choices[0].delta.content) {
+                                aiText += data.choices[0].delta.content;
+                            } else if (data.content) {
+                                // Fallback para mensagens customizadas do backend
+                                aiText += data.content;
+                            }
                             // Conversão básica de \n para <br>
-                            aiDiv.innerHTML = aiText.replace(/\\n/g, '<br>');
+                            aiDiv.innerHTML = aiText.replace(/\\n/g, '<br>').replace(/\n/g, '<br>');
                             this.scrollToBottom();
-                        } catch(e) {}
+                        } catch(e) {
+                            console.error("JSON Parse Error on chunk:", line, e);
+                        }
                     }
                 }
             }
