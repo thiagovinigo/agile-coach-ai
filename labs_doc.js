@@ -1939,16 +1939,34 @@ fi
                         <div style="width: 100%;">
                             <strong>Inicie o Agente e peça a configuração</strong>
                             <p>Abra o terminal do Kiro ou Claude e cole o prompt abaixo:</p>
-                            <div class="lab-code">@agente Instale o Playwright no projeto (npm init playwright@latest). Configure o playwright.config.ts para rodar testes em paralelo no Chromium e salvar vídeos em caso de falha de teste.</div>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Instale o Playwright (npm init playwright@latest). Leia a arquitetura corporativa no repositório e configure o playwright.config.ts para salvar vídeos e *traces* no pipeline TFS.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Instale o Playwright no projeto. Configure o playwright.config.ts para rodar testes em paralelo no Chromium e salvar vídeos em falha."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="lab-step">
                         <div class="lab-step-number">2</div>
                         <div style="width: 100%;">
-                            <strong>Crie o primeiro fluxo de QA Autônomo</strong>
-                            <p>Agora peça para o agente mapear um requisito em um teste E2E real.</p>
-                            <div class="lab-code">@agente Leia a documentação do login. Escreva um teste no Playwright validando o fluxo de sucesso (Login Válido) e erro (Senha Incorreta). Salve o arquivo em tests/login.spec.ts.</div>
+                            <strong>Validação baseada exclusivamente no PBI</strong>
+                            <p>O segredo da IA é não "inventar" testes, mas baseá-los estritamente nos Acceptance Criteria do PBI.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Acesse o PBI #456 no TFS On-Premise. Leia a 'Descrição' e os 'Acceptance Criteria'. Escreva um teste Playwright (login.spec.ts) validando EXATAMENTE os cenários de Sucesso e Erro definidos pelo Product Owner no PBI.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Use o Jira MCP para ler a Issue #456. Baseado exclusivamente nos Critérios de Aceite da tarefa, gere um arquivo de teste Playwright cobrindo os fluxos de autenticação descritos pelo PO."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1975,17 +1993,35 @@ fi
                         <div class="lab-step-number">1</div>
                         <div style="width: 100%;">
                             <strong>Geração do Artefato de Testes</strong>
-                            <p>Ordene ao agente a execução dos testes e compilação do relatório.</p>
-                            <div class="lab-code">@agente Rode o comando 'npx playwright test'. Pegue o output de sucesso ou falha e crie um arquivo chamado 'evidence_QA_PBI_123.md'. Inclua os cenários validados e o status final do Delivery.</div>
+                            <p>Ordene ao agente a execução e compilação do relatório.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Rode 'npx playwright test'. Pegue o output de falha/sucesso e gere o arquivo 'evidence_PBI_456.md'. Garanta que todos os cenários do PBI foram cobertos.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Execute o Playwright. Capture o log e crie 'evidence_Issue_456.md' mapeando o resultado dos testes contra os requisitos da Issue."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="lab-step">
                         <div class="lab-step-number">2</div>
                         <div style="width: 100%;">
-                            <strong>Orquestração do TFS (Anexar Artefato)</strong>
-                            <p>Agora use as capacidades do MCP do agente para conectar essa evidência no Microsoft Azure DevOps (TFS).</p>
-                            <div class="lab-code">@agente Use a skill de TFS. Encontre a Task/PBI #123. Anexe o arquivo 'evidence_QA_PBI_123.md' a ela. Em seguida, mude o estado da Task para "Ready for Prod / Done" adicionando o comentário: "Testes E2E validados com sucesso via Playwright."</div>
+                            <strong>Orquestração do Backlog (Anexar Artefato)</strong>
+                            <p>Agora use as capacidades do MCP do agente para conectar essa evidência no backlog antes do Delivery.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Use o TFS MCP. Anexe o arquivo 'evidence_PBI_456.md' ao PBI #456. Mude o estado da Task para "Ready for Prod" e adicione o comentário: "Testes E2E validados com sucesso conforme Acceptance Criteria."</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Via Jira/GitHub MCP, faça o upload de 'evidence_Issue_456.md' na Issue #456. Mova o card para 'Done' com o comentário de aprovação de QA automatizado."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
