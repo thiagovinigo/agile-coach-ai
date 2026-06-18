@@ -113,6 +113,7 @@ function initLabsView() {
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-basic', this)">💻 Claude: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-claude-tfs', this)">💻 Claude: TFS Lifecycle (11-20)</button>
             <button class="lab-tab-btn" style="background:#e0e7ff; border:1px solid #c7d2fe; color:#3730a3;" onclick="switchLabTab('tab-claude-final', this)">🌟 Claude: Projeto Final</button>
+            <button class="lab-tab-btn" style="background:#dcfce7; border:1px solid #86efac; color:#166534;" onclick="switchLabTab('tab-qa-delivery', this)">🎯 QA & Delivery (Playwright/PBIs)</button>
         </div>
 
         <div id="tab-kiro-basic" class="lab-tab-content active">
@@ -1908,6 +1909,87 @@ fi
 
             </div>
         </div>
+
+        </div>
+        
+        <!-- ============================================== -->
+        <!-- TAB: QA & DELIVERY (Playwright / PBIs)         -->
+        <!-- ============================================== -->
+        <div id="tab-qa-delivery" class="lab-tab-content">
+            
+            <div class="lab-card">
+                <div class="lab-header" style="border-bottom-color: #22c55e;">
+                    <span style="font-size:24px;">🧪</span> 
+                    <h3>Lab 1: Setup do Framework de Testes E2E (Playwright)</h3>
+                </div>
+                <div class="lab-content">
+                    <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                        <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                        <p style="margin: 5px 0 0 0; color: #166534;">Este laboratório ensina o Agente (Kiro/Claude) a orquestrar a instalação e configuração inicial do Playwright no projeto para garantir a Qualidade de Entrega (QA) com testes End-to-End.</p>
+                    </div>
+                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                        <p style="margin: 5px 0 0 0; color: #92400e;">Garantir que a IA valide a aplicação usando testes reais (clicando, digitando, navegando) protege o Delivery contra regressões. O Playwright é rápido e a IA sabe escrever os testes automaticamente baseada nas regras de negócio.</p>
+                    </div>
+                    
+                    <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">1</div>
+                        <div style="width: 100%;">
+                            <strong>Inicie o Agente e peça a configuração</strong>
+                            <p>Abra o terminal do Kiro ou Claude e cole o prompt abaixo:</p>
+                            <div class="lab-code">@agente Instale o Playwright no projeto (npm init playwright@latest). Configure o playwright.config.ts para rodar testes em paralelo no Chromium e salvar vídeos em caso de falha de teste.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-step">
+                        <div class="lab-step-number">2</div>
+                        <div style="width: 100%;">
+                            <strong>Crie o primeiro fluxo de QA Autônomo</strong>
+                            <p>Agora peça para o agente mapear um requisito em um teste E2E real.</p>
+                            <div class="lab-code">@agente Leia a documentação do login. Escreva um teste no Playwright validando o fluxo de sucesso (Login Válido) e erro (Senha Incorreta). Salve o arquivo em tests/login.spec.ts.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lab-card">
+                <div class="lab-header" style="border-bottom-color: #22c55e;">
+                    <span style="font-size:24px;">📦</span> 
+                    <h3>Lab 2: Delivery, Geração e Anexação de Artefatos em PBIs</h3>
+                </div>
+                <div class="lab-content">
+                    <div style="background: #f0fdf4; padding: 15px; border-left: 4px solid #22c55e; border-radius: 4px; margin-bottom: 15px;">
+                        <strong style="color: #166534; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                        <p style="margin: 5px 0 0 0; color: #166534;">Este laboratório usa o Agente para rodar a suíte de testes (QA), extrair os resultados em formato Markdown, e criar um Artefato de Evidência que é automaticamente anexado ao PBI (Product Backlog Item) do TFS/Jira antes do Delivery.</p>
+                    </div>
+                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
+                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
+                        <p style="margin: 5px 0 0 0; color: #92400e;">A rastreabilidade é a alma do Delivery Ágil. Sem evidências atreladas aos cards, a auditoria e o DoD (Definition of Done) falham. O Agente faz esse trabalho burocrático de evidência em segundos.</p>
+                    </div>
+                    
+                    <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">1</div>
+                        <div style="width: 100%;">
+                            <strong>Geração do Artefato de Testes</strong>
+                            <p>Ordene ao agente a execução dos testes e compilação do relatório.</p>
+                            <div class="lab-code">@agente Rode o comando 'npx playwright test'. Pegue o output de sucesso ou falha e crie um arquivo chamado 'evidence_QA_PBI_123.md'. Inclua os cenários validados e o status final do Delivery.</div>
+                        </div>
+                    </div>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">2</div>
+                        <div style="width: 100%;">
+                            <strong>Orquestração do TFS (Anexar Artefato)</strong>
+                            <p>Agora use as capacidades do MCP do agente para conectar essa evidência no Microsoft Azure DevOps (TFS).</p>
+                            <div class="lab-code">@agente Use a skill de TFS. Encontre a Task/PBI #123. Anexe o arquivo 'evidence_QA_PBI_123.md' a ela. Em seguida, mude o estado da Task para "Ready for Prod / Done" adicionando o comentário: "Testes E2E validados com sucesso via Playwright."</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 

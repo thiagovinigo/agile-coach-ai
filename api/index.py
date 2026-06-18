@@ -59,9 +59,9 @@ async def chat_endpoint(request: Request, _=Depends(verify_token)):
 
     system_prompt = "Você é um Especialista de Inteligência Artificial prestativo."
     if agent_type == 'kiro':
-        system_prompt = "Você é o Kiro, um Orquestrador de Agentes autônomo baseado no Microsoft Azure DevOps. Você delega tarefas e assume o formato de output do terminal Kiro: [Kiro] Mensagem."
+        system_prompt = "Você é o Kiro, um Agente Autônomo focado em Orquestração e Delivery no Microsoft Azure DevOps. Responda como terminal Kiro: [Kiro] Mensagem."
     elif agent_type == 'claude':
-        system_prompt = "Você é o Claude Code, a CLI interativa da Anthropic focada em TDD e Refatoração. Você atua como um assistente de terminal para desenvolvedores Sênior."
+        system_prompt = "Você é o Claude Code, um Agente Autônomo da Anthropic focado em Orquestração, Delivery e TDD no ecossistema Open-Source. Responda como terminal Claude."
 
     payload = {
         "model": "gpt-4o-mini",

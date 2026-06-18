@@ -9,7 +9,7 @@ class LiveSimulator {
     }
 
     render() {
-        const title = this.agentType === 'kiro' ? 'Kiro: Orquestrador de Agentes' : 'Claude Code: IDE Autônoma';
+        const title = this.agentType === 'kiro' ? 'Kiro (Agente Azure DevOps)' : 'Claude Code (Agente Anthropic)';
         const color = this.agentType === 'kiro' ? '#8b5cf6' : '#f97316';
         
         this.container.innerHTML = `
@@ -170,19 +170,19 @@ function initLiveSimView() {
         <div class="page-header" style="background:linear-gradient(135deg, #1e293b, #0f172a);">
             <div class="tag" style="background:#38bdf8; color:#0f172a;">EXPERIMENTAL (OPENAI)</div>
             <h2>💬 Simuladores Vivos de IA</h2>
-            <p style="margin-top:10px;">Esta página se conecta diretamente à API da OpenAI pelo seu Servidor Local. Escolha entre o orquestrador corporativo (Kiro) ou o desenvolvedor mão-na-massa (Claude Code) e dê um comando real.</p>
+            <p style="margin-top:10px;">Esta página se conecta diretamente à API da OpenAI pelo seu Servidor Local. Aqui você tem dois Agentes Autônomos de Terminal com a <strong>mesma proposta de valor</strong> (orquestração, delivery e resolução de problemas), divididos apenas pelo ecossistema: o Kiro (Especialista em Azure/TFS) e o Claude Code (Especialista Open-Source/Anthropic).</p>
         </div>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
             <div>
                 <h3 style="color:#8b5cf6; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
-                    <span>🛰️</span> Kiro Terminal
+                    <span>🛰️</span> Agente Kiro
                 </h3>
                 <div id="sim-kiro-container"></div>
             </div>
             <div>
                 <h3 style="color:#f97316; margin-bottom:15px; display:flex; align-items:center; gap:8px;">
-                    <span>🖥️</span> Claude Terminal
+                    <span>🖥️</span> Agente Claude
                 </h3>
                 <div id="sim-claude-container"></div>
             </div>
