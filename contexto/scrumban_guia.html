@@ -6779,6 +6779,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <strong style="font-size:14px; color:#111827;">🛠️ Skill: Gerador de PRD</strong>
         <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill acorda quando o card entra na coluna. Ela analisa a ideia crua, cria o <code>PRD.md</code> com Critérios de Aceite em BDD. Se faltar regra de negócio, tagueia como <code>DEP-Negócio</code>. Se estiver completo, <strong>move o card sozinho para "Refinamento Técnico"</strong>.</p>
         <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: blueprint', '🧰', 'Analisa a demanda abstrata e gera requisitos técnicos BDD rastreáveis e mapeamento de PRD.', 'skill', 'contexto/ECC-main/skills/blueprint/SKILL.md')">🧰 Ver Skill de PRD</button>
+        <div style="background:#1e293b; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; color:#e2e8f0; margin-top:8px;">
+          <span style="color:#a78bfa;">// Comando CLI</span><br>$ npx ecc plan --profile minimal --target prd
+        </div>
       </div>
     </div>
 
@@ -6792,6 +6795,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <strong style="font-size:14px; color:#111827;">🛠️ Skill: Gerador de Spec</strong>
         <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill lê o PRD recém-criado. Analisa a arquitetura, gera o <code>design_spec.md</code> (banco de dados, contratos de API) e quebra o trabalho em subtarefas técnicas no TFS. Ao terminar, <strong>move o card sozinho para "Pronto para Dev"</strong>.</p>
         <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: architecture-decision-records', '🧰', 'Escreve ADRs padronizados usando markdown e decisões técnicas baseadas em contexto.', 'skill', 'contexto/ECC-main/skills/architecture-decision-records/SKILL.md')">🧰 Ver Skill de Spec</button>
+        <div style="background:#1e293b; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; color:#e2e8f0; margin-top:8px;">
+          <span style="color:#a78bfa;">// Comando CLI</span><br>$ npx ecc catalog components --with spec
+        </div>
       </div>
     </div>
 
@@ -6805,6 +6811,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <strong style="font-size:14px; color:#111827;">🛠️ Skill: Executor TDD & Código</strong>
         <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">A Skill usa a Spec para codar. Força o ciclo TDD: cria o teste, falha, implementa, passa, refatora. No final do processo, gera o Pull Request, adiciona a tag <code>AI-Generated</code> e <strong>move o card sozinho para "Code Review"</strong>.</p>
         <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: tdd-workflow', '🧰', 'Força o TDD: Escreve o teste, roda o teste (que deve falhar), escreve o código, faz o teste passar, e refatora.', 'skill', 'contexto/ECC-main/skills/tdd-workflow/SKILL.md')">🧰 Ver Skill TDD</button>
+        <div style="background:#1e293b; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; color:#e2e8f0; margin-top:8px;">
+          <span style="color:#a78bfa;">// Execução de Hooks CLI</span><br>$ npx tsc --noEmit --pretty false<br>$ npx prettier --write .
+        </div>
       </div>
     </div>
 
@@ -6818,6 +6827,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <strong style="font-size:14px; color:#111827;">🛠️ Skill: Auditor e Segurança</strong>
         <p style="font-size:13px; color:#4b5563; margin-top:5px; margin-bottom:10px;">Uma Skill independente (que não codou a feature) cruza o código com os Critérios de Aceite do PRD. Roda os testes, verifica brechas OWASP e anexa as evidências no TFS. Se aprovado, <strong>move o card sozinho para "Validação PO"</strong>.</p>
         <button class="kb-nav-btn" style="font-size:11px; padding:4px 8px;" onclick="openInfoModalDirect('Skill: security-review', '🧰', 'Efetua revisão focada em segurança, OWASP Top 10, sanitização de inputs e vazamento de secrets.', 'skill', 'contexto/ECC-main/skills/security-review/SKILL.md')">🧰 Ver Skill de Sec</button>
+        <div style="background:#1e293b; padding:8px; border-radius:6px; font-family:monospace; font-size:11px; color:#e2e8f0; margin-top:8px;">
+          <span style="color:#a78bfa;">// Avaliação e Scan CLI</span><br>$ npx ecc-agentshield scan --format json
+        </div>
       </div>
     </div>
 
