@@ -106,6 +106,29 @@ function initLabsView() {
             <p style="margin-top:10px;">Aqui o código ganha vida. Abaixo estão catalogados 40 laboratórios detalhados dividindo o ciclo de vida da Engenharia de Software em duas IAs complementares: <strong>Kiro (O Orquestrador)</strong> e <strong>Claude Code (O Worker de Terminal)</strong>. Selecione a aba desejada abaixo.</p>
         </div>
 
+        <!-- Dicionário do Laboratório -->
+        <div style="background:#fff; border:1px solid #cbd5e1; border-radius:12px; padding:20px; margin-bottom:30px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+            <strong style="color:#0f172a; font-size:16px; display:block; margin-bottom:15px; border-bottom:2px solid #f1f5f9; padding-bottom:8px;">📖 Dicionário de Sobrevivência (Antes de Começar)</strong>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:15px;">
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #3b82f6;">
+                    <strong style="color:#1e3a8a; font-size:13px; display:block;">🧠 Agente (Agent)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">O cérebro autônomo (LLM). Diferente de um ChatGPT (onde você digita e ele responde), o agente tem autonomia para rodar em loop, pensar, executar ferramentas e tomar decisões sozinho até atingir o objetivo.</p>
+                </div>
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #8b5cf6;">
+                    <strong style="color:#4c1d95; font-size:13px; display:block;">🛠️ Skill (Habilidade/Cargo)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">É o "cargo" que damos ao Agente. Um YAML com instruções específicas (ex: "Você é o Tech Lead, só pode revisar código e nunca escrever"). Uma Skill limita e especializa o Agente.</p>
+                </div>
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #10b981;">
+                    <strong style="color:#064e3b; font-size:13px; display:block;">🔌 Solução (Harness)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">O software que abraça o LLM e dá "mãos" a ele. Kiro, Antigravity e Claude Code são Soluções (Harness). Eles instanciam o motor no seu PC (Windows/Linux) para que a IA consiga rodar comandos no seu terminal de verdade.</p>
+                </div>
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #f59e0b;">
+                    <strong style="color:#78350f; font-size:13px; display:block;">🎭 Playwright (Visão Automática)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">Ferramenta do mercado usada para automação de browser. A IA usa o Playwright como "olhos" para abrir o Google Chrome sozinho, clicar em botões, tirar prints e testar se a interface web que ela codou realmente funciona na tela.</p>
+                </div>
+            </div>
+        </div>
+
         <div class="lab-tabs" id="lab-tabs">
             <button class="lab-tab-btn active" onclick="switchLabTab('tab-kiro-basic', this)">⚙️ Kiro: Básicos (1-10)</button>
             <button class="lab-tab-btn" onclick="switchLabTab('tab-kiro-tfs', this)">⚙️ Kiro: TFS Lifecycle (11-20)</button>
