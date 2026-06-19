@@ -481,6 +481,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-elite-tamanho',this)"><span class="ni">📐</span> Tamanho & Previsibilidade</div>
         <div class="nav-item" onclick="goTo('s-elite-gitflow',this)"><span class="ni">🌿</span> Fluxo Git & Deploys</div>
         <div class="nav-item" onclick="goTo('s-elite-harness',this)"><span class="ni">🤖</span> Harness & Ambientes</div>
+        <div class="nav-item" onclick="goTo('s-elite-docs',this)"><span class="ni">📚</span> Documentos (PRD, SDD...)</div>
       </div>
     </div>
 
@@ -7178,6 +7179,116 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="alert alert-blue" style="margin-top:24px;"><span>💡</span><span><strong>A Regra de Ouro:</strong> Uma IA Agentic nunca "baixa" seu código para rodar magicamente no servidor da OpenAI ou do Google. O cérebro fica na nuvem, mas as mãos e o laboratório de teste (onde ele roda <code>git</code>, <code>npm</code>, <code>docker</code>) <strong>são a própria máquina onde o Harness está instalado</strong>. Por isso, se a sua máquina não tiver o Python instalado, a IA também vai tomar "Comando não encontrado" ao tentar rodar um script, exatamente como você tomaria. O Harness é você digitalizado.</span></div>
+  </div>
+
+<!-- ===== ECOSSISTEMA DE DOCUMENTOS ===== -->
+  <div id="s-elite-docs" class="section">
+    <div class="page-header" style="background:linear-gradient(135deg,#312e81,#1e1b4b)">
+      <div class="tag">ARQUITETURA</div><h2>📚 Sopa de Letrinhas (PRD, SDD, TDD, DDD)</h2>
+      <p>O funil de tradução: Como uma ideia de negócio vira código executável por IAs</p>
+    </div>
+    
+    <div class="card indigo" style="margin-bottom:24px;">
+      <p>Na era da Inteligência Artificial autônoma, a coisa mais perigosa que você pode fazer é pedir para o código ser escrito direto de uma ideia abstrata ("Faz um botão de Pix aí"). A IA precisa de <strong>traduções estruturadas</strong>. O Negócio escreve pro Arquiteto, o Arquiteto escreve pro Robô, o Robô escreve pro Computador.</p>
+    </div>
+
+    <div class="st">🔤 O Glossário da Engenharia AI-Native</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:15px; margin-bottom:24px;">
+      
+      <!-- PRD -->
+      <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #3b82f6;">
+        <strong style="color:#1e3a8a; font-size:14px; display:block;">📝 PRD (Product Requirements Document)</strong>
+        <p style="font-size:13px; color:#475569; margin:4px 0 0 0; line-height:1.5;"><strong>O Quê e Por Quê.</strong> Escrito pelo Product Owner (PO). Contém a dor do usuário, métricas de sucesso e os Critérios de Aceite da User Story em português/inglês claro.</p>
+      </div>
+
+      <!-- DDD -->
+      <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #8b5cf6;">
+        <strong style="color:#4c1d95; font-size:14px; display:block;">🏛️ DDD (Domain-Driven Design)</strong>
+        <p style="font-size:13px; color:#475569; margin:4px 0 0 0; line-height:1.5;"><strong>Como separar.</strong> Um padrão arquitetural de software usado pelo Tech Lead para dividir o sistema em pedaços lógicos (Ex: Módulo de 'Pagamento' não se mistura com 'Notificação').</p>
+      </div>
+
+      <!-- SDD / spec.md -->
+      <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #ec4899;">
+        <strong style="color:#831843; font-size:14px; display:block;">🎯 SDD / spec.md (Spec-Driven Development)</strong>
+        <p style="font-size:13px; color:#475569; margin:4px 0 0 0; line-height:1.5;"><strong>O Mapa do Tesouro.</strong> Um arquivo técnico (gerado pelo Tech Lead) que traduz o PRD em endpoints de API precisos, nomes de variáveis e tabelas de banco de dados.</p>
+      </div>
+
+      <!-- TDD -->
+      <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #14b8a6;">
+        <strong style="color:#0f766e; font-size:14px; display:block;">✅ TDD (Test-Driven Development)</strong>
+        <p style="font-size:13px; color:#475569; margin:4px 0 0 0; line-height:1.5;"><strong>Como validar.</strong> O Agente de IA primeiro escreve o teste unitário baseado na spec.md (que vai falhar). Depois escreve o código até a luz ficar verde. Isso impede alucinações da IA.</p>
+      </div>
+
+      <!-- claude.md -->
+      <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #f59e0b;">
+        <strong style="color:#78350f; font-size:14px; display:block;">🤖 claude.md (ou cursorrules)</strong>
+        <p style="font-size:13px; color:#475569; margin:4px 0 0 0; line-height:1.5;"><strong>As Regras da Casa.</strong> Um arquivo fixo na raiz do repositório que ensina a IA como trabalhar naquele projeto específico (ex: "Sempre use TypeScript estrito, nunca use var").</p>
+      </div>
+
+    </div>
+
+    <div class="st">🔄 Exemplo Completo: A Linha de Montagem</div>
+    <p style="font-size:13px; color:var(--text2); margin-bottom:16px;">Vamos ver como uma feature chamada "Exportar Relatório PDF" passa pelas mãos de Humanos e Agentes em uma esteira 100% autônoma.</p>
+
+    <div style="display:flex; flex-direction:column; gap:16px; background:#f8fafc; padding:20px; border-radius:12px; border:1px solid #cbd5e1;">
+      
+      <!-- Step 1 -->
+      <div style="display:flex; gap:15px; align-items:flex-start;">
+        <div style="width:40px; height:40px; background:#1e293b; color:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">1</div>
+        <div>
+          <strong style="color:#0f172a; font-size:14px;">Humano (Product Owner) gera o PRD</strong>
+          <p style="font-size:13px; color:#475569; margin:4px 0 8px 0; line-height:1.5;">O PO entra no TFS e escreve a User Story: <em>"Como gerente, quero exportar meus dados em PDF para enviar para a diretoria. Critério: Deve gerar o PDF em menos de 5 segundos."</em></p>
+        </div>
+      </div>
+
+      <div style="margin-left:20px; width:2px; height:20px; background:#cbd5e1;"></div>
+
+      <!-- Step 2 -->
+      <div style="display:flex; gap:15px; align-items:flex-start;">
+        <div style="width:40px; height:40px; background:#8b5cf6; color:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">2</div>
+        <div>
+          <strong style="color:#4c1d95; font-size:14px;">Skill Agente: Tech Lead cria a Spec (SDD + DDD)</strong>
+          <p style="font-size:13px; color:#475569; margin:4px 0 8px 0; line-height:1.5;">O Kiro percebe a nova Story. Ele assume o papel de Tech Lead, lê o PRD, aplica os princípios de <strong>DDD</strong> e escreve um arquivo técnico detalhado <code>spec.md</code>:</p>
+          <div style="background:#1e293b; color:#e2e8f0; font-family:monospace; padding:10px; border-radius:6px; font-size:12px;">
+# spec.md
+Endpoint: POST /api/reports/export
+Biblioteca: Puppeteer
+Domain (DDD): 'Reporting' (Não misturar com o domínio de 'Billing')
+Testes exigidos: Timeout < 5000ms.
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-left:20px; width:2px; height:20px; background:#cbd5e1;"></div>
+
+      <!-- Step 3 -->
+      <div style="display:flex; gap:15px; align-items:flex-start;">
+        <div style="width:40px; height:40px; background:#ec4899; color:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">3</div>
+        <div>
+          <strong style="color:#831843; font-size:14px;">Harness: Claude Code absorve o contexto (claude.md)</strong>
+          <p style="font-size:13px; color:#475569; margin:4px 0 8px 0; line-height:1.5;">A IA dev é acordada para codar a spec.md. Antes de escrever código, ela lê o <code>claude.md</code> na raiz do projeto que dita as leis da casa: <em>"Use TypeScript estrito, não use bibliotecas obsoletas"</em>.</p>
+        </div>
+      </div>
+
+      <div style="margin-left:20px; width:2px; height:20px; background:#cbd5e1;"></div>
+
+      <!-- Step 4 -->
+      <div style="display:flex; gap:15px; align-items:flex-start;">
+        <div style="width:40px; height:40px; background:#10b981; color:#fff; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;">4</div>
+        <div>
+          <strong style="color:#064e3b; font-size:14px;">Skill Agente: Coder atua com TDD</strong>
+          <p style="font-size:13px; color:#475569; margin:4px 0 8px 0; line-height:1.5;">A IA agora roda em loop fechado para garantir que não vai quebrar nada em produção:</p>
+          <ul style="font-size:12px; color:#475569; margin-top:5px; padding-left:15px; line-height:1.5;">
+            <li>Cria <code>report.spec.ts</code> testando se a API retorna um PDF em menos de 5s. <strong>(FALHA: O código não existe)</strong></li>
+            <li>Cria <code>report.controller.ts</code> e implementa o código real.</li>
+            <li>Roda os testes novamente. <strong>(PASSA: TDD finalizado com sucesso!)</strong></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="alert alert-indigo" style="margin-top:24px;"><span>💡</span><span><strong>A Chave de Ouro:</strong> Perceba que o <strong>PRD</strong> é para humanos entenderem o negócio, mas a IA que programa <em>precisa</em> do <strong>spec.md (SDD)</strong>. Pular essa etapa de tradução (por exemplo, mandar o Claude programar lendo direto o Épico do Jira/TFS escrito pelo PO) é o principal motivo de as empresas acharem que "A IA gera código ruim e alucinado". Ela precisa dessa "Sopa de Letrinhas" arquitetural no meio do caminho para se comportar como um sênior.</span></div>
   </div>
 
 <!-- ===== KIRO HUB ===== -->
