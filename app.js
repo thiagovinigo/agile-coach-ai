@@ -96,13 +96,8 @@ async function loadAndMigrateContent() {
                     { title: 'Refinamentos (Upstream)', parts: [ { id: 's-apresentacao-refinamentos', context: 'Time de Elite' } ] },
                     { title: 'Sim. Ref. Funcional', parts: [ { id: 's-elite-sim-func', context: 'Time de Elite' } ] },
                     { title: 'Sim. Ref. Técnico', parts: [ { id: 's-elite-sim-tec', context: 'Time de Elite' } ] },
-                    { title: 'Engenharia e IA no PRD', parts: [ { id: 's-po-ia-dev', context: 'Engenharia / PO' } ] },
                     { title: 'Fluxo Git (TST → HML → PROD)', parts: [ { id: 's-elite-gitflow', context: 'Engenharia / CI/CD' } ] },
-                    { title: 'Harness & Ambientes da IA', parts: [ { id: 's-elite-harness', context: 'Engenharia / AI' } ] },
-                    { title: 'Documentos (PRD, SDD, TDD...)', parts: [ { id: 's-elite-docs', context: 'Engenharia / Arquitetura' } ] },
-                    { title: '🎮 Simulador do Orquestrador', parts: [ { id: 's-elite-orchestrator', context: 'Engenharia / Arquitetura' } ] },
                     
-                    { title: 'Kiro: Simulador Hands-on', parts: [ { id: 's-kiro-hub', context: 'Engenharia / PO' } ] },
                     // 3. Operação e Execução
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Time de Elite' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Time de Elite' } ] },
@@ -114,6 +109,14 @@ async function loadAndMigrateContent() {
                     { title: 'Scrumban Avançado', parts: [ { id: 's-scrumban-avancado', context: 'Time de Elite' } ] },
                     { title: 'Métricas DORA', parts: [ { id: 's-metricas-dora', context: 'Engenharia / Métricas' } ] },
                     { title: 'Health Check do Time', parts: [ { id: 's-healthcheck', context: 'Agile Coach / Métricas' } ] }
+                ];
+            } else if(viewId === 'kb-arquitetura-ia') {
+                sectionsToExtract = [
+                    { title: 'Harness & Ambientes da IA', parts: [ { id: 's-elite-harness', context: 'Engenharia / AI' } ] },
+                    { title: 'Engenharia e IA no PRD', parts: [ { id: 's-po-ia-dev', context: 'Engenharia / PO' } ] },
+                    { title: 'Documentos (PRD, SDD, TDD...)', parts: [ { id: 's-elite-docs', context: 'Engenharia / Arquitetura' } ] },
+                    { title: '🎮 Simulador do Orquestrador', parts: [ { id: 's-elite-orchestrator', context: 'Engenharia / Arquitetura' } ] },
+                    { title: 'Kiro: Simulador Hands-on', parts: [ { id: 's-kiro-hub', context: 'Engenharia / PO' } ] }
                 ];
             } else if(viewId === 'kb-tfs') {
                 sectionsToExtract = [
@@ -266,6 +269,7 @@ async function loadAndMigrateContent() {
         // Popula as views
         extractSection('ng-scrumban', 'kb-scrumban');
         extractSection('ng-elite', 'kb-elite');
+        extractSection('kb-arquitetura-ia', 'kb-arquitetura-ia');
         extractSection('kb-agil', 'kb-agil');
         extractSection('kb-kanban', 'kb-kanban');
         extractSection('kb-scrum', 'kb-scrum');
