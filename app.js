@@ -646,23 +646,31 @@ setInterval(() => {
 /* =========================================================================
    Orchestrator vs Worker Simulator Logic
    ========================================================================= */
-let simTimeout1, simTimeout2, simTimeout3, simTimeout4, simTimeout5;
+let simTimeout1, simTimeout2, simTimeout3, simTimeout4, simTimeout5, simTimeout6, simTimeout7;
 
 window.resetOrchestratorSim = function() {
-    clearTimeout(simTimeout1); clearTimeout(simTimeout2); clearTimeout(simTimeout3); clearTimeout(simTimeout4); clearTimeout(simTimeout5);
+    clearTimeout(simTimeout1); clearTimeout(simTimeout2); clearTimeout(simTimeout3); clearTimeout(simTimeout4); clearTimeout(simTimeout5); clearTimeout(simTimeout6); clearTimeout(simTimeout7);
+    const humBox = document.getElementById('sim-hum-box');
     const orqBox = document.getElementById('sim-orq-box');
     const wrkBox = document.getElementById('sim-wrk-box');
-    if(!orqBox || !wrkBox) return;
+    if(!orqBox || !wrkBox || !humBox) return;
 
+    humBox.style.borderColor = '#334155';
+    humBox.style.boxShadow = 'none';
     orqBox.style.borderColor = '#334155';
     orqBox.style.boxShadow = 'none';
     wrkBox.style.borderColor = '#334155';
     wrkBox.style.boxShadow = 'none';
     
-    document.getElementById('sim-arrow-right').style.opacity = '0.2';
-    document.getElementById('sim-arrow-left').style.opacity = '0.2';
+    document.getElementById('sim-arrow-right-1').style.opacity = '0.2';
+    document.getElementById('sim-arrow-left-1').style.opacity = '0.2';
+    document.getElementById('sim-arrow-right-2').style.opacity = '0.2';
+    document.getElementById('sim-arrow-left-2').style.opacity = '0.2';
     
+    document.getElementById('sim-hum-log').innerHTML = '> Pensando...';
+    document.getElementById('sim-hum-log').style.color = '#a855f7';
     document.getElementById('sim-orq-log').innerHTML = '> Aguardando comandos...';
+    document.getElementById('sim-orq-log').style.color = '#10b981';
     document.getElementById('sim-wrk-log').innerHTML = '> Dormindo...';
     document.getElementById('sim-wrk-log').style.color = '#3b82f6';
 };
@@ -670,62 +678,104 @@ window.resetOrchestratorSim = function() {
 window.startOrchestratorSim = function() {
     window.resetOrchestratorSim();
     
+    const humBox = document.getElementById('sim-hum-box');
+    const humLog = document.getElementById('sim-hum-log');
     const orqBox = document.getElementById('sim-orq-box');
     const orqLog = document.getElementById('sim-orq-log');
     const wrkBox = document.getElementById('sim-wrk-box');
     const wrkLog = document.getElementById('sim-wrk-log');
-    const aRight = document.getElementById('sim-arrow-right');
-    const aLeft = document.getElementById('sim-arrow-left');
+    
+    const aR1 = document.getElementById('sim-arrow-right-1');
+    const aL1 = document.getElementById('sim-arrow-left-1');
+    const aR2 = document.getElementById('sim-arrow-right-2');
+    const aL2 = document.getElementById('sim-arrow-left-2');
 
     if(!orqBox) return;
 
-    // Step 1: Orquestrador analisa a tarefa
-    orqBox.style.borderColor = '#10b981';
-    orqBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
-    orqLog.innerHTML = '> Recebido: "Criar Tela de Login"<br>> Analisando...<br>> Quebrando em 2 Tasks:<br>1. Criar Auth API<br>2. Criar React Form';
+    // Step 1: Humano escreve a tarefa
+    humBox.style.borderColor = '#a855f7';
+    humBox.style.boxShadow = '0 0 15px rgba(168,85,247,0.3)';
+    humLog.innerHTML = '> Escrevendo PRD no TFS...<br>> Feature: "Criar Tela de Login"<br>> Acionando terminal: `kiro run`';
 
-    // Step 2: Delega
+    // Step 2: Humano manda pro Kiro
     simTimeout1 = setTimeout(() => {
-        aRight.style.opacity = '1';
-        orqLog.innerHTML += '<br><br>> [DELEGANDO] Task 1: Auth API para o Worker...';
+        aR1.style.opacity = '1';
+        humLog.innerHTML += '<br><br>> [ENVIANDO] Demanda para o Orquestrador...';
     }, 2000);
 
-    // Step 3: Worker tenta codar
+    // Step 3: Kiro recebe e atua como Arquiteto
     simTimeout2 = setTimeout(() => {
-        aRight.style.opacity = '0.2';
+        aR1.style.opacity = '0.2';
+        humBox.style.borderColor = '#334155';
+        humBox.style.boxShadow = 'none';
+        
+        orqBox.style.borderColor = '#10b981';
+        orqBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+        orqLog.innerHTML = '> Lendo TFS...<br>> [SKILL: Arquiteto] Gerando spec.md<br>> Quebrando em 2 Tasks:<br>1. Auth API<br>2. React Form<br>> [Harness] Chamando Claude Code';
+    }, 3500);
+
+    // Step 4: Kiro delega pro Claude
+    simTimeout3 = setTimeout(() => {
+        aR2.style.opacity = '1';
+        orqLog.innerHTML += '<br><br>> [DELEGANDO] Task 1: Auth API...';
+    }, 6000);
+
+    // Step 5: Claude tenta codar e falha
+    simTimeout4 = setTimeout(() => {
+        aR2.style.opacity = '0.2';
         orqBox.style.borderColor = '#334155';
         orqBox.style.boxShadow = 'none';
         
         wrkBox.style.borderColor = '#3b82f6';
         wrkBox.style.boxShadow = '0 0 15px rgba(59,130,246,0.3)';
-        wrkLog.innerHTML = '> Recebido: Task 1 (Auth API)<br>> Escrevendo código...<br>> Rodando TDD...<br>> <span style="color:#ef4444;">ERRO: Cannot find module bcrypt</span>';
-    }, 4000);
+        wrkLog.innerHTML = '> [SKILL: Coder TDD] Lendo spec.md<br>> Rodando testes...<br>> <span style="color:#ef4444;">ERRO: module bcrypt missing</span><br>> Devolvendo para Kiro.';
+        aL2.style.opacity = '1';
+    }, 8000);
 
-    // Step 4: Worker falha e devolve
-    simTimeout3 = setTimeout(() => {
-        aLeft.style.opacity = '1';
-        wrkLog.innerHTML += '<br>> [DEVOLVENDO] Chefe, travei nesse erro.';
-    }, 6000);
-
-    // Step 5: Orquestrador resolve e manda de novo
-    simTimeout4 = setTimeout(() => {
-        aLeft.style.opacity = '0.2';
+    // Step 6: Kiro resolve e manda de novo
+    simTimeout5 = setTimeout(() => {
+        aL2.style.opacity = '0.2';
         wrkBox.style.borderColor = '#334155';
         wrkBox.style.boxShadow = 'none';
         
         orqBox.style.borderColor = '#f59e0b';
         orqBox.style.boxShadow = '0 0 15px rgba(245,158,11,0.3)';
-        orqLog.innerHTML += '<br><br>> [ANALISANDO ERRO] Faltou dependência.<br>> [DELEGANDO] Rode `npm i bcrypt` e tente novamente.';
-    }, 8000);
+        orqLog.innerHTML = '> [ANALISANDO ERRO]<br>> Solução encontrada.<br>> [DELEGANDO] Rode `npm i bcrypt` e prossiga.';
+        aR2.style.opacity = '1';
+    }, 11000);
 
-    // Step 6: Worker finaliza
-    simTimeout5 = setTimeout(() => {
+    // Step 7: Claude finaliza e devolve pro Kiro
+    simTimeout6 = setTimeout(() => {
+        aR2.style.opacity = '0.2';
         orqBox.style.borderColor = '#334155';
         orqBox.style.boxShadow = 'none';
         
         wrkBox.style.borderColor = '#10b981';
         wrkBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
         wrkLog.style.color = '#10b981';
-        wrkLog.innerHTML = '> Rodando `npm i bcrypt`...<br>> Rodando testes...<br>> <span style="color:#10b981;">TDD PASSOU! ✅</span><br>> Task 1 Concluída.';
-    }, 11000);
+        wrkLog.innerHTML = '> `npm i bcrypt` executado.<br>> Testes passando ✅<br>> Commit efetuado.<br>> [DEVOLVENDO] Task 1 Completa.';
+        aL2.style.opacity = '1';
+    }, 14000);
+    
+    // Step 8: Kiro devolve pro Humano
+    simTimeout7 = setTimeout(() => {
+        aL2.style.opacity = '0.2';
+        wrkBox.style.borderColor = '#334155';
+        wrkBox.style.boxShadow = 'none';
+        
+        orqBox.style.borderColor = '#10b981';
+        orqBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+        orqLog.innerHTML = '> [SKILL: Arquiteto] Validando código.<br>> PR gerado.<br>> Atualizando TFS para "Code Review".';
+        
+        aL1.style.opacity = '1';
+        
+        setTimeout(() => {
+            orqBox.style.borderColor = '#334155';
+            orqBox.style.boxShadow = 'none';
+            humBox.style.borderColor = '#10b981';
+            humBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+            humLog.style.color = '#10b981';
+            humLog.innerHTML = '> Slack: "Chefe, Tela de Login PR enviado!"<br>> Fluxo concluído ✅';
+        }, 2000);
+    }, 17000);
 };

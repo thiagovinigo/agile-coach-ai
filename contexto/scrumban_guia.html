@@ -7325,32 +7325,49 @@ Testes exigidos: Timeout < 5000ms.
       </div>
 
       <!-- Diagram Area -->
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; position:relative;">
         
-        <!-- Left: Orquestrador -->
-        <div id="sim-orq-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:20px; text-align:center; transition:all 0.3s;">
-          <div style="font-size:40px; margin-bottom:10px;">🧠</div>
-          <h3 style="color:#f8fafc; margin:0 0 10px 0;">Sala do Chefe (Orquestrador)</h3>
-          <p style="color:#94a3b8; font-size:13px; margin:0 0 15px 0;">O Kiro. Visão macro, quebra de tarefas (WBS) e delegação.</p>
+        <!-- Left: Humano -->
+        <div id="sim-hum-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:15px; text-align:center; transition:all 0.3s;">
+          <div style="font-size:35px; margin-bottom:10px;">👤</div>
+          <h3 style="color:#f8fafc; margin:0 0 5px 0; font-size:14px;">Humano (Você)</h3>
+          <p style="color:#94a3b8; font-size:11px; margin:0 0 15px 0;">Cria a demanda (TFS) e aciona o Kiro.</p>
           
-          <div id="sim-orq-log" style="background:#020617; color:#10b981; font-family:monospace; padding:10px; border-radius:6px; font-size:12px; min-height:80px; text-align:left; border:1px solid #1e293b;">
+          <div id="sim-hum-log" style="background:#020617; color:#a855f7; font-family:monospace; padding:10px; border-radius:6px; font-size:11px; min-height:80px; text-align:left; border:1px solid #1e293b;">
+            > Pensando...
+          </div>
+        </div>
+
+        <!-- Center: Arrow 1 -->
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:180px; min-width:30px;">
+          <div id="sim-arrow-right-1" style="font-size:20px; opacity:0.2; transition:opacity 0.3s;">➡️</div>
+          <div id="sim-arrow-left-1" style="font-size:20px; opacity:0.2; transition:opacity 0.3s; margin-top:20px;">⬅️</div>
+        </div>
+
+        <!-- Middle: Orquestrador -->
+        <div id="sim-orq-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:15px; text-align:center; transition:all 0.3s;">
+          <div style="font-size:35px; margin-bottom:10px;">🧠</div>
+          <h3 style="color:#f8fafc; margin:0 0 5px 0; font-size:14px;">Kiro (Orquestrador)</h3>
+          <p style="color:#94a3b8; font-size:11px; margin:0 0 15px 0;">Veste a Skill de Arquiteto, quebra tarefas e despacha.</p>
+          
+          <div id="sim-orq-log" style="background:#020617; color:#10b981; font-family:monospace; padding:10px; border-radius:6px; font-size:11px; min-height:80px; text-align:left; border:1px solid #1e293b;">
             > Aguardando comandos...
           </div>
         </div>
 
-        <!-- Center: Arrow -->
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:200px;">
-          <div id="sim-arrow-right" style="font-size:30px; opacity:0.2; transition:opacity 0.3s;">➡️</div>
-          <div id="sim-arrow-left" style="font-size:30px; opacity:0.2; transition:opacity 0.3s; margin-top:20px;">⬅️</div>
+        <!-- Center: Arrow 2 -->
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:180px; min-width:30px;">
+          <div id="sim-arrow-right-2" style="font-size:20px; opacity:0.2; transition:opacity 0.3s;">➡️</div>
+          <div id="sim-arrow-left-2" style="font-size:20px; opacity:0.2; transition:opacity 0.3s; margin-top:20px;">⬅️</div>
         </div>
 
         <!-- Right: Worker -->
-        <div id="sim-wrk-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:20px; text-align:center; transition:all 0.3s;">
-          <div style="font-size:40px; margin-bottom:10px;">🏭</div>
-          <h3 style="color:#f8fafc; margin:0 0 10px 0;">Fábrica (Claude Code)</h3>
-          <p style="color:#94a3b8; font-size:13px; margin:0 0 15px 0;">O Operário. Só escreve código, roda no terminal e testa.</p>
+        <div id="sim-wrk-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:15px; text-align:center; transition:all 0.3s;">
+          <div style="font-size:35px; margin-bottom:10px;">🏭</div>
+          <h3 style="color:#f8fafc; margin:0 0 5px 0; font-size:14px;">Claude (Worker)</h3>
+          <p style="color:#94a3b8; font-size:11px; margin:0 0 15px 0;">Veste a Skill de Coder. Codifica e roda TDD no terminal.</p>
           
-          <div id="sim-wrk-log" style="background:#020617; color:#3b82f6; font-family:monospace; padding:10px; border-radius:6px; font-size:12px; min-height:80px; text-align:left; border:1px solid #1e293b;">
+          <div id="sim-wrk-log" style="background:#020617; color:#3b82f6; font-family:monospace; padding:10px; border-radius:6px; font-size:11px; min-height:80px; text-align:left; border:1px solid #1e293b;">
             > Dormindo...
           </div>
         </div>
