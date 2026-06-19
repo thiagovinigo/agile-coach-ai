@@ -126,6 +126,14 @@ function initLabsView() {
                     <strong style="color:#78350f; font-size:13px; display:block;">🎭 Playwright (Visão Automática)</strong>
                     <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">Ferramenta do mercado usada para automação de browser. A IA usa o Playwright como "olhos" para abrir o Google Chrome sozinho, clicar em botões, tirar prints e testar se a interface web que ela codou realmente funciona na tela.</p>
                 </div>
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #ec4899;">
+                    <strong style="color:#831843; font-size:13px; display:block;">📝 SDD (Spec-Driven Development)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">O desenvolvimento guiado por Especificação. Na era da IA, antes de codar, você cria um arquivo de especificação claro (ex: <code>spec.md</code> ou <code>openapi.yaml</code>). Essa é a "Fonte da Verdade" que garante que a IA construa a coisa certa, evitando alucinações.</p>
+                </div>
+                <div style="background:#f8fafc; padding:12px; border-radius:8px; border-left:4px solid #14b8a6;">
+                    <strong style="color:#0f766e; font-size:13px; display:block;">✅ TDD (Test-Driven Development)</strong>
+                    <p style="font-size:12px; color:#475569; margin:4px 0 0 0; line-height:1.5;">O desenvolvimento guiado por Testes. É como IAs autônomas programam com segurança: primeiro a IA escreve um teste automatizado (que falha). Depois ela gera o código até o teste ficar verde. O TDD obriga a IA a <strong>provar</strong> que a feature funciona.</p>
+                </div>
             </div>
         </div>
 
