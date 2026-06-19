@@ -170,6 +170,29 @@ function initKiroDocView() {
                 </div>
             </div>
         </details>
+
+        <!-- MÓDULO 5 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">🤖</span> Módulo 5: Orquestração de Subagents</summary>
+            <div class="mc-content">
+                <p>O verdadeiro poder do Kiro como Orquestrador brilha na sua capacidade de "delegar" (spawn) sub-agentes para resolver problemas em paralelo. Em vez de uma única IA tentar resolver tudo de forma linear, o Kiro atua como um Gerente de Projetos distribuindo a carga.</p>
+
+                <h4 style="color:#1e293b; margin-top:20px;">1. Padrão de Delegação (Spawning)</h4>
+                <p>Quando o Kiro recebe um Épico ou Feature grande, ele quebra os requisitos e dispara Subagents específicos (ex: um focado apenas em UI, outro em Banco de Dados, outro em Testes). O Kiro fica aguardando o retorno de cada um (Await).</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># Exemplo de fluxo do orquestrador (Kiro) delegando:</span>
+<span class="mc-code-highlight">@kiro</span>: "Vou criar dois sub-agentes para trabalhar nisso em paralelo."
+<span class="mc-code-highlight">[Subagent-1]</span> Iniciado: 'Role: Backend Developer'. Tarefa: Criar a API.
+<span class="mc-code-highlight">[Subagent-2]</span> Iniciado: 'Role: Codebase Researcher'. Tarefa: Levantar os modelos de dados atuais.
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">2. Sincronização e Message Passing</h4>
+                <p>Os Subagents não trabalham isolados. O Kiro e os Subagents usam ferramentas como <code>send_message</code> para trocar informações. O Pesquisador avisa o Desenvolvedor sobre quais tabelas usar, e o Desenvolvedor retorna o código pronto para o Kiro (Orquestrador) revisar e fazer o Merge.</p>
+                <div class="mc-callout">
+                    <strong>Benefício Real:</strong> Ao orquestrar Subagents, o Kiro isola o contexto (Context Window) de cada IA. O Agente de Frontend não polui sua memória com logs de queries SQL do Backend, resultando em respostas mais baratas (menos tokens) e menos "alucinações" da IA.
+                </div>
+            </div>
+        </details>
     `;
 }
 

@@ -268,7 +268,29 @@ A camada de Domínio deve ser 100% isolada e não ter dependências externas.
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
+
+        <!-- MÓDULO 5 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">🤖</span> Módulo 5: Orquestração de Agentes no Claude Code</summary>
+            <div class="mc-content">
+                <p>Assim como o Kiro no ecossistema Azure, o Claude Code não é apenas um "assistente de código", ele é um Orquestrador de Terminal. Ele pode invocar *Subagents* (instâncias secundárias do Claude) para executar tarefas em paralelo e reportar os resultados.</p>
+
+                <h4 style="color:#1e293b; margin-top:20px;">1. Processamento em Background</h4>
+                <p>No terminal, você não precisa ficar travado esperando o Claude ler mil arquivos. Você pode instruí-lo a disparar subagentes para fazer a pesquisa (Research) em background enquanto você continua codificando com ele.</p>
+                <div class="mc-code">
+<span class="mc-code-comment"># Exemplo de comando no REPL do Claude:</span>
+> "Inicie um subagente de pesquisa no background para procurar referências de 'Auth0' na pasta /services. Enquanto ele faz isso, vamos começar a refatorar o login.ts aqui."
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">2. Ferramentas de Comunicação (send_message)</h4>
+                <p>Os agentes não estão cegos uns para os outros. O Claude Code orquestrador pode enviar novas instruções para um subagente que já está rodando (usando ferramentas internas similares ao <code>send_message</code>) ou interrogar o status da tarefa dele.</p>
+                <div class="mc-callout" style="border-color:#10b981; background:#ecfdf5;">
+                    <strong>Eficiência de Tokens:</strong> A orquestração via Subagents é o segredo para projetos massivos. Em vez de entupir o Claude principal com gigabytes de logs, o Subagente analisa os logs e retorna apenas a conclusão resumida ("Encontrei 3 NullPointers na linha 42").
+                </div>
+            </div>
+        </details>
     `;
 }
 
