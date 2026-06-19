@@ -417,6 +417,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-wip',this)"><span class="ni">🚦</span> Limites de WIP</div>
         <div class="nav-item" onclick="goTo('s-daily',this)"><span class="ni">☀️</span> Daily</div>
         <div class="nav-item" onclick="goTo('s-demo',this)"><span class="ni">🎬</span> Demo</div>
+        <div class="nav-item" onclick="goTo('s-retro',this)"><span class="ni">🔄</span> Retrospectiva</div>
         <div class="nav-item" onclick="goTo('s-bloqueios',this)"><span class="ni">🚧</span> Bloqueios</div>
         <div class="nav-item" onclick="goTo('s-cos',this)"><span class="ni">🎯</span> Classes de Serviço</div>
         <div class="nav-item" onclick="goTo('s-tradeoffs',this)"><span class="ni">⚖️</span> Trade-offs</div>
@@ -9115,6 +9116,49 @@ Use a ferramenta `azure-devops_update_work_item` com o PATCH:
     <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">O que vem a seguir (5 min)</div><div class="vtl-body">PO mostra as próximas 3–5 apostas do backlog. Não é compromisso — é transparência. Stakeholders influenciam antes de ser construído.</div></div>
   </div>
   <div class="alert alert-red"><span>⚠️</span><span><strong>Demo que não gera feedback é show, não aprendizado.</strong> Se stakeholders saem sem dizer nada que muda o backlog, a demo não está cumprindo seu papel.</span></div>
+</div>
+
+<!-- ===== RETROSPECTIVA ===== -->
+<div id="s-retro" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#6d28d9,#4c1d95)">
+    <div class="tag">CERIMÔNIA</div><h2>🔄 Retrospectiva no Scrumban</h2>
+    <p>Melhoria contínua baseada em dados e métricas reais de fluxo</p>
+  </div>
+  <div class="card purple"><p>No Scrumban, a retrospectiva abandona o "achismo" (ex: "senti que fomos lentos") e abraça a análise de fluxo. Usamos o CFD, Control Chart e Cycle Time para pautar a discussão. <strong>Cadência recomendada:</strong> a cada 2 ou 4 semanas, ou gatilhada por um evento sistêmico (ex: Lead Time dobrou).</p></div>
+  
+  <div class="st">💡 Como Conduzir a Retro Scrumban</div>
+  <div class="vtl">
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">Passo 1: Revisão de Métricas (10 min)</div><div class="vtl-body">Abra o Control Chart e veja o Cycle Time médio e a dispersão. O CFD mostra gargalos? Existem tickets "velhos" envelhecendo na coluna de WIP? Os dados não mentem.</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">Passo 2: Análise de Bloqueios (15 min)</div><div class="vtl-body">Analise o "Blocker Clustering". Quais foram os motivos de bloqueio que mais consumiram tempo no último ciclo? Dependências externas? Ambiente de homologação fora do ar?</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">Passo 3: Ajuste de Políticas e WIP (15 min)</div><div class="vtl-body">Precisamos diminuir o limite de WIP da coluna "Code Review"? A política da Classe de Serviço Urgente foi desrespeitada? Ajuste as regras do jogo.</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">Passo 4: Ação de Melhoria Contínua (Kaizen) (10 min)</div><div class="vtl-body">O que vamos tentar diferente no próximo ciclo? Aja sobre o sistema, não sobre as pessoas.</div></div>
+  </div>
+
+  <div class="st">📋 Templates Dinâmicos para Retrô</div>
+  <div class="g2">
+    <div class="card dark">
+      <div class="card-title">📉 Template: Data-Driven Retro</div>
+      <p>Foco total no fluxo.</p>
+      <ul class="chk" style="margin-top:10px;">
+        <li>Nosso Lead Time subiu ou desceu? Por quê?</li>
+        <li>Onde o gargalo se formou no CFD?</li>
+        <li>Quantos itens "Urgentes" furaram a fila? Foram reais urgências?</li>
+        <li>Qual política explícita precisamos criar ou alterar?</li>
+      </ul>
+    </div>
+    <div class="card blue">
+      <div class="card-title">🕵️‍♂️ Template: Blocker Analysis</div>
+      <p>Foco na eficiência de fluxo.</p>
+      <ul class="chk" style="margin-top:10px;">
+        <li>Qual foi a dependência que mais nos gerou tempo de espera?</li>
+        <li>Como podemos evitar esse bloqueio na próxima vez?</li>
+        <li>O PO pode refinar melhor para mitigar surpresas técnicas?</li>
+        <li>Ação Kaizen focada em remover esse bloqueio sistêmico.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="alert alert-purple"><span>⚠️</span><span><strong>Lembre-se:</strong> O Scrumban lida com evolução sistêmica. A retro não é apenas sobre o time "trabalhar mais", mas sobre como a configuração do quadro (WIP, políticas, buffers) pode facilitar o trabalho.</span></div>
 </div>
 
 <!-- ===== BLOQUEIOS ===== -->
