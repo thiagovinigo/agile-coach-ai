@@ -473,6 +473,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-elite-flow',this)"><span class="ni">⏱️</span> Touch Time vs Wait Time</div>
         <div class="nav-item" onclick="goTo('s-elite-sla',this)"><span class="ni">🎯</span> SLA por Classe de Serviço</div>
         <div class="nav-item" onclick="goTo('s-elite-cadencias',this)"><span class="ni">🔄</span> Cadências do Scrumban</div>
+        <div class="nav-item" onclick="goTo('s-elite-retro',this)"><span class="ni">🕵️‍♂️</span> A Retrospectiva de Elite</div>
         <div class="nav-item" onclick="goTo('s-elite-metricas',this)"><span class="ni">📈</span> Métricas Avançadas</div>
         <div class="nav-item" onclick="goTo('s-elite-board',this)"><span class="ni">🗂️</span> Board Completo</div>
         <div class="nav-item" onclick="goTo('s-elite-sim-func',this)"><span class="ni">🎭</span> Sim. Ref. Funcional</div>
@@ -13491,6 +13492,49 @@ Use a ferramenta `azure-devops_update_work_item` com o PATCH:
   </div>
 
   <div class="quote">"Adote as cadências que resolvem uma dor real — nunca todas de uma vez. Uma cadência sem propósito vivo é burocracia com nome bonito." — Princípio de implementação gradual do Kanban</div>
+</div>
+
+<!-- ===== TIME DE ELITE: A RETROSPECTIVA DE ELITE ===== -->
+<div id="s-elite-retro" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#6d28d9,#4c1d95)">
+    <div class="tag">TIME DE ELITE</div>
+    <h2>🕵️‍♂️ A Retrospectiva de Elite</h2>
+    <p>Substituindo dinâmicas de post-its por engenharia de sistema e Blocker Clustering</p>
+  </div>
+  
+  <div class="card purple" style="margin-bottom:20px">
+    <div class="card-title">🎯 A Grande Diferença</div>
+    <p>Times iniciantes fazem retrospectivas focadas no sentimento: "O que fomos bem? O que fomos mal? Senti que o deploy demorou." Times de Elite não gastam tempo com impressões vagas. Eles olham para o <strong>Control Chart</strong> e para o <strong>Blocker Clustering</strong>. A pergunta não é "como melhorar o time?", mas sim "onde o sistema falhou conosco?"</p>
+  </div>
+
+  <div class="g2">
+    <div class="card dark">
+      <div class="card-title">❌ Retro Amadora (Scrum Base)</div>
+      <ul class="chk" style="margin-top:10px;">
+        <li>"Senti que as histórias estavam grandes"</li>
+        <li>"Faltou comunicação com o time de infra"</li>
+        <li>Ação: "Vamos tentar nos comunicar melhor"</li>
+      </ul>
+      <p style="margin-top:10px; font-size:12px; color:#ef4444;"><strong>Resultado:</strong> Frustração, pois nada estrutural muda.</p>
+    </div>
+    <div class="card green">
+      <div class="card-title">✅ Retro de Elite (Flow Review)</div>
+      <ul class="chk" style="margin-top:10px;">
+        <li>"O P85 saltou de 12 para 18 dias"</li>
+        <li>"Tivemos 6 bloqueios com Infra totalizando 22 dias de espera"</li>
+        <li>Ação: "SLA explícito de 24h acordado com Infra e buffer criado."</li>
+      </ul>
+      <p style="margin-top:10px; font-size:12px; color:#10b981;"><strong>Resultado:</strong> O sistema evolui, o Lead Time cai.</p>
+    </div>
+  </div>
+
+  <h3 style="margin:20px 0 12px">🛠️ Template Prático: A Retro de Elite</h3>
+  <div class="vtl">
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">1. Checagem de Eficiência de Fluxo (Flow Efficiency)</div><div class="vtl-body">A eficiência do nosso último ciclo foi menor que 20%? Se sim, significa que passamos mais de 80% do tempo esperando. Onde acumulou mais WIP?</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">2. Aprofundamento nos Bloqueios (Blocker Clustering)</div><div class="vtl-body">Pegue os 3 maiores motivos de bloqueio. Esqueça quem foi o culpado. Foque em: Qual política explícita precisamos alterar para que esse tipo de bloqueio nunca mais ocorra ou custe menos caro?</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">3. Revisão do Upstream</div><div class="vtl-body">O PO trouxe itens já refinados com <em>Definition of Ready (DoR)</em> claro? Itens que falharam na esteira foram por falta de critérios de aceite claros?</div></div>
+    <div class="vtl-item"><div class="vtl-dot"></div><div class="vtl-title">4. Definição do Experimento (Kaizen)</div><div class="vtl-body">Escolha <strong>apenas UMA</strong> mudança nas políticas do Board (ex: diminuir o WIP de testes, ou criar uma nova tag de Expedite). Essa será a hipótese a ser testada até a próxima Retro.</div></div>
+  </div>
 </div>
 
 <!-- ===== TIME DE ELITE: MÉTRICAS AVANÇADAS ===== -->
