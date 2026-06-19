@@ -9097,11 +9097,41 @@ Use a ferramenta `azure-devops_update_work_item` com o PATCH:
 <!-- ===== DEMO ===== -->
 <div id="s-demo" class="section">
   <div class="page-header" style="background:linear-gradient(135deg,#ea580c,#9a3412)">
-    <div class="tag">CERIMÔNIA</div><h2>🎬 Demo no Scrumban</h2>
-    <p>Quando fazer, como conduzir e os 4 modelos</p>
+    <div class="tag">CERIMÔNIA</div><h2>🎬 Demo: Kanban vs Scrumban</h2>
+    <p>Diferenças fundamentais entre Service Delivery Review e Product Showcase</p>
   </div>
-  <div class="card orange"><p>Sem sprint fixo, o time precisa de uma <strong>política explícita</strong> para quando mostrar o trabalho a stakeholders. Sem essa política: ou não mostra nunca, ou mostra itens a granel sem contexto.</p></div>
-  <div class="st">🗓️ Os 4 Modelos de Demo</div>
+  <div class="card orange"><p>Uma das maiores confusões na transição é o conceito de "Demonstração". O Kanban puro não prescreve uma cerimônia focada em "mostrar software funcionando numa tela". O Scrumban resgata a Review do Scrum, mas a adapta para um fluxo contínuo. Entenda a diferença crítica abaixo para não frustrar stakeholders.</p></div>
+
+  <div class="st">⚖️ O Contraste de Abordagens</div>
+  <div class="g2">
+    <div class="card blue">
+      <div class="card-title">🟦 A Abordagem Kanban (SDR)</div>
+      <p style="font-size:11px; font-weight:900; color:var(--blue); letter-spacing:1px; margin-bottom:8px;">SERVICE DELIVERY REVIEW</p>
+      <p style="font-size:13px; line-height:1.5; color:var(--text2);">No Kanban raiz, o foco não é juntar stakeholders numa sala para mostrar botões e telas. O foco é revisar a <strong>saúde do serviço</strong> prestado ao cliente.</p>
+      <ul class="chk" style="margin-top:10px;">
+        <li><strong>Foco:</strong> Métricas de Fluxo e Previsibilidade.</li>
+        <li><strong>Abertura:</strong> "Prometemos entregar 85% dos itens em 15 dias. O P85 real foi 12 dias. Tivemos 3 incidentes (CFR de 5%)."</li>
+        <li><strong>Validação do Produto:</strong> Ocorre de forma contínua e fragmentada (assim que o Dev termina, ele mostra ao PO e fecha o ticket).</li>
+        <li><strong>Vantagem:</strong> Governança implacável.</li>
+        <li><strong>Desvantagem:</strong> Gestores podem sentir falta do "brilho no olho" de ver o produto evoluindo.</li>
+      </ul>
+    </div>
+    
+    <div class="card orange">
+      <div class="card-title">🟧 A Abordagem Scrumban</div>
+      <p style="font-size:11px; font-weight:900; color:var(--orange); letter-spacing:1px; margin-bottom:8px;">PRODUCT SHOWCASE</p>
+      <p style="font-size:13px; line-height:1.5; color:var(--text2);">O Scrumban mantém a Demo do Scrum porque entende o altíssimo valor <strong>político e inspiracional</strong> de reunir os patrocinadores para ver software.</p>
+      <ul class="chk" style="margin-top:10px;">
+        <li><strong>Foco:</strong> Feedback tátil do Usuário e Produto Funcionando.</li>
+        <li><strong>Abertura:</strong> Demonstração guiada por cenário de uso (Storytelling real).</li>
+        <li><strong>Adaptação Kanban:</strong> Como não há Sprints, <strong>não existe</strong> "Planejado vs Entregue". Mostra-se apenas "Tudo o que alcançou a coluna DONE desde a última Demo".</li>
+        <li><strong>Vantagem:</strong> Engajamento e alinhamento de visão.</li>
+        <li><strong>Desvantagem:</strong> Custo de agenda para reunir stakeholders.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="st">🗓️ Os 4 Modelos de Demo no Scrumban</div>
   <div class="g2">
     <div class="card orange"><div class="card-title">📅 Modelo 1 — Cadência Fixa (Recomendado)</div><p>Data fixa: todo primeiro Thursday do mês. Mostra tudo que foi entregue desde a última demo. <strong>Melhor para:</strong> times com fluxo estável e stakeholders com agenda ocupada.</p><span class="badge" style="background:var(--green-l);color:var(--green)">✅ Recomendado para maioria dos times</span></div>
     <div class="card blue"><div class="card-title">🚀 Modelo 2 — Por Milestone</div><p>Demo quando um conjunto lógico de features forma uma "release". Ex: "Quando o módulo de pagamento estiver completo, fazemos a demo." <strong>Melhor para:</strong> produtos B2B.</p></div>
