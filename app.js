@@ -642,3 +642,90 @@ setInterval(() => {
     window.kiroSim._initialized = true;
   }
 }, 1000);
+
+/* =========================================================================
+   Orchestrator vs Worker Simulator Logic
+   ========================================================================= */
+let simTimeout1, simTimeout2, simTimeout3, simTimeout4, simTimeout5;
+
+window.resetOrchestratorSim = function() {
+    clearTimeout(simTimeout1); clearTimeout(simTimeout2); clearTimeout(simTimeout3); clearTimeout(simTimeout4); clearTimeout(simTimeout5);
+    const orqBox = document.getElementById('sim-orq-box');
+    const wrkBox = document.getElementById('sim-wrk-box');
+    if(!orqBox || !wrkBox) return;
+
+    orqBox.style.borderColor = '#334155';
+    orqBox.style.boxShadow = 'none';
+    wrkBox.style.borderColor = '#334155';
+    wrkBox.style.boxShadow = 'none';
+    
+    document.getElementById('sim-arrow-right').style.opacity = '0.2';
+    document.getElementById('sim-arrow-left').style.opacity = '0.2';
+    
+    document.getElementById('sim-orq-log').innerHTML = '> Aguardando comandos...';
+    document.getElementById('sim-wrk-log').innerHTML = '> Dormindo...';
+    document.getElementById('sim-wrk-log').style.color = '#3b82f6';
+};
+
+window.startOrchestratorSim = function() {
+    window.resetOrchestratorSim();
+    
+    const orqBox = document.getElementById('sim-orq-box');
+    const orqLog = document.getElementById('sim-orq-log');
+    const wrkBox = document.getElementById('sim-wrk-box');
+    const wrkLog = document.getElementById('sim-wrk-log');
+    const aRight = document.getElementById('sim-arrow-right');
+    const aLeft = document.getElementById('sim-arrow-left');
+
+    if(!orqBox) return;
+
+    // Step 1: Orquestrador analisa a tarefa
+    orqBox.style.borderColor = '#10b981';
+    orqBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+    orqLog.innerHTML = '> Recebido: "Criar Tela de Login"<br>> Analisando...<br>> Quebrando em 2 Tasks:<br>1. Criar Auth API<br>2. Criar React Form';
+
+    // Step 2: Delega
+    simTimeout1 = setTimeout(() => {
+        aRight.style.opacity = '1';
+        orqLog.innerHTML += '<br><br>> [DELEGANDO] Task 1: Auth API para o Worker...';
+    }, 2000);
+
+    // Step 3: Worker tenta codar
+    simTimeout2 = setTimeout(() => {
+        aRight.style.opacity = '0.2';
+        orqBox.style.borderColor = '#334155';
+        orqBox.style.boxShadow = 'none';
+        
+        wrkBox.style.borderColor = '#3b82f6';
+        wrkBox.style.boxShadow = '0 0 15px rgba(59,130,246,0.3)';
+        wrkLog.innerHTML = '> Recebido: Task 1 (Auth API)<br>> Escrevendo código...<br>> Rodando TDD...<br>> <span style="color:#ef4444;">ERRO: Cannot find module bcrypt</span>';
+    }, 4000);
+
+    // Step 4: Worker falha e devolve
+    simTimeout3 = setTimeout(() => {
+        aLeft.style.opacity = '1';
+        wrkLog.innerHTML += '<br>> [DEVOLVENDO] Chefe, travei nesse erro.';
+    }, 6000);
+
+    // Step 5: Orquestrador resolve e manda de novo
+    simTimeout4 = setTimeout(() => {
+        aLeft.style.opacity = '0.2';
+        wrkBox.style.borderColor = '#334155';
+        wrkBox.style.boxShadow = 'none';
+        
+        orqBox.style.borderColor = '#f59e0b';
+        orqBox.style.boxShadow = '0 0 15px rgba(245,158,11,0.3)';
+        orqLog.innerHTML += '<br><br>> [ANALISANDO ERRO] Faltou dependência.<br>> [DELEGANDO] Rode `npm i bcrypt` e tente novamente.';
+    }, 8000);
+
+    // Step 6: Worker finaliza
+    simTimeout5 = setTimeout(() => {
+        orqBox.style.borderColor = '#334155';
+        orqBox.style.boxShadow = 'none';
+        
+        wrkBox.style.borderColor = '#10b981';
+        wrkBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+        wrkLog.style.color = '#10b981';
+        wrkLog.innerHTML = '> Rodando `npm i bcrypt`...<br>> Rodando testes...<br>> <span style="color:#10b981;">TDD PASSOU! ✅</span><br>> Task 1 Concluída.';
+    }, 11000);
+};
