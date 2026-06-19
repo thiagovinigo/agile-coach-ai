@@ -2122,6 +2122,42 @@ fi
                             </div>
                         </div>
                     </div>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">2</div>
+                        <div style="width: 100%;">
+                            <strong>Sincronização e Message Passing</strong>
+                            <p>Enquanto os subagentes trabalham, o Orquestrador pode solicitar atualizações ou transferir dados entre eles sem envolver você.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Envie uma mensagem (via send_message) para o 'DB-Expert' perguntando se ele já mapeou a Tabela de Usuários. Peça para ele repassar os tipos dos campos diretamente para o 'Frontend-Dev' usar nas Interfaces TypeScript.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Pergunte ao agente de pesquisa em background qual foi o resultado parcial. Pegue o Schema que ele retornou e aplique na nossa tela de React atual."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lab-step">
+                        <div class="lab-step-number">3</div>
+                        <div style="width: 100%;">
+                            <strong>Síntese e Atualização do PBI</strong>
+                            <p>Após os subagentes finalizarem, o Orquestrador faz o Code Review conjunto, roda os testes e atualiza o card original.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Agora que os subagentes terminaram, compile o código (npm run build). Se passar, conecte-se ao TFS MCP, faça o upload dos Diff Logs no PBI #700, marque como 'Resolved' e encerre os subagentes.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Faça o merge do meu trabalho aqui com o log do pesquisador em background. Faça o commit com a mensagem '#700 feat: refatoração completa com DB e UI' usando o GitHub MCP."</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
