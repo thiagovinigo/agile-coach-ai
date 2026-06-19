@@ -101,7 +101,9 @@ async function loadAndMigrateContent() {
                     // 3. Operação e Execução
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Time de Elite' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Time de Elite' } ] },
+                    { title: 'O Guia do Replenishment', parts: [ { id: 's-replenishment', context: 'Time de Elite' } ] },
                     { title: 'A Retrospectiva de Elite', parts: [ { id: 's-elite-retro', context: 'Time de Elite' } ] },
+                    { title: 'Templates de Retrospectivas', parts: [ { id: 's-retro-templates', context: 'Time de Elite' } ] },
                     // 4. Avaliação e Melhoria Contínua
                     { title: 'Gestão de Resistência & IA', parts: [ { id: 's-elite-resistencia', context: 'Time de Elite' } ] },
                     { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Time de Elite' } ] },

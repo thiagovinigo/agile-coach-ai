@@ -18271,3 +18271,139 @@ function gDay(idx, btn) {
     5) Não ter limites de WIP reais ("Kanban de enfeite").</span>
   </div>
 </div>
+
+<!-- ===== GUIA DE REPLENISHMENT ===== -->
+<div id="s-replenishment" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#0284c7,#0369a1)">
+    <div class="tag" style="background:#38bdf8;">CADÊNCIA</div><h2>O Guia Definitivo do Replenishment</h2>
+    <p>O motor do Scrumban. Substitua a pesada Sprint Planning pelo fluxo de trabalho contínuo JIT (Just in Time).</p>
+  </div>
+
+  <div class="card emerald" style="margin-bottom:24px;">
+    <div class="card-title">🚀 O Fim da Sprint Planning</div>
+    <p>No Scrum tradicional, o time para o trabalho por até 4 horas para prever e se comprometer com 2 semanas de entregas. No Scrumban, <strong>não planejamos em lotes temporais fixos</strong>. Nós reabastecemos a fila de entrada apenas quando há "fome" no time.</p>
+  </div>
+
+  <h3>O que é o Replenishment?</h3>
+  <p>É uma reunião curta (30 a 45 minutos) onde o Product Owner apresenta os itens prioritários do Upstream (já refinados) e o time de desenvolvimento (Downstream) os puxa para a coluna "Ready for Dev".</p>
+
+  <div class="g2" style="margin-bottom:20px;">
+    <div class="card dark">
+      <div class="card-title">🎯 Gatilho (Quando Fazer?)</div>
+      <p>Não é feito em uma data fixa. O gatilho é visual: quando a coluna "Ready for Dev" cai abaixo do <strong>limite mínimo estipulado</strong> (ex: menos de 3 itens na fila).</p>
+    </div>
+    <div class="card dark">
+      <div class="card-title">👥 Quem Participa?</div>
+      <p>Product Owner (traz as prioridades de negócio), Tech Lead / Orquestrador e representantes técnicos do time (ou o time inteiro, dependendo do tamanho).</p>
+    </div>
+  </div>
+
+  <h3>Replenishment vs Sprint Planning</h3>
+  <table class="data-table" style="margin-bottom:30px;">
+    <thead>
+      <tr>
+        <th>Característica</th>
+        <th>Sprint Planning (Scrum)</th>
+        <th>Replenishment (Scrumban)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frequência</strong></td>
+        <td>Fixa (Ex: A cada 14 dias)</td>
+        <td>Sob Demanda (Gatilho de Limite Mínimo)</td>
+      </tr>
+      <tr>
+        <td><strong>Duração</strong></td>
+        <td>Longa (Até 4h)</td>
+        <td>Curta (30 - 45 min)</td>
+      </tr>
+      <tr>
+        <td><strong>Foco</strong></td>
+        <td>Compromisso de Entrega (Escopo Fixo)</td>
+        <td>Abastecer a fila imediata (Capacidade Atual)</td>
+      </tr>
+      <tr>
+        <td><strong>Estimativas</strong></td>
+        <td>Detailed Story Points / Horas</td>
+        <td>Tamanho Relativo Rápido (T-Shirt Size / PBB)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-indigo" style="margin-top:24px;">
+    <span>🤖</span>
+    <span><strong>Como o Kiro e a IA aceleram o Replenishment:</strong> O Replenishment só é rápido se as histórias estiverem muito bem escritas (Definition of Ready). Usamos o <strong>Kiro (Skill de Arquiteto)</strong> no Upstream para pegar os Épicos do PO e já transformar em PRD e SDD estruturados. Quando a reunião começa, o time já pega o cartão 100% detalhado.</span>
+  </div>
+</div>
+
+<!-- ===== TEMPLATES DE RETROSPECTIVAS ===== -->
+<div id="s-retro-templates" class="section">
+  <div class="page-header" style="background:linear-gradient(135deg,#db2777,#be185d)">
+    <div class="tag" style="background:#f472b6;">TOOLKIT</div><h2>Templates Práticos de Retrospectivas</h2>
+    <p>5 Pautas avançadas baseadas no fluxo e em dados (Chega de ficar no "O que fomos bem / O que fomos mal").</p>
+  </div>
+
+  <div class="card red" style="margin-bottom:24px;">
+    <p><strong>A Regra de Ouro:</strong> Nunca saia de uma retro com 10 ações soltas. Saia com <strong>1 único Experimento Kaizen</strong>. (Ex: "Vamos reduzir o WIP de Em Teste para 2 nesta semana e medir se o gargalo some").</p>
+  </div>
+
+  <div class="g1" style="margin-bottom: 30px;">
+    
+    <!-- Template 1 -->
+    <div class="card flat" style="border:1px solid #cbd5e1; border-left: 4px solid #3b82f6;">
+      <h3 style="margin-top:0;">📊 Template 1: A Caça aos Gargalos (Foco no CFD)</h3>
+      <p style="font-size:13px; color:var(--text2);"><strong>Quando Usar:</strong> O time diz que trabalha muito, mas poucas features estão subindo para produção. O painel parece entupido de cards no meio do fluxo.</p>
+      <ul class="chk">
+        <li><strong>Pré-requisito:</strong> Trazer o gráfico de CFD (Diagrama de Fluxo Acumulado) aberto na tela.</li>
+        <li><strong>Dinâmica:</strong> Analisar a "banda que engorda". Perguntar: "Por que QA acumulou na semana 2?"</li>
+        <li><strong>O que sai da reunião:</strong> Uma alteração nos limites de WIP ou regra de swarming (Ex: "Se QA bater o WIP, devs param de codar novas features e vão testar").</li>
+      </ul>
+    </div>
+
+    <!-- Template 2 -->
+    <div class="card flat" style="border:1px solid #cbd5e1; border-left: 4px solid #10b981;">
+      <h3 style="margin-top:0;">⏱️ Template 2: Acelerando as Entregas (Foco no Lead Time)</h3>
+      <p style="font-size:13px; color:var(--text2);"><strong>Quando Usar:</strong> O Lead Time subiu, os stakeholders estão reclamando da lentidão das entregas.</p>
+      <ul class="chk">
+        <li><strong>Pré-requisito:</strong> Abrir o gráfico de Scatterplot (Dispersão de Lead Time).</li>
+        <li><strong>Dinâmica:</strong> Ignorar os cartões normais. Selecionar os 3 "pontos fora da curva" (Outliers) que demoraram 3x mais que o normal e perguntar o "Porquê" deles terem ficado velhos.</li>
+        <li><strong>O que sai da reunião:</strong> Acordo sobre fatiação de tarefas ou melhora no Definition of Ready.</li>
+      </ul>
+    </div>
+
+    <!-- Template 3 -->
+    <div class="card flat" style="border:1px solid #cbd5e1; border-left: 4px solid #f59e0b;">
+      <h3 style="margin-top:0;">🧱 Template 3: A Retro da Dor (Blocker Clustering)</h3>
+      <p style="font-size:13px; color:var(--text2);"><strong>Quando Usar:</strong> Muitas interrupções, dependências de outras áreas, ou infra caindo.</p>
+      <ul class="chk">
+        <li><strong>Pré-requisito:</strong> Exportar a lista de todos os cartões marcados como "Bloqueados" no TFS durante o último mês e quantos dias ficaram parados.</li>
+        <li><strong>Dinâmica:</strong> Agrupar os bloqueios por causa-raiz ("Falta de Acesso", "Dúvida do PO", "Bug de Ambiente").</li>
+        <li><strong>O que sai da reunião:</strong> Atacar a maior família de bloqueios. Acionar líderes externos para remover o impedimento estrutural.</li>
+      </ul>
+    </div>
+
+    <!-- Template 4 -->
+    <div class="card flat" style="border:1px solid #cbd5e1; border-left: 4px solid #a855f7;">
+      <h3 style="margin-top:0;">🔄 Template 4: A Saúde do Funil (Upstream)</h3>
+      <p style="font-size:13px; color:var(--text2);"><strong>Quando Usar:</strong> Os desenvolvedores sentem "fome" de tarefas, ou puxam histórias que travam no meio por falta de requisito de negócio.</p>
+      <ul class="chk">
+        <li><strong>Pré-requisito:</strong> Número de cancelamentos/descartes de itens durante o fluxo.</li>
+        <li><strong>Dinâmica:</strong> Analisar a cadência de Replenishment. O PO está conseguindo acompanhar o ritmo do time?</li>
+        <li><strong>O que sai da reunião:</strong> Novos acordos para o processo de Discovery / Upstream.</li>
+      </ul>
+    </div>
+
+    <!-- Template 5 -->
+    <div class="card flat" style="border:1px solid #cbd5e1; border-left: 4px solid #0f172a;">
+      <h3 style="margin-top:0;">🤖 Template 5: Inteligência Artificial & Qualidade</h3>
+      <p style="font-size:13px; color:var(--text2);"><strong>Quando Usar:</strong> O fluxo está rápido com o Claude Code, mas muitos bugs estão estourando em produção ou em QA (Débito Técnico da IA).</p>
+      <ul class="chk">
+        <li><strong>Pré-requisito:</strong> Volume de Refatoração e Taxa de Falhas nos pipelines de Teste (TDD).</li>
+        <li><strong>Dinâmica:</strong> Discutir se os Specs gerados pelo Kiro estão rasos demais, ou se as bibliotecas usadas estão incorretas.</li>
+        <li><strong>O que sai da reunião:</strong> Um pull request atualizando o `SKILL.md` (A skill de Arquiteto do Kiro ou a Skill de Desenvolvedor) para garantir que a IA produza testes mais rigorosos no próximo ciclo.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
