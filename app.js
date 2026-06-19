@@ -100,6 +100,7 @@ async function loadAndMigrateContent() {
                     { title: 'Fluxo Git (TST → HML → PROD)', parts: [ { id: 's-elite-gitflow', context: 'Engenharia / CI/CD' } ] },
                     { title: 'Harness & Ambientes da IA', parts: [ { id: 's-elite-harness', context: 'Engenharia / AI' } ] },
                     { title: 'Documentos (PRD, SDD, TDD...)', parts: [ { id: 's-elite-docs', context: 'Engenharia / Arquitetura' } ] },
+                    { title: '🎮 Simulador do Orquestrador', parts: [ { id: 's-elite-orchestrator', context: 'Engenharia / Arquitetura' } ] },
                     
                     { title: 'Kiro: Simulador Hands-on', parts: [ { id: 's-kiro-hub', context: 'Engenharia / PO' } ] },
                     // 3. Operação e Execução

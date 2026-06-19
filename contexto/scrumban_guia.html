@@ -482,6 +482,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-elite-gitflow',this)"><span class="ni">🌿</span> Fluxo Git & Deploys</div>
         <div class="nav-item" onclick="goTo('s-elite-harness',this)"><span class="ni">🤖</span> Harness & Ambientes</div>
         <div class="nav-item" onclick="goTo('s-elite-docs',this)"><span class="ni">📚</span> Documentos (PRD, SDD...)</div>
+        <div class="nav-item" onclick="goTo('s-elite-orchestrator',this)"><span class="ni">🎮</span> Orquestrador x Worker</div>
       </div>
     </div>
 
@@ -7301,6 +7302,140 @@ Testes exigidos: Timeout < 5000ms.
     </div>
 
     <div class="alert alert-indigo" style="margin-top:24px;"><span>💡</span><span><strong>A Chave de Ouro:</strong> Perceba que o <strong>PRD</strong> é para humanos entenderem o negócio, mas a IA que programa <em>precisa</em> do <strong>spec.md (SDD)</strong>. Pular essa etapa de tradução (por exemplo, mandar o Claude programar lendo direto o Épico do Jira/TFS escrito pelo PO) é o principal motivo de as empresas acharem que "A IA gera código ruim e alucinado". Ela precisa dessa "Sopa de Letrinhas" arquitetural no meio do caminho para se comportar como um sênior.</span></div>
+  </div>
+
+<!-- ===== SIMULADOR DO ORQUESTRADOR ===== -->
+  <div id="s-elite-orchestrator" class="section">
+    <div class="page-header" style="background:linear-gradient(135deg,#064e3b,#022c22)">
+      <div class="tag" style="background:#10b981;">ARQUITETURA AI</div><h2>🎮 Simulador: Orquestrador vs Worker</h2>
+      <p>Entenda visualmente por que o Claude Code precisa do Kiro para não enlouquecer.</p>
+    </div>
+    
+    <div class="card emerald" style="margin-bottom:24px;">
+      <p>Nesta simulação interativa, a "Sala do Chefe" representa o <strong>Kiro (Orquestrador)</strong> que analisa o todo e quebra os problemas. A "Fábrica" representa o <strong>Claude Code (Worker)</strong>, focado exclusivamente em digitar código e rodar testes de forma rápida.</p>
+    </div>
+
+    <!-- The Simulator UI -->
+    <div style="background:#1e293b; padding:30px; border-radius:12px; position:relative; overflow:hidden;">
+      
+      <!-- Control Panel -->
+      <div style="text-align:center; margin-bottom:30px;">
+        <button onclick="startOrchestratorSim()" style="background:#10b981; color:#fff; border:none; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer; box-shadow:0 4px 6px rgba(0,0,0,0.3); font-size:16px;">▶️ Simular "Criar Tela de Login"</button>
+        <button onclick="resetOrchestratorSim()" style="background:#475569; color:#fff; border:none; padding:12px 24px; border-radius:8px; font-weight:bold; cursor:pointer; margin-left:10px; font-size:16px;">🔄 Reset</button>
+      </div>
+
+      <!-- Diagram Area -->
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:20px; position:relative;">
+        
+        <!-- Left: Orquestrador -->
+        <div id="sim-orq-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:20px; text-align:center; transition:all 0.3s;">
+          <div style="font-size:40px; margin-bottom:10px;">🧠</div>
+          <h3 style="color:#f8fafc; margin:0 0 10px 0;">Sala do Chefe (Orquestrador)</h3>
+          <p style="color:#94a3b8; font-size:13px; margin:0 0 15px 0;">O Kiro. Visão macro, quebra de tarefas (WBS) e delegação.</p>
+          
+          <div id="sim-orq-log" style="background:#020617; color:#10b981; font-family:monospace; padding:10px; border-radius:6px; font-size:12px; min-height:80px; text-align:left; border:1px solid #1e293b;">
+            > Aguardando comandos...
+          </div>
+        </div>
+
+        <!-- Center: Arrow -->
+        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:200px;">
+          <div id="sim-arrow-right" style="font-size:30px; opacity:0.2; transition:opacity 0.3s;">➡️</div>
+          <div id="sim-arrow-left" style="font-size:30px; opacity:0.2; transition:opacity 0.3s; margin-top:20px;">⬅️</div>
+        </div>
+
+        <!-- Right: Worker -->
+        <div id="sim-wrk-box" style="flex:1; background:#0f172a; border:2px solid #334155; border-radius:10px; padding:20px; text-align:center; transition:all 0.3s;">
+          <div style="font-size:40px; margin-bottom:10px;">🏭</div>
+          <h3 style="color:#f8fafc; margin:0 0 10px 0;">Fábrica (Claude Code)</h3>
+          <p style="color:#94a3b8; font-size:13px; margin:0 0 15px 0;">O Operário. Só escreve código, roda no terminal e testa.</p>
+          
+          <div id="sim-wrk-log" style="background:#020617; color:#3b82f6; font-family:monospace; padding:10px; border-radius:6px; font-size:12px; min-height:80px; text-align:left; border:1px solid #1e293b;">
+            > Dormindo...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let simTimeout1, simTimeout2, simTimeout3, simTimeout4, simTimeout5;
+      
+      function resetOrchestratorSim() {
+        clearTimeout(simTimeout1); clearTimeout(simTimeout2); clearTimeout(simTimeout3); clearTimeout(simTimeout4); clearTimeout(simTimeout5);
+        document.getElementById('sim-orq-box').style.borderColor = '#334155';
+        document.getElementById('sim-orq-box').style.boxShadow = 'none';
+        document.getElementById('sim-wrk-box').style.borderColor = '#334155';
+        document.getElementById('sim-wrk-box').style.boxShadow = 'none';
+        
+        document.getElementById('sim-arrow-right').style.opacity = '0.2';
+        document.getElementById('sim-arrow-left').style.opacity = '0.2';
+        
+        document.getElementById('sim-orq-log').innerHTML = '> Aguardando comandos...';
+        document.getElementById('sim-wrk-log').innerHTML = '> Dormindo...';
+        document.getElementById('sim-wrk-log').style.color = '#3b82f6';
+      }
+
+      function startOrchestratorSim() {
+        resetOrchestratorSim();
+        
+        // Step 1: Orquestrador analisa a tarefa
+        const orqBox = document.getElementById('sim-orq-box');
+        const orqLog = document.getElementById('sim-orq-log');
+        const wrkBox = document.getElementById('sim-wrk-box');
+        const wrkLog = document.getElementById('sim-wrk-log');
+        const aRight = document.getElementById('sim-arrow-right');
+        const aLeft = document.getElementById('sim-arrow-left');
+
+        orqBox.style.borderColor = '#10b981';
+        orqBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+        orqLog.innerHTML = '> Recebido: "Criar Tela de Login"<br>> Analisando...<br>> Quebrando em 2 Tasks:<br>1. Criar Auth API<br>2. Criar React Form';
+
+        // Step 2: Delega
+        simTimeout1 = setTimeout(() => {
+          aRight.style.opacity = '1';
+          orqLog.innerHTML += '<br><br>> [DELEGANDO] Task 1: Auth API para o Worker...';
+        }, 2000);
+
+        // Step 3: Worker tenta codar
+        simTimeout2 = setTimeout(() => {
+          aRight.style.opacity = '0.2';
+          orqBox.style.borderColor = '#334155';
+          orqBox.style.boxShadow = 'none';
+          
+          wrkBox.style.borderColor = '#3b82f6';
+          wrkBox.style.boxShadow = '0 0 15px rgba(59,130,246,0.3)';
+          wrkLog.innerHTML = '> Recebido: Task 1 (Auth API)<br>> Escrevendo código...<br>> Rodando TDD...<br>> <span style="color:#ef4444;">ERRO: Cannot find module bcrypt</span>';
+        }, 4000);
+
+        // Step 4: Worker falha e devolve
+        simTimeout3 = setTimeout(() => {
+          aLeft.style.opacity = '1';
+          wrkLog.innerHTML += '<br>> [DEVOLVENDO] Chefe, travei nesse erro.';
+        }, 6000);
+
+        // Step 5: Orquestrador resolve e manda de novo
+        simTimeout4 = setTimeout(() => {
+          aLeft.style.opacity = '0.2';
+          wrkBox.style.borderColor = '#334155';
+          wrkBox.style.boxShadow = 'none';
+          
+          orqBox.style.borderColor = '#f59e0b';
+          orqBox.style.boxShadow = '0 0 15px rgba(245,158,11,0.3)';
+          orqLog.innerHTML += '<br><br>> [ANALISANDO ERRO] Faltou dependência.<br>> [DELEGANDO] Rode `npm i bcrypt` e tente novamente.';
+        }, 8000);
+
+        // Step 6: Worker finaliza
+        simTimeout5 = setTimeout(() => {
+          orqBox.style.borderColor = '#334155';
+          orqBox.style.boxShadow = 'none';
+          
+          wrkBox.style.borderColor = '#10b981';
+          wrkBox.style.boxShadow = '0 0 15px rgba(16,185,129,0.3)';
+          wrkLog.style.color = '#10b981';
+          wrkLog.innerHTML = '> Rodando `npm i bcrypt`...<br>> Rodando testes...<br>> <span style="color:#10b981;">TDD PASSOU! ✅</span><br>> Task 1 Concluída.';
+        }, 11000);
+      }
+    </script>
   </div>
 
 <!-- ===== KIRO HUB ===== -->
