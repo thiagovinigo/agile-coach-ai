@@ -67,6 +67,7 @@ async function loadAndMigrateContent() {
                     { title: 'Limites de WIP', parts: [ { id: 's-wip', context: 'Teoria Base' }, { id: 's-teach-wip', context: 'Para Ensinar' }, { id: 's-fac-wip', context: 'Facilitador em Campo' } ] },
                     { title: 'Daily', parts: [ { id: 's-daily', context: 'Teoria Base' }, { id: 's-teach-daily', context: 'Para Ensinar' }, { id: 's-fac-daily', context: 'Facilitador em Campo' } ] },
                     { title: 'Demo', parts: [ { id: 's-demo', context: 'Teoria Base' } ] },
+                    { title: 'Retrospectiva', parts: [ { id: 's-retro', context: 'Teoria Base' } ] },
                     { title: 'Bloqueios', parts: [ { id: 's-bloqueios', context: 'Teoria Base' }, { id: 's-fac-bloqueio', context: 'Facilitador em Campo' } ] },
                     { title: 'Classes de Serviço / Expedite', parts: [ { id: 's-cos', context: 'Teoria Base' }, { id: 's-teach-cos', context: 'Para Ensinar' }, { id: 's-fac-expedite', context: 'Facilitador em Campo' } ] },
                     { title: 'Métricas / Fluxo', parts: [ { id: 's-teach-fluxo', context: 'Para Ensinar (Fluxo vs Pessoas)' }, { id: 's-teach-metricas', context: 'Para Ensinar (Métricas)' }, { id: 's-fac-retro', context: 'Facilitador em Campo (Retro de Fluxo)' } ] },
@@ -101,6 +102,7 @@ async function loadAndMigrateContent() {
                     // 3. Operação e Execução
                     { title: 'Board Completo', parts: [ { id: 's-elite-board', context: 'Time de Elite' } ] },
                     { title: 'Cadências do Scrumban', parts: [ { id: 's-elite-cadencias', context: 'Time de Elite' } ] },
+                    { title: 'A Retrospectiva de Elite', parts: [ { id: 's-elite-retro', context: 'Time de Elite' } ] },
                     // 4. Avaliação e Melhoria Contínua
                     { title: 'Gestão de Resistência & IA', parts: [ { id: 's-elite-resistencia', context: 'Time de Elite' } ] },
                     { title: 'Touch Time vs Wait Time', parts: [ { id: 's-elite-flow', context: 'Time de Elite' } ] },
