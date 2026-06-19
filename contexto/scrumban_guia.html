@@ -479,6 +479,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-elite-sim-func',this)"><span class="ni">🎭</span> Sim. Ref. Funcional</div>
         <div class="nav-item" onclick="goTo('s-elite-sim-tec',this)"><span class="ni">⚙️</span> Sim. Ref. Técnico</div>
         <div class="nav-item" onclick="goTo('s-elite-tamanho',this)"><span class="ni">📐</span> Tamanho & Previsibilidade</div>
+        <div class="nav-item" onclick="goTo('s-elite-gitflow',this)"><span class="ni">🌿</span> Fluxo Git & Deploys</div>
       </div>
     </div>
 
@@ -7025,6 +7026,97 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 
 
+
+<!-- ===== FLUXO GIT TST HML PROD ===== -->
+  <div id="s-elite-gitflow" class="section">
+    <div class="page-header" style="background:linear-gradient(135deg,#0369a1,#0f172a)">
+      <div class="tag">ENGENHARIA</div><h2>🌿 Fluxo Git (TST → HML → PROD)</h2>
+      <p>Entendendo branches como ambientes e Pull Requests como portas giratórias</p>
+    </div>
+    
+    <div class="card blue" style="margin-bottom:24px;">
+      <p>Uma das maiores dificuldades entre Produto e Engenharia é entender como o código sai da máquina do Dev e chega no celular do Cliente. Imagine que <strong>Branches</strong> não são apenas "versões do código", mas representam <strong>Ambientes Reais</strong>. E o <strong>Pull Request (PR)</strong> é a porta de segurança entre eles.</p>
+    </div>
+
+    <div class="st">🗺️ A Jornada da Feature</div>
+    <p style="font-size:13px; color:var(--text2); margin-bottom:16px;">Acompanhe o caminho de um card chamado "Botão de Pix" saindo do Backlog até a Produção.</p>
+
+    <!-- Pipeline Visual -->
+    <div style="background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:20px; box-shadow:inset 0 0 10px rgba(0,0,0,0.02);">
+      
+      <!-- Passo 1: DEV -->
+      <div style="display:flex; gap:16px; align-items:center;">
+         <div style="width:40px; height:40px; background:var(--slate-l); border:2px solid var(--slate); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--slate);">1</div>
+         <div style="flex:1; background:#fff; border:1px solid #cbd5e1; border-radius:8px; padding:16px; position:relative;">
+            <div style="font-size:10px; font-weight:900; color:var(--slate); letter-spacing:1px; margin-bottom:6px;">MÁQUINA DO DEV</div>
+            <strong style="font-size:15px; color:var(--dark);">Branch: <code>feature/botao-pix</code></strong>
+            <p style="font-size:13px; color:var(--text2); margin-top:6px; line-height:1.5;">O Dev cria uma branch nova a partir do código oficial (main). Ele cessa o código isoladamente. Ninguém mais é afetado se ele quebrar tudo na máquina dele.</p>
+         </div>
+      </div>
+
+      <!-- Seta -->
+      <div style="padding-left:20px;"><div style="width:2px; height:20px; background:#cbd5e1;"></div></div>
+
+      <!-- Passo 2: TST -->
+      <div style="display:flex; gap:16px; align-items:center;">
+         <div style="width:40px; height:40px; background:var(--blue-l); border:2px solid var(--blue); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--blue);">2</div>
+         <div style="flex:1; background:#fff; border:1px solid var(--blue); border-left:4px solid var(--blue); border-radius:8px; padding:16px; position:relative;">
+            <div style="font-size:10px; font-weight:900; color:var(--blue); letter-spacing:1px; margin-bottom:6px;">AMBIENTE DE TESTE (TST)</div>
+            <strong style="font-size:15px; color:var(--dark);">Merge na Branch: <code>test</code> (ou develop)</strong>
+            <p style="font-size:13px; color:var(--text2); margin-top:6px; line-height:1.5;">O Dev junta (merge) seu código com a branch de testes. A pipeline (esteira CI/CD) detecta a mudança e copia o código automaticamente para o servidor <strong>TST</strong>. Lá, a QA (ou o próprio time técnico) testa a integração com as features dos outros Devs.</p>
+            <div style="margin-top:10px; background:var(--blue-l); color:var(--blue); font-size:11px; padding:6px; border-radius:4px; font-weight:700;">✅ Se quebrar aqui: Fica só na TI, impacto zero no negócio.</div>
+         </div>
+      </div>
+
+      <!-- Seta com PR -->
+      <div style="padding-left:20px; display:flex; align-items:center; gap:10px;">
+         <div style="width:2px; height:40px; background:var(--orange);"></div>
+         <div style="background:var(--orange); color:#fff; font-size:10px; font-weight:900; padding:4px 8px; border-radius:12px;">PULL REQUEST (PR)</div>
+         <span style="font-size:11px; color:var(--text2);">Revisão de Código (Code Review) pelos colegas Devs.</span>
+      </div>
+
+      <!-- Passo 3: HML -->
+      <div style="display:flex; gap:16px; align-items:center;">
+         <div style="width:40px; height:40px; background:var(--orange-l); border:2px solid var(--orange); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--orange);">3</div>
+         <div style="flex:1; background:#fff; border:1px solid var(--orange); border-left:4px solid var(--orange); border-radius:8px; padding:16px; position:relative;">
+            <div style="font-size:10px; font-weight:900; color:var(--orange); letter-spacing:1px; margin-bottom:6px;">AMBIENTE DE HOMOLOGAÇÃO (HML)</div>
+            <strong style="font-size:15px; color:var(--dark);">Merge na Branch: <code>release/hml</code> (ou homolog)</strong>
+            <p style="font-size:13px; color:var(--text2); margin-top:6px; line-height:1.5;">Após aprovação do PR, o código entra na branch de HML. A pipeline joga o código para o servidor <strong>HML</strong>, que é uma réplica idêntica à Produção (mesmo tipo de banco de dados, mesma memória). É o playground oficial do <strong>Product Owner (PO)</strong> e Clientes-Beta.</p>
+            <div style="margin-top:10px; background:var(--orange-l); color:var(--orange); font-size:11px; padding:6px; border-radius:4px; font-weight:700;">🧐 O PO valida: "É isso que eu pedi na User Story?" (UAT - User Acceptance Testing).</div>
+         </div>
+      </div>
+
+      <!-- Seta com PR -->
+      <div style="padding-left:20px; display:flex; align-items:center; gap:10px;">
+         <div style="width:2px; height:40px; background:var(--green);"></div>
+         <div style="background:var(--green); color:#fff; font-size:10px; font-weight:900; padding:4px 8px; border-radius:12px;">PULL REQUEST FINAL (RELEASE)</div>
+         <span style="font-size:11px; color:var(--text2);">PO assina embaixo e o Tech Lead aprova o envio (Merge na Main).</span>
+      </div>
+
+      <!-- Passo 4: PROD -->
+      <div style="display:flex; gap:16px; align-items:center;">
+         <div style="width:40px; height:40px; background:var(--green-l); border:2px solid var(--green); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:900; color:var(--green);">4</div>
+         <div style="flex:1; background:#fff; border:1px solid var(--green); border-left:4px solid var(--green); border-radius:8px; padding:16px; position:relative; box-shadow:0 4px 10px rgba(16, 185, 129, 0.15);">
+            <div style="font-size:10px; font-weight:900; color:var(--green); letter-spacing:1px; margin-bottom:6px;">AMBIENTE DE PRODUÇÃO (PROD)</div>
+            <strong style="font-size:15px; color:var(--dark);">Merge na Branch Oficial: <code>main</code> (ou master)</strong>
+            <p style="font-size:13px; color:var(--text2); margin-top:6px; line-height:1.5;">O código agora faz parte da linha do tempo oficial (trunk) do software. A pipeline joga o botão de Pix para o servidor <strong>PROD</strong> definitivo.</p>
+            <div style="margin-top:10px; background:var(--green); color:#fff; font-size:11px; padding:6px; border-radius:4px; font-weight:700;">🚀 Live! Clientes reais estão usando o software e gerando receita.</div>
+         </div>
+      </div>
+
+    </div>
+
+    <div class="g2" style="margin-top:24px;">
+      <div class="card dark">
+        <div class="card-title">📜 A Regra de Ouro do Repositório</div>
+        <p style="font-size:13px; color:var(--text2);">Nenhum humano <strong>nunca</strong> escreve código (commita) diretamente nas branches <code>tst</code>, <code>hml</code> ou <code>main</code>. O código só viaja de uma branch para a outra através da "ponte levadiça" chamada Pull Request. Isso garante que todo código em produção passou por 4 olhos (Code Review) e validação de Qualidade.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-title">🔄 Hotfix (Apagando Fogo)</div>
+        <p style="font-size:13px; color:var(--text2);">Se a PROD cair (o botão de Pix sumiu do app live), o Dev cria uma branch <code>hotfix/pix</code> puxando direto da <code>main</code>, arruma, testa rápido, e o PR vai <strong>direto de volta para a <code>main</code></strong> (e depois os ajustes descem para baixo nas outras branches). Não se espera o fluxo de semanas para apagar um incêndio.</p>
+      </div>
+    </div>
+  </div>
 
 <!-- ===== KIRO HUB ===== -->
 <div id="s-kiro-hub" class="section">
