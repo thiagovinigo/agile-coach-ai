@@ -2037,10 +2037,6 @@ fi
                         <strong style="color: #991b1b; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
                         <p style="margin: 5px 0 0 0; color: #991b1b;">Este laboratório usa o Agente para rodar análises estáticas de segurança (SAST) e cruzar dependências do projeto contra bancos de dados de vulnerabilidades (CVEs) antes do Delivery.</p>
                     </div>
-                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
-                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                        <p style="margin: 5px 0 0 0; color: #92400e;">Segurança (DevSecOps) não deve ser uma etapa isolada no fim do processo. A IA pode auditar o código em tempo real e barrar envios para o TFS On-Premise caso sejam detectadas bibliotecas defasadas ou *secrets* vazados.</p>
-                    </div>
                     
                     <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
@@ -2049,16 +2045,16 @@ fi
                         <div style="width: 100%;">
                             <strong>Configuração de Hooks de Segurança</strong>
                             <p>Instrua o Agente a configurar um Hook Pre-commit focado em segurança.</p>
-                            <div class="lab-code">@agente Crie um hook pre-commit (usando Husky ou hook nativo do git) que rode uma varredura de 'npm audit' e verifique se há chaves de API *hardcoded* no código modificado usando Regex (como 'sk-...').</div>
-                        </div>
-                    </div>
-
-                    <div class="lab-step">
-                        <div class="lab-step-number">2</div>
-                        <div style="width: 100%;">
-                            <strong>Teste Prático de Detecção</strong>
-                            <p>Forçe uma vulnerabilidade e veja o Agente bloquear o commit.</p>
-                            <div class="lab-code">No seu código, adicione uma variável: const MY_SECRET = "sk-OPENAI-TEST-12345". Depois, tente fazer o commit. O Hook disparado pelo Agente deve acusar a falha de segurança no console e abortar o processo.</div>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Crie um hook pre-commit (Husky) que rode 'npm audit' e barre chaves de API *hardcoded* (Regex 'sk-...'). Sincronize essa política com as branch policies do TFS.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Gere um pre-commit nativo em bash que faça varredura de secrets e falhe o commit se encontrar vulnerabilidades."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -2072,11 +2068,7 @@ fi
                 <div class="lab-content">
                     <div style="background: #f5f3ff; padding: 15px; border-left: 4px solid #8b5cf6; border-radius: 4px; margin-bottom: 15px;">
                         <strong style="color: #5b21b6; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
-                        <p style="margin: 5px 0 0 0; color: #5b21b6;">Neste laboratório, testaremos a integração profunda do motor de IA com a rede legada corporativa (TFS On-Premise MCP) para fazer merge de código, Code Review autônomo e controle de branches (Git Flow).</p>
-                    </div>
-                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 25px;">
-                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">💡</span> Por Que Usar (Valor de Negócio)</strong>
-                        <p style="margin: 5px 0 0 0; color: #92400e;">Grandes corporações mantêm o código em redes privadas (TFS On-Premise). O MCP permite que a IA atue como um "Engenheiro Interno", lendo branches do servidor corporativo e fazendo reviews críticos sem que o código sensível vaze para serviços públicos em nuvem.</p>
+                        <p style="margin: 5px 0 0 0; color: #5b21b6;">Neste laboratório, testaremos a integração profunda do motor de IA com a rede legada corporativa (TFS On-Premise MCP) para Code Review autônomo e controle de branches.</p>
                     </div>
                     
                     <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
@@ -2085,17 +2077,49 @@ fi
                         <div class="lab-step-number">1</div>
                         <div style="width: 100%;">
                             <strong>Ativação do Motor de Review Local</strong>
-                            <p>Peça ao Agente para atuar como revisor em um Pull Request específico do TFS.</p>
-                            <div class="lab-code">@agente Conecte-se ao TFS On-Premise MCP. Encontre a Pull Request ativa associada à branch 'feature/login-sso'. Leia os diffs e forneça um Code Review nos comentários do TFS, apontando violações do guia de arquitetura.</div>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Use o TFS MCP. Encontre o PR da branch 'feature/login'. Forneça um Code Review nos comentários do PR, validando se o código cumpre os Acceptance Criteria do PBI.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Leia o PR associado à Issue atual via GitHub MCP. Aponte violações arquiteturais e sugira correções diretamente nos comentários do PR."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="lab-card">
+                <div class="lab-header" style="border-bottom-color: #f59e0b;">
+                    <span style="font-size:24px;">🤖</span> 
+                    <h3>Lab 5: Orquestração Simultânea de Subagents</h3>
+                </div>
+                <div class="lab-content">
+                    <div style="background: #fffbeb; padding: 15px; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 15px;">
+                        <strong style="color: #92400e; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🎯</span> O Que É</strong>
+                        <p style="margin: 5px 0 0 0; color: #92400e;">Este é o nível máximo de proficiência. Você usará o Agente principal como um "Arquiteto" que despacha múltiplos Subagentes em paralelo para resolver diferentes partes de um PBI (ex: um no Backend, outro pesquisando o Frontend) sem poluir o contexto da janela principal.</p>
+                    </div>
+                    
+                    <h4 style="color: #3b82f6; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span style="font-size:18px;">🛠️</span> Como Fazer</h4>
 
                     <div class="lab-step">
-                        <div class="lab-step-number">2</div>
+                        <div class="lab-step-number">1</div>
                         <div style="width: 100%;">
-                            <strong>Automatização de Merge Seguro</strong>
-                            <p>Se o código passar no QA (Lab 2) e em Segurança (Lab 3), ordene o Delivery via Agente.</p>
-                            <div class="lab-code">@agente Já que os testes Playwright passaram e a auditoria de CVEs está verde, por favor, realize o Squash e Merge desta branch na master. Marque a tarefa associada como 'Delivered'.</div>
+                            <strong>Delegando Tarefas (Spawning)</strong>
+                            <p>Ordene ao orquestrador que divida o PBI e convoque reforços.</p>
+                            <div style="display:flex; gap:10px; margin-top:10px;">
+                                <div style="flex:1; border:1px solid #c4b5fd; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ede9fe; color:#5b21b6; padding:5px 10px; font-weight:bold; font-size:12px;">Kiro (Azure DevOps)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">@kiro Leia o PBI #700. Crie um subagente em background chamado 'DB-Expert' para gerar os scripts SQL. Simultaneamente, inicie o 'Frontend-Dev' para criar os componentes React. Aguarde o retorno deles.</div>
+                                </div>
+                                <div style="flex:1; border:1px solid #fdba74; border-radius:6px; overflow:hidden;">
+                                    <div style="background:#ffedd5; color:#c2410c; padding:5px 10px; font-weight:bold; font-size:12px;">Claude (Anthropic/CLI)</div>
+                                    <div class="lab-code" style="margin:0; border-radius:0;">claude "Inicie um agente de pesquisa em background via MCP de Postgres para mapear a estrutura da tabela Users. Enquanto ele pesquisa, me ajude a refatorar o login.ts aqui."</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
