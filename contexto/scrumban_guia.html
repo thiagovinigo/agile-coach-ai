@@ -9243,6 +9243,110 @@ Use a ferramenta `azure-devops_update_work_item` com o PATCH:
        </div>
     </div>
   </div>
+
+  <div class="st" style="margin-top:28px;">📊 Dashboard Dinâmico da Retro (O Que Levar)</div>
+  <p style="font-size:13px; color:var(--text2); margin-bottom:14px;">Inicie a retrospectiva projetando seus resultados num painel como este. Sem métricas claras, você é apenas mais uma pessoa com uma opinião.</p>
+  <div class="metrics" style="margin-top:0; border:1px solid var(--border); border-radius:12px; padding:12px; background:#fff; box-shadow:0 2px 5px rgba(0,0,0,0.02);">
+    <div class="metric" style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px;">
+      <div class="metric-val" style="color:#0f172a; font-size:24px;">12.4 <span style="font-size:12px; font-weight:700;">dias</span></div>
+      <div class="metric-lbl" style="color:#475569; font-size:10px;">Lead Time (P85)</div>
+      <div style="font-size:9px; color:#ef4444; margin-top:4px; font-weight:800;">▲ +1.2d vs último</div>
+    </div>
+    <div class="metric" style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px;">
+      <div class="metric-val" style="color:#0f172a; font-size:24px;">18 <span style="font-size:12px; font-weight:700;">itens</span></div>
+      <div class="metric-lbl" style="color:#475569; font-size:10px;">Throughput</div>
+      <div style="font-size:9px; color:#10b981; margin-top:4px; font-weight:800;">▼ -2 (Estável)</div>
+    </div>
+    <div class="metric" style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px;">
+      <div class="metric-val" style="color:#0f172a; font-size:24px;">22<span style="font-size:12px; font-weight:700;">%</span></div>
+      <div class="metric-lbl" style="color:#475569; font-size:10px;">Flow Efficiency</div>
+      <div style="font-size:9px; color:#ef4444; margin-top:4px; font-weight:800;">▼ -5% (Muitas esperas)</div>
+    </div>
+    <div class="metric" style="background:#f8fafc; border:1px solid #e2e8f0; padding:10px;">
+      <div class="metric-val" style="color:#0f172a; font-size:24px;">42<span style="font-size:12px; font-weight:700;">d</span></div>
+      <div class="metric-lbl" style="color:#475569; font-size:10px;">Tempo em Bloqueio</div>
+      <div style="font-size:9px; color:#ef4444; margin-top:4px; font-weight:800;">▲ +15d vs último</div>
+    </div>
+  </div>
+
+  <div class="st" style="margin-top:28px;">🗺️ Navegação pelo Fluxo: Perguntas Poderosas</div>
+  <p style="font-size:13px; color:var(--text2); margin-bottom:14px;">Em vez de perguntar "O que deu errado?", percorra o quadro <strong>da direita para a esquerda</strong> (do Downstream pro Upstream) fazendo as perguntas certas na etapa exata.</p>
+
+  <div style="display:flex; flex-direction:column; gap:8px;">
+    <!-- Deploy / Entrega -->
+    <div style="display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:100px; background:#10b981; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px; letter-spacing:0.5px;">1. ENTREGA</div>
+      <div style="padding:12px 16px; flex:1;">
+        <ul class="chk" style="margin:0; font-size:13px;">
+          <li>Nossas entregas causaram incidentes em produção? O MTTR (Recovery) foi rápido?</li>
+          <li>Tivemos gargalos para fazer deploy? Estamos fazendo deploy em lotes muito grandes em vez de continuous?</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Validação / QA -->
+    <div style="display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:100px; background:#3b82f6; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px; letter-spacing:0.5px;">2. QUALITY</div>
+      <div style="padding:12px 16px; flex:1;">
+        <ul class="chk" style="margin:0; font-size:13px;">
+          <li>A taxa de rejeição (cartões voltando pro Dev) está alta? Onde os bugs estão sendo injetados?</li>
+          <li>Os critérios de aceite estavam ambíguos e só foram descobertos pela QA no último momento?</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Desenvolvimento -->
+    <div style="display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:100px; background:#f59e0b; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px; letter-spacing:0.5px;">3. BUILD</div>
+      <div style="padding:12px 16px; flex:1;">
+        <ul class="chk" style="margin:0; font-size:13px;">
+          <li>O trabalho técnico foi maior que o estimado? Faltou fatiamento da história (Elephant Sizing)?</li>
+          <li>Passamos mais tempo esperando aprovação de Code Review (Wait Time) do que programando (Touch Time)?</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Upstream / Refinamento -->
+    <div style="display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,0.02);">
+      <div style="width:100px; background:#6d28d9; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:13px; letter-spacing:0.5px;">4. UPSTREAM</div>
+      <div style="padding:12px 16px; flex:1;">
+        <ul class="chk" style="margin:0; font-size:13px;">
+          <li>Nossa <em>Definition of Ready (DoR)</em> protegeu a esteira de desenvolvimento ou deixamos "lixo mal refinado" entrar no fluxo?</li>
+          <li>Estamos puxando para Sprint itens que já nascem bloqueados por dependências de outros times?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="st" style="margin-top:28px;">🛠️ Simulação: Plano de Ação para Bloqueios</div>
+  <p style="font-size:13px; color:var(--text2); margin-bottom:14px;">Usando o Blocker Cluster da última sprint, a métrica indicou que o ambiente de homologação causou 15 dias de atraso. Veja o simulador de como transformar esse dado num Kaizen acionável.</p>
+
+  <div style="background:#f8fafc; border:2px dashed #94a3b8; border-radius:12px; padding:20px; box-shadow:inset 0 0 10px rgba(0,0,0,0.02);">
+    <div style="font-size:14px; font-weight:900; color:var(--dark); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+      <span style="font-size:20px;">🚨</span> Problema Detectado: QA indisponível 4 vezes na Sprint.
+    </div>
+    
+    <div class="g2" style="margin-bottom:0;">
+      <!-- Root Cause -->
+      <div style="background:#fff; border:1px solid #e2e8f0; border-radius:8px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+        <div style="font-size:10px; font-weight:900; color:#64748b; letter-spacing:1px; margin-bottom:10px;">ANÁLISE DE CAUSA (5 WHYs)</div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px; line-height:1.5;"><strong>Por que quebrou?</strong> Porque o Dev subiu um script SQL que conflitou.</p>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px; line-height:1.5;"><strong>Por que conflitou?</strong> Porque ele não tinha o banco atualizado localmente.</p>
+        <div style="margin-top:12px; padding-top:10px; border-top:1px dashed #cbd5e1;">
+          <p style="font-size:13px; color:var(--dark); font-weight:800; line-height:1.5;">Causa Raiz Sistêmica:<br><span style="font-weight:600; color:var(--text2);">O processo de deploy contínuo não possui validação automatizada de schema antes de jogar o código para o servidor.</span></p>
+        </div>
+      </div>
+      
+      <!-- Action Plan -->
+      <div style="background:#fef2f2; border:1px solid #fca5a5; border-radius:8px; padding:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02); display:flex; flex-direction:column;">
+        <div style="font-size:10px; font-weight:900; color:#dc2626; letter-spacing:1px; margin-bottom:10px;">O EXPERIMENTO KAIZEN</div>
+        <ul style="font-size:13px; color:#7f1d1d; margin:0; padding-left:16px; line-height:1.6; flex:1;">
+          <li style="margin-bottom:6px;"><strong>Ação:</strong> Incluir na <em>Definition of Done (DoD)</em> da coluna DEV a execução obrigatória do linter de schema do BD.</li>
+          <li style="margin-bottom:6px;"><strong>Dono:</strong> João (DevOps) vai configurar a step na Pipeline de CI até amanhã.</li>
+          <li><strong>Critério de Sucesso:</strong> Zero bloqueios gerados por schema database na próxima Sprint.</li>
+        </ul>
+        <div style="margin-top:14px; align-self:flex-start; background:#dc2626; color:#fff; font-size:9px; font-weight:900; padding:6px 10px; border-radius:4px; letter-spacing:0.5px;">STATUS: EXPERIMENTO ATIVO NA SPRINT</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===== BLOQUEIOS ===== -->
