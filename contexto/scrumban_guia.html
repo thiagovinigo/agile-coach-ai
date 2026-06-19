@@ -480,6 +480,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="nav-item" onclick="goTo('s-elite-sim-tec',this)"><span class="ni">⚙️</span> Sim. Ref. Técnico</div>
         <div class="nav-item" onclick="goTo('s-elite-tamanho',this)"><span class="ni">📐</span> Tamanho & Previsibilidade</div>
         <div class="nav-item" onclick="goTo('s-elite-gitflow',this)"><span class="ni">🌿</span> Fluxo Git & Deploys</div>
+        <div class="nav-item" onclick="goTo('s-elite-harness',this)"><span class="ni">🤖</span> Harness & Ambientes</div>
       </div>
     </div>
 
@@ -7116,6 +7117,67 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <p style="font-size:13px; color:var(--text2);">Se a PROD cair (o botão de Pix sumiu do app live), o Dev cria uma branch <code>hotfix/pix</code> puxando direto da <code>main</code>, arruma, testa rápido, e o PR vai <strong>direto de volta para a <code>main</code></strong> (e depois os ajustes descem para baixo nas outras branches). Não se espera o fluxo de semanas para apagar um incêndio.</p>
       </div>
     </div>
+  </div>
+
+<!-- ===== AMBIENTES & HARNESS ===== -->
+  <div id="s-elite-harness" class="section">
+    <div class="page-header" style="background:linear-gradient(135deg,#047857,#064e3b)">
+      <div class="tag">ENGENHARIA</div><h2>🤖 Harness & Ambientes da IA</h2>
+      <p>Onde o código roda, o que é um Harness e as diferenças operacionais</p>
+    </div>
+    
+    <div class="card green" style="margin-bottom:24px;">
+      <p>Um modelo de Inteligência Artificial (LLM) como o Claude ou GPT é "surdo e cego". Ele apenas recebe texto e cospe texto. Para que uma IA consiga ler seus arquivos, rodar testes ou fazer deploys, ela precisa de um <strong>Harness</strong> (um "arnês" ou "exoesqueleto" de software) que execute os comandos em um sistema operacional real.</p>
+    </div>
+
+    <div class="st">🛠️ O Que é um Harness?</div>
+    <div class="g2" style="margin-bottom:24px;">
+      <div class="card dark">
+        <div class="card-title">🧠 O Cérebro (O LLM)</div>
+        <p style="font-size:13px; color:var(--text2); margin-top:6px;">O modelo de IA puro, hospedado na nuvem (Anthropic, OpenAI, Google). Ele sabe <em>como</em> programar, mas não tem como mexer no seu computador sozinho.</p>
+      </div>
+      <div class="card purple">
+        <div class="card-title">🦾 O Harness (O Agente)</div>
+        <p style="font-size:13px; color:var(--text2); margin-top:6px;">Um software que empacota as intenções do Cérebro e as transforma em ações reais no terminal. É ele quem "digita" os comandos <code>git commit</code> ou <code>npm test</code> por você.</p>
+      </div>
+    </div>
+
+    <div class="st">🌍 Em Qual Ambiente a IA Roda?</div>
+    <p style="font-size:13px; color:var(--text2); margin-bottom:16px;">A IA executa comandos no mesmo sistema operacional onde o seu <strong>Harness local</strong> está rodando. Veja os principais exemplos do mercado e como eles lidam com o ambiente (Linux vs Windows):</p>
+
+    <!-- Kiro/Antigravity Card -->
+    <div style="background:#fff; border:1px solid #cbd5e1; border-left:4px solid #3b82f6; border-radius:8px; padding:20px; margin-bottom:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+         <div>
+            <strong style="font-size:16px; color:#1e3a8a; display:block; margin-bottom:4px;">Google Antigravity / Kiro</strong>
+            <span style="font-size:11px; background:#eff6ff; color:#2563eb; padding:2px 8px; border-radius:12px; font-weight:700;">Agentic Coding Framework</span>
+         </div>
+      </div>
+      <p style="font-size:13px; color:var(--text2); margin-top:12px; line-height:1.5;">O Antigravity é um framework avançadíssimo de IA corporativa construído pela equipe do Google DeepMind. Ele assume a identidade de um desenvolvedor pareado e roda <strong>exatamente no ambiente host em que foi plugado</strong>.</p>
+      <ul style="font-size:13px; color:#475569; margin-top:10px; padding-left:20px; line-height:1.6;">
+        <li style="margin-bottom:6px;">Se você inicializou o agente na sua máquina local <strong>Windows</strong>, a IA vai usar o terminal <strong>PowerShell</strong> nativo e utilizar caminhos padrão do sistema operacional (ex: <code>C:\Users\Nome\...</code>).</li>
+        <li style="margin-bottom:6px;">Se o Kiro foi embarcado num servidor corporativo, num contêiner Docker na Nuvem ou esteira CI/CD, ele fará deploy e rodará scripts usando o terminal <strong>Linux (Bash)</strong>.</li>
+        <li><strong>Superpoder:</strong> Orquestra ferramentas extremas: tem múltiplos "sub-agentes" em paralelo, acesso total a FileSystem/Terminal e cria artefatos visuais diretos no chat.</li>
+      </ul>
+    </div>
+
+    <!-- Claude Code Card -->
+    <div style="background:#fff; border:1px solid #cbd5e1; border-left:4px solid #d97757; border-radius:8px; padding:20px; margin-bottom:16px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+         <div>
+            <strong style="font-size:16px; color:#9a3412; display:block; margin-bottom:4px;">Claude Code (Anthropic)</strong>
+            <span style="font-size:11px; background:#ffedd5; color:#ea580c; padding:2px 8px; border-radius:12px; font-weight:700;">Local CLI Agent</span>
+         </div>
+      </div>
+      <p style="font-size:13px; color:var(--text2); margin-top:12px; line-height:1.5;">Lançado pela Anthropic, é uma ferramenta veloz de linha de comando (CLI) que você instala via <code>npm</code> e roda <strong>puramente dentro do projeto aberto na sua máquina</strong>.</p>
+      <ul style="font-size:13px; color:#475569; margin-top:10px; padding-left:20px; line-height:1.6;">
+        <li style="margin-bottom:6px;">Assim como o Antigravity, ele herda o SO (Linux, Mac ou Windows) do terminal onde você digitou o comando <code>claude</code>.</li>
+        <li style="margin-bottom:6px;">Ele é "sandboxed" (limitado) na própria pasta atual por questões de segurança e foco. Não tenta automatizar a infraestrutura inteira do PC.</li>
+        <li><strong>Superpoder:</strong> Velocidade de refatoração massiva local. Você diz "entenda essa arquitetura e resolva o ticket JIRA-123" direto na sua IDE, e ele roda comandos e escreve código lá mesmo.</li>
+      </ul>
+    </div>
+
+    <div class="alert alert-blue" style="margin-top:24px;"><span>💡</span><span><strong>A Regra de Ouro:</strong> Uma IA Agentic nunca "baixa" seu código para rodar magicamente no servidor da OpenAI ou do Google. O cérebro fica na nuvem, mas as mãos e o laboratório de teste (onde ele roda <code>git</code>, <code>npm</code>, <code>docker</code>) <strong>são a própria máquina onde o Harness está instalado</strong>. Por isso, se a sua máquina não tiver o Python instalado, a IA também vai tomar "Comando não encontrado" ao tentar rodar um script, exatamente como você tomaria. O Harness é você digitalizado.</span></div>
   </div>
 
 <!-- ===== KIRO HUB ===== -->
