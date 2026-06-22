@@ -785,3 +785,123 @@ window.startOrchestratorSim = function() {
         }, 2000);
     }, 17000);
 };
+
+// ==========================================
+// REPLENISHMENT SIMULATOR LOGIC
+// ==========================================
+const repScenarios = [
+    {
+        title: "Cenário 1: Fome de Downstream",
+        board: {
+            upstream: ["Épico A", "Épico B", "Épico C"],
+            refinement: ["Story 1 (Ready)", "Story 2 (Ready)", "Story 3 (Ready)"],
+            readyForDev: ["Story 4"], // Limite 4
+            inProgress: ["Story 5"],
+            done: ["Story 6", "Story 7", "Story 8", "Story 9"]
+        },
+        question: "A coluna 'Ready for Dev' (Limite: 4) tem apenas 1 item. A coluna In Progress está tranquila. O que o Flow Master deve fazer agora?",
+        options: [
+            "Aguardar a próxima Sprint Planning.",
+            "Puxar desenvolvedores para ajudar no Refinamento.",
+            "Disparar o gatilho do Replenishment imediatamente."
+        ],
+        correctAnswer: 2,
+        explanation: "Exato! O Replenishment não tem data marcada, ele ocorre por 'gatilho'. Como a fila principal de Dev baixou drasticamente do limite (fome), o time deve parar e fazer o Replenishment."
+    },
+    {
+        title: "Cenário 2: O Gargalo no Meio do Fluxo",
+        board: {
+            upstream: ["Épico D"],
+            refinement: ["Story 10", "Story 11"],
+            readyForDev: ["Story 12", "Story 13", "Story 14", "Story 15"], // Limite 4 (Cheio)
+            inProgress: ["Story 16", "Story 17", "Story 18", "Story 19", "Story 20"], // Limite 3 (Estourado)
+            done: ["Story 21"]
+        },
+        question: "Ready for Dev está cheia (4/4). In Progress está lotada e bloqueada (5/3). Devemos fazer Replenishment para não faltar trabalho futuro?",
+        options: [
+            "Sim. A esteira não pode parar, o PO precisa priorizar os próximos.",
+            "Não. O time deve fazer Swarming (mutirão) para esvaziar o 'In Progress'.",
+            "Sim, mas puxando tarefas técnicas em vez de produto."
+        ],
+        correctAnswer: 1,
+        explanation: "Stop starting, start finishing! Fazer Replenishment agora só vai empurrar mais cartões contra um gargalo que já está entupido."
+    },
+    {
+        title: "Cenário 3: Fome de Upstream",
+        board: {
+            upstream: ["Ideia 1", "Ideia 2"],
+            refinement: [], // Vazio!
+            readyForDev: ["Story 22"], // Limite 4 (Quase vazio)
+            inProgress: ["Story 23", "Story 24"],
+            done: ["Story 25", "Story 26"]
+        },
+        question: "Ready for Dev está acabando e pedindo Replenishment. Porém, não há NADA na coluna de Refinamento pronto. O que fazer na cerimônia?",
+        options: [
+            "Puxar as Ideias direto do Upstream para o Dev e o time descobre codando.",
+            "Acionar o Kiro e o PO urgentemente para Discovery e fatiamento. O Dev terá que focar em dívida técnica ou ajudar o PO por ora.",
+            "Fazer o Replenishment normalmente e deixar a coluna vazia."
+        ],
+        correctAnswer: 1,
+        explanation: "Sem itens prontos (DoR), puxar pro Dev é suicídio. A falta de Upstream exige que o fluxo inteiro se desloque para a esquerda temporariamente para reabastecer a 'fábrica'."
+    }
+];
+
+let currentRepScenario = 0;
+
+window.loadReplenishmentScenario = function() {
+    const s = repScenarios[currentRepScenario];
+    
+    const titleEl = document.getElementById('rep-sim-title');
+    if(!titleEl) return; // Se a página ainda não foi carregada
+    
+    // Atualizar título e pergunta
+    titleEl.innerText = s.title;
+    document.getElementById('rep-sim-question').innerText = s.question;
+    document.getElementById('rep-sim-feedback').style.display = 'none';
+
+    // Limpar colunas e preencher
+    const cols = ['upstream', 'refinement', 'readyForDev', 'inProgress', 'done'];
+    cols.forEach(col => {
+        const el = document.getElementById('rep-col-' + col);
+        if(el) {
+            el.innerHTML = '';
+            s.board[col].forEach(card => {
+                el.innerHTML += '<div style="background:#fff; color:#0f172a; padding:8px; border-radius:4px; margin-bottom:8px; font-size:12px; font-weight:bold; box-shadow:0 1px 3px rgba(0,0,0,0.2); border-left:4px solid #38bdf8;">' + card + '</div>';
+            });
+        }
+    });
+
+    // Limpar e preencher botões de resposta
+    const optsDiv = document.getElementById('rep-sim-options');
+    optsDiv.innerHTML = '';
+    s.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.innerText = opt;
+        btn.style.cssText = 'display:block; width:100%; text-align:left; padding:12px; margin-bottom:10px; background:#1e293b; color:#f8fafc; border:1px solid #334155; border-radius:6px; cursor:pointer; transition:all 0.2s; font-size:14px;';
+        btn.onmouseover = () => btn.style.background = '#334155';
+        btn.onmouseout = () => btn.style.background = '#1e293b';
+        btn.onclick = () => window.checkReplenishmentAnswer(idx);
+        optsDiv.appendChild(btn);
+    });
+};
+
+window.checkReplenishmentAnswer = function(answerIdx) {
+    const s = repScenarios[currentRepScenario];
+    const fb = document.getElementById('rep-sim-feedback');
+    fb.style.display = 'block';
+    
+    if(answerIdx === s.correctAnswer) {
+        fb.style.background = '#064e3b';
+        fb.style.borderColor = '#059669';
+        fb.innerHTML = '<strong>✅ Correto!</strong><br><br>' + s.explanation;
+    } else {
+        fb.style.background = '#7f1d1d';
+        fb.style.borderColor = '#dc2626';
+        fb.innerHTML = '<strong>❌ Incorreto.</strong> Tente pensar de forma sistêmica. Lembre-se das regras de puxada do Kanban.';
+    }
+};
+
+window.nextReplenishmentScenario = function() {
+    currentRepScenario = (currentRepScenario + 1) % repScenarios.length;
+    window.loadReplenishmentScenario();
+};

@@ -18335,6 +18335,50 @@ function gDay(idx, btn) {
     <span>🤖</span>
     <span><strong>Como o Kiro e a IA aceleram o Replenishment:</strong> O Replenishment só é rápido se as histórias estiverem muito bem escritas (Definition of Ready). Usamos o <strong>Kiro (Skill de Arquiteto)</strong> no Upstream para pegar os Épicos do PO e já transformar em PRD e SDD estruturados. Quando a reunião começa, o time já pega o cartão 100% detalhado.</span>
   </div>
+
+  <div style="margin-top:40px; padding-top:30px; border-top:1px solid #334155;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h3 style="margin:0;">🎮 Simulador Interativo de Replenishment</h3>
+      <button onclick="window.nextReplenishmentScenario()" style="background:#38bdf8; color:#0f172a; border:none; padding:8px 16px; border-radius:6px; font-weight:bold; cursor:pointer;">Gerar Novo Cenário</button>
+    </div>
+    
+    <div style="background:#0f172a; border-radius:8px; border:1px solid #334155; padding:20px;">
+      <h4 id="rep-sim-title" style="color:#38bdf8; margin:0 0 10px 0; font-size:18px;">Clique em 'Gerar Novo Cenário'</h4>
+      <p id="rep-sim-question" style="color:#e2e8f0; margin-bottom:20px; min-height:40px;"></p>
+
+      <!-- Board Visualization -->
+      <div style="display:flex; gap:10px; margin-bottom:20px; overflow-x:auto; padding-bottom:10px;">
+        <div style="flex:1; min-width:140px; background:#1e293b; padding:10px; border-radius:6px;">
+          <div style="font-size:11px; color:#94a3b8; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">Ideias (Upstream)</div>
+          <div id="rep-col-upstream" style="min-height:50px;"></div>
+        </div>
+        <div style="flex:1; min-width:140px; background:#1e293b; padding:10px; border-radius:6px;">
+          <div style="font-size:11px; color:#94a3b8; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">Refinamento</div>
+          <div id="rep-col-refinement" style="min-height:50px;"></div>
+        </div>
+        <div style="flex:1; min-width:140px; background:#1e293b; padding:10px; border-radius:6px; border-top:4px solid #38bdf8;">
+          <div style="font-size:11px; color:#38bdf8; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">Ready for Dev [4]</div>
+          <div id="rep-col-readyForDev" style="min-height:50px;"></div>
+        </div>
+        <div style="flex:1; min-width:140px; background:#1e293b; padding:10px; border-radius:6px; border-top:4px solid #f59e0b;">
+          <div style="font-size:11px; color:#f59e0b; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">In Progress [3]</div>
+          <div id="rep-col-inProgress" style="min-height:50px;"></div>
+        </div>
+        <div style="flex:1; min-width:140px; background:#1e293b; padding:10px; border-radius:6px; border-top:4px solid #10b981;">
+          <div style="font-size:11px; color:#10b981; font-weight:bold; margin-bottom:10px; text-transform:uppercase;">Done</div>
+          <div id="rep-col-done" style="min-height:50px;"></div>
+        </div>
+      </div>
+
+      <!-- Options -->
+      <div id="rep-sim-options" style="margin-bottom:15px;"></div>
+
+      <!-- Feedback -->
+      <div id="rep-sim-feedback" style="display:none; padding:15px; border-radius:6px; border-left:4px solid; color:#fff;"></div>
+    </div>
+    
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" onload="if(window.loadReplenishmentScenario) window.loadReplenishmentScenario();" style="display:none;">
+  </div>
 </div>
 
 <!-- ===== TEMPLATES DE RETROSPECTIVAS ===== -->
