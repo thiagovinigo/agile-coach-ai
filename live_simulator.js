@@ -195,7 +195,7 @@ function initLiveSimView() {
                 <div id="sim-claude-container"></div>
             </div>
         </div>
-    \`;
+    `;
 
     new LiveSimulator('sim-kiro-container', 'kiro');
     new LiveSimulator('sim-claude-container', 'claude');
