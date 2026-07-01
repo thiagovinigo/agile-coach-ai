@@ -89,7 +89,33 @@ function initSuperpowersView() {
                     });
                     parsed = parsed.replace(/```(.*?)[\n\r]([\s\S]*?)```/gim, '<pre style="background:#1e293b; color:#e2e8f0; padding:15px; border-radius:6px; overflow-x:auto; font-family:monospace; margin:15px 0;"><code>$2</code></pre>');
 
-                    contentArea.innerHTML = `<div style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#333; line-height:1.6;">` + parsed + `</div>`;
+                    const headerCard = `
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🧠</span> O que é?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem;">
+        A <strong>${skill.title}</strong> é uma diretriz avançada do repositório Superpowers, projetada para injetar capacidades metodológicas rigorosas nos agentes.
+    </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>⏱️</span> Quando usar?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem; font-weight: 500;">
+        ${skill.description}
+    </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🛠️</span> Como usar?
+    </h3>
+    <ul style="margin-top:5px; color:#475569; font-size: 0.95rem; padding-left: 20px; margin-bottom:0;">
+        <li>No seu prompt, cite o nome da skill explicitamente.</li>
+        <li><strong>Exemplo:</strong> <code>"Aja seguindo rigorosamente as diretrizes do manual ${skill.title} para resolver este problema."</code></li>
+    </ul>
+</div>
+`;
+
+                    contentArea.innerHTML = `<div style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color:#333; line-height:1.6;">` + headerCard + parsed + `</div>`;
                 } catch(e) {
                     contentArea.innerHTML = '<div style="color:#ef4444; padding:20px;">Erro ao carregar o documento: ' + e.message + '</div>';
                 }
