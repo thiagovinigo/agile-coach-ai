@@ -449,9 +449,17 @@ function initSkillsView() {
             wrapper.innerHTML = `
                 <div class="card" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:2.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.02); max-width: 900px;">
                     <div style="text-transform: uppercase; font-size: 0.85rem; color: #0078d4; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;">📁 ${category}</div>
-                    <h3 style="margin-bottom:1.2rem; color:#1a202c; font-size:2rem; border-bottom:1px solid #eee; padding-bottom: 1rem;">${skill.title}</h3>
-                    <p style="color:#4a5568; margin-bottom:2rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
                     
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom: 1rem; margin-bottom:1.2rem;">
+                        <h3 style="margin:0; color:#1a202c; font-size:2rem;">${skill.title}</h3>
+                        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'Flowgrammers Skills', skill.path) : ''}
+                    </div>
+
+                    <p style="color:#4a5568; margin-bottom:1.5rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
+                    
+                    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
+                        📂 <strong>Repositório:</strong> ${skill.path}
+                    </div>
                     
                     <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
                         <a href="flowgrammers-skills-main/flowgrammers-skills-main/${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#0078d4; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;">
