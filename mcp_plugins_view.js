@@ -103,6 +103,54 @@ document.addEventListener('DOMContentLoaded', () => {
             ${renderTable(plugins, "Plugins (Extensões de Framework)", "🧩")}
             ${renderTable(dataAndAI, "Data & Knowledge (AI Memory)", "🧠")}
 
+            <div style="margin-top: 3rem; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+                <div style="background: #1e293b; color: #fff; padding: 1.5rem 2rem;">
+                    <h3 style="margin: 0; font-size: 1.3rem; display: flex; align-items: center; gap: 10px;">
+                        <span>🔥</span> Case Prático de Elite: O Fluxo Autônomo Completo
+                    </h3>
+                    <p style="margin: 5px 0 0 0; color: #94a3b8; font-size: 0.95rem;">
+                        Como todas essas tecnologias operam juntas em um cenário real do dia a dia.
+                    </p>
+                </div>
+                <div style="padding: 2rem;">
+                    <p style="margin-top: 0; color: #334155; font-size: 1.05rem; line-height: 1.6;">
+                        Imagine que um desenvolvedor subiu um código e o build quebrou na nuvem. Antigamente, o Tech Lead perderia 2 horas investigando. Com nossa arquitetura de <strong>Integrações de IA</strong>, o seguinte fluxo acontece em segundos:
+                    </p>
+                    
+                    <div style="margin-top: 2rem; border-left: 3px solid #cbd5e1; padding-left: 1.5rem; margin-left: 1rem;">
+                        <div style="position: relative; margin-bottom: 1.5rem;">
+                            <div style="position: absolute; left: -2.35rem; background: #fff; border: 2px solid #cbd5e1; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #475569;">1</div>
+                            <h4 style="margin: 0 0 5px 0; color: #0f172a; font-size: 1.05rem;">O Gatilho (Hook)</h4>
+                            <p style="margin: 0; color: #475569; font-size: 0.95rem;">O pipeline falha. O <strong>CI/CD Build Error Resolver (Hook)</strong> detecta a falha e acorda o <em>Flowgrammers Agent</em> automaticamente, enviando o log de erro.</p>
+                        </div>
+                        
+                        <div style="position: relative; margin-bottom: 1.5rem;">
+                            <div style="position: absolute; left: -2.35rem; background: #fff; border: 2px solid #cbd5e1; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #475569;">2</div>
+                            <h4 style="margin: 0 0 5px 0; color: #0f172a; font-size: 1.05rem;">Análise de Impacto (Grafos)</h4>
+                            <p style="margin: 0; color: #475569; font-size: 0.95rem;">O Agente acessa o <strong>Neo4j (Knowledge Graph)</strong> e descobre que a API de Pagamentos que quebrou afeta também o microserviço de Faturamento.</p>
+                        </div>
+                        
+                        <div style="position: relative; margin-bottom: 1.5rem;">
+                            <div style="position: absolute; left: -2.35rem; background: #fff; border: 2px solid #cbd5e1; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #475569;">3</div>
+                            <h4 style="margin: 0 0 5px 0; color: #0f172a; font-size: 1.05rem;">Pesquisa de Contexto (Embeddings + RAG)</h4>
+                            <p style="margin: 0; color: #475569; font-size: 0.95rem;">Sem saber como consertar a regra de negócio específica da empresa, o Agente faz uma busca semântica via <strong>Pinecone (Embeddings)</strong> na documentação interna. Usando a arquitetura <strong>RAG</strong>, ele lê a Wiki oficial de arquitetura de pagamentos da empresa e aprende a regra correta.</p>
+                        </div>
+                        
+                        <div style="position: relative; margin-bottom: 1.5rem;">
+                            <div style="position: absolute; left: -2.35rem; background: #fff; border: 2px solid #cbd5e1; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #475569;">4</div>
+                            <h4 style="margin: 0 0 5px 0; color: #0f172a; font-size: 1.05rem;">Resolução no Código (Plugins)</h4>
+                            <p style="margin: 0; color: #475569; font-size: 0.95rem;">Munido de contexto, o Agente usa o <strong>Plugin de Audit/Discovery</strong> para alterar exatamente a linha de código defeituosa respeitando os padrões de lint e segurança do framework (ex: Laravel).</p>
+                        </div>
+                        
+                        <div style="position: relative;">
+                            <div style="position: absolute; left: -2.35rem; background: #10b981; border: 2px solid #10b981; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; color: #fff;">5</div>
+                            <h4 style="margin: 0 0 5px 0; color: #0f172a; font-size: 1.05rem;">Ações Finais (Servidores MCP)</h4>
+                            <p style="margin: 0; color: #475569; font-size: 0.95rem;">Finalmente, ele invoca o <strong>GitHub MCP</strong> para abrir um Pull Request com o código corrigido e o <strong>Jira MCP</strong> para mover o status do ticket original alertando o QA. Tudo isso feito de forma 100% autônoma.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     `;
 });
