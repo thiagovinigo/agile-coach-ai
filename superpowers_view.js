@@ -91,6 +91,17 @@ function initSuperpowersView() {
 
                     const headerCard = `
 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
+        <span>📚</span> Resumo Rápido
+    </h3>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#14b8a6; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            ⬇️ Baixar Arquivo da Skill
+        </a>
+        <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f8fafc; color:#334155; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #cbd5e1; font-size:0.95rem;">
+            👀 Ver Arquivo
+        </a>
+    </div>
     <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
         <span>🧠</span> O que é?
     </h3>

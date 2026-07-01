@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "OpenCode Integration", desc: "Manifestos (.codex-plugin) para interoperabilidade entre diferentes LLMs na IDE.", status: "Ativo", color: "green" }
     ];
 
+    const dataAndAI = [
+        { name: "Vector Embeddings (Pinecone/Milvus)", desc: "Banco de dados vetorial para permitir busca semântica de alta velocidade no código-fonte ou documentação pela IA.", status: "Core", color: "blue" },
+        { name: "RAG (Retrieval-Augmented Generation)", desc: "Pipeline que injeta contexto empresarial (Wiki, Jira) no LLM antes dele gerar a resposta, evitando alucinações.", status: "Ativo", color: "green" },
+        { name: "Knowledge Graphs (Neo4j)", desc: "Mapeamento estruturado das relações entre microserviços e componentes de negócio para análise de impacto pelo Agente.", status: "Planejado", color: "gray" }
+    ];
+
     const renderBadge = (status, color) => {
         const colors = {
             green: "bg-green-100 text-green-800 border-green-200",
@@ -86,7 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <ul style="margin:0; padding-left:20px; color:#334155; font-size:0.95rem; line-height:1.6;">
                         <li style="margin-bottom:8px;"><strong>🔌 MCP (Model Context Protocol):</strong> Servidores locais ou remotos que dão à IA a capacidade de ler/escrever em bancos de dados, APIs ou arquivos com segurança.</li>
                         <li style="margin-bottom:8px;"><strong>🪝 Hooks:</strong> Gatilhos que disparam Agentes de IA em momentos-chave (como num commit de código ou falha de CI/CD).</li>
-                        <li><strong>🧩 Plugins:</strong> Extensões específicas (manifestos JSON/MD) instaladas na IDE ou no Agente para estender capacidades de frameworks.</li>
+                        <li style="margin-bottom:8px;"><strong>🧩 Plugins:</strong> Extensões específicas (manifestos JSON/MD) instaladas na IDE ou no Agente para estender capacidades de frameworks.</li>
+                        <li><strong>🧠 Data & Knowledge:</strong> Tecnologias baseadas em IA (Embeddings, RAG, Grafos) que dão memória de longo prazo e precisão cirúrgica aos Agentes.</li>
                     </ul>
                 </div>
             </div>
@@ -94,6 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${renderTable(mcps, "Servidores MCP (Integrações de Contexto)", "🔌")}
             ${renderTable(hooks, "Hooks (Gatilhos Autônomos)", "🪝")}
             ${renderTable(plugins, "Plugins (Extensões de Framework)", "🧩")}
+            ${renderTable(dataAndAI, "Data & Knowledge (AI Memory)", "🧠")}
 
         </div>
     `;
