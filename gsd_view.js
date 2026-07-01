@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    initSuperpowersView();
+    initGsdView();
 });
 
-function initSuperpowersView() {
-    const container = document.getElementById('superpowers-view');
-    if(!container || typeof superpowersData === 'undefined') return;
+function initGsdView() {
+    const container = document.getElementById('gsd-view');
+    if(!container || typeof gsdData === 'undefined') return;
 
     container.innerHTML = '';
     
@@ -14,9 +14,9 @@ function initSuperpowersView() {
     introHeader.style.borderBottom = '1px solid #edebe9';
     introHeader.style.marginBottom = '20px';
     introHeader.innerHTML = `
-        <h2 style="margin-top:0; color:#0f172a; margin-bottom:10px;">⚡ Catálogo de Superpowers</h2>
+        <h2 style="margin-top:0; color:#0f172a; margin-bottom:10px;">🎯 Get-Shit-Done (GSD) Agents</h2>
         <p style="font-size:1.1rem; line-height:1.5; color:#323130; margin:0;">
-            Diretrizes avançadas e métodos de engenharia contínua projetados para Agentes Autônomos.
+            Exército de agentes altamente especializados e focados em execução do framework GSD.
         </p>
     `;
     container.appendChild(introHeader);
@@ -38,25 +38,25 @@ function initSuperpowersView() {
 
     let firstBtn = null;
 
-    if (superpowersData.Superpowers) {
+    if (gsdData['GSD Agents']) {
         const catTitle = document.createElement('div');
         catTitle.className = 'kb-category-title';
-        catTitle.innerText = 'Superpowers Disponíveis';
+        catTitle.innerText = 'Agentes GSD';
         sidebar.appendChild(catTitle);
 
-        superpowersData.Superpowers.forEach(skill => {
+        gsdData['GSD Agents'].forEach(agent => {
             const btn = document.createElement('button');
             btn.className = 'kb-menu-btn';
-            btn.innerText = "⚡ " + skill.title;
+            btn.innerText = "🎯 " + agent.title;
             
             btn.onclick = async () => {
-                document.querySelectorAll('#superpowers-view .kb-menu-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#gsd-view .kb-menu-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
-                contentArea.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">⏳ Carregando ' + skill.title + '...</div>';
+                contentArea.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">⏳ Carregando ' + agent.title + '...</div>';
                 
                 try {
-                    const response = await fetch(skill.path + '?v=' + new Date().getTime());
+                    const response = await fetch(agent.path + '?v=' + new Date().getTime());
                     if(!response.ok) throw new Error('Falha ao carregar');
                     const text = await response.text();
                     
@@ -89,4 +89,4 @@ function initSuperpowersView() {
     if(firstBtn) firstBtn.click();
 }
 
-window.initSuperpowersView = initSuperpowersView;
+window.initGsdView = initGsdView;
