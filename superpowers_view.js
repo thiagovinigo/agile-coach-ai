@@ -39,18 +39,32 @@ function initSuperpowersView() {
     let firstBtn = null;
 
     if (superpowersData.Superpowers) {
-        const catTitle = document.createElement('div');
-        catTitle.className = 'kb-category-title';
-        catTitle.innerText = 'Superpowers Disponíveis';
-        sidebar.appendChild(catTitle);
+        const catHeader = document.createElement('div');
+        catHeader.className = 'kb-category-header';
+        catHeader.style.padding = '12px 15px';
+        catHeader.style.fontWeight = 'bold';
+        catHeader.style.color = '#323130';
+        catHeader.style.backgroundColor = '#f3f2f1';
+        catHeader.style.borderLeft = '4px solid #f59e0b';
+        catHeader.style.cursor = 'pointer';
+        catHeader.style.marginTop = '10px';
+        catHeader.style.marginBottom = '2px';
+        catHeader.style.borderRadius = '0 6px 6px 0';
+        catHeader.innerText = 'Superpowers Disponíveis';
+        sidebar.appendChild(catHeader);
+
+        const skillsContainer = document.createElement('div');
+        skillsContainer.className = 'kb-skills-list';
+        skillsContainer.style.display = 'block';
+        sidebar.appendChild(skillsContainer);
 
         superpowersData.Superpowers.forEach(skill => {
-            const btn = document.createElement('button');
-            btn.className = 'kb-menu-btn';
+            const btn = document.createElement('div');
+            btn.className = 'kb-nav-btn';
             btn.innerText = "⚡ " + skill.title;
             
             btn.onclick = async () => {
-                document.querySelectorAll('#superpowers-view .kb-menu-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#superpowers-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
                 contentArea.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">⏳ Carregando ' + skill.title + '...</div>';
@@ -81,7 +95,7 @@ function initSuperpowersView() {
                 }
             };
             
-            sidebar.appendChild(btn);
+            skillsContainer.appendChild(btn);
             if(!firstBtn) firstBtn = btn;
         });
     }

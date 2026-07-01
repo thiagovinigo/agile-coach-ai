@@ -39,18 +39,32 @@ function initGsdView() {
     let firstBtn = null;
 
     if (gsdData['GSD Agents']) {
-        const catTitle = document.createElement('div');
-        catTitle.className = 'kb-category-title';
-        catTitle.innerText = 'Agentes GSD';
-        sidebar.appendChild(catTitle);
+        const catHeader = document.createElement('div');
+        catHeader.className = 'kb-category-header';
+        catHeader.style.padding = '12px 15px';
+        catHeader.style.fontWeight = 'bold';
+        catHeader.style.color = '#323130';
+        catHeader.style.backgroundColor = '#f3f2f1';
+        catHeader.style.borderLeft = '4px solid #10b981';
+        catHeader.style.cursor = 'pointer';
+        catHeader.style.marginTop = '10px';
+        catHeader.style.marginBottom = '2px';
+        catHeader.style.borderRadius = '0 6px 6px 0';
+        catHeader.innerText = 'Agentes GSD';
+        sidebar.appendChild(catHeader);
+
+        const skillsContainer = document.createElement('div');
+        skillsContainer.className = 'kb-skills-list';
+        skillsContainer.style.display = 'block';
+        sidebar.appendChild(skillsContainer);
 
         gsdData['GSD Agents'].forEach(agent => {
-            const btn = document.createElement('button');
-            btn.className = 'kb-menu-btn';
+            const btn = document.createElement('div');
+            btn.className = 'kb-nav-btn';
             btn.innerText = "🎯 " + agent.title;
             
             btn.onclick = async () => {
-                document.querySelectorAll('#gsd-view .kb-menu-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('#gsd-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
                 contentArea.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">⏳ Carregando ' + agent.title + '...</div>';
@@ -81,7 +95,7 @@ function initGsdView() {
                 }
             };
             
-            sidebar.appendChild(btn);
+            skillsContainer.appendChild(btn);
             if(!firstBtn) firstBtn = btn;
         });
     }
