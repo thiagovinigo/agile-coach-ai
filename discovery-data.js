@@ -23,6 +23,12 @@ const discoveryData = {
             "title": "Design Sprint",
             "description": "O processo ágil e rápido do Google Ventures para prototipar e validar ideias com clientes em apenas 5 dias.",
             "path": "contexto/discovery/design-sprint.md"
+        },
+        {
+            "id": "pbb",
+            "title": "Product Backlog Building (PBB)",
+            "description": "O passo natural pós-Lean Inception para transformar a visão do produto em um backlog bem estruturado e fatiado.",
+            "path": "contexto/discovery/pbb.md"
         }
     ]
 };

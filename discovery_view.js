@@ -81,7 +81,7 @@ function initDiscoveryView() {
                         .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
                         .replace(/\*(.*?)\*/gim, '<em>$1</em>')
                         .replace(/`(.*?)`/gim, '<code style="background:#e2e8f0; padding:2px 4px; border-radius:3px; font-family:monospace; color:#ef4444;">$1</code>')
-                        .replace(/\n/gim, '<br>');
+                        .replace(/\n\n/gim, '<br><br>');
 
                     const headerCard = `
 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">

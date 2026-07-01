@@ -1,45 +1,88 @@
-# Design Sprint
+# Design Sprint (Case Prático Google Ventures)
 
-Criado pela Google Ventures (GV), o **Design Sprint** é um processo prático de 5 dias focado em responder questões críticas de negócio através de design, prototipagem e teste das ideias diretamente com os usuários finais.
+O **Design Sprint** não é para pequenas funcionalidades. É um framework hardcore desenhado para apostas altas. Se a Lean Inception serve para fatiar um MVP gigante, o Design Sprint serve para testar um risco gigante em apenas 5 dias sem escrever código.
 
-Diferente da Lean Inception (focada em alinhar o escopo de um MVP completo), o Design Sprint foca intensamente na **validação de um problema ou conceito específico** construindo uma "ilusão funcional" (um protótipo descartável de alta fidelidade) sem escrever nenhum código.
+---
 
-## Quando utilizar?
-- Quando o projeto envolve alto risco e alto investimento.
-- Quando a equipe está travada em debates sem fim e precisa de dados empíricos.
-- Quando o problema está claro, mas existem múltiplas ideias concorrentes de solução.
+<div class="card dark">
+    <div class="card-title">🚀 A Premissa Tática</div>
+    <div class="card-desc">
+        <strong>"Construa uma fachada, não um prédio."</strong><br>
+        A ideia é que, ao final de 5 dias, você tenha um protótipo hiper-realista no Figma (a fachada) e o teste com 5 usuários reais para responder à principal dúvida de negócio.
+    </div>
+</div>
 
-## Estrutura dos 5 Dias
+---
 
-### Segunda-feira: Mapear
-O objetivo é entender o problema em sua totalidade.
-- Definir um objetivo de longo prazo.
-- Mapear a jornada do cliente desde a descoberta até a resolução do problema.
-- Ouvir os especialistas do domínio na empresa.
-- Escolher o "Alvo" do Sprint (a parte mais crítica do mapa que precisa ser resolvida).
+## 📅 Segunda-feira: Mapear e Escolher o Alvo
 
-### Terça-feira: Esboçar
-O dia para colocar ideias no papel, longe das telas.
-- Em vez de um brainstorming coletivo (que costuma favorecer as vozes mais altas), as pessoas trabalham sozinhas.
-- Exercícios como *Crazy 8s* forçam a equipe a gerar variadas opções rapidamente.
-- No fim do dia, cada participante cria um storyboard anônimo e detalhado com sua melhor ideia.
+O time precisa de um foco. Você não vai desenhar o app inteiro no Sprint.
 
-### Quarta-feira: Decidir
-Temos várias soluções concorrentes; é hora de escolher.
-- "Museu de Arte": Colar todos os esboços nas paredes e analisá-los silenciosamente.
-- Uso de "Dot Voting" (votação por adesivos) para criar mapas de calor nos pontos positivos.
-- O *Decisor* (Stakeholder principal) dá o voto de minerva para selecionar quais ideias vão para o protótipo.
-- Criar o *Storyboard* (um passo-a-passo minucioso das 10 a 15 telas do protótipo).
+<div class="info-box">
+  <strong>🔥 Dinâmica Prática: "Ask the Experts" & HMW</strong><br>
+  <strong>O Problema:</strong> Um e-commerce está perdendo vendas porque as pessoas abandonam o carrinho de compras de itens caros (ex: Geladeiras) na hora de ver o frete.<br>
+  <strong>A Dinâmica:</strong> Enquanto os especialistas de logística da empresa falam, o time anota dores no formato HMW (<em>How Might We</em> - Como poderíamos?).<br><br>
+  <em>Ex: "HMW deixar o valor do frete transparente antes do checkout?"</em><br>
+  No fim do dia, o CEO (Decisor) aponta para o mapa da jornada e escolhe o alvo: <strong>A tela de Detalhes do Produto</strong>. É lá que focaremos a semana toda!
+</div>
 
-### Quinta-feira: Prototipar
-Aqui vale a filosofia "Fake it till you make it" (Finja até conseguir).
-- Em vez de codificar, a equipe usa ferramentas como Figma, InVision ou Keynote para criar telas que *parecem* reais.
-- A equipe se divide: Criadores (fazem telas), Redatores (fazem textos realistas), Montadores (costuram o protótipo) e Entrevistadores (preparam o roteiro para sexta-feira).
+---
 
-### Sexta-feira: Testar
-O dia da verdade. A mágica acontece nas interações reais.
-- Entrevistar 5 usuários-alvo (a regra de ouro de Jakob Nielsen dita que 5 usuários encontram cerca de 85% dos problemas de usabilidade).
-- A equipe acompanha a entrevista por transmissão em outra sala, anotando o que funcionou, o que deu errado e o que surpreendeu.
+## 📅 Terça-feira: Esboçar e Solucionar (Sem Falar)
 
-## O Que Esperar?
-Ao final da sexta-feira, você terá algo inestimável: dados empíricos reais sobre o que os clientes pensam do seu conceito, o que permite seguir em frente com confiança ou descartar uma ideia ruim antes de investir dinheiro em desenvolvimento.
+O pior inimigo da ideação é o brainstorming em grupo, onde o chefe ou o cara mais falante sempre vence. No Sprint, trabalhamos juntos, mas em silêncio.
+
+<div class="card orange">
+    <div class="card-title">✏️ Exercício: Crazy 8's</div>
+    <div class="card-desc">
+        <strong>A Regra:</strong> Pegue uma folha A4 e dobre em 8 quadrados. Você tem 8 minutos (1 min por quadrado) para desenhar 8 variações cruas da tela de Detalhes do Produto. Isso força o cérebro a sair das ideias óbvias iniciais.<br><br>
+        <strong>O Resultado (Fim do dia):</strong> Cada pessoa cria um storyboard anônimo detalhado de 3 painéis com sua melhor ideia. Nomes não são assinados.
+    </div>
+</div>
+
+---
+
+## 📅 Quarta-feira: Decidir o Vencedor
+
+Temos dezenas de ideias coladas na parede.
+
+<div class="info-box">
+  <strong>O Museu de Arte e a Votação Silenciosa:</strong><br>
+  1. Todos olham os esboços em silêncio, como em um museu.<br>
+  2. Cada um recebe adesivos de bolinhas e cola nas partes que mais gostou (Heatmap de ideias).<br>
+  3. Debate rápido (3 minutos por esboço).<br>
+  4. <strong>O Super Voto:</strong> O Decisor (CEO/Diretor) recebe um adesivo especial e faz a escolha final. Não importa se a maioria votou na ideia A, se o decisor cravar a B, a B ganha. (Evita design por comitê).
+</div>
+
+---
+
+## 📅 Quinta-feira: A Ilusão Funcional (Prototipação)
+
+Aqui o time se divide em papeis. **Não escreva código!**
+
+<div class="card">
+    <div class="card-title">🛠️ Construindo a Fachada (O Protótipo)</div>
+    <div class="card-desc">
+        <ul>
+            <li><strong>Makers (Designers):</strong> Vão para o Figma e montam as telas baseadas no esboço vencedor de Quarta.</li>
+            <li><strong>Stitcher (Costureiro):</strong> Pega as telas do Figma e cria os links clicáveis (protótipo navegável).</li>
+            <li><strong>Writer (Redator):</strong> Garante que os textos não sejam "Lorem Ipsum" (Isso quebra a ilusão no teste). Textos precisam ser reais.</li>
+            <li><strong>Interviewer (Pesquisador):</strong> Escreve o roteiro de perguntas para amanhã.</li>
+        </ul>
+    </div>
+</div>
+
+---
+
+## 📅 Sexta-feira: O Teste de Realidade
+
+Você precisa de apenas 5 clientes reais (Estatística prova que 5 usuários encontram 85% dos erros críticos).
+
+<div class="info-box">
+  <strong>🗣️ O Setup do Teste (Sexta às 10h):</strong><br>
+  - A cliente (Joana) está em uma sala com o Pesquisador usando o protótipo pelo celular.<br>
+  - O resto do time está em outra sala assistindo via webcam em silêncio.<br>
+  - A regra é não explicar como usar. O pesquisador diz: <em>"Tente comprar uma geladeira e veja se o frete cabe no bolso"</em>.<br><br>
+  <strong>Resultado do Sprint:</strong> Joana clica no novo botão e sorri. <em>"Ah, que legal, o frete divide no cartão!"</em><br><br>
+  <strong>Veredito:</strong> Hipótese validada. O Dev Team já pode codar na próxima segunda!
+</div>
