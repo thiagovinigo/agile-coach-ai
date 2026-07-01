@@ -93,10 +93,10 @@ function initSuperpowersView() {
 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
     <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
         <span><span>📚</span> Resumo Rápido</span>
-        \${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'Superpowers', skill.path) : ''}
+        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'Superpowers', skill.path) : ''}
     </h3>
     <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
-        📂 <strong>Repositório:</strong> \${skill.path}
+        📂 <strong>Repositório:</strong> ${skill.path}
     </div>
     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
         <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#14b8a6; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">

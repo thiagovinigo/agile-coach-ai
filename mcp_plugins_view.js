@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <td style="padding: 16px; color: #1a202c; font-weight: 600; font-size: 0.95rem;">
                                     <div style="display: flex; align-items: center; justify-content: space-between;">
                                         <span>${item.name}</span>
-                                        \${window.favoritesManager ? window.favoritesManager.renderButton(item.name.replace(/[^a-zA-Z0-9]/g, ''), item.name, 'Integrações (MCP/Plugins)', 'undefined') : ''}
+                                        ${window.favoritesManager ? window.favoritesManager.renderButton(item.name.replace(/[^a-zA-Z0-9]/g, ''), item.name, 'Integrações (MCP/Plugins)', 'undefined') : ''}
                                     </div>
                                 </td>
                                 <td style="padding: 16px; color: #4a5568; font-size: 0.95rem;">${item.desc}</td>

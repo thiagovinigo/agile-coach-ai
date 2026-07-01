@@ -312,13 +312,13 @@ function initEccSkillsView() {
                     
                     <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom: 1rem; margin-bottom:1.2rem;">
                         <h3 style="margin:0; color:#1a202c; font-size:2rem;">${skill.title}</h3>
-                        \${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'ECC Skills', skill.path) : ''}
+                        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'ECC Skills', skill.path) : ''}
                     </div>
 
                     <p style="color:#4a5568; margin-bottom:1.5rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
                     
                     <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
-                        📂 <strong>Repositório:</strong> \${skill.path}
+                        📂 <strong>Repositório:</strong> ${skill.path}
                     </div>
                     
                     <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
