@@ -193,6 +193,151 @@ function initKiroDocView() {
                 </div>
             </div>
         </details>
+        <!-- MÓDULO 6: CASE PRÁTICO TFS -->
+        <details class="mc-accordion" open>
+            <summary><span style="font-size:24px;">🚀</span> Módulo 6: Case Prático - Fluxo TFS Completo (End-to-End)</summary>
+            <div class="mc-content" style="background: #fafafa;">
+                <p>Neste cenário avançado, vemos como o Kiro e o ecossistema de Agentes atuam sobre o ciclo de vida completo de um PBI (Product Backlog Item) no <strong>Azure DevOps (TFS)</strong>. Da concepção da ideia até o aceite final (UAT).</p>
+                
+                <style>
+                    .tfs-board { display: flex; gap: 10px; overflow-x: auto; padding: 15px 0; margin: 20px 0; }
+                    .tfs-col { background: #f1f5f9; min-width: 150px; border-radius: 8px; padding: 10px; border-top: 4px solid #94a3b8; }
+                    .tfs-col.active { border-top-color: #3b82f6; background: #eff6ff; }
+                    .tfs-col-title { font-size: 11px; text-transform: uppercase; font-weight: bold; color: #475569; margin-bottom: 10px; }
+                    .tfs-card { background: #fff; border: 1px solid #cbd5e1; border-left: 4px solid #0ea5e9; padding: 10px; border-radius: 4px; font-size: 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+                    .tfs-tag { display: inline-block; background: #e0f2fe; color: #0284c7; padding: 2px 6px; border-radius: 999px; font-size: 9px; font-weight: bold; margin-right: 4px; margin-top: 5px; }
+                    
+                    .phase-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+                    .phase-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: bold; color: #0f172a; border-bottom: 1px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; }
+                    .phase-badge { background: #1e293b; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+                    
+                    .ai-action { display: flex; align-items: flex-start; gap: 15px; margin-top: 15px; background: #f8fafc; padding: 15px; border-radius: 6px; border-left: 3px solid #8b5cf6; }
+                    .ai-avatar { font-size: 24px; }
+                    .ai-desc { font-size: 13.5px; color: #334155; }
+                    .file-attachment { display: inline-flex; align-items: center; gap: 5px; background: #fff; border: 1px solid #cbd5e1; padding: 5px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; color: #b91c1c; margin-top: 8px; }
+                </style>
+
+                <!-- FASE 1 -->
+                <div class="phase-box">
+                    <div class="phase-title"><span class="phase-badge">Fase 1</span> New ➔ Refinamento Funcional</div>
+                    <div class="tfs-board">
+                        <div class="tfs-col"><div class="tfs-col-title">New</div></div>
+                        <div class="tfs-col active">
+                            <div class="tfs-col-title">Ref. Funcional</div>
+                            <div class="tfs-card">
+                                <strong>PBI 8492:</strong> Portal de Pagamentos
+                                <div><span class="tfs-tag">AI-Started</span></div>
+                            </div>
+                        </div>
+                        <div class="tfs-col"><div class="tfs-col-title">Ref. Técnico</div></div>
+                        <div class="tfs-col"><div class="tfs-col-title">Replenishment</div></div>
+                    </div>
+                    <p>O PO cria o card apenas com a Ideia. O <strong>Agente de PRD (Product Requirements Document)</strong> assume o card automaticamente via Webhook do TFS.</p>
+                    <div class="ai-action">
+                        <div class="ai-avatar">🤖</div>
+                        <div class="ai-desc">
+                            <strong>Ação do Agente PRD:</strong> Lê a descrição pífia, pesquisa a base de conhecimento de negócios no Confluence (RAG), formata User Stories, Critérios de Aceite (BDD) e anexa um documento formal de PRD. Atualiza a Description do TFS e adiciona a Tag <code>PRD-Ready</code>.
+                            <br>
+                            <span class="file-attachment">📄 Funcional_PRD_8492.pdf</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FASE 2 -->
+                <div class="phase-box">
+                    <div class="phase-title"><span class="phase-badge">Fase 2</span> Refinamento Técnico</div>
+                    <div class="tfs-board">
+                        <div class="tfs-col"><div class="tfs-col-title">New</div></div>
+                        <div class="tfs-col"><div class="tfs-col-title">Ref. Funcional</div></div>
+                        <div class="tfs-col active">
+                            <div class="tfs-col-title">Ref. Técnico</div>
+                            <div class="tfs-card">
+                                <strong>PBI 8492:</strong> Portal de Pagamentos
+                                <div><span class="tfs-tag">PRD-Ready</span> <span class="tfs-tag">Tech-Spec</span></div>
+                            </div>
+                        </div>
+                        <div class="tfs-col"><div class="tfs-col-title">Replenishment</div></div>
+                    </div>
+                    <p>Com o Funcional aprovado, a trigger move o card e aciona o <strong>Agente de Spec (Tech Lead AI)</strong>.</p>
+                    <div class="ai-action">
+                        <div class="ai-avatar">🛠️</div>
+                        <div class="ai-desc">
+                            <strong>Ação do Agente Spec:</strong> Lê o PDF do PRD, acessa o Github via MCP para entender a arquitetura atual. Gera o modelo de dados (SQL), diagramas Mermaid (C4 Model) e a estratégia de branch. Anexa a Especificação Técnica no PBI.
+                            <br>
+                            <span class="file-attachment">🧩 Tech_Architecture_8492.md</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FASE 3 -->
+                <div class="phase-box">
+                    <div class="phase-title"><span class="phase-badge">Fase 3</span> Pronto para Replenishment</div>
+                    <p>O card agora contém: <strong>Descrição Refinada, User Stories, BDD, Diagramas e Contratos de API</strong>. O time (humanos) faz a cerimônia de Replenishment, avalia o trabalho já pré-mastigado pela IA, estima e puxa para a Sprint.</p>
+                </div>
+
+                <!-- FASE 4 -->
+                <div class="phase-box">
+                    <div class="phase-title"><span class="phase-badge">Fase 4</span> Em Desenvolvimento (Coleta no Git / End-to-End)</div>
+                    <div class="tfs-board">
+                        <div class="tfs-col"><div class="tfs-col-title">Sprint Backlog</div></div>
+                        <div class="tfs-col active">
+                            <div class="tfs-col-title">Em Dev</div>
+                            <div class="tfs-card">
+                                <strong>PBI 8492:</strong> Portal de Pagamentos
+                                <div><span class="tfs-tag">In-Progress</span> <span class="tfs-tag">Kiro-Assigned</span></div>
+                            </div>
+                        </div>
+                        <div class="tfs-col"><div class="tfs-col-title">Em Teste</div></div>
+                    </div>
+                    <p>Aqui o desenvolvedor entra em ação localmente usando o Kiro na linha de comando.</p>
+                    
+                    <div class="mc-code">
+<span class="mc-code-comment"># O Dev clona o repo publicado e cria a branch baseada no PBI</span>
+$ git checkout -b feature/pbi-8492-portal
+
+<span class="mc-code-comment"># Inicia o Kiro passando o ID do PBI. O Kiro usa o MCP do Azure DevOps para ler TODOS os anexos (PRD, Tech Spec) que os agentes anteriores geraram!</span>
+$ kiro start --pbi 8492
+
+<span class="mc-code-highlight">[Kiro]</span>: "Baixei o PRD e a Tech Spec. Vejo que precisamos criar o endpoint de pagamentos. Posso iniciar os sub-agentes de Backend e Frontend?"
+<span class="mc-code-highlight">[Dev]</span>: "Sim. Use a skill de TDD e crie o código."
+
+<span class="mc-code-comment"># Kiro assume a direção (Steering).</span>
+<span class="mc-code-highlight">[Kiro Sub-Agent Backend]</span>: Escrevendo testes (test_payment.py)... Falhou (Red). Escrevendo implementação... Passou (Green).
+<span class="mc-code-highlight">[Kiro Sub-Agent Frontend]</span>: Criando formulário em React e vinculando à nova API.
+
+<span class="mc-code-comment"># Coleta no Git - O Kiro faz o commit de cada etapa logando o esforço:</span>
+$ git commit -m "feat(pbi-8492): implementa API baseada na Tech Spec"
+$ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
+
+<span class="mc-code-highlight">[Kiro]</span>: "Desenvolvimento concluído. Gostaria que eu abrisse o Pull Request e movesse o PBI para 'Em Teste'?"
+<span class="mc-code-highlight">[Dev]</span>: "Sim."
+                    </div>
+                </div>
+
+                <!-- FASE 5 -->
+                <div class="phase-box">
+                    <div class="phase-title"><span class="phase-badge">Fase 5</span> Em Teste ➔ Aceite UAT</div>
+                    <div class="tfs-board">
+                        <div class="tfs-col"><div class="tfs-col-title">Em Dev</div></div>
+                        <div class="tfs-col"><div class="tfs-col-title">Em Teste</div></div>
+                        <div class="tfs-col active">
+                            <div class="tfs-col-title">Aceite UAT</div>
+                            <div class="tfs-card">
+                                <strong>PBI 8492:</strong> Portal de Pagamentos
+                                <div><span class="tfs-tag">QA-Passed</span> <span class="tfs-tag">Ready-Release</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ai-action">
+                        <div class="ai-avatar">🧪</div>
+                        <div class="ai-desc">
+                            <strong>Ação do Agente QA:</strong> O Pull Request dispara o Pipeline. O agente lê o código gerado, escreve testes E2E em Playwright automatizados, roda contra o ambiente de Staging. Como tudo passa, ele move o TFS para Aceite UAT (User Acceptance Testing) para a aprovação final humana.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </details>
     `;
 }
 
