@@ -241,6 +241,61 @@ function initKiroDocView() {
                             <span class="file-attachment">📄 Funcional_PRD_8492.pdf</span>
                         </div>
                     </div>
+
+                    <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                        <details style="background: #f1f5f9; border-radius: 6px; padding: 10px; border: 1px solid #cbd5e1;">
+                            <summary style="font-weight: bold; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                ⚙️ Behind the Scenes: Como configurar isso no Kiro?
+                            </summary>
+                            <div style="margin-top: 15px; font-size: 13.5px; color: #475569;">
+                                <p>Para essa mágica acontecer, o Kiro precisa de 3 configurações simples:</p>
+                                
+                                <strong>1. O Webhook (Escuta o TFS)</strong>
+                                <div class="mc-code" style="margin-bottom: 15px;">
+<span class="mc-code-comment"># .kiro/hooks/tfs-new-pbi.json</span>
+{
+  "event": "workitem.created",
+  "condition": "payload.fields['System.State'] == 'New'",
+  "action": {
+    "type": "spawn_agent",
+    "agent": "prd-agent",
+    "args": { "pbi_id": "{{payload.id}}" }
+  }
+}
+                                </div>
+
+                                <strong>2. O Agent Prompt (Instrui a IA)</strong>
+                                <div class="mc-code" style="margin-bottom: 15px;">
+<span class="mc-code-comment"># .kiro/agents/prd-agent.md</span>
+Você é o Agente de PRD. Seu objetivo é refinar PBIs novos.
+Sempre que for acionado com um PBI ID:
+1. Use a tool 'tfs_get_workitem' para ler a ideia do PO.
+2. Use a tool 'search_confluence_knowledge' (RAG) para buscar regras de negócio relevantes ao tema.
+3. Formate a história de usuário e os critérios de aceite em BDD.
+4. Use 'tfs_update_description' para salvar no card.
+5. Use 'tfs_add_tag' para adicionar a tag "PRD-Ready".
+                                </div>
+
+                                <strong>3. Roteamento de Ferramentas (MCPs)</strong>
+                                <p>O Kiro injeta essas "tools" no LLM do agente lendo o arquivo principal de servidores MCP:</p>
+                                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/mcp.json</span>
+{
+  "mcpServers": {
+    "tfs-plugin": {
+      "command": "node",
+      "args": ["plugins/tfs-mcp.js"]
+    },
+    "confluence-rag": {
+      "command": "python3",
+      "args": ["plugins/rag-confluence.py"]
+    }
+  }
+}
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
                 <!-- FASE 2 -->
