@@ -465,7 +465,7 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
                         <button id="btn-kiro-reset" style="background: #475569; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">🔄 Reiniciar</button>
                     </div>
                     
-                    <div style="display: flex; gap: 10px; position: relative; min-height: 180px;" id="sim-board">
+                    <div style="display: flex; gap: 10px; position: relative; min-height: 180px;" id="kiro-doc-board">
                         <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-1"><div class="tfs-col-title" style="color: #cbd5e1;">New</div></div>
                         <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-2"><div class="tfs-col-title" style="color: #cbd5e1;">Ref. Funcional</div></div>
                         <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-3"><div class="tfs-col-title" style="color: #cbd5e1;">Ref. Técnico</div></div>
@@ -473,20 +473,20 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
                         <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-5"><div class="tfs-col-title" style="color: #cbd5e1;">Aceite UAT</div></div>
                         
                         <!-- Animated Card -->
-                        <div id="sim-card" style="background: #fff; border: 1px solid #0ea5e9; border-left: 4px solid #0ea5e9; padding: 10px; border-radius: 4px; font-size: 12px; color: #0f172a; position: absolute; width: calc(20% - 20px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); opacity: 0; z-index: 10;">
+                        <div id="kiro-doc-card" style="background: #fff; border: 1px solid #0ea5e9; border-left: 4px solid #0ea5e9; padding: 10px; border-radius: 4px; font-size: 12px; color: #0f172a; position: absolute; width: calc(20% - 20px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); opacity: 0; z-index: 10;">
                             <strong>PBI 8492:</strong> Portal de Pagamentos
-                            <div id="sim-tags" style="margin-top: 8px; min-height: 20px; display:flex; flex-wrap:wrap; gap:4px;">
+                            <div id="kiro-doc-tags" style="margin-top: 8px; min-height: 20px; display:flex; flex-wrap:wrap; gap:4px;">
                             </div>
                         </div>
                     </div>
 
                     <!-- Modal for Artifacts -->
-                    <div id="sim-modal" style="display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #3b82f6;">
+                    <div id="kiro-doc-modal" style="display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #3b82f6;">
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 10px;">
-                            <strong style="color: #60a5fa;" id="sim-modal-title">Título do Artefato</strong>
+                            <strong style="color: #60a5fa;" id="kiro-doc-modal-title">Título do Artefato</strong>
                             <button id="btn-kiro-close-modal" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✖</button>
                         </div>
-                        <pre id="sim-modal-content" style="margin: 0; color: #e2e8f0; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                        <pre id="kiro-doc-modal-content" style="margin: 0; color: #e2e8f0; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;"></pre>
                     </div>
                 </div>
 
@@ -498,9 +498,9 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
     window.kiroSimStep = 0;
 
     window.kiroSimOpenModal = function(type) {
-        const modal = document.getElementById('sim-modal');
-        const modalTitle = document.getElementById('sim-modal-title');
-        const modalContent = document.getElementById('sim-modal-content');
+        const modal = document.getElementById('kiro-doc-modal');
+        const modalTitle = document.getElementById('kiro-doc-modal-title');
+        const modalContent = document.getElementById('kiro-doc-modal-content');
         if (!modal || !modalTitle || !modalContent) return;
 
         modal.style.display = 'block';
@@ -521,9 +521,9 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
 
     window.kiroSimReset = function() {
         window.kiroSimStep = 0;
-        const card = document.getElementById('sim-card');
-        const tags = document.getElementById('sim-tags');
-        const modal = document.getElementById('sim-modal');
+        const card = document.getElementById('kiro-doc-card');
+        const tags = document.getElementById('kiro-doc-tags');
+        const modal = document.getElementById('kiro-doc-modal');
         const col = document.getElementById('col-1');
         
         if (!card || !col) return;
@@ -541,10 +541,10 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
     
     window.kiroSimNext = function() {
         console.log("btnNext clicado! kiroSimStep atual:", window.kiroSimStep);
-        const card = document.getElementById('sim-card');
-        const tags = document.getElementById('sim-tags');
-        if (!card) console.error("ERRO: sim-card não encontrado");
-        if (!tags) console.error("ERRO: sim-tags não encontrado");
+        const card = document.getElementById('kiro-doc-card');
+        const tags = document.getElementById('kiro-doc-tags');
+        if (!card) console.error("ERRO: kiro-doc-card não encontrado");
+        if (!tags) console.error("ERRO: kiro-doc-tags não encontrado");
         if (!card || !tags) return;
 
         window.kiroSimStep++;
@@ -611,7 +611,7 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
         const btnClose = document.getElementById('btn-kiro-close-modal');
         if (btnNext) btnNext.onclick = window.kiroSimNext;
         if (btnReset) btnReset.onclick = window.kiroSimReset;
-        if (btnClose) btnClose.onclick = () => { document.getElementById('sim-modal').style.display = 'none'; };
+        if (btnClose) btnClose.onclick = () => { document.getElementById('kiro-doc-modal').style.display = 'none'; };
     }, 200);
 }
 
