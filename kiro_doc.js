@@ -461,8 +461,8 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
                     <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Acompanhe o PBI se movendo pelo quadro enquanto a IA anexa os artefatos automaticamente.</p>
                     
                     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <button onclick="window.kiroSimNext()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">▶️ Próximo Passo</button>
-                        <button onclick="window.kiroSimReset()" style="background: #475569; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">🔄 Reiniciar</button>
+                        <button id="btn-kiro-next" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">▶️ Próximo Passo</button>
+                        <button id="btn-kiro-reset" style="background: #475569; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">🔄 Reiniciar</button>
                     </div>
                     
                     <div style="display: flex; gap: 10px; position: relative; min-height: 180px;" id="sim-board">
@@ -484,7 +484,7 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
                     <div id="sim-modal" style="display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #3b82f6;">
                         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 10px;">
                             <strong style="color: #60a5fa;" id="sim-modal-title">Título do Artefato</strong>
-                            <button onclick="document.getElementById('sim-modal').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✖</button>
+                            <button id="btn-kiro-close-modal" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✖</button>
                         </div>
                         <pre id="sim-modal-content" style="margin: 0; color: #e2e8f0; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;"></pre>
                     </div>
@@ -560,22 +560,33 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
         if (!cols[window.kiroSimStep]) return;
         card.style.left = cols[window.kiroSimStep].offsetLeft + 10 + 'px';
         
+        function addTag(text, bg, color, type) {
+            const span = document.createElement('span');
+            span.className = 'tfs-tag';
+            span.style.background = bg;
+            span.style.color = color;
+            span.style.cursor = 'pointer';
+            span.innerText = text;
+            span.onclick = function() { window.kiroSimOpenModal(type); };
+            tags.appendChild(span);
+        }
+
         if (window.kiroSimStep === 1) {
             setTimeout(() => {
-                tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e; cursor:pointer;" onclick="window.kiroSimOpenModal(\'PRD\')">📄 PRD</span>';
+                addTag('📄 PRD', '#fef08a', '#854d0e', 'PRD');
             }, 600);
         } else if (window.kiroSimStep === 2) {
             setTimeout(() => {
-                tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Spec\')">🧩 Spec</span>';
-                tags.innerHTML += '<span class="tfs-tag" style="background:#fee2e2; color:#991b1b; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Spec\')">🛡️ ADR</span>';
+                addTag('🧩 Spec', '#e0e7ff', '#3730a3', 'Spec');
+                addTag('🛡️ ADR', '#fee2e2', '#991b1b', 'Spec');
             }, 600);
         } else if (window.kiroSimStep === 3) {
             setTimeout(() => {
-                tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Code\')">⚙️ Code</span>';
+                addTag('⚙️ Code', '#dcfce7', '#166534', 'Code');
             }, 600);
         } else if (window.kiroSimStep === 4) {
             setTimeout(() => {
-                tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Passed\')">🧪 Passed</span>';
+                addTag('🧪 Passed', '#ccfbf1', '#115e59', 'Passed');
             }, 600);
         }
     };
@@ -583,6 +594,12 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
     // Initial setup with short delay to allow DOM render
     setTimeout(() => {
         window.kiroSimReset();
+        const btnNext = document.getElementById('btn-kiro-next');
+        const btnReset = document.getElementById('btn-kiro-reset');
+        const btnClose = document.getElementById('btn-kiro-close-modal');
+        if (btnNext) btnNext.onclick = window.kiroSimNext;
+        if (btnReset) btnReset.onclick = window.kiroSimReset;
+        if (btnClose) btnClose.onclick = () => { document.getElementById('sim-modal').style.display = 'none'; };
     }, 200);
 }
 
