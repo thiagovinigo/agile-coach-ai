@@ -495,87 +495,95 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
     `;
 
     // Script Logic
-    if (window.kiroSimulationInterval) clearInterval(window.kiroSimulationInterval);
+    window.kiroSimStep = 0;
 
-    setTimeout(() => {
-        const card = document.getElementById('sim-card');
-        const tags = document.getElementById('sim-tags');
+    window.kiroSimOpenModal = function(type) {
         const modal = document.getElementById('sim-modal');
         const modalTitle = document.getElementById('sim-modal-title');
         const modalContent = document.getElementById('sim-modal-content');
-        if (!card || !tags) return;
-        
-        let currentStep = 0;
-        
-        window.kiroSimOpenModal = function(type) {
-            modal.style.display = 'block';
-            if (type === 'PRD') {
-                modalTitle.innerHTML = '📄 Funcional_PRD_8492.md';
-                modalContent.innerHTML = "Feature: Processamento de Pagamento\n\n  Scenario: Pagamento com Cartão Válido\n    Given que o usuário está na tela de checkout\n    When ele insere dados de cartão válidos e clica 'Pagar'\n    Then o sistema deve processar via API Cielo\n    And retornar 'Sucesso' na interface";
-            } else if (type === 'Spec') {
-                modalTitle.innerHTML = '🧩 Tech_Architecture_8492.md';
-                modalContent.innerHTML = "## Decisão de Arquitetura (Tech Lead AI)\n\nO frontend enviará payload JSON para `/api/payments`.\nBanco de dados atualizará tabela `Orders` (Status=PAID).\n\n```mermaid\ngraph TD\n  UI[React UI] --> API[Node.js API]\n  API --> DB[(PostgreSQL)]\n```";
-            } else if (type === 'Code') {
-                modalTitle.innerHTML = '⚙️ Code.js (Commit)';
-                modalContent.innerHTML = "// Kiro-Backend SubAgent\napp.post('/api/payments', async (req, res) => {\n  try {\n    const tx = await CieloAPI.process(req.body);\n    await db.query('UPDATE orders SET status=$1', ['PAID']);\n    return res.status(200).json({ success: true, tx });\n  } catch (e) {\n    return res.status(500).json({ error: e.message });\n  }\n});";
-            } else if (type === 'Passed') {
-                modalTitle.innerHTML = '🧪 E2E_Test_Results.log';
-                modalContent.innerHTML = "Running tests in Playwright...\n[✓] test_payment_success (1.2s)\n[✓] test_payment_declined (0.9s)\n\n2 passed (2.1s)\n\n> QA-Agent: Tudo verde! Movendo PBI para Aceite UAT.";
-            }
-        };
+        if (!modal || !modalTitle || !modalContent) return;
 
-        window.kiroSimReset = function() {
-            currentStep = 0;
-            const col = document.getElementById('col-1');
-            if (!col) return;
-            card.style.opacity = '0';
-            modal.style.display = 'none';
+        modal.style.display = 'block';
+        if (type === 'PRD') {
+            modalTitle.innerHTML = '📄 Funcional_PRD_8492.md';
+            modalContent.innerHTML = "Feature: Processamento de Pagamento\n\n  Scenario: Pagamento com Cartão Válido\n    Given que o usuário está na tela de checkout\n    When ele insere dados de cartão válidos e clica 'Pagar'\n    Then o sistema deve processar via API Cielo\n    And retornar 'Sucesso' na interface";
+        } else if (type === 'Spec') {
+            modalTitle.innerHTML = '🧩 Tech_Architecture_8492.md';
+            modalContent.innerHTML = "## Decisão de Arquitetura (Tech Lead AI)\n\nO frontend enviará payload JSON para `/api/payments`.\nBanco de dados atualizará tabela `Orders` (Status=PAID).\n\n```mermaid\ngraph TD\n  UI[React UI] --> API[Node.js API]\n  API --> DB[(PostgreSQL)]\n```";
+        } else if (type === 'Code') {
+            modalTitle.innerHTML = '⚙️ Code.js (Commit)';
+            modalContent.innerHTML = "// Kiro-Backend SubAgent\napp.post('/api/payments', async (req, res) => {\n  try {\n    const tx = await CieloAPI.process(req.body);\n    await db.query('UPDATE orders SET status=$1', ['PAID']);\n    return res.status(200).json({ success: true, tx });\n  } catch (e) {\n    return res.status(500).json({ error: e.message });\n  }\n});";
+        } else if (type === 'Passed') {
+            modalTitle.innerHTML = '🧪 E2E_Test_Results.log';
+            modalContent.innerHTML = "Running tests in Playwright...\n[✓] test_payment_success (1.2s)\n[✓] test_payment_declined (0.9s)\n\n2 passed (2.1s)\n\n> QA-Agent: Tudo verde! Movendo PBI para Aceite UAT.";
+        }
+    };
+
+    window.kiroSimReset = function() {
+        window.kiroSimStep = 0;
+        const card = document.getElementById('sim-card');
+        const tags = document.getElementById('sim-tags');
+        const modal = document.getElementById('sim-modal');
+        const col = document.getElementById('col-1');
+        
+        if (!card || !col) return;
+        
+        card.style.opacity = '0';
+        if (modal) modal.style.display = 'none';
+        
+        setTimeout(() => {
+            card.style.left = col.offsetLeft + 10 + 'px';
+            card.style.top = col.offsetTop + 40 + 'px';
+            if (tags) tags.innerHTML = '';
+            card.style.opacity = '1';
+        }, 300);
+    };
+    
+    window.kiroSimNext = function() {
+        const card = document.getElementById('sim-card');
+        const tags = document.getElementById('sim-tags');
+        if (!card || !tags) return;
+
+        window.kiroSimStep++;
+        if (window.kiroSimStep > 4) {
+            window.kiroSimReset();
+            return;
+        }
+        const cols = [
+            document.getElementById('col-1'),
+            document.getElementById('col-2'),
+            document.getElementById('col-3'),
+            document.getElementById('col-4'),
+            document.getElementById('col-5')
+        ];
+        
+        if (!cols[window.kiroSimStep]) return;
+        card.style.left = cols[window.kiroSimStep].offsetLeft + 10 + 'px';
+        
+        if (window.kiroSimStep === 1) {
             setTimeout(() => {
-                card.style.left = col.offsetLeft + 10 + 'px';
-                card.style.top = col.offsetTop + 40 + 'px';
-                tags.innerHTML = '';
-                card.style.opacity = '1';
-            }, 300);
-        };
-        
-        window.kiroSimNext = function() {
-            currentStep++;
-            if (currentStep > 4) {
-                window.kiroSimReset();
-                return;
-            }
-            const cols = [
-                document.getElementById('col-1'),
-                document.getElementById('col-2'),
-                document.getElementById('col-3'),
-                document.getElementById('col-4'),
-                document.getElementById('col-5')
-            ];
-            
-            card.style.left = cols[currentStep].offsetLeft + 10 + 'px';
-            
-            if (currentStep === 1) {
-                setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e; cursor:pointer;" onclick="kiroSimOpenModal(\'PRD\')">📄 PRD</span>';
-                }, 600);
-            } else if (currentStep === 2) {
-                setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3; cursor:pointer;" onclick="kiroSimOpenModal(\'Spec\')">🧩 Spec</span>';
-                }, 600);
-            } else if (currentStep === 3) {
-                setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534; cursor:pointer;" onclick="kiroSimOpenModal(\'Code\')">⚙️ Code</span>';
-                }, 600);
-            } else if (currentStep === 4) {
-                setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59; cursor:pointer;" onclick="kiroSimOpenModal(\'Passed\')">🧪 Passed</span>';
-                }, 600);
-            }
-        };
-        
-        // Initial setup
+                tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e; cursor:pointer;" onclick="window.kiroSimOpenModal(\'PRD\')">📄 PRD</span>';
+            }, 600);
+        } else if (window.kiroSimStep === 2) {
+            setTimeout(() => {
+                tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Spec\')">🧩 Spec</span>';
+                tags.innerHTML += '<span class="tfs-tag" style="background:#fee2e2; color:#991b1b; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Spec\')">🛡️ ADR</span>';
+            }, 600);
+        } else if (window.kiroSimStep === 3) {
+            setTimeout(() => {
+                tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Code\')">⚙️ Code</span>';
+            }, 600);
+        } else if (window.kiroSimStep === 4) {
+            setTimeout(() => {
+                tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59; cursor:pointer;" onclick="window.kiroSimOpenModal(\'Passed\')">🧪 Passed</span>';
+            }, 600);
+        }
+    };
+    
+    // Initial setup with short delay to allow DOM render
+    setTimeout(() => {
         window.kiroSimReset();
-    }, 500);
+    }, 200);
 }
 
 window.initKiroDocView = initKiroDocView;
