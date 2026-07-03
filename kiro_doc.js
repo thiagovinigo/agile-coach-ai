@@ -390,10 +390,104 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
                         </div>
                     </div>
                 </div>
+                <!-- ANIMATED SIMULATOR -->
+                <div class="phase-box" style="margin-top: 40px; background: #1e293b; color: white; border: 1px solid #334155;">
+                    <div class="phase-title" style="color: white; border-bottom-color: #334155;">
+                        <span style="font-size: 20px;">🎬</span> Simulação Animada do Card Kiro
+                    </div>
+                    <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Acompanhe o PBI se movendo pelo quadro enquanto a IA anexa os artefatos automaticamente.</p>
+                    
+                    <div style="display: flex; gap: 10px; position: relative; min-height: 180px;" id="sim-board">
+                        <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-1"><div class="tfs-col-title" style="color: #cbd5e1;">New</div></div>
+                        <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-2"><div class="tfs-col-title" style="color: #cbd5e1;">Ref. Funcional</div></div>
+                        <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-3"><div class="tfs-col-title" style="color: #cbd5e1;">Ref. Técnico</div></div>
+                        <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-4"><div class="tfs-col-title" style="color: #cbd5e1;">Em Dev</div></div>
+                        <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-5"><div class="tfs-col-title" style="color: #cbd5e1;">Aceite UAT</div></div>
+                        
+                        <!-- Animated Card -->
+                        <div id="sim-card" style="background: #fff; border: 1px solid #0ea5e9; border-left: 4px solid #0ea5e9; padding: 10px; border-radius: 4px; font-size: 12px; color: #0f172a; position: absolute; width: calc(20% - 20px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); opacity: 0; z-index: 10;">
+                            <strong>PBI 8492:</strong> Portal de Pagamentos
+                            <div id="sim-tags" style="margin-top: 8px; min-height: 20px; display:flex; flex-wrap:wrap; gap:4px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </details>
     `;
+
+    // Start simulation loop
+    if (window.kiroSimulationInterval) clearInterval(window.kiroSimulationInterval);
+    
+    setTimeout(() => {
+        const card = document.getElementById('sim-card');
+        const tags = document.getElementById('sim-tags');
+        if (!card || !tags) return;
+        
+        let step = 0;
+        
+        window.kiroSimulationInterval = setInterval(() => {
+            const cols = [
+                document.getElementById('col-1'),
+                document.getElementById('col-2'),
+                document.getElementById('col-3'),
+                document.getElementById('col-4'),
+                document.getElementById('col-5')
+            ];
+            
+            if (!cols[0]) {
+                clearInterval(window.kiroSimulationInterval);
+                return;
+            }
+            
+            if (step === 0) {
+                // Reset to col-1
+                card.style.opacity = '0'; // fade out briefly
+                setTimeout(() => {
+                    card.style.left = cols[0].offsetLeft + 10 + 'px';
+                    card.style.top = cols[0].offsetTop + 40 + 'px';
+                    tags.innerHTML = '';
+                    card.style.opacity = '1';
+                }, 300);
+            } else if (step === 1) {
+                // Funcional
+                card.style.left = cols[1].offsetLeft + 10 + 'px';
+                setTimeout(() => {
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e;">📄 PRD</span>';
+                }, 600);
+            } else if (step === 2) {
+                // Tech
+                card.style.left = cols[2].offsetLeft + 10 + 'px';
+                setTimeout(() => {
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3;">🧩 Spec</span>';
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#fee2e2; color:#991b1b;">🛡️ ADR</span>';
+                }, 600);
+            } else if (step === 3) {
+                // Dev
+                card.style.left = cols[3].offsetLeft + 10 + 'px';
+                setTimeout(() => {
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534;">⚙️ Code</span>';
+                }, 600);
+            } else if (step === 4) {
+                // Test
+                card.style.left = cols[4].offsetLeft + 10 + 'px';
+                setTimeout(() => {
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59;">🧪 Passed</span>';
+                }, 600);
+            }
+            
+            step++;
+            if (step > 6) step = 0; // Pause for 2 ticks before resetting
+            
+        }, 2200);
+        
+        // Initial positioning
+        card.style.left = document.getElementById('col-1').offsetLeft + 10 + 'px';
+        card.style.top = document.getElementById('col-1').offsetTop + 40 + 'px';
+        card.style.opacity = '1';
+        
+    }, 500);
 }
 
 window.initKiroDocView = initKiroDocView;
