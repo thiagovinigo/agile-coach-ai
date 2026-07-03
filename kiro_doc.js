@@ -321,6 +321,27 @@ Sempre que for acionado com um PBI ID:
                             <br>
                             <span class="file-attachment">🧩 Tech_Architecture_8492.md</span>
                         </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                        <details style="background: #f1f5f9; border-radius: 6px; padding: 10px; border: 1px solid #cbd5e1;">
+                            <summary style="font-weight: bold; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                ⚙️ Behind the Scenes: Como configurar o Agente Spec?
+                            </summary>
+                            <div style="margin-top: 15px; font-size: 13.5px; color: #475569;">
+                                <strong>O Prompt do Agente Tech Lead</strong>
+                                <div class="mc-code" style="margin-bottom: 15px;">
+<span class="mc-code-comment"># .kiro/agents/spec-agent.md</span>
+Você é o Arquiteto de Software. Quando acionado:
+1. Leia o PRD anexado usando 'tfs_download_attachment'.
+2. Explore o repositório atual usando as ferramentas do 'github-mcp' para entender a stack.
+3. Gere o modelo de dados (SQL) e o diagrama arquitetural (C4 Model).
+4. Salve como 'Tech_Architecture.md' e faça o upload pro TFS usando 'tfs_upload_attachment'.
+5. Atualize as tags do TFS para "Tech-Spec".
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 </div>
 
@@ -367,6 +388,25 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
 <span class="mc-code-highlight">[Kiro]</span>: "Desenvolvimento concluído. Gostaria que eu abrisse o Pull Request e movesse o PBI para 'Em Teste'?"
 <span class="mc-code-highlight">[Dev]</span>: "Sim."
                     </div>
+
+                    <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                        <details style="background: #f1f5f9; border-radius: 6px; padding: 10px; border: 1px solid #cbd5e1;">
+                            <summary style="font-weight: bold; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                ⚙️ Behind the Scenes: Como configurar o Orquestrador Kiro?
+                            </summary>
+                            <div style="margin-top: 15px; font-size: 13.5px; color: #475569;">
+                                <p>O Kiro no terminal (Steering mode) atua como um Orquestrador que pode invocar Sub-Agentes (Workers) sob demanda.</p>
+                                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/agents/kiro-orchestrator.md</span>
+Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
+1. Leia os anexos do PBI atual.
+2. Identifique quais skills são necessárias (Backend, Frontend).
+3. Use a ferramenta 'invoke_subagent' para spawnar um Worker para o Backend e um para o Frontend em paralelo.
+4. Aguarde o retorno deles. Quando finalizarem, faça o commit automático das alterações no Git.
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
                 <!-- FASE 5 -->
@@ -388,6 +428,29 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
                         <div class="ai-desc">
                             <strong>Ação do Agente QA:</strong> O Pull Request dispara o Pipeline. O agente lê o código gerado, escreve testes E2E em Playwright automatizados, roda contra o ambiente de Staging. Como tudo passa, ele move o TFS para Aceite UAT (User Acceptance Testing) para a aprovação final humana.
                         </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px dashed #cbd5e1; padding-top: 15px;">
+                        <details style="background: #f1f5f9; border-radius: 6px; padding: 10px; border: 1px solid #cbd5e1;">
+                            <summary style="font-weight: bold; color: #334155; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                ⚙️ Behind the Scenes: O Agente QA
+                            </summary>
+                            <div style="margin-top: 15px; font-size: 13.5px; color: #475569;">
+                                <div class="mc-code">
+<span class="mc-code-comment"># .kiro/hooks/github-pr-opened.json</span>
+{
+  "event": "pull_request.opened",
+  "action": {
+    "type": "spawn_agent",
+    "agent": "qa-agent",
+    "args": { "pr_id": "{{payload.number}}" }
+  }
+}
+<span class="mc-code-comment"># O 'qa-agent' tem acesso ao MCP do Playwright para rodar testes E2E e, se passar, chama a tool do TFS para mover a coluna para 'Aceite UAT'.</span>
+                                </div>
+                            </div>
+                        </details>
                     </div>
                 </div>
                 <!-- ANIMATED SIMULATOR -->
@@ -396,6 +459,11 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
                         <span style="font-size: 20px;">🎬</span> Simulação Animada do Card Kiro
                     </div>
                     <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">Acompanhe o PBI se movendo pelo quadro enquanto a IA anexa os artefatos automaticamente.</p>
+                    
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <button onclick="window.kiroSimNext()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">▶️ Próximo Passo</button>
+                        <button onclick="window.kiroSimReset()" style="background: #475569; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: background 0.2s;">🔄 Reiniciar</button>
+                    </div>
                     
                     <div style="display: flex; gap: 10px; position: relative; min-height: 180px;" id="sim-board">
                         <div class="tfs-col" style="flex: 1; background: #334155; border-color: #64748b;" id="col-1"><div class="tfs-col-title" style="color: #cbd5e1;">New</div></div>
@@ -411,23 +479,71 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
                             </div>
                         </div>
                     </div>
+
+                    <!-- Modal for Artifacts -->
+                    <div id="sim-modal" style="display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #3b82f6;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 10px; margin-bottom: 10px;">
+                            <strong style="color: #60a5fa;" id="sim-modal-title">Título do Artefato</strong>
+                            <button onclick="document.getElementById('sim-modal').style.display='none'" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✖</button>
+                        </div>
+                        <pre id="sim-modal-content" style="margin: 0; color: #e2e8f0; font-family: monospace; font-size: 12px; white-space: pre-wrap; word-wrap: break-word;"></pre>
+                    </div>
                 </div>
 
             </div>
         </details>
     `;
 
-    // Start simulation loop
+    // Script Logic
     if (window.kiroSimulationInterval) clearInterval(window.kiroSimulationInterval);
-    
+
     setTimeout(() => {
         const card = document.getElementById('sim-card');
         const tags = document.getElementById('sim-tags');
+        const modal = document.getElementById('sim-modal');
+        const modalTitle = document.getElementById('sim-modal-title');
+        const modalContent = document.getElementById('sim-modal-content');
         if (!card || !tags) return;
         
-        let step = 0;
+        let currentStep = 0;
         
-        window.kiroSimulationInterval = setInterval(() => {
+        window.kiroSimOpenModal = function(type) {
+            modal.style.display = 'block';
+            if (type === 'PRD') {
+                modalTitle.innerHTML = '📄 Funcional_PRD_8492.md';
+                modalContent.innerHTML = "Feature: Processamento de Pagamento\n\n  Scenario: Pagamento com Cartão Válido\n    Given que o usuário está na tela de checkout\n    When ele insere dados de cartão válidos e clica 'Pagar'\n    Then o sistema deve processar via API Cielo\n    And retornar 'Sucesso' na interface";
+            } else if (type === 'Spec') {
+                modalTitle.innerHTML = '🧩 Tech_Architecture_8492.md';
+                modalContent.innerHTML = "## Decisão de Arquitetura (Tech Lead AI)\n\nO frontend enviará payload JSON para `/api/payments`.\nBanco de dados atualizará tabela `Orders` (Status=PAID).\n\n```mermaid\ngraph TD\n  UI[React UI] --> API[Node.js API]\n  API --> DB[(PostgreSQL)]\n```";
+            } else if (type === 'Code') {
+                modalTitle.innerHTML = '⚙️ Code.js (Commit)';
+                modalContent.innerHTML = "// Kiro-Backend SubAgent\napp.post('/api/payments', async (req, res) => {\n  try {\n    const tx = await CieloAPI.process(req.body);\n    await db.query('UPDATE orders SET status=$1', ['PAID']);\n    return res.status(200).json({ success: true, tx });\n  } catch (e) {\n    return res.status(500).json({ error: e.message });\n  }\n});";
+            } else if (type === 'Passed') {
+                modalTitle.innerHTML = '🧪 E2E_Test_Results.log';
+                modalContent.innerHTML = "Running tests in Playwright...\n[✓] test_payment_success (1.2s)\n[✓] test_payment_declined (0.9s)\n\n2 passed (2.1s)\n\n> QA-Agent: Tudo verde! Movendo PBI para Aceite UAT.";
+            }
+        };
+
+        window.kiroSimReset = function() {
+            currentStep = 0;
+            const col = document.getElementById('col-1');
+            if (!col) return;
+            card.style.opacity = '0';
+            modal.style.display = 'none';
+            setTimeout(() => {
+                card.style.left = col.offsetLeft + 10 + 'px';
+                card.style.top = col.offsetTop + 40 + 'px';
+                tags.innerHTML = '';
+                card.style.opacity = '1';
+            }, 300);
+        };
+        
+        window.kiroSimNext = function() {
+            currentStep++;
+            if (currentStep > 4) {
+                window.kiroSimReset();
+                return;
+            }
             const cols = [
                 document.getElementById('col-1'),
                 document.getElementById('col-2'),
@@ -436,57 +552,29 @@ $ git commit -m "test(pbi-8492): adiciona cobertura BDD validada pelo PRD"
                 document.getElementById('col-5')
             ];
             
-            if (!cols[0]) {
-                clearInterval(window.kiroSimulationInterval);
-                return;
-            }
+            card.style.left = cols[currentStep].offsetLeft + 10 + 'px';
             
-            if (step === 0) {
-                // Reset to col-1
-                card.style.opacity = '0'; // fade out briefly
+            if (currentStep === 1) {
                 setTimeout(() => {
-                    card.style.left = cols[0].offsetLeft + 10 + 'px';
-                    card.style.top = cols[0].offsetTop + 40 + 'px';
-                    tags.innerHTML = '';
-                    card.style.opacity = '1';
-                }, 300);
-            } else if (step === 1) {
-                // Funcional
-                card.style.left = cols[1].offsetLeft + 10 + 'px';
-                setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e;">📄 PRD</span>';
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#fef08a; color:#854d0e; cursor:pointer;" onclick="kiroSimOpenModal(\'PRD\')">📄 PRD</span>';
                 }, 600);
-            } else if (step === 2) {
-                // Tech
-                card.style.left = cols[2].offsetLeft + 10 + 'px';
+            } else if (currentStep === 2) {
                 setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3;">🧩 Spec</span>';
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#fee2e2; color:#991b1b;">🛡️ ADR</span>';
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#e0e7ff; color:#3730a3; cursor:pointer;" onclick="kiroSimOpenModal(\'Spec\')">🧩 Spec</span>';
                 }, 600);
-            } else if (step === 3) {
-                // Dev
-                card.style.left = cols[3].offsetLeft + 10 + 'px';
+            } else if (currentStep === 3) {
                 setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534;">⚙️ Code</span>';
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#dcfce7; color:#166534; cursor:pointer;" onclick="kiroSimOpenModal(\'Code\')">⚙️ Code</span>';
                 }, 600);
-            } else if (step === 4) {
-                // Test
-                card.style.left = cols[4].offsetLeft + 10 + 'px';
+            } else if (currentStep === 4) {
                 setTimeout(() => {
-                    tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59;">🧪 Passed</span>';
+                    tags.innerHTML += '<span class="tfs-tag" style="background:#ccfbf1; color:#115e59; cursor:pointer;" onclick="kiroSimOpenModal(\'Passed\')">🧪 Passed</span>';
                 }, 600);
             }
-            
-            step++;
-            if (step > 6) step = 0; // Pause for 2 ticks before resetting
-            
-        }, 2200);
+        };
         
-        // Initial positioning
-        card.style.left = document.getElementById('col-1').offsetLeft + 10 + 'px';
-        card.style.top = document.getElementById('col-1').offsetTop + 40 + 'px';
-        card.style.opacity = '1';
-        
+        // Initial setup
+        window.kiroSimReset();
     }, 500);
 }
 
