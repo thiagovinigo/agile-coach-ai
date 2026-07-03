@@ -540,12 +540,18 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
     };
     
     window.kiroSimNext = function() {
+        console.log("btnNext clicado! kiroSimStep atual:", window.kiroSimStep);
         const card = document.getElementById('sim-card');
         const tags = document.getElementById('sim-tags');
+        if (!card) console.error("ERRO: sim-card não encontrado");
+        if (!tags) console.error("ERRO: sim-tags não encontrado");
         if (!card || !tags) return;
 
         window.kiroSimStep++;
+        console.log("Novo kiroSimStep:", window.kiroSimStep);
+        
         if (window.kiroSimStep > 4) {
+            console.log("Resetando...");
             window.kiroSimReset();
             return;
         }
@@ -557,8 +563,14 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
             document.getElementById('col-5')
         ];
         
-        if (!cols[window.kiroSimStep]) return;
+        if (!cols[window.kiroSimStep]) {
+            console.error("ERRO: Coluna não encontrada para o passo", window.kiroSimStep);
+            return;
+        }
+        
+        console.log("Coluna alvo encontrada. offsetLeft:", cols[window.kiroSimStep].offsetLeft);
         card.style.left = cols[window.kiroSimStep].offsetLeft + 10 + 'px';
+        console.log("Nova posição left do card:", card.style.left);
         
         function addTag(text, bg, color, type) {
             const span = document.createElement('span');
