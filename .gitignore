@@ -1,0 +1,5 @@
+node_modules/
+pm-skills-claude-code/
+openwiki/
+.env
+__pycache__/

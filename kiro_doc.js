@@ -492,6 +492,59 @@ Você é o Orquestrador. Quando o dev disser "inicie os trabalhos":
 
             </div>
         </details>
+
+        <!-- MÓDULO 7 -->
+        <details class="mc-accordion">
+            <summary><span style="font-size:24px;">⌨️</span> Módulo 7: Cheatsheet de Comandos MCP/TFS</summary>
+            <div class="mc-content">
+                <p>O Kiro (ou Claude Code) utiliza o MCP (Model Context Protocol) para invocar alterações no TFS/Azure DevOps. Aqui está a folha de dicas com as "Skills" (Comandos) que você pode pedir para a IA executar ou rodar no terminal.</p>
+                
+                <h4 style="color:#1e293b; margin-top:20px;">1. Gerar/Criar PBI (Work Item)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Criar um novo Product Backlog Item</span>
+<span class="mc-code-highlight">kiro run tfs/create-work-item</span> --type="Product Backlog Item" --title="Nova API de Checkout" --description="Implementar endpoint /api/checkout"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">2. Gerar / Adicionar Tag</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Adicionar uma tag específica a um PBI existente (Ex: ID 8492)</span>
+<span class="mc-code-highlight">kiro run tfs/add-tag</span> --id=8492 --tag="PRD-Ready"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">3. Atualizar Description (Adicionar informações)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Sobrescrever ou fazer append na descrição</span>
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8492 --field="System.Description" --value="&lt;p&gt;Nova descrição processada pela IA.&lt;/p&gt;"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">4. Mudar um State (Mover no Kanban)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Mover o card para uma nova coluna/status</span>
+<span class="mc-code-highlight">kiro run tfs/update-state</span> --id=8492 --state="Aguardando Refinamento Técnico"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">5. Mudar um Campo Customizado (Ex: Prioridade, Risco)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Atualizar qualquer campo nativo ou custom do TFS</span>
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8492 --field="Microsoft.VSTS.Common.Priority" --value="1"
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8492 --field="Custom.BusinessValue" --value="80"
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">6. Trocar Informação (Adicionar Comentário / Discussion)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Adicionar um comentário no histórico do ticket (Discussion)</span>
+<span class="mc-code-highlight">kiro run tfs/add-comment</span> --id=8492 --text="O Agente PRD revisou os critérios de aceite. Por favor, Tech Lead, valide a arquitetura."
+                </div>
+
+                <h4 style="color:#1e293b; margin-top:20px;">7. Somar Horas (Completed / Remaining Work)</h4>
+                <div class="mc-code">
+<span class="mc-code-comment"># Atualizar as estimativas de esforço (em horas ou story points) da Task/PBI</span>
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8493 --field="Microsoft.VSTS.Scheduling.CompletedWork" --value="4"
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8493 --field="Microsoft.VSTS.Scheduling.RemainingWork" --value="2"
+<span class="mc-code-highlight">kiro run tfs/update-field</span> --id=8492 --field="Microsoft.VSTS.Scheduling.StoryPoints" --value="5"
+                </div>
+            </div>
+        </details>
     `;
 
     // Script Logic
