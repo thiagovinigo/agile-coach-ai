@@ -18,6 +18,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "assets/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "pm-skills-claude-code/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
