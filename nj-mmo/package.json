@@ -1,0 +1,59 @@
+{
+  "name": "nj-mmo",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Waldemar Neto",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waldemarnt/nj-mmo.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"nx serve server\" \"nx serve client\"",
+    "start:tunnel": "pkill -f 'tsx.*server/src/index' 2>/dev/null; pkill -f 'vite client' 2>/dev/null; sleep 1; NGROK_CLIENT=$(curl -s http://localhost:4040/api/tunnels | node -e \"const d=require('fs').readFileSync('/dev/stdin','utf8');const t=JSON.parse(d).tunnels;console.log(t.find(x=>x.config.addr.endsWith('4200')).public_url)\"); echo \"\"; echo \"======================================\"; echo \"  Share this URL with players:\"; echo \"  $NGROK_CLIENT\"; echo \"======================================\"; echo \"\"; concurrently -n server,client -c blue,green \"tsx --tsconfig server/tsconfig.app.json server/src/index.ts\" \"VITE_TUNNEL=1 VITE_COLYSEUS_ENDPOINT=$NGROK_CLIENT vite client --port 4200\""
+  },
+  "devDependencies": {
+    "@colyseus/testing": "^0.17.11",
+    "@eslint/js": "^10.0.1",
+    "@gltf-transform/core": "^4.4.0",
+    "@gltf-transform/functions": "^4.4.0",
+    "@nx/eslint": "^23.0.1",
+    "@nx/eslint-plugin": "^23.0.1",
+    "@nx/js": "^23.0.1",
+    "@nx/node": "^23.0.1",
+    "@nx/vite": "^23.0.1",
+    "@nx/vitest": "^23.0.1",
+    "@playwright/test": "^1.61.1",
+    "@swc/helpers": "~0.5.18",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.0.1",
+    "@types/three": "^0.185.0",
+    "@vitest/coverage-v8": "~4.1.0",
+    "concurrently": "^9.1.2",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^10.6.0",
+    "jsdom": "^29.1.1",
+    "nx": "23.0.1",
+    "prettier": "~3.6.2",
+    "tslib": "^2.3.0",
+    "tsx": "^4.19.4",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.62.0",
+    "vite": "^8.1.0",
+    "vitest": "^4.1.9"
+  },
+  "dependencies": {
+    "@colyseus/schema": "^4.0.26",
+    "@colyseus/sdk": "^0.17.43",
+    "@colyseus/tools": "^0.17.19",
+    "better-sqlite3": "^12.11.1",
+    "colyseus": "^0.17.10",
+    "drizzle-orm": "^0.45.2",
+    "fast-xml-parser": "^5.9.3",
+    "three": "^0.185.0"
+  }
+}

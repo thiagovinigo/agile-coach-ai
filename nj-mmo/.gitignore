@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.nx/cache
+.nx/workspace-data
+*.db
+*.db-journal
+data/
+.devmode.json
+.env
+.DS_Store
+coverage/
+test-results/
+playwright-report/
+blob-report/
+
+vitest.config.*.timestamp*
+tmp/

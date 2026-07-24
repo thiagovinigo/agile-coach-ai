@@ -26,6 +26,22 @@
       "use": "@vercel/static"
     },
     {
+      "src": "templates/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "openwiki/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "banana-slides/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "nj-mmo/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
