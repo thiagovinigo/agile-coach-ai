@@ -92,7 +92,10 @@ Linha: " + line);
                         <span class="icon">🍌</span> Banana Slides
                     </a>
                     <a href="#nj-mmo" class="nav-item" data-target="nj-mmo-view">
-                        <span class="icon">⚔️</span> NJ MMO
+                        <span class="icon">🎮</span> NJ MMO
+                    </a>
+                    <a href="#spec-driven" class="nav-item" data-target="spec-driven-view">
+                        <span class="icon">🎯</span> Spec-Driven
                     </a>
                     <a href="#ecc-agents" class="nav-item" data-target="ecc-agents-view">
                         <span class="icon">🤖</span> ECC Agents
@@ -192,6 +195,7 @@ Linha: " + line);
                 <div id="pm-skills-view" class="view kb-view"></div>
                 <div id="banana-slides-view" class="view kb-view"></div>
                 <div id="nj-mmo-view" class="view kb-view"></div>
+                <div id="spec-driven-view" class="view kb-view"></div>
                 <div id="ecc-skills-view" class="view kb-view"></div>
                 <div id="favorites-view" class="view kb-view"></div>
                 
@@ -255,6 +259,11 @@ Linha: " + line);
     <script src="banana_slides_view.js?v=1"></script>
     <script src="nj-mmo-data.js?v=1"></script>
     <script src="nj_mmo_view.js?v=1"></script>
-    
+    <script src="spec-driven-data.js?v=1"></script>
+    <script src="spec_driven_view.js?v=1"></script>
+    <script>
+        if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
+        if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');
+    </script>
 </body>
 </html>

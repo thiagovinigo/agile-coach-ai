@@ -42,6 +42,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "spec-driven/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
