@@ -84,22 +84,33 @@ function initPmSkillsView() {
                         .then(text => {
                         
                         // Simple markdown parser
-                        let html = text
-                            .replace(/```[a-z]*\n([\s\S]*?)```/g, '<pre style="background:#0f172a; color:#e2e8f0; padding:15px; border-radius:8px; overflow-x:auto; font-family:monospace; font-size:13px; line-height:1.4;">$1</pre>')
+                        const preBlocks = [];
+                        let processedText = text.replace(/```[a-z]*\n([\s\S]*?)```/g, (match, p1) => {
+                            preBlocks.push(p1);
+                            return `__PRE_BLOCK_${preBlocks.length - 1}__`;
+                        });
+
+                        let html = processedText
                             .replace(/^### (.*$)/gim, '<h3 style="margin-top:35px; margin-bottom:15px; color:#1e293b; font-size:1.4rem;">$1</h3>')
                             .replace(/^## (.*$)/gim, '<h2 style="margin-top:45px; margin-bottom:20px; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:8px; font-size:1.8rem;">$1</h2>')
                             .replace(/^# (.*$)/gim, '<h1 style="color:#0f172a; font-size:2.2rem; margin-bottom:25px;">$1</h1>')
                             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                            .replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<strong style="color:#4f46e5;">$1</strong>') // Replace links with just styled text to avoid dead links
+                            .replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<strong style="color:#4f46e5;">$1</strong>')
                             .replace(/^\> (.*$)/gim, '<blockquote style="background:#f8fafc; border-left:4px solid #cbd5e1; padding:15px 20px; color:#475569; margin:20px 0; border-radius:0 8px 8px 0; font-style:italic;">$1</blockquote>')
-                            .replace(/^\| (.*)\|/gim, (match) => {
-                                // Super basic table row formatting
+                            .replace(/^\|(.*)\|/gim, (match) => {
                                 const cells = match.split('|').filter(c => c.trim() !== '');
-                                return '<div style="display:flex; border-bottom:1px solid #e2e8f0; padding:10px 0;">' + cells.map(c => '<div style="flex:1; padding:0 10px;">' + c.replace(/-/g, '').trim() + '</div>').join('') + '</div>';
+                                // Only match table if there are actual words, ignore rows that are just hyphens
+                                if(cells.every(c => c.replace(/-/g, '').trim() === '')) return '';
+                                return '<div style="display:flex; border-bottom:1px solid #e2e8f0; padding:10px 0;">' + cells.map(c => '<div style="flex:1; padding:0 10px;">' + c.trim() + '</div>').join('') + '</div>';
                             })
                             .replace(/^- (.*$)/gim, '<li style="margin-left:25px; margin-bottom:8px;">$1</li>')
                             .replace(/\n\n/g, '</p><p style="margin-bottom:15px;">')
                             .replace(/<p style="margin-bottom:15px;"><\/p>/g, '');
+
+                        // Restore pre blocks
+                        preBlocks.forEach((block, index) => {
+                            html = html.replace(`__PRE_BLOCK_${index}__`, `<pre style="background:#0f172a; color:#e2e8f0; padding:15px; border-radius:8px; overflow-x:auto; font-family:monospace; font-size:13px; line-height:1.4;">${block}</pre>`);
+                        });
                             
                         contentArea.innerHTML = `
                             <div style="max-width:900px; margin:0 auto; padding:40px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9; line-height:1.7; font-size:1.05rem; color:#334155;">
