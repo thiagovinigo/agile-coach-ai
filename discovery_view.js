@@ -85,12 +85,42 @@ function initDiscoveryView() {
 
                     const headerCard = `
 <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
+        <span><span>📚</span> Resumo Rápido</span>
+        ${window.favoritesManager ? window.favoritesManager.renderButton(item.id || item.title, item.title, 'Product Discovery', item.path) : ''}
+    </h3>
+    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
+        📂 <strong>Repositório:</strong> ${item.path}
+    </div>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a href="${item.path}" download="${item.title}.md" style="display:inline-block; background-color:#14b8a6; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            ⬇️ Baixar Arquivo da Skill
+        </a>
+        <a href="${item.path}" target="_blank" style="display:inline-block; background-color:#f8fafc; color:#334155; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #cbd5e1; font-size:0.95rem;">
+            👀 Ver Arquivo
+        </a>
+    </div>
     <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
-        <span>📚</span> Resumo Rápido
+        <span>🧠</span> O que é?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem;">
+        O módulo <strong>${item.title}</strong> é um guia conceitual e prático focado em Product Discovery, pesquisa com usuários e validação de ideias.
+    </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>⏱️</span> Quando usar?
     </h3>
     <p style="margin-top:5px; color:#475569; font-size: 0.95rem; font-weight: 500;">
         ${item.description}
     </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🛠️</span> Como usar?
+    </h3>
+    <ul style="margin-top:5px; color:#475569; font-size: 0.95rem; padding-left: 20px; margin-bottom:0;">
+        <li>No seu terminal ou Claude Code, utilize este guia como referência ou contexto na tomada de decisões.</li>
+        <li><strong>Exemplo:</strong> <code>/read ${item.path}</code> seguido pelo problema a ser analisado no discovery.</li>
+    </ul>
 </div>
 `;
 

@@ -75,40 +75,96 @@ function initNjMmoView() {
                 document.querySelectorAll('#nj-mmo-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Render standard skill content
-                contentArea.innerHTML = `
-                    <div style="max-width:800px; margin:0 auto; padding:20px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9;">
-                        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1rem;">
-                            <div>
-                                <span style="background:#e0e7ff; color:#4f46e5; padding:4px 8px; border-radius:4px; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:10px; display:inline-block;">${category}</span>
-                                <h3 style="margin:0; color:#0f172a; font-size:2rem; display:flex; align-items:center; gap:10px;">
-                                    ${skill.icon} ${skill.title}
-                                </h3>
+                const headerCard = `
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
+        <span><span>📚</span> Resumo Rápido (${category})</span>
+        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'NJ MMO', skill.path) : ''}
+    </h3>
+    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
+        📂 <strong>Repositório:</strong> ${skill.path}
+    </div>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#4f46e5; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            ⬇️ Baixar Arquivo da Skill
+        </a>
+        <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f8fafc; color:#334155; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #cbd5e1; font-size:0.95rem;">
+            👀 Ver Arquivo
+        </a>
+    </div>
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🧠</span> O que é?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem;">
+        A skill <strong>${skill.title}</strong> é um modelo ou ferramenta orientada a gamificação e design motivacional no ecossistema NJ MMO (Ninja MMO / Octalysis).
+    </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>⏱️</span> Quando usar?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem; font-weight: 500;">
+        ${skill.description}
+    </p>
+
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🛠️</span> Como usar?
+    </h3>
+    <ul style="margin-top:5px; color:#475569; font-size: 0.95rem; padding-left: 20px; margin-bottom:0;">
+        <li>No seu terminal ou Claude Code, chame a instrução ou faça a leitura do arquivo base.</li>
+        <li><strong>Exemplo:</strong> <code>/read ${skill.path}</code> seguido pela instrução da tarefa.</li>
+    </ul>
+</div>
+`;
+
+                contentArea.innerHTML = '<div style="padding:40px; text-align:center; color:#64748b;">⏳ Carregando ' + skill.title + '...</div>';
+                
+                fetch(skill.path)
+                    .then(r => {
+                        if(!r.ok) throw new Error("Não foi possível carregar o arquivo.");
+                        return r.text();
+                    })
+                    .then(text => {
+                        const preBlocks = [];
+                        let processedText = text.replace(/```[a-z]*\n([\s\S]*?)```/g, (match, p1) => {
+                            preBlocks.push(p1);
+                            return `__PRE_BLOCK_${preBlocks.length - 1}__`;
+                        });
+
+                        let html = processedText
+                            .replace(/^### (.*$)/gim, '<h3 style="margin-top:35px; margin-bottom:15px; color:#1e293b; font-size:1.4rem;">$1</h3>')
+                            .replace(/^## (.*$)/gim, '<h2 style="margin-top:45px; margin-bottom:20px; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:8px; font-size:1.8rem;">$1</h2>')
+                            .replace(/^# (.*$)/gim, '<h1 style="color:#0f172a; font-size:2.2rem; margin-bottom:25px;">$1</h1>')
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<strong style="color:#4f46e5;">$1</strong>')
+                            .replace(/^\> (.*$)/gim, '<blockquote style="background:#f8fafc; border-left:4px solid #cbd5e1; padding:15px 20px; color:#475569; margin:20px 0; border-radius:0 8px 8px 0; font-style:italic;">$1</blockquote>')
+                            .replace(/^\|(.*)\|/gim, (match) => {
+                                const cells = match.split('|').filter(c => c.trim() !== '');
+                                if(cells.every(c => c.replace(/-/g, '').trim() === '')) return '';
+                                return '<div style="display:flex; border-bottom:1px solid #e2e8f0; padding:10px 0;">' + cells.map(c => '<div style="flex:1; padding:0 10px;">' + c.trim() + '</div>').join('') + '</div>';
+                            })
+                            .replace(/^- (.*$)/gim, '<li style="margin-left:25px; margin-bottom:8px;">$1</li>')
+                            .replace(/\n\n/g, '</p><p style="margin-bottom:15px;">')
+                            .replace(/<p style="margin-bottom:15px;"><\/p>/g, '');
+
+                        preBlocks.forEach((block, index) => {
+                            html = html.replace(`__PRE_BLOCK_${index}__`, `<pre style="background:#0f172a; color:#e2e8f0; padding:15px; border-radius:8px; overflow-x:auto; font-family:monospace; font-size:13px; line-height:1.4;">${block}</pre>`);
+                        });
+                            
+                        contentArea.innerHTML = `
+                            <div style="max-width:900px; margin:0 auto; padding:40px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9; line-height:1.7; font-size:1.05rem; color:#334155;">
+                                ${headerCard}
+                                <p style="margin-bottom:15px;">${html}</p>
                             </div>
-                        </div>
-                        
-                        <p style="color:#475569; font-size:1.15rem; line-height:1.6; margin-bottom:1.5rem;">${skill.description}</p>
-                        
-                        <div style="background:#f8fafc; padding:15px; border-radius:6px; margin-bottom:20px; font-size:0.95rem; color:#334155;">
-                            📂 <strong>Repositório Path:</strong> <code>${skill.path}</code>
-                        </div>
-
-                        <div style="display:flex; gap:10px; margin-bottom:25px;">
-                            <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#4f46e5; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;">
-                                ⬇️ Baixar Skill
-                            </a>
-                            <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f8fafc; color:#0f172a; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #e2e8f0; font-size:1rem; transition: background 0.2s;">
-                                👀 Ver Arquivo
-                            </a>
-                        </div>
-
-                        <div style="margin-top:20px; border-top:1px solid #e2e8f0; padding-top:20px;">
-                            <h4 style="margin-top:0; color:#334155; margin-bottom:10px;">Como usar no Claude Code / Terminal:</h4>
-                            <pre style="background:#0f172a; color:#e2e8f0; padding:15px; border-radius:8px; font-family:monospace; font-size:14px; overflow-x:auto;">/read ${skill.path}
-${skill.title}</pre>
-                        </div>
-                    </div>
-                `;
+                        `;
+                    })
+                    .catch(e => {
+                        contentArea.innerHTML = `
+                            <div style="max-width:900px; margin:0 auto; padding:40px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9; line-height:1.7; font-size:1.05rem; color:#334155;">
+                                ${headerCard}
+                                <div style="padding:20px; color:red; background:#fff5f5; border-radius:6px; margin-top:20px;">Erro ao carregar documento Markdown (.md): ${e.message}</div>
+                            </div>
+                        `;
+                    });
             };
         });
 

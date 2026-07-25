@@ -289,72 +289,105 @@ function initEccSkillsView() {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.kb-nav-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+
+                const headerCard = `
+<div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
+        <span><span>📚</span> Resumo Rápido (${category})</span>
+        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'ECC Skills', skill.path) : ''}
+    </h3>
+    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
+        📂 <strong>Repositório:</strong> ${skill.path}
+    </div>
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#0078d4; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            ⬇️ Baixar Arquivo da Skill
+        </a>
+        <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f8fafc; color:#334155; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #cbd5e1; font-size:0.95rem;">
+            👀 Ver Arquivo
+        </a>
+    </div>
+    <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🧠</span> O que é?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem;">
+        A skill <strong>${skill.title}</strong> é um padrão técnico, arquitetural ou diretriz de qualidade da biblioteca ECC.
+    </p>
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>⏱️</span> Quando usar?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem; font-weight: 500;">
+        ${skill.description || '<i>Sem descrição fornecida.</i>'}
+    </p>
+    ${skill.dependencies && skill.dependencies.length > 0 ? `
+    <div style="background:#f0f8ff; padding: 1rem; border-radius: 6px; border-left: 4px solid #0078d4; margin-top: 15px; margin-bottom: 15px;">
+        <strong style="display:block; font-size:0.9rem; color:#0078d4; text-transform:uppercase; margin-bottom:5px;">🔗 Skills Vinculadas (Sub-Skills)</strong>
+        <div>
+            ${skill.dependencies.map(d => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.2em .6em; border-radius:4px; font-size:.8rem; color:#0078d4; margin-right:5px; margin-bottom:3px; font-weight:bold;">${d}</span>`).join('')}
+        </div>
+    </div>
+    ` : ''}
+    <h3 style="margin-top:20px; color:#0f172a; display:flex; align-items:center; gap:8px; font-size: 1.1rem;">
+        <span>🛠️</span> Como usar?
+    </h3>
+    <p style="margin-top:5px; color:#475569; font-size: 0.95rem; margin-bottom:8px;">No Claude Code, após ler com <code>/read ${skill.path}</code>, peça a tarefa usando linguagem natural:</p>
+    <div style="background:#f8fafc; padding:10px 15px; border-radius:6px; border-left:3px solid #0078d4; font-size:0.9rem;">
+        <ul style="margin:0; padding-left:20px; color:#334155;">
+            ${getContextualExamples(skill.title)}
+        </ul>
+    </div>
+</div>
+`;
+
+                contentArea.innerHTML = '<div style="padding:40px; text-align:center; color:#64748b;">⏳ Carregando ' + skill.title + '...</div>';
                 
-                let sTriggers = skill.triggers || [];
-                sTriggers = sTriggers.filter(t => {
-                    if (typeof t !== 'string') return false;
-                    t = t.trim();
-                    if (t.length < 2 || t.length > 35) return false;
-                    if (!t.match(/^\/[a-z0-9-_]+$/i) && !t.match(/^[a-z0-9 ]+$/i)) return false;
-                    if (['/var', '/etc', '/usr', '/bin', '/tmp', '/dev', '/opt'].includes(t)) return false;
-                    return true;
-                }).map(t => t.trim());
-                let visibleTriggers = sTriggers.slice(0, 8);
-                let extraCount = sTriggers.length - 8;
-                let triggersList = visibleTriggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; word-break: break-all;">${t}</span>`).join('');
-                if (extraCount > 0) {
-                    triggersList += `<span class="tag" style="display:inline-block; background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.1); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#4a5568; margin-right:5px; margin-bottom:5px;">+ ${extraCount} outros</span>`;
-                }
-                
-                contentArea.innerHTML = `
-                <div class="card" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:2.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.02); max-width: 900px;">
-                    <div style="text-transform: uppercase; font-size: 0.85rem; color: #0078d4; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;">📁 ${category}</div>
-                    
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom: 1rem; margin-bottom:1.2rem;">
-                        <h3 style="margin:0; color:#1a202c; font-size:2rem;">${skill.title}</h3>
-                        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'ECC Skills', skill.path) : ''}
-                    </div>
+                fetch(skill.path)
+                    .then(r => {
+                        if(!r.ok) throw new Error("Não foi possível carregar o arquivo.");
+                        return r.text();
+                    })
+                    .then(text => {
+                        const preBlocks = [];
+                        let processedText = text.replace(/```[a-z]*\n([\s\S]*?)```/g, (match, p1) => {
+                            preBlocks.push(p1);
+                            return `__PRE_BLOCK_${preBlocks.length - 1}__`;
+                        });
 
-                    <p style="color:#4a5568; margin-bottom:1.5rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
-                    
-                    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
-                        📂 <strong>Repositório:</strong> ${skill.path}
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
-                        <a href="${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#0078d4; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;">
-                            ⬇️ Baixar Arquivo da Skill
-                        </a>
-                        <a href="${skill.path}" target="_blank" style="display:inline-block; background-color:#f3f2f1; color:#323130; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #edebe9; font-size:1rem; transition: background 0.2s;">
-                            👀 Ver Arquivo
-                        </a>
-                    </div>
+                        let html = processedText
+                            .replace(/^### (.*$)/gim, '<h3 style="margin-top:35px; margin-bottom:15px; color:#1e293b; font-size:1.4rem;">$1</h3>')
+                            .replace(/^## (.*$)/gim, '<h2 style="margin-top:45px; margin-bottom:20px; color:#0f172a; border-bottom:1px solid #e2e8f0; padding-bottom:8px; font-size:1.8rem;">$1</h2>')
+                            .replace(/^# (.*$)/gim, '<h1 style="color:#0f172a; font-size:2.2rem; margin-bottom:25px;">$1</h1>')
+                            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                            .replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<strong style="color:#0078d4;">$1</strong>')
+                            .replace(/^\> (.*$)/gim, '<blockquote style="background:#f8fafc; border-left:4px solid #cbd5e1; padding:15px 20px; color:#475569; margin:20px 0; border-radius:0 8px 8px 0; font-style:italic;">$1</blockquote>')
+                            .replace(/^\|(.*)\|/gim, (match) => {
+                                const cells = match.split('|').filter(c => c.trim() !== '');
+                                if(cells.every(c => c.replace(/-/g, '').trim() === '')) return '';
+                                return '<div style="display:flex; border-bottom:1px solid #e2e8f0; padding:10px 0;">' + cells.map(c => '<div style="flex:1; padding:0 10px;">' + c.trim() + '</div>').join('') + '</div>';
+                            })
+                            .replace(/^- (.*$)/gim, '<li style="margin-left:25px; margin-bottom:8px;">$1</li>')
+                            .replace(/\n\n/g, '</p><p style="margin-bottom:15px;">')
+                            .replace(/<p style="margin-bottom:15px;"><\/p>/g, '');
 
-
-                    
-                    
-                    ${skill.dependencies && skill.dependencies.length > 0 ? `
-                    <div style="background:#f0f8ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0078d4; margin-bottom: 2rem;">
-                        <h4 style="margin-top:0; margin-bottom:1rem; font-size:1.1rem; color:#0078d4; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🔗 Skills Vinculadas (Sub-Skills)</h4>
-                        <p style="font-size:0.95rem; color:#4a5568; margin-bottom:1rem;">Esta skill possui conexões diretas ou invoca o conhecimento das seguintes skills:</p>
-                        <div>
-                            ${skill.dependencies.map(d => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:4px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; font-weight:bold;">${d}</span>`).join('')}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🛠️ Como Instalar (Claude Code):</h4>
-                    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1.2rem; border-radius:8px; font-family:monospace; overflow-x:auto; margin-bottom:2rem; font-size:1.05rem;">/read ${skill.path}</pre>
-                    
-                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar (Exemplos Práticos):</h4>
-                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural. Veja exemplos de acionamento:</p>
-                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
-                        <ul style="margin:0; padding-left:20px; color:#334155;">
-                            ${getContextualExamples(skill.title)}
-                        </ul>
-                    </div>
-                </div>
-                `;
+                        preBlocks.forEach((block, index) => {
+                            html = html.replace(`__PRE_BLOCK_${index}__`, `<pre style="background:#0f172a; color:#e2e8f0; padding:15px; border-radius:8px; overflow-x:auto; font-family:monospace; font-size:13px; line-height:1.4;">${block}</pre>`);
+                        });
+                            
+                        contentArea.innerHTML = `
+                            <div style="max-width:900px; margin:0 auto; padding:40px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9; line-height:1.7; font-size:1.05rem; color:#334155;">
+                                ${headerCard}
+                                <p style="margin-bottom:15px;">${html}</p>
+                            </div>
+                        `;
+                    })
+                    .catch(e => {
+                        contentArea.innerHTML = `
+                            <div style="max-width:900px; margin:0 auto; padding:40px; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); border:1px solid #edebe9; line-height:1.7; font-size:1.05rem; color:#334155;">
+                                ${headerCard}
+                                <div style="padding:20px; color:red; background:#fff5f5; border-radius:6px; margin-top:20px;">Erro ao carregar documento Markdown (.md): ${e.message}</div>
+                            </div>
+                        `;
+                    });
             });
 
             skillsContainer.appendChild(btn);
