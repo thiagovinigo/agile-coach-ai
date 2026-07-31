@@ -66,7 +66,15 @@ function initTfsView() {
         tfsData[category].forEach(item => {
             const btn = document.createElement('div');
             btn.className = 'kb-nav-btn';
-            btn.innerText = "📄 " + item.title;
+            btn.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.1rem;">📄</span>
+                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${item.title}</span>
+                </div>
+                <div style="font-size:0.8rem; color:#605e5c; margin-top:4px; line-height:1.3; white-space:normal;">
+                    ${item.description || 'Nenhuma descrição fornecida.'}
+                </div>
+            `;
             
             btn.onclick = async () => {
                 document.querySelectorAll('#tfs-view .kb-nav-btn').forEach(b => b.classList.remove('active'));

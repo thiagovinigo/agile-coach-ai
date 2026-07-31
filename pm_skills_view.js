@@ -66,7 +66,15 @@ function initPmSkillsView() {
         skillsList.forEach((skill) => {
             const btn = document.createElement('div');
             btn.className = 'kb-nav-btn';
-            btn.innerHTML = `<span style="margin-right:8px;">${skill.icon}</span> ${skill.title}`;
+            btn.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.1rem;">${skill.icon || '📄'}</span>
+                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${skill.title}</span>
+                </div>
+                <div style="font-size:0.8rem; color:#605e5c; margin-top:4px; line-height:1.3; white-space:normal;">
+                    ${skill.description || 'Nenhuma descrição fornecida.'}
+                </div>
+            `;
             linkList.appendChild(btn);
 
             if(!firstBtn) firstBtn = btn;

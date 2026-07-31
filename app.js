@@ -501,7 +501,15 @@ function initSkillsView() {
             btn.className = 'kb-nav-btn';
             btn.style.fontSize = '0.9rem';
             btn.style.padding = '8px 10px 8px 25px';
-            btn.innerText = skill.title;
+            btn.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.1rem;">💻</span>
+                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${skill.title}</span>
+                </div>
+                <div style="font-size:0.8rem; color:#605e5c; margin-top:4px; line-height:1.3; white-space:normal; text-align:left;">
+                    ${skill.description || 'Nenhuma descrição fornecida.'}
+                </div>
+            `;
             
             btn.onclick = () => {
                 contentArea.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');

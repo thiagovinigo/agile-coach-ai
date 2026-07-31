@@ -250,41 +250,36 @@ function initEccSkillsView() {
         
         const catHeader = document.createElement('div');
         catHeader.className = 'kb-category-header';
+        catHeader.innerText = category;
         catHeader.style.padding = '12px 15px';
         catHeader.style.fontWeight = 'bold';
         catHeader.style.color = '#323130';
         catHeader.style.backgroundColor = '#f3f2f1';
-        catHeader.style.borderLeft = '4px solid #0078d4';
+        catHeader.style.borderLeft = '4px solid #6366f1';
         catHeader.style.cursor = 'pointer';
         catHeader.style.marginTop = '10px';
-        catHeader.style.marginBottom = '2px';
-        catHeader.style.borderRadius = '0 6px 6px 0';
-        catHeader.style.display = 'flex';
-        catHeader.style.justifyContent = 'space-between';
-        catHeader.style.alignItems = 'center';
-        
-        catHeader.innerHTML = `
-            <span>${category} <span style="font-size:12px; font-weight:normal; color:#605e5c;">(${skillsList.length})</span></span>
-            <span class="toggle-icon" style="transition: transform 0.2s;">▼</span>
-        `;
+        sidebar.appendChild(catHeader);
 
         const skillsContainer = document.createElement('div');
         skillsContainer.className = 'kb-skills-list';
-        skillsContainer.style.display = 'none';
-
-        catHeader.addEventListener('click', () => {
-            const isVisible = skillsContainer.style.display === 'block';
-            skillsContainer.style.display = isVisible ? 'none' : 'block';
-            catHeader.querySelector('.toggle-icon').style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
-        });
+        skillsContainer.style.display = 'block';
 
         sidebar.appendChild(catHeader);
+
         sidebar.appendChild(skillsContainer);
 
         skillsList.forEach((skill, index) => {
             const btn = document.createElement('div');
             btn.className = 'kb-nav-btn';
-            btn.textContent = skill.title;
+            btn.innerHTML = `
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:1.1rem;">🧰</span>
+                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${skill.title}</span>
+                </div>
+                <div style="font-size:0.8rem; color:#605e5c; margin-top:4px; line-height:1.3; white-space:normal;">
+                    ${skill.description || 'Nenhuma descrição fornecida.'}
+                </div>
+            `;
             
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.kb-nav-btn').forEach(b => b.classList.remove('active'));
