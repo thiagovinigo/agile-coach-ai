@@ -3,8 +3,8 @@ const eccSkillsData = {
         {
             "id": "accessibility",
             "category": "Uncategorized",
-            "title": "Accessibility",
-            "description": "Design, implement, and audit inclusive digital products using WCAG 2.2 Level AA",
+            "title": "Acessibilidade",
+            "description": "Projetar, implementar e auditar produtos digitais inclusivos usando WCAG 2.2 Nível AA",
             "triggers": [
                 "/screen",
                 "/wai-aria-practices",
@@ -28,8 +28,8 @@ const eccSkillsData = {
         {
             "id": "agent-architecture-audit",
             "category": "Uncategorized",
-            "title": "Agent Architecture Audit",
-            "description": "Full-stack diagnostic for agent and LLM applications. Audits the 12-layer agent stack for wrapper regression, memory pollution, tool discipline failures, hidden repair loops, and rendering corruption. Produces severity-ranked findings with code-first fixes. Essential for developers building agent applications, autonomous loops, or any LLM-powered feature.",
+            "title": "Auditoria de Arquitetura de Agente",
+            "description": "Diagnóstico full-stack para aplicativos de agente e LLM. Audita a pilha de agentes de 12 camadas quanto a regressão de wrapper, poluição de memória, falhas de disciplina de ferramenta, loops de reparo ocultos e corrupção de renderização. Produz descobertas classificadas por gravidade com correções de código inicial. Essencial para desenvolvedores que criam aplicativos de agente, loops autônomos ou qualquer recurso com tecnologia LLM.",
             "triggers": [
                 "/scan",
                 "/rendering",
@@ -41,8 +41,8 @@ const eccSkillsData = {
         {
             "id": "agent-eval",
             "category": "Uncategorized",
-            "title": "Agent Eval",
-            "description": "Head-to-head comparison of coding agents (Claude Code, Aider, Codex, etc.) on custom tasks with pass rate, cost, time, and consistency metrics",
+            "title": "Agente Avaliação",
+            "description": "Comparação direta de agentes de codificação (Claude Code, Aider, Codex, etc.) em tarefas personalizadas com taxa de aprovação, custo, tempo e métricas de consistência",
             "triggers": [
                 "/add-retry-logic",
                 "/joaquinhuigomez",
@@ -60,8 +60,8 @@ const eccSkillsData = {
         {
             "id": "agent-harness-construction",
             "category": "Uncategorized",
-            "title": "Agent Harness Construction",
-            "description": "Design and optimize AI agent action spaces, tool definitions, and observation formatting for higher completion rates.",
+            "title": "Construção de chicote de agente",
+            "description": "Projete e otimize espaços de ação de agentes de IA, definições de ferramentas e formatação de observação para taxas de conclusão mais altas.",
             "triggers": [
                 "/search",
                 "/read"
@@ -72,8 +72,8 @@ const eccSkillsData = {
         {
             "id": "agent-introspection-debugging",
             "category": "Uncategorized",
-            "title": "Agent Introspection Debugging",
-            "description": "Structured self-debugging workflow for AI agent failures using capture, diagnosis, contained recovery, and introspection reports.",
+            "title": "Depuração de introspecção de agente",
+            "description": "Fluxo de trabalho estruturado de autodepuração para falhas de agentes de IA usando captura, diagnóstico, recuperação contida e relatórios de introspecção.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/agent-introspection-debugging/SKILL.md"
@@ -81,8 +81,8 @@ const eccSkillsData = {
         {
             "id": "agent-payment-x402",
             "category": "Uncategorized",
-            "title": "Agent Payment X402",
-            "description": "Add x402 payment execution to AI agents with per-task budgets, spending controls, and non-custodial wallets. Supports Base through agentwallet-sdk and X Layer through OKX Payments / OKX Agent Payments Protocol.",
+            "title": "Pagamento do Agente X402",
+            "description": "Adicione execução de pagamentos x402 a agentes de IA com orçamentos por tarefa, controles de gastos e carteiras sem custódia. Suporta Base por meio de agentwallet-sdk e X Layer por meio de OKX Payments / OKX Agent Payments Protocol.",
             "triggers": [
                 "/hour",
                 "/17",
@@ -123,8 +123,8 @@ const eccSkillsData = {
         {
             "id": "agent-sort",
             "category": "Uncategorized",
-            "title": "Agent Sort",
-            "description": "Build an evidence-backed ECC install plan for a specific repo by sorting skills, commands, rules, hooks, and extras into DAILY vs LIBRARY buckets using parallel repo-aware review passes. Use when ECC should be trimmed to what a project actually needs instead of loading the full bundle.",
+            "title": "Classificação de agente",
+            "description": "Crie um plano de instalação ECC baseado em evidências para um repositório específico, classificando habilidades, comandos, regras, ganchos e extras em buckets DAILY vs LIBRARY usando passagens de revisão paralelas com reconhecimento de repositório. Use quando o ECC deve ser reduzido ao que um projeto realmente precisa, em vez de carregar o pacote completo.",
             "triggers": [
                 "/typescript",
                 "/frontend-patterns",
@@ -145,8 +145,8 @@ const eccSkillsData = {
         {
             "id": "agentic-engineering",
             "category": "Uncategorized",
-            "title": "Agentic Engineering",
-            "description": "Operate as an agentic engineer using eval-first execution, decomposition, and cost-aware model routing.",
+            "title": "Engenharia Agêntica",
+            "description": "Opere como um engenheiro de agência usando execução de avaliação inicial, decomposição e roteamento de modelo com reconhecimento de custo.",
             "triggers": [
                 "/lint",
                 "/failure"
@@ -157,8 +157,8 @@ const eccSkillsData = {
         {
             "id": "agentic-os",
             "category": "Uncategorized",
-            "title": "Agentic Os",
-            "description": "Build persistent multi-agent operating systems on Claude Code. Covers kernel architecture, specialist agents, slash commands, file-based memory, scheduled automation, and state management without external databases.",
+            "title": "Agente Os",
+            "description": "Crie sistemas operacionais multiagentes persistentes no Claude Code. Abrange arquitetura de kernel, agentes especializados, comandos de barra, memória baseada em arquivo, automação agendada e gerenciamento de estado sem bancos de dados externos.",
             "triggers": [
                 "/website-v2",
                 "/2026-04-22-auth",
@@ -206,8 +206,8 @@ const eccSkillsData = {
         {
             "id": "ai-first-engineering",
             "category": "Uncategorized",
-            "title": "Ai First Engineering",
-            "description": "Engineering operating model for teams where AI agents generate a large share of implementation output.",
+            "title": "Ai Primeira Engenharia",
+            "description": "Modelo operacional de engenharia para equipes onde os agentes de IA geram uma grande parcela dos resultados da implementação.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/ai-first-engineering/SKILL.md"
@@ -215,8 +215,8 @@ const eccSkillsData = {
         {
             "id": "ai-regression-testing",
             "category": "Uncategorized",
-            "title": "Ai Regression Testing",
-            "description": "Regression testing strategies for AI-assisted development. Sandbox-mode API testing without database dependencies, automated bug-check workflows, and patterns to catch AI blind spots where the same model writes and reviews code.",
+            "title": "Teste de regressão de IA",
+            "description": "Estratégias de teste de regressão para desenvolvimento assistido por IA. Testes de API no modo sandbox sem dependências de banco de dados, fluxos de trabalho automatizados de verificação de bugs e padrões para detectar pontos cegos de IA onde o mesmo modelo escreve e revisa código.",
             "triggers": [
                 "/setup",
                 "/localhost",
@@ -244,8 +244,8 @@ const eccSkillsData = {
         {
             "id": "android-clean-architecture",
             "category": "Uncategorized",
-            "title": "Android Clean Architecture",
-            "description": "Clean Architecture patterns for Android and Kotlin Multiplatform projects — module structure, dependency rules, UseCases, Repositories, and data layer patterns.",
+            "title": "Arquitetura limpa do Android",
+            "description": "Padrões de arquitetura limpa para projetos multiplataforma Android e Kotlin - estrutura de módulo, regras de dependência, UseCases, repositórios e padrões de camada de dados.",
             "triggers": [
                 "/items",
                 "/src",
@@ -261,8 +261,8 @@ const eccSkillsData = {
         {
             "id": "angular-developer",
             "category": "Uncategorized",
-            "title": "Angular Developer",
-            "description": "Generates Angular code and provides architectural guidance. Trigger when creating projects, components, or services, or for best practices on reactivity (signals, linkedSignal, resource), forms, dependency injection, routing, SSR, accessibility (ARIA), animations, styling (component styles, Tailwind CSS), testing, or CLI tooling.",
+            "title": "Desenvolvedor Angular",
+            "description": "Gera código Angular e fornece orientação arquitetônica. Acione ao criar projetos, componentes ou serviços, ou para práticas recomendadas de reatividade (sinais, linkedSignal, recurso), formulários, injeção de dependência, roteamento, SSR, acessibilidade (ARIA), animações, estilo (estilos de componentes, Tailwind CSS), testes ou ferramentas CLI.",
             "triggers": [
                 "/tailwind-css",
                 "/e2e-testing",
@@ -310,8 +310,8 @@ const eccSkillsData = {
         {
             "id": "api-connector-builder",
             "category": "Uncategorized",
-            "title": "Api Connector Builder",
-            "description": "Build a new API connector or provider by matching the target repo's existing integration pattern exactly. Use when adding one more integration without inventing a second architecture.",
+            "title": "Construtor de conector de API",
+            "description": "Crie um novo conector ou provedor de API combinando exatamente o padrão de integração existente do repositório de destino. Use ao adicionar mais uma integração sem inventar uma segunda arquitetura.",
             "triggers": [
                 "/write",
                 "/examples",
@@ -329,8 +329,8 @@ const eccSkillsData = {
         {
             "id": "api-design",
             "category": "Uncategorized",
-            "title": "Api Design",
-            "description": "REST API design patterns including resource naming, status codes, pagination, filtering, error responses, versioning, and rate limiting for production APIs.",
+            "title": "Design de API",
+            "description": "Padrões de design da API REST, incluindo nomenclatura de recursos, códigos de status, paginação, filtragem, respostas a erros, controle de versão e limitação de taxa para APIs de produção.",
             "triggers": [
                 "/team-members",
                 "/cancel",
@@ -360,8 +360,8 @@ const eccSkillsData = {
         {
             "id": "architecture-decision-records",
             "category": "Uncategorized",
-            "title": "Architecture Decision Records",
-            "description": "Capture architectural decisions made during Claude Code sessions as structured ADRs. Auto-detects decision moments, records context, alternatives considered, and rationale. Maintains an ADR log so future developers understand why the codebase is shaped the way it is.",
+            "title": "Registros de decisões de arquitetura",
+            "description": "Capture decisões arquitetônicas tomadas durante sessões do Claude Code como ADRs estruturados. Detecta automaticamente momentos de decisão, registra contexto, alternativas consideradas e justificativa. Mantém um log ADR para que futuros desenvolvedores entendam por que a base de código foi moldada dessa maneira.",
             "triggers": [
                 "/adr",
                 "/or",
@@ -374,8 +374,8 @@ const eccSkillsData = {
         {
             "id": "article-writing",
             "category": "Uncategorized",
-            "title": "Article Writing",
-            "description": "Write articles, guides, blog posts, tutorials, newsletter issues, and other long-form content in a distinctive voice derived from supplied examples or brand guidance. Use when the user wants polished written content longer than a paragraph, especially when voice consistency, structure, and credibility matter.",
+            "title": "Redação de artigos",
+            "description": "Escreva artigos, guias, postagens em blogs, tutoriais, edições de boletins informativos e outros conteúdos extensos com uma voz distinta, derivada de exemplos fornecidos ou orientações de marca. Use quando o usuário deseja um conteúdo escrito sofisticado com mais de um parágrafo, especialmente quando a consistência, estrutura e credibilidade da voz são importantes.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/article-writing/SKILL.md"
@@ -383,8 +383,8 @@ const eccSkillsData = {
         {
             "id": "automation-audit-ops",
             "category": "Uncategorized",
-            "title": "Automation Audit Ops",
-            "description": "Evidence-first automation inventory and overlap audit workflow for ECC. Use when the user wants to know which jobs, hooks, connectors, MCP servers, or wrappers are live, broken, redundant, or missing before fixing anything.",
+            "title": "Operações de auditoria de automação",
+            "description": "Inventário de automação baseado em evidências e fluxo de trabalho de auditoria sobreposto para ECC. Use quando o usuário quiser saber quais tarefas, ganchos, conectores, servidores MCP ou wrappers estão ativos, quebrados, redundantes ou ausentes antes de consertar qualquer coisa.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/automation-audit-ops/SKILL.md"
@@ -392,8 +392,8 @@ const eccSkillsData = {
         {
             "id": "autonomous-agent-harness",
             "category": "Uncategorized",
-            "title": "Autonomous Agent Harness",
-            "description": "Transform Claude Code into a fully autonomous agent system with persistent memory, scheduled operations, computer use, and task queuing. Replaces standalone agent frameworks (Hermes, AutoGPT) by leveraging Claude Code's native crons, dispatch, MCP tools, and memory. Use when the user wants continuous autonomous operation, scheduled tasks, or a self-directing agent loop.",
+            "title": "Chicote de Agente Autônomo",
+            "description": "Transforme o Claude Code em um sistema de agente totalmente autônomo com memória persistente, operações agendadas, uso de computador e enfileiramento de tarefas. Substitui estruturas de agentes independentes (Hermes, AutoGPT) aproveitando os crons, despacho, ferramentas MCP e memória nativos do Claude Code. Use quando o usuário desejar operação autônoma contínua, tarefas agendadas ou um loop de agente autodirecionado.",
             "triggers": [
                 "/task-queue",
                 "/memory-mcp-server",
@@ -416,8 +416,8 @@ const eccSkillsData = {
         {
             "id": "autonomous-loops",
             "category": "Uncategorized",
-            "title": "Autonomous Loops",
-            "description": "Patterns and architectures for autonomous Claude Code loops — from simple sequential pipelines to RFC-driven multi-agent DAG systems.",
+            "title": "Loops Autônomos",
+            "description": "Padrões e arquiteturas para loops autônomos de Claude Code — desde pipelines sequenciais simples até sistemas DAG multiagentes orientados por RFC.",
             "triggers": [
                 "/bash",
                 "/lines",
@@ -451,8 +451,8 @@ const eccSkillsData = {
         {
             "id": "backend-patterns",
             "category": "Uncategorized",
-            "title": "Backend Patterns",
-            "description": "Backend architecture patterns, API design, database optimization, and server-side best practices for Node.js, Express, and Next.js API routes.",
+            "title": "Padrões de back-end",
+            "description": "Padrões de arquitetura de back-end, design de API, otimização de banco de dados e práticas recomendadas do lado do servidor para rotas de API Node.js, Express e Next.js.",
             "triggers": [
                 "/api",
                 "/markets",
@@ -464,8 +464,8 @@ const eccSkillsData = {
         {
             "id": "benchmark",
             "category": "Uncategorized",
-            "title": "Benchmark",
-            "description": "Use this skill to measure performance baselines, detect regressions before/after PRs, and compare stack alternatives.",
+            "title": "Referência",
+            "description": "Use esta habilidade para medir linhas de base de desempenho, detectar regressões antes/depois de PRs e comparar alternativas de pilha.",
             "triggers": [
                 "/after",
                 "/benchmarks",
@@ -479,8 +479,8 @@ const eccSkillsData = {
         {
             "id": "benchmark-optimization-loop",
             "category": "Uncategorized",
-            "title": "Benchmark Optimization Loop",
-            "description": "Use when the user asks to make something faster, try many variants, run recursive optimization, benchmark latency/throughput/cost, or choose the best implementation by repeated measured tests.",
+            "title": "Ciclo de otimização de benchmark",
+            "description": "Use quando o usuário pedir para fazer algo mais rápido, tentar muitas variantes, executar otimização recursiva, comparar latência/rendimento/custo ou escolher a melhor implementação por meio de testes medidos repetidos.",
             "triggers": [
                 "/sec",
                 "/throughput",
@@ -493,8 +493,8 @@ const eccSkillsData = {
         {
             "id": "blender-motion-state-inspection",
             "category": "Uncategorized",
-            "title": "Blender Motion State Inspection",
-            "description": "Use this skill when inspecting Blender characters, rigs, poses, animation retargeting, ground contact, facing direction, or model-vs-motion alignment where screenshots alone are not enough.",
+            "title": "Inspeção do estado de movimento do Blender",
+            "description": "Use esta habilidade ao inspecionar personagens, rigs, poses, retargeting de animação, contato com o solo, direção frontal ou alinhamento modelo versus movimento do Blender, onde as capturas de tela por si só não são suficientes.",
             "triggers": [
                 "/skin",
                 "/spine",
@@ -517,8 +517,8 @@ const eccSkillsData = {
         {
             "id": "blueprint",
             "category": "Uncategorized",
-            "title": "Blueprint",
-            "description": ">-",
+            "title": "Projeto",
+            "description": null,
             "triggers": [
                 "/to",
                 "/skills",
@@ -536,8 +536,8 @@ const eccSkillsData = {
         {
             "id": "brand-voice",
             "category": "Uncategorized",
-            "title": "Brand Voice",
-            "description": "Build a source-derived writing style profile from real posts, essays, launch notes, docs, or site copy, then reuse that profile across content, outreach, and social workflows. Use when the user wants voice consistency without generic AI writing tropes.",
+            "title": "Voz da marca",
+            "description": "Crie um perfil de estilo de escrita derivado da fonte a partir de postagens reais, ensaios, notas de lançamento, documentos ou cópias do site e, em seguida, reutilize esse perfil em conteúdo, divulgação e fluxos de trabalho sociais. Use quando o usuário deseja consistência de voz sem tropos genéricos de escrita de IA.",
             "triggers": [
                 "/voice-profile-schema",
                 "/plugin"
@@ -548,8 +548,8 @@ const eccSkillsData = {
         {
             "id": "browser-qa",
             "category": "Uncategorized",
-            "title": "Browser Qa",
-            "description": "Use this skill to automate visual testing and UI interaction verification using browser automation after deploying features.",
+            "title": "Controle de qualidade do navegador",
+            "description": "Use esta habilidade para automatizar testes visuais e verificação de interação da IU usando a automação do navegador após a implantação de recursos.",
             "triggers": [
                 "/304",
                 "/5xx",
@@ -564,8 +564,8 @@ const eccSkillsData = {
         {
             "id": "bun-runtime",
             "category": "Uncategorized",
-            "title": "Bun Runtime",
-            "description": "Bun as runtime, package manager, bundler, and test runner. When to choose Bun vs Node, migration notes, and Vercel support.",
+            "title": "Tempo de execução do pão",
+            "description": "Bun como tempo de execução, gerenciador de pacotes, empacotador e executor de testes. Quando escolher Bun vs Node, notas de migração e suporte Vercel.",
             "triggers": [
                 "/src",
                 "/updates",
@@ -581,8 +581,8 @@ const eccSkillsData = {
         {
             "id": "canary-watch",
             "category": "Uncategorized",
-            "title": "Canary Watch",
-            "description": "Use this skill to monitor and verify a deployed URL after releases — checks HTTP endpoints, SSE streams, static assets, console errors, and performance regressions after deploys, merges, or dependency upgrades. Smoke / canary / post-deploy verification.",
+            "title": "Relógio Canário",
+            "description": "Use esta habilidade para monitorar e verificar uma URL implantada após lançamentos — verifica endpoints HTTP, fluxos SSE, ativos estáticos, erros de console e regressões de desempenho após implantações, fusões ou atualizações de dependência. Verificação Smoke/canary/pós-implantação.",
             "triggers": [
                 "/5xx",
                 "/myapp",
@@ -600,8 +600,8 @@ const eccSkillsData = {
         {
             "id": "carrier-relationship-management",
             "category": "Uncategorized",
-            "title": "Carrier Relationship Management",
-            "description": ">",
+            "title": "Gestão de relacionamento com operadoras",
+            "description": null,
             "triggers": [
                 "/specialty",
                 "/month",
@@ -624,8 +624,8 @@ const eccSkillsData = {
         {
             "id": "cisco-ios-patterns",
             "category": "Uncategorized",
-            "title": "Cisco Ios Patterns",
-            "description": "Cisco IOS and IOS-XE review patterns for show commands, config hierarchy, wildcard masks, ACL placement, interface hygiene, and safe change-window verification.",
+            "title": "Padrões Cisco Ios",
+            "description": "Padrões de revisão do Cisco IOS e IOS-XE para comandos de exibição, hierarquia de configuração, máscaras curinga, posicionamento de ACL, higiene de interface e verificação segura de janela de alteração.",
             "triggers": [
                 "/after"
             ],
@@ -636,7 +636,7 @@ const eccSkillsData = {
             "id": "ck",
             "category": "Uncategorized",
             "title": "Ck",
-            "description": "Persistent per-project memory for Claude Code. Auto-loads project context on session start, tracks sessions with git activity, and writes to native memory. Commands run deterministic Node.js scripts — behavior is consistent across model versions.",
+            "description": "Memória persistente por projeto para Claude Code. Carrega automaticamente o contexto do projeto no início da sessão, rastreia sessões com atividade git e grava na memória nativa. Os comandos executam scripts determinísticos do Node.js – o comportamento é consistente em todas as versões do modelo.",
             "triggers": [
                 "/migrate",
                 "/context-keeper",
@@ -665,7 +665,7 @@ const eccSkillsData = {
             "id": "claude-devfleet",
             "category": "Uncategorized",
             "title": "Claude Devfleet",
-            "description": "Orchestrate multi-agent coding tasks via Claude DevFleet — plan projects, dispatch parallel agents in isolated worktrees, monitor progress, and read structured reports.",
+            "description": "Orquestre tarefas de codificação multiagentes por meio do Claude DevFleet — planeje projetos, envie agentes paralelos em árvores de trabalho isoladas, monitore o progresso e leia relatórios estruturados.",
             "triggers": [
                 "/mcp",
                 "/localhost"
@@ -676,8 +676,8 @@ const eccSkillsData = {
         {
             "id": "click-path-audit",
             "category": "Uncategorized",
-            "title": "Click Path Audit",
-            "description": "Trace every user-facing button/touchpoint through its full state change sequence to find bugs where functions individually work but cancel each other out, produce wrong final state, or leave the UI in an inconsistent state. Use when: systematic debugging found no bugs but users report broken buttons, or after any major refactor touching shared state stores.",
+            "title": "Clique em Auditoria de caminho",
+            "description": "Rastreie cada botão/ponto de contato voltado para o usuário através de sua sequência completa de mudança de estado para encontrar bugs onde as funções funcionam individualmente, mas se cancelam, produzem um estado final errado ou deixam a UI em um estado inconsistente. Use quando: a depuração sistemática não encontrou bugs, mas os usuários relataram botões quebrados ou após qualquer refatoração importante que tocou em armazenamentos de estado compartilhados.",
             "triggers": [
                 "/superpowers",
                 "/clear",
@@ -697,7 +697,7 @@ const eccSkillsData = {
             "id": "clickhouse-io",
             "category": "Uncategorized",
             "title": "Clickhouse Io",
-            "description": "ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads.",
+            "description": "Padrões de banco de dados ClickHouse, otimização de consultas, análises e práticas recomendadas de engenharia de dados para cargas de trabalho analíticas de alto desempenho.",
             "triggers": [
                 "/promises"
             ],
@@ -707,8 +707,8 @@ const eccSkillsData = {
         {
             "id": "code-tour",
             "category": "Uncategorized",
-            "title": "Code Tour",
-            "description": "Create CodeTour `.tour` files — persona-targeted, step-by-step walkthroughs with real file and line anchors. Use for onboarding tours, architecture walkthroughs, PR tours, RCA tours, and structured \"explain how this works\" requests.",
+            "title": "Tour de código",
+            "description": "Crie arquivos CodeTour `.tour` — orientações passo a passo direcionadas à pessoa com arquivos reais e âncoras de linha. Use para tours de integração, orientações de arquitetura, tours de relações públicas, tours RCA e solicitações estruturadas de \"explicar como isso funciona\".",
             "triggers": [
                 "/routes",
                 "/github",
@@ -734,8 +734,8 @@ const eccSkillsData = {
         {
             "id": "codebase-onboarding",
             "category": "Uncategorized",
-            "title": "Codebase Onboarding",
-            "description": "Analyze an unfamiliar codebase and generate a structured onboarding guide with architecture map, key entry points, conventions, and a starter CLAUDE.md. Use when joining a new project or setting up Claude Code for the first time in a repo.",
+            "title": "Integração da base de código",
+            "description": "Analise uma base de código desconhecida e gere um guia de integração estruturado com mapa de arquitetura, principais pontos de entrada, convenções e um CLAUDE.md inicial. Use ao ingressar em um novo projeto ou configurar o Claude Code pela primeira vez em um repositório.",
             "triggers": [
                 "/backend",
                 "/catch",
@@ -756,8 +756,8 @@ const eccSkillsData = {
         {
             "id": "coding-standards",
             "category": "Uncategorized",
-            "title": "Coding Standards",
-            "description": "Baseline cross-project coding conventions for naming, readability, immutability, and code-quality review. Use detailed frontend or backend skills for framework-specific patterns.",
+            "title": "Padrões de codificação",
+            "description": "Convenções básicas de codificação entre projetos para nomenclatura, legibilidade, imutabilidade e revisão da qualidade do código. Use habilidades detalhadas de front-end ou back-end para padrões específicos da estrutura.",
             "triggers": [
                 "/common",
                 "/use",
@@ -775,8 +775,8 @@ const eccSkillsData = {
         {
             "id": "compose-multiplatform-patterns",
             "category": "Uncategorized",
-            "title": "Compose Multiplatform Patterns",
-            "description": "Compose Multiplatform and Jetpack Compose patterns for KMP projects — state management, navigation, theming, performance, and platform-specific UI.",
+            "title": "Componha padrões multiplataforma",
+            "description": "Padrões Compose Multiplatform e Jetpack Compose para projetos KMP – gerenciamento de estado, navegação, temas, desempenho e interface de usuário específica da plataforma.",
             "triggers": [
                 "/actual",
                 "/hide"
@@ -787,8 +787,8 @@ const eccSkillsData = {
         {
             "id": "configure-ecc",
             "category": "Uncategorized",
-            "title": "Configure Ecc",
-            "description": "Interactive installer for Everything Claude Code — guides users through selecting and installing skills and rules to user-level or project-level directories, verifies paths, and optionally optimizes installed files.",
+            "title": "Configurar Ecc",
+            "description": "Instalador interativo para Everything Claude Code — orienta os usuários na seleção e instalação de habilidades e regras em diretórios de nível de usuário ou de projeto, verifica caminhos e, opcionalmente, otimiza arquivos instalados.",
             "triggers": [
                 "/golang",
                 "/plugin",
@@ -826,8 +826,8 @@ const eccSkillsData = {
         {
             "id": "connections-optimizer",
             "category": "Uncategorized",
-            "title": "Connections Optimizer",
-            "description": "Reorganize the user's X and LinkedIn network with review-first pruning, add/follow recommendations, and channel-specific warm outreach drafted in the user's real voice. Use when the user wants to clean up following lists, grow toward current priorities, or rebalance a social graph around higher-signal relationships.",
+            "title": "Otimizador de conexões",
+            "description": "Reorganize a rede X e LinkedIn do usuário com revisão inicial, recomendações para adicionar/seguir e divulgação calorosa específica do canal redigida na voz real do usuário. Use quando o usuário quiser limpar listas a seguir, crescer em direção às prioridades atuais ou reequilibrar um gráfico social em torno de relacionamentos de sinal mais alto.",
             "triggers": [
                 "/follow"
             ],
@@ -837,8 +837,8 @@ const eccSkillsData = {
         {
             "id": "content-engine",
             "category": "Uncategorized",
-            "title": "Content Engine",
-            "description": "Create platform-native content systems for X, LinkedIn, TikTok, YouTube, newsletters, and repurposed multi-platform campaigns. Use when the user wants social posts, threads, scripts, content calendars, or one source asset adapted cleanly across platforms.",
+            "title": "Mecanismo de conteúdo",
+            "description": "Crie sistemas de conteúdo nativos de plataforma para X, LinkedIn, TikTok, YouTube, boletins informativos e campanhas multiplataforma reaproveitadas. Use quando o usuário desejar postagens sociais, tópicos, scripts, calendários de conteúdo ou um ativo de origem adaptado de forma limpa entre plataformas.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/content-engine/SKILL.md"
@@ -846,8 +846,8 @@ const eccSkillsData = {
         {
             "id": "content-hash-cache-pattern",
             "category": "Uncategorized",
-            "title": "Content Hash Cache Pattern",
-            "description": "Cache expensive file processing results using SHA-256 content hashes — path-independent, auto-invalidating, with service layer separation.",
+            "title": "Padrão de cache de hash de conteúdo",
+            "description": "Armazene em cache resultados caros de processamento de arquivos usando hashes de conteúdo SHA-256 — independente de caminho, invalidação automática e separação de camada de serviço.",
             "triggers": [
                 "/to",
                 "/renames",
@@ -864,8 +864,8 @@ const eccSkillsData = {
         {
             "id": "context-budget",
             "category": "Uncategorized",
-            "title": "Context Budget",
-            "description": "Audits Claude Code context window consumption across agents, skills, MCP servers, and rules. Identifies bloat, redundant components, and produces prioritized token-savings recommendations.",
+            "title": "Orçamento de Contexto",
+            "description": "Audita o consumo da janela de contexto do Claude Code em agentes, habilidades, servidores MCP e regras. Identifica componentes redundantes e inchados e produz recomendações priorizadas de economia de tokens.",
             "triggers": [
                 "/context-budget",
                 "/skills"
@@ -876,8 +876,8 @@ const eccSkillsData = {
         {
             "id": "continuous-agent-loop",
             "category": "Uncategorized",
-            "title": "Continuous Agent Loop",
-            "description": "Patterns for continuous autonomous agent loops with quality gates, evals, and recovery controls.",
+            "title": "Loop Contínuo de Agente",
+            "description": "Padrões para loops contínuos de agentes autônomos com portas de qualidade, avaliações e controles de recuperação.",
             "triggers": [
                 "/quality-gate",
                 "/harness-audit"
@@ -888,8 +888,8 @@ const eccSkillsData = {
         {
             "id": "continuous-learning",
             "category": "Uncategorized",
-            "title": "Continuous Learning",
-            "description": "[DEPRECATED - use continuous-learning-v2] Legacy v1 stop-hook skill extractor. v2 is a strict superset with instinct-based, project-scoped, hook-reliable learning. Do not invoke v1; route continuous learning, session learning, and pattern extraction requests to continuous-learning-v2.",
+            "title": "Aprendizagem Contínua",
+            "description": "[DEPRECADO - use Continuous-learning-v2] Extrator de habilidade stop-hook legado v1. v2 é um superconjunto estrito com aprendizado baseado em instinto, no escopo do projeto e confiável. Não invoque v1; encaminhar solicitações de aprendizado contínuo, aprendizado de sessão e extração de padrões para aprendizado contínuo-v2.",
             "triggers": [
                 "/learned",
                 "/evaluate-session",
@@ -913,8 +913,8 @@ const eccSkillsData = {
         {
             "id": "continuous-learning-v2",
             "category": "Uncategorized",
-            "title": "Continuous Learning V2",
-            "description": "Instinct-based learning system that observes sessions via hooks, creates atomic instincts with confidence scoring, and evolves them into skills/commands/agents. v2.1 adds project-scoped instincts to prevent cross-project contamination.",
+            "title": "Aprendizagem Contínua V2",
+            "description": "Sistema de aprendizagem baseado em instinto que observa sessões por meio de ganchos, cria instintos atômicos com pontuação de confiança e os transforma em habilidades/comandos/agentes. A v2.1 adiciona instintos no escopo do projeto para evitar a contaminação entre projetos.",
             "triggers": [
                 "/skills",
                 "/settings",
@@ -967,8 +967,8 @@ const eccSkillsData = {
         {
             "id": "cost-aware-llm-pipeline",
             "category": "Uncategorized",
-            "title": "Cost Aware Llm Pipeline",
-            "description": "Cost optimization patterns for LLM API usage — model routing by task complexity, budget tracking, retry logic, and prompt caching.",
+            "title": "Pipeline de Llm com reconhecimento de custos",
+            "description": "Padrões de otimização de custos para uso de API LLM – roteamento de modelo por complexidade de tarefa, rastreamento de orçamento, lógica de repetição e cache de prompt.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/cost-aware-llm-pipeline/SKILL.md"
@@ -976,8 +976,8 @@ const eccSkillsData = {
         {
             "id": "cost-tracking",
             "category": "Uncategorized",
-            "title": "Cost Tracking",
-            "description": "Track and report Claude Code token usage, spending, and budgets from a local cost-tracking database. Use when the user asks about costs, spending, usage, tokens, budgets, or cost breakdowns by project, tool, session, or date.",
+            "title": "Acompanhamento de custos",
+            "description": "Rastreie e relate o uso, os gastos e os orçamentos do token Claude Code a partir de um banco de dados local de rastreamento de custos. Use quando o usuário perguntar sobre custos, gastos, uso, tokens, orçamentos ou detalhamento de custos por projeto, ferramenta, sessão ou data.",
             "triggers": [
                 "/plugin",
                 "/null",
@@ -991,8 +991,8 @@ const eccSkillsData = {
         {
             "id": "council",
             "category": "Uncategorized",
-            "title": "Council",
-            "description": "Convene a four-voice council for ambiguous decisions, tradeoffs, and go/no-go calls. Use when multiple valid paths exist and you need structured disagreement before choosing.",
+            "title": "Conselho",
+            "description": "Convoque um conselho de quatro vozes para decisões ambíguas, compensações e chamadas de sim/não. Use quando existirem vários caminhos válidos e você precisar de um desacordo estruturado antes de escolher.",
             "triggers": [
                 "/general",
                 "/save-session",
@@ -1005,8 +1005,8 @@ const eccSkillsData = {
         {
             "id": "cpp-coding-standards",
             "category": "Uncategorized",
-            "title": "Cpp Coding Standards",
-            "description": "C++ coding standards based on the C++ Core Guidelines (isocpp.github.io). Use when writing, reviewing, or refactoring C++ code to enforce modern, safe, and idiomatic practices.",
+            "title": "Padrões de codificação Cpp",
+            "description": "Padrões de codificação C++ baseados nas Diretrizes Principais do C++ (isocpp.github.io). Use ao escrever, revisar ou refatorar código C++ para impor práticas modernas, seguras e idiomáticas.",
             "triggers": [
                 "/destructor",
                 "/array",
@@ -1026,8 +1026,8 @@ const eccSkillsData = {
         {
             "id": "cpp-testing",
             "category": "Uncategorized",
-            "title": "Cpp Testing",
-            "description": "Use only when writing/updating/fixing C++ tests, configuring GoogleTest/CTest, diagnosing failing or flaky tests, or adding coverage/sanitizers.",
+            "title": "Teste de Cpp",
+            "description": "Use apenas ao escrever/atualizar/corrigir testes C++, configurar GoogleTest/CTest, diagnosticar testes com falha ou instáveis ​​ou adicionar cobertura/desinfetantes.",
             "triggers": [
                 "/add",
                 "/gmock",
@@ -1063,8 +1063,8 @@ const eccSkillsData = {
         {
             "id": "crosspost",
             "category": "Uncategorized",
-            "title": "Crosspost",
-            "description": "Multi-platform content distribution across X, LinkedIn, Threads, and Bluesky. Adapts content per platform using content-engine patterns. Never posts identical content cross-platform. Use when the user wants to distribute content across social platforms.",
+            "title": "Poste cruzado",
+            "description": "Distribuição de conteúdo multiplataforma em X, LinkedIn, Threads e Bluesky. Adapta o conteúdo por plataforma usando padrões de mecanismo de conteúdo. Nunca poste conteúdo idêntico em várias plataformas. Use quando o usuário quiser distribuir conteúdo em plataformas sociais.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/crosspost/SKILL.md"
@@ -1072,8 +1072,8 @@ const eccSkillsData = {
         {
             "id": "csharp-testing",
             "category": "Uncategorized",
-            "title": "Csharp Testing",
-            "description": "C# and .NET testing patterns with xUnit, FluentAssertions, mocking, integration tests, and test organization best practices.",
+            "title": "Teste Csharp",
+            "description": "Padrões de teste C# e .NET com xUnit, FluentAssertions, simulação, testes de integração e práticas recomendadas de organização de testes.",
             "triggers": [
                 "/api",
                 "/orders"
@@ -1084,8 +1084,8 @@ const eccSkillsData = {
         {
             "id": "customer-billing-ops",
             "category": "Uncategorized",
-            "title": "Customer Billing Ops",
-            "description": "Operate customer billing workflows such as subscriptions, refunds, churn triage, billing-portal recovery, and plan analysis using connected billing tools like Stripe. Use when the user needs to help a customer, inspect subscription state, or manage revenue-impacting billing operations.",
+            "title": "Operações de faturamento do cliente",
+            "description": "Opere fluxos de trabalho de faturamento de clientes, como assinaturas, reembolsos, triagem de rotatividade, recuperação do portal de faturamento e análise de planos usando ferramentas de faturamento conectadas, como o Stripe. Use quando o usuário precisar ajudar um cliente, inspecionar o estado da assinatura ou gerenciar operações de cobrança que impactam a receita.",
             "triggers": [
                 "/customer",
                 "/seat",
@@ -1098,8 +1098,8 @@ const eccSkillsData = {
         {
             "id": "customs-trade-compliance",
             "category": "Uncategorized",
-            "title": "Customs Trade Compliance",
-            "description": ">",
+            "title": "Conformidade Comercial Aduaneira",
+            "description": null,
             "triggers": [
                 "/github",
                 "/heading",
@@ -1122,8 +1122,8 @@ const eccSkillsData = {
         {
             "id": "dart-flutter-patterns",
             "category": "Uncategorized",
-            "title": "Dart Flutter Patterns",
-            "description": "Production-ready Dart and Flutter patterns covering null safety, immutable state, async composition, widget architecture, popular state management frameworks (BLoC, Riverpod, Provider), GoRouter navigation, Dio networking, Freezed code generation, and clean architecture.",
+            "title": "Padrões de vibração de dardo",
+            "description": "Padrões Dart e Flutter prontos para produção cobrindo segurança nula, estado imutável, composição assíncrona, arquitetura de widget, estruturas populares de gerenciamento de estado (BLoC, Riverpod, Provider), navegação GoRouter, rede Dio, geração de código congelado e arquitetura limpa.",
             "triggers": [
                 "/json",
                 "/bloclibrary",
@@ -1150,8 +1150,8 @@ const eccSkillsData = {
         {
             "id": "dashboard-builder",
             "category": "Uncategorized",
-            "title": "Dashboard Builder",
-            "description": "Build monitoring dashboards that answer real operator questions for Grafana, SigNoz, and similar platforms. Use when turning metrics into a working dashboard instead of a vanity board.",
+            "title": "Construtor de painel",
+            "description": "Crie painéis de monitoramento que respondam a perguntas reais dos operadores para Grafana, SigNoz e plataformas semelhantes. Use ao transformar métricas em um painel de trabalho em vez de um painel personalizado.",
             "triggers": [
                 "/status"
             ],
@@ -1161,8 +1161,8 @@ const eccSkillsData = {
         {
             "id": "data-scraper-agent",
             "category": "Uncategorized",
-            "title": "Data Scraper Agent",
-            "description": "Build a fully automated AI-powered data collection agent for any public source — job boards, prices, news, GitHub, sports, anything. Scrapes on a schedule, enriches data with a free LLM (Gemini Flash), stores results in Notion/Sheets/Supabase, and learns from user feedback. Runs 100% free on GitHub Actions. Use when the user wants to monitor, collect, or track any public data automatically.",
+            "title": "Agente raspador de dados",
+            "description": "Crie um agente de coleta de dados totalmente automatizado e alimentado por IA para qualquer fonte pública: quadros de empregos, preços, notícias, GitHub, esportes, qualquer coisa. Raspe dentro de um cronograma, enriquece dados com um LLM (Gemini Flash) gratuito, armazena resultados em Notion/Sheets/Supabase e aprende com o feedback do usuário. Funciona 100% gratuitamente no GitHub Actions. Use quando o usuário quiser monitorar, coletar ou rastrear quaisquer dados públicos automaticamente.",
             "triggers": [
                 "/checkout",
                 "/setup-python",
@@ -1197,8 +1197,8 @@ const eccSkillsData = {
         {
             "id": "data-throughput-accelerator",
             "category": "Uncategorized",
-            "title": "Data Throughput Accelerator",
-            "description": "Use when large data ingestion, backfill, export, ETL, warehouse loading, manifest catch-up, or table synchronization needs to become much faster while preserving data correctness.",
+            "title": "Acelerador de transferência de dados",
+            "description": "Use quando a ingestão de grandes dados, preenchimento, exportação, ETL, carregamento de warehouse, atualização de manifesto ou sincronização de tabelas precisarem se tornar muito mais rápidos, preservando a correção dos dados.",
             "triggers": [
                 "/max",
                 "/load",
@@ -1210,8 +1210,8 @@ const eccSkillsData = {
         {
             "id": "database-migrations",
             "category": "Uncategorized",
-            "title": "Database Migrations",
-            "description": "Database migration best practices for schema changes, data migrations, rollbacks, and zero-downtime deployments across PostgreSQL, MySQL, and common ORMs (Prisma, Drizzle, Kysely, Django, TypeORM, golang-migrate).",
+            "title": "Migrações de banco de dados",
+            "description": "Práticas recomendadas de migração de banco de dados para alterações de esquema, migrações de dados, reversões e implantações com tempo de inatividade zero em PostgreSQL, MySQL e ORMs comuns (Prisma, Drizzle, Kysely, Django, TypeORM, golang-migrate).",
             "triggers": [
                 "/write",
                 "/pg-core",
@@ -1229,8 +1229,8 @@ const eccSkillsData = {
         {
             "id": "deep-research",
             "category": "Uncategorized",
-            "title": "Deep Research",
-            "description": "Multi-source deep research using firecrawl and exa MCPs. Searches the web, synthesizes findings, and delivers cited reports with source attribution. Use when the user wants thorough research on any topic with evidence and citations.",
+            "title": "Pesquisa Profunda",
+            "description": "Pesquisa profunda de múltiplas fontes usando firecrawl e exa MCPs. Pesquisa na web, sintetiza descobertas e fornece relatórios citados com atribuição da fonte. Use quando o usuário desejar uma pesquisa completa sobre qualquer assunto com evidências e citações.",
             "triggers": [
                 "/config"
             ],
@@ -1240,8 +1240,8 @@ const eccSkillsData = {
         {
             "id": "defi-amm-security",
             "category": "Uncategorized",
-            "title": "Defi Amm Security",
-            "description": "Security checklist for Solidity AMM contracts, liquidity pools, and swap flows. Covers reentrancy, CEI ordering, donation or inflation attacks, oracle manipulation, slippage, admin controls, and integer math.",
+            "title": "Segurança Defi Amm",
+            "description": "Lista de verificação de segurança para contratos Solidity AMM, pools de liquidez e fluxos de swap. Abrange reentrada, ordenação de CEI, ataques de doação ou inflação, manipulação de oráculo, derrapagem, controles administrativos e matemática de números inteiros.",
             "triggers": [
                 "/static-analysis",
                 "/libraries",
@@ -1257,8 +1257,8 @@ const eccSkillsData = {
         {
             "id": "deployment-patterns",
             "category": "Uncategorized",
-            "title": "Deployment Patterns",
-            "description": "Deployment workflows, CI/CD pipeline patterns, Docker containerization, health checks, rollback strategies, and production readiness checklists for web applications.",
+            "title": "Padrões de implantação",
+            "description": "Fluxos de trabalho de implantação, padrões de pipeline CI/CD, conteinerização Docker, verificações de integridade, estratégias de reversão e listas de verificação de preparação de produção para aplicativos web.",
             "triggers": [
                 "/checkout",
                 "/host",
@@ -1295,8 +1295,8 @@ const eccSkillsData = {
         {
             "id": "design-system",
             "category": "Uncategorized",
-            "title": "Design System",
-            "description": "Use this skill to generate or audit design systems, check visual consistency, and review PRs that touch styling.",
+            "title": "Sistema de projeto",
+            "description": "Use essa habilidade para gerar ou auditar sistemas de design, verificar a consistência visual e revisar PRs relacionados ao estilo.",
             "triggers": [
                 "/localhost",
                 "/pricing",
@@ -1312,8 +1312,8 @@ const eccSkillsData = {
         {
             "id": "django-celery",
             "category": "Uncategorized",
-            "title": "Django Celery",
-            "description": "Django + Celery async task patterns — configuration, task design, beat scheduling, retries, canvas workflows, monitoring, and testing. Use when adding background jobs, scheduled tasks, or async processing to a Django app.",
+            "title": "Aipo Django",
+            "description": "Padrões de tarefas assíncronas Django + Celery – configuração, design de tarefas, agendamento de batidas, novas tentativas, fluxos de trabalho de tela, monitoramento e testes. Use ao adicionar trabalhos em segundo plano, tarefas agendadas ou processamento assíncrono a um aplicativo Django.",
             "triggers": [
                 "/scheduled",
                 "/test",
@@ -1333,8 +1333,8 @@ const eccSkillsData = {
         {
             "id": "django-patterns",
             "category": "Uncategorized",
-            "title": "Django Patterns",
-            "description": "Django architecture patterns, REST API design with DRF, ORM best practices, caching, signals, middleware, and production-grade Django apps.",
+            "title": "Padrões Django",
+            "description": "Padrões de arquitetura Django, design de API REST com DRF, práticas recomendadas de ORM, cache, sinais, middleware e aplicativos Django de nível de produção.",
             "triggers": [
                 "/signals",
                 "/list",
@@ -1360,8 +1360,8 @@ const eccSkillsData = {
         {
             "id": "django-security",
             "category": "Uncategorized",
-            "title": "Django Security",
-            "description": "Django security best practices, authentication, authorization, CSRF protection, SQL injection prevention, XSS prevention, and secure deployment configurations.",
+            "title": "Segurança Django",
+            "description": "Melhores práticas de segurança do Django, autenticação, autorização, proteção CSRF, prevenção de injeção de SQL, prevenção de XSS e configurações de implantação seguras.",
             "triggers": [
                 "/hour",
                 "/django",
@@ -1395,7 +1395,7 @@ const eccSkillsData = {
             "id": "django-tdd",
             "category": "Uncategorized",
             "title": "Django Tdd",
-            "description": "Django testing strategies with pytest-django, TDD methodology, factory_boy, mocking, coverage, and testing Django REST Framework APIs.",
+            "description": "Estratégias de teste do Django com pytest-django, metodologia TDD, factory_boy, zombaria, cobertura e teste de APIs do Django REST Framework.",
             "triggers": [
                 "/test",
                 "/factories",
@@ -1411,8 +1411,8 @@ const eccSkillsData = {
         {
             "id": "django-verification",
             "category": "Uncategorized",
-            "title": "Django Verification",
-            "description": "Verification loop for Django projects: migrations, linting, tests with coverage, security scans, and deployment readiness checks before release or PR.",
+            "title": "Verificação Django",
+            "description": "Loop de verificação para projetos Django: migrações, linting, testes com cobertura, varreduras de segurança e verificações de prontidão de implantação antes do lançamento ou PR.",
             "triggers": [
                 "/checkout",
                 "/setup-python",
@@ -1441,8 +1441,8 @@ const eccSkillsData = {
         {
             "id": "dmux-workflows",
             "category": "Uncategorized",
-            "title": "Dmux Workflows",
-            "description": "Multi-agent orchestration using dmux (tmux pane manager for AI agents). Patterns for parallel agent workflows across Claude Code, Codex, OpenCode, and other harnesses. Use when running multiple agent sessions in parallel or coordinating multi-agent development workflows.",
+            "title": "Fluxos de trabalho Dmux",
+            "description": "Orquestração multiagente usando dmux (gerenciador de painel tmux para agentes de IA). Padrões para fluxos de trabalho de agentes paralelos em Claude Code, Codex, OpenCode e outros equipamentos. Use ao executar várias sessões de agente em paralelo ou coordenar fluxos de trabalho de desenvolvimento de vários agentes.",
             "triggers": [
                 "/orchestrate-worktrees",
                 "/feature-auth",
@@ -1468,8 +1468,8 @@ const eccSkillsData = {
         {
             "id": "docker-patterns",
             "category": "Uncategorized",
-            "title": "Docker Patterns",
-            "description": "Docker and Docker Compose patterns for local development, container security, networking, volume strategies, and multi-service orchestration.",
+            "title": "Padrões Docker",
+            "description": "Padrões Docker e Docker Compose para desenvolvimento local, segurança de contêineres, rede, estratégias de volume e orquestração multisserviço.",
             "triggers": [
                 "/src",
                 "/localhost",
@@ -1502,8 +1502,8 @@ const eccSkillsData = {
         {
             "id": "documentation-lookup",
             "category": "Uncategorized",
-            "title": "Documentation Lookup",
-            "description": "Use up-to-date library and framework docs via Context7 MCP instead of training data. Activates for setup questions, API references, code examples, or when the user names a framework (e.g. React, Next.js, Prisma).",
+            "title": "Pesquisa de documentação",
+            "description": "Use bibliotecas atualizadas e documentos de estrutura por meio do Context7 MCP em vez de dados de treinamento. Ativado para questões de configuração, referências de API, exemplos de código ou quando o usuário nomeia uma estrutura (por exemplo, React, Next.js, Prisma).",
             "triggers": [
                 "/vercel",
                 "/next",
@@ -1519,8 +1519,8 @@ const eccSkillsData = {
         {
             "id": "dotnet-patterns",
             "category": "Uncategorized",
-            "title": "Dotnet Patterns",
-            "description": "Idiomatic C# and .NET patterns, conventions, dependency injection, async/await, and best practices for building robust, maintainable .NET applications.",
+            "title": "Padrões Dotnet",
+            "description": "Padrões idiomáticos de C# e .NET, convenções, injeção de dependência, assíncrono/espera e práticas recomendadas para a construção de aplicativos .NET robustos e de fácil manutenção.",
             "triggers": [
                 "/api",
                 "/failure",
@@ -1533,8 +1533,8 @@ const eccSkillsData = {
         {
             "id": "e2e-testing",
             "category": "Uncategorized",
-            "title": "E2E Testing",
-            "description": "Playwright E2E testing patterns, Page Object Model, configuration, CI/CD integration, artifact management, and flaky test strategies.",
+            "title": "Teste E2E",
+            "description": "Padrões de teste Playwright E2E, modelo de objeto de página, configuração, integração CI/CD, gerenciamento de artefatos e estratégias de teste fragmentadas.",
             "triggers": [
                 "/checkout",
                 "/test-market",
@@ -1568,8 +1568,8 @@ const eccSkillsData = {
         {
             "id": "ecc-guide",
             "category": "Uncategorized",
-            "title": "Ecc Guide",
-            "description": "Guide users through ECC's current agents, skills, commands, hooks, rules, install profiles, and project onboarding by reading the live repository surface before answering.",
+            "title": "Guia Ecc",
+            "description": "Oriente os usuários através dos agentes, habilidades, comandos, ganchos, regras atuais do ECC, perfis de instalação e integração de projetos lendo a superfície do repositório ativo antes de responder.",
             "triggers": [
                 "/harness-audit",
                 "/install-apply",
@@ -1596,8 +1596,8 @@ const eccSkillsData = {
         {
             "id": "ecc-tools-cost-audit",
             "category": "Uncategorized",
-            "title": "Ecc Tools Cost Audit",
-            "description": "Evidence-first ECC Tools burn and billing audit workflow. Use when investigating runaway PR creation, quota bypass, premium-model leakage, duplicate jobs, or GitHub App cost spikes in the ECC Tools repo.",
+            "title": "Auditoria de custos de ferramentas Ecc",
+            "description": "Fluxo de trabalho de auditoria de faturamento e gravação de ferramentas ECC que priorizam evidências. Use ao investigar a criação descontrolada de PR, desvio de cota, vazamento de modelo premium, trabalhos duplicados ou picos de custo do aplicativo GitHub no repositório de ferramentas ECC.",
             "triggers": [
                 "/update",
                 "/index"
@@ -1608,8 +1608,8 @@ const eccSkillsData = {
         {
             "id": "email-ops",
             "category": "Uncategorized",
-            "title": "Email Ops",
-            "description": "Evidence-first mailbox triage, drafting, send verification, and sent-mail-safe follow-up workflow for ECC. Use when the user wants to organize email, draft or send through the real mail surface, or prove what landed in Sent.",
+            "title": "Operações de e-mail",
+            "description": "Triagem de caixa de correio com base em evidências, elaboração, verificação de envio e fluxo de trabalho de acompanhamento seguro para e-mails enviados para ECC. Use quando o usuário quiser organizar e-mail, rascunhar ou enviar por meio da superfície de e-mail real ou provar o que chegou em Enviado.",
             "triggers": [
                 "/support"
             ],
@@ -1619,8 +1619,8 @@ const eccSkillsData = {
         {
             "id": "energy-procurement",
             "category": "Uncategorized",
-            "title": "Energy Procurement",
-            "description": ">",
+            "title": "Aquisição de Energia",
+            "description": null,
             "triggers": [
                 "/variable",
                 "/month",
@@ -1641,8 +1641,8 @@ const eccSkillsData = {
         {
             "id": "enterprise-agent-ops",
             "category": "Uncategorized",
-            "title": "Enterprise Agent Ops",
-            "description": "Operate long-lived agent workloads with observability, security boundaries, and lifecycle management.",
+            "title": "Operações de agente empresarial",
+            "description": "Opere cargas de trabalho de agentes de longa duração com observabilidade, limites de segurança e gerenciamento do ciclo de vida.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/enterprise-agent-ops/SKILL.md"
@@ -1650,8 +1650,8 @@ const eccSkillsData = {
         {
             "id": "error-handling",
             "category": "Uncategorized",
-            "title": "Error Handling",
-            "description": "Patterns for robust error handling across TypeScript, Python, and Go. Covers typed errors, error boundaries, retries, circuit breakers, and user-facing error messages.",
+            "title": "Tratamento de erros",
+            "description": "Padrões para tratamento robusto de erros em TypeScript, Python e Go. Abrange erros digitados, limites de erro, novas tentativas, disjuntores e mensagens de erro voltadas ao usuário.",
             "triggers": [
                 "/api",
                 "/data",
@@ -1663,8 +1663,8 @@ const eccSkillsData = {
         {
             "id": "eval-harness",
             "category": "Uncategorized",
-            "title": "Eval Harness",
-            "description": "Formal evaluation framework for Claude Code sessions implementing eval-driven development (EDD) principles",
+            "title": "Arnês Eva",
+            "description": "Estrutura de avaliação formal para sessões do Código Claude que implementam princípios de desenvolvimento orientado para avaliação (EDD)",
             "triggers": [
                 "/password",
                 "/feature-name",
@@ -1682,8 +1682,8 @@ const eccSkillsData = {
         {
             "id": "evm-token-decimals",
             "category": "Uncategorized",
-            "title": "Evm Token Decimals",
-            "description": "Prevent silent decimal mismatch bugs across EVM chains. Covers runtime decimal lookup, chain-aware caching, bridged-token precision drift, and safe normalization for bots, dashboards, and DeFi tools.",
+            "title": "Decimais de token Evm",
+            "description": "Evite bugs silenciosos de incompatibilidade decimal em cadeias EVM. Abrange pesquisa decimal em tempo de execução, cache com reconhecimento de cadeia, desvio de precisão de token em ponte e normalização segura para bots, painéis e ferramentas DeFi.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/evm-token-decimals/SKILL.md"
@@ -1691,8 +1691,8 @@ const eccSkillsData = {
         {
             "id": "exa-search",
             "category": "Uncategorized",
-            "title": "Exa Search",
-            "description": "Neural search via Exa MCP for web, code, and company research. Use when the user needs web search, code examples, company intel, people lookup, or AI-powered deep research with Exa's neural search engine.",
+            "title": "Pesquisa de exames",
+            "description": "Pesquisa neural via Exa MCP para pesquisa na web, código e empresa. Use quando o usuário precisar de pesquisa na web, exemplos de código, informações da empresa, pesquisa de pessoas ou pesquisa profunda baseada em IA com o mecanismo de pesquisa neural da Exa.",
             "triggers": [
                 "/exa",
                 "/in"
@@ -1704,7 +1704,7 @@ const eccSkillsData = {
             "id": "fal-ai-media",
             "category": "Uncategorized",
             "title": "Fal Ai Media",
-            "description": "Unified media generation via fal.ai MCP — image, video, and audio. Covers text-to-image (Nano Banana), text/image-to-video (Seedance, Kling, Veo 3), text-to-speech (CSM-1B), and video-to-audio (ThinkSound). Use when the user wants to generate images, videos, or audio with AI.",
+            "description": "Geração unificada de mídia via fal.ai MCP — imagem, vídeo e áudio. Abrange texto para imagem (Nano Banana), texto/imagem para vídeo (Seedance, Kling, Veo 3), texto para fala (CSM-1B) e vídeo para áudio (ThinkSound). Use quando o usuário quiser gerar imagens, vídeos ou áudio com IA.",
             "triggers": [
                 "/json",
                 "/veo-3",
@@ -1731,8 +1731,8 @@ const eccSkillsData = {
         {
             "id": "fastapi-patterns",
             "category": "Uncategorized",
-            "title": "Fastapi Patterns",
-            "description": "FastAPI patterns for async APIs, dependency injection, Pydantic request and response models, OpenAPI docs, tests, security, and production readiness.",
+            "title": "Padrões FastAPI",
+            "description": "Padrões FastAPI para APIs assíncronas, injeção de dependência, modelos de solicitação e resposta Pydantic, documentos OpenAPI, testes, segurança e prontidão para produção.",
             "triggers": [
                 "/fastapi-review",
                 "/test",
@@ -1750,8 +1750,8 @@ const eccSkillsData = {
         {
             "id": "finance-billing-ops",
             "category": "Uncategorized",
-            "title": "Finance Billing Ops",
-            "description": "Evidence-first revenue, pricing, refunds, team-billing, and billing-model truth workflow for ECC. Use when the user wants a sales snapshot, pricing comparison, duplicate-charge diagnosis, or code-backed billing reality instead of generic payments advice.",
+            "title": "Operações de faturamento financeiro",
+            "description": "Receita com base em evidências, preços, reembolsos, faturamento da equipe e fluxo de trabalho verdadeiro do modelo de faturamento para ECC. Use quando o usuário deseja um instantâneo de vendas, comparação de preços, diagnóstico de cobrança duplicada ou realidade de faturamento baseada em código, em vez de conselhos genéricos sobre pagamentos.",
             "triggers": [
                 "/product"
             ],
@@ -1761,8 +1761,8 @@ const eccSkillsData = {
         {
             "id": "flox-environments",
             "category": "Uncategorized",
-            "title": "Flox Environments",
-            "description": "Create reproducible, cross-platform development environments with Flox — a declarative environment manager built on Nix. ALWAYS use this skill when the user needs to: set up a project with system-level dependencies (compilers, databases, native libraries like openssl, libvips, BLAS, LAPACK); configure reproducible toolchains for Python, Node.js, Rust, Go, C/C++, Java, Ruby, Elixir, PHP, or any language; manage environments that must work identically across macOS and Linux; pin exact package versions for a team; run local services (PostgreSQL, Redis, Kafka) alongside development tools; onboard new developers with a single command; or solve 'works on my machine' problems. Especially valuable for AI-assisted and vibe coding — Flox lets agents install tools into a project-scoped environment without sudo, system pollution, or sandbox restrictions, and the resulting environment is committed to the repo so anyone can reproduce it instantly. Use this skill even if the user doesn't mention Flox — if they describe needing reproducible, declarative, cross-platform dev environments with system packages, this is the right tool. Also use when the user mentions .flox/, manifest.toml, flox activate, or FloxHub.",
+            "title": "Ambientes Flox",
+            "description": "Crie ambientes de desenvolvimento reproduzíveis e multiplataforma com Flox — um gerenciador de ambiente declarativo construído em Nix. SEMPRE utilize esta habilidade quando o usuário precisar: montar um projeto com dependências em nível de sistema (compiladores, bancos de dados, bibliotecas nativas como openssl, libvips, BLAS, LAPACK); configurar conjuntos de ferramentas reproduzíveis para Python, Node.js, Rust, Go, C/C++, Java, Ruby, Elixir, PHP ou qualquer linguagem; gerenciar ambientes que devem funcionar de forma idêntica no macOS e no Linux; fixar versões exatas do pacote para uma equipe; execute serviços locais (PostgreSQL, Redis, Kafka) juntamente com ferramentas de desenvolvimento; integrar novos desenvolvedores com um único comando; ou resolver problemas de 'funciona na minha máquina'. Especialmente valioso para codificação assistida por IA e vibração - o Flox permite que os agentes instalem ferramentas em um ambiente com escopo de projeto sem sudo, poluição do sistema ou restrições de sandbox, e o ambiente resultante é comprometido com o repositório para que qualquer pessoa possa reproduzi-lo instantaneamente. Use essa habilidade mesmo que o usuário não mencione o Flox — se ele descrever a necessidade de ambientes de desenvolvimento reproduzíveis, declarativos e multiplataforma com pacotes de sistema, esta é a ferramenta certa. Use também quando o usuário mencionar .flox/, manifest.toml, flox activate ou FloxHub.",
             "triggers": [
                 "/python-base",
                 "/localhost",
@@ -1797,8 +1797,8 @@ const eccSkillsData = {
         {
             "id": "flutter-dart-code-review",
             "category": "Uncategorized",
-            "title": "Flutter Dart Code Review",
-            "description": "Library-agnostic Flutter/Dart code review checklist covering widget best practices, state management patterns (BLoC, Riverpod, Provider, GetX, MobX, Signals), Dart idioms, performance, accessibility, security, and clean architecture.",
+            "title": "Revisão do código Flutter Dart",
+            "description": "Lista de verificação de revisão de código Flutter/Dart independente de biblioteca, cobrindo práticas recomendadas de widgets, padrões de gerenciamento de estado (BLoC, Riverpod, Provider, GetX, MobX, Signals), idiomas Dart, desempenho, acessibilidade, segurança e arquitetura limpa.",
             "triggers": [
                 "/src",
                 "/unit",
@@ -1842,8 +1842,8 @@ const eccSkillsData = {
         {
             "id": "foundation-models-on-device",
             "category": "Uncategorized",
-            "title": "Foundation Models On Device",
-            "description": "Apple FoundationModels framework for on-device LLM — text generation, guided generation with @Generable, tool calling, and snapshot streaming in iOS 26+.",
+            "title": "Modelos básicos no dispositivo",
+            "description": "Estrutura Apple FoundationModels para LLM no dispositivo – geração de texto, geração guiada com @Generable, chamada de ferramenta e streaming de instantâneo no iOS 26+.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/foundation-models-on-device/SKILL.md"
@@ -1851,8 +1851,8 @@ const eccSkillsData = {
         {
             "id": "frontend-a11y",
             "category": "Uncategorized",
-            "title": "Frontend A11Y",
-            "description": ">",
+            "title": "Interface A11Y",
+            "description": null,
             "triggers": [
                 "/github",
                 "/label",
@@ -1879,8 +1879,8 @@ const eccSkillsData = {
         {
             "id": "frontend-design-direction",
             "category": "Uncategorized",
-            "title": "Frontend Design Direction",
-            "description": "Set an ECC-specific frontend design direction for production UI work. Use when building or improving websites, dashboards, applications, components, landing pages, visual tools, or any web UI that needs stronger product-specific design judgment.",
+            "title": "Direção de design de front-end",
+            "description": "Defina uma direção de design de front-end específica do ECC para o trabalho de UI de produção. Use ao criar ou melhorar sites, painéis, aplicativos, componentes, páginas de destino, ferramentas visuais ou qualquer UI da web que precise de um julgamento mais forte de design específico do produto.",
             "triggers": [
                 "/max",
                 "/skills"
@@ -1891,8 +1891,8 @@ const eccSkillsData = {
         {
             "id": "frontend-patterns",
             "category": "Uncategorized",
-            "title": "Frontend Patterns",
-            "description": "Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.",
+            "title": "Padrões de front-end",
+            "description": "Padrões de desenvolvimento de front-end para React, Next.js, gerenciamento de estado, otimização de desempenho e práticas recomendadas de UI.",
             "triggers": [
                 "/motion",
                 "/h3",
@@ -1911,8 +1911,8 @@ const eccSkillsData = {
         {
             "id": "frontend-slides",
             "category": "Uncategorized",
-            "title": "Frontend Slides",
-            "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration rather than abstract choices.",
+            "title": "Slides de front-end",
+            "description": "Crie apresentações HTML impressionantes e ricas em animação do zero ou convertendo arquivos do PowerPoint. Use quando o usuário deseja construir uma apresentação, converter um PPT/PPTX para web ou criar slides para uma palestra/pitch. Ajuda quem não é designer a descobrir sua estética por meio da exploração visual, em vez de escolhas abstratas.",
             "triggers": [
                 "/motion",
                 "/pitch",
@@ -1926,8 +1926,8 @@ const eccSkillsData = {
         {
             "id": "fsharp-testing",
             "category": "Uncategorized",
-            "title": "Fsharp Testing",
-            "description": "F# testing patterns with xUnit, FsUnit, Unquote, FsCheck property-based testing, integration tests, and test organization best practices.",
+            "title": "Teste Fsharp",
+            "description": "Padrões de teste F# com testes baseados em propriedades xUnit, FsUnit, Unquote, FsCheck, testes de integração e práticas recomendadas de organização de testes.",
             "triggers": [
                 "/api",
                 "/orders"
@@ -1938,8 +1938,8 @@ const eccSkillsData = {
         {
             "id": "gan-style-harness",
             "category": "Uncategorized",
-            "title": "Gan Style Harness",
-            "description": "GAN-inspired Generator-Evaluator agent harness for building high-quality applications autonomously. Based on Anthropic's March 2026 harness design paper.",
+            "title": "Arnês Estilo Gan",
+            "description": "Equipamento de agente Generator-Evaluator inspirado em GAN para construir aplicativos de alta qualidade de forma autônoma. Baseado no documento de design de arreios da Anthropic de março de 2026.",
             "triggers": [
                 "/anthropic-harness-engineering-multi-agent-gan-architecture",
                 "/martinfowler",
@@ -1963,8 +1963,8 @@ const eccSkillsData = {
         {
             "id": "gateguard",
             "category": "Uncategorized",
-            "title": "Gateguard",
-            "description": "Fact-forcing gate that blocks Edit/Write/Bash (including MultiEdit) and demands concrete investigation (importers, data schemas, user instruction) before allowing the action. Measurably improves output quality by +2.25 points vs ungated agents.",
+            "title": "Portão",
+            "description": "Porta de forçamento de fatos que bloqueia Edit/Write/Bash (incluindo MultiEdit) e exige investigação concreta (importadores, esquemas de dados, instruções do usuário) antes de permitir a ação. Melhora mensuravelmente a qualidade da saída em +2,25 pontos em comparação com agentes não bloqueados.",
             "triggers": [
                 "/writes",
                 "/classes",
@@ -1980,8 +1980,8 @@ const eccSkillsData = {
         {
             "id": "git-workflow",
             "category": "Uncategorized",
-            "title": "Git Workflow",
-            "description": "Git workflow patterns including branching strategies, commit conventions, merge vs rebase, conflict resolution, and collaborative development best practices for teams of all sizes.",
+            "title": "Fluxo de trabalho Git",
+            "description": "Padrões de fluxo de trabalho Git, incluindo estratégias de ramificação, convenções de commit, mesclagem versus rebase, resolução de conflitos e práticas recomendadas de desenvolvimento colaborativo para equipes de todos os tamanhos.",
             "triggers": [
                 "/months",
                 "/bash",
@@ -2023,8 +2023,8 @@ const eccSkillsData = {
         {
             "id": "github-ops",
             "category": "Uncategorized",
-            "title": "Github Ops",
-            "description": "GitHub repository operations, automation, and management. Issue triage, PR management, CI/CD operations, release management, and security monitoring using the gh CLI. Use when the user wants to manage GitHub issues, PRs, CI status, releases, contributors, stale items, or any GitHub operational task beyond simple git commands.",
+            "title": "Operações do GitHub",
+            "description": "Operações, automação e gerenciamento do repositório GitHub. Triagem de problemas, gerenciamento de PR, operações de CI/CD, gerenciamento de liberação e monitoramento de segurança usando o gh CLI. Use quando o usuário deseja gerenciar problemas do GitHub, PRs, status de CI, lançamentos, contribuidores, itens obsoletos ou qualquer tarefa operacional do GitHub além de simples comandos git.",
             "triggers": [
                 "/dependabot",
                 "/high",
@@ -2038,8 +2038,8 @@ const eccSkillsData = {
         {
             "id": "golang-patterns",
             "category": "Uncategorized",
-            "title": "Golang Patterns",
-            "description": "Idiomatic Go patterns, best practices, and conventions for building robust, efficient, and maintainable Go applications.",
+            "title": "Padrões de Golang",
+            "description": "Padrões idiomáticos Go, práticas recomendadas e convenções para construir aplicativos Go robustos, eficientes e de fácil manutenção.",
             "triggers": [
                 "/goimports",
                 "/errgroup",
@@ -2054,8 +2054,8 @@ const eccSkillsData = {
         {
             "id": "golang-testing",
             "category": "Uncategorized",
-            "title": "Golang Testing",
-            "description": "Go testing patterns including table-driven tests, subtests, benchmarks, fuzzing, and test coverage. Follows TDD methodology with idiomatic Go practices.",
+            "title": "Teste de Golang",
+            "description": "Padrões de teste Go, incluindo testes baseados em tabela, subtestes, benchmarks, difusão e cobertura de teste. Segue a metodologia TDD com práticas idiomáticas de Go.",
             "triggers": [
                 "/json",
                 "/checkout",
@@ -2074,8 +2074,8 @@ const eccSkillsData = {
         {
             "id": "google-workspace-ops",
             "category": "Uncategorized",
-            "title": "Google Workspace Ops",
-            "description": "Operate across Google Drive, Docs, Sheets, and Slides as one workflow surface for plans, trackers, decks, and shared documents. Use when the user needs to find, summarize, edit, migrate, or clean up Google Workspace assets without dropping to raw tool calls.",
+            "title": "Operações do Google Workspace",
+            "description": "Opere no Google Drive, Documentos, Planilhas e Apresentações como uma superfície de fluxo de trabalho para planos, rastreadores, apresentações e documentos compartilhados. Use quando o usuário precisar encontrar, resumir, editar, migrar ou limpar recursos do Google Workspace sem recorrer a chamadas de ferramentas brutas.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/google-workspace-ops/SKILL.md"
@@ -2083,8 +2083,8 @@ const eccSkillsData = {
         {
             "id": "healthcare-cdss-patterns",
             "category": "Uncategorized",
-            "title": "Healthcare Cdss Patterns",
-            "description": "Clinical Decision Support System (CDSS) development patterns. Drug interaction checking, dose validation, clinical scoring (NEWS2, qSOFA), alert severity classification, and integration into EMR workflows.",
+            "title": "Padrões de CDSs de saúde",
+            "description": "Padrões de desenvolvimento do Sistema de Apoio à Decisão Clínica (CDSS). Verificação de interação medicamentosa, validação de dose, pontuação clínica (NEWS2, qSOFA), classificação de gravidade de alerta e integração em fluxos de trabalho EMR.",
             "triggers": [
                 "/kg"
             ],
@@ -2094,8 +2094,8 @@ const eccSkillsData = {
         {
             "id": "healthcare-emr-patterns",
             "category": "Uncategorized",
-            "title": "Healthcare Emr Patterns",
-            "description": "EMR/EHR development patterns for healthcare applications. Clinical safety, encounter workflows, prescription generation, clinical decision support integration, and accessibility-first UI for medical data entry.",
+            "title": "Padrões Emr de saúde",
+            "description": "Padrões de desenvolvimento EMR/EHR para aplicações de saúde. Segurança clínica, fluxos de trabalho de encontro, geração de prescrições, integração de suporte a decisões clínicas e interface de usuário com acessibilidade para entrada de dados médicos.",
             "triggers": [
                 "/age",
                 "/locked",
@@ -2115,8 +2115,8 @@ const eccSkillsData = {
         {
             "id": "healthcare-eval-harness",
             "category": "Uncategorized",
-            "title": "Healthcare Eval Harness",
-            "description": "Patient safety evaluation harness for healthcare application deployments. Automated test suites for CDSS accuracy, PHI exposure, clinical workflow integrity, and integration compliance. Blocks deployments on safety failures.",
+            "title": "Arnês de Avaliação de Saúde",
+            "description": "Equipamento de avaliação de segurança do paciente para implantações de aplicativos de saúde. Conjuntos de testes automatizados para precisão de CDSS, exposição a PHI, integridade do fluxo de trabalho clínico e conformidade de integração. Bloqueia implantações em falhas de segurança.",
             "triggers": [
                 "/checkout",
                 "/integration",
@@ -2134,8 +2134,8 @@ const eccSkillsData = {
         {
             "id": "healthcare-phi-compliance",
             "category": "Uncategorized",
-            "title": "Healthcare Phi Compliance",
-            "description": "Protected Health Information (PHI) and Personally Identifiable Information (PII) compliance patterns for healthcare applications. Covers data classification, access control, audit trails, encryption, and common leak vectors.",
+            "title": "Conformidade com Phi de saúde",
+            "description": "Padrões de conformidade de informações de saúde protegidas (PHI) e informações de identificação pessoal (PII) para aplicações de saúde. Abrange classificação de dados, controle de acesso, trilhas de auditoria, criptografia e vetores de vazamento comuns.",
             "triggers": [
                 "/console",
                 "/staff",
@@ -2147,8 +2147,8 @@ const eccSkillsData = {
         {
             "id": "hermes-imports",
             "category": "Uncategorized",
-            "title": "Hermes Imports",
-            "description": "Convert local Hermes operator workflows into sanitized ECC skills and release-pack artifacts. Use when preparing a Hermes workflow for public ECC reuse without leaking private workspace state, credentials, or local-only paths.",
+            "title": "Hermes Importações",
+            "description": "Converta fluxos de trabalho de operadores locais da Hermes em habilidades de ECC higienizadas e artefatos de pacotes de lançamento. Use ao preparar um fluxo de trabalho Hermes para reutilização de ECC público sem vazar o estado do espaço de trabalho privado, credenciais ou caminhos somente locais.",
             "triggers": [
                 "/releases"
             ],
@@ -2158,8 +2158,8 @@ const eccSkillsData = {
         {
             "id": "hexagonal-architecture",
             "category": "Uncategorized",
-            "title": "Hexagonal Architecture",
-            "description": "Design, implement, and refactor Ports & Adapters systems with clear domain boundaries, dependency inversion, and testable use-case orchestration across TypeScript, Java, Kotlin, and Go services.",
+            "title": "Arquitetura Hexagonal",
+            "description": "Projete, implemente e refatore sistemas de portas e adaptadores com limites de domínio claros, inversão de dependência e orquestração de casos de uso testáveis ​​em serviços TypeScript, Java, Kotlin e Go.",
             "triggers": [
                 "/packages",
                 "/queue",
@@ -2195,8 +2195,8 @@ const eccSkillsData = {
         {
             "id": "hipaa-compliance",
             "category": "Uncategorized",
-            "title": "Hipaa Compliance",
-            "description": "HIPAA-specific entrypoint for healthcare privacy and security work. Use when a task is explicitly framed around HIPAA, PHI handling, covered entities, BAAs, breach posture, or US healthcare compliance requirements.",
+            "title": "Conformidade Hipaa",
+            "description": "Ponto de entrada específico da HIPAA para trabalho de privacidade e segurança na área da saúde. Use quando uma tarefa é explicitamente estruturada em torno de HIPAA, tratamento de PHI, entidades cobertas, BAAs, postura de violação ou requisitos de conformidade de saúde dos EUA.",
             "triggers": [
                 "/write",
                 "/tooling",
@@ -2208,8 +2208,8 @@ const eccSkillsData = {
         {
             "id": "homelab-network-readiness",
             "category": "Uncategorized",
-            "title": "Homelab Network Readiness",
-            "description": "Readiness checklist for homelab VLAN segmentation, local DNS filtering, and WireGuard-style remote access before changing router, firewall, DHCP, or VPN configuration.",
+            "title": "Preparação da rede Homelab",
+            "description": "Lista de verificação de preparação para segmentação de VLAN do homelab, filtragem de DNS local e acesso remoto estilo WireGuard antes de alterar a configuração do roteador, firewall, DHCP ou VPN.",
             "triggers": [
                 "/security"
             ],
@@ -2219,8 +2219,8 @@ const eccSkillsData = {
         {
             "id": "homelab-network-setup",
             "category": "Uncategorized",
-            "title": "Homelab Network Setup",
-            "description": "Practical home and homelab network planning for gateways, switches, access points, IP ranges, DHCP reservations, DNS, cabling, and common beginner mistakes.",
+            "title": "Configuração de rede Homelab",
+            "description": "Planejamento prático de rede doméstica e de laboratório doméstico para gateways, switches, pontos de acesso, intervalos de IP, reservas de DHCP, DNS, cabeamento e erros comuns de iniciante.",
             "triggers": [
                 "/conflict",
                 "/reserved",
@@ -2233,7 +2233,7 @@ const eccSkillsData = {
             "id": "homelab-pihole-dns",
             "category": "Uncategorized",
             "title": "Homelab Pihole Dns",
-            "description": "Pi-hole installation, blocklist management, DNS-over-HTTPS setup, DHCP integration, local DNS records, and troubleshooting broken DNS resolution on a home network.",
+            "description": "Instalação Pi-hole, gerenciamento de lista de bloqueio, configuração de DNS sobre HTTPS, integração de DHCP, registros DNS locais e solução de problemas de resolução de DNS quebrada em uma rede doméstica.",
             "triggers": [
                 "/etc",
                 "/tcp",
@@ -2277,8 +2277,8 @@ const eccSkillsData = {
         {
             "id": "homelab-vlan-segmentation",
             "category": "Uncategorized",
-            "title": "Homelab Vlan Segmentation",
-            "description": "Segmenting home networks into VLANs for IoT, guest, trusted, and server traffic using UniFi, pfSense/OPNsense, and MikroTik — including switch trunk config, firewall rules, and wireless SSID mapping.",
+            "title": "Segmentação Homelab Vlan",
+            "description": "Segmentação de redes domésticas em VLANs para IoT, tráfego de convidados, confiáveis ​​e de servidor usando UniFi, pfSense/OPNsense e MikroTik — incluindo configuração de tronco de switch, regras de firewall e mapeamento de SSID sem fio.",
             "triggers": [
                 "/ip",
                 "/24",
@@ -2293,8 +2293,8 @@ const eccSkillsData = {
         {
             "id": "homelab-wireguard-vpn",
             "category": "Uncategorized",
-            "title": "Homelab Wireguard Vpn",
-            "description": "WireGuard VPN server setup, peer configuration, key generation, split tunneling vs full tunnel routing, and remote access to a home network from mobile and laptop clients.",
+            "title": "Homelab Wireguard VPN",
+            "description": "Configuração do servidor VPN WireGuard, configuração de pares, geração de chaves, túnel dividido versus roteamento de túnel completo e acesso remoto a uma rede doméstica a partir de clientes móveis e laptops.",
             "triggers": [
                 "/etc",
                 "/sh",
@@ -2329,8 +2329,8 @@ const eccSkillsData = {
         {
             "id": "hookify-rules",
             "category": "Uncategorized",
-            "title": "Hookify Rules",
-            "description": "This skill should be used when the user asks to create a hookify rule, write a hook rule, configure hookify, add a hookify rule, or needs guidance on hookify rule syntax and patterns.",
+            "title": "Regras do Hookify",
+            "description": "Essa habilidade deve ser usada quando o usuário solicita a criação de uma regra de hookify, escreve uma regra de hookify, configura o hookify, adiciona uma regra de hookify ou precisa de orientação sobre sintaxe e padrões de regras de hookify.",
             "triggers": [
                 "/hookify-list",
                 "/hookify-configure",
@@ -2351,8 +2351,8 @@ const eccSkillsData = {
         {
             "id": "inventory-demand-planning",
             "category": "Uncategorized",
-            "title": "Inventory Demand Planning",
-            "description": ">",
+            "title": "Planejamento de demanda de estoque",
+            "description": null,
             "triggers": [
                 "/github",
                 "/lumpy",
@@ -2376,8 +2376,8 @@ const eccSkillsData = {
         {
             "id": "investor-materials",
             "category": "Uncategorized",
-            "title": "Investor Materials",
-            "description": "Create and update pitch decks, one-pagers, investor memos, accelerator applications, financial models, and fundraising materials. Use when the user needs investor-facing documents, projections, use-of-funds tables, milestone plans, or materials that must stay internally consistent across multiple fundraising assets.",
+            "title": "Materiais para Investidores",
+            "description": "Crie e atualize apresentações de argumentos de venda, apresentações de uma página, memorandos para investidores, aplicativos aceleradores, modelos financeiros e materiais de arrecadação de fundos. Use quando o usuário precisar de documentos voltados para o investidor, projeções, tabelas de uso de fundos, planos de marcos ou materiais que devem permanecer internamente consistentes em vários ativos de arrecadação de fundos.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/investor-materials/SKILL.md"
@@ -2385,8 +2385,8 @@ const eccSkillsData = {
         {
             "id": "investor-outreach",
             "category": "Uncategorized",
-            "title": "Investor Outreach",
-            "description": "Draft cold emails, warm intro blurbs, follow-ups, update emails, and investor communications for fundraising. Use when the user wants outreach to angels, VCs, strategic investors, or accelerators and needs concise, personalized, investor-facing messaging.",
+            "title": "Alcance do Investidor",
+            "description": "Elabore e-mails frios, sinopses de introdução calorosas, acompanhamentos, e-mails de atualização e comunicações com investidores para arrecadação de fundos. Use quando o usuário deseja alcançar anjos, VCs, investidores estratégicos ou aceleradores e precisa de mensagens concisas, personalizadas e voltadas para o investidor.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/investor-outreach/SKILL.md"
@@ -2394,8 +2394,8 @@ const eccSkillsData = {
         {
             "id": "ios-icon-gen",
             "category": "Uncategorized",
-            "title": "Ios Icon Gen",
-            "description": "Generate iOS app icons as PNG imagesets for Xcode asset catalogs from SF Symbols (5000+ Apple-native) or Iconify API (275k+ open source icons from 200+ collections). Use when generating icons, creating icon assets, adding icons to asset catalog, or searching for icons for iOS projects.",
+            "title": "Geração de ícones iOS",
+            "description": "Gere ícones de aplicativos iOS como conjuntos de imagens PNG para catálogos de ativos Xcode de SF Symbols (mais de 5.000 nativos da Apple) ou API Iconify (mais de 275 mil ícones de código aberto de mais de 200 coleções). Use ao gerar ícones, criar ativos de ícones, adicionar ícones ao catálogo de ativos ou pesquisar ícones para projetos iOS.",
             "triggers": [
                 "/iconify",
                 "/tmp",
@@ -2413,8 +2413,8 @@ const eccSkillsData = {
         {
             "id": "iterative-retrieval",
             "category": "Uncategorized",
-            "title": "Iterative Retrieval",
-            "description": "Pattern for progressively refining context retrieval to solve the subagent context problem",
+            "title": "Recuperação Iterativa",
+            "description": "Padrão para refinar progressivamente a recuperação de contexto para resolver o problema de contexto do subagente",
             "triggers": [
                 "/affaanmustafa",
                 "/2014040193557471352",
@@ -2427,8 +2427,8 @@ const eccSkillsData = {
         {
             "id": "ito-basket-compare",
             "category": "Uncategorized",
-            "title": "Ito Basket Compare",
-            "description": "Compare Itô prediction-market baskets against a user's knowledge base, portfolio notes, financial context, watchlist, or research thesis. Use for read-only basket comparison and gap analysis without investment advice or live trading.",
+            "title": "Comparar Ito Basket",
+            "description": "Compare as cestas de previsão do mercado Itô com a base de conhecimento do usuário, notas do portfólio, contexto financeiro, lista de observação ou tese de pesquisa. Use para comparação de cesta somente leitura e análise de lacunas, sem aconselhamento de investimento ou negociação ao vivo.",
             "triggers": [
                 "/market"
             ],
@@ -2438,8 +2438,8 @@ const eccSkillsData = {
         {
             "id": "ito-data-atlas-agent",
             "category": "Uncategorized",
-            "title": "Ito Data Atlas Agent",
-            "description": "Design background Data Atlas style agents for Itô basket research, market discovery, parameter drafting, and human-in-the-loop editing. Use for architecture and workflow planning, not live order execution.",
+            "title": "Agente Ito Data Atlas",
+            "description": "Projete agentes de base no estilo Data Atlas para pesquisa de cesta Itô, descoberta de mercado, elaboração de parâmetros e edição humana no circuito. Use para arquitetura e planejamento de fluxo de trabalho, não para execução de pedidos em tempo real.",
             "triggers": [
                 "/audit",
                 "/event"
@@ -2450,8 +2450,8 @@ const eccSkillsData = {
         {
             "id": "ito-market-intelligence",
             "category": "Uncategorized",
-            "title": "Ito Market Intelligence",
-            "description": "Research prediction-market events, venues, underliers, liquidity, and news context for Itô basket workflows. Use for read-only market intelligence, API-gated Itô exploration, and source-grounded prediction-market briefings without investment advice or live trading.",
+            "title": "Inteligência de Mercado Ito",
+            "description": "Pesquise eventos de previsão de mercado, locais, subjacentes, liquidez e contexto de notícias para fluxos de trabalho da cesta Itô. Use para inteligência de mercado somente leitura, exploração de Itô controlada por API e briefings de previsão de mercado com base na fonte, sem consultoria de investimento ou negociação ao vivo.",
             "triggers": [
                 "/event",
                 "/source"
@@ -2462,8 +2462,8 @@ const eccSkillsData = {
         {
             "id": "ito-trade-planner",
             "category": "Uncategorized",
-            "title": "Ito Trade Planner",
-            "description": "Build a non-advisory prediction-market trade planning worksheet for Itô or venue workflows. Use to inspect venues, underliers, constraints, order prerequisites, and manual execution steps without placing trades or recommending positions.",
+            "title": "Planejador de comércio Ito",
+            "description": "Crie uma planilha de planejamento comercial de previsão de mercado não consultiva para fluxos de trabalho Itô ou locais. Use para inspecionar locais, subjacentes, restrições, pré-requisitos de pedidos e etapas de execução manual sem realizar negociações ou recomendar posições.",
             "triggers": [
                 "/underlier",
                 "/sell"
@@ -2474,8 +2474,8 @@ const eccSkillsData = {
         {
             "id": "java-coding-standards",
             "category": "Uncategorized",
-            "title": "Java Coding Standards",
-            "description": "Java coding standards for Spring Boot and Quarkus services: naming, immutability, Optional usage, streams, exceptions, generics, CDI, reactive patterns, and project layout. Automatically applies framework-specific conventions.",
+            "title": "Padrões de codificação Java",
+            "description": "Padrões de codificação Java para serviços Spring Boot e Quarkus: nomenclatura, imutabilidade, uso opcional, fluxos, exceções, genéricos, CDI, padrões reativos e layout do projeto. Aplica automaticamente convenções específicas da estrutura.",
             "triggers": [
                 "/logging",
                 "/fields",
@@ -2497,8 +2497,8 @@ const eccSkillsData = {
         {
             "id": "jira-integration",
             "category": "Uncategorized",
-            "title": "Jira Integration",
-            "description": "Use this skill when retrieving Jira tickets, analyzing requirements, updating ticket status, adding comments, or transitioning issues. Provides Jira API patterns via MCP or direct REST calls.",
+            "title": "Integração Jira",
+            "description": "Use essa habilidade ao recuperar tickets do Jira, analisar requisitos, atualizar o status do ticket, adicionar comentários ou fazer a transição de problemas. Fornece padrões de API Jira por meio de MCP ou chamadas REST diretas.",
             "triggers": [
                 "/comment",
                 "/repo",
@@ -2526,8 +2526,8 @@ const eccSkillsData = {
         {
             "id": "jpa-patterns",
             "category": "Uncategorized",
-            "title": "Jpa Patterns",
-            "description": "JPA/Hibernate patterns for entity design, relationships, query optimization, transactions, auditing, indexing, pagination, and pooling in Spring Boot.",
+            "title": "Padrões Jpa",
+            "description": "Padrões JPA/Hibernate para design de entidades, relacionamentos, otimização de consultas, transações, auditoria, indexação, paginação e pooling no Spring Boot.",
             "triggers": [
                 "/write"
             ],
@@ -2537,8 +2537,8 @@ const eccSkillsData = {
         {
             "id": "knowledge-ops",
             "category": "Uncategorized",
-            "title": "Knowledge Ops",
-            "description": "Knowledge base management, ingestion, sync, and retrieval across multiple storage layers (local files, MCP memory, vector stores, Git repos). Use when the user wants to save, organize, sync, deduplicate, or search across their knowledge systems.",
+            "title": "Operações de conhecimento",
+            "description": "Gerenciamento, ingestão, sincronização e recuperação da base de conhecimento em diversas camadas de armazenamento (arquivos locais, memória MCP, armazenamentos de vetores, repositórios Git). Use quando o usuário quiser salvar, organizar, sincronizar, desduplicar ou pesquisar em seus sistemas de conhecimento.",
             "triggers": [
                 "/feedback",
                 "/docs",
@@ -2554,8 +2554,8 @@ const eccSkillsData = {
         {
             "id": "kotlin-coroutines-flows",
             "category": "Uncategorized",
-            "title": "Kotlin Coroutines Flows",
-            "description": "Kotlin Coroutines and Flow patterns for Android and KMP — structured concurrency, Flow operators, StateFlow, error handling, and testing.",
+            "title": "Fluxos de corrotinas Kotlin",
+            "description": "Corrotinas Kotlin e padrões de fluxo para Android e KMP — simultaneidade estruturada, operadores de fluxo, StateFlow, tratamento de erros e testes.",
             "triggers": [
                 "/finally"
             ],
@@ -2565,8 +2565,8 @@ const eccSkillsData = {
         {
             "id": "kotlin-exposed-patterns",
             "category": "Uncategorized",
-            "title": "Kotlin Exposed Patterns",
-            "description": "JetBrains Exposed ORM patterns including DSL queries, DAO pattern, transactions, HikariCP connection pooling, Flyway migrations, and repository pattern.",
+            "title": "Padrões expostos Kotlin",
+            "description": "Padrões ORM expostos da JetBrains, incluindo consultas DSL, padrão DAO, transações, pool de conexão HikariCP, migrações Flyway e padrão de repositório.",
             "triggers": [
                 "/migration",
                 "/resources",
@@ -2579,8 +2579,8 @@ const eccSkillsData = {
         {
             "id": "kotlin-ktor-patterns",
             "category": "Uncategorized",
-            "title": "Kotlin Ktor Patterns",
-            "description": "Ktor server patterns including routing DSL, plugins, authentication, Koin DI, kotlinx.serialization, WebSockets, and testApplication testing.",
+            "title": "Padrões Kotlin Ktor",
+            "description": "Padrões de servidor Ktor, incluindo roteamento DSL, plug-ins, autenticação, Koin DI, kotlinx.serialization, WebSockets e testes testApplication.",
             "triggers": [
                 "/test",
                 "/kotlin",
@@ -2603,8 +2603,8 @@ const eccSkillsData = {
         {
             "id": "kotlin-patterns",
             "category": "Uncategorized",
-            "title": "Kotlin Patterns",
-            "description": "Idiomatic Kotlin patterns, best practices, and conventions for building robust, efficient, and maintainable Kotlin applications with coroutines, null safety, and DSL builders.",
+            "title": "Padrões Kotlin",
+            "description": "Padrões idiomáticos de Kotlin, práticas recomendadas e convenções para criar aplicativos Kotlin robustos, eficientes e de fácil manutenção com corrotinas, segurança nula e construtores DSL.",
             "triggers": [
                 "/finally",
                 "/cert",
@@ -2627,8 +2627,8 @@ const eccSkillsData = {
         {
             "id": "kotlin-testing",
             "category": "Uncategorized",
-            "title": "Kotlin Testing",
-            "description": "Kotlin testing patterns with Kotest, MockK, coroutine testing, property-based testing, and Kover coverage. Follows TDD methodology with idiomatic Kotlin practices.",
+            "title": "Teste Kotlin",
+            "description": "Padrões de teste Kotlin com Kotest, MockK, testes de rotina, testes baseados em propriedades e cobertura Kover. Segue a metodologia TDD com práticas idiomáticas de Kotlin.",
             "triggers": [
                 "/checkout",
                 "/setup-java",
@@ -2648,8 +2648,8 @@ const eccSkillsData = {
         {
             "id": "laravel-patterns",
             "category": "Uncategorized",
-            "title": "Laravel Patterns",
-            "description": "Laravel architecture patterns, routing/controllers, Eloquent ORM, service layers, queues, events, caching, and API resources for production apps.",
+            "title": "Padrões Laravel",
+            "description": "Padrões de arquitetura Laravel, roteamento/controladores, Eloquent ORM, camadas de serviço, filas, eventos, cache e recursos de API para aplicativos de produção.",
             "triggers": [
                 "/deleted",
                 "/updated",
@@ -2665,8 +2665,8 @@ const eccSkillsData = {
         {
             "id": "laravel-plugin-discovery",
             "category": "Uncategorized",
-            "title": "Laravel Plugin Discovery",
-            "description": "Discover and evaluate Laravel packages via LaraPlugins.io MCP. Use when the user wants to find plugins, check package health, or assess Laravel/PHP compatibility.",
+            "title": "Descoberta de plug-in Laravel",
+            "description": "Descubra e avalie pacotes Laravel via LaraPlugins.io MCP. Use quando o usuário quiser encontrar plugins, verificar a integridade do pacote ou avaliar a compatibilidade do Laravel/PHP.",
             "triggers": [
                 "/breeze",
                 "/passport",
@@ -2682,8 +2682,8 @@ const eccSkillsData = {
         {
             "id": "laravel-security",
             "category": "Uncategorized",
-            "title": "Laravel Security",
-            "description": "Laravel security best practices for authn/authz, validation, CSRF, mass assignment, file uploads, secrets, rate limiting, and secure deployment.",
+            "title": "Segurança Laravel",
+            "description": "Práticas recomendadas de segurança do Laravel para autenticação/authz, validação, CSRF, atribuição em massa, uploads de arquivos, segredos, limitação de taxa e implantação segura.",
             "triggers": [
                 "/sanctum",
                 "/download",
@@ -2703,7 +2703,7 @@ const eccSkillsData = {
             "id": "laravel-tdd",
             "category": "Uncategorized",
             "title": "Laravel Tdd",
-            "description": "Test-driven development for Laravel with PHPUnit and Pest, factories, database testing, fakes, and coverage targets.",
+            "description": "Desenvolvimento orientado a testes para Laravel com PHPUnit e Pest, fábricas, testes de banco de dados, fakes e alvos de cobertura.",
             "triggers": [
                 "/integration",
                 "/bin",
@@ -2723,8 +2723,8 @@ const eccSkillsData = {
         {
             "id": "laravel-verification",
             "category": "Uncategorized",
-            "title": "Laravel Verification",
-            "description": "Verification loop for Laravel projects: env checks, linting, static analysis, tests with coverage, security scans, and deployment readiness.",
+            "title": "Verificação Laravel",
+            "description": "Loop de verificação para projetos Laravel: verificações de ambiente, linting, análise estática, testes com cobertura, verificações de segurança e prontidão de implantação.",
             "triggers": [
                 "/deploy",
                 "/bin",
@@ -2743,8 +2743,8 @@ const eccSkillsData = {
         {
             "id": "latency-critical-systems",
             "category": "Uncategorized",
-            "title": "Latency Critical Systems",
-            "description": "Use for latency-sensitive systems such as realtime dashboards, market data, streaming agents, execution gateways, queues, caches, or HFT-like infrastructure where freshness and p95 latency matter.",
+            "title": "Sistemas Críticos de Latência",
+            "description": "Use para sistemas sensíveis à latência, como painéis em tempo real, dados de mercado, agentes de streaming, gateways de execução, filas, caches ou infraestrutura semelhante a HFT, onde a atualização e a latência p95 são importantes.",
             "triggers": [
                 "/event",
                 "/cache"
@@ -2755,8 +2755,8 @@ const eccSkillsData = {
         {
             "id": "lead-intelligence",
             "category": "Uncategorized",
-            "title": "Lead Intelligence",
-            "description": "AI-native lead intelligence and outreach pipeline. Replaces Apollo, Clay, and ZoomInfo with agent-powered signal scoring, mutual ranking, warm path discovery, source-derived voice modeling, and channel-specific outreach across email, LinkedIn, and X. Use when the user wants to find, qualify, and reach high-value contacts.",
+            "title": "Inteligência de leads",
+            "description": "Inteligência de leads e pipeline de divulgação nativos de IA. Substitui Apollo, Clay e ZoomInfo por pontuação de sinal alimentada por agente, classificação mútua, descoberta de caminho quente, modelagem de voz derivada de fonte e alcance específico de canal por e-mail, LinkedIn e X. Use quando o usuário quiser encontrar, qualificar e alcançar contatos de alto valor.",
             "triggers": [
                 "/program",
                 "/know",
@@ -2772,8 +2772,8 @@ const eccSkillsData = {
         {
             "id": "liquid-glass-design",
             "category": "Uncategorized",
-            "title": "Liquid Glass Design",
-            "description": "iOS 26 Liquid Glass design system — dynamic glass material with blur, reflection, and interactive morphing for SwiftUI, UIKit, and WidgetKit.",
+            "title": "Design de vidro líquido",
+            "description": "Sistema de design iOS 26 Liquid Glass — material de vidro dinâmico com desfoque, reflexão e transformação interativa para SwiftUI, UIKit e WidgetKit.",
             "triggers": [
                 "/disappear",
                 "/trailing",
@@ -2787,8 +2787,8 @@ const eccSkillsData = {
         {
             "id": "llm-trading-agent-security",
             "category": "Uncategorized",
-            "title": "Llm Trading Agent Security",
-            "description": "Security patterns for autonomous trading agents with wallet or transaction authority. Covers prompt injection, spend limits, pre-send simulation, circuit breakers, MEV protection, and key handling.",
+            "title": "Segurança do agente comercial Llm",
+            "description": "Padrões de segurança para agentes comerciais autônomos com autoridade de carteira ou transação. Abrange injeção imediata, limites de gastos, simulação de pré-envio, disjuntores, proteção MEV e manuseio de chaves.",
             "triggers": [
                 "/rpc"
             ],
@@ -2798,8 +2798,8 @@ const eccSkillsData = {
         {
             "id": "logistics-exception-management",
             "category": "Uncategorized",
-            "title": "Logistics Exception Management",
-            "description": ">",
+            "title": "Gestão de Exceções Logísticas",
+            "description": null,
             "triggers": [
                 "/lane",
                 "/truckload",
@@ -2822,8 +2822,8 @@ const eccSkillsData = {
         {
             "id": "make-interfaces-feel-better",
             "category": "Uncategorized",
-            "title": "Make Interfaces Feel Better",
-            "description": "Apply concrete design-engineering details that make interfaces feel polished. Use when reviewing or improving UI spacing, typography, borders, shadows, motion, hit areas, icons, text wrapping, and interaction states.",
+            "title": "Faça as interfaces parecerem melhores",
+            "description": "Aplique detalhes concretos de engenharia de design que fazem com que as interfaces pareçam refinadas. Use ao revisar ou melhorar o espaçamento da interface do usuário, tipografia, bordas, sombras, movimento, áreas de ocorrência, ícones, quebra automática de texto e estados de interação.",
             "triggers": [
                 "/after"
             ],
@@ -2833,8 +2833,8 @@ const eccSkillsData = {
         {
             "id": "manim-video",
             "category": "Uncategorized",
-            "title": "Manim Video",
-            "description": "Build reusable Manim explainers for technical concepts, graphs, system diagrams, and product walkthroughs, then hand off to the wider ECC video stack if needed. Use when the user wants a clean animated explainer rather than a generic talking-head script.",
+            "title": "Vídeo Manim",
+            "description": "Crie explicadores Manim reutilizáveis ​​para conceitos técnicos, gráficos, diagramas de sistema e orientações de produtos e, em seguida, entregue-os à pilha de vídeos ECC mais ampla, se necessário. Use quando o usuário deseja um explicador animado e limpo, em vez de um script falante genérico.",
             "triggers": [
                 "/network"
             ],
@@ -2844,8 +2844,8 @@ const eccSkillsData = {
         {
             "id": "market-research",
             "category": "Uncategorized",
-            "title": "Market Research",
-            "description": "Conduct market research, competitive analysis, investor due diligence, and industry intelligence with source attribution and decision-oriented summaries. Use when the user wants market sizing, competitor comparisons, fund research, technology scans, or research that informs business decisions.",
+            "title": "Pesquisa de mercado",
+            "description": "Conduza pesquisas de mercado, análises competitivas, due diligence de investidores e inteligência do setor com atribuição de fontes e resumos orientados para decisões. Use quando o usuário desejar dimensionamento de mercado, comparações de concorrentes, pesquisas de fundos, varreduras de tecnologia ou pesquisas que embasem decisões de negócios.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/market-research/SKILL.md"
@@ -2853,8 +2853,8 @@ const eccSkillsData = {
         {
             "id": "marketing-campaign",
             "category": "Uncategorized",
-            "title": "Marketing Campaign",
-            "description": "End-to-end marketing campaign planning and execution. Covers audience research, positioning, campaign angle definition, landing page copy, email sequences, social posts, ad copy, short-form video scripts, and content calendars. Use as the orchestration layer for multi-channel product launches.",
+            "title": "Campanha de marketing",
+            "description": "Planejamento e execução de campanhas de marketing de ponta a ponta. Abrange pesquisa de público, posicionamento, definição de ângulo de campanha, cópia da página de destino, sequências de e-mail, postagens sociais, texto de anúncio, scripts de vídeo curtos e calendários de conteúdo. Use como camada de orquestração para lançamentos de produtos multicanais.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/marketing-campaign/SKILL.md"
@@ -2862,8 +2862,8 @@ const eccSkillsData = {
         {
             "id": "mcp-server-patterns",
             "category": "Uncategorized",
-            "title": "Mcp Server Patterns",
-            "description": "Build MCP servers with Node/TypeScript SDK — tools, resources, prompts, Zod validation, stdio vs Streamable HTTP. Use Context7 or official MCP docs for latest API.",
+            "title": "Padrões de servidor Mcp",
+            "description": "Crie servidores MCP com Node/TypeScript SDK — ferramentas, recursos, prompts, validação Zod, stdio vs Streamable HTTP. Use Context7 ou documentos oficiais do MCP para obter a API mais recente.",
             "triggers": [
                 "/capability-surface-selection",
                 "/server",
@@ -2879,8 +2879,8 @@ const eccSkillsData = {
         {
             "id": "messages-ops",
             "category": "Uncategorized",
-            "title": "Messages Ops",
-            "description": "Evidence-first live messaging workflow for ECC. Use when the user wants to read texts or DMs, recover a recent one-time code, inspect a thread before replying, or prove which message source was actually checked.",
+            "title": "Operações de mensagens",
+            "description": "Fluxo de trabalho de mensagens ao vivo com primeira evidência para ECC. Use quando o usuário quiser ler textos ou mensagens diretas, recuperar um código único recente, inspecionar um tópico antes de responder ou provar qual fonte de mensagem foi realmente verificada.",
             "triggers": [
                 "/text"
             ],
@@ -2890,8 +2890,8 @@ const eccSkillsData = {
         {
             "id": "mle-workflow",
             "category": "Uncategorized",
-            "title": "Mle Workflow",
-            "description": "Production machine-learning engineering workflow for data contracts, reproducible training, model evaluation, deployment, monitoring, and rollback. Use when building, reviewing, or hardening ML systems beyond one-off notebooks.",
+            "title": "Fluxo de trabalho de gerenciamento",
+            "description": "Fluxo de trabalho de engenharia de aprendizado de máquina de produção para contratos de dados, treinamento reproduzível, avaliação de modelo, implantação, monitoramento e reversão. Use ao criar, revisar ou fortalecer sistemas de ML além de notebooks únicos.",
             "triggers": [
                 "/recall",
                 "/online",
@@ -2910,8 +2910,8 @@ const eccSkillsData = {
         {
             "id": "motion-advanced",
             "category": "Uncategorized",
-            "title": "Motion Advanced",
-            "description": "Advanced motion patterns for React / Next.js — drag & drop, gestures, text animations, SVG path drawing, custom hooks, imperative sequences (useAnimate), loaders, and the full API decision tree. Requires motion-foundations.",
+            "title": "Movimento Avançado",
+            "description": "Padrões de movimento avançados para React/Next.js — arrastar e soltar, gestos, animações de texto, desenho de caminho SVG, ganchos personalizados, sequências imperativas (useAnimate), carregadores e a árvore de decisão completa da API. Requer bases de movimento.",
             "triggers": [
                 "/40",
                 "/shimmer-skeleton",
@@ -2933,8 +2933,8 @@ const eccSkillsData = {
         {
             "id": "motion-foundations",
             "category": "Uncategorized",
-            "title": "Motion Foundations",
-            "description": "Motion tokens, spring presets, performance rules, device adaptation, accessibility enforcement, and SSR safety for React / Next.js using motion/react. Foundation layer — all other motion skills depend on this.",
+            "title": "Fundações de Movimento",
+            "description": "Tokens de movimento, predefinições de mola, regras de desempenho, adaptação de dispositivos, aplicação de acessibilidade e segurança SSR para React/Next.js usando motion/react. Camada de base – todas as outras habilidades de movimento dependem disso.",
             "triggers": [
                 "/motion-config",
                 "/motion",
@@ -2953,8 +2953,8 @@ const eccSkillsData = {
         {
             "id": "motion-patterns",
             "category": "Uncategorized",
-            "title": "Motion Patterns",
-            "description": "Production-ready animation patterns for React / Next.js — button, modal, toast, stagger, page transitions, exit animations, scroll, and layout — built on motion-foundations tokens and springs.",
+            "title": "Padrões de movimento",
+            "description": "Padrões de animação prontos para produção para React/Next.js — botão, modal, brinde, escalonamento, transições de página, animações de saída, rolagem e layout — construídos em tokens e molas de base de movimento.",
             "triggers": [
                 "/character",
                 "/motion",
@@ -2976,8 +2976,8 @@ const eccSkillsData = {
         {
             "id": "motion-ui",
             "category": "Uncategorized",
-            "title": "Motion Ui",
-            "description": "Production-ready UI motion system for React/Next.js. Use when implementing animations, transitions, or motion patterns.",
+            "title": "Interface de movimento",
+            "description": "Sistema de movimento de UI pronto para produção para React/Next.js. Use ao implementar animações, transições ou padrões de movimento.",
             "triggers": [
                 "/unmount",
                 "/tap",
@@ -2995,8 +2995,8 @@ const eccSkillsData = {
         {
             "id": "mysql-patterns",
             "category": "Uncategorized",
-            "title": "Mysql Patterns",
-            "description": "MySQL and MariaDB schema, query, indexing, transaction, replication, and connection-pool patterns for production backends.",
+            "title": "Padrões Mysql",
+            "description": "Esquema MySQL e MariaDB, consulta, indexação, transação, replicação e padrões de pool de conexão para back-ends de produção.",
             "triggers": [
                 "/promise",
                 "/admin",
@@ -3010,8 +3010,8 @@ const eccSkillsData = {
         {
             "id": "nanoclaw-repl",
             "category": "Uncategorized",
-            "title": "Nanoclaw Repl",
-            "description": "Operate and extend NanoClaw v2, ECC's zero-dependency session-aware REPL built on claude -p.",
+            "title": "Substituição de Nanogarra",
+            "description": "Opere e estenda o NanoClaw v2, o REPL com reconhecimento de sessão de dependência zero do ECC construído em claude -p.",
             "triggers": [
                 "/claw",
                 "/json",
@@ -3030,8 +3030,8 @@ const eccSkillsData = {
         {
             "id": "nestjs-patterns",
             "category": "Uncategorized",
-            "title": "Nestjs Patterns",
-            "description": "NestJS architecture patterns for modules, controllers, providers, DTO validation, guards, interceptors, config, and production-grade TypeScript backends.",
+            "title": "Padrões Nestjs",
+            "description": "Padrões de arquitetura NestJS para módulos, controladores, provedores, validação DTO, guardas, interceptores, configuração e back-ends TypeScript de nível de produção.",
             "triggers": [
                 "/filters",
                 "/report",
@@ -3046,8 +3046,8 @@ const eccSkillsData = {
         {
             "id": "netmiko-ssh-automation",
             "category": "Uncategorized",
-            "title": "Netmiko Ssh Automation",
-            "description": "Safe Python Netmiko patterns for read-only collection, bounded batch SSH, TextFSM parsing, guarded config changes, timeouts, and network automation error handling.",
+            "title": "Automação Netmiko Ssh",
+            "description": "Padrões Python Netmiko seguros para coleta somente leitura, SSH em lote limitado, análise TextFSM, alterações de configuração protegidas, tempos limite e tratamento de erros de automação de rede.",
             "triggers": [
                 "/after"
             ],
@@ -3057,8 +3057,8 @@ const eccSkillsData = {
         {
             "id": "network-bgp-diagnostics",
             "category": "Uncategorized",
-            "title": "Network Bgp Diagnostics",
-            "description": "Diagnostics-only BGP troubleshooting patterns for neighbor state, route exchange, prefix policy, AS path inspection, and safe evidence collection.",
+            "title": "Diagnóstico de BGP de rede",
+            "description": "Padrões de solução de problemas BGP somente para diagnóstico para estado vizinho, troca de rotas, política de prefixo, inspeção de caminho AS e coleta segura de evidências.",
             "triggers": [
                 "/remote",
                 "/after"
@@ -3069,8 +3069,8 @@ const eccSkillsData = {
         {
             "id": "network-config-validation",
             "category": "Uncategorized",
-            "title": "Network Config Validation",
-            "description": "Pre-deployment checks for router and switch configuration, including dangerous commands, duplicate addresses, subnet overlaps, stale references, management-plane risk, and IOS-style security hygiene.",
+            "title": "Validação de configuração de rede",
+            "description": "Verificações pré-implantação para configuração de roteadores e switches, incluindo comandos perigosos, endereços duplicados, sobreposições de sub-redes, referências obsoletas, risco de plano de gerenciamento e higiene de segurança estilo IOS.",
             "triggers": [
                 "/logs"
             ],
@@ -3080,8 +3080,8 @@ const eccSkillsData = {
         {
             "id": "network-interface-health",
             "category": "Uncategorized",
-            "title": "Network Interface Health",
-            "description": "Diagnose interface errors, drops, CRCs, duplex mismatches, flapping, speed negotiation issues, and counter trends on routers, switches, and Linux hosts.",
+            "title": "Integridade da interface de rede",
+            "description": "Diagnosticar erros de interface, quedas, CRCs, incompatibilidades duplex, flapping, problemas de negociação de velocidade e contrariar tendências em roteadores, switches e hosts Linux.",
             "triggers": [
                 "/duplex",
                 "/errors",
@@ -3095,7 +3095,7 @@ const eccSkillsData = {
             "id": "nextjs-turbopack",
             "category": "Uncategorized",
             "title": "Nextjs Turbopack",
-            "description": "Next.js 16+ and Turbopack — incremental bundling, FS caching, dev speed, and when to use Turbopack vs webpack.",
+            "description": "Next.js 16+ e Turbopack – pacote incremental, cache FS, velocidade de desenvolvimento e quando usar Turbopack vs webpack.",
             "triggers": [
                 "/nextjs",
                 "/getting-started",
@@ -3110,7 +3110,7 @@ const eccSkillsData = {
             "id": "nodejs-keccak256",
             "category": "Uncategorized",
             "title": "Nodejs Keccak256",
-            "description": "Prevent Ethereum hashing bugs in JavaScript and TypeScript. Node's sha3-256 is NIST SHA3, not Ethereum Keccak-256, and silently breaks selectors, signatures, storage slots, and address derivation.",
+            "description": "Evite bugs de hashing Ethereum em JavaScript e TypeScript. O sha3-256 do nó é NIST SHA3, não Ethereum Keccak-256, e quebra silenciosamente seletores, assinaturas, slots de armazenamento e derivação de endereço.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/nodejs-keccak256/SKILL.md"
@@ -3118,8 +3118,8 @@ const eccSkillsData = {
         {
             "id": "nutrient-document-processing",
             "category": "Uncategorized",
-            "title": "Nutrient Document Processing",
-            "description": "Process, convert, OCR, extract, redact, sign, and fill documents using the Nutrient DWS API. Works with PDFs, DOCX, XLSX, PPTX, HTML, and images.",
+            "title": "Processamento de documentos nutricionais",
+            "description": "Processe, converta, faça OCR, extraia, edite, assine e preencha documentos usando a API Nutrient DWS. Funciona com PDFs, DOCX, XLSX, PPTX, HTML e imagens.",
             "triggers": [
                 "/www",
                 "/ocr",
@@ -3146,8 +3146,8 @@ const eccSkillsData = {
         {
             "id": "nuxt4-patterns",
             "category": "Uncategorized",
-            "title": "Nuxt4 Patterns",
-            "description": "Nuxt 4 app patterns for hydration safety, performance, route rules, lazy loading, and SSR-safe data fetching with useFetch and useAsyncData.",
+            "title": "Padrões Nuxt4",
+            "description": "Padrões de aplicativos Nuxt 4 para segurança de hidratação, desempenho, regras de rota, carregamento lento e busca de dados segura para SSR com useFetch e useAsyncData.",
             "triggers": [
                 "/products",
                 "/comments",
@@ -3164,8 +3164,8 @@ const eccSkillsData = {
         {
             "id": "openclaw-persona-forge",
             "category": "Uncategorized",
-            "title": "Openclaw Persona Forge",
-            "description": "为 OpenClaw AI Agent 锻造完整的龙虾灵魂方案。根据用户偏好或随机抽卡， 输出身份定位、灵魂描述(SOUL.md)、角色化底线规则、名字和头像生图提示词。 如当前环境提供已审核的生图 skill，可自动生成统一风格头像图片。 当用户需要创建、设计或定制 OpenClaw 龙虾灵魂时使用。 不适用于：微调已有 SOUL.md、非 OpenClaw 平台的角色设计、纯工具型无性格 Agent。 触发词：龙虾灵魂、虾魂、OpenClaw 灵魂、养虾灵魂、龙虾角色、龙虾定位、 龙虾剧本杀角色、龙虾游戏角色、龙虾 NPC、龙虾性格、龙虾背景故事、 lobster soul、lobster character、抽卡、随机龙虾、龙虾 SOUL、gacha。",
+            "title": "Forja de Persona Openclaw",
+            "description": "Para OpenClaw AI Agent 锻造完整的龙虾灵魂方案。根据用户偏好或随机抽卡,输出身份定位、灵魂描述(SOUL.md)、角色化底线规则、名字和头像生图提示词。如当前环境提供已审核的生图 habilidade,可自动生成统一风格头像图片。当用户需要创建、设计或定制 OpenClaw 龙虾灵魂时使用。 不适用于：微调已有 SOUL.md、非 OpenClaw平台的角色设计、纯工具型无性格 Agent。 触发词：龙虾灵魂、虾魂、OpenClaw灵魂、养虾灵魂、龙虾角色、龙虾定位、 龙虾剧本杀角色、龙虾游戏角色、龙虾NPC、龙虾性格、龙虾背景故事、 alma de lagosta、personagem de lagosta、抽卡、随机龙虾、龙虾 SOUL、gacha。",
             "triggers": [
                 "/openclaw-",
                 "/identity-tension",
@@ -3183,8 +3183,8 @@ const eccSkillsData = {
         {
             "id": "opensource-pipeline",
             "category": "Uncategorized",
-            "title": "Opensource Pipeline",
-            "description": "Open-source pipeline: fork, sanitize, and package private projects for safe public release. Chains 3 agents (forker, sanitizer, packager). Triggers: '/opensource', 'open source this', 'make this public', 'prepare for open source'.",
+            "title": "Pipeline de código aberto",
+            "description": "Pipeline de código aberto: bifurque, higienize e empacote projetos privados para divulgação pública segura. Cadeias 3 agentes (garfo, sanitizante, empacotador). Gatilhos: '/opensource', 'open source this', 'tornar isto público', 'prepare-se para open source'.",
             "triggers": [
                 "/review",
                 "/opensource",
@@ -3197,8 +3197,8 @@ const eccSkillsData = {
         {
             "id": "parallel-execution-optimizer",
             "category": "Uncategorized",
-            "title": "Parallel Execution Optimizer",
-            "description": "Use when the user wants a task done much faster through parallel work, concurrent agents, batched tool calls, isolated worktrees, or many independent verification lanes without losing correctness.",
+            "title": "Otimizador de execução paralela",
+            "description": "Use quando o usuário deseja que uma tarefa seja realizada muito mais rapidamente por meio de trabalho paralelo, agentes simultâneos, chamadas de ferramentas em lote, árvores de trabalho isoladas ou muitas vias de verificação independentes sem perder a correção.",
             "triggers": [
                 "/test",
                 "/git",
@@ -3212,8 +3212,8 @@ const eccSkillsData = {
         {
             "id": "perl-patterns",
             "category": "Uncategorized",
-            "title": "Perl Patterns",
-            "description": "Modern Perl 5.36+ idioms, best practices, and conventions for building robust, maintainable Perl applications.",
+            "title": "Padrões Perl",
+            "description": "Idiomas, práticas recomendadas e convenções modernas do Perl 5.36+ para construir aplicativos Perl robustos e de fácil manutenção.",
             "triggers": [
                 "/catch",
                 "/myapp",
@@ -3226,8 +3226,8 @@ const eccSkillsData = {
         {
             "id": "perl-security",
             "category": "Uncategorized",
-            "title": "Perl Security",
-            "description": "Comprehensive Perl security covering taint mode, input validation, safe process execution, DBI parameterized queries, web security (XSS/SQLi/CSRF), and perlcritic security policies.",
+            "title": "Segurança Perl",
+            "description": "Segurança Perl abrangente cobrindo modo taint, validação de entrada, execução segura de processos, consultas parametrizadas DBI, segurança web (XSS/SQLi/CSRF) e políticas de segurança perlcritic.",
             "triggers": [
                 "/bin",
                 "/log",
@@ -3247,8 +3247,8 @@ const eccSkillsData = {
         {
             "id": "perl-testing",
             "category": "Uncategorized",
-            "title": "Perl Testing",
-            "description": "Perl testing patterns using Test2::V0, Test::More, prove runner, mocking, coverage with Devel::Cover, and TDD methodology.",
+            "title": "Teste Perl",
+            "description": "Padrões de teste Perl usando Test2::V0, Test::More, prove runner, mocking, cobertura com Devel::Cover e metodologia TDD.",
             "triggers": [
                 "/array",
                 "/unit",
@@ -3266,8 +3266,8 @@ const eccSkillsData = {
         {
             "id": "plan-orchestrate",
             "category": "Uncategorized",
-            "title": "Plan Orchestrate",
-            "description": "Read a plan document, decompose it into steps, design a per-step agent chain from the ECC catalogue, and emit ready-to-paste /orchestrate custom prompts. Generative only — never invokes /orchestrate itself. Use when the user has a multi-step plan and wants to drive it through orchestrate without composing chains by hand.",
+            "title": "Planejar orquestrar",
+            "description": "Leia um documento de plano, decomponha-o em etapas, projete uma cadeia de agentes por etapa do catálogo ECC e emita prompts personalizados prontos para colar/orquestrar. Somente generativo - nunca invoca /orquestrar a si mesmo. Use quando o usuário tiver um plano de várias etapas e quiser conduzi-lo de forma orquestrada sem compor cadeias manualmente.",
             "triggers": [
                 "/everything-claude-code",
                 "/marketplaces",
@@ -3287,8 +3287,8 @@ const eccSkillsData = {
         {
             "id": "plankton-code-quality",
             "category": "Uncategorized",
-            "title": "Plankton Code Quality",
-            "description": "Write-time code quality enforcement using Plankton — auto-formatting, linting, and Claude-powered fixes on every file edit via hooks.",
+            "title": "Qualidade do código do plâncton",
+            "description": "Aplicação da qualidade do código em tempo de gravação usando Plankton - formatação automática, linting e correções com tecnologia Claude em cada edição de arquivo por meio de ganchos.",
             "triggers": [
                 "/check",
                 "/settings",
@@ -3303,8 +3303,8 @@ const eccSkillsData = {
         {
             "id": "postgres-patterns",
             "category": "Uncategorized",
-            "title": "Postgres Patterns",
-            "description": "PostgreSQL database patterns for query optimization, schema design, indexing, and security. Based on Supabase best practices.",
+            "title": "Padrões Postgres",
+            "description": "Padrões de banco de dados PostgreSQL para otimização de consultas, design de esquemas, indexação e segurança. Baseado nas melhores práticas da Supabase.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/postgres-patterns/SKILL.md"
@@ -3312,8 +3312,8 @@ const eccSkillsData = {
         {
             "id": "prediction-market-oracle-research",
             "category": "Uncategorized",
-            "title": "Prediction Market Oracle Research",
-            "description": "Research prediction markets as data sources or oracle signals for products, agents, dashboards, and corporate decision intelligence. Use for source-grounded analysis of market-implied probabilities, caveats, and integration patterns without investment advice.",
+            "title": "Mercado de previsão Oracle Research",
+            "description": "Pesquise mercados de previsão como fontes de dados ou sinais oráculo para produtos, agentes, painéis e inteligência de decisão corporativa. Use para análise baseada na fonte de probabilidades implícitas no mercado, advertências e padrões de integração sem aconselhamento de investimento.",
             "triggers": [
                 "/incentive"
             ],
@@ -3323,8 +3323,8 @@ const eccSkillsData = {
         {
             "id": "prediction-market-risk-review",
             "category": "Uncategorized",
-            "title": "Prediction Market Risk Review",
-            "description": "Review prediction-market, basket, oracle, and trading-agent workflows for compliance, safety, data-quality, privacy, and execution risk. Use before any workflow handles venue auth, user portfolio data, API keys, or trade planning.",
+            "title": "Revisão de risco de mercado de previsão",
+            "description": "Revise os fluxos de trabalho de previsão de mercado, cesta, oráculo e agente comercial para conformidade, segurança, qualidade de dados, privacidade e risco de execução. Use antes de qualquer fluxo de trabalho lidar com autenticação de local, dados de portfólio de usuários, chaves de API ou planejamento comercial.",
             "triggers": [
                 "/warn",
                 "/sell",
@@ -3338,8 +3338,8 @@ const eccSkillsData = {
         {
             "id": "prisma-patterns",
             "category": "Uncategorized",
-            "title": "Prisma Patterns",
-            "description": "Prisma ORM patterns for TypeScript backends — schema design, query optimization, transactions, pagination, and critical traps like updateMany returning count not records, $transaction timeouts, migrate dev resetting the DB, @updatedAt skipped on bulk writes, and serverless connection exhaustion.",
+            "title": "Padrões Prisma",
+            "description": "Padrões Prisma ORM para back-ends TypeScript - design de esquema, otimização de consulta, transações, paginação e armadilhas críticas como updateMany retornando contagem, não registros, tempo limite de $ transação, migração de desenvolvimento redefinindo o banco de dados, @updatedAt ignorado em gravações em massa e esgotamento de conexão sem servidor.",
             "triggers": [
                 "/client",
                 "/user",
@@ -3354,8 +3354,8 @@ const eccSkillsData = {
         {
             "id": "product-capability",
             "category": "Uncategorized",
-            "title": "Product Capability",
-            "description": "Translate PRD intent, roadmap asks, or product discussions into an implementation-ready capability plan that exposes constraints, invariants, interfaces, and unresolved decisions before multi-service work starts. Use when the user needs an ECC-native PRD-to-SRS lane instead of vague planning prose.",
+            "title": "Capacidade do produto",
+            "description": "Traduza a intenção do PRD, as solicitações de roteiro ou as discussões do produto em um plano de capacidade pronto para implementação que expõe restrições, invariantes, interfaces e decisões não resolvidas antes do início do trabalho multisserviço. Use quando o usuário precisar de uma via PRD para SRS nativa de ECC em vez de uma prosa de planejamento vaga.",
             "triggers": [
                 "/product-capability-template",
                 "/examples",
@@ -3368,8 +3368,8 @@ const eccSkillsData = {
         {
             "id": "product-lens",
             "category": "Uncategorized",
-            "title": "Product Lens",
-            "description": "Use this skill to validate the \"why\" before building, run product diagnostics, and pressure-test product direction before the request becomes an implementation contract.",
+            "title": "Lente do produto",
+            "description": "Use essa habilidade para validar o “porquê” antes de construir, executar diagnósticos do produto e testar a direção do produto antes que a solicitação se torne um contrato de implementação.",
             "triggers": [
                 "/time",
                 "/necessary",
@@ -3385,8 +3385,8 @@ const eccSkillsData = {
         {
             "id": "production-audit",
             "category": "Uncategorized",
-            "title": "Production Audit",
-            "description": "Local-evidence production readiness audit for shipped apps, pre-launch reviews, post-merge checks, and \"what breaks in prod?\" questions without sending repo data to an external audit service.",
+            "title": "Auditoria de Produção",
+            "description": "Auditoria de prontidão de produção de evidências locais para aplicativos enviados, análises de pré-lançamento, verificações pós-mesclagem e \"o que interrompe a produção?\" perguntas sem enviar dados repo para um serviço de auditoria externo.",
             "triggers": [
                 "/stripe",
                 "/release",
@@ -3403,8 +3403,8 @@ const eccSkillsData = {
         {
             "id": "production-scheduling",
             "category": "Uncategorized",
-            "title": "Production Scheduling",
-            "description": ">",
+            "title": "Programação de Produção",
+            "description": null,
             "triggers": [
                 "/hour",
                 "/github",
@@ -3422,8 +3422,8 @@ const eccSkillsData = {
         {
             "id": "project-flow-ops",
             "category": "Uncategorized",
-            "title": "Project Flow Ops",
-            "description": "Operate execution flow across GitHub and Linear by triaging issues and pull requests, linking active work, and keeping GitHub public-facing while Linear remains the internal execution layer. Use when the user wants backlog control, PR triage, or GitHub-to-Linear coordination.",
+            "title": "Operações de fluxo de projeto",
+            "description": "Opere o fluxo de execução no GitHub e no Linear, fazendo triagem de problemas e solicitações pull, vinculando o trabalho ativo e mantendo o GitHub voltado para o público, enquanto o Linear permanece como a camada de execução interna. Use quando o usuário deseja controle de pendências, triagem de PR ou coordenação de GitHub para Linear.",
             "triggers": [
                 "/rebuild"
             ],
@@ -3433,8 +3433,8 @@ const eccSkillsData = {
         {
             "id": "prompt-optimizer",
             "category": "Uncategorized",
-            "title": "Prompt Optimizer",
-            "description": ">-",
+            "title": "Otimizador de prompt",
+            "description": null,
             "triggers": [
                 "/verify",
                 "/plan",
@@ -3466,8 +3466,8 @@ const eccSkillsData = {
         {
             "id": "python-patterns",
             "category": "Uncategorized",
-            "title": "Python Patterns",
-            "description": "Pythonic idioms, PEP 8 standards, type hints, and best practices for building robust, efficient, and maintainable Python applications.",
+            "title": "Padrões Python",
+            "description": "Idiomas Pythonic, padrões PEP 8, dicas de tipo e práticas recomendadas para construir aplicativos Python robustos, eficientes e de fácil manutenção.",
             "triggers": [
                 "/functions",
                 "/modules"
@@ -3478,8 +3478,8 @@ const eccSkillsData = {
         {
             "id": "python-testing",
             "category": "Uncategorized",
-            "title": "Python Testing",
-            "description": "Python testing strategies using pytest, TDD methodology, fixtures, mocking, parametrization, and coverage requirements.",
+            "title": "Teste Python",
+            "description": "Estratégias de teste Python usando pytest, metodologia TDD, fixtures, mocking, parametrização e requisitos de cobertura.",
             "triggers": [
                 "/test",
                 "/localhost",
@@ -3495,8 +3495,8 @@ const eccSkillsData = {
         {
             "id": "pytorch-patterns",
             "category": "Uncategorized",
-            "title": "Pytorch Patterns",
-            "description": "PyTorch deep learning patterns and best practices for building robust, efficient, and reproducible training pipelines, model architectures, and data loading.",
+            "title": "Padrões Pytorch",
+            "description": "Padrões de aprendizado profundo PyTorch e práticas recomendadas para construir pipelines de treinamento, arquiteturas de modelo e carregamento de dados robustos, eficientes e reproduzíveis.",
             "triggers": [
                 "/model",
                 "/eval"
@@ -3507,8 +3507,8 @@ const eccSkillsData = {
         {
             "id": "quality-nonconformance",
             "category": "Uncategorized",
-            "title": "Quality Nonconformance",
-            "description": ">",
+            "title": "Não conformidade de qualidade",
+            "description": null,
             "triggers": [
                 "/github",
                 "/serial",
@@ -3527,8 +3527,8 @@ const eccSkillsData = {
         {
             "id": "quarkus-patterns",
             "category": "Uncategorized",
-            "title": "Quarkus Patterns",
-            "description": "Quarkus 3.x LTS architecture patterns with Camel for messaging, RESTful API design, CDI services, data access with Panache, and async processing. Use for Java Quarkus backend work with event-driven architectures.",
+            "title": "Padrões de Quarkus",
+            "description": "Padrões de arquitetura Quarkus 3.x LTS com Camel para mensagens, design de API RESTful, serviços CDI, acesso a dados com Panache e processamento assíncrono. Use para trabalho de back-end do Java Quarkus com arquiteturas orientadas a eventos.",
             "triggers": [
                 "/encoder",
                 "/jacoco-maven-plugin",
@@ -3564,8 +3564,8 @@ const eccSkillsData = {
         {
             "id": "quarkus-security",
             "category": "Uncategorized",
-            "title": "Quarkus Security",
-            "description": "Quarkus Security best practices for authentication, authorization, JWT/OIDC, RBAC, input validation, CSRF, secrets management, and dependency security.",
+            "title": "Segurança Quarkus",
+            "description": "Práticas recomendadas da Quarkus Security para autenticação, autorização, JWT/OIDC, RBAC, validação de entrada, CSRF, gerenciamento de segredos e segurança de dependências.",
             "triggers": [
                 "/protected",
                 "/vault",
@@ -3586,7 +3586,7 @@ const eccSkillsData = {
             "id": "quarkus-tdd",
             "category": "Uncategorized",
             "title": "Quarkus Tdd",
-            "description": "Test-driven development for Quarkus 3.x LTS using JUnit 5, Mockito, REST Assured, Camel testing, and JaCoCo. Use when adding features, fixing bugs, or refactoring event-driven services.",
+            "description": "Desenvolvimento orientado a testes para Quarkus 3.x LTS usando JUnit 5, Mockito, REST Assured, testes Camel e JaCoCo. Use ao adicionar recursos, corrigir bugs ou refatorar serviços orientados a eventos.",
             "triggers": [
                 "/rule",
                 "/plugin",
@@ -3622,8 +3622,8 @@ const eccSkillsData = {
         {
             "id": "quarkus-verification",
             "category": "Uncategorized",
-            "title": "Quarkus Verification",
-            "description": "Verification loop for Quarkus projects: build, static analysis, tests with coverage, security scans, native compilation, and diff review before release or PR.",
+            "title": "Verificação Quarkus",
+            "description": "Loop de verificação para projetos Quarkus: construção, análise estática, testes com cobertura, varreduras de segurança, compilação nativa e revisão de diferenças antes do lançamento ou PR.",
             "triggers": [
                 "/bash",
                 "/checkout",
@@ -3666,7 +3666,7 @@ const eccSkillsData = {
             "id": "ralphinho-rfc-pipeline",
             "category": "Uncategorized",
             "title": "Ralphinho Rfc Pipeline",
-            "description": "RFC-driven multi-agent DAG execution pattern with quality gates, merge queues, and work unit orchestration.",
+            "description": "Padrão de execução DAG multiagente orientado por RFC com portas de qualidade, filas de mesclagem e orquestração de unidades de trabalho.",
             "triggers": [
                 "/github",
                 "/humanplane",
@@ -3680,8 +3680,8 @@ const eccSkillsData = {
         {
             "id": "recsys-pipeline-architect",
             "category": "Uncategorized",
-            "title": "Recsys Pipeline Architect",
-            "description": "Design composable recommendation, ranking, and feed pipelines using the six-stage Source→Hydrator→Filter→Scorer→Selector→SideEffect framework popularized by xAI's open-sourced For You algorithm. Use this skill whenever the user is building any system that picks \"the top K items for a (user, context)\" — social feeds, content CMSs, RAG rerankers, task prioritizers, notification triage, search reranking, ad ranking.",
+            "title": "Arquiteto de pipeline Recsys",
+            "description": "Projete recomendações combináveis, classificação e pipelines de feed usando a estrutura de seis estágios Source→Hydrator→Filter→Scorer→Selector→SideEffect popularizada pelo algoritmo For You de código aberto da xAI. Use essa habilidade sempre que o usuário estiver construindo qualquer sistema que escolha \"os principais K itens para um (usuário, contexto)\" - feeds sociais, CMSs de conteúdo, reclassificadores RAG, priorizadores de tarefas, triagem de notificação, reclassificação de pesquisa, classificação de anúncios.",
             "triggers": [
                 "/github",
                 "/context",
@@ -3702,8 +3702,8 @@ const eccSkillsData = {
         {
             "id": "recursive-decision-ledger",
             "category": "Uncategorized",
-            "title": "Recursive Decision Ledger",
-            "description": "Use when the user asks for repeated rollouts, marked decision processes, high-dimensional search, stochastic optimization, local-optima exploration, ensemble comparison, or recursive reasoning with a visible evidence trail.",
+            "title": "Livro razão de decisões recursivas",
+            "description": "Use quando o usuário solicitar implementações repetidas, processos de decisão marcados, pesquisa de alta dimensão, otimização estocástica, exploração de ótimos locais, comparação de conjuntos ou raciocínio recursivo com uma trilha de evidência visível.",
             "triggers": [
                 "/service"
             ],
@@ -3713,8 +3713,8 @@ const eccSkillsData = {
         {
             "id": "redis-patterns",
             "category": "Uncategorized",
-            "title": "Redis Patterns",
-            "description": "Redis data structure patterns, caching strategies, distributed locks, rate limiting, pub/sub, and connection management for production applications.",
+            "title": "Padrões Redis",
+            "description": "Padrões de estrutura de dados Redis, estratégias de cache, bloqueios distribuídos, limitação de taxa, pub/sub e gerenciamento de conexão para aplicativos de produção.",
             "triggers": [
                 "/reference",
                 "/sub",
@@ -3726,8 +3726,8 @@ const eccSkillsData = {
         {
             "id": "regex-vs-llm-structured-text",
             "category": "Uncategorized",
-            "title": "Regex Vs Llm Structured Text",
-            "description": "Decision framework for choosing between regex and LLM when parsing structured text — start with regex, add LLM only for low-confidence edge cases.",
+            "title": "Texto estruturado Regex Vs Llm",
+            "description": "Estrutura de decisão para escolher entre regex e LLM ao analisar texto estruturado — comece com regex, adicione LLM apenas para casos extremos de baixa confiança.",
             "triggers": [
                 "/validation",
                 "/receipt",
@@ -3740,8 +3740,8 @@ const eccSkillsData = {
         {
             "id": "remotion-video-creation",
             "category": "Uncategorized",
-            "title": "Remotion Video Creation",
-            "description": "Best practices for Remotion - Video creation in React. 29 domain-specific rules covering 3D, animations, audio, captions, charts, transitions, and more.",
+            "title": "Criação de vídeo remoto",
+            "description": "Melhores práticas para Remotion - Criação de vídeo em React. 29 regras específicas de domínio que abrangem 3D, animações, áudio, legendas, gráficos, transições e muito mais.",
             "triggers": [
                 "/get-video-dimensions",
                 "/calculate-metadata",
@@ -3779,8 +3779,8 @@ const eccSkillsData = {
         {
             "id": "repo-scan",
             "category": "Uncategorized",
-            "title": "Repo Scan",
-            "description": "Cross-stack source code asset audit — classifies every file, detects embedded third-party libraries, and delivers actionable four-level verdicts per module with interactive HTML reports.",
+            "title": "Varredura de repositório",
+            "description": "Auditoria de ativos de código-fonte entre pilhas — classifica cada arquivo, detecta bibliotecas incorporadas de terceiros e fornece veredictos acionáveis ​​de quatro níveis por módulo com relatórios HTML interativos.",
             "triggers": [
                 "/github",
                 "/skills",
@@ -3795,8 +3795,8 @@ const eccSkillsData = {
         {
             "id": "research-ops",
             "category": "Uncategorized",
-            "title": "Research Ops",
-            "description": "Evidence-first current-state research workflow for ECC. Use when the user wants fresh facts, comparisons, enrichment, or a recommendation built from current public evidence and any supplied local context.",
+            "title": "Operações de pesquisa",
+            "description": "Primeiro fluxo de trabalho de pesquisa do estado atual para ECC. Use quando o usuário desejar fatos novos, comparações, enriquecimento ou uma recomendação baseada em evidências públicas atuais e em qualquer contexto local fornecido.",
             "triggers": [
                 "/company",
                 "/enrichment"
@@ -3807,8 +3807,8 @@ const eccSkillsData = {
         {
             "id": "returns-reverse-logistics",
             "category": "Uncategorized",
-            "title": "Returns Reverse Logistics",
-            "description": ">",
+            "title": "Logística Reversa de Devoluções",
+            "description": null,
             "triggers": [
                 "/github",
                 "/stretched",
@@ -3833,8 +3833,8 @@ const eccSkillsData = {
         {
             "id": "rules-distill",
             "category": "Uncategorized",
-            "title": "Rules Distill",
-            "description": "Scan skills to extract cross-cutting principles and distill them into rules — append, revise, or create new rule files",
+            "title": "Destilação de regras",
+            "description": "Analise habilidades para extrair princípios transversais e destilá-los em regras — anexe, revise ou crie novos arquivos de regras",
             "triggers": [
                 "/framework-specific",
                 "/common",
@@ -3856,8 +3856,8 @@ const eccSkillsData = {
         {
             "id": "rust-patterns",
             "category": "Uncategorized",
-            "title": "Rust Patterns",
-            "description": "Idiomatic Rust patterns, ownership, error handling, traits, concurrency, and best practices for building safe, performant applications.",
+            "title": "Padrões de ferrugem",
+            "description": "Padrões idiomáticos de Rust, propriedade, tratamento de erros, características, simultaneidade e práticas recomendadas para construir aplicativos seguros e de alto desempenho.",
             "triggers": [
                 "/await",
                 "/production"
@@ -3868,8 +3868,8 @@ const eccSkillsData = {
         {
             "id": "rust-testing",
             "category": "Uncategorized",
-            "title": "Rust Testing",
-            "description": "Rust testing patterns including unit tests, integration tests, async testing, property-based testing, mocking, and coverage. Follows TDD methodology.",
+            "title": "Teste de ferrugem",
+            "description": "Padrões de teste de ferrugem, incluindo testes de unidade, testes de integração, testes assíncronos, testes baseados em propriedades, simulação e cobertura. Segue a metodologia TDD.",
             "triggers": [
                 "/checkout",
                 "/user",
@@ -3886,8 +3886,8 @@ const eccSkillsData = {
         {
             "id": "safety-guard",
             "category": "Uncategorized",
-            "title": "Safety Guard",
-            "description": "Use this skill to prevent destructive operations when working on production systems or running agents autonomously.",
+            "title": "Guarda de segurança",
+            "description": "Use esta habilidade para evitar operações destrutivas ao trabalhar em sistemas de produção ou executar agentes de forma autônoma.",
             "triggers": [
                 "/api",
                 "/safety-guard",
@@ -3900,8 +3900,8 @@ const eccSkillsData = {
         {
             "id": "santa-method",
             "category": "Uncategorized",
-            "title": "Santa Method",
-            "description": "Multi-agent adversarial verification with convergence loop. Two independent review agents must both pass before output ships.",
+            "title": "Método Papai Noel",
+            "description": "Verificação contraditória multiagente com loop de convergência. Dois agentes de revisão independentes devem passar antes dos navios de saída.",
             "triggers": [
                 "/runs",
                 "/lint",
@@ -3914,8 +3914,8 @@ const eccSkillsData = {
         {
             "id": "scientific-db-pubmed-database",
             "category": "Uncategorized",
-            "title": "Scientific Db Pubmed Database",
-            "description": "Direct PubMed and NCBI E-utilities search workflows for biomedical literature, MeSH queries, PMID lookup, citation retrieval, and API-backed literature monitoring.",
+            "title": "Banco de dados científico DB Pubmed",
+            "description": "Fluxos de trabalho diretos de pesquisa de utilitários eletrônicos PubMed e NCBI para literatura biomédica, consultas MeSH, pesquisa PMID, recuperação de citações e monitoramento de literatura apoiado por API.",
             "triggers": [
                 "/15",
                 "/www",
@@ -3938,8 +3938,8 @@ const eccSkillsData = {
         {
             "id": "scientific-db-uspto-database",
             "category": "Uncategorized",
-            "title": "Scientific Db Uspto Database",
-            "description": "USPTO patent and trademark data workflow for official record lookup, PatentSearch queries, TSDR checks, assignment data, and reproducible IP research logs.",
+            "title": "Banco de dados científico Db Uspto",
+            "description": "Fluxo de trabalho de dados de patentes e marcas registradas do USPTO para pesquisa de registros oficiais, consultas PatentSearch, verificações de TSDR, dados de atribuição e registros de pesquisa de IP reproduzíveis.",
             "triggers": [
                 "/json",
                 "/query",
@@ -3963,8 +3963,8 @@ const eccSkillsData = {
         {
             "id": "scientific-pkg-gget",
             "category": "Uncategorized",
-            "title": "Scientific Pkg Gget",
-            "description": "gget CLI and Python workflow for quick genomic database queries, sequence lookup, BLAST-style searches, enrichment checks, and reproducible bioinformatics evidence logs.",
+            "title": "Pacote Científico Gget",
+            "description": "Fluxo de trabalho gget CLI e Python para consultas rápidas de banco de dados genômico, pesquisa de sequência, pesquisas no estilo BLAST, verificações de enriquecimento e registros de evidências de bioinformática reproduzíveis.",
             "triggers": [
                 "/bin",
                 "/assembly",
@@ -3985,8 +3985,8 @@ const eccSkillsData = {
         {
             "id": "scientific-thinking-literature-review",
             "category": "Uncategorized",
-            "title": "Scientific Thinking Literature Review",
-            "description": "Systematic literature-review workflow for academic, biomedical, technical, and scientific topics, including search planning, source screening, synthesis, citation checks, and evidence logging.",
+            "title": "Revisão da literatura sobre pensamento científico",
+            "description": "Fluxo de trabalho sistemático de revisão de literatura para tópicos acadêmicos, biomédicos, técnicos e científicos, incluindo planejamento de pesquisa, triagem de fontes, síntese, verificação de citações e registro de evidências.",
             "triggers": [
                 "/etc",
                 "/review",
@@ -3998,8 +3998,8 @@ const eccSkillsData = {
         {
             "id": "scientific-thinking-scholar-evaluation",
             "category": "Uncategorized",
-            "title": "Scientific Thinking Scholar Evaluation",
-            "description": "Structured scholarly-work evaluation for papers, proposals, literature reviews, methods sections, evidence quality, citation support, and research-writing feedback.",
+            "title": "Avaliação Acadêmica do Pensamento Científico",
+            "description": "Avaliação estruturada de trabalhos acadêmicos para artigos, propostas, revisões de literatura, seções de métodos, qualidade de evidências, suporte de citações e feedback sobre redação de pesquisas.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/scientific-thinking-scholar-evaluation/SKILL.md"
@@ -4007,8 +4007,8 @@ const eccSkillsData = {
         {
             "id": "search-first",
             "category": "Uncategorized",
-            "title": "Search First",
-            "description": "Research-before-coding workflow. Search for existing tools, libraries, and patterns before writing custom code. Invokes the researcher agent.",
+            "title": "Pesquise primeiro",
+            "description": "Fluxo de trabalho de pesquisa antes da codificação. Pesquise ferramentas, bibliotecas e padrões existentes antes de escrever código personalizado. Invoca o agente pesquisador.",
             "triggers": [
                 "/skills",
                 "/settings",
@@ -4028,8 +4028,8 @@ const eccSkillsData = {
         {
             "id": "security-bounty-hunter",
             "category": "Uncategorized",
-            "title": "Security Bounty Hunter",
-            "description": "Hunt for exploitable, bounty-worthy security issues in repositories. Focuses on remotely reachable vulnerabilities that qualify for real reports instead of noisy local-only findings.",
+            "title": "Caçador de recompensas de segurança",
+            "description": "Procure problemas de segurança exploráveis ​​e dignos de recompensa em repositórios. Concentra-se em vulnerabilidades acessíveis remotamente que se qualificam para relatórios reais, em vez de descobertas barulhentas apenas locais.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/security-bounty-hunter/SKILL.md"
@@ -4037,8 +4037,8 @@ const eccSkillsData = {
         {
             "id": "security-review",
             "category": "Uncategorized",
-            "title": "Security Review",
-            "description": "Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns.",
+            "title": "Revisão de segurança",
+            "description": "Use essa habilidade ao adicionar autenticação, lidar com entradas do usuário, trabalhar com segredos, criar endpoints de API ou implementar recursos confidenciais/de pagamento. Fornece lista de verificação e padrões de segurança abrangentes.",
             "triggers": [
                 "/nextjs",
                 "/admin",
@@ -4071,8 +4071,8 @@ const eccSkillsData = {
         {
             "id": "security-scan",
             "category": "Uncategorized",
-            "title": "Security Scan",
-            "description": "Scan your Claude Code configuration (.claude/ directory) for security vulnerabilities, misconfigurations, and injection risks using AgentShield. Checks CLAUDE.md, settings.json, MCP servers, hooks, and agent definitions.",
+            "title": "Verificação de segurança",
+            "description": "Verifique sua configuração do Claude Code (diretório .claude/) em busca de vulnerabilidades de segurança, configurações incorretas e riscos de injeção usando o AgentShield. Verifica CLAUDE.md, settings.json, servidores MCP, ganchos e definições de agente.",
             "triggers": [
                 "/www",
                 "/ecc-agentshield",
@@ -4092,8 +4092,8 @@ const eccSkillsData = {
         {
             "id": "seo",
             "category": "Uncategorized",
-            "title": "Seo",
-            "description": "Audit, plan, and implement SEO improvements across technical SEO, on-page optimization, structured data, Core Web Vitals, and content strategy. Use when the user wants better search visibility, SEO remediation, schema markup, sitemap/robots work, or keyword mapping.",
+            "title": "SEO",
+            "description": "Audite, planeje e implemente melhorias de SEO em SEO técnico, otimização on-page, dados estruturados, Core Web Vitals e estratégia de conteúdo. Use quando o usuário deseja melhor visibilidade de pesquisa, remediação de SEO, marcação de esquema, trabalho de mapa de site/robôs ou mapeamento de palavras-chave.",
             "triggers": [
                 "/routes",
                 "/robots",
@@ -4107,8 +4107,8 @@ const eccSkillsData = {
         {
             "id": "skill-comply",
             "category": "Uncategorized",
-            "title": "Skill Comply",
-            "description": "Visualize whether skills, rules, and agent definitions are actually followed — auto-generates scenarios at 3 prompt strictness levels, runs agents, classifies behavioral sequences, and reports compliance rates with full tool call timelines",
+            "title": "Habilidade Cumprir",
+            "description": "Visualize se as habilidades, regras e definições do agente são realmente seguidas — gera automaticamente cenários em 3 níveis de rigidez de prompt, executa agentes, classifica sequências comportamentais e relata taxas de conformidade com cronogramas completos de chamada de ferramenta",
             "triggers": [
                 "/common",
                 "/rules",
@@ -4124,8 +4124,8 @@ const eccSkillsData = {
         {
             "id": "skill-scout",
             "category": "Uncategorized",
-            "title": "Skill Scout",
-            "description": "Search existing local, marketplace, GitHub, and web skill sources before creating a new skill. Use when the user wants to create, build, fork, or find a skill for a workflow.",
+            "title": "Escoteiro de Habilidades",
+            "description": "Pesquise fontes de habilidades locais, de mercado, GitHub e web existentes antes de criar uma nova habilidade. Use quando o usuário quiser criar, construir, bifurcar ou encontrar uma habilidade para um fluxo de trabalho.",
             "triggers": [
                 "/null",
                 "/skills",
@@ -4139,8 +4139,8 @@ const eccSkillsData = {
         {
             "id": "skill-stocktake",
             "category": "Uncategorized",
-            "title": "Skill Stocktake",
-            "description": "Use when auditing Claude skills and commands for quality. Supports Quick Scan (changed skills only) and Full Stocktake modes with sequential subagent batch evaluation.",
+            "title": "Avaliação de habilidades",
+            "description": "Use ao auditar as habilidades e comandos de Claude para verificar a qualidade. Suporta os modos Quick Scan (somente habilidades alteradas) e Full Stocktake com avaliação sequencial de lote de subagentes.",
             "triggers": [
                 "/scan",
                 "/rule",
@@ -4162,8 +4162,8 @@ const eccSkillsData = {
         {
             "id": "social-graph-ranker",
             "category": "Uncategorized",
-            "title": "Social Graph Ranker",
-            "description": "Weighted social-graph ranking for warm intro discovery, bridge scoring, and network gap analysis across X and LinkedIn. Use when the user wants the reusable graph-ranking engine itself, not the broader outreach or network-maintenance workflow layered on top of it.",
+            "title": "Classificador de gráfico social",
+            "description": "Classificação ponderada de gráfico social para descoberta de introdução calorosa, pontuação de ponte e análise de lacunas de rede no X e no LinkedIn. Use quando o usuário desejar o mecanismo reutilizável de classificação de gráficos em si, e não o alcance mais amplo ou o fluxo de trabalho de manutenção de rede em camadas sobre ele.",
             "triggers": [],
             "dependencies": [],
             "path": "contexto/ECC-main/skills/social-graph-ranker/SKILL.md"
@@ -4171,8 +4171,8 @@ const eccSkillsData = {
         {
             "id": "social-publisher",
             "category": "Uncategorized",
-            "title": "Social Publisher",
-            "description": "Agent-driven scheduling and publishing of social media posts across 13 platforms via SocialClaw. Use when the user wants to publish to X, LinkedIn, Instagram, Facebook Pages, TikTok, Discord, Telegram, YouTube, Reddit, WordPress, or Pinterest — or when managing campaigns, uploading media, or monitoring post delivery status.",
+            "title": "Editor Social",
+            "description": "Agendamento e publicação de postagens em mídias sociais orientadas por agentes em 13 plataformas via SocialClaw. Use quando o usuário quiser publicar no X, LinkedIn, Instagram, páginas do Facebook, TikTok, Discord, Telegram, YouTube, Reddit, WordPress ou Pinterest — ou ao gerenciar campanhas, fazer upload de mídia ou monitorar o status pós-entrega.",
             "triggers": [
                 "/validate",
                 "/dashboard",
@@ -4187,8 +4187,8 @@ const eccSkillsData = {
         {
             "id": "springboot-patterns",
             "category": "Uncategorized",
-            "title": "Springboot Patterns",
-            "description": "Spring Boot architecture patterns, REST API design, layered services, data access, caching, async processing, and logging. Use for Java Spring Boot backend work.",
+            "title": "Padrões Springboot",
+            "description": "Padrões de arquitetura Spring Boot, design de API REST, serviços em camadas, acesso a dados, cache, processamento assíncrono e registro em log. Use para trabalho de back-end do Java Spring Boot.",
             "triggers": [
                 "/yaml",
                 "/markets",
@@ -4202,8 +4202,8 @@ const eccSkillsData = {
         {
             "id": "springboot-security",
             "category": "Uncategorized",
-            "title": "Springboot Security",
-            "description": "Spring Security best practices for authn/authz, validation, CSRF, secrets, headers, rate limiting, and dependency security in Java Spring Boot services.",
+            "title": "Segurança Springboot",
+            "description": "Práticas recomendadas do Spring Security para autenticação/authz, validação, CSRF, segredos, cabeçalhos, limitação de taxa e segurança de dependência em serviços Java Spring Boot.",
             "triggers": [
                 "/vault",
                 "/admin",
@@ -4220,7 +4220,7 @@ const eccSkillsData = {
             "id": "springboot-tdd",
             "category": "Uncategorized",
             "title": "Springboot Tdd",
-            "description": "Test-driven development for Spring Boot using JUnit 5, Mockito, MockMvc, Testcontainers, and JaCoCo. Use when adding features, fixing bugs, or refactoring.",
+            "description": "Desenvolvimento orientado a testes para Spring Boot usando JUnit 5, Mockito, MockMvc, Testcontainers e JaCoCo. Use ao adicionar recursos, corrigir bugs ou refatorar.",
             "triggers": [
                 "/group",
                 "/plugin",
@@ -4242,8 +4242,8 @@ const eccSkillsData = {
         {
             "id": "springboot-verification",
             "category": "Uncategorized",
-            "title": "Springboot Verification",
-            "description": "Verification loop for Spring Boot projects: build, static analysis, tests with coverage, security scans, and diff review before release or PR.",
+            "title": "Verificação Springboot",
+            "description": "Loop de verificação para projetos Spring Boot: construção, análise estática, testes com cobertura, varreduras de segurança e revisão de diferenças antes do lançamento ou PR.",
             "triggers": [
                 "/failed",
                 "/pmd",
@@ -4260,8 +4260,8 @@ const eccSkillsData = {
         {
             "id": "strategic-compact",
             "category": "Uncategorized",
-            "title": "Strategic Compact",
-            "description": "Suggests manual context compaction at logical intervals to preserve context through task phases rather than arbitrary auto-compaction.",
+            "title": "Pacto Estratégico",
+            "description": "Sugere compactação manual de contexto em intervalos lógicos para preservar o contexto durante as fases da tarefa, em vez de compactação automática arbitrária.",
             "triggers": [
                 "/compact",
                 "/status",
@@ -4281,8 +4281,8 @@ const eccSkillsData = {
         {
             "id": "swift-actor-persistence",
             "category": "Uncategorized",
-            "title": "Swift Actor Persistence",
-            "description": "Thread-safe data persistence in Swift using actors — in-memory cache with file-backed storage, eliminating data races by design.",
+            "title": "Persistência do ator rápido",
+            "description": "Persistência de dados thread-safe em Swift usando atores — cache na memória com armazenamento baseado em arquivo, eliminando disputas de dados por design.",
             "triggers": [
                 "/mac"
             ],
@@ -4292,8 +4292,8 @@ const eccSkillsData = {
         {
             "id": "swift-concurrency-6-2",
             "category": "Uncategorized",
-            "title": "Swift Concurrency 6 2",
-            "description": "Swift 6.2 Approachable Concurrency — single-threaded by default, @concurrent for explicit background offloading, isolated conformances for main actor types.",
+            "title": "Simultaneidade rápida 6 2",
+            "description": "Swift 6.2 Approachable Concurrency – single-threaded por padrão, @concurrent para descarregamento explícito em segundo plano, conformidades isoladas para os principais tipos de atores.",
             "triggers": [
                 "/migration",
                 "/static"
@@ -4304,8 +4304,8 @@ const eccSkillsData = {
         {
             "id": "swift-protocol-di-testing",
             "category": "Uncategorized",
-            "title": "Swift Protocol Di Testing",
-            "description": "Protocol-based dependency injection for testable Swift code — mock file system, network, and external APIs using focused protocols and Swift Testing.",
+            "title": "Teste de protocolo Swift Di",
+            "description": "Injeção de dependência baseada em protocolo para código Swift testável – sistema de arquivos simulado, rede e APIs externas usando protocolos focados e testes Swift.",
             "triggers": [
                 "/write"
             ],
@@ -4315,8 +4315,8 @@ const eccSkillsData = {
         {
             "id": "swiftui-patterns",
             "category": "Uncategorized",
-            "title": "Swiftui Patterns",
-            "description": "SwiftUI architecture patterns, state management with @Observable, view composition, navigation, performance optimization, and modern iOS/macOS UI best practices.",
+            "title": "Padrões Swiftui",
+            "description": "Padrões de arquitetura SwiftUI, gerenciamento de estado com @Observable, composição de visualização, navegação, otimização de desempenho e práticas recomendadas modernas de UI iOS/macOS.",
             "triggers": [
                 "/from",
                 "/mac"
@@ -4327,8 +4327,8 @@ const eccSkillsData = {
         {
             "id": "tdd-workflow",
             "category": "Uncategorized",
-            "title": "Tdd Workflow",
-            "description": "Use this skill when writing new features, fixing bugs, or refactoring code. Enforces test-driven development with 80%+ coverage including unit, integration, and E2E tests.",
+            "title": "Fluxo de Trabalho Tdd",
+            "description": "Use essa habilidade ao escrever novos recursos, corrigir bugs ou refatorar código. Aplica o desenvolvimento orientado a testes com mais de 80% de cobertura, incluindo testes unitários, de integração e E2E.",
             "triggers": [
                 "/test",
                 "/test-market",
@@ -4351,8 +4351,8 @@ const eccSkillsData = {
         {
             "id": "team-builder",
             "category": "Uncategorized",
-            "title": "Team Builder",
-            "description": "Interactive agent picker for composing and dispatching parallel teams",
+            "title": "Construtor de equipe",
+            "description": "Seletor de agente interativo para composição e envio de equipes paralelas",
             "triggers": [
                 "/agents"
             ],
@@ -4362,8 +4362,8 @@ const eccSkillsData = {
         {
             "id": "terminal-ops",
             "category": "Uncategorized",
-            "title": "Terminal Ops",
-            "description": "Evidence-first repo execution workflow for ECC. Use when the user wants a command run, a repo checked, a CI failure debugged, or a narrow fix pushed with exact proof of what was executed and verified.",
+            "title": "Operações de terminal",
+            "description": "Fluxo de trabalho de execução de repositório com base em evidências para ECC. Use quando o usuário deseja que um comando seja executado, um repositório verificado, uma falha de CI depurada ou uma correção restrita enviada com prova exata do que foi executado e verificado.",
             "triggers": [
                 "/review",
                 "/test"
@@ -4374,8 +4374,8 @@ const eccSkillsData = {
         {
             "id": "tinystruct-patterns",
             "category": "Uncategorized",
-            "title": "Tinystruct Patterns",
-            "description": "Expert guidance for developing with the tinystruct Java framework. Use when working on the tinystruct codebase or any project built on tinystruct — including creating Application classes, @Action-mapped routes, unit tests, ActionRegistry, HTTP/CLI dual-mode handling, the built-in HTTP server, the event system, JSON with Builder/Builders, database persistence with AbstractData, POJO generation, Server-Sent Events (SSE), file uploads, and outbound HTTP networking.",
+            "title": "Padrões Tinystruct",
+            "description": "Orientação especializada para desenvolvimento com a estrutura Java tinystruct. Use ao trabalhar na base de código tinystruct ou em qualquer projeto construído em tinystruct - incluindo a criação de classes de aplicativos, rotas mapeadas por @Action, testes de unidade, ActionRegistry, manipulação de modo duplo HTTP/CLI, o servidor HTTP integrado, o sistema de eventos, JSON com Builder/Builders, persistência de banco de dados com AbstractData, geração de POJO, eventos enviados por servidor (SSE), uploads de arquivos e rede HTTP de saída.",
             "triggers": [
                 "/system-usage",
                 "/application",
@@ -4406,8 +4406,8 @@ const eccSkillsData = {
         {
             "id": "token-budget-advisor",
             "category": "Uncategorized",
-            "title": "Token Budget Advisor",
-            "description": ">-",
+            "title": "Consultor de orçamento de token",
+            "description": null,
             "triggers": [
                 "/cons",
                 "/github",
@@ -4426,8 +4426,8 @@ const eccSkillsData = {
         {
             "id": "ui-demo",
             "category": "Uncategorized",
-            "title": "Ui Demo",
-            "description": "Record polished UI demo videos using Playwright. Use when the user asks to create a demo, walkthrough, screen recording, or tutorial video of a web application. Produces WebM videos with visible cursor, natural pacing, and professional feel.",
+            "title": "Demonstração da interface do usuário",
+            "description": "Grave vídeos de demonstração de interface de usuário sofisticados usando o Playwright. Use quando o usuário solicitar a criação de uma demonstração, um passo a passo, uma gravação de tela ou um vídeo tutorial de um aplicativo da web. Produz vídeos WebM com cursor visível, ritmo natural e toque profissional.",
             "triggers": [
                 "/dashboard",
                 "/localhost",
@@ -4443,8 +4443,8 @@ const eccSkillsData = {
         {
             "id": "ui-to-vue",
             "category": "Uncategorized",
-            "title": "Ui To Vue",
-            "description": "Use when the user has UI screenshots or design exports that need batch conversion into Vue 3 components, especially with Vant, Element Plus, or Ant Design Vue.",
+            "title": "UI para Vue",
+            "description": "Use quando o usuário tiver capturas de tela da UI ou exportações de design que precisem de conversão em lote em componentes Vue 3, especialmente com Vant, Element Plus ou Ant Design Vue.",
             "triggers": [
                 "/designs",
                 "/src",
@@ -4456,8 +4456,8 @@ const eccSkillsData = {
         {
             "id": "uncloud",
             "category": "Uncategorized",
-            "title": "Uncloud",
-            "description": "Use when managing an Uncloud cluster — deploying services, configuring Caddy ingress, adding static proxy routes for non-cluster devices, publishing ports, scaling, inspecting logs, or managing machines and volumes with the `uc` CLI.",
+            "title": "Desnuvem",
+            "description": "Use ao gerenciar um cluster Uncloud — implantando serviços, configurando a entrada do Caddy, adicionando rotas de proxy estáticas para dispositivos não-cluster, publicando portas, dimensionando, inspecionando logs ou gerenciando máquinas e volumes com a CLI `uc`.",
             "triggers": [
                 "/sh",
                 "/device",
@@ -4487,8 +4487,8 @@ const eccSkillsData = {
         {
             "id": "unified-notifications-ops",
             "category": "Uncategorized",
-            "title": "Unified Notifications Ops",
-            "description": "Operate notifications as one ECC-native workflow across GitHub, Linear, desktop alerts, hooks, and connected communication surfaces. Use when the real problem is alert routing, deduplication, escalation, or inbox collapse.",
+            "title": "Operações de notificações unificadas",
+            "description": "Opere notificações como um fluxo de trabalho nativo do ECC em GitHub, Linear, alertas de desktop, ganchos e superfícies de comunicação conectadas. Use quando o problema real for roteamento de alertas, desduplicação, escalonamento ou colapso da caixa de entrada.",
             "triggers": [
                 "/connector",
                 "/scripts",
@@ -4503,8 +4503,8 @@ const eccSkillsData = {
         {
             "id": "verification-loop",
             "category": "Uncategorized",
-            "title": "Verification Loop",
-            "description": "A comprehensive verification system for Claude Code sessions.",
+            "title": "Ciclo de verificação",
+            "description": "Um sistema de verificação abrangente para sessões do Código Claude.",
             "triggers": [
                 "/verify",
                 "/dev",
@@ -4516,8 +4516,8 @@ const eccSkillsData = {
         {
             "id": "video-editing",
             "category": "Uncategorized",
-            "title": "Video Editing",
-            "description": "AI-assisted video editing workflows for cutting, structuring, and augmenting real footage. Covers the full pipeline from raw capture through FFmpeg, Remotion, ElevenLabs, fal.ai, and final polish in Descript or CapCut. Use when the user wants to edit video, cut footage, create vlogs, or build video content.",
+            "title": "Edição de vídeo",
+            "description": "Fluxos de trabalho de edição de vídeo assistidos por IA para cortar, estruturar e aumentar imagens reais. Abrange todo o pipeline desde a captura bruta por meio de FFmpeg, Remotion, ElevenLabs, fal.ai e polimento final em Descript ou CapCut. Use quando o usuário quiser editar vídeo, cortar filmagens, criar vlogs ou criar conteúdo de vídeo.",
             "triggers": [
                 "/json",
                 "/bash",
@@ -4542,7 +4542,7 @@ const eccSkillsData = {
             "id": "videodb",
             "category": "Uncategorized",
             "title": "Videodb",
-            "description": "See, Understand, Act on video and audio. See- ingest from local files, URLs, RTSP/live feeds, or live record desktop; return realtime context and playable stream links. Understand- extract frames, build visual/semantic/temporal indexes, and search moments with timestamps and auto-clips. Act- transcode and normalize (codec, fps, resolution, aspect ratio), perform timeline edits (subtitles, text/image overlays, branding, audio overlays, dubbing, translation), generate media assets (image, audio, video), and create real time alerts for events from live streams or desktop capture.",
+            "description": "Veja, entenda, atue em vídeo e áudio. Visualização de arquivos locais, URLs, feeds RTSP/ao vivo ou desktop de gravação ao vivo; retornar contexto em tempo real e links de stream reproduzíveis. Entenda: extraia quadros, construa índices visuais/semânticos/temporais e pesquise momentos com carimbos de data/hora e clipes automáticos. Aja: transcodifique e normalize (codec, fps, resolução, proporção de aspecto), execute edições na linha do tempo (legendas, sobreposições de texto/imagem, branding, sobreposições de áudio, dublagem, tradução), gere ativos de mídia (imagem, áudio, vídeo) e crie alertas em tempo real para eventos de transmissões ao vivo ou captura de desktop.",
             "triggers": [
                 "/editor",
                 "/stop",
@@ -4587,8 +4587,8 @@ const eccSkillsData = {
         {
             "id": "visa-doc-translate",
             "category": "Uncategorized",
-            "title": "Visa Doc Translate",
-            "description": "Translate visa application documents (images) to English and create a bilingual PDF with original and translation",
+            "title": "Tradução de documento de visto",
+            "description": "Traduza documentos de solicitação de visto (imagens) para o inglês e crie um PDF bilíngue com original e tradução",
             "triggers": [
                 "/visa-doc-translate"
             ],
@@ -4598,8 +4598,8 @@ const eccSkillsData = {
         {
             "id": "vite-patterns",
             "category": "Uncategorized",
-            "title": "Vite Patterns",
-            "description": "Vite build tool patterns including config, plugins, HMR, env variables, proxy setup, SSR, library mode, dependency pre-bundling, and build optimization. Activate when working with vite.config.ts, Vite plugins, or Vite-based projects.",
+            "title": "Padrões Vite",
+            "description": "Padrões de ferramentas de construção Vite, incluindo configuração, plug-ins, HMR, variáveis ​​de ambiente, configuração de proxy, SSR, modo de biblioteca, pré-agrupamento de dependência e otimização de construção. Ative ao trabalhar com vite.config.ts, plug-ins Vite ou projetos baseados em Vite.",
             "triggers": [
                 "/src",
                 "/plugin-vue",
@@ -4634,8 +4634,8 @@ const eccSkillsData = {
         {
             "id": "windows-desktop-e2e",
             "category": "Uncategorized",
-            "title": "Windows Desktop E2E",
-            "description": "E2E testing for Windows native desktop apps (WPF, WinForms, Win32/MFC, Qt) using pywinauto and Windows UI Automation.",
+            "title": "Área de trabalho do Windows E2E",
+            "description": "Teste E2E para aplicativos de desktop nativos do Windows (WPF, WinForms, Win32/MFC, Qt) usando pywinauto e Windows UI Automation.",
             "triggers": [
                 "/rerun",
                 "/checkout",
@@ -4670,8 +4670,8 @@ const eccSkillsData = {
         {
             "id": "workspace-surface-audit",
             "category": "Uncategorized",
-            "title": "Workspace Surface Audit",
-            "description": "Audit the active repo, MCP servers, plugins, connectors, env surfaces, and harness setup, then recommend the highest-value ECC-native skills, hooks, agents, and operator workflows. Use when the user wants help setting up Claude Code or understanding what capabilities are actually available in their environment.",
+            "title": "Auditoria de superfície do espaço de trabalho",
+            "description": "Audite o repositório ativo, servidores MCP, plug-ins, conectores, superfícies de ambiente e configuração de chicote e, em seguida, recomende as habilidades, ganchos, agentes e fluxos de trabalho do operador nativos de ECC de maior valor. Use quando o usuário quiser ajuda para configurar o Claude Code ou entender quais recursos estão realmente disponíveis em seu ambiente.",
             "triggers": [
                 "/bootstrap",
                 "/settings",
@@ -4685,8 +4685,8 @@ const eccSkillsData = {
         {
             "id": "x-api",
             "category": "Uncategorized",
-            "title": "X Api",
-            "description": "X/Twitter API integration for posting tweets, threads, reading timelines, search, and analytics. Covers OAuth auth patterns, rate limits, and platform-native content posting. Use when the user wants to interact with X programmatically.",
+            "title": "API X",
+            "description": "Integração de API X/Twitter para postagem de tweets, tópicos, leitura de cronogramas, pesquisa e análises. Abrange padrões de autenticação OAuth, limites de taxa e postagem de conteúdo nativo da plataforma. Use quando o usuário quiser interagir com o X programaticamente.",
             "triggers": [
                 "/tweets",
                 "/search",
@@ -4705,3 +4705,5 @@ const eccSkillsData = {
         }
     ]
 };
+
+if (typeof module !== 'undefined') module.exports = eccSkillsData;
