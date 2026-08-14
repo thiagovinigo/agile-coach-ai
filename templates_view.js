@@ -4,34 +4,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const templates = [
         {
-            title: "CLAUDE.md",
-            desc: "Instruções base de comportamento, regras e convenções do projeto para a IA (Flowgrammers & ECC).",
+            title: "CLAUDE.md / IA Core",
+            desc: "Instruções base de comportamento, regras e convenções do projeto para os agentes (Flowgrammers & ECC).",
             path: "templates/CLAUDE.md"
         },
         {
             title: "PRD (Product Requirements Document)",
-            desc: "Template para definir requisitos de produto, escopo, personas e métricas de sucesso.",
+            desc: "Padrão Produto: Como mapear problemas, audiência, limites e métricas ANTES de codar.",
             path: "templates/prd.md"
         },
         {
             title: "Especificação Técnica (SPEC)",
-            desc: "Template para design técnico, arquitetura de componentes, APIs e fluxo de dados.",
+            desc: "Padrão Engenharia: Detalhamento de arquitetura, contratos de API e restrições.",
             path: "templates/spec.md"
         },
         {
-            title: "Plano de QA / Testes",
-            desc: "Documento para mapear casos de teste, cobertura, estratégia E2E e critérios de aceite.",
-            path: "templates/qa.md"
+            title: "User Stories (STORYS)",
+            desc: "Padrão Ágil: Como fatiar épicos em histórias de BDD com critérios de aceite e DoD.",
+            path: "templates/storys.md"
+        },
+        {
+            title: "Request for Comments (RFC)",
+            desc: "Padrão Engenharia: Proposições assíncronas para mudanças de infra ou tecnologia, fomentando discussão sem culpas.",
+            path: "templates/rfc.md"
         },
         {
             title: "Decisão Arquitetural (ADR)",
-            desc: "Registro de decisões de arquitetura, trade-offs, riscos e diagramas de contexto.",
+            desc: "Registro definitivo de escolhas de arquitetura que ditarão o rumo do software e seus trade-offs.",
             path: "templates/arquitetural.md"
         },
         {
-            title: "Revisão de Segurança (Security)",
-            desc: "Checklist de segurança (OWASP), proteção de dados, controle de acessos e auditoria.",
+            title: "Plano de Qualidade (QA)",
+            desc: "Estratégia de validação: Testes, mitigação de risco e critérios de release/go-no-go.",
+            path: "templates/qa.md"
+        },
+        {
+            title: "Revisão de Segurança",
+            desc: "Checklist restrito de InfoSec para proteção de dados, acessos e auditoria (OWASP).",
             path: "templates/security.md"
+        },
+        {
+            title: "Post-mortem / Incidente (RCA)",
+            desc: "Cultura blameless: Investigação profunda (5 Porquês) para aprender e previnir problemas críticos em produção.",
+            path: "templates/rca.md"
+        },
+        {
+            title: "Agente IA (SKILL)",
+            desc: "Padrão skillsmp: Metadados, guard rails e instruções para definir o escopo de atuação autônoma de LLMs.",
+            path: "templates/skill.md"
         }
     ];
 
@@ -51,11 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div style="flex: 1; min-width: 350px; background:#f0f8ff; border-left:4px solid #0078d4; padding:1.5rem; border-radius:8px;">
                     <h4 style="margin-top:0; color:#0078d4; margin-bottom:1rem; font-size:1.1rem;">🧭 Como e Quando Utilizar?</h4>
                     <ul style="margin:0; padding-left:20px; color:#334155; font-size:0.95rem; line-height:1.6;">
-                        <li style="margin-bottom:8px;"><strong>1. Planejamento:</strong> Inicie com o <b>PRD.md</b> para alinhar as regras de negócio e escopo com Produto.</li>
-                        <li style="margin-bottom:8px;"><strong>2. Arquitetura:</strong> Use o <b>Arquitetural.md (ADR)</b> para registrar escolhas técnicas (ex: mudar de REST para GraphQL).</li>
-                        <li style="margin-bottom:8px;"><strong>3. Refinamento Técnico:</strong> Detalhe APIs, dependências e fluxos no <b>SPEC.md</b> antes de iniciar a codificação.</li>
-                        <li style="margin-bottom:8px;"><strong>4. Qualidade & Segurança:</strong> Use o <b>QA.md</b> para testes E2E e passe o <b>Security.md</b> em fluxos críticos.</li>
-                        <li><strong>5. Desenvolvimento IA:</strong> Mantenha o <b>CLAUDE.md</b> atualizado na raiz do projeto para balizar o comportamento dos Agentes.</li>
+                        <li style="margin-bottom:8px;"><strong>1. Produto & Agilidade:</strong> Alinhe o "O que" com o <b>PRD.md</b>, debata propostas no <b>RFC.md</b> e quebre as entregas em <b>STORYS.md</b>.</li>
+                        <li style="margin-bottom:8px;"><strong>2. Engenharia:</strong> Oficialize as escolhas no <b>Arquitetural.md (ADR)</b> e guie o código via <b>SPEC.md</b>.</li>
+                        <li style="margin-bottom:8px;"><strong>3. Qualidade Contínua:</strong> Proteja o deploy com <b>QA.md</b>, blinde o código com o <b>Security.md</b>, e evolua após crises com o <b>RCA.md (Post-mortem)</b>.</li>
+                        <li><strong>4. Cultura de IA:</strong> Mantenha seu projeto LLM-friendly centralizando regras no <b>CLAUDE.md</b> e crie agentes poderosos usando o formato <b>SKILL.md</b>.</li>
                     </ul>
                 </div>
             </div>
