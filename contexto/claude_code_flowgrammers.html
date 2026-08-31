@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code como núcleo · Flowgrammers</title>
+<style>
+:root {
+  --bg:           #0A0612;
+  --bg-2:         #12081E;
+  --surface:      #1A1024;
+  --surface-2:    #221430;
+  --border:       rgba(255, 0, 128, 0.12);
+  --border-hi:    rgba(255, 0, 128, 0.35);
+  --text:         #F5F5F7;
+  --text-muted:   #A8A3B0;
+  --text-dim:     #6B6575;
+  --accent:       #FF0080;
+  --accent-hi:    #FF3399;
+  --accent-soft:  rgba(255, 0, 128, 0.10);
+  --accent-glow:  rgba(255, 0, 128, 0.25);
+
+  --c-green:      #1D9E75;
+  --c-green-bg:   rgba(29, 158, 117, 0.15);
+  --c-blue:       #378ADD;
+  --c-blue-bg:    rgba(55, 138, 221, 0.15);
+  --c-amber:      #EF9F27;
+  --c-amber-bg:   rgba(239, 159, 39, 0.15);
+  --c-coral:      #D85A30;
+  --c-coral-bg:   rgba(216, 90, 48, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--text); }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(ellipse at top, var(--bg-2) 0%, var(--bg) 70%);
+  min-height: 100vh;
+}
+
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10, 6, 18, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.header-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; gap: 24px;
+}
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.01em; white-space: nowrap;
+}
+.logo-mark {
+  width: 26px; height: 26px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hi) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 13px;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  font-size: 13px; font-weight: 500; color: var(--text-muted);
+  padding: 7px 14px; border-radius: 8px; cursor: pointer;
+  border: 1px solid transparent; white-space: nowrap;
+  transition: all 0.15s;
+}
+.nav-item:hover { color: var(--text); background: var(--surface); }
+.nav-item.active {
+  color: var(--accent); background: var(--accent-soft);
+  border-color: var(--border-hi);
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 60px 24px 100px; }
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  padding: 8px 18px; border: 1px solid var(--border-hi);
+  background: var(--accent-soft); border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.hero-wrap { text-align: center; margin-bottom: 60px; }
+.hero-title {
+  font-size: 60px; font-weight: 900;
+  letter-spacing: -0.03em; line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.hero-title .pink { color: var(--accent); display: block; }
+.hero-desc {
+  font-size: 16px; color: var(--text-muted);
+  max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+.flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 60px 0; flex-wrap: wrap;
+}
+.flow-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 20px;
+  min-width: 160px; text-align: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.flow-card:hover {
+  border-color: var(--border-hi);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.flow-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent);
+  color: white; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; box-shadow: 0 0 14px var(--accent-glow);
+}
+.flow-name {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.flow-sub { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.flow-arrow { color: var(--text-dim); font-size: 18px; user-select: none; }
+
+.result-banner {
+  background: var(--accent-soft);
+  border: 1px solid var(--border-hi);
+  border-radius: 10px;
+  padding: 18px 24px; text-align: center;
+  font-size: 14px; color: var(--text-muted);
+  margin: 40px 0 60px;
+}
+.result-banner b { color: var(--accent); font-weight: 600; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.info-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 26px 28px;
+  transition: border-color 0.2s;
+}
+.info-card:hover { border-color: var(--border-hi); }
+.info-icon { font-size: 24px; margin-bottom: 16px; display: block; }
+.info-title {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--text); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.info-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+.aula-header { text-align: center; margin-bottom: 50px; }
+.aula-label {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.aula-title {
+  font-size: 44px; font-weight: 900;
+  letter-spacing: -0.02em; line-height: 1.08;
+  text-transform: uppercase; color: var(--text);
+  max-width: 800px; margin: 0 auto 20px;
+}
+.aula-title .pink { color: var(--accent); }
+.aula-desc {
+  font-size: 15px; color: var(--text-muted);
+  max-width: 620px; margin: 0 auto; line-height: 1.7;
+}
+
+.intro-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 32px;
+  margin-bottom: 50px;
+}
+.intro-box p {
+  font-size: 15px; color: var(--text); line-height: 1.8;
+  margin-bottom: 12px;
+}
+.intro-box p:last-child { margin-bottom: 0; }
+
+.s-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 24px; text-align: center;
+}
+.s-block { margin: 60px 0; }
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.learn-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 24px;
+}
+.learn-check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 6px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-hi);
+}
+.learn-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+.passo {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 36px;
+  margin-bottom: 18px;
+}
+.passo-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.passo-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent); color: white;
+  font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px var(--accent-glow); flex-shrink: 0;
+}
+.passo-title {
+  font-size: 20px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.passo-body { font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+.passo-body p { margin-bottom: 14px; }
+.passo-body p:last-child { margin-bottom: 0; }
+.passo-body strong { color: var(--text); font-weight: 600; }
+.passo-body em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+.destaque {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(255, 0, 128, 0.04) 100%);
+  border: 1px solid var(--border-hi);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 22px; margin: 18px 0;
+}
+.destaque-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.destaque-text { font-size: 15px; color: var(--text); line-height: 1.75; }
+
+.dica {
+  background: var(--bg-2);
+  border: 1px dashed var(--border-hi);
+  border-radius: 10px;
+  padding: 14px 18px; margin: 18px 0;
+  font-size: 14px; color: var(--text-muted); line-height: 1.7;
+}
+.dica strong { color: var(--accent); font-weight: 600; }
+
+.analogia {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px; margin: 16px 0;
+}
+.analogia-label {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.analogia-text { font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+
+.atividade {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.08) 0%, rgba(255, 0, 128, 0.02) 100%);
+  border: 1px solid var(--border-hi);
+  border-radius: 12px;
+  padding: 22px 26px; margin: 20px 0;
+}
+.atividade-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.atividade-title {
+  font-size: 17px; font-weight: 700; color: var(--text);
+  margin-bottom: 10px;
+}
+.atividade-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.atividade-text ol { margin-left: 20px; margin-top: 10px; }
+.atividade-text ol li { margin-bottom: 6px; }
+.atividade-text ul { margin-left: 20px; margin-top: 10px; }
+.atividade-text ul li { margin-bottom: 6px; }
+
+.t {
+  width: 100%; border-collapse: collapse; margin: 18px 0;
+  background: var(--bg-2); border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.t th, .t td {
+  padding: 14px 18px; text-align: left; font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.t th {
+  background: var(--surface); color: var(--accent);
+  font-weight: 700; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.t td { color: var(--text-muted); }
+.t tr:last-child td { border-bottom: none; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pill {
+  font-size: 13px; padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-muted);
+  background: var(--bg-2);
+}
+.pill.accent {
+  border-color: var(--border-hi); color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.lista-fluxo {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 24px; margin: 18px 0;
+}
+.lista-fluxo-item {
+  display: flex; gap: 14px; padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.lista-fluxo-item:last-child { border-bottom: none; }
+.lista-fluxo-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; border: 1px solid var(--border-hi);
+}
+.lista-fluxo-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+.lista-fluxo-text strong { color: var(--text); }
+
+.aula-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 70px; padding-top: 30px;
+  border-top: 1px solid var(--border);
+  gap: 14px;
+}
+.aula-nav-btn {
+  padding: 14px 24px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  font-family: inherit;
+}
+.aula-nav-btn:hover {
+  border-color: var(--border-hi);
+  background: var(--surface-2);
+  color: var(--accent);
+}
+.aula-nav-btn.primary {
+  background: var(--accent); color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.aula-nav-btn.primary:hover { background: var(--accent-hi); }
+.aula-nav-spacer { flex: 1; }
+
+/* ============================================================
+   DIAGRAMA INTERATIVO
+   ============================================================ */
+.diagram-interactive {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 20px 0;
+}
+
+.diagram-help {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: var(--bg-2);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+.diagram-help strong { color: var(--accent); font-weight: 600; }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 8px 16px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border); background: var(--bg-2);
+  color: var(--text-muted); cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.filter-btn:hover { color: var(--text); border-color: var(--border-hi); }
+.filter-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--border-hi);
+}
+.filter-dot { width: 8px; height: 8px; border-radius: 50%; }
+.fd-all   { background: var(--text-muted); }
+.fd-green { background: var(--c-green); }
+.fd-blue  { background: var(--c-blue); }
+.fd-amber { background: var(--c-amber); }
+.fd-coral { background: var(--c-coral); }
+
+.diagram-svg-wrap {
+  background: var(--bg-2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.diagram-svg-wrap svg { width: 100%; height: auto; display: block; }
+
+.node-g { cursor: pointer; transition: opacity 0.3s, transform 0.2s; transform-origin: center; transform-box: fill-box; }
+.node-g:hover { transform: scale(1.03); }
+.node-g.dimmed { opacity: 0.18; }
+.node-g.highlighted .node-rect {
+  stroke-width: 2.5 !important;
+  filter: drop-shadow(0 0 14px currentColor);
+}
+.node-g.selected .node-rect {
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 20px currentColor);
+}
+.node-rect { transition: stroke-width 0.25s, filter 0.25s; }
+
+.connector {
+  stroke: var(--text-dim);
+  stroke-width: 0.6;
+  transition: stroke 0.3s, stroke-width 0.3s, opacity 0.3s;
+}
+.connector.dimmed { opacity: 0.2; }
+.connector.active {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+}
+.connector.flow-path {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  animation: dash 1.2s linear infinite;
+}
+@keyframes dash { to { stroke-dashoffset: -20; } }
+
+.core-rect {
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { filter: drop-shadow(0 0 12px var(--accent-glow)); }
+  50% { filter: drop-shadow(0 0 24px var(--accent-glow)); }
+}
+
+.step-badge { pointer-events: none; }
+.step-circle { fill: var(--accent); stroke: white; stroke-width: 1.5; }
+.step-text { fill: white; font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+
+.legend-row {
+  display: flex; gap: 18px;
+  margin-bottom: 20px; flex-wrap: wrap;
+  justify-content: center;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-muted);
+}
+.legend-box {
+  width: 14px; height: 14px; border-radius: 4px;
+  border: 1px solid;
+}
+.lb-green { background: var(--c-green-bg); border-color: var(--c-green); }
+.lb-blue  { background: var(--c-blue-bg);  border-color: var(--c-blue);  }
+.lb-amber { background: var(--c-amber-bg); border-color: var(--c-amber); }
+.lb-coral { background: var(--c-coral-bg); border-color: var(--c-coral); }
+
+.info-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  min-height: 180px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+.info-panel.has-content { border-color: var(--border-hi); }
+
+.panel-empty { text-align: center; padding: 20px 10px; color: var(--text-dim); }
+.panel-empty-icon { font-size: 28px; margin-bottom: 10px; opacity: 0.5; }
+.panel-empty-title { font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+.panel-empty-text { font-size: 13px; line-height: 1.6; max-width: 400px; margin: 0 auto; }
+
+.panel-head {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.panel-cat {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 8px;
+}
+.panel-cat.green { color: var(--c-green); background: var(--c-green-bg); border: 1px solid var(--c-green); }
+.panel-cat.blue  { color: var(--c-blue);  background: var(--c-blue-bg);  border: 1px solid var(--c-blue); }
+.panel-cat.amber { color: var(--c-amber); background: var(--c-amber-bg); border: 1px solid var(--c-amber); }
+.panel-cat.coral { color: var(--c-coral); background: var(--c-coral-bg); border: 1px solid var(--c-coral); }
+.panel-cat.core  { color: var(--accent); background: var(--accent-soft); border: 1px solid var(--border-hi); }
+
+.panel-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 4px 0; }
+.panel-sub { font-size: 13px; color: var(--text-muted); }
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.panel-section-col { }
+.panel-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.panel-text { font-size: 13px; color: var(--text); line-height: 1.65; }
+.panel-text-muted { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+.flows-wrap {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.flows-label {
+  font-size: 12px; color: var(--text-muted); font-weight: 500;
+  margin-right: 4px; width: 100%; text-align: center; margin-bottom: 6px;
+}
+.flow-btn {
+  padding: 9px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border); background: var(--bg-2);
+  color: var(--text); cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+}
+.flow-btn:hover {
+  border-color: var(--border-hi);
+  color: var(--accent);
+}
+.flow-btn.active {
+  background: var(--accent); color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+.reset-btn {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-dim); font-size: 11px;
+  padding: 8px 12px; border-radius: 8px;
+  cursor: pointer; font-family: inherit;
+}
+.reset-btn:hover { color: var(--text); }
+
+.flow-path-list { margin-top: 10px; }
+.flow-path-item {
+  display: flex; gap: 10px; align-items: center;
+  padding: 8px 0; border-bottom: 1px dashed var(--border);
+}
+.flow-path-item:last-child { border: none; }
+.flow-path-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: white;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.flow-path-info { font-size: 13px; color: var(--text); }
+.flow-path-info strong { color: var(--text); }
+.flow-path-info span { color: var(--text-muted); font-size: 12px; display: block; }
+
+@media (max-width: 768px) {
+  .container { padding: 40px 16px 60px; }
+  .hero-title { font-size: 34px; }
+  .aula-title { font-size: 28px; }
+  .passo { padding: 24px 22px; }
+  .intro-box { padding: 22px 20px; }
+  .flow { flex-direction: column; gap: 8px; }
+  .flow-arrow { transform: rotate(90deg); }
+  .flow-card { width: 100%; }
+  .header-inner { padding: 0 16px; gap: 12px; }
+  .logo { font-size: 13px; }
+  .nav-item { font-size: 12px; padding: 6px 10px; }
+  .diagram-interactive { padding: 16px; }
+  .diagram-svg-wrap { padding: 10px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">F</div>
+      <span>Flowgrammers</span>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-item active" data-target="overview">Visão Geral</div>
+      <div class="nav-item" data-target="aula1">Aula 1</div>
+      <div class="nav-item" data-target="aula2">Aula 2</div>
+      <div class="nav-item" data-target="aula3">Aula 3</div>
+      <div class="nav-item" data-target="aula4">Aula 4</div>
+      <div class="nav-item" data-target="aula5">Aula 5</div>
+      <div class="nav-item" data-target="resumo">Resumo</div>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- VISÃO GERAL -->
+  <section class="section active" id="overview">
+    <div class="hero-wrap">
+      <div class="tag">Flowgrammers · Arquitetura de Agentes</div>
+      <h1 class="hero-title">
+        Claude Code
+        <span class="pink">como núcleo</span>
+      </h1>
+      <p class="hero-desc">
+        Cinco aulas para você entender como o Claude Code se posiciona no centro
+        de uma arquitetura moderna de desenvolvimento com IA. Sem código.
+        Foco total em como pensar sobre sistemas.
+      </p>
+    </div>
+
+    <div class="flow">
+      <div class="flow-card" onclick="go('aula1')">
+        <div class="flow-num">1</div>
+        <div class="flow-name">O NÚCLEO</div>
+        <div class="flow-sub">Por que Claude Code está no centro</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card" onclick="go('aula2')">
+        <div class="flow-num">2</div>
+        <div class="flow-name">O DIAGRAMA</div>
+        <div class="flow-sub">As 4 categorias de conexão</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card" onclick="go('aula3')">
+        <div class="flow-num">3</div>
+        <div class="flow-name">O FLUXO</div>
+        <div class="flow-sub">Como instrução vira ação</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card" onclick="go('aula4')">
+        <div class="flow-num">4</div>
+        <div class="flow-name">OS LIMITES</div>
+        <div class="flow-sub">O que Claude Code não substitui</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-card" onclick="go('aula5')">
+        <div class="flow-num">5</div>
+        <div class="flow-name">SEU PROJETO</div>
+        <div class="flow-sub">Desenhando sua arquitetura</div>
+      </div>
+    </div>
+
+    <div class="result-banner">
+      Ao final, você vai ter <b>mental model claro</b> e o <b>diagrama do seu próprio projeto</b> documentado
+    </div>
+
+    <div class="cards-grid">
+      <div class="info-card">
+        <span class="info-icon">🎯</span>
+        <div class="info-title">COMO USAR ESTE MATERIAL</div>
+        <div class="info-text">Cada aula tem um conteúdo escrito que complementa o vídeo. Use para revisar conceitos, fazer as atividades e fixar o aprendizado. Volte sempre que precisar.</div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">📐</span>
+        <div class="info-title">SEM CÓDIGO</div>
+        <div class="info-text">Nenhuma aula exige abrir o terminal. O foco aqui é entender como os sistemas se conectam, não implementar. O código vem nos próximos módulos.</div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">✍️</span>
+        <div class="info-title">FAÇA AS ATIVIDADES</div>
+        <div class="info-text">Em cada aula você encontra atividades práticas. Pare o vídeo, faça o exercício e compare sua resposta com a resposta esperada. É assim que o conteúdo fixa.</div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🚀</span>
+        <div class="info-title">ENTREGÁVEL FINAL</div>
+        <div class="info-text">Na Aula 5 você vai desenhar o diagrama da arquitetura do seu próprio projeto. Esse diagrama vai te acompanhar no curso inteiro como referência técnica.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AULA 1 -->
+  <section class="section" id="aula1">
+    <div class="aula-header">
+      <div class="aula-label">AULA 01</div>
+      <h1 class="aula-title">Por que Claude Code <span class="pink">está no centro</span></h1>
+      <p class="aula-desc">A primeira aula responde à pergunta mais importante do módulo: o que significa um sistema ser o núcleo de uma arquitetura.</p>
+    </div>
+    <div class="intro-box">
+      <p>Se você já mexeu com Claude Code, provavelmente já notou: ele não funciona como um ChatGPT. Você não chama ele pra fazer uma coisa. Você fala um objetivo, e ele se vira.</p>
+      <p>Essa diferença parece sutil, mas muda completamente como você desenha seus projetos. Nesta aula, você vai entender por que Claude Code fica <em>no centro</em> da arquitetura — e não como mais uma ferramenta ao lado das outras.</p>
+    </div>
+    <div class="s-block">
+      <div class="s-label">O QUE VOCÊ VAI APRENDER</div>
+      <div class="learn-grid">
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Por que o diagrama coloca Claude Code no centro — e não as APIs, o banco ou o n8n.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">A diferença entre uma ferramenta passiva e um agente ativo que orquestra outras ferramentas.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">O conceito de núcleo ativo: um sistema que age, decide e chama os outros por conta própria.</div></div>
+      </div>
+    </div>
+    <div class="s-block">
+      <div class="s-label">CONTEÚDO DA AULA</div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">1</div><div class="passo-title">Olhe o diagrama antes de qualquer coisa</div></div>
+        <div class="passo-body">
+          <p>Antes de entrar em qualquer conceito, preste atenção no diagrama da arquitetura que você viu no início do vídeo. Observe uma coisa: <strong>no centro, tem uma caixa escrita "Claude Code"</strong>. Tudo o mais ao redor se conecta a ele.</p>
+          <p>Por que o desenho foi feito assim? Por que não o Supabase no centro? Por que não o GitHub? Por que não o n8n? Eles são todos sistemas importantes. O que justifica essa posição?</p>
+          <p>Guarde essa pergunta. A resposta vem nos próximos passos.</p>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">2</div><div class="passo-title">Ferramenta passiva vs agente ativo</div></div>
+        <div class="passo-body">
+          <p>Existem dois tipos fundamentais de sistema numa stack moderna: os <strong>passivos</strong> e os <strong>ativos</strong>.</p>
+          <p>Um sistema passivo é aquele que executa o que você pede, exatamente como você pediu. Ele não tem iniciativa. O Supabase, por exemplo, é um banco de dados excelente — mas ele fica parado esperando alguém escrever SQL. O n8n também: ele espera você desenhar o workflow. O GitHub guarda o código, não escreve.</p>
+          <p>Já um agente ativo é diferente. Você fala <em>o que quer</em>, e ele decide sozinho <em>como fazer</em>. Qual ferramenta usar. Em qual ordem. O que fazer quando algo dá errado. Ele tem iniciativa.</p>
+          <table class="t">
+            <thead><tr><th>Ferramenta passiva</th><th>Agente ativo (Claude Code)</th></tr></thead>
+            <tbody>
+              <tr><td>Espera você clicar</td><td>Age por conta própria</td></tr>
+              <tr><td>Executa um comando por vez</td><td>Encadeia múltiplas ações</td></tr>
+              <tr><td>Não toma decisões</td><td>Decide o caminho baseado no objetivo</td></tr>
+              <tr><td>Precisa de você do início ao fim</td><td>Você define o destino, ele se vira</td></tr>
+            </tbody>
+          </table>
+          <div class="destaque">
+            <div class="destaque-label">O ponto-chave</div>
+            <div class="destaque-text">Claude Code está no centro do diagrama porque ele é o único sistema ativo da arquitetura. Todos os outros esperam ser chamados. Só ele age por conta própria.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">3</div><div class="passo-title">A analogia do maestro</div></div>
+        <div class="passo-body">
+          <p>A forma mais fácil de entender isso é pensar numa orquestra.</p>
+          <div class="analogia">
+            <div class="analogia-label">A orquestra</div>
+            <div class="analogia-text">Imagine uma orquestra sinfônica. Cada músico é um especialista: o violinista toca violino muito bem, o tubista toca tuba, o baterista cuida do tempo. Todos são excelentes no que fazem, mas sozinhos tocariam cada um no seu ritmo, sem sincronia. O que transforma um grupo de músicos em uma orquestra é o maestro.<br><br>O maestro não toca nenhum instrumento durante o concerto. Ele lê a partitura, entende o que precisa acontecer em cada momento, e coordena quem entra quando, em que volume, com qual intensidade. Sem ele, o concerto vira ruído.</div>
+          </div>
+          <p>Agora aplique isso ao diagrama:</p>
+          <div class="analogia">
+            <div class="analogia-label">A tradução para arquitetura</div>
+            <div class="analogia-text">O Supabase é o violinista dos dados. O n8n é o percussionista da automação. O GitHub é o baixista da versão. O WhatsApp é o trompete da entrega. Cada um faz muito bem uma coisa específica. <strong>Claude Code é o maestro</strong>: lê sua instrução (a partitura), decide quem entra primeiro, chama cada sistema na hora certa e entrega o resultado final coeso.</div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">Lembre sempre</div>
+            <div class="destaque-text">Se você tirar o maestro da orquestra, os músicos continuam tocando — mas cada um no seu tempo, sem sincronia. É exatamente isso que acontece sem Claude Code: os sistemas continuam funcionando, mas ninguém coordena. Você vira o maestro humano, abrindo aba por aba, conectando tudo na mão.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">4</div><div class="passo-title">Hora de testar o conceito</div></div>
+        <div class="passo-body">
+          <p>Agora que você entendeu a ideia, é hora de aplicar. Pare o vídeo e tente responder essas três perguntas antes de continuar:</p>
+          <div class="atividade">
+            <div class="atividade-label">Atividade mental</div>
+            <div class="atividade-title">Imagine o diagrama sem Claude Code no centro</div>
+            <div class="atividade-text">
+              <ol>
+                <li>Se eu tiro Claude Code do centro, como o Supabase conversa com o GitHub?</li>
+                <li>Quem decide que, depois de escrever no banco, precisa notificar o WhatsApp?</li>
+                <li>Quem escolhe, entre Playwright e MCP, qual usar em cada situação?</li>
+              </ol>
+            </div>
+          </div>
+          <p>Pense por um minuto antes de ver a resposta.</p>
+          <div class="dica"><strong>Resposta:</strong> sem Claude Code, cada integração precisa ser escrita manualmente — código, workflow no n8n, scripts shell. O que era orquestração automática vira trabalho humano repetitivo. É aí que está o valor do núcleo: ele elimina o trabalho de conectar os sistemas manualmente.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">5</div><div class="passo-title">O takeaway da aula</div></div>
+        <div class="passo-body">
+          <p>Chegamos ao final. Fixe esta ideia na cabeça:</p>
+          <div class="destaque">
+            <div class="destaque-label">Takeaway</div>
+            <div class="destaque-text">Claude Code não é só mais uma ferramenta que você instala. Ele é o <strong>maestro</strong> que decide quem toca quando na sua arquitetura. Essa é a razão pela qual ele fica no centro — e tudo o mais se organiza ao redor dele.</div>
+          </div>
+          <p>Na próxima aula, você vai aprender a <em>ler</em> esse diagrama. Porque ele não é só bonito — ele tem uma linguagem própria. Cada cor, cada posição, cada conexão significa alguma coisa. E quando você aprende essa linguagem, consegue desenhar a arquitetura de qualquer projeto.</p>
+        </div>
+      </div>
+    </div>
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('overview')">← Visão Geral</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('aula2')">Aula 2 →</button>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       AULA 2 — COM DIAGRAMA INTERATIVO (14 SISTEMAS)
+       ============================================================ -->
+  <section class="section" id="aula2">
+    <div class="aula-header">
+      <div class="aula-label">AULA 02</div>
+      <h1 class="aula-title">Lendo o diagrama — <span class="pink">as 4 categorias</span></h1>
+      <p class="aula-desc">Cada cor do diagrama representa um tipo específico de relação com o núcleo. Aprender essa linguagem é aprender a pensar arquiteturalmente.</p>
+    </div>
+
+    <div class="intro-box">
+      <p>Você já entendeu <em>por que</em> Claude Code fica no centro. Agora vamos entender o que está ao redor dele.</p>
+      <p>Olhe o diagrama abaixo: quatro cores, quatro grupos de sistemas. Isso não é decorativo. Cada cor representa um tipo diferente de relação com o núcleo. Nesta aula, você vai aprender a <strong>ler</strong> esse diagrama como um idioma — e você pode explorar ele interativamente logo na próxima seção.</p>
+    </div>
+
+    <div class="s-block">
+      <div class="s-label">O QUE VOCÊ VAI APRENDER</div>
+      <div class="learn-grid">
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Reconhecer a lógica de cores — cada categoria representa um tipo de relação com o núcleo.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Diferenciar sistemas que orquestram junto com Claude Code vs sistemas que são consumidos por ele.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Entender que a posição no diagrama (esquerda/direita) carrega significado arquitetural.</div></div>
+      </div>
+    </div>
+
+    <!-- DIAGRAMA INTERATIVO -->
+    <div class="s-block">
+      <div class="s-label">EXPLORE O DIAGRAMA</div>
+
+      <div class="diagram-interactive">
+
+        <div class="diagram-help">
+          <strong>Clique</strong> em qualquer sistema para ver os detalhes · <strong>Filtre</strong> por categoria com os botões abaixo · <strong>Visualize fluxos</strong> nos botões ao final
+        </div>
+
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all"><span class="filter-dot fd-all"></span> Todas</button>
+          <button class="filter-btn" data-filter="green"><span class="filter-dot fd-green"></span> Frameworks</button>
+          <button class="filter-btn" data-filter="blue"><span class="filter-dot fd-blue"></span> Infra / Dados</button>
+          <button class="filter-btn" data-filter="amber"><span class="filter-dot fd-amber"></span> APIs / IDEs</button>
+          <button class="filter-btn" data-filter="coral"><span class="filter-dot fd-coral"></span> Canais / RAG</button>
+        </div>
+
+        <div class="legend-row">
+          <div class="legend-item"><span class="legend-box lb-green"></span> Frameworks / Orquestração</div>
+          <div class="legend-item"><span class="legend-box lb-blue"></span> Infra / Dados</div>
+          <div class="legend-item"><span class="legend-box lb-amber"></span> APIs / IDEs</div>
+          <div class="legend-item"><span class="legend-box lb-coral"></span> Canais / RAG</div>
+        </div>
+
+        <!-- SVG COM 14 SISTEMAS -->
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 900 590" xmlns="http://www.w3.org/2000/svg" id="svg">
+
+            <g id="connectors">
+              <!-- Verde (esquerda superior) -->
+              <line class="connector" data-to="mcp" x1="230" y1="65" x2="370" y2="280"/>
+              <line class="connector" data-to="n8n" x1="230" y1="155" x2="370" y2="290"/>
+              <line class="connector" data-to="langgraph" x1="230" y1="245" x2="370" y2="300"/>
+              <!-- Azul (esquerda inferior) -->
+              <line class="connector" data-to="supabase" x1="230" y1="335" x2="370" y2="310"/>
+              <line class="connector" data-to="github" x1="230" y1="425" x2="370" y2="320"/>
+              <line class="connector" data-to="docker" x1="230" y1="515" x2="370" y2="330"/>
+              <!-- Amarelo (direita superior) -->
+              <line class="connector" data-to="cursor" x1="670" y1="59" x2="530" y2="280"/>
+              <line class="connector" data-to="vscode" x1="670" y1="125" x2="530" y2="285"/>
+              <line class="connector" data-to="antigravity" x1="670" y1="191" x2="530" y2="295"/>
+              <line class="connector" data-to="fastapi" x1="670" y1="257" x2="530" y2="300"/>
+              <line class="connector" data-to="anthropic" x1="670" y1="323" x2="530" y2="310"/>
+              <!-- Coral (direita inferior) -->
+              <line class="connector" data-to="playwright" x1="670" y1="389" x2="530" y2="320"/>
+              <line class="connector" data-to="rag" x1="670" y1="455" x2="530" y2="325"/>
+              <line class="connector" data-to="whatsapp" x1="670" y1="521" x2="530" y2="330"/>
+            </g>
+
+            <!-- Núcleo Claude Code -->
+            <g class="node-g" data-id="core" data-cat="core">
+              <rect class="node-rect core-rect" x="370" y="265" width="160" height="70" rx="12" fill="rgba(255,0,128,0.22)" stroke="#FF0080" stroke-width="1.5"/>
+              <text x="450" y="293" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">Claude Code</text>
+              <text x="450" y="315" text-anchor="middle" fill="#FF3399" font-size="12" font-weight="500">núcleo</text>
+            </g>
+
+            <!-- VERDE: Frameworks (esquerda superior) — 3 caixas de 60px -->
+            <g class="node-g" data-id="mcp" data-cat="green" style="color: #1D9E75;">
+              <rect class="node-rect" x="70" y="35" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+              <text x="150" y="61" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">MCP Servers</text>
+              <text x="150" y="81" text-anchor="middle" fill="#5DCAA5" font-size="11">protocolo de contexto</text>
+            </g>
+            <g class="node-g" data-id="n8n" data-cat="green" style="color: #1D9E75;">
+              <rect class="node-rect" x="70" y="125" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+              <text x="150" y="151" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">n8n</text>
+              <text x="150" y="171" text-anchor="middle" fill="#5DCAA5" font-size="11">automação empresarial</text>
+            </g>
+            <g class="node-g" data-id="langgraph" data-cat="green" style="color: #1D9E75;">
+              <rect class="node-rect" x="70" y="215" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+              <text x="150" y="241" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">LangGraph / CrewAI</text>
+              <text x="150" y="261" text-anchor="middle" fill="#5DCAA5" font-size="11">multi-agent systems</text>
+            </g>
+
+            <!-- AZUL: Infra (esquerda inferior) — 3 caixas de 60px -->
+            <g class="node-g" data-id="supabase" data-cat="blue" style="color: #378ADD;">
+              <rect class="node-rect" x="70" y="305" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+              <text x="150" y="331" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Supabase / DB</text>
+              <text x="150" y="351" text-anchor="middle" fill="#85B7EB" font-size="11">dados e vetores</text>
+            </g>
+            <g class="node-g" data-id="github" data-cat="blue" style="color: #378ADD;">
+              <rect class="node-rect" x="70" y="395" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+              <text x="150" y="421" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">GitHub</text>
+              <text x="150" y="441" text-anchor="middle" fill="#85B7EB" font-size="11">versionamento + CI/CD</text>
+            </g>
+            <g class="node-g" data-id="docker" data-cat="blue" style="color: #378ADD;">
+              <rect class="node-rect" x="70" y="485" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+              <text x="150" y="511" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Docker / VPS</text>
+              <text x="150" y="531" text-anchor="middle" fill="#85B7EB" font-size="11">deploy e infra</text>
+            </g>
+
+            <!-- AMARELO: IDEs + APIs (direita superior) — 5 caixas de 48px -->
+            <g class="node-g" data-id="cursor" data-cat="amber" style="color: #EF9F27;">
+              <rect class="node-rect" x="670" y="35" width="160" height="48" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+              <text x="750" y="56" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">Cursor / Lovable</text>
+              <text x="750" y="73" text-anchor="middle" fill="#F2B955" font-size="10">IDEs com IA</text>
+            </g>
+            <g class="node-g" data-id="vscode" data-cat="amber" style="color: #EF9F27;">
+              <rect class="node-rect" x="670" y="101" width="160" height="48" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+              <text x="750" y="122" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">VS Code</text>
+              <text x="750" y="139" text-anchor="middle" fill="#F2B955" font-size="10">IDE padrão de mercado</text>
+            </g>
+            <g class="node-g" data-id="antigravity" data-cat="amber" style="color: #EF9F27;">
+              <rect class="node-rect" x="670" y="167" width="160" height="48" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+              <text x="750" y="188" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">Antigravity</text>
+              <text x="750" y="205" text-anchor="middle" fill="#F2B955" font-size="10">IDE agent-first (Google)</text>
+            </g>
+            <g class="node-g" data-id="fastapi" data-cat="amber" style="color: #EF9F27;">
+              <rect class="node-rect" x="670" y="233" width="160" height="48" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+              <text x="750" y="254" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">FastAPI / REST</text>
+              <text x="750" y="271" text-anchor="middle" fill="#F2B955" font-size="10">exposição de agentes</text>
+            </g>
+            <g class="node-g" data-id="anthropic" data-cat="amber" style="color: #EF9F27;">
+              <rect class="node-rect" x="670" y="299" width="160" height="48" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+              <text x="750" y="320" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">Anthropic API</text>
+              <text x="750" y="337" text-anchor="middle" fill="#F2B955" font-size="10">SDK + streaming</text>
+            </g>
+
+            <!-- CORAL: Canais / RAG (direita inferior) — 3 caixas de 48px -->
+            <g class="node-g" data-id="playwright" data-cat="coral" style="color: #D85A30;">
+              <rect class="node-rect" x="670" y="365" width="160" height="48" rx="10" fill="rgba(216,90,48,0.18)" stroke="#D85A30" stroke-width="0.8"/>
+              <text x="750" y="386" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">Playwright</text>
+              <text x="750" y="403" text-anchor="middle" fill="#F09079" font-size="10">browser automation</text>
+            </g>
+            <g class="node-g" data-id="rag" data-cat="coral" style="color: #D85A30;">
+              <rect class="node-rect" x="670" y="431" width="160" height="48" rx="10" fill="rgba(216,90,48,0.18)" stroke="#D85A30" stroke-width="0.8"/>
+              <text x="750" y="452" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">RAG + Embeddings</text>
+              <text x="750" y="469" text-anchor="middle" fill="#F09079" font-size="10">memória semântica</text>
+            </g>
+            <g class="node-g" data-id="whatsapp" data-cat="coral" style="color: #D85A30;">
+              <rect class="node-rect" x="670" y="497" width="160" height="48" rx="10" fill="rgba(216,90,48,0.18)" stroke="#D85A30" stroke-width="0.8"/>
+              <text x="750" y="518" text-anchor="middle" fill="#F5F5F7" font-size="13" font-weight="600">WhatsApp / Slack</text>
+              <text x="750" y="535" text-anchor="middle" fill="#F09079" font-size="10">canais de entrega</text>
+            </g>
+
+            <g id="step-badges"></g>
+          </svg>
+        </div>
+
+        <div class="info-panel" id="panel">
+          <div class="panel-empty">
+            <div class="panel-empty-icon">◎</div>
+            <div class="panel-empty-title">Clique em um sistema</div>
+            <div class="panel-empty-text">As informações sobre o sistema selecionado aparecem aqui. Explore cada caixa do diagrama para entender seu papel.</div>
+          </div>
+        </div>
+
+        <div class="flows-wrap">
+          <span class="flows-label">VEJA EXEMPLOS DE FLUXO NO DIAGRAMA</span>
+          <button class="flow-btn" data-flow="endpoint">Endpoint + Slack</button>
+          <button class="flow-btn" data-flow="scraping">Monitoramento + WhatsApp</button>
+          <button class="flow-btn" data-flow="refactor">Refatoração + deploy</button>
+          <button class="reset-btn" onclick="resetAll()">Limpar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="s-block">
+      <div class="s-label">AS 4 CATEGORIAS EXPLICADAS</div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">1</div><div class="passo-title">Verde — Frameworks e orquestração</div></div>
+        <div class="passo-body">
+          <p>Os sistemas verdes são <strong>MCP Servers</strong>, <strong>n8n</strong> e <strong>LangGraph/CrewAI</strong>. O que eles têm em comum?</p>
+          <p>Todos os três <em>estendem</em> o que Claude Code sabe fazer. O MCP adiciona ferramentas novas ao agente. O n8n adiciona workflows de automação empresarial. O LangGraph adiciona capacidade de trabalhar com múltiplos agentes em paralelo.</p>
+          <p>Eles não são apenas <em>usados</em> pelo Claude Code. Eles <em>trabalham junto</em> com ele, como parceiros de orquestração.</p>
+          <div class="pills">
+            <div class="pill accent">MCP Servers</div>
+            <div class="pill accent">n8n</div>
+            <div class="pill accent">LangGraph / CrewAI</div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">A forma mais fácil de pensar</div>
+            <div class="destaque-text">Se Claude Code é o maestro, os sistemas verdes são outros maestros convidados. Eles também sabem coordenar coisas. MCP convida novas ferramentas pra orquestra. n8n cuida da parte empresarial. LangGraph monta outra orquestra se precisar.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">2</div><div class="passo-title">Azul — Infraestrutura e dados</div></div>
+        <div class="passo-body">
+          <p>Os sistemas azuis são <strong>Supabase/DB</strong>, <strong>GitHub</strong> e <strong>Docker/VPS</strong>. São a <em>fundação física</em> da sua arquitetura.</p>
+          <p>A característica que une os três: eles existem independentemente do Claude Code e continuam úteis mesmo sem ele. Você teria um Supabase, um GitHub e um Docker de qualquer forma, em qualquer projeto moderno. A diferença é que o Claude Code aprende a usar essas fundações automaticamente.</p>
+          <div class="pills">
+            <div class="pill accent">Supabase / DB</div>
+            <div class="pill accent">GitHub</div>
+            <div class="pill accent">Docker / VPS</div>
+          </div>
+          <div class="analogia">
+            <div class="analogia-label">Uma forma de lembrar</div>
+            <div class="analogia-text">Os sistemas azuis são como os <strong>cimentos da casa</strong>. Não importa quem vai morar, eles precisam estar lá. Claude Code é quem mora na casa — ele usa os cimentos, mas não os substitui.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">3</div><div class="passo-title">Amarelo — IDEs e APIs</div></div>
+        <div class="passo-body">
+          <p>A categoria amarela é a maior do diagrama porque reúne <em>dois subtipos relacionados</em>: os <strong>IDEs</strong> (onde o desenvolvedor trabalha) e as <strong>APIs</strong> (onde o código é exposto ou consumido).</p>
+
+          <p><strong>Os IDEs da categoria:</strong></p>
+          <div class="pills">
+            <div class="pill accent">Cursor / Lovable</div>
+            <div class="pill accent">VS Code</div>
+            <div class="pill accent">Antigravity</div>
+          </div>
+
+          <p><strong>As APIs da categoria:</strong></p>
+          <div class="pills">
+            <div class="pill accent">FastAPI / REST</div>
+            <div class="pill accent">Anthropic API</div>
+          </div>
+
+          <p>Os IDEs são onde você <em>dirige</em> o Claude Code. Cursor e Lovable têm IA nativa; o VS Code é o editor mais usado do mundo, onde Claude Code também opera via terminal ou extensão; o Antigravity é o novo IDE do Google focado em fluxo <em>agent-first</em> (desenvolvido para colaborar com múltiplos agentes de IA).</p>
+
+          <p>Já as APIs estão no mesmo grupo porque dividem a mesma lógica: não orquestram, elas <em>expõem</em> ou <em>consomem</em>. A FastAPI expõe seus agentes; a Anthropic API é o acesso direto ao modelo.</p>
+
+          <div class="destaque">
+            <div class="destaque-label">Por que IDE e API na mesma categoria</div>
+            <div class="destaque-text">Porque todos esses sistemas são <strong>primos do Claude Code</strong> — ambientes e interfaces que usam ou hospedam inteligência artificial, mas nenhum deles tenta ser maestro. São ferramentas de desenvolvedor que trabalham <em>com</em> Claude Code ou <em>paralelamente</em> a ele.</div>
+          </div>
+
+          <div class="dica"><strong>Observação importante:</strong> Antigravity e VS Code foram adicionados à categoria para refletir a realidade de 2026. O Antigravity representa a próxima geração de IDEs já nascidos para IA multi-agente. O VS Code é o editor neutro onde Claude Code pode rodar de forma não-invasiva.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">4</div><div class="passo-title">Vermelho — Canais de entrega e RAG</div></div>
+        <div class="passo-body">
+          <p>Os sistemas vermelhos são <strong>Playwright</strong>, <strong>RAG + Embeddings</strong> e <strong>WhatsApp/Slack</strong>. Eles têm um papel específico: são o <em>ponto de contato com o mundo real</em>.</p>
+          <p>Playwright leva o Claude Code até o navegador, conectando ao mundo via web. RAG é a memória que permite responder com contexto específico do seu negócio. WhatsApp e Slack são onde o resultado aparece para o usuário final. Os três fazem a ponte entre o agente e o mundo externo.</p>
+          <div class="pills">
+            <div class="pill accent">Playwright</div>
+            <div class="pill accent">RAG + Embeddings</div>
+            <div class="pill accent">WhatsApp / Slack</div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">O papel deles</div>
+            <div class="destaque-text">Tudo o que sai do núcleo precisa chegar em algum lugar. Os sistemas vermelhos são esse <strong>último quilômetro</strong> da sua arquitetura. Sem eles, o Claude Code pensa bonito mas não entrega nada pra ninguém.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">5</div><div class="passo-title">Hora de testar sua compreensão</div></div>
+        <div class="passo-body">
+          <p>Agora que você conhece as 4 categorias, vamos ver se você absorveu mesmo. Use o diagrama interativo acima se precisar revisar.</p>
+          <div class="atividade">
+            <div class="atividade-label">Atividade de classificação</div>
+            <div class="atividade-title">Em qual categoria você colocaria?</div>
+            <div class="atividade-text">
+              <ol>
+                <li>Evolution API</li>
+                <li>pgvector</li>
+                <li>Vercel</li>
+                <li>JetBrains IDEs</li>
+              </ol>
+              <br>
+              Para cada um, pense: qual categoria? Por quê? Só depois veja a resposta abaixo.
+            </div>
+          </div>
+          <div class="dica">
+            <strong>Respostas:</strong><br>
+            • Evolution API → <em>Vermelho</em> (canal de entrega, é WhatsApp).<br>
+            • pgvector → <em>Azul</em> (dados e vetores, é infraestrutura).<br>
+            • Vercel → <em>Azul</em> (deploy, é infraestrutura).<br>
+            • JetBrains IDEs → <em>Amarelo</em> (IDE, entra na mesma categoria que Cursor, VS Code e Antigravity).<br><br>
+            Se você acertou a lógica, parabéns: você já internalizou a categorização. Se errou, volte nos passos 1 a 4 e tente de novo.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('aula1')">← Aula 1</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('aula3')">Aula 3 →</button>
+    </div>
+  </section>
+
+  <!-- AULA 3 -->
+  <section class="section" id="aula3">
+    <div class="aula-header">
+      <div class="aula-label">AULA 03</div>
+      <h1 class="aula-title">Como uma instrução <span class="pink">vira ação</span></h1>
+      <p class="aula-desc">Rastreando fluxos reais no diagrama. Do comando do desenvolvedor até o resultado entregue ao usuário final.</p>
+    </div>
+    <div class="intro-box">
+      <p>Nas duas primeiras aulas, você aprendeu <em>por que</em> Claude Code está no centro e <em>o que</em> tem ao redor. Agora é hora de ver a arquitetura em movimento.</p>
+      <p>Nesta aula, você vai ver como uma única instrução sua ativa múltiplos sistemas do diagrama em sequência. Isso tem um nome: <strong>caminho crítico</strong>. Lembre: no diagrama interativo da Aula 2, você pode visualizar esses fluxos clicando nos botões "Endpoint + Slack", "Monitoramento + WhatsApp" e "Refatoração + deploy".</p>
+    </div>
+    <div class="s-block">
+      <div class="s-label">O QUE VOCÊ VAI APRENDER</div>
+      <div class="learn-grid">
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Como uma única instrução ativa múltiplos sistemas em sequência.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Que Claude Code decide o caminho baseado na tarefa, não aciona tudo ao mesmo tempo.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">O conceito de caminho crítico: sistemas obrigatórios vs opcionais por tipo de objetivo.</div></div>
+      </div>
+    </div>
+    <div class="s-block">
+      <div class="s-label">TRÊS EXEMPLOS REAIS</div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">1</div><div class="passo-title">O conceito de caminho crítico</div></div>
+        <div class="passo-body">
+          <p>Antes de ver os exemplos, entenda o conceito central da aula.</p>
+          <p>Numa arquitetura com 14 sistemas, nenhuma tarefa usa todos ao mesmo tempo. Cada instrução percorre um <em>subconjunto específico</em> — um caminho determinado pelos requisitos da tarefa.</p>
+          <p>Esse caminho é o <strong>caminho crítico</strong>. Ele inclui só os sistemas necessários para aquela tarefa específica. Os outros ficam parados, esperando.</p>
+          <div class="destaque">
+            <div class="destaque-label">Por que isso importa</div>
+            <div class="destaque-text">Entender caminho crítico é a habilidade que separa quem só <em>usa</em> Claude Code de quem <em>projeta</em> sistemas com Claude Code. Você olha pra uma tarefa e já consegue prever quais sistemas serão acionados — e em que ordem.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">2</div><div class="passo-title">Exemplo 1 — Criando um endpoint de cadastro</div></div>
+        <div class="passo-body">
+          <div class="analogia">
+            <div class="analogia-label">A instrução</div>
+            <div class="analogia-text">"Cria um endpoint REST de cadastro de usuário que grava no banco, dispara email de boas-vindas e manda notificação pro Slack do time."</div>
+          </div>
+          <p>Vamos rastrear o caminho crítico dessa tarefa, sistema por sistema:</p>
+          <div class="lista-fluxo">
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">1</div><div class="lista-fluxo-text"><strong>CLAUDE.md</strong> — Claude Code lê o arquivo de contexto do projeto</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">2</div><div class="lista-fluxo-text"><strong>GitHub (azul)</strong> — analisa a estrutura atual do repositório</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">3</div><div class="lista-fluxo-text"><strong>FastAPI (amarelo)</strong> — gera o código do endpoint</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">4</div><div class="lista-fluxo-text"><strong>Supabase (azul)</strong> — cria o schema da tabela de usuários</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">5</div><div class="lista-fluxo-text"><strong>Bash (tool nativa)</strong> — roda os testes automatizados</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">6</div><div class="lista-fluxo-text"><strong>n8n (verde)</strong> — configura o workflow que dispara email e Slack</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">7</div><div class="lista-fluxo-text"><strong>Slack (vermelho)</strong> — recebe a notificação final</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">8</div><div class="lista-fluxo-text"><strong>GitHub (azul)</strong> — commit, push e PR abertos automaticamente</div></div>
+          </div>
+          <div class="dica"><strong>Repare:</strong> não usamos MCP, nem Playwright, nem RAG nesse exemplo. Essa instrução não precisa deles. Cada tarefa tem seu caminho crítico próprio.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">3</div><div class="passo-title">Exemplo 2 — Monitoramento + relatório automatizado</div></div>
+        <div class="passo-body">
+          <div class="analogia">
+            <div class="analogia-label">A instrução</div>
+            <div class="analogia-text">"Monitora o site de licitações do governo todo dia às 8h, extrai as novas publicações da área de tecnologia, salva num banco vetorial e gera um briefing executivo em PDF enviado por WhatsApp."</div>
+          </div>
+          <p>Essa tarefa é bem mais complexa. Veja o caminho:</p>
+          <div class="lista-fluxo">
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">1</div><div class="lista-fluxo-text"><strong>n8n (verde)</strong> — agenda o trigger diário às 8h</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">2</div><div class="lista-fluxo-text"><strong>Playwright (vermelho)</strong> — acessa o site e extrai os dados</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">3</div><div class="lista-fluxo-text"><strong>Claude Code (núcleo)</strong> — analisa e classifica o conteúdo</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">4</div><div class="lista-fluxo-text"><strong>RAG + Embeddings (vermelho)</strong> — gera embeddings e armazena</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">5</div><div class="lista-fluxo-text"><strong>Supabase (azul)</strong> — persiste os metadados</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">6</div><div class="lista-fluxo-text"><strong>Anthropic API (amarelo)</strong> — gera o briefing executivo</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">7</div><div class="lista-fluxo-text"><strong>Docker / VPS (azul)</strong> — gera o PDF no servidor</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">8</div><div class="lista-fluxo-text"><strong>WhatsApp via n8n</strong> — entrega o briefing ao usuário</div></div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">Observação importante</div>
+            <div class="destaque-text">Esse caminho passa por <strong>todas as 4 categorias</strong> (verde, azul, amarelo e vermelho). É um fluxo completo que mostra o poder da arquitetura integrada. Mas note: continuou não usando MCP, nem GitHub, nem LangGraph.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">4</div><div class="passo-title">Exemplo 3 — Refatoração com deploy</div></div>
+        <div class="passo-body">
+          <div class="analogia">
+            <div class="analogia-label">A instrução</div>
+            <div class="analogia-text">"Refatora esse módulo de autenticação pra usar JWT com refresh token, atualiza os testes e faz o deploy em staging."</div>
+          </div>
+          <p>Esse exemplo é mais <em>"centrado em desenvolvedor"</em>:</p>
+          <div class="lista-fluxo">
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">1</div><div class="lista-fluxo-text"><strong>VS Code (amarelo)</strong> — Claude Code opera dentro do IDE do desenvolvedor</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">2</div><div class="lista-fluxo-text"><strong>MCP Servers (verde)</strong> — acessa contexto via MCP</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">3</div><div class="lista-fluxo-text"><strong>GitHub (azul)</strong> — cria branch e faz commits</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">4</div><div class="lista-fluxo-text"><strong>Bash (tool nativa)</strong> — roda os testes após cada mudança</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">5</div><div class="lista-fluxo-text"><strong>Docker (azul)</strong> — faz build da imagem atualizada</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">6</div><div class="lista-fluxo-text"><strong>VPS (azul)</strong> — deploy em ambiente de staging</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">7</div><div class="lista-fluxo-text"><strong>GitHub (azul novamente)</strong> — abre PR com descrição</div></div>
+          </div>
+          <div class="dica"><strong>Padrão interessante:</strong> esse exemplo usa muito da faixa amarela e azul, quase nada de vermelho. É uma tarefa interna, sem entrega externa imediata. Repare que o IDE escolhido poderia ser Cursor ou Antigravity — o caminho funciona com qualquer um deles.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">5</div><div class="passo-title">Sua vez — mapeie um caminho</div></div>
+        <div class="passo-body">
+          <p>Agora é sua vez de treinar. Escolha UMA das quatro instruções abaixo e mapeie o caminho crítico dela. Pare o vídeo e pegue papel e caneta.</p>
+          <div class="atividade">
+            <div class="atividade-label">Atividade prática</div>
+            <div class="atividade-title">Escolha uma e mapeie</div>
+            <div class="atividade-text">
+              <ol>
+                <li>"Toda segunda gera um relatório de vendas da semana em PDF e manda pra diretoria"</li>
+                <li>"Implementa um chatbot que responde dúvidas de RH via WhatsApp usando a documentação da empresa"</li>
+                <li>"Monitora concorrentes nas redes sociais e resume posts relevantes num dashboard"</li>
+                <li>"Cria um agente que faz code review automatizado em todo PR aberto no GitHub"</li>
+              </ol>
+              <br>
+              Para a instrução que você escolheu, liste na ordem: quais sistemas do diagrama são acionados, em qual ordem, e por quê.
+            </div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">Takeaway da aula</div>
+            <div class="destaque-text">Se você consegue olhar pra uma instrução qualquer e imediatamente mapear o caminho crítico dela no diagrama, você já pensa como arquiteto. Essa é a habilidade central que este módulo quer te entregar.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('aula2')">← Aula 2</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('aula4')">Aula 4 →</button>
+    </div>
+  </section>
+
+  <!-- AULA 4 -->
+  <section class="section" id="aula4">
+    <div class="aula-header">
+      <div class="aula-label">AULA 04</div>
+      <h1 class="aula-title">O que Claude Code <span class="pink">não substitui</span></h1>
+      <p class="aula-desc">Limites arquiteturais, responsabilidades e onde o humano continua no loop. A aula mais estratégica do módulo.</p>
+    </div>
+    <div class="intro-box">
+      <p>Depois de três aulas mostrando o poder do Claude Code, existe um risco: você começar a achar que ele substitui todo mundo. Isso é um erro — e um erro que pode custar caro.</p>
+      <p>Nesta aula, você vai ver exatamente <strong>o que Claude Code não substitui</strong> — e por que isso é uma boa notícia pra quem quer construir arquiteturas confiáveis, não sistemas frágeis.</p>
+    </div>
+    <div class="s-block">
+      <div class="s-label">O QUE VOCÊ VAI APRENDER</div>
+      <div class="learn-grid">
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Por que cada sistema do diagrama continua existindo, mesmo com Claude Code.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Os limites do núcleo: o que Claude Code decide sozinho vs o que precisa de aprovação humana.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Como posicionar checkpoints humanos na arquitetura de forma estratégica.</div></div>
+      </div>
+    </div>
+    <div class="s-block">
+      <div class="s-label">CONTEÚDO DA AULA</div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">1</div><div class="passo-title">Por que cada sistema continua existindo</div></div>
+        <div class="passo-body">
+          <p>Uma pergunta justa: se Claude Code é tão poderoso, por que eu preciso do Supabase? Por que manter o n8n? Por que o GitHub?</p>
+          <p>A resposta é que cada um desses sistemas faz muito bem uma coisa específica — e essa coisa não é o que Claude Code faz. Observe:</p>
+          <table class="t">
+            <thead><tr><th>Sistema</th><th>Por que Claude Code não substitui</th></tr></thead>
+            <tbody>
+              <tr><td>Supabase</td><td>Armazena dados persistentes, aplica regras transacionais, escala horizontalmente</td></tr>
+              <tr><td>GitHub</td><td>Versiona código de forma confiável, mantém histórico auditável</td></tr>
+              <tr><td>n8n</td><td>Executa workflows agendados 24/7 sem depender do Claude estar ativo</td></tr>
+              <tr><td>Docker</td><td>Garante reprodutibilidade do ambiente, isola execuções, padroniza deploy</td></tr>
+              <tr><td>WhatsApp / Slack</td><td>São onde os humanos já estão — Claude Code não tem audiência própria</td></tr>
+            </tbody>
+          </table>
+          <div class="destaque">
+            <div class="destaque-label">O ponto central</div>
+            <div class="destaque-text">Claude Code é excepcional em pensar e orquestrar. Mas não é bom em persistir 10 milhões de registros. Não é bom em ficar 24 horas no ar esperando eventos. Cada sistema ao redor faz uma coisa muito bem. Claude Code também: coordenar os outros. <strong>Ninguém aqui é redundante.</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">2</div><div class="passo-title">Autonomia vs supervisão humana</div></div>
+        <div class="passo-body">
+          <p>Este é o conceito mais importante da aula inteira.</p>
+          <p>Existe um espectro. Num extremo, decisões operacionais rotineiras que Claude Code resolve sozinho. No outro extremo, decisões com impacto irreversível, custo alto ou exposição pública — essas sempre passam por você.</p>
+          <div class="analogia">
+            <div class="analogia-label">Decisões que Claude Code pode tomar sozinho</div>
+            <div class="analogia-text">
+              <ol>
+                <li>Escolher qual biblioteca importar para resolver um problema técnico</li>
+                <li>Organizar a estrutura interna de um arquivo de código</li>
+                <li>Escrever testes unitários para funções existentes</li>
+                <li>Fazer commits locais e criar branches novas</li>
+                <li>Consultar documentação e buscar exemplos na web</li>
+              </ol>
+            </div>
+          </div>
+          <div class="analogia">
+            <div class="analogia-label">Decisões que precisam de aprovação humana</div>
+            <div class="analogia-text">
+              <ol>
+                <li>Fazer deploy em produção</li>
+                <li>Apagar registros de banco de dados ou deletar arquivos</li>
+                <li>Enviar mensagens em nome da empresa para clientes externos</li>
+                <li>Gastar recursos pagos (APIs, infraestrutura) acima de um limite</li>
+                <li>Mudanças arquiteturais que afetam múltiplos módulos</li>
+              </ol>
+            </div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">A regra geral</div>
+            <div class="destaque-text">Claude Code decide sozinho o que é <strong>reversível</strong>, <strong>barato</strong> e <strong>interno</strong>. Você decide o que é <strong>irreversível</strong>, <strong>caro</strong> ou <strong>público</strong>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">3</div><div class="passo-title">Como posicionar checkpoints no fluxo</div></div>
+        <div class="passo-body">
+          <p>Na prática, como você garante que o humano entra no loop na hora certa, sem virar gargalo?</p>
+          <p>Existem padrões conhecidos. Aprenda esses cinco:</p>
+          <div class="lista-fluxo">
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">1</div><div class="lista-fluxo-text"><strong>Checkpoint de aprovação antes de deploy</strong> — Claude Code faz tudo até gerar um PR. Humano aprova o merge.</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">2</div><div class="lista-fluxo-text"><strong>Checkpoint de limite de custo</strong> — acima de X reais gastos em API, o agente para e pede autorização.</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">3</div><div class="lista-fluxo-text"><strong>Checkpoint de comunicação externa</strong> — toda mensagem para clientes passa por revisão humana.</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">4</div><div class="lista-fluxo-text"><strong>Checkpoint de dados críticos</strong> — qualquer deleção ou update massivo aguarda confirmação.</div></div>
+            <div class="lista-fluxo-item"><div class="lista-fluxo-num">5</div><div class="lista-fluxo-text"><strong>Checkpoint de escalação</strong> — quando o agente fica "confuso" por mais de N iterações, escala.</div></div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">Human-in-the-loop consciente</div>
+            <div class="destaque-text">Coloque o humano <strong>exatamente onde ele agrega valor</strong>: em decisões irreversíveis, caras ou com exposição pública. E tire o humano de todo o resto.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">4</div><div class="passo-title">Exercício 5 × 5 — aplicado ao seu projeto</div></div>
+        <div class="passo-body">
+          <p>Vamos fazer essa teoria virar algo concreto pra você.</p>
+          <div class="atividade">
+            <div class="atividade-label">Atividade obrigatória</div>
+            <div class="atividade-title">Liste 5 × 5</div>
+            <div class="atividade-text">
+              Pensando no SEU projeto atual:
+              <br><br>
+              <strong>Lista A</strong> — liste 5 decisões que o Claude Code pode tomar sozinho, sem te perguntar.
+              <br><br>
+              <strong>Lista B</strong> — liste 5 decisões que você quer revisar manualmente antes de o agente executar.
+              <br><br>
+              Pare o vídeo, pegue um caderno e faça agora.
+            </div>
+          </div>
+          <div class="dica"><strong>Por que esse exercício importa:</strong> você sai da aula com uma lista concreta aplicada ao seu contexto. Guarde essa lista — ela vai ser referência quando você montar seu CLAUDE.md nos próximos módulos.</div>
+        </div>
+      </div>
+    </div>
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('aula3')">← Aula 3</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('aula5')">Aula 5 →</button>
+    </div>
+  </section>
+
+  <!-- AULA 5 -->
+  <section class="section" id="aula5">
+    <div class="aula-header">
+      <div class="aula-label">AULA 05</div>
+      <h1 class="aula-title">Desenhando sua <span class="pink">própria arquitetura</span></h1>
+      <p class="aula-desc">A aula culminante. Você vai sair com o diagrama do seu próprio projeto — o primeiro artefato técnico da sua jornada no curso.</p>
+    </div>
+    <div class="intro-box">
+      <p>Até agora, você viu o diagrama completo com 14 sistemas. Hora de uma notícia importante: muito provavelmente, seu próximo projeto não vai usar nem metade disso.</p>
+      <p>O diagrama é um <strong>buffet, não um prato</strong>. Você escolhe o que faz sentido pro seu caso. E é exatamente essa escolha que você vai aprender a fazer hoje.</p>
+    </div>
+    <div class="s-block">
+      <div class="s-label">O QUE VOCÊ VAI APRENDER</div>
+      <div class="learn-grid">
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Que o diagrama do módulo é um template flexível.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Como escolher quais sistemas conectar baseado no tipo de projeto.</div></div>
+        <div class="learn-card"><div class="learn-check">✓</div><div class="learn-text">Como documentar sua arquitetura num formato legível e evolutivo.</div></div>
+      </div>
+    </div>
+    <div class="s-block">
+      <div class="s-label">CONTEÚDO DA AULA</div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">1</div><div class="passo-title">Template vs projeto real</div></div>
+        <div class="passo-body">
+          <p>O diagrama completo que você viu no módulo inteiro é um <em>template</em>. Um menu de possibilidades. Mas cada projeto real usa um subconjunto específico.</p>
+          <p>Para te ajudar a decidir, vou mostrar quatro arquétipos de arquitetura. Cada arquétipo é adequado a um tipo de projeto diferente.</p>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">2</div><div class="passo-title">Arquétipos minimalistas</div></div>
+        <div class="passo-body">
+          <p>Estes dois arquétipos usam poucos sistemas, mas resolvem muito.</p>
+          <div class="analogia">
+            <div class="analogia-label">Arquétipo 1 — Agente solo</div>
+            <div class="analogia-text">
+              <strong>Sistemas:</strong> Claude Code + GitHub + Anthropic API + VS Code (ou Cursor/Antigravity)<br><br>
+              <strong>Quando usar:</strong> desenvolvimento individual de scripts, prototipagem, projetos pessoais.<br><br>
+              <strong>Exemplo real:</strong> um dev criando uma biblioteca open source ou um MVP pessoal.
+            </div>
+          </div>
+          <div class="analogia">
+            <div class="analogia-label">Arquétipo 2 — Automação interna</div>
+            <div class="analogia-text">
+              <strong>Sistemas:</strong> Claude Code + n8n + Supabase + Slack<br><br>
+              <strong>Quando usar:</strong> automações internas para times.<br><br>
+              <strong>Exemplo real:</strong> um bot de status diário que coleta métricas e resume pro time.
+            </div>
+          </div>
+          <div class="dica"><strong>Observação importante:</strong> esses dois arquétipos atendem 80% dos projetos do começo da sua jornada. Comece com 4 sistemas e adicione o resto quando o problema aparecer.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">3</div><div class="passo-title">Arquétipos completos</div></div>
+        <div class="passo-body">
+          <p>Agora os arquétipos maiores. Use quando o projeto exige escala.</p>
+          <div class="analogia">
+            <div class="analogia-label">Arquétipo 3 — SaaS com IA como produto</div>
+            <div class="analogia-text">
+              <strong>Sistemas:</strong> Claude Code + Supabase + pgvector + FastAPI + Docker + VPS + GitHub + MCP + Playwright + Stripe<br><br>
+              <strong>Quando usar:</strong> SaaS onde a IA <em>é</em> o produto.<br><br>
+              <strong>Exemplo real:</strong> plataforma de diagnóstico empresarial com IA atendendo 500 clientes simultâneos.
+            </div>
+          </div>
+          <div class="analogia">
+            <div class="analogia-label">Arquétipo 4 — Automação empresarial de ponta</div>
+            <div class="analogia-text">
+              <strong>Sistemas:</strong> Claude Code + n8n + LangGraph + Supabase + RAG + Playwright + WhatsApp + Slack + Docker<br><br>
+              <strong>Quando usar:</strong> múltiplos agentes coordenados, monitoramento contínuo.<br><br>
+              <strong>Exemplo real:</strong> sistema de inteligência competitiva monitorando 20 concorrentes.
+            </div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">Regra de ouro</div>
+            <div class="destaque-text">Não é "quanto mais sistemas, melhor". A complexidade tem custo. Só escale quando o problema <strong>exigir</strong>.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">4</div><div class="passo-title">Critérios de um bom diagrama</div></div>
+        <div class="passo-body">
+          <p>Antes de desenhar o seu, fixe os critérios:</p>
+          <div class="pills">
+            <div class="pill accent">Claude Code no centro</div>
+            <div class="pill accent">1 sistema por categoria relevante</div>
+            <div class="pill accent">Fluxo principal rastreável</div>
+            <div class="pill accent">Checkpoint humano identificado</div>
+            <div class="pill accent">Legenda de cores visível</div>
+            <div class="pill accent">Cabe numa única página</div>
+          </div>
+          <div class="destaque">
+            <div class="destaque-label">O teste final</div>
+            <div class="destaque-text">Um bom diagrama é aquele que um novo dev consegue entender em 3 minutos. Se precisa de 20 minutos de explicação, o diagrama está ruim.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">5</div><div class="passo-title">O grande momento — desenhe o seu diagrama</div></div>
+        <div class="passo-body">
+          <p>Chegamos à atividade culminante do módulo.</p>
+          <div class="atividade">
+            <div class="atividade-label">Atividade final do módulo</div>
+            <div class="atividade-title">Desenhe a arquitetura do seu projeto</div>
+            <div class="atividade-text">
+              <ol>
+                <li><strong>Defina em uma frase:</strong> "Meu projeto é um ___ que ___ para ___."</li>
+                <li><strong>Liste os sistemas</strong> necessários, agrupando-os em verde, azul, amarelo e vermelho.</li>
+                <li><strong>Desenhe</strong> à mão (ou Excalidraw/Miro) com Claude Code no centro.</li>
+                <li><strong>Destaque</strong> onde o humano entra (os checkpoints da Aula 4).</li>
+                <li><strong>Responda:</strong> "Este diagrama cabe numa página? Mostra o fluxo principal?"</li>
+              </ol>
+            </div>
+          </div>
+          <div class="dica"><strong>Ferramentas sugeridas:</strong> Excalidraw (gratuito), Miro, ou papel e caneta.</div>
+        </div>
+      </div>
+
+      <div class="passo">
+        <div class="passo-head"><div class="passo-num">6</div><div class="passo-title">Fechando o módulo</div></div>
+        <div class="passo-body">
+          <p>Se você chegou até aqui e fez todas as atividades, você entrou no curso achando que Claude Code é <em>"uma ferramenta"</em>. Você sai entendendo que Claude Code é o centro de uma arquitetura — e agora consegue desenhar a sua.</p>
+          <div class="destaque">
+            <div class="destaque-label">O que fazer com o seu diagrama</div>
+            <div class="destaque-text">Ele vai ser o <strong>README técnico do seu projeto</strong> ao longo do curso inteiro. Guarde-o. Ele vai evoluir — mas o esqueleto é esse.</div>
+          </div>
+          <p>Parabéns por completar o módulo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('aula4')">← Aula 4</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('resumo')">Resumo →</button>
+    </div>
+  </section>
+
+  <!-- RESUMO -->
+  <section class="section" id="resumo">
+    <div class="aula-header">
+      <div class="aula-label">RESUMO DO MÓDULO</div>
+      <h1 class="aula-title">Cinco aulas, <span class="pink">uma missão</span></h1>
+      <p class="aula-desc">Transformar você de "usuário do Claude Code" em "arquiteto que posiciona Claude Code no centro da própria stack".</p>
+    </div>
+    <div class="intro-box">
+      <p>Este é o resumo que você pode consultar antes de qualquer prova ou apresentação. Cinco takeaways, um para cada aula.</p>
+    </div>
+    <div class="s-block">
+      <div class="s-label">OS 5 TAKEAWAYS DO MÓDULO</div>
+      <div class="cards-grid">
+        <div class="info-card"><span class="info-icon">🎼</span><div class="info-title">AULA 01 · O MAESTRO</div><div class="info-text">Claude Code é o maestro. Ele decide, coordena e orquestra — enquanto os outros sistemas executam. É o único componente ativo.</div></div>
+        <div class="info-card"><span class="info-icon">🎨</span><div class="info-title">AULA 02 · AS CORES</div><div class="info-text">Verde orquestra, azul sustenta, amarelo expõe, vermelho entrega. Cada cor é um tipo de relação com o núcleo.</div></div>
+        <div class="info-card"><span class="info-icon">🛤️</span><div class="info-title">AULA 03 · O CAMINHO</div><div class="info-text">Cada instrução acende um caminho crítico diferente. Mapear esse caminho é o que define pensamento arquitetural.</div></div>
+        <div class="info-card"><span class="info-icon">🛑</span><div class="info-title">AULA 04 · OS LIMITES</div><div class="info-text">Claude Code não substitui ninguém — ele coordena. Decisões irreversíveis, caras ou públicas passam por você.</div></div>
+        <div class="info-card"><span class="info-icon">📐</span><div class="info-title">AULA 05 · SEU DIAGRAMA</div><div class="info-text">O diagrama do módulo é um template, não uma receita. Você saiu com o seu próprio mapa desenhado.</div></div>
+        <div class="info-card"><span class="info-icon">🚀</span><div class="info-title">PRÓXIMA ETAPA</div><div class="info-text">Com o mental model pronto, você entra nos módulos práticos — onde o código aparece apoiado numa arquitetura clara.</div></div>
+      </div>
+    </div>
+    <div class="result-banner">
+      Agora você olha para qualquer projeto e vê <b>arquitetura</b>, não mais <b>caos de ferramentas</b>
+    </div>
+    <div class="aula-nav">
+      <button class="aula-nav-btn" onclick="go('aula5')">← Aula 5</button>
+      <div class="aula-nav-spacer"></div>
+      <button class="aula-nav-btn primary" onclick="go('overview')">Voltar ao início</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+function go(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.target === id);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('.nav-item').forEach(n => {
+  n.addEventListener('click', () => go(n.dataset.target));
+});
+
+/* ============================================================
+   DIAGRAMA INTERATIVO (AULA 2) — COM 14 SISTEMAS
+   ============================================================ */
+const systems = {
+  core: {
+    cat: 'core', catLabel: 'NÚCLEO',
+    title: 'Claude Code', sub: 'O maestro da arquitetura',
+    role: 'É o único sistema ativo do diagrama. Recebe sua instrução e decide sozinho quais dos outros sistemas acionar, em qual ordem e como combinar os resultados.',
+    why: 'Todos os outros sistemas são excelentes no que fazem, mas passivos — esperam ser chamados. Claude Code quebra essa lógica: age, decide e orquestra.',
+    relates: 'Está conectado a todos os 14 sistemas ao redor. É por isso que ocupa o centro: nenhum dos sistemas da periferia conversa diretamente com os outros sem passar por ele.'
+  },
+  mcp: {
+    cat: 'green', catLabel: 'FRAMEWORK',
+    title: 'MCP Servers', sub: 'Protocolo de contexto',
+    role: 'Dá ao Claude Code acesso a ferramentas e dados externos padronizados — de bancos de dados a APIs internas da empresa.',
+    why: 'Sem MCP, cada integração nova seria código customizado. Com MCP, basta plugar um server e o agente sabe usar.',
+    relates: 'Estende o que Claude Code sabe fazer. Funciona como "plugin store" da arquitetura.'
+  },
+  n8n: {
+    cat: 'green', catLabel: 'FRAMEWORK',
+    title: 'n8n', sub: 'Automação empresarial',
+    role: 'Executa workflows agendados e visuais. Conecta centenas de serviços empresariais através de uma interface no-code.',
+    why: 'Claude Code coordena, mas não é bom em ficar 24/7 rodando triggers agendados. n8n cuida dessa parte.',
+    relates: 'Parceiro ideal pra automações recorrentes. Claude Code configura o workflow, n8n executa todos os dias.'
+  },
+  langgraph: {
+    cat: 'green', catLabel: 'FRAMEWORK',
+    title: 'LangGraph / CrewAI', sub: 'Sistemas multi-agente',
+    role: 'Frameworks para coordenar múltiplos agentes de IA trabalhando juntos em uma tarefa complexa.',
+    why: 'Quando uma tarefa exige vários especialistas (pesquisador + escritor + revisor), essas libs montam o time.',
+    relates: 'Expande Claude Code em múltiplos agentes coordenados. Usado em arquiteturas sofisticadas.'
+  },
+  supabase: {
+    cat: 'blue', catLabel: 'INFRAESTRUTURA',
+    title: 'Supabase / DB', sub: 'Dados e vetores',
+    role: 'Banco de dados relacional (PostgreSQL) + autenticação + banco vetorial (pgvector) + storage. Fundação de dados da aplicação.',
+    why: 'Claude Code não armazena 10 milhões de registros. Supabase sim, com garantias transacionais.',
+    relates: 'Memória persistente. Tudo que precisa ser consultado depois passa por aqui.'
+  },
+  github: {
+    cat: 'blue', catLabel: 'INFRAESTRUTURA',
+    title: 'GitHub', sub: 'Versionamento + CI/CD',
+    role: 'Guarda o código-fonte versionado, coordena equipe, roda pipelines de integração contínua e deploy.',
+    why: 'Histórico auditável, rollback seguro e colaboração humana. Nada disso é papel do Claude Code.',
+    relates: 'Onde o código produzido pelo Claude Code é commitado, revisado e mergeado.'
+  },
+  docker: {
+    cat: 'blue', catLabel: 'INFRAESTRUTURA',
+    title: 'Docker / VPS', sub: 'Deploy e infra',
+    role: 'Containers (Docker) isolam e padronizam o ambiente. VPS (Hostinger, DigitalOcean, AWS) hospeda as aplicações em produção.',
+    why: 'Reprodutibilidade de ambiente e escalabilidade. Claude Code gera os arquivos, Docker e VPS fazem rodar.',
+    relates: 'Destino final do código. Onde a arquitetura roda de verdade, 24/7.'
+  },
+  cursor: {
+    cat: 'amber', catLabel: 'IDE',
+    title: 'Cursor / Lovable', sub: 'IDEs com IA embutida',
+    role: 'Ambientes de desenvolvimento com IA nativa. Cursor é pra desenvolvedores, Lovable pra construir UIs rápidas.',
+    why: 'Claude Code opera muito bem DENTRO dessas IDEs — você tem o agente + edição + preview em uma tela só.',
+    relates: 'É onde o desenvolvedor dirige o Claude Code. Cockpit da operação.'
+  },
+  vscode: {
+    cat: 'amber', catLabel: 'IDE',
+    title: 'VS Code', sub: 'IDE padrão de mercado',
+    role: 'Editor de código open source da Microsoft — o IDE mais usado do mundo. Extensível por milhares de plugins, roda em qualquer sistema operacional.',
+    why: 'Você pode rodar Claude Code dentro do VS Code via terminal integrado ou via extensão oficial. Aproveita toda a infraestrutura que você já conhece e configurou.',
+    relates: 'Ambiente "neutro" onde Claude Code vira mais uma ferramenta poderosa no seu workflow. Ideal para quem não quer migrar de IDE.'
+  },
+  antigravity: {
+    cat: 'amber', catLabel: 'IDE',
+    title: 'Antigravity', sub: 'IDE agent-first (Google)',
+    role: 'Plataforma de desenvolvimento agentic do Google lançada em 2025. Projetada desde o começo para workflows com múltiplos agentes de IA colaborando no código.',
+    why: 'Representa a próxima geração de IDEs: não apenas ferramentas com IA adicionada, mas ambientes desenhados nativamente para orquestração multi-agente.',
+    relates: 'Um IDE onde Claude Code pode operar ao lado de outros agentes especialistas, cada um cuidando de uma parte do trabalho.'
+  },
+  fastapi: {
+    cat: 'amber', catLabel: 'API',
+    title: 'FastAPI / REST', sub: 'Exposição de agentes',
+    role: 'Framework pra criar APIs REST em Python de forma rápida. É como você expõe seu agente para outros sistemas consumirem.',
+    why: 'Um agente sem API é um agente solto. FastAPI transforma sua lógica em endpoint reutilizável.',
+    relates: 'Claude Code gera o código do endpoint. FastAPI expõe como serviço.'
+  },
+  anthropic: {
+    cat: 'amber', catLabel: 'API',
+    title: 'Anthropic API', sub: 'SDK + streaming',
+    role: 'Acesso direto ao modelo Claude via SDK. Quando você precisa da inteligência do modelo dentro do seu código, sem todo o aparato do Claude Code.',
+    why: 'Casos de uso onde você quer fine-grain control sobre prompts, streaming e parâmetros.',
+    relates: 'Complementa o Claude Code. O agente coordena; a API executa a inferência pontual.'
+  },
+  playwright: {
+    cat: 'coral', catLabel: 'CANAL',
+    title: 'Playwright', sub: 'Browser automation',
+    role: 'Controla navegadores programaticamente. Abre páginas, preenche forms, extrai dados, faz screenshots.',
+    why: 'Quando a informação só está acessível via web (Diário Oficial, sites de concorrentes), é o caminho.',
+    relates: 'Ponte entre Claude Code e a web aberta. Olhos e mãos do agente no mundo real.'
+  },
+  rag: {
+    cat: 'coral', catLabel: 'MEMÓRIA',
+    title: 'RAG + Embeddings', sub: 'Memória semântica',
+    role: 'Transforma documentos em vetores pesquisáveis semanticamente. Permite ao agente "lembrar" de contextos específicos do seu domínio.',
+    why: 'O modelo base é genérico. RAG injeta conhecimento específico da SUA empresa no momento certo.',
+    relates: 'Camada de memória de longo prazo. Sem ela, o agente só sabe o que está no prompt.'
+  },
+  whatsapp: {
+    cat: 'coral', catLabel: 'CANAL',
+    title: 'WhatsApp / Slack', sub: 'Canais de entrega',
+    role: 'Onde humanos já estão. WhatsApp para B2C no Brasil, Slack para times corporativos.',
+    why: 'Claude Code não tem audiência própria. O resultado final precisa chegar onde as pessoas leem.',
+    relates: 'Último quilômetro da arquitetura. É onde o valor aparece pro usuário final.'
+  }
+};
+
+const flows = {
+  endpoint: {
+    title: 'Criar endpoint + notificar Slack',
+    path: ['github', 'fastapi', 'supabase', 'n8n', 'whatsapp']
+  },
+  scraping: {
+    title: 'Monitoramento + relatório por WhatsApp',
+    path: ['n8n', 'playwright', 'rag', 'supabase', 'anthropic', 'docker', 'whatsapp']
+  },
+  refactor: {
+    title: 'Refatoração com deploy automatizado',
+    path: ['vscode', 'mcp', 'github', 'docker']
+  }
+};
+
+const panel = document.getElementById('panel');
+const stepBadgesGroup = document.getElementById('step-badges');
+let currentFilter = 'all';
+let selectedId = null;
+let currentFlow = null;
+
+/* Centros atualizados para layout de 14 sistemas */
+const nodeCenters = {
+  core:        [450, 300],
+  mcp:         [150, 65],
+  n8n:         [150, 155],
+  langgraph:   [150, 245],
+  supabase:    [150, 335],
+  github:      [150, 425],
+  docker:      [150, 515],
+  cursor:      [750, 59],
+  vscode:      [750, 125],
+  antigravity: [750, 191],
+  fastapi:     [750, 257],
+  anthropic:   [750, 323],
+  playwright:  [750, 389],
+  rag:         [750, 455],
+  whatsapp:    [750, 521]
+};
+
+function renderPanel(id) {
+  const s = systems[id];
+  if (!s) {
+    panel.classList.remove('has-content');
+    panel.innerHTML = `
+      <div class="panel-empty">
+        <div class="panel-empty-icon">◎</div>
+        <div class="panel-empty-title">Clique em um sistema</div>
+        <div class="panel-empty-text">As informações sobre o sistema selecionado aparecem aqui. Explore cada caixa do diagrama para entender seu papel.</div>
+      </div>`;
+    return;
+  }
+  panel.classList.add('has-content');
+  panel.innerHTML = `
+    <div class="panel-head">
+      <span class="panel-cat ${s.cat}">${s.catLabel}</span>
+      <div class="panel-title">${s.title}</div>
+      <div class="panel-sub">${s.sub}</div>
+    </div>
+    <div class="panel-grid">
+      <div class="panel-section-col">
+        <div class="panel-label">O que faz</div>
+        <div class="panel-text">${s.role}</div>
+      </div>
+      <div class="panel-section-col">
+        <div class="panel-label">Por que está no diagrama</div>
+        <div class="panel-text-muted">${s.why}</div>
+      </div>
+      <div class="panel-section-col">
+        <div class="panel-label">Relação com Claude Code</div>
+        <div class="panel-text-muted">${s.relates}</div>
+      </div>
+    </div>
+  `;
+}
+
+function selectNode(id) {
+  selectedId = id;
+  document.querySelectorAll('.node-g').forEach(n => n.classList.remove('selected'));
+  if (id) {
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (el) el.classList.add('selected');
+  }
+  renderPanel(id);
+}
+
+document.querySelectorAll('.node-g').forEach(node => {
+  node.addEventListener('click', () => selectNode(node.dataset.id));
+  node.addEventListener('mouseenter', () => {
+    const id = node.dataset.id;
+    if (id === 'core' || currentFlow) return;
+    const line = document.querySelector(`.connector[data-to="${id}"]`);
+    if (line) line.classList.add('active');
+  });
+  node.addEventListener('mouseleave', () => {
+    const id = node.dataset.id;
+    const line = document.querySelector(`.connector[data-to="${id}"]`);
+    if (line) line.classList.remove('active');
+  });
+});
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilter();
+  });
+});
+
+function applyFilter() {
+  document.querySelectorAll('.node-g').forEach(node => {
+    const cat = node.dataset.cat;
+    if (currentFilter === 'all' || cat === currentFilter || cat === 'core') {
+      node.classList.remove('dimmed');
+    } else {
+      node.classList.add('dimmed');
+    }
+  });
+  document.querySelectorAll('.connector').forEach(line => {
+    const toId = line.dataset.to;
+    const toNode = document.querySelector(`[data-id="${toId}"]`);
+    if (!toNode) return;
+    const cat = toNode.dataset.cat;
+    if (currentFilter === 'all' || cat === currentFilter) {
+      line.classList.remove('dimmed');
+    } else {
+      line.classList.add('dimmed');
+    }
+  });
+}
+
+document.querySelectorAll('.flow-btn').forEach(btn => {
+  btn.addEventListener('click', () => showFlow(btn.dataset.flow, btn));
+});
+
+function showFlow(flowId, btn) {
+  resetFlowVisual();
+  const flow = flows[flowId];
+  if (!flow) return;
+
+  currentFlow = flowId;
+  document.querySelectorAll('.flow-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const pathIds = new Set([...flow.path, 'core']);
+  document.querySelectorAll('.node-g').forEach(node => {
+    if (pathIds.has(node.dataset.id)) {
+      node.classList.remove('dimmed');
+      node.classList.add('highlighted');
+    } else {
+      node.classList.add('dimmed');
+      node.classList.remove('highlighted');
+    }
+  });
+
+  document.querySelectorAll('.connector').forEach(line => {
+    const toId = line.dataset.to;
+    if (flow.path.includes(toId)) {
+      line.classList.remove('dimmed');
+      line.classList.add('flow-path');
+    } else {
+      line.classList.add('dimmed');
+      line.classList.remove('flow-path');
+    }
+  });
+
+  stepBadgesGroup.innerHTML = '';
+  flow.path.forEach((nodeId, idx) => {
+    const [cx, cy] = nodeCenters[nodeId];
+    const badgeX = cx + (cx < 450 ? 85 : -85);
+    const badgeY = cy - 32;
+
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'step-badge');
+
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('class', 'step-circle');
+    circle.setAttribute('cx', badgeX);
+    circle.setAttribute('cy', badgeY);
+    circle.setAttribute('r', '14');
+
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('class', 'step-text');
+    text.setAttribute('x', badgeX);
+    text.setAttribute('y', badgeY);
+    text.textContent = idx + 1;
+
+    g.appendChild(circle);
+    g.appendChild(text);
+    stepBadgesGroup.appendChild(g);
+  });
+
+  const pathList = flow.path.map((id, i) =>
+    `<div class="flow-path-item">
+      <div class="flow-path-num">${i+1}</div>
+      <div class="flow-path-info"><strong>${systems[id].title}</strong><span>${systems[id].sub}</span></div>
+    </div>`
+  ).join('');
+
+  panel.classList.add('has-content');
+  panel.innerHTML = `
+    <div class="panel-head">
+      <span class="panel-cat core">CAMINHO CRÍTICO</span>
+      <div class="panel-title">${flow.title}</div>
+      <div class="panel-sub">Ordem de ativação dos sistemas</div>
+    </div>
+    <div class="panel-label" style="margin-top:14px;">Sequência no diagrama</div>
+    <div class="flow-path-list">${pathList}</div>
+    <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+      <div class="panel-label">Observação</div>
+      <div class="panel-text-muted">Nem todos os 14 sistemas são ativados. Cada instrução tem seu próprio caminho crítico — os sistemas não envolvidos ficam em repouso.</div>
+    </div>
+  `;
+}
+
+function resetFlowVisual() {
+  currentFlow = null;
+  stepBadgesGroup.innerHTML = '';
+  document.querySelectorAll('.connector').forEach(l => l.classList.remove('flow-path', 'active'));
+  document.querySelectorAll('.node-g').forEach(n => n.classList.remove('highlighted'));
+  document.querySelectorAll('.flow-btn').forEach(b => b.classList.remove('active'));
+}
+
+function resetAll() {
+  resetFlowVisual();
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+  applyFilter();
+  selectNode(null);
+}
+</script>
+
+</body>
+</html>

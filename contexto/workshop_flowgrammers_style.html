@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Interativo · Gestor de Fluxo</title>
+<style>
+
+:root {
+  --bg:           #0A0612;
+  --bg-2:         #12081E;
+  --surface:      #1A1024;
+  --surface-2:    #221430;
+  --border:       rgba(255, 0, 128, 0.12);
+  --border-hi:    rgba(255, 0, 128, 0.35);
+  --text:         #F5F5F7;
+  --text-muted:   #A8A3B0;
+  --text-dim:     #6B6575;
+  --accent:       #FF0080;
+  --accent-hi:    #FF3399;
+  --accent-soft:  rgba(255, 0, 128, 0.10);
+  --accent-glow:  rgba(255, 0, 128, 0.25);
+
+  --c-green:      #1D9E75;
+  --c-green-bg:   rgba(29, 158, 117, 0.15);
+  --c-blue:       #378ADD;
+  --c-blue-bg:    rgba(55, 138, 221, 0.15);
+  --c-amber:      #EF9F27;
+  --c-amber-bg:   rgba(239, 159, 39, 0.15);
+  --c-coral:      #D85A30;
+  --c-coral-bg:   rgba(216, 90, 48, 0.15);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--text); }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(ellipse at top, var(--bg-2) 0%, var(--bg) 70%);
+  min-height: 100vh;
+}
+
+.header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10, 6, 18, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.header-inner {
+  max-width: 1280px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; gap: 24px;
+}
+.logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.01em; white-space: nowrap;
+}
+.logo-mark {
+  width: 26px; height: 26px; border-radius: 6px;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hi) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 700; font-size: 13px;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.nav { display: flex; gap: 4px; flex: 1; overflow-x: auto; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  font-size: 13px; font-weight: 500; color: var(--text-muted);
+  padding: 7px 14px; border-radius: 8px; cursor: pointer;
+  border: 1px solid transparent; white-space: nowrap;
+  transition: all 0.15s;
+}
+.nav-item:hover { color: var(--text); background: var(--surface); }
+.nav-item.active {
+  color: var(--accent); background: var(--accent-soft);
+  border-color: var(--border-hi);
+}
+
+.container { max-width: 900px; margin: 0 auto; padding: 60px 24px 100px; }
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.tag {
+  display: inline-block;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  padding: 8px 18px; border: 1px solid var(--border-hi);
+  background: var(--accent-soft); border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.hero-wrap { text-align: center; margin-bottom: 60px; }
+.hero-title {
+  font-size: 60px; font-weight: 900;
+  letter-spacing: -0.03em; line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.hero-title .pink { color: var(--accent); display: block; }
+.hero-desc {
+  font-size: 16px; color: var(--text-muted);
+  max-width: 600px; margin: 0 auto; line-height: 1.7;
+}
+
+.flow {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 60px 0; flex-wrap: wrap;
+}
+.flow-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px 20px;
+  min-width: 160px; text-align: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.flow-card:hover {
+  border-color: var(--border-hi);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+}
+.flow-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent);
+  color: white; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; box-shadow: 0 0 14px var(--accent-glow);
+}
+.flow-name {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.flow-sub { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.flow-arrow { color: var(--text-dim); font-size: 18px; user-select: none; }
+
+.result-banner {
+  background: var(--accent-soft);
+  border: 1px solid var(--border-hi);
+  border-radius: 10px;
+  padding: 18px 24px; text-align: center;
+  font-size: 14px; color: var(--text-muted);
+  margin: 40px 0 60px;
+}
+.result-banner b { color: var(--accent); font-weight: 600; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.info-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 26px 28px;
+  transition: border-color 0.2s;
+}
+.info-card:hover { border-color: var(--border-hi); }
+.info-icon { font-size: 24px; margin-bottom: 16px; display: block; }
+.info-title {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.1em;
+  color: var(--text); text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.info-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+.aula-header { text-align: center; margin-bottom: 50px; }
+.aula-label {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.aula-title {
+  font-size: 44px; font-weight: 900;
+  letter-spacing: -0.02em; line-height: 1.08;
+  text-transform: uppercase; color: var(--text);
+  max-width: 800px; margin: 0 auto 20px;
+}
+.aula-title .pink { color: var(--accent); }
+.aula-desc {
+  font-size: 15px; color: var(--text-muted);
+  max-width: 620px; margin: 0 auto; line-height: 1.7;
+}
+
+.intro-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 32px;
+  margin-bottom: 50px;
+}
+.intro-box p {
+  font-size: 15px; color: var(--text); line-height: 1.8;
+  margin-bottom: 12px;
+}
+.intro-box p:last-child { margin-bottom: 0; }
+
+.s-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 24px; text-align: center;
+}
+.s-block { margin: 60px 0; }
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.learn-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 22px 24px;
+}
+.learn-check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 6px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 12px;
+  border: 1px solid var(--border-hi);
+}
+.learn-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+.passo {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; padding: 32px 36px;
+  margin-bottom: 18px;
+}
+.passo-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.passo-num {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent); color: white;
+  font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px var(--accent-glow); flex-shrink: 0;
+}
+.passo-title {
+  font-size: 20px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.01em;
+}
+.passo-body { font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+.passo-body p { margin-bottom: 14px; }
+.passo-body p:last-child { margin-bottom: 0; }
+.passo-body strong { color: var(--text); font-weight: 600; }
+.passo-body em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+.destaque {
+  background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(255, 0, 128, 0.04) 100%);
+  border: 1px solid var(--border-hi);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 18px 22px; margin: 18px 0;
+}
+.destaque-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.destaque-text { font-size: 15px; color: var(--text); line-height: 1.75; }
+
+.dica {
+  background: var(--bg-2);
+  border: 1px dashed var(--border-hi);
+  border-radius: 10px;
+  padding: 14px 18px; margin: 18px 0;
+  font-size: 14px; color: var(--text-muted); line-height: 1.7;
+}
+.dica strong { color: var(--accent); font-weight: 600; }
+
+.analogia {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px; margin: 16px 0;
+}
+.analogia-label {
+  font-size: 11px; font-weight: 700; color: var(--accent);
+  letter-spacing: 0.15em; margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.analogia-text { font-size: 15px; color: var(--text-muted); line-height: 1.8; }
+
+.atividade {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.08) 0%, rgba(255, 0, 128, 0.02) 100%);
+  border: 1px solid var(--border-hi);
+  border-radius: 12px;
+  padding: 22px 26px; margin: 20px 0;
+}
+.atividade-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.atividade-title {
+  font-size: 17px; font-weight: 700; color: var(--text);
+  margin-bottom: 10px;
+}
+.atividade-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.atividade-text ol { margin-left: 20px; margin-top: 10px; }
+.atividade-text ol li { margin-bottom: 6px; }
+.atividade-text ul { margin-left: 20px; margin-top: 10px; }
+.atividade-text ul li { margin-bottom: 6px; }
+
+.t {
+  width: 100%; border-collapse: collapse; margin: 18px 0;
+  background: var(--bg-2); border-radius: 10px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.t th, .t td {
+  padding: 14px 18px; text-align: left; font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.t th {
+  background: var(--surface); color: var(--accent);
+  font-weight: 700; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+.t td { color: var(--text-muted); }
+.t tr:last-child td { border-bottom: none; }
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+.pill {
+  font-size: 13px; padding: 6px 14px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--text-muted);
+  background: var(--bg-2);
+}
+.pill.accent {
+  border-color: var(--border-hi); color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.lista-fluxo {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 20px 24px; margin: 18px 0;
+}
+.lista-fluxo-item {
+  display: flex; gap: 14px; padding: 10px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.lista-fluxo-item:last-child { border-bottom: none; }
+.lista-fluxo-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; border: 1px solid var(--border-hi);
+}
+.lista-fluxo-text { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+.lista-fluxo-text strong { color: var(--text); }
+
+.aula-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 70px; padding-top: 30px;
+  border-top: 1px solid var(--border);
+  gap: 14px;
+}
+.aula-nav-btn {
+  padding: 14px 24px; border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface); color: var(--text);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s;
+  font-family: inherit;
+}
+.aula-nav-btn:hover {
+  border-color: var(--border-hi);
+  background: var(--surface-2);
+  color: var(--accent);
+}
+.aula-nav-btn.primary {
+  background: var(--accent); color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.aula-nav-btn.primary:hover { background: var(--accent-hi); }
+.aula-nav-spacer { flex: 1; }
+
+/* ============================================================
+   DIAGRAMA INTERATIVO
+   ============================================================ */
+.diagram-interactive {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  margin: 20px 0;
+}
+
+.diagram-help {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 10px 16px;
+  background: var(--bg-2);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+.diagram-help strong { color: var(--accent); font-weight: 600; }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 8px 16px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  border: 1px solid var(--border); background: var(--bg-2);
+  color: var(--text-muted); cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.filter-btn:hover { color: var(--text); border-color: var(--border-hi); }
+.filter-btn.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--border-hi);
+}
+.filter-dot { width: 8px; height: 8px; border-radius: 50%; }
+.fd-all   { background: var(--text-muted); }
+.fd-green { background: var(--c-green); }
+.fd-blue  { background: var(--c-blue); }
+.fd-amber { background: var(--c-amber); }
+.fd-coral { background: var(--c-coral); }
+
+.diagram-svg-wrap {
+  background: var(--bg-2);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.diagram-svg-wrap svg { width: 100%; height: auto; display: block; }
+
+.node-g { cursor: pointer; transition: opacity 0.3s, transform 0.2s; transform-origin: center; transform-box: fill-box; }
+.node-g:hover { transform: scale(1.03); }
+.node-g.dimmed { opacity: 0.18; }
+.node-g.highlighted .node-rect {
+  stroke-width: 2.5 !important;
+  filter: drop-shadow(0 0 14px currentColor);
+}
+.node-g.selected .node-rect {
+  stroke-width: 3 !important;
+  filter: drop-shadow(0 0 20px currentColor);
+}
+.node-rect { transition: stroke-width 0.25s, filter 0.25s; }
+
+.connector {
+  stroke: var(--text-dim);
+  stroke-width: 0.6;
+  transition: stroke 0.3s, stroke-width 0.3s, opacity 0.3s;
+}
+.connector.dimmed { opacity: 0.2; }
+.connector.active {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+}
+.connector.flow-path {
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+  animation: dash 1.2s linear infinite;
+}
+@keyframes dash { to { stroke-dashoffset: -20; } }
+
+.core-rect {
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { filter: drop-shadow(0 0 12px var(--accent-glow)); }
+  50% { filter: drop-shadow(0 0 24px var(--accent-glow)); }
+}
+
+.step-badge { pointer-events: none; }
+.step-circle { fill: var(--accent); stroke: white; stroke-width: 1.5; }
+.step-text { fill: white; font-size: 11px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+
+.legend-row {
+  display: flex; gap: 18px;
+  margin-bottom: 20px; flex-wrap: wrap;
+  justify-content: center;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-muted);
+}
+.legend-box {
+  width: 14px; height: 14px; border-radius: 4px;
+  border: 1px solid;
+}
+.lb-green { background: var(--c-green-bg); border-color: var(--c-green); }
+.lb-blue  { background: var(--c-blue-bg);  border-color: var(--c-blue);  }
+.lb-amber { background: var(--c-amber-bg); border-color: var(--c-amber); }
+.lb-coral { background: var(--c-coral-bg); border-color: var(--c-coral); }
+
+.info-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  min-height: 180px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s;
+}
+.info-panel.has-content { border-color: var(--border-hi); }
+
+.panel-empty { text-align: center; padding: 20px 10px; color: var(--text-dim); }
+.panel-empty-icon { font-size: 28px; margin-bottom: 10px; opacity: 0.5; }
+.panel-empty-title { font-size: 14px; font-weight: 600; color: var(--text-muted); margin-bottom: 4px; }
+.panel-empty-text { font-size: 13px; line-height: 1.6; max-width: 400px; margin: 0 auto; }
+
+.panel-head {
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.panel-cat {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: inline-block; padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 8px;
+}
+.panel-cat.green { color: var(--c-green); background: var(--c-green-bg); border: 1px solid var(--c-green); }
+.panel-cat.blue  { color: var(--c-blue);  background: var(--c-blue-bg);  border: 1px solid var(--c-blue); }
+.panel-cat.amber { color: var(--c-amber); background: var(--c-amber-bg); border: 1px solid var(--c-amber); }
+.panel-cat.coral { color: var(--c-coral); background: var(--c-coral-bg); border: 1px solid var(--c-coral); }
+.panel-cat.core  { color: var(--accent); background: var(--accent-soft); border: 1px solid var(--border-hi); }
+
+.panel-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; color: var(--text); margin: 4px 0; }
+.panel-sub { font-size: 13px; color: var(--text-muted); }
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+.panel-section-col { }
+.panel-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.panel-text { font-size: 13px; color: var(--text); line-height: 1.65; }
+.panel-text-muted { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+.flows-wrap {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  align-items: center; justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.flows-label {
+  font-size: 12px; color: var(--text-muted); font-weight: 500;
+  margin-right: 4px; width: 100%; text-align: center; margin-bottom: 6px;
+}
+.flow-btn {
+  padding: 9px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 500;
+  border: 1px solid var(--border); background: var(--bg-2);
+  color: var(--text); cursor: pointer;
+  font-family: inherit; transition: all 0.2s;
+}
+.flow-btn:hover {
+  border-color: var(--border-hi);
+  color: var(--accent);
+}
+.flow-btn.active {
+  background: var(--accent); color: white;
+  border-color: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+.reset-btn {
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-dim); font-size: 11px;
+  padding: 8px 12px; border-radius: 8px;
+  cursor: pointer; font-family: inherit;
+}
+.reset-btn:hover { color: var(--text); }
+
+.flow-path-list { margin-top: 10px; }
+.flow-path-item {
+  display: flex; gap: 10px; align-items: center;
+  padding: 8px 0; border-bottom: 1px dashed var(--border);
+}
+.flow-path-item:last-child { border: none; }
+.flow-path-num {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--accent); color: white;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.flow-path-info { font-size: 13px; color: var(--text); }
+.flow-path-info strong { color: var(--text); }
+.flow-path-info span { color: var(--text-muted); font-size: 12px; display: block; }
+
+@media (max-width: 768px) {
+  .container { padding: 40px 16px 60px; }
+  .hero-title { font-size: 34px; }
+  .aula-title { font-size: 28px; }
+  .passo { padding: 24px 22px; }
+  .intro-box { padding: 22px 20px; }
+  .flow { flex-direction: column; gap: 8px; }
+  .flow-arrow { transform: rotate(90deg); }
+  .flow-card { width: 100%; }
+  .header-inner { padding: 0 16px; gap: 12px; }
+  .logo { font-size: 13px; }
+  .nav-item { font-size: 12px; padding: 6px 10px; }
+  .diagram-interactive { padding: 16px; }
+  .diagram-svg-wrap { padding: 10px; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">G</div>
+      <span>Gestor de Fluxo</span>
+    </div>
+    <nav class="nav" id="nav">
+      <div class="nav-item active" data-target="diagrama">Diagrama Interativo</div>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="section active" id="diagrama">
+    <div class="aula-header">
+      <div class="aula-label">WORKSHOP INTERATIVO</div>
+      <h1 class="aula-title">Arquitetura de um <span class="pink">Sistema Puxado</span></h1>
+      <p class="aula-desc">Clique nos sistemas para entender como as cadências, as políticas e as métricas se conectam ao board principal para gerenciar o fluxo real de trabalho.</p>
+    </div>
+
+    <div class="diagram-interactive">
+      <div class="diagram-help">
+        <strong>Clique</strong> em qualquer item para ver os detalhes · <strong>Filtre</strong> pelas categorias de estudo
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all"><span class="filter-dot fd-all"></span> Todas</button>
+        <button class="filter-btn" data-filter="green"><span class="filter-dot fd-green"></span> Fundamentos</button>
+        <button class="filter-btn" data-filter="blue"><span class="filter-dot fd-blue"></span> Scrumban</button>
+        <button class="filter-btn" data-filter="amber"><span class="filter-dot fd-amber"></span> Cadências</button>
+        <button class="filter-btn" data-filter="coral"><span class="filter-dot fd-coral"></span> Métricas</button>
+      </div>
+
+      <div class="diagram-svg-wrap">
+        <svg viewBox="0 0 900 590" xmlns="http://www.w3.org/2000/svg" id="svg">
+          <defs>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+          <g id="connectors">
+            <!-- Fundamentos -->
+            <line class="connector" data-to="scrum" x1="230" y1="120" x2="370" y2="280"/>
+            <line class="connector" data-to="kanban" x1="230" y1="200" x2="370" y2="290"/>
+            <line class="connector" data-to="agil" x1="230" y1="280" x2="370" y2="300"/>
+            
+            <!-- Scrumban -->
+            <line class="connector" data-to="wip" x1="230" y1="360" x2="370" y2="310"/>
+            <line class="connector" data-to="pull" x1="230" y1="440" x2="370" y2="320"/>
+            <line class="connector" data-to="politicas" x1="230" y1="520" x2="370" y2="330"/>
+
+            <!-- Cadências -->
+            <line class="connector" data-to="daily" x1="670" y1="120" x2="530" y2="280"/>
+            <line class="connector" data-to="replenishment" x1="670" y1="200" x2="530" y2="295"/>
+            <line class="connector" data-to="retro" x1="670" y1="280" x2="530" y2="300"/>
+
+            <!-- Métricas -->
+            <line class="connector" data-to="leadtime" x1="670" y1="360" x2="530" y2="310"/>
+            <line class="connector" data-to="cfd" x1="670" y1="440" x2="530" y2="320"/>
+            <line class="connector" data-to="aging" x1="670" y1="520" x2="530" y2="330"/>
+          </g>
+
+          <!-- NÚCLEO -->
+          <g class="node-g" data-id="core" data-cat="core" style="cursor: pointer;">
+            <rect class="node-rect core-rect" x="370" y="265" width="160" height="70" rx="12" fill="rgba(255,0,128,0.22)" stroke="#FF0080" stroke-width="1.5"/>
+            <text x="450" y="293" text-anchor="middle" fill="#FFFFFF" font-size="16" font-weight="700">O Board Kanban</text>
+            <text x="450" y="315" text-anchor="middle" fill="#FF3399" font-size="12" font-weight="500">radiador de fluxo</text>
+          </g>
+
+          <!-- Fundamentos (green) -->
+          <g class="node-g" data-id="scrum" data-cat="green" style="color: #1D9E75; cursor: pointer;">
+            <rect class="node-rect" x="70" y="90" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+            <text x="150" y="116" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Scrum</text>
+            <text x="150" y="136" text-anchor="middle" fill="#5DCAA5" font-size="11">timeboxes & papéis</text>
+          </g>
+          <g class="node-g" data-id="kanban" data-cat="green" style="color: #1D9E75; cursor: pointer;">
+            <rect class="node-rect" x="70" y="170" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+            <text x="150" y="196" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Método Kanban</text>
+            <text x="150" y="216" text-anchor="middle" fill="#5DCAA5" font-size="11">evolução & fluxo</text>
+          </g>
+          <g class="node-g" data-id="agil" data-cat="green" style="color: #1D9E75; cursor: pointer;">
+            <rect class="node-rect" x="70" y="250" width="160" height="60" rx="10" fill="rgba(29,158,117,0.18)" stroke="#1D9E75" stroke-width="0.8"/>
+            <text x="150" y="276" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Manifesto Ágil</text>
+            <text x="150" y="296" text-anchor="middle" fill="#5DCAA5" font-size="11">valores base</text>
+          </g>
+
+          <!-- Scrumban (blue) -->
+          <g class="node-g" data-id="wip" data-cat="blue" style="color: #378ADD; cursor: pointer;">
+            <rect class="node-rect" x="70" y="330" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+            <text x="150" y="356" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Limites de WIP</text>
+            <text x="150" y="376" text-anchor="middle" fill="#85B7EB" font-size="11">restrição no board</text>
+          </g>
+          <g class="node-g" data-id="pull" data-cat="blue" style="color: #378ADD; cursor: pointer;">
+            <rect class="node-rect" x="70" y="410" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+            <text x="150" y="436" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Pull System</text>
+            <text x="150" y="456" text-anchor="middle" fill="#85B7EB" font-size="11">sistema puxado</text>
+          </g>
+          <g class="node-g" data-id="politicas" data-cat="blue" style="color: #378ADD; cursor: pointer;">
+            <rect class="node-rect" x="70" y="490" width="160" height="60" rx="10" fill="rgba(55,138,221,0.18)" stroke="#378ADD" stroke-width="0.8"/>
+            <text x="150" y="516" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Políticas Explícitas</text>
+            <text x="150" y="536" text-anchor="middle" fill="#85B7EB" font-size="11">DoR, DoD, SLAs</text>
+          </g>
+
+          <!-- Cadências (amber) -->
+          <g class="node-g" data-id="daily" data-cat="amber" style="color: #EF9F27; cursor: pointer;">
+            <rect class="node-rect" x="670" y="90" width="160" height="60" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+            <text x="750" y="116" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Daily Meeting</text>
+            <text x="750" y="136" text-anchor="middle" fill="#F2B955" font-size="11">sincronização de fluxo</text>
+          </g>
+          <g class="node-g" data-id="replenishment" data-cat="amber" style="color: #EF9F27; cursor: pointer;">
+            <rect class="node-rect" x="670" y="170" width="160" height="60" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+            <text x="750" y="196" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Replenishment</text>
+            <text x="750" y="216" text-anchor="middle" fill="#F2B955" font-size="11">reabastecimento</text>
+          </g>
+          <g class="node-g" data-id="retro" data-cat="amber" style="color: #EF9F27; cursor: pointer;">
+            <rect class="node-rect" x="670" y="250" width="160" height="60" rx="10" fill="rgba(239,159,39,0.18)" stroke="#EF9F27" stroke-width="0.8"/>
+            <text x="750" y="276" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Retrospectiva</text>
+            <text x="750" y="296" text-anchor="middle" fill="#F2B955" font-size="11">melhoria contínua</text>
+          </g>
+
+          <!-- Métricas (coral) -->
+          <g class="node-g" data-id="leadtime" data-cat="coral" style="color: #E86A58; cursor: pointer;">
+            <rect class="node-rect" x="670" y="330" width="160" height="60" rx="10" fill="rgba(232,106,88,0.18)" stroke="#E86A58" stroke-width="0.8"/>
+            <text x="750" y="356" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">Lead / Cycle Time</text>
+            <text x="750" y="376" text-anchor="middle" fill="#ECA298" font-size="11">tempo de travessia</text>
+          </g>
+          <g class="node-g" data-id="cfd" data-cat="coral" style="color: #E86A58; cursor: pointer;">
+            <rect class="node-rect" x="670" y="410" width="160" height="60" rx="10" fill="rgba(232,106,88,0.18)" stroke="#E86A58" stroke-width="0.8"/>
+            <text x="750" y="436" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">CFD</text>
+            <text x="750" y="456" text-anchor="middle" fill="#ECA298" font-size="11">fluxo cumulativo</text>
+          </g>
+          <g class="node-g" data-id="aging" data-cat="coral" style="color: #E86A58; cursor: pointer;">
+            <rect class="node-rect" x="670" y="490" width="160" height="60" rx="10" fill="rgba(232,106,88,0.18)" stroke="#E86A58" stroke-width="0.8"/>
+            <text x="750" y="516" text-anchor="middle" fill="#F5F5F7" font-size="14" font-weight="600">WIP Aging</text>
+            <text x="750" y="536" text-anchor="middle" fill="#ECA298" font-size="11">idade dos itens</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="info-panel cat-core" id="info-panel">
+        <div class="panel-head">
+          <div class="panel-cat core" id="info-cat">NÚCLEO</div>
+          <div class="panel-title" id="info-title">O Board Kanban</div>
+          <div class="panel-sub" id="info-sub">O espelho da realidade</div>
+        </div>
+        <div class="panel-grid">
+          <div class="panel-section-col">
+            <div class="panel-label">O QUE É</div>
+            <div class="panel-text" id="info-role">O coração do sistema de fluxo. Ele não é uma ferramenta de gestão de tarefas, mas um radiador de informações que reflete exatamente como o trabalho flui.</div>
+          </div>
+          <div class="panel-section-col">
+            <div class="panel-label">POR QUE IMPORTA</div>
+            <div class="panel-text-muted" id="info-why">Sem um board que espelha o processo real (com Upstream, Downstream, gargalos reais), você está gerenciando a ilusão de trabalho, não o fluxo.</div>
+          </div>
+          <div class="panel-section-col" style="grid-column: 1 / -1; margin-top: -6px;">
+            <div class="panel-label">CONEXÃO COM O NÚCLEO</div>
+            <div class="panel-text-muted" id="info-relates">Todas as políticas, métricas e cadências giram em torno do estado atual e do design do board.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+
+function go(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    n.classList.toggle('active', n.dataset.target === id);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const systems = {
+  core: {
+    cat: 'core', catLabel: 'NÚCLEO',
+    title: 'O Board Kanban', sub: 'O espelho da realidade',
+    role: 'O coração do sistema de fluxo. Ele não é uma ferramenta de gestão de tarefas, mas um radiador de informações que reflete exatamente como o trabalho flui.',
+    why: 'Sem um board que espelha o processo real (com Upstream, Downstream, gargalos reais), você está gerenciando a ilusão de trabalho, não o fluxo.',
+    relates: 'Todas as políticas, métricas e cadências giram em torno do estado atual e do design do board.'
+  },
+  scrum: {
+    cat: 'green', catLabel: 'FUNDAMENTOS',
+    title: 'Scrum', sub: 'Timeboxes & Papéis',
+    role: 'Estrutura o trabalho em ciclos fechados (Sprints) e papéis bem definidos (SM, PO, Devs).',
+    why: 'Traz foco e alinhamento em ambientes complexos. Quando o escopo muda demais, o Sprint blinda o time.',
+    relates: 'Pode ser evoluído para Scrumban, mantendo as cadências mas adicionando o foco em fluxo contínuo.'
+  },
+  kanban: {
+    cat: 'green', catLabel: 'FUNDAMENTOS',
+    title: 'O Método Kanban', sub: 'Evolução e Fluxo',
+    role: 'Focado em visibilidade, limites de WIP e gerenciamento de fluxo contínuo. Não prescreve papéis.',
+    why: 'Permite entregar de forma contínua, medindo Lead Time e gerenciando a carga do time (WIP).',
+    relates: 'A base matemática e visual para construir um verdadeiro sistema puxado (Pull System).'
+  },
+  agil: {
+    cat: 'green', catLabel: 'FUNDAMENTOS',
+    title: 'Manifesto Ágil', sub: 'Valores base',
+    role: 'Indivíduos acima de ferramentas, software funcionando acima de documentação.',
+    why: 'Um Board perfeito não adianta nada se as pessoas não conversam para remover bloqueios.',
+    relates: 'É a fundação moral de todo o Gestor de Fluxo.'
+  },
+  wip: {
+    cat: 'blue', catLabel: 'SCRUMBAN',
+    title: 'Limites de WIP', sub: 'Pare de começar, comece a terminar',
+    role: 'Restrição física no board do número máximo de itens em uma coluna. A regra de ouro do fluxo.',
+    why: 'Lei de Little: mais itens em andamento = mais tempo para cada item ficar pronto. Limitar WIP acelera entregas.',
+    relates: 'Muda o comportamento do time. Se o limite atingiu, o time para de puxar novos e se junta para fechar o que está agarrado.'
+  },
+  pull: {
+    cat: 'blue', catLabel: 'SCRUMBAN',
+    title: 'Pull System', sub: 'Sistema Puxado',
+    role: 'Ninguém "empurra" trabalho. O item só avança quando há capacidade na próxima fase.',
+    why: 'Previne o acúmulo de trabalho (gargalos invisíveis) e sobrecarga do time.',
+    relates: 'Depende estritamente do respeito aos limites de WIP.'
+  },
+  politicas: {
+    cat: 'blue', catLabel: 'SCRUMBAN',
+    title: 'Políticas Explícitas', sub: 'Regras do Jogo',
+    role: 'DoR, DoD, SLAs, e o que significa estar "Pronto" em cada coluna.',
+    why: 'Se as regras não estão visíveis (no board), as pessoas vão fazer suposições diferentes.',
+    relates: 'Alinha expectativas entre o time de engenharia e os stakeholders (ex: "Em Homologação" significa que passou nos testes automatizados).'
+  },
+  daily: {
+    cat: 'amber', catLabel: 'CADÊNCIAS',
+    title: 'Daily Meeting', sub: 'Sincronização de fluxo',
+    role: 'Reunião diária lendo o board "da direita para a esquerda", focando nos itens mais próximos de terminar e nos bloqueios.',
+    why: 'No Scrumban, a daily não é sobre "o que eu fiz", mas sobre "o que está bloqueando este card de mover?".',
+    relates: 'O momento tático onde o time atua imediatamente sobre o WIP limit atingido e cards com Aging alto.'
+  },
+  replenishment: {
+    cat: 'amber', catLabel: 'CADÊNCIAS',
+    title: 'Replenishment', sub: 'Reabastecimento',
+    role: 'O ato contínuo de mover itens do Upstream (Product) para o ponto de comprometimento (To Do).',
+    why: 'Garante que o time de engenharia nunca fique sem trabalho refinado para puxar.',
+    relates: 'Substitui o Sprint Planning massivo por reuniões menores sob demanda.'
+  },
+  retro: {
+    cat: 'amber', catLabel: 'CADÊNCIAS',
+    title: 'Retrospectiva', sub: 'Melhoria contínua',
+    role: 'Reunião periódica olhando para o retrovisor, analisando métricas e gargalos recentes.',
+    why: 'Onde as políticas explícitas são ajustadas e os limites de WIP são calibrados.',
+    relates: 'Usa os dados reais do board (Lead Time, CFD) para tomar decisões.'
+  },
+  leadtime: {
+    cat: 'coral', catLabel: 'MÉTRICAS',
+    title: 'Lead / Cycle Time', sub: 'Tempo de travessia',
+    role: 'Mede o tempo exato desde que o time se comprometeu com o card até ele ser entregue em produção.',
+    why: 'É a métrica primária da agilidade de negócios. Se o Cycle Time cai, o time está mais veloz e previsível.',
+    relates: 'Diretamente afetado pelas quebras de WIP limit.'
+  },
+  cfd: {
+    cat: 'coral', catLabel: 'MÉTRICAS',
+    title: 'CFD', sub: 'Diagrama de Fluxo Cumulativo',
+    role: 'Gráfico visual que mostra a quantidade de itens em cada etapa ao longo do tempo.',
+    why: 'Permite identificar gargalos antes mesmo de eles se tornarem um desastre no projeto.',
+    relates: 'A representação visual definitiva da saúde do Pull System.'
+  },
+  aging: {
+    cat: 'coral', catLabel: 'MÉTRICAS',
+    title: 'WIP Aging', sub: 'Envelhecimento dos itens',
+    role: 'Sinaliza os itens que estão envelhecendo na mesma coluna além do SLA esperado.',
+    why: 'O melhor preditor de atrasos. Um item não fica atrasado no final, ele envelhece 1 dia por vez.',
+    relates: 'O principal insumo da Daily Meeting focada em fluxo.'
+  }
+};
+
+let currentSys = 'core';
+
+function selectNode(id) {
+  document.querySelectorAll('.node-g').forEach(el => {
+    el.style.opacity = '0.3';
+    el.querySelector('rect').setAttribute('stroke-width', '0.8');
+    el.querySelector('rect').setAttribute('filter', 'none');
+  });
+  
+  const g = document.querySelector(`.node-g[data-id="${id}"]`);
+  if (g) {
+    g.style.opacity = '1';
+    g.querySelector('rect').setAttribute('stroke-width', '2');
+    g.querySelector('rect').setAttribute('filter', 'url(#glow)');
+  }
+  
+  document.querySelectorAll('.connector').forEach(c => {
+    if (id === 'core' || c.dataset.to === id) {
+      c.style.opacity = '0.8';
+      c.style.strokeDasharray = '4';
+    } else {
+      c.style.opacity = '0.1';
+      c.style.strokeDasharray = 'none';
+    }
+  });
+  
+  const s = systems[id];
+  const panel = document.getElementById('info-panel');
+  panel.className = 'info-panel fade-in cat-' + s.cat;
+  
+  document.getElementById('info-cat').className = 'panel-cat ' + s.cat;
+  document.getElementById('info-cat').innerText = s.catLabel;
+  document.getElementById('info-title').innerText = s.title;
+  document.getElementById('info-sub').innerText = s.sub;
+  document.getElementById('info-role').innerText = s.role;
+  document.getElementById('info-why').innerText = s.why;
+  document.getElementById('info-relates').innerText = s.relates;
+  
+  setTimeout(() => panel.classList.remove('fade-in'), 300);
+}
+
+function applyFilter(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === cat));
+  
+  document.querySelectorAll('.node-g').forEach(g => {
+    if (cat === 'all' || g.dataset.cat === cat || g.dataset.cat === 'core') {
+      g.style.opacity = '1';
+    } else {
+      g.style.opacity = '0.2';
+    }
+  });
+  
+  document.querySelectorAll('.connector').forEach(c => {
+    const toNode = document.querySelector(`.node-g[data-id="${c.dataset.to}"]`);
+    if (cat === 'all' || toNode.dataset.cat === cat) {
+      c.style.opacity = '0.4';
+    } else {
+      c.style.opacity = '0.1';
+    }
+  });
+  
+  if (cat !== 'all') {
+    const firstOfCat = Object.keys(systems).find(k => systems[k].cat === cat && k !== 'core');
+    if (firstOfCat) selectNode(firstOfCat);
+  } else {
+    selectNode('core');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.node-g').forEach(g => {
+    g.addEventListener('click', () => {
+      selectNode(g.dataset.id);
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+    });
+  });
+  
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.addEventListener('click', () => applyFilter(b.dataset.filter));
+  });
+  
+  selectNode('core');
+});
+
+</script>
+
+</body>
+</html>

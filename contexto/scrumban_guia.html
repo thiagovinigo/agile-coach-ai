@@ -7201,6 +7201,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     </div>
 
     <div class="alert alert-blue" style="margin-top:24px;"><span>💡</span><span><strong>A Regra de Ouro:</strong> Uma IA Agentic nunca "baixa" seu código para rodar magicamente no servidor da OpenAI ou do Google. O cérebro fica na nuvem, mas as mãos e o laboratório de teste (onde ele roda <code>git</code>, <code>npm</code>, <code>docker</code>) <strong>são a própria máquina onde o Harness está instalado</strong>. Por isso, se a sua máquina não tiver o Python instalado, a IA também vai tomar "Comando não encontrado" ao tentar rodar um script, exatamente como você tomaria. O Harness é você digitalizado.</span></div>
+
+    <!-- Exemplo Prático Baseado nos Arquivos -->
+    <div style="background:#fff; border:1px solid #cbd5e1; border-left:4px solid #10b981; border-radius:8px; padding:20px; margin-top:24px; box-shadow:0 2px 4px rgba(0,0,0,0.02);">
+      <strong style="font-size:16px; color:#065f46; display:block; margin-bottom:12px;">🧩 Exemplo Prático (Baseado nos Nossos Arquivos)</strong>
+      <p style="font-size:13px; color:var(--text2); line-height:1.6;">
+        Imagine o pedido: <em>"adicione um link para a nova apresentação do Claude Code no nosso menu"</em>. Como o Cérebro (LLM) usa o Harness para modificar o <strong>Portal Agile Coach AI</strong> real?
+      </p>
+      <div style="margin-top: 16px; font-family: monospace; font-size: 12px; background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px;">
+        <span style="color: #94a3b8;">// 1. O Harness executa ferramentas locais para inspecionar seu HD</span><br>
+        <span style="color: #38bdf8;">[Harness Tool]</span> view_file("c:\\Users\\User\\.antigravity\\Agile Coach AI\\index.html")<br>
+        <br>
+        <span style="color: #94a3b8;">// 2. O Cérebro interpreta o conteúdo e pede para o Harness editar</span><br>
+        <span style="color: #38bdf8;">[Harness Tool]</span> replace_file_content(...) adicionando a tag &lt;a href="..."&gt;<br>
+        <br>
+        <span style="color: #94a3b8;">// 3. O Harness testa o portal usando seu próprio Windows</span><br>
+        <span style="color: #38bdf8;">[Harness Tool]</span> run_command("python server.py", cwd="Agile Coach AI")<br>
+        <span style="color: #a3e635;">[Terminal Windows]</span> "Serving at port 8081 with no cache"<br>
+      </div>
+      <p style="font-size:13px; color:#475569; margin-top:12px; line-height:1.6;">
+        Neste fluxo, o modelo base apenas pensou: <em>"precisamos ler o index.html, inserir a âncora e reiniciar o servidor"</em>. Foi o <strong>Harness (Google Antigravity)</strong> que executou os scripts no seu Windows, manipulou os bytes do seu arquivo <code>index.html</code> real e invocou a porta <code>8081</code> na sua máquina. O modelo ditou as regras, mas o Harness sujou as mãos.
+      </p>
+    </div>
   </div>
 
 <!-- ===== ECOSSISTEMA DE DOCUMENTOS ===== -->

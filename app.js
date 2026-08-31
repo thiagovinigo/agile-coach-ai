@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Funções globais de apoio para tabs (injetadas para resolver perda de escopo no innerHTML)
+    window.switchPhase = function(prefix, idx, el) {
+        const allBtns = el.parentElement.querySelectorAll('.phase-btn');
+        allBtns.forEach(b => b.classList.remove('on'));
+        el.classList.add('on');
+        const container = el.closest('.section') || el.closest('.extracted-content') || document;
+        container.querySelectorAll('.phase-panel').forEach(p => p.classList.remove('on'));
+        const target = container.querySelector('#' + prefix + '-' + idx);
+        if (target) target.classList.add('on');
+    };
+    window.toggleAcc = function(header) { header.parentElement.classList.toggle('open'); };
+    window.show = function(id, el) {
+        const container = el.closest('.section') || el.closest('.extracted-content') || document;
+        container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+        container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+        const t = container.querySelector('#' + id);
+        if(t) t.classList.add('on');
+        el.classList.add('on');
+    };
+
     // O portal agora é aberto.
     // Apenas os simuladores exigirão autenticação (tratado dentro da view).
 
@@ -9,8 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navegação lateral
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetId = item.getAttribute('data-target');
+            if (!targetId) return; // Se não tiver data-target, ignora o hijacking
+            
+            e.preventDefault();
             
             // Update nav active state
             navItems.forEach(nav => nav.classList.remove('active'));

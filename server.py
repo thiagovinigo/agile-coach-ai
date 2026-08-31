@@ -9,7 +9,7 @@ class NoCacheHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
         super().end_headers()
 
 if __name__ == '__main__':
-    port = 8080
+    port = 8081
     handler = NoCacheHTTPRequestHandler
     with socketserver.TCPServer(('', port), handler) as httpd:
         print(f'Serving at port {port} with no cache')

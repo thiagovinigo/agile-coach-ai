@@ -128,9 +128,22 @@ Linha: " + line);
 
                 <div class="nav-group">
                     <div class="nav-group-title">Apresentações</div>
-                    <a href="#workshop" class="nav-group-title nav-item" data-target="workshop-view" style="color:#0078d4; font-weight:bold; font-size: 13px;">
-                        <span class="icon">🎓</span> Workshop: Gestor de Fluxo
-                    </a>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding-right: 10px;">
+                        <a href="#workshop" class="nav-item" data-target="workshop-view" style="color:#0078d4; font-weight:bold; font-size: 13px; flex: 1;">
+                            <span class="icon">🎓</span> Workshop: Gestor de Fluxo
+                        </a>
+                        <a href="contexto/scrumban_guia.html" download="Workshop_Gestor_de_Fluxo.html" title="Baixar Apresentação" style="text-decoration: none; color: #0078d4; font-size: 16px;">
+                            ⬇️
+                        </a>
+                    </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding-right: 10px;">
+                        <a href="#flowgrammers-claude" class="nav-item" data-target="flowgrammers-claude-view" style="color:#FF0080; font-weight:bold; font-size: 13px; flex: 1;">
+                            <span class="icon">🧠</span> Claude Code (Flowgrammers)
+                        </a>
+                        <a href="contexto/claude_code_flowgrammers.html" download="Claude_Code_Arquitetura_Flowgrammers.html" title="Baixar Apresentação" style="text-decoration: none; color: #0078d4; font-size: 16px;">
+                            ⬇️
+                        </a>
+                    </div>
                 </div>
 
                 <div class="nav-group">
@@ -209,6 +222,9 @@ Linha: " + line);
                 
                 <div id="agil-view" class="view kb-view"><div class="kb-content-container" id="kb-agil"></div></div>
                 <div id="workshop-view" class="view"></div>
+                <div id="flowgrammers-claude-view" class="view" style="margin: -32px; height: calc(100vh - 70px); background: #0A0612;">
+                    <iframe src="contexto/claude_code_flowgrammers.html" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+                </div>
                 <div id="apresentacao-view" class="view kb-view"><div class="kb-content-container" id="kb-apresentacao"></div></div>
                 <div id="kanban-view" class="view kb-view"><div class="kb-content-container" id="kb-kanban"></div></div>
                 <div id="scrum-view" class="view kb-view"><div class="kb-content-container" id="kb-scrum"></div></div>
