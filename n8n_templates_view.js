@@ -69,7 +69,7 @@ function initN8nTemplatesView() {
 
             const catHeader = document.createElement('div');
             catHeader.className = 'kb-category-header';
-            catHeader.innerText = \`\${category} (\${filtered.length})\`;
+            catHeader.innerText = `${category} (${filtered.length})`;
             catHeader.style.padding = '12px 15px';
             catHeader.style.fontWeight = 'bold';
             catHeader.style.color = '#323130';
@@ -91,12 +91,12 @@ function initN8nTemplatesView() {
             filtered.forEach((skill) => {
                 const btn = document.createElement('div');
                 btn.className = 'kb-nav-btn';
-                btn.innerHTML = \`
+                btn.innerHTML = `
                     <div style="display:flex; align-items:center; gap:8px;">
                         <span style="font-size:1.1rem;">⚡</span>
-                        <span style="font-weight:600; color:#323130; font-size:0.95rem; word-break: break-word;">\${skill.title}</span>
+                        <span style="font-weight:600; color:#323130; font-size:0.95rem; word-break: break-word;">${skill.title}</span>
                     </div>
-                \`;
+                `;
                 linkList.appendChild(btn);
 
                 if(!firstBtn) firstBtn = btn;
@@ -105,18 +105,18 @@ function initN8nTemplatesView() {
                     document.querySelectorAll('#n8n-templates-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
 
-                    const headerCard = \`
+                    const headerCard = `
     <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
         <h3 style="margin-top:0; color:#0f172a; display:flex; align-items:center; justify-content:space-between; gap:8px; font-size: 1.1rem; margin-bottom: 15px;">
-            <span><span>📦</span> \${skill.title}</span>
-            \${window.favoritesManager ? window.favoritesManager.renderButton(skill.file, skill.title, 'n8n Templates', skill.path) : ''}
+            <span><span>📦</span> ${skill.title}</span>
+            ${window.favoritesManager ? window.favoritesManager.renderButton(skill.file, skill.title, 'n8n Templates', skill.path) : ''}
         </h3>
         <div style="display:flex; gap:10px; margin-bottom:15px;">
-            <span style="background-color:#ea580c; color:#fff; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:bold;">\${category}</span>
-            <span style="background-color:#e2e8f0; color:#334155; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:bold;">\${skill.file}</span>
+            <span style="background-color:#ea580c; color:#fff; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:bold;">${category}</span>
+            <span style="background-color:#e2e8f0; color:#334155; padding:2px 8px; border-radius:12px; font-size:12px; font-weight:bold;">${skill.file}</span>
         </div>
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <a href="\${skill.path}" download="\${skill.file}" style="display:inline-block; background-color:#ea580c; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+            <a href="${skill.path}" download="${skill.file}" style="display:inline-block; background-color:#ea580c; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:0.95rem; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
                 ⬇️ Baixar Template (.json)
             </a>
         </div>
@@ -128,20 +128,20 @@ function initN8nTemplatesView() {
             <li style="margin-bottom:8px;">Adicione suas credenciais e ajuste os webhooks!</li>
         </ul>
     </div>
-                    \`;
+                    `;
 
                     // We fetch the JSON to show a preview if possible
                     fetch(skill.path).then(r => r.text()).then(text => {
                         let preview = text;
                         if(text.length > 5000) {
-                            preview = text.substring(0, 5000) + '\\n\\n... (ARQUIVO TRUNCADO PARA VISUALIZAÇÃO) ...';
+                            preview = text.substring(0, 5000) + 'nn... (ARQUIVO TRUNCADO PARA VISUALIZAÇÃO) ...';
                         }
                         
-                        const mdContent = \`
+                        const mdContent = `
 <div class="markdown-body">
     <h4>Preview do Código (JSON)</h4>
-    <pre style="max-height: 400px; overflow: auto; background: #f6f8fa; padding: 16px; border-radius: 6px;"><code class="language-json">\${preview.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
-</div>\`;
+    <pre style="max-height: 400px; overflow: auto; background: #f6f8fa; padding: 16px; border-radius: 6px;"><code class="language-json">${preview.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>
+</div>`;
                         contentArea.innerHTML = headerCard + mdContent;
                     }).catch(err => {
                         contentArea.innerHTML = headerCard + '<p>Erro ao carregar preview do arquivo.</p>';
