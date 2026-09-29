@@ -25,6 +25,14 @@ function initReferenciasView() {
                 { title: "SkillsMP - Product Owner", url: "https://skillsmp.com/search?q=product+owner", desc: "Diretório de skills focadas em gestão de produtos e PO." },
                 { title: "AI Tmpl - Skills", url: "https://aitmpl.com/skills/", desc: "Templates e diretórios de skills de IA para diversas áreas." }
             ]
+        },
+        {
+            category: "Engenharia de IA & RAG",
+            icon: "🧠",
+            color: "#10b981", // green
+            links: [
+                { title: "VectifyAI / PageIndex", url: "https://github.com/VectifyAI/PageIndex", desc: "Framework open-source para RAG sem vetores (Vectorless). Ele constrói uma estrutura hierárquica que permite ao LLM navegar pelo documento imitando um humano, garantindo alta precisão em RAGs complexos." }
+            ]
         }
     ];
 
