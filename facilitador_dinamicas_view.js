@@ -123,6 +123,28 @@ function initFacilitadorDinamicasView() {
 
         <div style="padding: 30px;">
             
+            <!-- Material Necessário -->
+            <div style="margin-bottom: 25px; background: #e0f2fe; padding: 15px 20px; border-left: 4px solid #0ea5e9; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #0369a1; font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; display:flex; align-items:center; gap:8px;">
+                    <span>🛠️</span> Material Necessário / Preparação
+                </h4>
+                <p style="color: #0c4a6e; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+                    ${din.materials || "Material padrão: Post-its, canetas e quadro branco (ou board virtual no Miro/Mural)."}
+                </p>
+            </div>
+
+            <!-- Imagem Ilustrativa (Placeholder / SVG Dinâmico) -->
+            <div style="margin-bottom: 25px; text-align: center; border: 2px dashed #cbd5e1; border-radius: 12px; padding: 20px; background: #f8fafc; position: relative;">
+                <h4 style="color: #64748b; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                    <span>📸</span> Ilustração do Quadro / Execução
+                </h4>
+                <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); width: 100%; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    <span style="font-weight: 600; letter-spacing: 0.5px;">Espaço reservado para o print do seu board Miro/Mural</span>
+                    <span style="font-size: 0.85rem; margin-top: 5px;">Salve a imagem como "dinamica_${din.title.replace(/[^a-zA-Z0-9]/g, '')}.png" para substituir</span>
+                </div>
+            </div>
+
             <!-- Detalhamento -->
             <div style="margin-bottom: 25px;">
                 <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">

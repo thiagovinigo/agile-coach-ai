@@ -6,105 +6,10 @@ function initTecnicasFacilitacaoView() {
     const container = document.getElementById('tecnicas-facilitacao-view');
     if(!container) return;
 
-    const tecnicasData = {
-        "Comunicação & Escuta": [
-            {
-                title: "Escuta Ativa e Empática",
-                icon: "👂",
-                detail: "A habilidade de focar completamente no locutor, compreender a mensagem, compreender as emoções e reter a informação para uso posterior sem interrupções.",
-                examples: "Um membro do time desabafa sobre a pressão das entregas. O Agile Coach para de digitar, faz contato visual, concorda com a cabeça e repete a essência do que foi dito: 'Então você sente que o escopo está crescendo sem aviso, correto?'.",
-                execution: `
-                    <ol>
-                        <li><strong>Pare outras atividades:</strong> Feche notebooks e foque no interlocutor.</li>
-                        <li><strong>Postura aberta:</strong> Mantenha contato visual e evite braços cruzados.</li>
-                        <li><strong>Parafraseie:</strong> Repita com suas palavras o que a pessoa disse para validar o entendimento.</li>
-                        <li><strong>Valide a emoção:</strong> Reconheça o sentimento ("Entendo sua frustração").</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: O membro da equipe se sente ouvido, diminui sua defensiva e se torna mais aberto a discutir soluções de fluxo."
-            },
-            {
-                title: "Perguntas Poderosas (Socráticas)",
-                icon: "❓",
-                detail: "Técnica de questionamento que força o interlocutor a refletir, encontrar suas próprias respostas e descobrir falhas em seu raciocínio, em vez do facilitador entregar a resposta pronta.",
-                examples: "O time pergunta 'O que fazemos com esse bug?'. O Scrum Master devolve: 'O que a nossa política explícita de bugs críticos diz sobre isso?'.",
-                execution: `
-                    <ol>
-                        <li>Use perguntas abertas (Como, O que, Por que).</li>
-                        <li>Evite perguntas de 'Sim ou Não'.</li>
-                        <li>Deixe o silêncio atuar após a pergunta; dê tempo para a pessoa pensar.</li>
-                        <li>Evite embutir a sua opinião na pergunta (Ex errado: 'Você não acha que deveríamos testar mais?').</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: O time de desenvolvimento para de depender do Scrum Master para decisões diárias e desenvolve auto-organização."
-            }
-        ],
-        "Gestão de Tempo & Foco": [
-            {
-                title: "Parking Lot (Estacionamento de Ideias)",
-                icon: "🅿️",
-                detail: "Técnica visual para capturar ideias ou discussões válidas, mas que estão fora do escopo ou foco do objetivo atual da reunião.",
-                examples: "Durante a Daily, dois desenvolvedores começam a discutir a arquitetura de banco de dados para uma feature futura.",
-                execution: `
-                    <ol>
-                        <li>Crie um espaço visual na parede ou no Miro chamado 'Parking Lot'.</li>
-                        <li>Ao notar um desvio de foco, interrompa educadamente: 'Excelente ponto, mas foge do escopo atual'.</li>
-                        <li>Anote o tópico em um post-it e coloque no Parking Lot.</li>
-                        <li>Reserve os 5 minutos finais da reunião para revisar o Parking Lot e definir os próximos passos de cada item.</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: A reunião de Planning acaba no tempo exato de 2 horas. As discussões técnicas de arquitetura foram marcadas para uma reunião separada amanhã à tarde."
-            },
-            {
-                title: "Timeboxing Rigoroso",
-                icon: "⏱️",
-                detail: "Alocação de um período de tempo fixo e inegociável para uma atividade. Quando o tempo acaba, a atividade para, forçando o foco no que é mais essencial.",
-                examples: "Brainstorming infinito em uma Retrospectiva onde as pessoas divagam e nunca chegam a um plano de ação.",
-                execution: `
-                    <ol>
-                        <li>Defina o limite de tempo publicamente (ex: 'Temos 8 minutos para ideação').</li>
-                        <li>Use um timer visual e grande (ex: Time Timer) para que todos vejam a regressão.</li>
-                        <li>Aise quando faltar metade do tempo e quando faltar 1 minuto.</li>
-                        <li>Quando o timer tocar, interrompa imediatamente de forma gentil mas firme.</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: O time gera 15 ideias objetivas em 8 minutos, parando a atividade no alarme, permitindo tempo de sobra para votação e plano de ação."
-            }
-        ],
-        "Consenso & Decisão": [
-            {
-                title: "Fist of Five (Punho de Cinco)",
-                icon: "🖐️",
-                detail: "Técnica rápida para avaliar o grau de consenso de uma equipe sobre uma decisão, variando de 0 (bloqueio) a 5 dedos (total suporte).",
-                examples: "A equipe precisa decidir se vai adotar um novo framework de testes ou manter o antigo nesta Sprint.",
-                execution: `
-                    <ol>
-                        <li>Apresente a proposta claramente.</li>
-                        <li>Peça que todos levantem a mão ao mesmo tempo mostrando os dedos (1 a 5).</li>
-                        <li>5: 'Apoio totalmente e lidero'. 4: 'Gosto e apoio'. 3: 'Concordo, posso viver com isso'. 2: 'Tenho ressalvas, mas não bloqueio'. 1: 'Discordo fortemente'. 0 (Punho fechado): 'Veto/Bloqueio'.</li>
-                        <li>Se houver algum 0 ou 1, peça para a pessoa explicar sua preocupação para ajustar a proposta.</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: 4 pessoas mostram 4 dedos e 1 pessoa mostra o punho (0). A equipe para, escuta o risco técnico apontado pelo punho fechado, ajusta a proposta e vota novamente com sucesso (todos 3+)."
-            },
-            {
-                title: "Dot Voting (Votação por Pontos)",
-                icon: "🔴",
-                detail: "Método democrático para priorizar uma lista extensa de itens, distribuindo uma quantidade limitada de 'votos' (pontos adesivos) para cada participante.",
-                examples: "Selecionar qual experimento de melhoria contínua o time vai puxar dentre 20 problemas levantados na Retrospectiva.",
-                execution: `
-                    <ol>
-                        <li>Agrupe ideias semelhantes para evitar divisão de votos.</li>
-                        <li>Distribua votos (ex: 3 pontos por pessoa).</li>
-                        <li>Defina a regra: as pessoas podem colocar todos os votos num mesmo cartão ou distribuir.</li>
-                        <li>Votação silenciosa: todos colam seus pontos simultaneamente.</li>
-                        <li>Ordene os cartões pela quantidade total de pontos recebidos.</li>
-                    </ol>
-                `,
-                result: "Exemplo Prático: O item 'Ajustar CI/CD' recebe 9 votos, enquanto 'Melhorar documentação' recebe 2. O time entra em acordo imediato para focar no CI/CD."
-            }
-        ]
-    };
+    if (typeof tecnicasData === 'undefined') {
+        container.innerHTML = '<p style="padding:20px;">Erro: Dados das técnicas não carregados.</p>';
+        return;
+    }
 
     container.innerHTML = '';
     
