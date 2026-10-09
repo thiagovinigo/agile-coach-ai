@@ -97,55 +97,65 @@ function initTecnicasFacilitacaoView() {
         </div>
     </div>
 
-    <div style="padding: 30px;">
-        
-        <!-- Detalhamento -->
-        <div style="margin-bottom: 25px;">
-            <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
-                <span>📝</span> O que é a Técnica?
-            </h4>
-            <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin: 0;">
-                ${din.detail}
-            </p>
-        </div>
-
-        <!-- Exemplos -->
-        <div style="margin-bottom: 25px; background: #faf5ff; padding: 15px 20px; border-left: 4px solid #8b5cf6; border-radius: 0 8px 8px 0;">
-            <h4 style="color: #5b21b6; font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; display:flex; align-items:center; gap:8px;">
-                <span>💡</span> Exemplo de Cenário
-            </h4>
-            <p style="color: #4c1d95; font-size: 1.05rem; line-height: 1.6; margin: 0; font-style: italic;">
-                "${din.examples}"
-            </p>
-        </div>
-
-        <!-- A Prática Executada -->
-        <div style="margin-bottom: 25px;">
-            <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px; display:flex; align-items:center; gap:8px;">
-                <span>⚙️</span> Passo a Passo do Facilitador
-            </h4>
-            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
-                <div style="color: #334155; font-size: 1.05rem; line-height: 1.7; margin-left: 10px;" class="din-execution-list">
-                    ${din.execution}
+        <div style="padding: 30px;">
+            
+            <!-- Contexto e Propósito -->
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                        <span>🧠</span> O que é e por que fazer esta técnica?
+                    </h4>
+                    <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+                        ${din.detail}
+                    </p>
+                </div>
+                <div style="flex: 1; min-width: 300px; background: #faf5ff; padding: 15px 20px; border-left: 4px solid #8b5cf6; border-radius: 0 8px 8px 0;">
+                    <h4 style="color: #5b21b6; font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; display:flex; align-items:center; gap:8px;">
+                        <span>🎯</span> Qual problema ajuda a solucionar?
+                    </h4>
+                    <p style="color: #4c1d95; font-size: 1.05rem; line-height: 1.6; margin: 0; font-style: italic;">
+                        ${din.examples}
+                    </p>
                 </div>
             </div>
-        </div>
 
-            <!-- Canvas Visual da Técnica / Exemplo Real -->
-            <div style="margin-bottom: 25px; text-align: center; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #f8fafc; position: relative;">
-                <h4 style="color: #475569; font-size: 1.1rem; margin-top: 0; margin-bottom: 15px; display:flex; align-items:center; justify-content:center; gap:8px;">
-                    <span>📸</span> Canvas Visual da Técnica / Exemplo Real
+            <!-- Como Executar -->
+            <div style="margin-bottom: 25px;">
+                <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px; display:flex; align-items:center; gap:8px;">
+                    <span>⚙️</span> Passo a Passo do Facilitador
                 </h4>
-                ${din.board_html ? `
-                    <div style="width: 100%; text-align: left; overflow-x: auto;">
-                        ${din.board_html}
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+                    <strong style="color: #0f172a; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">DURANTE A SESSÃO:</strong>
+                    <div style="color: #334155; font-size: 1.05rem; line-height: 1.7; margin-top: 8px;" class="din-execution-list">
+                        ${din.execution}
                     </div>
-                ` : `
+                </div>
+            </div>
+
+            <!-- Visual Final da Sessão -->
+            <div style="margin-bottom: 10px;">
+                <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                    <span>🏆</span> Resultado e Visual Final da Técnica
+                </h4>
+                
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="color: #166534; font-size: 1.1rem; line-height: 1.6; margin: 0; font-weight: 500;">
+                        ${din.result || "Melhor facilitação das interações do time."}
+                    </p>
+                </div>
+
+                <div style="text-align: center; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #fff; position: relative;">
+                    ${din.board_html ? `
+                        <div style="width: 100%; text-align: left; overflow-x: auto;">
+                            ${din.board_html}
+                        </div>
+                    ` : `
                     <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); width: 100%; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                        <span style="font-weight: 600; letter-spacing: 0.5px;">Espaço reservado para o visual da técnica</span>
+                        <span style="font-weight: 600; letter-spacing: 0.5px;">Espaço reservado para o print do visual final</span>
                     </div>
-                `}
+                    `}
+                </div>
             </div>
 
         </div>

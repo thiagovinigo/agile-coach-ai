@@ -503,6 +503,56 @@ const facilitadorDinamicasData = {
     ],
     "Scrum & Retrospectivas": [
         {
+        "title": "Futureospective (Expectativas vs Preocupações)",
+        "icon": "🔮",
+        "detail": "Uma retrospectiva voltada para o futuro, ajudando a equipe a mapear expectativas e preocupações para as próximas sprints ou projetos. A Diretiva Primária é: 'Vamos exercer plenamente esta oportunidade de nos unir em torno de uma visão inclusiva, e dar as mãos para construir um futuro comum.'",
+        "examples": "No início de um novo trimestre ou de um projeto importante, para nivelar a equipe.",
+        "execution": "<ol><li>Leia a Diretiva Primária da Futureospective.</li><li>Divida o quadro em 'Expectativas' e 'Preocupações'.</li><li>Os participantes adicionam post-its em cada área.</li><li>Debata as preocupações e crie planos de ação para mitigá-las, aproveitando as expectativas positivas.</li></ol>",
+        "result": "Exemplo: A equipe estava preocupada com a 'falta de clareza nas metas'. O plano de ação foi agendar uma sessão com o PO para detalhar os OKRs do trimestre.",
+        "materials": "Miro/Mural: Board com duas colunas (Expectativas e Preocupações). Físico: Quadro branco, post-its e canetas.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Futureospective</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #dcfce7; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #15803d; text-align: center;\">Expectativas</h4><div style=\"background: #bbf7d0; padding: 12px; margin: 8px 0; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.15); font-size: 13px; color: #333; line-height: 1.4;\">Vamos entregar a nova feature no prazo.</div></div><div style=\"background: #fee2e2; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #b91c1c; text-align: center;\">Preocupações</h4><div style=\"background: #fca5a5; padding: 12px; margin: 8px 0; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.15); font-size: 13px; color: #333; line-height: 1.4;\">Falta de clareza nas metas da sprint.</div></div></div></div>"
+},
+        {
+        "title": "Melhoria Contínua (Que bom, que pena, que tal?)",
+        "icon": "📈",
+        "detail": "Um formato de retrospectiva muito popular e fácil de aplicar, que foca nos aspectos positivos, negativos e em ideias de melhoria (ações).",
+        "examples": "Retrospectiva de fim de sprint para times que buscam um formato simples e direto.",
+        "execution": "<ol><li>Divida o quadro nas seções: Que bom, Que pena e Que tal?.</li><li>Participantes têm 5 minutos para preencher post-its em silêncio.</li><li>Agrupamento por afinidade e discussão.</li><li>Votação e definição de action items na coluna 'Que tal?'.</li></ol>",
+        "result": "Exemplo: 'Que pena: A daily está demorando muito.' -> 'Que tal?: Usar um timer de 1 min por pessoa.'",
+        "materials": "Miro/Mural: Board dividido em 3 colunas ou quadrantes. Físico: Post-its de 3 cores diferentes.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Que bom, Que pena, Que tal?</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #fef08a; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #a16207; text-align: center;\">Que bom</h4><div style=\"background: #fde047; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">Integração com a nova API foi sucesso!</div></div><div style=\"background: #fed7aa; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #c2410c; text-align: center;\">Que pena</h4><div style=\"background: #fdba74; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">Reuniões diárias longas.</div></div><div style=\"background: #bbf7d0; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #15803d; text-align: center;\">Que tal?</h4><div style=\"background: #86efac; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">Usar timer na daily.</div></div></div></div>"
+},
+        {
+        "title": "Happiness Radar",
+        "icon": "😊",
+        "detail": "Uma atividade rápida de check-in para medir o sentimento da equipe sobre diferentes aspectos do trabalho, como processos, pessoas e tecnologias.",
+        "examples": "No início de uma reunião para entender como o time está chegando emocionalmente.",
+        "execution": "<ol><li>Desenhe um radar ou colunas com diferentes emojis (feliz, neutro, triste).</li><li>Os eixos podem ser 'Pessoas', 'Processos', 'Tecnologias' ou dias da semana.</li><li>Cada pessoa faz uma marca no radar ou coloca um post-it onde seu sentimento se enquadra.</li><li>Observe onde há concentração de 'tristeza' ou 'alegria' e pergunte ao grupo.</li></ol>",
+        "result": "Exemplo: Maioria votou 'triste' em Processos. O facilitador pergunta o porquê e a equipe explica que os deploys estão muito burocráticos.",
+        "materials": "Miro/Mural: Template de Radar de Felicidade. Físico: Cartolina com o radar desenhado e adesivos de bolinhas para votar.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Happiness Radar</h3><div style=\"display: flex; justify-content: center; gap: 20px; margin-top: 15px;\"><div style=\"font-size: 40px; text-align: center;\">😊<br><small style=\"font-size: 14px;\">Pessoas (5)</small></div><div style=\"font-size: 40px; text-align: center;\">😐<br><small style=\"font-size: 14px;\">Tecnologia (2)</small></div><div style=\"font-size: 40px; text-align: center;\">☹️<br><small style=\"font-size: 14px;\">Processos (4)</small></div></div></div>"
+},
+        {
+        "title": "Safety Check",
+        "icon": "🛡️",
+        "detail": "Mede o grau de segurança psicológica da equipe antes de uma reunião importante ou retrospectiva.",
+        "examples": "Para saber se a equipe está confortável em compartilhar problemas reais.",
+        "execution": "<ol><li>Peça aos participantes para darem uma nota de 1 (nada seguro) a 5 (totalmente seguro) anonimamente.</li><li>O facilitador coleta e apresenta a média.</li><li>Se a média for baixa, a reunião deve focar em descobrir por que a segurança está baixa, em vez de seguir a pauta original.</li></ol>",
+        "result": "Exemplo: A média deu 2. O facilitador mudou a pauta para conversar abertamente sobre medos e punições recentes na empresa.",
+        "materials": "Votação anônima em uma ferramenta digital (Mentimeter) ou papéis dobrados recolhidos em um chapéu.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Safety Check</h3><div style=\"text-align: center; font-size: 24px; font-weight: bold; color: #334155; margin-top: 15px;\">Média de Segurança da Equipe: <span style=\"color: #eab308; font-size: 40px;\">3.5</span> / 5</div></div>"
+},
+        {
+        "title": "3Ls: Liked, Learned, Lacked",
+        "icon": "📚",
+        "detail": "Uma técnica estruturada para refletir sobre o que a equipe gostou (Liked), o que aprendeu (Learned) e o que sentiu falta (Lacked).",
+        "examples": "Ideal para retrospectivas após um treinamento, ciclo de aprendizado ou final de projeto.",
+        "execution": "<ol><li>Crie 3 colunas: Liked, Learned, Lacked.</li><li>Time adiciona notas em cada coluna (5-7 min).</li><li>Agrupe as notas similares e discuta os maiores aprendizados e as lacunas (Lacked).</li><li>Transforme os 'Lacked' em itens de ação.</li></ol>",
+        "result": "Exemplo: Learned: Aprendemos a usar a nova ferramenta de CI/CD. Lacked: Faltou tempo para revisar o código dos colegas.",
+        "materials": "Miro/Mural ou quadro branco dividido em 3 colunas. Post-its.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: 3Ls</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #dcfce7; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #15803d; text-align: center;\">Liked</h4><div style=\"background: #bbf7d0; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">Colaboração alta da equipe de design.</div></div><div style=\"background: #bfdbfe; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #1d4ed8; text-align: center;\">Learned</h4><div style=\"background: #93c5fd; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">O novo framework ajudou muito.</div></div><div style=\"background: #fee2e2; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; color: #b91c1c; text-align: center;\">Lacked</h4><div style=\"background: #fca5a5; padding: 12px; border-radius: 2px; font-size: 13px; color: #333;\">Faltou clareza nos requisitos da API.</div></div></div></div>"
+},
+        {
             "title": "Starfish Retrospective",
             "icon": "⭐",
             "detail": "Uma técnica para avaliar práticas que o time deve começar, parar, continuar, fazer mais ou fazer menos.",

@@ -16,9 +16,7 @@ window.onerror = function(msg, url, line, col, error) {
     console.error("GLOBAL ERROR:", msg, line, col);
     
     // Create an alert so the user can copy it even if DOM is not ready
-    alert("ERRO ENCONTRADO! Copie isso e envie:
-" + msg + "
-Linha: " + line);
+    alert("ERRO ENCONTRADO! Copie isso e envie:\\n" + msg + "\\nLinha: " + line);
     
     if (document.body) {
         var errorDiv = document.createElement('div');

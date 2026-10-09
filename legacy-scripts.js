@@ -1,11 +1,10 @@
-
 window.getActiveElement = function(id) {
   var activeView = document.querySelector('.view.active');
   if (activeView) {
     var el = activeView.querySelector('[id="' + id + '"]');
     if (el) return el;
   }
-  return getActiveElement(id);
+  return document.getElementById(id);
 };
 
 window.getActiveContainer = function() {

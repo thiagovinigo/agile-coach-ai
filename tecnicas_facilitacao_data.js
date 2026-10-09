@@ -453,6 +453,56 @@ const tecnicasData = {
     ],
     "Management 3.0 & Engajamento": [
         {
+        "title": "Team Building: Sua Logo",
+        "icon": "🖼️",
+        "detail": "Dinâmica para criar laços (Team Bonding) e conhecer os indivíduos. Cada participante desenha uma 'logo' pessoal dividida em 4 partes.",
+        "examples": "Início da formação de uma equipe ou workshops de team building.",
+        "execution": "<ol><li>Desenhe um quadro dividido em 4: 1. Sua jornada. 2. Algo que faz você feliz. 3. Algo que você faz bem. 4. Algo que você está aprendendo.</li><li>Cada pessoa desenha em seu próprio canvas.</li><li>Rodada de apresentação onde cada um explica sua logo.</li></ol>",
+        "result": "Exemplo: Ao apresentar sua logo, a equipe descobriu que 3 pessoas estavam aprendendo a tocar violão, o que gerou um assunto em comum imediato e maior integração.",
+        "materials": "Template no Miro com 4 quadrantes para cada membro. Fisicamente: Folhas A4 e canetas coloridas.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Sua Logo Pessoal</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; max-width: 400px; margin-left: auto; margin-right: auto;\"><div style=\"background: #fff; padding: 15px; border: 2px dashed #94a3b8; text-align: center;\">Sua Jornada 🛤️</div><div style=\"background: #fff; padding: 15px; border: 2px dashed #94a3b8; text-align: center;\">Algo que te faz feliz 😊</div><div style=\"background: #fff; padding: 15px; border: 2px dashed #94a3b8; text-align: center;\">Algo que faz bem 🌟</div><div style=\"background: #fff; padding: 15px; border: 2px dashed #94a3b8; text-align: center;\">Algo que está aprendendo 🧠</div></div></div>"
+},
+        {
+        "title": "Praise Board (Quadro de Reconhecimento)",
+        "icon": "🏅",
+        "detail": "Espaço visual para reconhecer e celebrar conquistas, comportamentos e ajuda entre os membros da equipe. Essencial para Team Bonding.",
+        "examples": "Mantido em uma parede física ou virtual constantemente, revisado no final das retrospectivas.",
+        "execution": "<ol><li>Crie quadrantes: 'Sensacional', 'Bom trabalho', 'Muito obrigado', 'Parabéns'.</li><li>Incentive as pessoas a deixarem bilhetes umas para as outras durante a semana.</li><li>No fim da sprint, leiam alguns dos reconhecimentos em voz alta.</li></ol>",
+        "result": "Exemplo: 'Muito obrigado Ana, por me ajudar com o deploy de ontem à noite.' Isso aumenta o moral da equipe.",
+        "materials": "Miro: Quadro com 4 áreas. Físico: Kudo cards e um mural visível na sala.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Praise Board</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #bfdbfe; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; text-align: center;\">Sensacional</h4><div style=\"background: #fff; padding: 10px; font-size: 12px; box-shadow: 2px 2px 4px rgba(0,0,0,0.1);\">Para João pela ajuda no bug crasso.</div></div><div style=\"background: #fed7aa; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; text-align: center;\">Bom Trabalho</h4></div><div style=\"background: #fef08a; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; text-align: center;\">Muito Obrigado</h4></div><div style=\"background: #bbf7d0; padding: 15px; border-radius: 8px;\"><h4 style=\"margin: 0 0 10px 0; text-align: center;\">Parabéns</h4></div></div></div>"
+},
+        {
+        "title": "Growth Board (Oportunidades)",
+        "icon": "🌱",
+        "detail": "Quadro para alinhar as necessidades de aprendizado e compartilhamento da equipe.",
+        "examples": "Para mapear habilidades e necessidades da equipe e criar um plano de desenvolvimento individual e coletivo.",
+        "execution": "<ol><li>Divida o quadro em: 'Quero ensinar', 'Quero aprender', 'Tenho dúvidas', 'Tenho ideias / sugestões'.</li><li>Participantes adicionam post-its aos quadrantes.</li><li>Facilitador conecta quem quer ensinar com quem quer aprender.</li></ol>",
+        "result": "Exemplo: Carlos queria aprender React, e Joana queria ensinar. O facilitador combinou um pair programming semanal entre os dois.",
+        "materials": "Miro/Mural: Board dividido em 4. Físico: Flipchart e post-its.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Growth Board</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #e2e8f0; padding: 15px;\"><h4 style=\"margin: 0;\">Quero ensinar</h4></div><div style=\"background: #e2e8f0; padding: 15px;\"><h4 style=\"margin: 0;\">Quero aprender</h4></div><div style=\"background: #e2e8f0; padding: 15px;\"><h4 style=\"margin: 0;\">Tenho dúvidas</h4></div><div style=\"background: #e2e8f0; padding: 15px;\"><h4 style=\"margin: 0;\">Tenho ideias</h4></div></div></div>"
+},
+        {
+        "title": "RAID (Riscos, Premissas, Questões, Dependências)",
+        "icon": "⚠️",
+        "detail": "Uma matriz para dar clareza aos desafios de um projeto, mapeando Risks, Assumptions, Issues e Dependencies.",
+        "examples": "No planejamento de um novo projeto, PI Planning ou Sprint Planning complexa.",
+        "execution": "<ol><li>Mural com 4 quadrantes: Riscos, Premissas, Questões (Issues), Dependências.</li><li>O time preenche cada um dos quadrantes sobre o projeto atual.</li><li>Cria-se um plano de mitigação para riscos altos e dependências externas críticas.</li></ol>",
+        "result": "Exemplo: Dependência identificada: 'Precisamos do banco de dados do time B pronto na sprint 2'. Ação: Alinhar com o PO do time B hoje.",
+        "materials": "Miro/Mural ou quadro físico dividido em 4 áreas.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: RAID</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #fee2e2; padding: 15px;\"><h4 style=\"margin: 0; color: #b91c1c;\">Riscos</h4></div><div style=\"background: #fef08a; padding: 15px;\"><h4 style=\"margin: 0; color: #a16207;\">Premissas</h4></div><div style=\"background: #bfdbfe; padding: 15px;\"><h4 style=\"margin: 0; color: #1d4ed8;\">Questões</h4></div><div style=\"background: #dcfce7; padding: 15px;\"><h4 style=\"margin: 0; color: #15803d;\">Dependências</h4></div></div></div>"
+},
+        {
+        "title": "Parking Lot (Estacionamento)",
+        "icon": "🅿️",
+        "detail": "Mantém o foco da reunião evitando tangentes. Ideias boas, mas fora de tópico, são 'estacionadas' para depois.",
+        "examples": "Qualquer reunião ou cerimônia em que o grupo tende a sair do tema principal.",
+        "execution": "<ol><li>Crie um espaço visível na sala ou board chamado 'Parking Lot'.</li><li>Sempre que alguém levantar um ponto válido, mas fora da pauta, anote no Parking Lot e retome o foco.</li><li>No final da reunião, revise o Parking Lot e defina quem vai cuidar de cada item e quando.</li></ol>",
+        "result": "Exemplo: Discussão sobre a arquitetura foi interrompida para falar de licenças do software. O facilitador estacionou as 'licenças' e o time concluiu a arquitetura no tempo previsto.",
+        "materials": "Miro: Retângulo na lateral do board. Físico: Papel kraft no canto da parede.",
+        "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Canvas: Parking Lot 🅿️</h3><div style=\"background: #e2e8f0; padding: 20px; min-height: 100px; border: 2px dashed #94a3b8; border-radius: 8px;\"><div style=\"background: #fef08a; padding: 10px; margin-bottom: 5px; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); font-size: 13px;\">Renovação de licenças de software</div></div></div>"
+},
+        {
             "title": "Moving Motivators",
             "icon": "🚀",
             "detail": "Dinâmica para entender os motivadores intrínsecos de cada pessoa usando 10 cartas (CHAMPFROGS). Útil em 1:1s e team buildings.",
