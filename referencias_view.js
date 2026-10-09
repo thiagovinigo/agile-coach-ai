@@ -33,8 +33,27 @@ function initReferenciasView() {
             links: [
                 { title: "VectifyAI / PageIndex", url: "https://github.com/VectifyAI/PageIndex", desc: "Framework open-source para RAG sem vetores (Vectorless). Ele constrói uma estrutura hierárquica que permite ao LLM navegar pelo documento imitando um humano, garantindo alta precisão em RAGs complexos." }
             ]
+        },
+        {
+            category: "Facilitação e Ferramentas Ágeis",
+            icon: "💡",
+            color: "#f59e0b",
+            links: [
+                { title: "FunRetrospectives", url: "https://www.funretrospectives.com/pt/", desc: "Catálogo completo de atividades e dinâmicas para tornar suas retrospectivas ágeis mais envolventes (Team Building, Energizers, Futurespectives)." },
+                { title: "Melhores Ferramentas Ágeis 2026", url: "https://echometerapp.com/pt/beste-kostenlose-agile-tools-2026/", desc: "Lista curada pela Echometer das melhores ferramentas gratuitas e pagas para equipes ágeis em 2026." },
+                { title: "Masterclass: A Rota da Facilitação", url: "https://drive.google.com/file/d/19022oLGt17pEVo0ev9u6SItYO2KAwcwP/view?usp=sharing", desc: "PDF da Masterclass do Coletivo Ação abordando Diretiva Primária, Os 5 Desafios das Equipes, Projeto Aristóteles do Google e Acordos." }
+            ]
+        },
+        {
+            category: "Meus Boards Miro",
+            icon: "💛",
+            color: "#eab308",
+            links: [
+                { title: "Miro: Rota da Facilitação", url: "https://miro.com/app/board/uXjVMdUsHFU=/", desc: "Board oficial completo utilizado na dinâmica de facilitação (inclui Acordos, Expectativas, Radar de Felicidade)." },
+                { title: "Miro: Área de Trabalho 2", url: "https://miro.com/app/board/uXjVPi2n1KI=/", desc: "Espaço de trabalho secundário no Miro." }
+            ]
         }
-    ];
+];
 
     container.innerHTML = '';
     
