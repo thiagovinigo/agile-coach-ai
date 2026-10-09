@@ -503,6 +503,46 @@ const facilitadorDinamicasData = {
     ],
     "Scrum & Retrospectivas": [
         {
+            "title": "Planning Poker & Magic Estimation",
+            "icon": "🃏",
+            "detail": "Uma dinâmica para facilitar estimativas conjuntas no Refinamento ou Planning, garantindo que todo o time tenha voz sem viés de ancoragem.",
+            "examples": "O time debate e estima o esforço das histórias da próxima Sprint.",
+            "execution": "<ol><li>Apresente a história a ser estimada.</li><li>Todos selecionam uma carta em segredo (Story Points).</li><li>Todos revelam as cartas ao mesmo tempo.</li><li>As pontas (maior e menor estimativa) justificam seus votos.</li><li>O debate continua até haver consenso.</li></ol>",
+            "result": "Alinhamento técnico sobre a complexidade da entrega e esforço estimado, mitigando riscos invisíveis.",
+            "materials": "Cartas de Planning Poker físicas ou aplicativo/site de Planning Poker (ex: PlanITPoker).",
+            "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Votação: Planning Poker</h3><div style=\"display: flex; justify-content: center; gap: 15px; margin-top: 15px;\"><div style=\"background: #e2e8f0; padding: 20px; border-radius: 8px; font-size: 24px; font-weight: bold;\">5</div><div style=\"background: #e2e8f0; padding: 20px; border-radius: 8px; font-size: 24px; font-weight: bold;\">5</div><div style=\"background: #fef08a; padding: 20px; border-radius: 8px; font-size: 24px; font-weight: bold;\">13</div><div style=\"background: #e2e8f0; padding: 20px; border-radius: 8px; font-size: 24px; font-weight: bold;\">5</div></div><p style=\"text-align: center; color: #64748b; margin-top: 10px;\">Um desenvolvedor votou 13. Hora de debater!</p></div>"
+        },
+        {
+            "title": "Daily Scrum: Walk the Board",
+            "icon": "🚶",
+            "detail": "Uma forma de conduzir a Daily Scrum focada no fluxo de trabalho (da direita para a esquerda do quadro) em vez de focar nas pessoas (o que fiz, o que vou fazer).",
+            "examples": "A Daily está durando mais de 15 minutos e parecendo 'status report' para o Scrum Master.",
+            "execution": "<ol><li>Abra o quadro Kanban/Scrum do time.</li><li>Comece lendo o quadro da direita (mais perto de 'Done') para a esquerda.</li><li>Para cada item, pergunte: 'O que precisamos fazer para mover este item para a próxima etapa hoje?'.</li><li>Foque em identificar gargalos e impedimentos no fluxo.</li></ol>",
+            "result": "Daily mais rápida, focada no fluxo de valor e na resolução imediata de gargalos, e não em micro-gerenciamento.",
+            "materials": "Quadro da Sprint (Jira, Azure DevOps, Miro, etc.) aberto e visível para todos.",
+            "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Walk the Board</h3><div style=\"display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 15px;\"><div style=\"background: #e2e8f0; padding: 15px; border-radius: 8px;\">To Do</div><div style=\"background: #e2e8f0; padding: 15px; border-radius: 8px;\">Doing</div><div style=\"background: #bbf7d0; padding: 15px; border-radius: 8px; border: 2px solid #22c55e;\">Review (Foco 1)</div></div></div>"
+        },
+        {
+            "title": "Sprint Review: Science Fair (Bazaar)",
+            "icon": "🔬",
+            "detail": "Uma dinâmica para a Sprint Review onde, em vez de uma apresentação em slide entediante, os desenvolvedores montam 'estações' para demonstrar o incremento, e os stakeholders circulam experimentando o produto.",
+            "examples": "Stakeholders não prestam atenção na Review ou há múltiplas features de times diferentes (LeSS/Nexus).",
+            "execution": "<ol><li>Cada squad (ou par de devs) cria um 'estande' (sala de breakout ou mesa física) para sua feature.</li><li>Os stakeholders recebem uma breve introdução.</li><li>Eles andam pelos estandes, testam o software e dão feedback direto para os criadores.</li><li>No final, junta-se todo mundo para resumir feedbacks.</li></ol>",
+            "result": "Stakeholders muito mais engajados, feedback empírico coletado na hora e desenvolvedores recebem o louvor direto do cliente.",
+            "materials": "Salas de Breakout (Zoom/Teams) ou espaço físico com monitores e mesas. Formulários rápidos de feedback.",
+            "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Science Fair Layout</h3><div style=\"display: flex; justify-content: space-around; margin-top: 15px;\"><div style=\"background: #bfdbfe; padding: 15px; border-radius: 8px; text-align: center;\">Estande 1: App Mobile</div><div style=\"background: #fef08a; padding: 15px; border-radius: 8px; text-align: center;\">Estande 2: Portal Web</div><div style=\"background: #fed7aa; padding: 15px; border-radius: 8px; text-align: center;\">Estande 3: Nova API</div></div></div>"
+        },
+        {
+            "title": "Sprint Planning: Fist of Five (Confiança)",
+            "icon": "🖐️",
+            "detail": "Uma técnica rápida para medir a confiança do time sobre o objetivo da Sprint antes de fechar a Planning.",
+            "examples": "Garantir que o time não se comprometeu demais por pressão do PO.",
+            "execution": "<ol><li>Após definir o Sprint Backlog, o facilitador pergunta: 'De 1 a 5, qual a confiança de que entregaremos o Sprint Goal?'.</li><li>1 = Sem chance; 5 = Totalmente confiante.</li><li>Ao contar 3, todos mostram os dedos nas câmeras ou ao vivo.</li><li>Se houver votos abaixo de 3, pergunte o porquê e renegocie o escopo.</li></ol>",
+            "result": "Alinhamento real e um Sprint Goal que a equipe efetivamente acredita e se compromete.",
+            "materials": "Nenhum material necessário (apenas as mãos e a atenção de todos).",
+            "board_html": "<div style=\"font-family: system-ui, sans-serif; background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;\"><h3 style=\"text-align: center; color: #1e293b; margin-top: 0;\">Confiança da Sprint</h3><div style=\"display: flex; justify-content: center; gap: 20px; font-size: 40px; margin-top: 15px;\"><span>🖐️ (5)</span><span>✌️ (2)</span><span>🖐️ (5)</span><span>🖖 (4)</span></div><p style=\"text-align: center; color: #b91c1c; margin-top: 10px;\">Alerta: Há um voto 2! É preciso conversar antes de fechar a Planning.</p></div>"
+        },
+        {
         "title": "Futureospective (Expectativas vs Preocupações)",
         "icon": "🔮",
         "detail": "Uma retrospectiva voltada para o futuro, ajudando a equipe a mapear expectativas e preocupações para as próximas sprints ou projetos. A Diretiva Primária é: 'Vamos exercer plenamente esta oportunidade de nos unir em torno de uma visão inclusiva, e dar as mãos para construir um futuro comum.'",
