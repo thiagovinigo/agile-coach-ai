@@ -35,6 +35,15 @@ function initTecnicasFacilitacaoView() {
     sidebar.className = 'kb-sidebar';
     sidebar.style.overflowY = 'auto';
 
+    const searchBox = document.createElement('div');
+    searchBox.style.padding = '15px';
+    searchBox.style.borderBottom = '1px solid #edebe9';
+    searchBox.innerHTML = `<input type="text" id="tecnicas-search" placeholder="🔍 Buscar técnica..." style="width:100%; padding:8px 12px; border:1px solid #ccc; border-radius:4px; outline:none; font-size: 14px;">`;
+    sidebar.appendChild(searchBox);
+
+    const navContainer = document.createElement('div');
+    sidebar.appendChild(navContainer);
+
     const contentArea = document.createElement('div');
     contentArea.className = 'kb-page-content';
     contentArea.style.overflowY = 'auto';
@@ -48,48 +57,65 @@ function initTecnicasFacilitacaoView() {
     const categories = Object.keys(tecnicasData);
     let firstBtn = null;
 
-    categories.forEach(category => {
-        const catHeader = document.createElement('div');
-        catHeader.className = 'kb-category-header';
-        catHeader.innerText = category;
-        catHeader.style.padding = '12px 15px';
-        catHeader.style.fontWeight = 'bold';
-        catHeader.style.color = '#323130';
-        catHeader.style.backgroundColor = '#f3f2f1';
-        catHeader.style.borderLeft = '4px solid #8b5cf6';
-        catHeader.style.cursor = 'pointer';
-        catHeader.style.marginTop = '10px';
-        sidebar.appendChild(catHeader);
+    function renderSidebar(query = '') {
+        navContainer.innerHTML = '';
+        firstBtn = null;
 
-        const linkList = document.createElement('div');
-        linkList.className = 'kb-link-list';
-        linkList.style.display = 'block';
-        sidebar.appendChild(linkList);
+        categories.forEach(category => {
+            const dinList = tecnicasData[category];
+            const filtered = query 
+                ? dinList.filter(d => d.title.toLowerCase().includes(query.toLowerCase()) || category.toLowerCase().includes(query.toLowerCase()) || (d.detail && d.detail.toLowerCase().includes(query.toLowerCase())))
+                : dinList;
 
-        const dinList = tecnicasData[category];
-        dinList.forEach((din) => {
-            const btn = document.createElement('div');
-            btn.className = 'kb-nav-btn';
-            btn.innerHTML = `
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:1.1rem;">${din.icon}</span>
-                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${din.title}</span>
-                </div>
-            `;
-            linkList.appendChild(btn);
+            if (filtered.length === 0) return;
 
-            if(!firstBtn) firstBtn = btn;
+            const catHeader = document.createElement('div');
+            catHeader.className = 'kb-category-header';
+            catHeader.innerText = `${category} (${filtered.length})`;
+            catHeader.style.padding = '12px 15px';
+            catHeader.style.fontWeight = 'bold';
+            catHeader.style.color = '#323130';
+            catHeader.style.backgroundColor = '#f3f2f1';
+            catHeader.style.borderLeft = '4px solid #8b5cf6';
+            catHeader.style.cursor = 'pointer';
+            catHeader.style.marginTop = '10px';
+            catHeader.style.display = 'flex';
+            catHeader.style.justifyContent = 'space-between';
+            catHeader.style.alignItems = 'center';
+            navContainer.appendChild(catHeader);
 
-            btn.onclick = () => {
-                document.querySelectorAll('#tecnicas-facilitacao-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+            const linkList = document.createElement('div');
+            linkList.className = 'kb-link-list';
+            linkList.style.display = query ? 'block' : 'none';
+            navContainer.appendChild(linkList);
 
-                const contentHtml = `
+            catHeader.onclick = () => {
+                linkList.style.display = linkList.style.display === 'none' ? 'block' : 'none';
+            };
+
+            filtered.forEach((din) => {
+                const btn = document.createElement('div');
+                btn.className = 'kb-nav-btn';
+                btn.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <span style="font-size:1.1rem;">${din.icon || '🧠'}</span>
+                        <span style="font-weight:600; color:#323130; font-size:0.95rem;">${din.title}</span>
+                    </div>
+                `;
+                linkList.appendChild(btn);
+
+                if(!firstBtn) firstBtn = btn;
+
+                btn.onclick = () => {
+                    document.querySelectorAll('#tecnicas-facilitacao-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const contentHtml = `
 <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); max-width: 900px; margin: 0 auto;">
     
     <div style="background: linear-gradient(to right, #2e1065, #4c1d95); padding: 30px; color: white;">
         <div style="display: flex; align-items: center; gap: 15px;">
-            <span style="font-size: 3rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;">${din.icon}</span>
+            <span style="font-size: 3rem; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 12px;">${din.icon || '🧠'}</span>
             <div>
                 <span style="color: #c4b5fd; font-weight: bold; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">${category}</span>
                 <h2 style="margin: 5px 0 0 0; font-size: 2rem;">${din.title}</h2>
@@ -97,77 +123,110 @@ function initTecnicasFacilitacaoView() {
         </div>
     </div>
 
-        <div style="padding: 30px;">
-            
-            <!-- Contexto e Propósito -->
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;">
-                <div style="flex: 1; min-width: 300px;">
-                    <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
-                        <span>🧠</span> O que é e por que fazer esta técnica?
-                    </h4>
-                    <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin: 0;">
-                        ${din.detail}
-                    </p>
-                </div>
-                <div style="flex: 1; min-width: 300px; background: #faf5ff; padding: 15px 20px; border-left: 4px solid #8b5cf6; border-radius: 0 8px 8px 0;">
-                    <h4 style="color: #5b21b6; font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; display:flex; align-items:center; gap:8px;">
-                        <span>🎯</span> Qual problema ajuda a solucionar?
-                    </h4>
-                    <p style="color: #4c1d95; font-size: 1.05rem; line-height: 1.6; margin: 0; font-style: italic;">
-                        ${din.examples}
-                    </p>
-                </div>
-            </div>
-
-            <!-- Como Executar -->
-            <div style="margin-bottom: 25px;">
-                <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px; display:flex; align-items:center; gap:8px;">
-                    <span>⚙️</span> Passo a Passo do Facilitador
-                </h4>
-                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
-                    <strong style="color: #0f172a; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">DURANTE A SESSÃO:</strong>
-                    <div style="color: #334155; font-size: 1.05rem; line-height: 1.7; margin-top: 8px;" class="din-execution-list">
-                        ${din.execution}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visual Final da Sessão -->
-            <div style="margin-bottom: 10px;">
+    <div style="padding: 30px;">
+        
+        <!-- Contexto e Propósito -->
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 25px;">
+            <div style="flex: 1; min-width: 300px;">
                 <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
-                    <span>🏆</span> Resultado e Visual Final da Técnica
+                    <span>🧠</span> O que é e por que fazer esta técnica?
                 </h4>
-                
-                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <p style="color: #166534; font-size: 1.1rem; line-height: 1.6; margin: 0; font-weight: 500;">
-                        ${din.result || "Melhor facilitação das interações do time."}
-                    </p>
-                </div>
+                <p style="color: #475569; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+                    ${din.detail}
+                </p>
+            </div>
+            <div style="flex: 1; min-width: 300px; background: #faf5ff; padding: 15px 20px; border-left: 4px solid #8b5cf6; border-radius: 0 8px 8px 0;">
+                <h4 style="color: #5b21b6; font-size: 1.1rem; margin-top: 0; margin-bottom: 8px; display:flex; align-items:center; gap:8px;">
+                    <span>🎯</span> Qual problema ajuda a solucionar?
+                </h4>
+                <p style="color: #4c1d95; font-size: 1.05rem; line-height: 1.6; margin: 0; font-style: italic;">
+                    ${din.examples}
+                </p>
+            </div>
+        </div>
 
-                <div style="text-align: center; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #fff; position: relative;">
-                    ${din.board_html ? `
-                        <div style="width: 100%; text-align: left; overflow-x: auto;">
-                            ${din.board_html}
-                        </div>
-                    ` : `
-                    <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); width: 100%; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
-                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-                        <span style="font-weight: 600; letter-spacing: 0.5px;">Espaço reservado para o print do visual final</span>
-                    </div>
-                    `}
+        <!-- Como Executar -->
+        <div style="margin-bottom: 25px;">
+            <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 15px; display:flex; align-items:center; gap:8px;">
+                <span>⚙️</span> Passo a Passo do Facilitador
+            </h4>
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px;">
+                <strong style="color: #0f172a; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">DURANTE A SESSÃO:</strong>
+                <div style="color: #334155; font-size: 1.05rem; line-height: 1.7; margin-top: 8px;" class="din-execution-list">
+                    ${din.execution}
                 </div>
             </div>
-
         </div>
+
+        <!-- Visual Final da Sessão -->
+        <div style="margin-bottom: 10px;">
+            <h4 style="color: #334155; font-size: 1.2rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; margin-bottom: 12px; display:flex; align-items:center; gap:8px;">
+                <span>🏆</span> Resultado e Visual Final da Técnica
+            </h4>
+            
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px 20px; border-radius: 8px; margin-bottom: 20px;">
+                <p style="color: #166534; font-size: 1.1rem; line-height: 1.6; margin: 0; font-weight: 500;">
+                    ${din.result || "Melhor facilitação das interações do time."}
+                </p>
+            </div>
+
+            <div style="text-align: center; border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #fff; position: relative;">
+                ${din.board_html ? `
+                    <div style="width: 100%; text-align: left; overflow-x: auto;">
+                        ${din.board_html}
+                    </div>
+                ` : `
+                <div style="background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%); width: 100%; height: 250px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #94a3b8; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                    <span style="font-weight: 600; letter-spacing: 0.5px;">Espaço reservado para o print do visual final</span>
+                </div>
+                `}
+            </div>
+        </div>
+
+    </div>
 </div>
-                `;
+                    `;
 
-                contentArea.innerHTML = contentHtml;
-            };
+                    contentArea.innerHTML = contentHtml;
+                    contentArea.scrollTop = 0; // Garante que a visualização inicie no topo do card
+
+                    const styleId = 'tecnicas-style';
+                    if (!document.getElementById(styleId)) {
+                        const style = document.createElement('style');
+                        style.id = styleId;
+                        style.innerHTML = `
+                            .din-execution-list ol { padding-left: 20px; margin: 0; }
+                            .din-execution-list li { margin-bottom: 12px; }
+                            .din-execution-list li strong { color: #0f172a; }
+                        `;
+                        document.head.appendChild(style);
+                    }
+                };
+            });
         });
-    });
 
-    if (firstBtn) {
-        firstBtn.click();
+        if (firstBtn && query === '') {
+            const firstHeader = navContainer.querySelector('.kb-category-header');
+            if (firstHeader) firstHeader.click();
+            firstBtn.click();
+        } else if (firstBtn) {
+            firstBtn.click();
+        } else {
+            contentArea.innerHTML = '<div style="padding: 40px; text-align: center; color: #64748b;">Nenhuma técnica encontrada.</div>';
+        }
     }
+
+    renderSidebar();
+
+    setTimeout(() => {
+        const input = document.getElementById('tecnicas-search');
+        if(input) {
+            input.addEventListener('input', (e) => {
+                renderSidebar(e.target.value.trim());
+            });
+        }
+    }, 100);
 }
+
+window.initTecnicasFacilitacaoView = initTecnicasFacilitacaoView;

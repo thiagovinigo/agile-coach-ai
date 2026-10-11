@@ -27,30 +27,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const sectionTitle = document.getElementById('current-section-title');
 
     // Navegação lateral
+    function activateNav(item, updateHash = true) {
+        const targetId = item.getAttribute('data-target');
+        if (!targetId) return;
+
+        // Update nav active state
+        navItems.forEach(nav => nav.classList.remove('active'));
+        item.classList.add('active');
+
+        // Update title
+        sectionTitle.textContent = item.textContent.trim();
+
+        // Toggle views
+        views.forEach(view => {
+            view.classList.remove('active');
+        });
+        const targetEl = document.getElementById(targetId);
+        if(targetEl) {
+            targetEl.classList.add('active');
+        }
+
+        const href = item.getAttribute('href');
+        if (updateHash && href && href.startsWith('#')) {
+            history.replaceState(null, '', href);
+        }
+    }
+
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             const targetId = item.getAttribute('data-target');
-            if (!targetId) return; // Se não tiver data-target, ignora o hijacking
-            
+            if (!targetId) return;
             e.preventDefault();
-            
-            // Update nav active state
-            navItems.forEach(nav => nav.classList.remove('active'));
-            item.classList.add('active');
-
-            // Update title
-            sectionTitle.textContent = item.textContent.trim();
-
-            // Toggle views
-            views.forEach(view => {
-                view.classList.remove('active');
-            });
-            const targetEl = document.getElementById(targetId);
-            if(targetEl) {
-                targetEl.classList.add('active');
-            }
+            activateNav(item, true);
         });
     });
+
+    function checkInitialHash() {
+        const hash = window.location.hash;
+        if (!hash) return;
+        const matching = Array.from(navItems).find(n => n.getAttribute('href') === hash);
+        if (matching) {
+            activateNav(matching, false);
+        }
+    }
+
+    window.addEventListener('hashchange', checkInitialHash);
+    setTimeout(checkInitialHash, 50);
 
     // Função para carregar o conteúdo legado HTML e extrair as seções
     loadAndMigrateContent();
