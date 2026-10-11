@@ -22,6 +22,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "images/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "agent-skills/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "pm-skills-claude-code/**/*",
       "use": "@vercel/static"
     },
