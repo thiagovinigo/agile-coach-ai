@@ -18,3 +18,4 @@ ruflo/plugins/*/*
 *.mcp.json
 .mcp.json
 !ruflo/plugins/*/README.md
+.vercel

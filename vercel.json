@@ -54,6 +54,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "ruflo/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
