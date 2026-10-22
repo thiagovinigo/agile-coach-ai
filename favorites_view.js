@@ -63,7 +63,7 @@ window.favoritesManager = {
                 <div style="font-size: 3rem; margin-bottom: 1rem;">⭐</div>
                 <h3 style="margin-bottom:1rem; color:#1a202c; font-size:1.8rem;">Nenhum favorito ainda</h3>
                 <p style="color:#4a5568; font-size:1.1rem; line-height:1.7; max-width: 500px; margin: 0 auto;">
-                    Navegue pelos módulos de Agentes, Skills, Superpowers ou Integrações e clique no botão <strong>☆ Favoritar</strong> para salvar suas ferramentas mais usadas aqui.
+                    Navegue pelos módulos de Agentes, Skills, Superpowers, Ruflo ou Integrações e clique no botão <strong>☆ Favoritar</strong> para salvar suas ferramentas mais usadas aqui.
                 </p>
             </div>`;
             return;

@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initClaudeCodeDocView === 'function') initClaudeCodeDocView();
     if (typeof initLabsView === 'function') initLabsView();
     if (typeof initLiveSimView === 'function') initLiveSimView();
+    if (typeof initRufloView === 'function') initRufloView();
 });
 
 async function loadAndMigrateContent() {
@@ -345,262 +346,44 @@ async function loadAndMigrateContent() {
 
 
 function initSkillsView() {
-    const container = document.getElementById('skills-view');
-    if(!container || typeof skillsData === 'undefined') return;
+    if (typeof skillsData === 'undefined' || !window.createStandardToolView) return;
 
-    function getContextualExamples(title) {
-        const t = title.toLowerCase();
-        if (t.includes('test') || t.includes('jest') || t.includes('cypress') || t.includes('playwright')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"Por favor, crie testes unitários para este arquivo usando as diretrizes da skill ${title}."</code></li>
-                <li><code>"Identifique os edge cases deste componente e gere testes de cobertura via ${title}."</code></li>
-            `;
-        } else if (t.includes('arch') || t.includes('defensive') || t.includes('securit') || t.includes('design') || t.includes('pattern')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"Faça uma revisão de arquitetura e segurança neste arquivo aplicando a skill ${title}."</code></li>
-                <li><code>"Quais padrões do ${title} estão sendo violados neste código? Sugira a refatoração."</code></li>
-            `;
-        } else if (t.includes('react') || t.includes('front') || t.includes('a11y') || t.includes('access') || t.includes('ui') || t.includes('css')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"Revise este componente garantindo aderência às boas práticas e regras visuais do ${title}."</code></li>
-                <li><code>"Atue como especialista em ${title} e melhore a estrutura e semântica deste código."</code></li>
-            `;
-        } else if (t.includes('review') || t.includes('lint') || t.includes('refactor') || t.includes('clean')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"Atue como ${title} e faça um code review severo buscando code smells neste código."</code></li>
-                <li><code>"Refatore esta função para deixá-la mais limpa, seguindo as regras de ${title}."</code></li>
-            `;
-        } else if (t.includes('build') || t.includes('error') || t.includes('debug') || t.includes('fix') || t.includes('resolve')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"O código está falhando. Como especialista em ${title}, analise o log de erro e sugira o fix."</code></li>
-                <li><code>"Invoque o conhecimento de ${title} para resolver este problema no projeto."</code></li>
-            `;
-        } else if (t.includes('data') || t.includes('sql') || t.includes('database') || t.includes('api') || t.includes('backend')) {
-            return `
-                <li style="margin-bottom:8px;"><code>"Otimize esta funcionalidade utilizando as diretrizes de performance do ${title}."</code></li>
-                <li><code>"Como especialista em ${title}, estruture os dados para esta nova feature."</code></li>
-            `;
-        } else {
-            return `
-                <li style="margin-bottom:8px;"><code>"Analise as modificações deste arquivo garantindo que não estamos violando as políticas da skill ${title}."</code></li>
-                <li><code>"Atue como especialista em ${title} e implemente a feature solicitada seguindo suas diretrizes."</code></li>
-            `;
-        }
-    }
-
-    container.innerHTML = '';
-
-    
-    const introHeader = document.createElement('div');
-    introHeader.style.padding = '20px 30px';
-    introHeader.style.backgroundColor = '#fff';
-    introHeader.style.borderBottom = '1px solid #edebe9';
-    introHeader.style.marginBottom = '20px';
-    introHeader.innerHTML = `
-        <h2 style="margin-top:0; color:#0078d4; margin-bottom:10px;">Flowgrammers Skills vs. AI Agents</h2>
-        <p style="font-size:1.1rem; line-height:1.5; color:#323130; margin:0;">
-            <strong>Qual a diferença?</strong> Os <a href="#agents" style="color:#0078d4; text-decoration:none;">AI Agents</a> (no menu acima) são simuladores interativos embutidos <em>neste portal</em> (você clica e digita aqui). Já as <strong>Flowgrammers Skills</strong> são <em>manuais de instrução avançados</em> (arquivos <code>.md</code>). Você deve baixar esses arquivos e colocá-los no seu próprio ambiente local (Cursor, Windsurf, Claude Code) para que sua Inteligência Artificial aja como o especialista descrito.
-        </p>
-    `;
-    container.appendChild(introHeader);
-
-    const layout = document.createElement('div');
-    layout.className = 'kb-layout';
-
-    const sidebar = document.createElement('div');
-    sidebar.className = 'kb-sidebar';
-    sidebar.style.overflowY = 'auto';
-
-    const contentArea = document.createElement('div');
-    contentArea.className = 'kb-page-content';
-    contentArea.style.overflowY = 'auto';
-
-    layout.appendChild(sidebar);
-    layout.appendChild(contentArea);
-    container.appendChild(introHeader);
-    container.appendChild(layout);
-
-    // Get categories and sort them alphabetically
-    const categories = Object.keys(skillsData).sort();
-    
-    let firstGlobalBtn = null;
-
-    categories.forEach((category) => {
-        const skillsList = skillsData[category];
-        
-        // Category Header
-        const catHeader = document.createElement('div');
-        catHeader.className = 'kb-category-header';
-        catHeader.style.padding = '12px 15px';
-        catHeader.style.fontWeight = 'bold';
-        catHeader.style.color = '#323130';
-        catHeader.style.backgroundColor = '#f3f2f1';
-        catHeader.style.borderLeft = '4px solid #0078d4';
-        catHeader.style.cursor = 'pointer';
-        catHeader.style.marginTop = '10px';
-        catHeader.style.marginBottom = '2px';
-        catHeader.style.borderRadius = '0 6px 6px 0';
-        catHeader.style.transition = 'background 0.2s';
-        catHeader.style.display = 'flex';
-        catHeader.style.justifyContent = 'space-between';
-        catHeader.style.alignItems = 'center';
-        
-        const titleSpan = document.createElement('span');
-        titleSpan.innerText = category;
-        const iconSpan = document.createElement('span');
-        iconSpan.innerText = '▼';
-        iconSpan.style.fontSize = '0.8rem';
-        iconSpan.style.color = '#aaa';
-        
-        catHeader.appendChild(titleSpan);
-        catHeader.appendChild(iconSpan);
-        
-        const subMenu = document.createElement('div');
-        subMenu.className = 'kb-submenu';
-        subMenu.style.display = 'none'; 
-        subMenu.style.paddingLeft = '5px';
-        subMenu.style.marginBottom = '10px';
-
-        catHeader.onmouseover = () => catHeader.style.backgroundColor = '#e1dfdd';
-        catHeader.onmouseout = () => catHeader.style.backgroundColor = '#f3f2f1';
-
-        sidebar.appendChild(catHeader);
-        sidebar.appendChild(subMenu);
-
-        let firstBtnInCategory = null;
-
-        skillsList.forEach((skill) => {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'section-group sub-page';
-            wrapper.style.display = 'none';
-            
-            let sTriggers = skill.triggers || [];
-            sTriggers = sTriggers.filter(t => {
-                if (typeof t !== 'string') return false;
-                t = t.trim();
-                if (t.length < 2 || t.length > 35) return false;
-                if (!t.match(/^\/[a-z0-9-_]+$/i) && !t.match(/^[a-z0-9 ]+$/i)) return false;
-                if (['/var', '/etc', '/usr', '/bin', '/tmp', '/dev', '/opt'].includes(t)) return false;
-                return true;
-            }).map(t => t.trim());
-            let visibleTriggers = sTriggers.slice(0, 8);
-            let extraCount = sTriggers.length - 8;
-            let triggersList = visibleTriggers.map(t => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; word-break: break-all;">${t}</span>`).join('');
-            if (extraCount > 0) {
-                triggersList += `<span class="tag" style="display:inline-block; background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.1); padding:.3em .8em; border-radius:999px; font-size:.85rem; color:#4a5568; margin-right:5px; margin-bottom:5px;">+ ${extraCount} outros</span>`;
-            }
-            
-            wrapper.innerHTML = `
-                <div class="card" style="background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:2.5rem; box-shadow:0 4px 6px rgba(0,0,0,0.02); max-width: 900px;">
-                    <div style="text-transform: uppercase; font-size: 0.85rem; color: #0078d4; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 0.5rem;">📁 ${category}</div>
-                    
-                    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:1px solid #eee; padding-bottom: 1rem; margin-bottom:1.2rem;">
-                        <h3 style="margin:0; color:#1a202c; font-size:2rem;">${skill.title}</h3>
-                        ${window.favoritesManager ? window.favoritesManager.renderButton(skill.id, skill.title, 'Flowgrammers Skills', skill.path) : ''}
-                    </div>
-
-                    <p style="color:#4a5568; margin-bottom:1.5rem; font-size:1.15rem; line-height:1.7;">${skill.description || '<i>Sem descrição fornecida.</i>'}</p>
-                    
-                    <div style="background:#f1f5f9; border:1px solid #cbd5e1; padding:8px 12px; border-radius:4px; font-family:monospace; font-size:0.85rem; color:#475569; word-break:break-all; margin-bottom: 20px;">
-                        📂 <strong>Repositório:</strong> ${skill.path}
-                    </div>
-                    
-                    <div style="display: flex; gap: 10px; margin-bottom: 2rem;">
-                        <a href="flowgrammers-skills-main/flowgrammers-skills-main/${skill.path}" download="${skill.id}.md" style="display:inline-block; background-color:#0078d4; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; font-size:1rem; box-shadow:0 2px 4px rgba(0,0,0,0.1); transition: background 0.2s;">
-                            ⬇️ Baixar Arquivo da Skill
-                        </a>
-                        <a href="flowgrammers-skills-main/flowgrammers-skills-main/${skill.path}" target="_blank" style="display:inline-block; background-color:#f3f2f1; color:#323130; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; border: 1px solid #edebe9; font-size:1rem; transition: background 0.2s;">
-                            👀 Ver Arquivo
-                        </a>
-                    </div>
-
-
-                    
-                    
-                    ${skill.dependencies && skill.dependencies.length > 0 ? `
-                    <div style="background:#f0f8ff; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #0078d4; margin-bottom: 2rem;">
-                        <h4 style="margin-top:0; margin-bottom:1rem; font-size:1.1rem; color:#0078d4; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🔗 Skills Vinculadas (Sub-Skills)</h4>
-                        <p style="font-size:0.95rem; color:#4a5568; margin-bottom:1rem;">Esta skill possui conexões diretas ou invoca o conhecimento das seguintes skills:</p>
-                        <div>
-                            ${skill.dependencies.map(d => `<span class="tag" style="display:inline-block; background:rgba(0,120,212,.12); border:1px solid rgba(0,120,212,.3); padding:.3em .8em; border-radius:4px; font-size:.85rem; color:#0078d4; margin-right:5px; margin-bottom:5px; font-weight:bold;">${d}</span>`).join('')}
-                        </div>
-                    </div>
-                    ` : ''}
-
-                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🛠️ Como Instalar (Claude Code):</h4>
-                    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1.2rem; border-radius:8px; font-family:monospace; overflow-x:auto; margin-bottom:2rem; font-size:1.05rem;">/read flowgrammers-skills-main/flowgrammers-skills-main/${skill.path}</pre>
-                    
-                    <h4 style="margin-top:1.5rem; margin-bottom:0.8rem; font-size:1rem; color:#718096; text-transform:uppercase; font-weight:700; letter-spacing:0.05em;">🚀 Como Executar (Exemplos Práticos):</h4>
-                    <p style="font-size:1rem; color:#4a5568; line-height: 1.6;">No Claude Code, após o <strong>/read</strong> acima, peça a tarefa usando linguagem natural. Veja exemplos de acionamento:</p>
-                    <div style="background:#f8fafc; padding:15px; border-radius:8px; border-left:4px solid #38bdf8; margin-top:10px;">
-                        <ul style="margin:0; padding-left:20px; color:#334155;">
-                            ${getContextualExamples(skill.title)}
-                        </ul>
-                    </div>
-                </div>
-            `;
-            contentArea.appendChild(wrapper);
-
-            const btn = document.createElement('button');
-            btn.className = 'kb-nav-btn';
-            btn.style.fontSize = '0.9rem';
-            btn.style.padding = '8px 10px 8px 25px';
-            btn.innerHTML = `
-                <div style="display:flex; align-items:center; gap:8px;">
-                    <span style="font-size:1.1rem;">💻</span>
-                    <span style="font-weight:600; color:#323130; font-size:0.95rem;">${skill.title}</span>
-                </div>
-                <div style="font-size:0.8rem; color:#605e5c; margin-top:4px; line-height:1.3; white-space:normal; text-align:left;">
-                    ${skill.description || 'Nenhuma descrição fornecida.'}
-                </div>
-            `;
-            
-            btn.onclick = () => {
-                contentArea.querySelectorAll('.sub-page').forEach(p => p.style.display = 'none');
-                sidebar.querySelectorAll('.kb-nav-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                wrapper.style.display = 'block';
-                contentArea.scrollTop = 0;
+    const normalizedSkillsData = {};
+    for (const [cat, list] of Object.entries(skillsData)) {
+        normalizedSkillsData[cat] = list.map(s => {
+            const path = s.path && !s.path.startsWith('flowgrammers-skills-main') 
+                ? 'flowgrammers-skills-main/flowgrammers-skills-main/' + s.path 
+                : s.path;
+            return {
+                ...s,
+                path: path
             };
-
-            subMenu.appendChild(btn);
-
-            if(!firstBtnInCategory) {
-                firstBtnInCategory = btn;
-            }
-            if(!firstGlobalBtn) {
-                firstGlobalBtn = { header: catHeader, submenu: subMenu, btn: btn, wrapper: wrapper };
-            }
         });
-
-        // Click on category logic
-        catHeader.onclick = () => {
-            const isVisible = subMenu.style.display === 'block';
-            
-            // Close all
-            sidebar.querySelectorAll('.kb-submenu').forEach(sm => sm.style.display = 'none');
-            sidebar.querySelectorAll('.kb-category-header span:last-child').forEach(sp => sp.innerText = '▼');
-            
-            if (!isVisible) {
-                // Open clicked
-                subMenu.style.display = 'block';
-                iconSpan.innerText = '▲';
-                // Auto-click the first skill so the right panel matches the open category
-                if(firstBtnInCategory) {
-                    firstBtnInCategory.click();
-                }
-            }
-        };
-    });
-
-    // Auto-open first global category
-    if(firstGlobalBtn) {
-        firstGlobalBtn.submenu.style.display = 'block';
-        firstGlobalBtn.header.querySelector('span:last-child').innerText = '▲';
-        firstGlobalBtn.btn.click();
     }
-}
 
+    window.createStandardToolView({
+        containerId: 'skills-view',
+        title: 'Flowgrammers Skills',
+        badge: 'Engineering Skills Suite',
+        icon: '💻',
+        tagline: 'Biblioteca de centenas de playbooks de engenharia para Claude Code, Cursor e Windsurf',
+        description: 'As <strong>Flowgrammers Skills</strong> são manuais avançados de instrução (arquivos <code>.md</code>). Ao referenciar esses playbooks no seu prompt ou ambiente local, o assistente adota diretrizes e melhores práticas comprovadas de engenharia de software.',
+        themeColor: '#ec4899',
+        themeGradient: 'linear-gradient(135deg, #500724 0%, #0f172a 60%, #1e1b4b 100%)',
+        commandPrefix: '/read',
+        itemType: 'Flowgrammers Skills',
+        pills: [
+            { text: '💻 Centenas de Skills Ativas' },
+            { text: '🧩 Claude Code & Cursor' },
+            { text: '🛡️ Engenharia Disciplinada' },
+            { text: '⚡ Otimização & Refatoração' }
+        ],
+        tabs: [
+            { id: 'all', label: '🌟 Todas as Skills' }
+        ],
+        data: normalizedSkillsData
+    });
+}
 
 // --- INJETADO PARA SIMULADOR KIRO ---
 window.kiroSim = {

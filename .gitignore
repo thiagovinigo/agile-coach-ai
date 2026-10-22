@@ -4,3 +4,17 @@ __pycache__/
 scratch/
 temp*.js
 scratch_materials.pdf
+# Ruflo selective inclusion (only docs, guides, agents, and plugin READMEs)
+ruflo/*
+!ruflo/README.md
+!ruflo/AGENTS.md
+!ruflo/CLAUDE.md
+!ruflo/docs/
+!ruflo/.claude/
+ruflo/.claude/*
+!ruflo/.claude/agents/
+!ruflo/plugins/
+ruflo/plugins/*/*
+*.mcp.json
+.mcp.json
+!ruflo/plugins/*/README.md
