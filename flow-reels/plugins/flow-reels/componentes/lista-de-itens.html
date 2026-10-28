@@ -1,0 +1,467 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   lista-de-itens  ·  linhas com ícone, título e meta
+   -------------------------------------------------------------------------
+   Caixa de entrada, pasta de arquivos, resultados de uma execução. O que faz
+   o olho reconhecer uma lista é o ritmo: a mesma coluna de ícone à esquerda,
+   o mesmo par título mais meta no meio, o mesmo divisor entre uma linha e a
+   seguinte, tudo repetido. Linha com altura diferente da vizinha desmancha
+   o reconhecimento na hora.
+
+   A marca da lista inteira entra pelo parâmetro marca, no cabeçalho; cada
+   item pode ter a marca dele. Sempre o arquivo de verdade do acervo em
+   logos/. Item sem marca usa a inicial dele ou o glifo de documento, que
+   não fingem ser o logo de ninguém.
+   ========================================================================= */
+
+.fc-lista {
+  box-sizing: border-box;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+  font-family: var(--fonte-corpo);
+}
+
+.fc-lista-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 24px 32px;
+  border-bottom: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+}
+
+.fc-lista-nome {
+  flex: 1 1 auto;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-lista-contagem {
+  flex: 0 0 auto;
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.fc-lista-linha {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  padding: 22px 32px;
+  border-left: var(--traco) solid transparent;
+}
+
+.fc-lista-linha + .fc-lista-linha {
+  border-top: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 20%, transparent);
+}
+
+/* A caixa do ícone tem sempre o mesmo tamanho, tendo dentro um logo do
+   acervo, uma inicial ou o glifo de documento. É o que mantém a coluna
+   alinhada e o ritmo de lista de pé. */
+.fc-lista-cela {
+  box-sizing: border-box;
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--raio) * 0.6);
+  background: color-mix(in srgb, var(--tinta-suave) 20%, transparent);
+  font-size: var(--tam-rotulo);
+  color: var(--tinta);
+}
+
+.fc-lista-cela-glifo { display: flex; color: var(--tinta-suave); }
+
+.fc-lista-texto {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fc-lista-titulo {
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-lista-meta {
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-lista-fim {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+  visibility: hidden;
+}
+
+.fc-lista-linha[data-marcado="1"] .fc-lista-fim { visibility: visible; }
+
+/* O acento é o traço na entrada da linha mais o título: preencher a linha
+   inteira de destaque estouraria o orçamento de 15% de área. */
+.fc-lista-linha[data-apontado="1"] { border-left-color: var(--destaque); }
+.fc-lista-linha[data-apontado="1"] .fc-lista-titulo { color: var(--destaque); }
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-lista-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-lista-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-lista-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-lista-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-lista-marca[data-erro="sim"] .fc-lista-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "lista-de-itens";
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  /* Documento e confirmação são móveis do sistema, não marca de ninguém. */
+  function glifo(desenho, lado) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", lado);
+    svg.setAttribute("height", lado);
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.innerHTML = desenho;
+    return svg;
+  }
+
+  var DOCUMENTO = "<path d='M6.5 3.5 h7 L18 8 v12.5 h-11.5 z'/><path d='M13.5 3.5 V8 H18'/>";
+  var CONFIRMA = "<path d='M4.5 12.5 L9.5 17.5 L19.5 6.5'/>";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var itens = p.itens || [];
+      if (!itens.length) {
+        throw new Error("lista-de-itens: o parâmetro itens é obrigatório.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+
+      var el = document.createElement("div");
+      el.className = "fc-lista";
+      el.style.width = largura + "px";
+
+      var contagem = null;
+
+      if (p.marca || p.titulo) {
+        var cabeca = document.createElement("div");
+        cabeca.className = "fc-lista-cabeca";
+
+        var insignia = criarMarca(p.marca, 56, "fc-lista-marca");
+        if (insignia) { cabeca.appendChild(insignia); }
+
+        var nome = document.createElement("div");
+        nome.className = "fc-lista-nome";
+        nome.textContent = p.titulo || "";
+        cabeca.appendChild(nome);
+
+        if (p.contador !== false) {
+          contagem = document.createElement("div");
+          contagem.className = "fc-lista-contagem";
+          cabeca.appendChild(contagem);
+        }
+
+        el.appendChild(cabeca);
+      }
+
+      var desenhados = itens.map(function (item, indice) {
+        var dados = typeof item === "string" ? { titulo: item } : (item || {});
+
+        var linha = document.createElement("div");
+        linha.className = "fc-lista-linha";
+
+        var cela = document.createElement("div");
+        cela.className = "fc-lista-cela";
+
+        var marcaDoItem = criarMarca(dados.marca, 44, "fc-lista-marca");
+        if (p.numerada) {
+          cela.textContent = String(indice + 1);
+        } else if (marcaDoItem) {
+          cela.appendChild(marcaDoItem);
+        } else if (dados.inicial) {
+          cela.textContent = String(dados.inicial).toUpperCase();
+        } else {
+          var marcador = document.createElement("span");
+          marcador.className = "fc-lista-cela-glifo";
+          marcador.appendChild(glifo(DOCUMENTO, 40));
+          cela.appendChild(marcador);
+        }
+        linha.appendChild(cela);
+
+        var texto = document.createElement("div");
+        texto.className = "fc-lista-texto";
+
+        var titulo = document.createElement("div");
+        titulo.className = "fc-lista-titulo";
+        titulo.textContent = dados.titulo || "";
+        texto.appendChild(titulo);
+
+        if (dados.meta) {
+          var meta = document.createElement("div");
+          meta.className = "fc-lista-meta";
+          meta.textContent = dados.meta;
+          texto.appendChild(meta);
+        }
+
+        linha.appendChild(texto);
+
+        var fim = document.createElement("span");
+        fim.className = "fc-lista-fim";
+        fim.appendChild(glifo(CONFIRMA, 44));
+        linha.appendChild(fim);
+
+        el.appendChild(linha);
+        return { no: linha, titulo: titulo };
+      });
+
+      function definir(estado) {
+        var e = estado || {};
+        var visiveis = e.itens_visiveis == null ? 0 : e.itens_visiveis;
+        var marcados = e.marcados == null ? 0 : e.marcados;
+        var apontado = e.destaque == null ? null : e.destaque;
+
+        desenhados.forEach(function (d, i) {
+          d.no.style.display = i < visiveis ? "" : "none";
+
+          if (i < marcados) {
+            d.no.setAttribute("data-marcado", "1");
+          } else {
+            d.no.removeAttribute("data-marcado");
+          }
+
+          if (apontado === i) {
+            d.no.setAttribute("data-apontado", "1");
+          } else {
+            d.no.removeAttribute("data-apontado");
+          }
+        });
+
+        /* O contador conta o que está na tela. Número escrito na mão aqui
+           seria número inventado, e ele mentiria assim que uma linha a mais
+           entrasse. */
+        if (contagem) {
+          contagem.textContent = visiveis > 0 ? String(visiveis) : "";
+        }
+      }
+
+      definir({ itens_visiveis: 0, marcados: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var ITENS = [
+      { titulo: "resumo-da-call.md", meta: "agora" },
+      { titulo: "lista-de-tarefas.md", meta: "2 min" },
+      { titulo: "próximos-passos.md", meta: "5 min" }
+    ];
+
+    var APLICATIVOS = [
+      { titulo: "Mensagem do suporte", meta: "não lida", marca: "whatsapp" },
+      { titulo: "Convite de reunião", meta: "hoje", marca: "zoom" },
+      { titulo: "Comentário novo", meta: "ontem", marca: "figma" }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Linhas com ícone, título e meta: caixa de entrada, arquivos, resultados. As linhas chegam por definir({ itens_visiveis }), a confirmação por marcados, e o acento por destaque. O ícone do item é o logo de verdade do acervo, a inicial ou o glifo de documento.",
+      casos: [
+        {
+          nome: "vazia",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "Arquivos gerados", itens: ITENS, largura: 820 },
+          estado: { itens_visiveis: 0, marcados: 0, destaque: null }
+        },
+        {
+          nome: "primeira linha",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "Arquivos gerados", itens: ITENS, largura: 820 },
+          estado: { itens_visiveis: 1, marcados: 0, destaque: null }
+        },
+        {
+          nome: "lista cheia",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "Arquivos gerados", itens: ITENS, largura: 820 },
+          estado: { itens_visiveis: 3, marcados: 0, destaque: null }
+        },
+        {
+          nome: "linha apontada",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "Arquivos gerados", itens: ITENS, largura: 820 },
+          estado: { itens_visiveis: 3, marcados: 0, destaque: 1 }
+        },
+        {
+          nome: "tudo confirmado",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "Arquivos gerados", itens: ITENS, largura: 820 },
+          estado: { itens_visiveis: 3, marcados: 3, destaque: null }
+        },
+        {
+          nome: "caixa de entrada, com marcas",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { marca: "googledrive", titulo: "Caixa de entrada", itens: APLICATIVOS, largura: 820 },
+          estado: { itens_visiveis: 3, marcados: 0, destaque: null }
+        },
+        {
+          nome: "numerada",
+          largura: 940, altura: 520, escala: 0.44, x: 20, y: 20,
+          parametros: { titulo: "O que ele devolveu", itens: ITENS, numerada: true, largura: 820 },
+          estado: { itens_visiveis: 3, marcados: 0, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

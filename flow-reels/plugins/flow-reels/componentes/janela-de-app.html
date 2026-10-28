@@ -1,0 +1,465 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   janela-de-app  ·  janela com barra lateral e área de conteúdo
+   -------------------------------------------------------------------------
+   Qualquer programa de trabalho na tela: editor de documento, ferramenta de
+   conversa com IA, quadro de tarefas. A forma que entrega o reconhecimento é
+   a divisão vertical: uma coluna estreita e mais escura à esquerda, com a
+   lista de seções, e a área larga de conteúdo à direita. Some com a coluna
+   e sobra um card.
+
+   A marca entra pelo parâmetro marca e fica na barra de cima, ao lado do
+   nome. Sempre o arquivo de verdade do acervo em logos/.
+   ========================================================================= */
+
+.fc-app {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+  font-family: var(--fonte-corpo);
+}
+
+.fc-app-topo {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px 28px;
+  border-bottom: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+}
+
+.fc-app-pontos {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.fc-app-ponto {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tinta-suave) 55%, transparent);
+}
+
+.fc-app-nome {
+  flex: 1 1 auto;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-app-corpo {
+  display: flex;
+  align-items: stretch;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* A coluna é mais escura que a janela: sem esse degrau ela some e a peça
+   volta a ser um card com uma lista dentro. */
+.fc-app-lateral {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 20px;
+  background: var(--superficie);
+  border-right: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 22%, transparent);
+}
+
+.fc-app-secao {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: calc(var(--raio) * 0.6);
+  font-size: var(--tam-rotulo);
+  color: var(--tinta-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-app-bolinha {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tinta-suave) 60%, transparent);
+}
+
+.fc-app-secao[data-ativa="1"] {
+  background: color-mix(in srgb, var(--tinta-suave) 24%, transparent);
+  color: var(--tinta);
+}
+
+.fc-app-secao[data-ativa="1"] .fc-app-bolinha { background: var(--tinta); }
+
+.fc-app-secao[data-apontada="1"] {
+  background: color-mix(in srgb, var(--destaque) 22%, transparent);
+  color: var(--destaque);
+}
+
+.fc-app-secao[data-apontada="1"] .fc-app-bolinha { background: var(--destaque); }
+
+.fc-app-conteudo {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 32px;
+}
+
+.fc-app-manchete {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+}
+
+.fc-app-bloco {
+  box-sizing: border-box;
+  padding: 20px 26px;
+  border-radius: calc(var(--raio) * 0.6);
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 20%, transparent);
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+}
+
+.fc-app-bloco[data-apontado="1"] {
+  border-color: var(--destaque);
+  color: var(--destaque);
+}
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-app-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-app-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-app-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-app-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-app-marca[data-erro="sim"] .fc-app-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "janela-de-app";
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var secoes = p.secoes || [];
+      if (secoes.length < 2) {
+        throw new Error("janela-de-app: o parâmetro secoes precisa de pelo menos duas entradas. " +
+                        "Com uma só a coluna da esquerda não lê como barra lateral.");
+      }
+      if (!p.titulo) {
+        throw new Error("janela-de-app: o parâmetro titulo é obrigatório. " +
+                        "Ele é o nome do programa na barra de cima.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+      var conteudo = p.conteudo || [];
+
+      var el = document.createElement("div");
+      el.className = "fc-app";
+      el.style.width = largura + "px";
+      if (p.altura) { el.style.height = p.altura + "px"; }
+
+      var topo = document.createElement("div");
+      topo.className = "fc-app-topo";
+
+      var pontos = document.createElement("div");
+      pontos.className = "fc-app-pontos";
+      pontos.innerHTML = "<i class='fc-app-ponto'></i><i class='fc-app-ponto'></i><i class='fc-app-ponto'></i>";
+      topo.appendChild(pontos);
+
+      var insignia = criarMarca(p.marca, 52, "fc-app-marca");
+      if (insignia) { topo.appendChild(insignia); }
+
+      var nome = document.createElement("div");
+      nome.className = "fc-app-nome";
+      nome.textContent = p.titulo;
+      topo.appendChild(nome);
+
+      el.appendChild(topo);
+
+      var corpo = document.createElement("div");
+      corpo.className = "fc-app-corpo";
+      el.appendChild(corpo);
+
+      var lateral = document.createElement("div");
+      lateral.className = "fc-app-lateral";
+      lateral.style.width = Math.round(largura * 0.32) + "px";
+      corpo.appendChild(lateral);
+
+      var desenhadas = secoes.map(function (texto) {
+        var no = document.createElement("div");
+        no.className = "fc-app-secao";
+
+        var bolinha = document.createElement("span");
+        bolinha.className = "fc-app-bolinha";
+        no.appendChild(bolinha);
+
+        var rotulo = document.createElement("span");
+        rotulo.textContent = texto;
+        no.appendChild(rotulo);
+
+        lateral.appendChild(no);
+        return no;
+      });
+
+      var area = document.createElement("div");
+      area.className = "fc-app-conteudo";
+      corpo.appendChild(area);
+
+      var manchete = null;
+      if (p.manchete) {
+        manchete = document.createElement("div");
+        manchete.className = "fc-app-manchete";
+        manchete.textContent = p.manchete;
+        area.appendChild(manchete);
+      }
+
+      var blocos = conteudo.map(function (texto) {
+        var no = document.createElement("div");
+        no.className = "fc-app-bloco";
+        no.textContent = texto;
+        area.appendChild(no);
+        return no;
+      });
+
+      function definir(estado) {
+        var e = estado || {};
+        var ativa = e.secao == null ? 0 : e.secao;
+        var visiveis = e.conteudo_visivel == null ? 0 : e.conteudo_visivel;
+        var apontado = e.destaque == null ? null : e.destaque;
+
+        desenhadas.forEach(function (no, i) {
+          if (i === ativa) {
+            no.setAttribute("data-ativa", "1");
+          } else {
+            no.removeAttribute("data-ativa");
+          }
+          if (apontado === "secao" && i === ativa) {
+            no.setAttribute("data-apontada", "1");
+          } else {
+            no.removeAttribute("data-apontada");
+          }
+        });
+
+        blocos.forEach(function (no, i) {
+          no.style.display = i < visiveis ? "" : "none";
+          if (apontado === i) {
+            no.setAttribute("data-apontado", "1");
+          } else {
+            no.removeAttribute("data-apontado");
+          }
+        });
+      }
+
+      definir({ secao: 0, conteudo_visivel: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var base = {
+      marca: "slack",
+      titulo: "Slack",
+      secoes: ["Roteiros", "Cortes", "Publicados"],
+      manchete: "Corte da semana",
+      conteudo: ["Gancho escolhido", "Painel montado", "Legenda no ar"],
+      largura: 820
+    };
+
+    function com(extra) {
+      var saida = {};
+      Object.keys(base).forEach(function (chave) { saida[chave] = base[chave]; });
+      Object.keys(extra || {}).forEach(function (chave) { saida[chave] = extra[chave]; });
+      return saida;
+    }
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Janela de programa com barra lateral e conteúdo. A seção ativa sai de definir({ secao }), as linhas de conteúdo chegam por conteudo_visivel, e o acento vai para a seção ativa ou para uma linha, um por vez.",
+      casos: [
+        {
+          nome: "só a janela",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 0, conteudo_visivel: 0, destaque: null }
+        },
+        {
+          nome: "primeira linha",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 0, conteudo_visivel: 1, destaque: null }
+        },
+        {
+          nome: "conteúdo inteiro",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 0, conteudo_visivel: 3, destaque: null }
+        },
+        {
+          nome: "trocou de seção",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 1, conteudo_visivel: 3, destaque: null }
+        },
+        {
+          nome: "seção apontada",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 1, conteudo_visivel: 3, destaque: "secao" }
+        },
+        {
+          nome: "linha apontada",
+          largura: 960, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { secao: 0, conteudo_visivel: 3, destaque: 2 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

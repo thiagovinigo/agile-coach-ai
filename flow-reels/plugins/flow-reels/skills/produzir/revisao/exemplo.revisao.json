@@ -1,0 +1,74 @@
+{
+  "_nota": "Este é um exemplo preenchido, e é ele que documenta o formato. O arquivo de verdade se chama revisao.json, nasce dentro de projetos/<video>/revisao/ e quem cria é o script nova-revisao.py. O script preenche sozinho o que ele consegue medir (id, arquivo, duração, ficha técnica) e deixa vazio o que é julgamento (título, gancho, por que, decisões): esses quatro campos quem escreve é o agente que produziu os cortes, antes de chamar a pessoa para revisar. Campo de julgamento vazio é revisão pela metade, porque a pessoa fica sem saber o que estava sendo tentado.",
+  "versao": "1.0",
+
+  "chave": "cafe-em-casa-lote-01",
+  "_nota_chave": "A identidade desta revisão dentro do navegador. As respostas ficam guardadas em localStorage sob esta chave, então ela precisa ser única por lote. Trocar a chave é o mesmo que começar uma revisão do zero; repetir a chave de um lote antigo faz as respostas velhas reaparecerem.",
+
+  "lote": "Café em casa | primeiro lote",
+  "_nota_lote": "O nome que aparece no cabeçalho da página. Serve para a pessoa saber o que está revisando quando abrir a aba três dias depois.",
+
+  "video": "2026-09-14-cafe-em-casa",
+  "_nota_video": "O nome da pasta do vídeo dentro de projetos/. Aparece na linha de apoio do cabeçalho.",
+
+  "gerado_em": "2026-09-18 22:40",
+  "_nota_gerado_em": "Quando o script montou esta revisão. Texto livre, só para leitura humana.",
+
+  "introducao": "Três cortes saíram do vídeo sobre moagem, dois vieram para revisão. Os dois usam o mesmo mundo no painel de cima, um moedor visto de frente que muda de estado, para o lote parecer um lote e não dois vídeos soltos. Assista com som: a legenda é uma linha só e passa na costura, e é lá que dá para ver se ela está atropelando a fala.",
+  "_nota_introducao": "Uma ou duas frases dizendo o que a pessoa está prestes a ver e onde prestar atenção. Opcional, mas uma revisão sem introdução vira uma pilha de vídeos.",
+
+  "cortes": [
+    {
+      "id": "corte-01",
+      "_nota_id": "O mesmo nome da pasta do corte. Vira a chave de armazenamento daquele bloco, então não mude depois que a pessoa já respondeu.",
+
+      "titulo": "O moedor importa mais que o grão",
+      "_nota_titulo": "Nome curto e humano, para conversar sobre o corte sem citar número de arquivo.",
+
+      "arquivo": "../corte-01/corte-01.mp4",
+      "_nota_arquivo": "Caminho do vídeo relativo a esta página. Como a página fica em projetos/<video>/revisao/ e o corte fica em projetos/<video>/corte-NN/, onde mora só o MP4 de entrega, o caminho começa com dois pontos e uma barra. O servidor sobe na pasta do vídeo, e é isso que faz esse caminho funcionar. Material de trabalho (painel, face, legenda, brief) fica em materiais-de-trabalho/corte-NN/ e nunca é apontado aqui.",
+
+      "duracao_s": 34.2,
+      "_nota_duracao_s": "Em segundos, com decimal. O script mede com ffprobe. Aparece embaixo do player em minutos e segundos.",
+
+      "gancho": "Você pode comprar o café mais caro da cidade que, se o seu moedor for de lâmina, você vai continuar tomando café ruim.",
+      "_nota_gancho": "O texto exato do gancho, palavra por palavra, do jeito que é ouvido nos primeiros segundos. Sai da seção 1 do brief.md. É o campo mais importante da página, porque aprovar um corte é aprovar o gancho dele.",
+
+      "porque": "É a afirmação mais afiada do vídeo e contraria o que quase todo mundo acredita, que café bom é questão de grão caro. Se sustenta sozinha para quem nunca viu o canal, e a promessa fecha dentro do próprio corte: o payoff mostra a diferença entre a moagem de lâmina e a de mó em quinze segundos.",
+      "_nota_porque": "Por que este trecho virou corte, em duas ou três frases. É aqui que a produção defende a escolha e a pessoa concorda ou discorda com argumento, em vez de reagir só ao acabamento.",
+
+      "decisoes": [
+        "O gancho costura dois trechos que estão a onze minutos de distância um do outro. A emenda cai em 6,4 s, logo depois de uma respiração. Ouça se soa como uma fala só ou se dá para perceber o corte.",
+        "O painel mostra o moedor de lâmina picando o grão de forma irregular, e não as palavras da legenda. A escolha foi mostrar a coisa, não repetir o texto. Se você achar que ficou abstrato demais, o plano B é um comparativo lado a lado das duas moagens.",
+        "Termina em conclusão, sem convite para assistir ao vídeo inteiro. A ideia é deixar o corte fechado e completo. Se a preferência for puxar tráfego para o longo, entra uma ponte de dois segundos no fim."
+      ],
+      "_nota_decisoes": "Lista de pontos em aberto, um por item. Não é lista de defeito conhecido: é onde a produção escolheu um caminho e quer confirmação. Item bem escrito diz o que foi feito e qual é a alternativa. Se não houver nenhuma dúvida real, mande uma lista vazia em vez de inventar item.",
+
+      "ficha": {
+        "formato": "1080x1920 · 30 fps · H.264",
+        "painel": "moedor visto de frente, 4 estados",
+        "beats": "9 beats, cadência média 1,9 s",
+        "legenda": "Quicksand Bold 116, uma linha"
+      },
+      "_nota_ficha": "Pares de rótulo e valor que aparecem como etiquetas pequenas. Campo livre: coloque o que ajuda a julgar e nada do que só ocupa espaço. O script preenche formato e duração sozinho; o resto é o agente que acrescenta."
+    },
+    {
+      "id": "corte-02",
+      "titulo": "Os trinta segundos que ninguém espera",
+      "arquivo": "../corte-02/corte-02.mp4",
+      "duracao_s": 28.6,
+      "gancho": "A parte mais importante do preparo acontece antes de a água encostar no café, e ela dura trinta segundos.",
+      "porque": "Abre uma lacuna concreta e com prazo, que é o que segura a pessoa até o fim. O payoff é a pré infusão, explicada com a própria mão do apresentador em cena, então o corte entrega uma coisa que dá para fazer amanhã de manhã.",
+      "decisoes": [
+        "Este corte fica em 28,6 s enquanto o primeiro fica em 34,2 s. Não achei onde tirar mais sem amputar a explicação. Se a preferência for padronizar a duração do lote, dá para cortar o exemplo do final e ficar em 24 s.",
+        "O cronômetro do painel roda em tempo real durante a pré infusão, e é o único momento do lote em que alguma coisa se move sem uma frase nova chegando junto. A justificativa é que o tempo é o assunto. Se soar como enfeite, ele vira um contador que pula de cinco em cinco."
+      ],
+      "ficha": {
+        "formato": "1080x1920 · 30 fps · H.264",
+        "painel": "mesmo moedor, estado de repouso, com cronômetro",
+        "beats": "7 beats, cadência média 2,1 s",
+        "legenda": "Quicksand Bold 116, uma linha"
+      }
+    }
+  ]
+}

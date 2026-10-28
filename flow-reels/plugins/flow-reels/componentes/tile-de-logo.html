@@ -1,0 +1,371 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   tile-de-logo  ·  uma ferramenta ou marca como objeto físico
+   -------------------------------------------------------------------------
+   É o que substitui escrever o nome da coisa.
+
+   REGRA DURA: marca só aparece com o logo de verdade. Nunca uma forma
+   parecida, nunca um ícone genérico no lugar de uma marca nomeada. Quem
+   conhece a marca vê o erro na hora, e quem não conhece aprende errado. Se o
+   logo não está no acervo, as saídas são duas: baixar, ou não mostrar a marca
+   e resolver o beat com palavra.
+
+   O acervo fica em componentes/logos/. O parâmetro marca é o nome do arquivo
+   de lá, sem a extensão. Faltou o arquivo, o tile não inventa desenho nenhum:
+   ele mostra a falta na cara, no próprio quadro, e grita no console.
+   ========================================================================= */
+
+.fc-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--fonte-corpo);
+}
+
+.fc-tile-quadro {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+/* A silhueta do acervo. Ela é pintada por máscara porque o SVG do acervo é
+   monocromático: a forma é da marca, a cor da tinta é do painel. Logo
+   colorido oficial não passa por aqui, passa por .fc-tile-imagem. */
+.fc-tile-marca {
+  width: 62%;
+  height: 62%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* O arquivo colorido oficial, mostrado como ele é. Nunca recolorido, nunca
+   com a cor de destaque por cima: cor de marca de outra pessoa não é nossa
+   para mexer. */
+.fc-tile-imagem {
+  width: 62%;
+  height: 62%;
+  object-fit: contain;
+  display: block;
+}
+
+/* A sentinela existe por dois motivos: ela é quem descobre que o arquivo não
+   veio, e é ela que segura o window.PRONTO até a imagem terminar de carregar,
+   porque o base.js só espera por elementos img. */
+.fc-tile-sentinela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-tile-nome {
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  text-align: center;
+}
+
+.fc-tile[data-estado="apagado"] .fc-tile-imagem,
+.fc-tile[data-estado="apagado"] .fc-tile-marca { visibility: hidden; }
+
+.fc-tile[data-estado="aceso"] .fc-tile-quadro {
+  background: var(--destaque);
+  border-color: var(--destaque);
+}
+
+.fc-tile[data-estado="aceso"] .fc-tile-marca {
+  background-color: var(--destaque-contraste);
+}
+
+.fc-tile[data-estado="aceso"] .fc-tile-nome { color: var(--tinta); }
+
+/* ---------------------------------------------------------------------
+   A falta, visível
+   O pior desfecho possível seria o tile cair calado em um desenho genérico:
+   o corte sairia com um logo errado e ninguém perceberia até alguém de fora
+   apontar. Então a falta aparece hachurada no quadro, com o nome do arquivo
+   que falta e o comando que resolve. É feio de propósito.
+   --------------------------------------------------------------------- */
+
+.fc-tile[data-erro="sim"] .fc-tile-quadro,
+.fc-tile[data-erro="sim"][data-estado="aceso"] .fc-tile-quadro {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--destaque) 55%, transparent) 0 10px,
+      transparent 10px 20px
+    ),
+    var(--superficie-alt);
+  border-style: dashed;
+  border-color: var(--destaque);
+}
+
+.fc-tile[data-erro="sim"] .fc-tile-marca,
+.fc-tile[data-erro="sim"] .fc-tile-imagem { display: none; }
+
+.fc-tile-falta {
+  box-sizing: border-box;
+  max-width: 92%;
+  padding: 8px 10px;
+  background: var(--superficie);
+  border: var(--borda) solid var(--destaque);
+  border-radius: var(--raio);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Os tamanhos desta caixa saem de uma conta sobre o lado do tile, e não dos
+   tokens de tipografia, porque ela não é superfície de marca: é o aviso de
+   defeito, e ele precisa caber dentro de qualquer tile, do pequeno ao grande. */
+.fc-tile-falta-titulo {
+  font-family: var(--fonte-titulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--destaque);
+}
+
+.fc-tile-falta-alvo {
+  margin-top: 5px;
+  font-family: var(--fonte-mono);
+  color: var(--tinta);
+  word-break: break-all;
+}
+
+.fc-tile[data-erro="sim"] .fc-tile-nome {
+  font-family: var(--fonte-mono);
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--destaque);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "tile-de-logo";
+
+  /* A pasta do acervo, vista pelo navegador. O servidor do painel.py serve,
+     na ordem, a pasta do corte, a raiz do pacote e a pasta componentes, então
+     "logos/claude.svg" acha componentes/logos/claude.svg sozinho. Um corte que
+     precise de um logo só dele pode ter a própria pasta logos/ ao lado do
+     painel.html, e ela ganha. */
+  var PASTA = "logos/";
+
+  /* Só o que pode virar nome de arquivo. Serve de tranca: nome de marca nunca
+     vira caminho de pasta. */
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function anotarFalta(alvo, motivo) {
+    var FC = window.FC;
+    if (FC) {
+      FC.logosAusentes = FC.logosAusentes || [];
+      if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+    }
+    /* console.error porque o painel.py coleta e imprime no fim do render. É
+       assim que quem está produzindo fica sabendo sem precisar olhar quadro
+       por quadro. */
+    console.error(
+      "tile-de-logo: " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+      "Baixe o arquivo com: flow-reels componentes/baixar-logo <marca>. " +
+      "Se a marca nao existir na fonte, pegue o logo oficial na pagina de imprensa dela, " +
+      "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+    );
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (p.marca && p.imagem) {
+        throw new Error("tile-de-logo: escolha um dos dois, marca (silhueta do acervo) " +
+                        "ou imagem (arquivo colorido oficial), nunca os dois juntos.");
+      }
+      if (!p.marca && !p.imagem) {
+        throw new Error("tile-de-logo: diga marca: \"claude\" para usar o acervo em " +
+                        "componentes/logos/, ou imagem: \"caminho.svg\" para um logo colorido " +
+                        "oficial que voce mesmo colocou na pasta. Nunca desenhe a marca.");
+      }
+
+      var lado = p.tamanho == null ? 200 : p.tamanho;
+      var monocromatico = !!p.marca;
+      var alvo = monocromatico ? PASTA + p.marca + ".svg" : p.imagem;
+      var slugRuim = monocromatico && !SLUG_VALIDO.test(String(p.marca));
+
+      var el = document.createElement("div");
+      el.className = "fc-tile";
+      el.setAttribute("data-estado", "apagado");
+      el.setAttribute("data-erro", "nao");
+
+      var quadro = document.createElement("div");
+      quadro.className = "fc-tile-quadro";
+      quadro.style.width = lado + "px";
+      quadro.style.height = lado + "px";
+      el.appendChild(quadro);
+
+      var nome = null;
+      if (p.nome) {
+        nome = document.createElement("div");
+        nome.className = "fc-tile-nome";
+        nome.style.maxWidth = (lado + 60) + "px";
+        nome.textContent = p.nome;
+        el.appendChild(nome);
+      }
+
+      function mostrarFalta(motivo) {
+        el.setAttribute("data-erro", "sim");
+        var aviso = document.createElement("div");
+        aviso.className = "fc-tile-falta";
+        var titulo = document.createElement("div");
+        titulo.className = "fc-tile-falta-titulo";
+        titulo.textContent = "logo ausente";
+        titulo.style.fontSize = Math.max(11, Math.round(lado * 0.085)) + "px";
+        var qual = document.createElement("div");
+        qual.className = "fc-tile-falta-alvo";
+        qual.textContent = alvo;
+        qual.style.fontSize = Math.max(9, Math.round(lado * 0.062)) + "px";
+        aviso.appendChild(titulo);
+        aviso.appendChild(qual);
+        quadro.appendChild(aviso);
+        if (nome) {
+          nome.textContent = monocromatico
+            ? "baixar-logo.py " + p.marca
+            : "arquivo nao encontrado";
+          nome.style.fontSize = Math.max(10, Math.round(lado * 0.07)) + "px";
+        }
+        anotarFalta(alvo, motivo);
+      }
+
+      if (slugRuim) {
+        mostrarFalta("o nome da marca nao vira nome de arquivo");
+      } else {
+        var desenho;
+        if (monocromatico) {
+          /* A silhueta entra por máscara para poder receber a tinta do painel.
+             Isso não é recolorir marca: o arquivo do acervo já é de uma cor só,
+             e essa cor é a do painel, não a da marca. Quando a cor da marca for
+             parte do beat, use imagem com o logo colorido oficial. */
+          desenho = document.createElement("div");
+          desenho.className = "fc-tile-marca";
+          desenho.style.webkitMaskImage = "url('" + alvo + "')";
+          desenho.style.maskImage = "url('" + alvo + "')";
+        } else {
+          desenho = document.createElement("img");
+          desenho.className = "fc-tile-imagem";
+          desenho.src = alvo;
+          desenho.alt = "";
+        }
+        quadro.appendChild(desenho);
+
+        /* A máscara de CSS não avisa quando o arquivo falta, e nem o base.js
+           espera por ela. A sentinela resolve as duas coisas de uma vez. */
+        var sentinela = document.createElement("img");
+        sentinela.className = "fc-tile-sentinela";
+        sentinela.setAttribute("aria-hidden", "true");
+        sentinela.alt = "";
+        sentinela.addEventListener("error", function () {
+          mostrarFalta("o arquivo do logo nao existe");
+        }, { once: true });
+        sentinela.src = alvo;
+        quadro.appendChild(sentinela);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var valor = e.estado || "apagado";
+        /* O parâmetro fundo é o repouso da peça; o estado aceso é sempre a
+           fala apontando para ela agora. */
+        if (valor === "neutro" && p.fundo === "destaque") { valor = "aceso"; }
+        el.setAttribute("data-estado", valor);
+      }
+
+      definir({ estado: "apagado" });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Transforma uma marca em objeto dentro do mundo, sempre com o logo de verdade do acervo em componentes/logos/. Apagado é o quadrado sem a marca, neutro é a silhueta na tinta do painel, aceso troca o fundo para a cor de destaque, e vale um tile aceso por vez. O último caso mostra o que acontece quando o arquivo não existe: a falta aparece no quadro, nunca um desenho parecido.",
+      casos: [
+        {
+          nome: "apagado",
+          largura: 320, altura: 320, escala: 0.6, x: 40, y: 20,
+          parametros: { marca: "claude", nome: "claude", tamanho: 200 },
+          estado: { estado: "apagado" }
+        },
+        {
+          nome: "neutro",
+          largura: 320, altura: 320, escala: 0.6, x: 40, y: 20,
+          parametros: { marca: "claude", nome: "claude", tamanho: 200 },
+          estado: { estado: "neutro" }
+        },
+        {
+          nome: "aceso",
+          largura: 320, altura: 320, escala: 0.6, x: 40, y: 20,
+          parametros: { marca: "notion", nome: "notion", tamanho: 200 },
+          estado: { estado: "aceso" }
+        },
+        {
+          nome: "grande, sem nome",
+          largura: 400, altura: 400, escala: 0.6, x: 40, y: 30,
+          parametros: { marca: "instagram", tamanho: 300 },
+          estado: { estado: "neutro" }
+        },
+        {
+          nome: "logo que nao existe no acervo",
+          largura: 320, altura: 320, escala: 0.6, x: 40, y: 20,
+          parametros: { marca: "linkedin", nome: "linkedin", tamanho: 200 },
+          estado: { estado: "neutro" }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

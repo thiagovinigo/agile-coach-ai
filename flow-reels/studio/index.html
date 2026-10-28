@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow Reels Studio 3.0 · Central de Criação</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header Principal -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="brand-logo">
+        <span class="logo-icon" id="headerLogoIcon">🎬</span>
+        <div class="logo-text">
+          <h1>FLOW REELS <span class="badge-version">v3.0</span></h1>
+          <div class="header-project-box">
+            <span style="font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Projeto:</span>
+            <select id="headerProjectSelect" class="header-project-select">
+              <option value="nutrivvo">Nutrivvo</option>
+              <option value="garimpo-armas">Garimpo de Armas</option>
+            </select>
+            <button type="button" class="btn-new-project" id="btnOpenNewProjectModal">+ Novo Projeto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="header-nav">
+      <button class="nav-tab active" data-tab="wizard" id="tabBtnWizard">
+        <span class="tab-icon">✨</span> Novo Reel (Passo a Passo)
+      </button>
+      <button class="nav-tab" data-tab="projetos" id="tabBtnProjetos">
+        <span class="tab-icon">🎬</span> Projetos & Cortes
+      </button>
+      <button class="nav-tab" data-tab="radar" id="tabBtnRadar">
+        <span class="tab-icon">📡</span> Radar de Tendências
+      </button>
+      <button class="nav-tab" data-tab="marca" id="tabBtnMarca">
+        <span class="tab-icon">🎨</span> Identidade & Tokens
+      </button>
+    </div>
+
+    <div class="header-right">
+      <button class="btn btn-ai-sparkle" id="btnOpenAiModal">
+        <span class="ai-sparkle-icon">✨</span> Assistente IA
+      </button>
+      <a href="http://localhost:8790" target="_blank" class="btn-review-link" id="btnOpenReview">
+        <span class="pulse-dot"></span> Validar Cortes (8790)
+      </a>
+    </div>
+  </header>
+
+  <!-- MODAL NOVO PROJETO (UNIVERSAL) -->
+  <div class="modal-new-project" id="modalNovoProjeto">
+    <div class="modal-new-project-card glass-card">
+      <div class="modal-header-flex">
+        <div>
+          <span style="font-size:11px; font-weight:700; color:#c084fc; text-transform:uppercase; letter-spacing:0.05em;">NOVO PROJETO UNIVERSAL</span>
+          <h2 style="font-size:1.4rem; font-weight:800; margin-top:4px;">Criar Projeto para Qualquer Marca</h2>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Configure seu nicho, negócio e proposta para a IA gerar roteiros personalizados.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="btnCloseNewProjectModal">&times;</button>
+      </div>
+
+      <form id="formNovoProjeto" onsubmit="return false;">
+        <div class="form-group full-width mb-3" style="background: rgba(139, 92, 246, 0.08); border: 1px dashed rgba(139, 92, 246, 0.4); padding: 14px; border-radius: 10px;">
+          <label for="newProjUrl" style="color: #c084fc; display:flex; align-items:center; justify-content:space-between;">
+            <span>🌐 URL do seu Site ou Plataforma (Preenchimento com IA)</span>
+            <span style="font-size:11px; font-weight:normal; color:#a78bfa;">Opcional</span>
+          </label>
+          <div style="display: flex; gap: 8px; margin-top: 6px;">
+            <input type="url" id="newProjUrl" class="form-control" placeholder="Ex: https://buscaarmas.com.br ou https://meusite.com.br">
+            <button type="button" class="btn btn-primary" id="btnAnalisarUrlSite" style="white-space:nowrap; background: linear-gradient(135deg, #8B5CF6, #06B6D4); font-weight:700;">
+              ✨ Puxar Dados do Site
+            </button>
+          </div>
+          <span class="hint" id="statusAnaliseSite" style="display:block; margin-top:6px; font-size:12px; color:var(--text-muted);">
+            Cole o link do seu site para a IA ler a proposta, definir nicho, público e gerar 4 pautas sob medida automaticamente.
+          </span>
+        </div>
+
+        <div class="form-group full-width mb-3">
+          <label for="newProjNome">Nome do Projeto / Marca / Criador *</label>
+          <input type="text" id="newProjNome" class="form-control" placeholder="Ex: Barbearia Alfa, Dra. Camila Pele, Garimpo Armas, Loja Fitness..." required>
+        </div>
+
+        <div class="form-grid-2 mb-3">
+          <div class="form-group">
+            <label for="newProjNicho">Nicho / Ramo de Atuação *</label>
+            <input type="text" id="newProjNicho" class="form-control" placeholder="Ex: Serviços Locais & Barba, Dermatologia, Finanças..." required>
+          </div>
+          <div class="form-group">
+            <label for="newProjCta">Palavra-Chave da DM *</label>
+            <input type="text" id="newProjCta" class="form-control" placeholder="Ex: AGENDA, PELE, GARIMPO, TREINO, ACESSO" required>
+          </div>
+        </div>
+
+        <div class="form-group full-width mb-3">
+          <label for="newProjProposta">O que você Vende / Proposta de Valor *</label>
+          <textarea id="newProjProposta" class="form-control" rows="2" placeholder="Ex: Cortes modernos sem fila de espera com agendamento online fácil pelo link da bio..." required></textarea>
+        </div>
+
+        <div class="form-group full-width mb-3">
+          <label for="newProjPublico">Público-Alvo Principal</label>
+          <input type="text" id="newProjPublico" class="form-control" placeholder="Ex: Homens de 20 a 45 anos que prezam por boa aparência">
+        </div>
+
+        <div class="form-grid-2 mb-4">
+          <div class="form-group">
+            <label for="newProjCor">Cor de Destaque da Marca</label>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <input type="color" id="newProjCor" value="#06B6D4" style="width:44px; height:38px; border-radius:8px; border:none; cursor:pointer;">
+              <span id="newProjCorHex" style="font-family:var(--font-mono); font-size:13px; color:#fff;">#06B6D4</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="newProjFormato">Tipo de Formato Padrão</label>
+            <select id="newProjFormato" class="form-control">
+              <option value="narrado" selected>Reel Narrado (Sem Rosto / Voz IA)</option>
+              <option value="fabrica">Cortes de Vídeo Longo</option>
+              <option value="radar">Pauta & Roteiro Viral</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+          <button type="button" class="btn btn-secondary" id="btnCancelNewProject">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btnSubmitNewProject" style="background:linear-gradient(135deg, #8B5CF6, #06B6D4);">
+            ✨ Criar e Ativar Projeto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Container Principal -->
+  <main class="main-container">
+    
+    <!-- TAB 1: WIZARD DE CRIAÇÃO PASSO A PASSO -->
+    <section class="tab-content active" id="tabWizard">
+      
+      <!-- Stepper / Barra de Progresso -->
+      <div class="stepper-bar">
+        <div class="step-item active" data-step="1">
+          <div class="step-circle">1</div>
+          <span class="step-label">Formato & Tipo</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="2">
+          <div class="step-circle">2</div>
+          <span class="step-label">Roteiro & Gancho</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="3">
+          <div class="step-circle">3</div>
+          <span class="step-label">Cenas & Visual</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="4">
+          <div class="step-circle">4</div>
+          <span class="step-label">Voz & Trilha</span>
+        </div>
+        <div class="step-line"></div>
+        <div class="step-item" data-step="5">
+          <div class="step-circle">5</div>
+          <span class="step-label">Revisão & Montagem</span>
+        </div>
+      </div>
+
+      <!-- PAINEL DO PASSO ATUAL -->
+      <div class="wizard-panel glass-card">
+        
+        <!-- ETAPA 1: FORMATO -->
+        <div class="wizard-step active" id="step1">
+          <div class="step-header">
+            <h2>Escolha como seu Reel será criado</h2>
+            <p>Selecione a fonte de conteúdo e a estrutura do vídeo vertical.</p>
+          </div>
+
+          <div class="cards-grid-3">
+            <div class="option-card active" data-type="narrado" id="optCardNarrado">
+              <div class="card-badge free-badge">Opção Gratuita Disponível</div>
+              <div class="card-icon">🎙️</div>
+              <h3>Reel Narrado (Sem Rosto)</h3>
+              <p>Locução neural de alta autoridade por cima de filmagens reais (B-roll, armaria, estande) com animação de cartões e legendas dinâmicas.</p>
+              <ul class="card-features">
+                <li>✓ Não precisa gravar com câmera</li>
+                <li>✓ Voz neural em português sem custo</li>
+                <li>✓ B-roll do YouTube ou vídeo local</li>
+              </ul>
+              <div class="selection-indicator">Selecionado</div>
+            </div>
+
+            <div class="option-card" data-type="fabrica" id="optCardFabrica">
+              <div class="card-badge">Fábrica de Cortes</div>
+              <div class="card-icon">✂️</div>
+              <h3>Cortes de Vídeo Longo</h3>
+              <p>Transforme um podcast, live ou aula existente em cortes verticais inteligentes com enquadramento automático do seu rosto.</p>
+              <ul class="card-features">
+                <li>✓ Transcrição palavra por palavra</li>
+                <li>✓ Mineração de ganchos que prendem</li>
+                <li>✓ Layout com cards de liquid glass</li>
+              </ul>
+              <div class="selection-indicator">Selecionar</div>
+            </div>
+
+            <div class="option-card" data-type="radar" id="optCardRadar">
+              <div class="card-badge">Radar de IA</div>
+              <div class="card-icon">🔥</div>
+              <h3>Pauta & Roteiro Viral</h3>
+              <p>Varra os tópicos que mais geram comentários no seu nicho e gere uma pauta pronta com fatos checados antes de produzir.</p>
+              <ul class="card-features">
+                <li>✓ Varredura Reddit, YouTube e Notícias</li>
+                <li>✓ Roteiro medido em 40-50 segundos</li>
+                <li>✓ Palavra de engajamento para a DM</li>
+              </ul>
+              <div class="selection-indicator">Selecionar</div>
+            </div>
+          </div>
+
+          <div class="step-footer">
+            <div></div>
+            <button class="btn btn-primary next-step" data-next="2" id="btnNextToStep2">
+              Avançar para o Roteiro →
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 2: ROTEIRO & GANCHO -->
+        <div class="wizard-step" id="step2">
+          <div class="step-header-flex">
+            <div>
+              <h2>Estrutura do Roteiro (Formato dos 5 Blocos)</h2>
+              <p>O roteiro é calibrado para fala natural de 40 a 50 segundos (média de 3.7 palavras/segundo).</p>
+            </div>
+            <div class="word-meter-box" id="wordMeterBox">
+              <div class="meter-info">
+                <span class="meter-count" id="meterWordCount">155 palavras</span>
+                <span class="meter-time" id="meterTimeCount">~42 s</span>
+              </div>
+              <div class="meter-bar-track">
+                <div class="meter-bar-fill" id="meterBarFill" style="width: 85%;"></div>
+              </div>
+              <span class="meter-status" id="meterStatus">✓ Duração Ideal (40-50s)</span>
+            </div>
+          </div>
+
+          <!-- Pautas Dinâmicas Específicas do Projeto Ativo -->
+          <div class="quick-templates-wrapper mb-3" style="margin-bottom: 1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="templates-label" id="labelPautasProjeto" style="font-weight:700; color:#fff; font-size:13px;">Pautas do Projeto:</span>
+                <a id="linkSiteProjeto" target="_blank" href="#" class="badge" style="display:none; font-size:11px; background:rgba(6,182,212,0.15); color:#22d3ee; border:1px solid rgba(6,182,212,0.3); padding:2px 8px; border-radius:999px; text-decoration:none;">
+                  🌐 Abrir Site
+                </a>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button type="button" class="btn-template" id="btnIaRefinarPasso2" style="background:rgba(139,92,246,0.15); border-color:#8b5cf6; color:#c084fc; font-weight:700;">
+                  ✨ Assistente IA: Roteiro por Etapa
+                </button>
+                <button type="button" class="btn-template" id="btnGerarMaisPautas" style="background:rgba(16,185,129,0.15); border-color:#10b981; color:#34d399; font-weight:700;">
+                  + 4 Novas Pautas com IA
+                </button>
+              </div>
+            </div>
+            <div class="quick-templates" id="containerPautasProjeto">
+              <!-- Botões de pauta gerados dinamicamente para o projeto ativo -->
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="inputGancho">1. O Gancho (Primeiros 0 a 4 segundos) <span class="hint">Máx. 15 palavras. Toque na maior dor ou curiosidade do público.</span></label>
+              <input type="text" id="inputGancho" class="form-control" value="Você sabia que a mesma pistola que uma loja vende por doze mil reais está saindo por cinco e oitocentos em outra?">
+            </div>
+
+            <div class="form-group full-width">
+              <label for="inputOQueE">2. O que é / Contexto (4 a 10 segundos) <span class="hint">Onde o erro ou oportunidade realmente acontece.</span></label>
+              <input type="text" id="inputOQueE" class="form-control" value="A maioria dos atiradores e CACs perde milhares de reais simplesmente porque pesquisa apenas em duas ou três lojas locais.">
+            </div>
+
+            <div class="form-group full-width">
+              <label for="inputProvas">3. As Provas (10 a 35 segundos) <span class="hint">Dados, números, comparações concretas e contraste de mercado.</span></label>
+              <textarea id="inputProvas" class="form-control" rows="4">A diferença de preço entre lojistas autorizados no Brasil chega a mais de quarenta por cento no mesmo calibre e modelo. Quem não compara gasta o dobro do valor da anuidade em apenas uma compra de munição e acessórios.</textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="inputVirada">4. A Virada (35 a 42 segundos) <span class="hint">Apresentação da solução e autoridade da marca.</span></label>
+              <input type="text" id="inputVirada" class="form-control" value="É por isso que atiradores experientes usam o Busca Armas: o primeiro comparador inteligente que monitora o estoque e preço de lojas legalizadas em tempo real para você nunca mais pagar caro.">
+            </div>
+
+            <div class="form-group full-width">
+              <label for="inputChamada">5. A Chamada da DM (Últimos 4 a 6 segundos) <span class="hint">Palavra de comando fácil de digitar.</span></label>
+              <div class="cta-input-group">
+                <input type="text" id="inputChamada" class="form-control" value="Comenta RETENCAO aqui embaixo que eu te mando um acesso exclusivo para testar na prática.">
+                <div class="keyword-pill">
+                  Palavra: <strong id="ctaKeywordPreview">RETENCAO</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PREVIEW DE ÁUDIO INSTANTÂNEO NO PASSO 2 -->
+          <div class="audio-preview-box" id="step2AudioBox">
+            <div class="audio-preview-header">
+              <div class="audio-preview-title">
+                <span>🎙️ Prévia Instantânea de Locução da IA</span>
+                <span class="badge" style="font-size:11px; background:rgba(16,185,129,0.2); color:#6ee7b7; padding:2px 8px; border-radius:999px;">Gera em ~1.5s</span>
+              </div>
+              <span id="step2AudioTimeEst" style="font-size:12px; font-family:var(--font-mono); color:#c084fc;">~42 segundos</span>
+            </div>
+            <div class="audio-controls-row">
+              <button type="button" class="btn-audio-listen" id="btnListenAudioStep2">
+                <span>▶</span> Ouvir Locução da IA
+              </button>
+              <audio id="audioPreviewStep2" controls class="audio-player-native" style="display:none;"></audio>
+              <span id="audioStatusStep2" style="font-size:12px; color:var(--text-muted);">Clique para escutar a dicção antes de renderizar</span>
+            </div>
+          </div>
+
+          <div class="step-footer">
+            <button class="btn btn-secondary prev-step" data-prev="1" id="btnBackToStep1">← Voltar</button>
+            <button class="btn btn-primary next-step" data-next="3" id="btnNextToStep3">Avançar para Visual & Cenas →</button>
+          </div>
+        </div>
+
+        <!-- ETAPA 3: CENAS & VISUAL -->
+        <div class="wizard-step" id="step3">
+          <div class="step-header">
+            <h2>Estilo Visual & Modos de Cena</h2>
+            <p>Selecione a composição de tela, transições e destaques de legenda.</p>
+          </div>
+
+          <div class="form-section-title">Modo Principal da Cena (Todos os 8 Modos do Flow Reels 3.0)</div>
+          <div class="cards-grid-4">
+            <div class="scene-card active" data-mode="rosto-vidro" id="sceneRostoVidro">
+              <div class="scene-preview preview-rosto-vidro">
+                <div class="mock-card"></div>
+              </div>
+              <h4>Rosto + Vidro</h4>
+              <p>Vídeo em largura cheia com cards liquid glass sobrepostos.</p>
+            </div>
+
+            <div class="scene-card" data-mode="manchete" id="sceneManchete">
+              <div class="scene-preview preview-manchete">
+                <div class="mock-headline">NOTÍCIA URGENTE</div>
+              </div>
+              <h4>Manchete</h4>
+              <p>Card translúcido com destaque de matéria jornalística e escurecimento.</p>
+            </div>
+
+            <div class="scene-card" data-mode="lado-a-lado" id="sceneLadoALado">
+              <div class="scene-preview preview-split">
+                <div class="mock-split-1"></div>
+                <div class="mock-split-2"></div>
+              </div>
+              <h4>Lado a Lado</h4>
+              <p>Comparativo direto entre dois modelos com vencedor em destaque.</p>
+            </div>
+
+            <div class="scene-card" data-mode="mundo" id="sceneMundo">
+              <div class="scene-preview preview-mundo">
+                <div class="mock-window"></div>
+              </div>
+              <h4>Mundo / Objeto</h4>
+              <p>A gravação ou tabela ocupa a tela com zoom guiado.</p>
+            </div>
+
+            <div class="scene-card" data-mode="vidro-liquido" id="sceneVidroLiquido">
+              <div class="scene-preview preview-vidro-liquido">
+                <div class="mock-liquid"></div>
+              </div>
+              <h4>Vidro Líquido</h4>
+              <p>Frosted glass dinâmico com desfoque e refração suave.</p>
+            </div>
+
+            <div class="scene-card" data-mode="camadas" id="sceneCamadas">
+              <div class="scene-preview preview-camadas">
+                <div class="mock-layer-1"></div>
+                <div class="mock-layer-2"></div>
+              </div>
+              <h4>Camadas 3D</h4>
+              <p>Profundidade com elementos voando e rotação sutil.</p>
+            </div>
+
+            <div class="scene-card" data-mode="chat" id="sceneChat">
+              <div class="scene-preview preview-chat">
+                <div class="mock-bubble-left">Paciente sumiu?</div>
+                <div class="mock-bubble-right">Secretária IA ativada!</div>
+              </div>
+              <h4>Chat / Mensagem</h4>
+              <p>Balões de conversa dinâmicos estilo WhatsApp / Telegram.</p>
+            </div>
+
+            <div class="scene-card" data-mode="lista" id="sceneLista">
+              <div class="scene-preview preview-lista">
+                <div class="mock-list-item"><span class="mock-num">1</span><div class="mock-line"></div></div>
+                <div class="mock-list-item"><span class="mock-num">2</span><div class="mock-line"></div></div>
+                <div class="mock-list-item"><span class="mock-num">3</span><div class="mock-line"></div></div>
+              </div>
+              <h4>Lista / Passos</h4>
+              <p>Cards sequenciais e contadores para tutoriais e listas.</p>
+            </div>
+          </div>
+
+          <div class="form-grid-3 mt-4" style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;">
+            <div class="form-group">
+              <label for="selectTransicao">Transição Entre Tomadas</label>
+              <select id="selectTransicao" class="form-control">
+                <option value="desfoque" selected>Desfoque Suave (Foco Contínuo)</option>
+                <option value="zoom">Zoom Punch (Tensão e Foco)</option>
+                <option value="corte">Corte Seco (Rápido e Preciso)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectDuracaoTransicao">Duração da Transição</label>
+              <select id="selectDuracaoTransicao" class="form-control">
+                <option value="0.30">0.30 s · Rápida (Corte dinâmico)</option>
+                <option value="0.36" selected>0.36 s · Padrão Flow Reels (Ideal)</option>
+                <option value="0.42">0.42 s · Suave (Cinemática)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selectEstiloLegenda">Estilo da Legenda Queimada</label>
+              <select id="selectEstiloLegenda" class="form-control">
+                <option value="amarelo-ouro" selected>Amarelo Ouro / Acento Tático (#F59E0B)</option>
+                <option value="verde-neon">Verde Neon / Tecnológico (#10B981)</option>
+                <option value="violeta-marca">Violeta Oficial da Marca (#8B5CF6)</option>
+                <option value="branco-bold">Branco Bold Minimalista (#FFFFFF)</option>
+                <option value="placa-escura">Placa Translúcida de Fundo (--placa)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group mt-3">
+            <label for="inputFonteVideo">Vídeo de Origem (B-Roll ou Gravação)</label>
+            <div class="quick-templates mb-2" style="margin-bottom:0.6rem;">
+              <span class="templates-label">Atalhos de B-Roll:</span>
+              <button type="button" class="btn-template active" id="btnVideoArmas">🔫 Garimpo de Armas (B-Roll Samuel Cout)</button>
+              <button type="button" class="btn-template" id="btnVideoNutrivvo">🥗 Nutrivvo Plataforma (B-Roll Demo)</button>
+              <button type="button" class="btn-template" id="btnVideoProjeto">🎬 Vídeo Ativo do Projeto</button>
+            </div>
+            <input type="text" id="inputFonteVideo" class="form-control" value="projetos/garimpo-armas-desconto/materiais-de-trabalho/fonte/video-base.mp4">
+            <span class="hint">Caminho do arquivo MP4 que será recortado e enquadrado em 1080x1920.</span>
+          </div>
+
+          <div class="step-footer">
+            <button class="btn btn-secondary prev-step" data-prev="2" id="btnBackToStep2">← Voltar</button>
+            <button class="btn btn-primary next-step" data-next="4" id="btnNextToStep4">Avançar para Voz & Áudio →</button>
+          </div>
+        </div>
+
+        <!-- ETAPA 4: VOZ & ÁUDIO -->
+        <div class="wizard-step" id="step4">
+          <div class="step-header">
+            <h2>Locução Neural & Mixagem Sonora</h2>
+            <p>Configure a narração e o ambiente acústico do vídeo vertical com todas as opções do pacote.</p>
+          </div>
+
+          <div class="form-section-title">Motor de Voz (Vozes Neurais em Português)</div>
+          <div class="cards-grid-3">
+            <div class="voice-card active" data-engine="pt-BR-AntonioNeural" id="voiceEdgeAntonio">
+              <div class="voice-badge">100% Grátis</div>
+              <div class="voice-avatar">👨‍💼</div>
+              <h4>Antônio Neural (pt-BR)</h4>
+              <p>Voz masculina madura, tom sério, documental e firme. Perfeita para autoridade, armas e negócios.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewAntonio">▶ Testar Voz</button>
+            </div>
+
+            <div class="voice-card" data-engine="pt-BR-FranciscaNeural" id="voiceEdgeFrancisca">
+              <div class="voice-badge">100% Grátis</div>
+              <div class="voice-avatar">👩‍💼</div>
+              <h4>Francisca Neural (pt-BR)</h4>
+              <p>Voz feminina fluida, clara, dinâmica e envolvente. Ótima para novidades, tendências e tutoriais.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewFrancisca">▶ Testar Voz</button>
+            </div>
+
+            <div class="voice-card" data-engine="pt-BR-ThalitaMultilingualNeural" id="voiceEdgeThalita">
+              <div class="voice-badge">100% Grátis</div>
+              <div class="voice-avatar">🎙️</div>
+              <h4>Thalita Multilingual (pt-BR)</h4>
+              <p>Voz feminina jovem, expressiva, calorosa e moderna. Perfeita para conexão e engajamento.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewThalita">▶ Testar Voz</button>
+            </div>
+
+            <div class="voice-card" data-engine="pt-PT-DuarteNeural" id="voiceEdgeDuarte">
+              <div class="voice-badge">100% Grátis</div>
+              <div class="voice-avatar">👔</div>
+              <h4>Duarte Neural (pt-PT)</h4>
+              <p>Voz masculina européia clássica, formal e clara. Tom institucional de alta credibilidade.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewDuarte">▶ Testar Voz</button>
+            </div>
+
+            <div class="voice-card" data-engine="pt-PT-RaquelNeural" id="voiceEdgeRaquel">
+              <div class="voice-badge">100% Grátis</div>
+              <div class="voice-avatar">👩‍💻</div>
+              <h4>Raquel Neural (pt-PT)</h4>
+              <p>Voz feminina européia expressiva e fluente para notícias, análises globais e finanças.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewRaquel">▶ Testar Voz</button>
+            </div>
+
+            <div class="voice-card" data-engine="elevenlabs" id="voiceElevenLabs">
+              <div class="voice-badge">API Externa</div>
+              <div class="voice-avatar">⚡</div>
+              <h4>ElevenLabs Clonação</h4>
+              <p>Voz sintetizada com seu próprio clone vocal ou atores de voz via ELEVENLABS_API_KEY no .env.</p>
+              <button type="button" class="btn-play-preview" id="btnPreviewEleven" disabled>Requer Chave .env</button>
+            </div>
+          </div>
+
+          <div class="form-grid-2 mt-4">
+            <div class="form-group">
+              <label for="selectTrilha">Trilha Sonora de Fundo (Acervo Oficial de Trilhas)</label>
+              <select id="selectTrilha" class="form-control">
+                <option value="calma-pads-01" selected>calma-pads-01 · Calma & Foco (Pads atmosféricos com ducking)</option>
+                <option value="tensa-atmosfera-01">tensa-atmosfera-01 · Tensão & Investigação (Alertas e notícias)</option>
+                <option value="tensa-synthwave-01">tensa-synthwave-01 · Tensão Synthwave (Urgência tática)</option>
+                <option value="calma-lofi-01">calma-lofi-01 · Calma Lo-Fi 01 (Batidas suaves e relaxadas)</option>
+                <option value="calma-lofi-02">calma-lofi-02 · Calma Lo-Fi 02 (Acústico e acolhedor)</option>
+                <option value="leve-lofi-03">leve-lofi-03 · Leve Lo-Fi 03 (Ritmo agradável de fundo)</option>
+                <option value="tech-synthwave-02">tech-synthwave-02 · Tech Synthwave 02 (Tecnologia, inovação e IA)</option>
+                <option value="animada-synthwave-01">animada-synthwave-01 · Animada Synthwave 01 (Energia alta e dinâmica)</option>
+                <option value="animada-deephouse-01">animada-deephouse-01 · Animada Deep House 01 (Batida moderna e contínua)</option>
+                <option value="nenhuma">Sem Música (Apenas locução neural + efeitos sonoros)</option>
+              </select>
+              
+              <div class="audio-controls-row mt-2" style="display:flex; align-items:center; gap:10px; margin-top:8px;">
+                <button type="button" class="btn-audio-listen" id="btnOuvirTrilha" style="background:rgba(245,158,11,0.15); border:1px solid #f59e0b; color:#fbbf24; padding:6px 14px; border-radius:6px; font-weight:700; cursor:pointer; font-size:12px;">
+                  <span>▶</span> Ouvir Trilha Selecionada
+                </button>
+                <audio id="audioTrilhaPreview" controls class="audio-player-native" style="display:none;"></audio>
+                <span id="audioTrilhaStatus" style="font-size:12px; color:var(--text-muted);">Clique para escutar o leito sonoro</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="checkSfx">Efeitos Sonoros (SFX Sintetizados)</label>
+              <div class="checkbox-container">
+                <input type="checkbox" id="checkSfx" checked>
+                <label for="checkSfx">Habilitar transições com Whoosh, Cliques, Pops e Impactos no ritmo exato da fala (67 sons masterizados)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-footer">
+            <button class="btn btn-secondary prev-step" data-prev="3" id="btnBackToStep3">← Voltar</button>
+            <button class="btn btn-primary next-step" data-next="5" id="btnNextToStep5">Revisar & Gerar Corte →</button>
+          </div>
+        </div>
+
+        <!-- ETAPA 5: REVISÃO & PRODUÇÃO -->
+        <div class="wizard-step" id="step5">
+          <div class="step-header">
+            <h2>Confirmação e Início de Produção</h2>
+            <p>Revise o pacote completo antes de acionar a renderização em 1080x1920.</p>
+          </div>
+
+          <div class="summary-box">
+            <div class="summary-item">
+              <span class="summary-label">Formato:</span>
+              <strong id="sumFormato">Reel Narrado (Sem Rosto)</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Gancho:</span>
+              <span id="sumGancho" class="text-truncate">"Essa arma aqui custava doze mil reais..."</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Palavras & Duração:</span>
+              <strong id="sumDuracao">155 palavras · ~42 segundos</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Voz Selecionada:</span>
+              <strong id="sumVoz">Antônio Neural (pt-BR) · Gratuita</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Cena Principal:</span>
+              <strong id="sumCena">Rosto + Vidro (Liquid Glass)</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Transição & Duração:</span>
+              <strong id="sumTransicao">Desfoque Suave (0.36s)</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Estilo de Legenda:</span>
+              <strong id="sumLegenda">Amarelo Ouro (#F59E0B)</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Trilha Sonora:</span>
+              <strong id="sumTrilha">calma-pads-01</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Efeitos Sonoros (SFX):</span>
+              <strong id="sumSfx">Ativados (Whoosh, Cliques, Impactos)</strong>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Palavra da DM:</span>
+              <strong id="sumPalavra" class="badge-cta">GARIMPO</strong>
+            </div>
+          </div>
+
+          <div class="action-zone">
+            <button type="button" class="btn btn-cta" id="btnGerarReel">
+              <span class="btn-icon">🚀</span> Gerar Reel 1080x1920 Agora
+            </button>
+          </div>
+
+          <!-- Terminal de Logs ao Vivo -->
+          <div class="terminal-container" id="terminalContainer" style="display: none;">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span class="terminal-title">flow-reels-engine.log</span>
+            </div>
+            <pre class="terminal-body" id="terminalLog">Iniciando motor de renderização...</pre>
+          </div>
+
+          <div class="step-footer">
+            <button class="btn btn-secondary prev-step" data-prev="4" id="btnBackToStep4">← Voltar</button>
+            <div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 2: PROJETOS & CORTES PRONTOS -->
+    <section class="tab-content" id="tabProjetos">
+      <div class="section-title-bar">
+        <h2>Seus Projetos & Vídeos Gerados</h2>
+        <p>Acesse as produções prontas para download e validação em 1080x1920.</p>
+      </div>
+
+      <div class="project-selector-bar glass-card mb-4">
+        <span class="selector-label">Selecionar Vídeo Renderizado:</span>
+        <button type="button" class="btn-proj-select active" id="btnSelectNutrivvo">🥗 Nutrivvo · Retenção de Pacientes (32.5 MB)</button>
+        <button type="button" class="btn-proj-select" id="btnSelectGarimpo">🔫 Garimpo de Armas (47.8 MB)</button>
+      </div>
+
+      <div class="project-showcase glass-card">
+        <div class="project-video-col">
+          <div class="video-frame-container">
+            <video id="playerVideo" controls playsinline>
+              <source id="videoPlayerSource" src="/video/nutrivvo-retencao-pacientes/narrado-01/narrado-01.mp4" type="video/mp4">
+              Seu navegador não suporta este vídeo.
+            </video>
+          </div>
+        </div>
+
+        <div class="project-details-col">
+          <div class="project-badge" id="projectBadgeType">Reel Narrado · 1080x1920</div>
+          <h3 id="currentProjectTitle">Nutrivvo: Por que 70% dos pacientes somem (Radar de Abandono)</h3>
+          <p class="project-hook" id="projectHook"><strong>Gancho:</strong> "Você sabe por que mais de setenta por cento dos seus pacientes de nutrição nunca voltam para a segunda consulta?"</p>
+
+          <div class="project-stats-grid">
+            <div class="stat-pill">
+              <span class="stat-label">Duração</span>
+              <span class="stat-value" id="projectStatDuration">53.8 s</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-label">Resolução</span>
+              <span class="stat-value">1080x1920 (9:16)</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-label">Loudness</span>
+              <span class="stat-value">-14.2 LUFS</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-label">Chamada DM</span>
+              <span class="stat-value cta-highlight" id="projectStatCta">RETENCAO</span>
+            </div>
+          </div>
+
+          <div class="project-actions">
+            <a href="http://localhost:8790" target="_blank" class="btn btn-primary" id="btnValidarLote">
+              Abrir Tela de Aprovação (Feedback)
+            </a>
+            <button type="button" class="btn btn-danger" id="btnReprovarRefazer" style="background: rgba(239, 68, 68, 0.16); border: 1px solid #ef4444; color: #fca5a5; cursor: pointer; border-radius: 8px; padding: 12px 18px; font-weight: 700;">
+              👎 Reprovar e Refazer com IA
+            </button>
+            <a href="/video/nutrivvo-retencao-pacientes/narrado-01/narrado-01.mp4" download="reel-nutrivvo-retencao.mp4" class="btn btn-secondary" id="btnDownloadMp4">
+              Baixar MP4 (32.5 MB)
+            </a>
+          </div>
+
+          <div class="folder-path-box">
+            <span>Arquivo de Entrega:</span>
+            <code id="projectCodePath">projetos/nutrivvo-retencao-pacientes/narrado-01/narrado-01.mp4</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: RADAR DE TENDÊNCIAS -->
+    <section class="tab-content" id="tabRadar">
+      <div class="section-title-bar">
+        <h2>Radar de Tendências & Pautas</h2>
+        <p>O que está em alta no nicho com números de engajamento e fontes conferidas.</p>
+      </div>
+
+      <div class="radar-search-bar glass-card">
+        <input type="text" id="inputRadarTopic" class="form-control" placeholder="Digite um tema (ex: nutrição, pacientes, dieta com IA, consultório)..." value="retenção pacientes nutrição">
+        <button class="btn btn-primary" id="btnTriggerRadar">Escanear Tendências</button>
+      </div>
+
+      <div class="pautas-grid" id="pautasContainer">
+        <div class="pauta-card featured">
+          <div class="pauta-tag">Em Alta · Dor Nº 1 das Clínicas</div>
+          <h4>70% dos Pacientes Não Voltam (O Radar de Abandono)</h4>
+          <p class="pauta-hook">"Você sabe por que mais de setenta por cento dos seus pacientes de nutrição nunca voltam para a segunda consulta?"</p>
+          <div class="pauta-score">Score: 74/75 (Retenção & Faturamento)</div>
+          <button class="btn btn-secondary btn-sm load-pauta" data-pauta="nutrivvo-retencao">Usar no Criador</button>
+        </div>
+
+        <div class="pauta-card">
+          <div class="pauta-tag">Sobrecarga · WhatsApp Pessoal</div>
+          <h4>O Erro de Cobrar Foto de Prato no Seu WhatsApp</h4>
+          <p class="pauta-hook">"O maior erro que você comete como nutricionista é usar o seu WhatsApp pessoal para cobrar foto do almoço de paciente."</p>
+          <div class="pauta-score">Score: 71/75 (Proteção de Limites)</div>
+          <button class="btn btn-secondary btn-sm load-pauta" data-pauta="nutrivvo-secretaria">Usar no Criador</button>
+        </div>
+
+        <div class="pauta-card">
+          <div class="pauta-tag">Viral · Gamificação</div>
+          <h4>O Efeito Duolingo no Consultório de Nutrição</h4>
+          <p class="pauta-hook">"E se o seu paciente ficasse tão viciado em seguir a sua dieta quanto as pessoas ficam no Duolingo?"</p>
+          <div class="pauta-score">Score: 69/75 (Engajamento com XP)</div>
+          <button class="btn btn-secondary btn-sm load-pauta" data-pauta="nutrivvo-gamificacao">Usar no Criador</button>
+        </div>
+
+        <div class="pauta-card">
+          <div class="pauta-tag">Produtividade · IA Prática</div>
+          <h4>2 Horas no Word vs. Cardápio Real em 2 Minutos</h4>
+          <p class="pauta-hook">"Você ainda passa duas horas do seu dia digitando cardápio no Word para o paciente desistir na primeira quarta-feira?"</p>
+          <div class="pauta-score">Score: 72/75 (IA que Funciona)</div>
+          <button class="btn btn-secondary btn-sm load-pauta" data-pauta="nutrivvo-dieta">Usar no Criador</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: IDENTIDADE & TOKENS -->
+    <section class="tab-content" id="tabMarca">
+      <div class="section-title-bar">
+        <h2>Identidade Visual & Tokens de Marca</h2>
+        <p>Valores que definem cores, fontes e logotipo em todos os vídeos gerados.</p>
+      </div>
+
+      <div class="tokens-editor-grid glass-card">
+        <div class="token-col">
+          <h3>Paleta de Cores (marca/tokens.json)</h3>
+          
+          <div class="color-picker-row">
+            <label for="colorSuperficie">Superfície (Fundo Principal)</label>
+            <div class="picker-group">
+              <input type="color" id="colorSuperficie" value="#0B0E14">
+              <code>#0B0E14</code>
+            </div>
+          </div>
+
+          <div class="color-picker-row">
+            <label for="colorDestaque">Cor de Destaque (Acento Único Nutrivvo)</label>
+            <div class="picker-group">
+              <input type="color" id="colorDestaque" value="#8B5CF6">
+              <code>#8B5CF6</code>
+            </div>
+          </div>
+
+          <div class="color-picker-row">
+            <label for="colorTinta">Tinta (Texto Principal)</label>
+            <div class="picker-group">
+              <input type="color" id="colorTinta" value="#F8FAFC">
+              <code>#F8FAFC</code>
+            </div>
+          </div>
+
+          <div class="color-picker-row">
+            <label for="colorSuave">Tinta Suave (Rótulos & Apoio)</label>
+            <div class="picker-group">
+              <input type="color" id="colorSuave" value="#94A3B8">
+              <code>#94A3B8</code>
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-4" id="btnSalvarTokens">Salvar Tokens de Marca</button>
+        </div>
+
+        <div class="token-preview-col">
+          <h3>Amostra em Tempo Real (1080x956)</h3>
+          <div class="mock-panel-sample" id="mockPanelSample">
+            <div class="sample-tag" id="sampleTag">NUTRIVVO</div>
+            <div class="sample-title" id="sampleTitle">Retenção de Pacientes com <span class="sample-accent" id="sampleAccent">Inteligência Artificial</span></div>
+            <div class="sample-card">
+              <div class="sample-card-price">70% Evasão → <strong>&lt; 12% Abandono</strong></div>
+              <div class="sample-card-sub">Secretária no Telegram + Gamificação com XP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL / PAINEL DA ASSISTENTE IA UNIVERSAL -->
+    <div class="ai-modal-overlay" id="aiModalOverlay">
+      <div class="ai-modal glass-card">
+        <div class="ai-modal-header">
+          <div class="ai-modal-title">
+            <span class="ai-badge">🤖 COPILOT FLOW REELS</span>
+            <h2>Assistente Inteligente de Criação</h2>
+            <p id="aiModalProjectSubtitle">Projeto Ativo: <strong id="aiActiveProjectName" style="color: #c084fc;">Busca Armas</strong> · <span id="aiActiveProjectNiche" style="color: var(--text-muted);">Comparador de Preços</span></p>
+          </div>
+          <button class="ai-modal-close" id="btnCloseAiModal">&times;</button>
+        </div>
+
+        <div class="ai-modal-body">
+          <!-- TABS DE MODO DA IA: GERAL VS POR ETAPA -->
+          <div class="ai-mode-tabs" style="display:flex; gap:10px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:12px;">
+            <button type="button" class="btn-template active" id="btnTabAiGeral" style="padding:8px 16px; font-size:13px; font-weight:700;">
+              🌟 Modo Geral (Criar Reel Completo)
+            </button>
+            <button type="button" class="btn-template" id="btnTabAiEtapa" style="padding:8px 16px; font-size:13px; font-weight:700;">
+              🎯 Modo por Etapa (Passos 1, 2, 3 ou 4)
+            </button>
+          </div>
+
+          <!-- CONTAINER 1: MODO GERAL -->
+          <div id="aiContainerModoGeral">
+            <!-- ETAPA 1: TEMA OU IDEIA -->
+            <div class="ai-prompt-section">
+              <label for="aiPromptInput">Qual o tema, dor ou produto para este Reel?</label>
+              <div class="ai-input-wrapper">
+                <textarea id="aiPromptInput" class="form-control" rows="3" placeholder="Ex: Fale sobre a diferença de preço entre armarias ou por que não comprar na primeira loja..."></textarea>
+                <button class="btn btn-primary btn-ai-generate" id="btnAiGenerateHooks">
+                  <span class="btn-text">🎯 Gerar Opções de Ganchos</span>
+                </button>
+              </div>
+
+              <div class="ai-quick-suggestions">
+                <span class="suggestions-label">Ou escolha uma ideia rápida para o nicho:</span>
+                <div id="aiDynamicChipsContainer" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <!-- Preenchido dinamicamente pelo projeto ativo -->
+                </div>
+              </div>
+            </div>
+
+            <!-- ETAPA 2: AS 4 OPÇÕES DE GANCHOS (ESCOLHA ANTES DE ESCREVER) -->
+            <div class="hook-options-container" id="hookOptionsContainer" style="display: none;">
+              <div class="hook-options-header">
+                <div class="hook-options-title">
+                  <span>🎯 Escolha um Gancho & Ângulo Estratégico</span>
+                  <span class="badge" style="font-size:11px; background:rgba(139,92,246,0.2); color:#c084fc; padding:3px 10px; border-radius:999px;">4 Ângulos Gerados pela IA</span>
+                </div>
+                <span style="font-size:12px; color:var(--text-muted);">Clique no gancho ideal para desenvolver o roteiro</span>
+              </div>
+
+              <div class="hook-options-grid" id="hookOptionsGrid">
+                <!-- Cards gerados via JS -->
+              </div>
+            </div>
+
+            <!-- ETAPA 3: ROTEIRO GERADO & PREVIEW ANTES DE RENDERIZAR -->
+            <div class="ai-result-section" id="aiResultSection" style="display: none;">
+              <div class="ai-result-card">
+                <div class="ai-result-header">
+                  <span class="ai-success-badge">✓ Roteiro Estruturado (5 Blocos)</span>
+                  <div class="ai-metrics">
+                    <span id="aiMetricWords">158 palavras</span> · <span id="aiMetricTime">~42 segundos</span>
+                  </div>
+                </div>
+
+                <div class="ai-blocks-preview">
+                  <div class="ai-block-row">
+                    <span class="block-tag">1. Gancho (0 a 4s):</span>
+                    <p id="aiHookText"></p>
+                  </div>
+                  <div class="ai-block-row">
+                    <span class="block-tag">2. Contexto (4 a 10s):</span>
+                    <p id="aiContextText"></p>
+                  </div>
+                  <div class="ai-block-row">
+                    <span class="block-tag">3. Provas (10 a 35s):</span>
+                    <p id="aiProofsText"></p>
+                  </div>
+                  <div class="ai-block-row">
+                    <span class="block-tag">4. Virada (35 a 42s):</span>
+                    <p id="aiTurnText"></p>
+                  </div>
+                  <div class="ai-block-row">
+                    <span class="block-tag">5. Chamada DM (42 a 48s):</span>
+                    <p id="aiCtaText"></p>
+                  </div>
+                </div>
+
+                <!-- PREVIEW DE ÁUDIO INSTANTÂNEO -->
+                <div class="audio-preview-box mb-3" id="aiAudioPreviewBox">
+                  <div class="audio-preview-header">
+                    <div class="audio-preview-title">
+                      <span>🎙️ Prévia da Locução Neural</span>
+                      <span style="font-size:11px; background:rgba(16,185,129,0.2); color:#6ee7b7; padding:2px 8px; border-radius:999px;">Edge-TTS Instantâneo (~1.5s)</span>
+                    </div>
+                    <span id="aiAudioTimeEst" style="font-size:12px; font-family:var(--font-mono); color:#c084fc;">~42 segundos</span>
+                  </div>
+                  <div class="audio-controls-row">
+                    <button type="button" class="btn-audio-listen" id="btnListenAudioAi">
+                      <span>▶</span> Ouvir Locução da IA
+                    </button>
+                    <audio id="aiAudioPlayer" controls class="audio-player-native" style="display:none;"></audio>
+                    <span id="aiAudioStatus" style="font-size:12px; color:var(--text-muted);">Ouça o ritmo e a dicção antes de renderizar o vídeo</span>
+                  </div>
+                </div>
+
+                <!-- ATRIBUTOS E EXIBIÇÃO TOTALMENTE CUSTOMIZÁVEIS -->
+                <div class="ai-attributes-customizer glass-card" style="margin-top:16px; margin-bottom:16px; padding:16px; background:rgba(14,18,25,0.95); border:1px solid rgba(255,255,255,0.12); border-radius:12px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <span style="font-size:16px;">⚙️</span>
+                      <strong style="font-size:13px; color:#fff;">Atributos & Exibição do Vídeo (Personalize antes de Renderizar)</strong>
+                    </div>
+                    <span style="font-size:11px; color:#c084fc; font-weight:700;">Recomendados pela IA · 100% Ajustáveis</span>
+                  </div>
+
+                  <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:12px;">
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Modo de Cena</label>
+                      <select id="aiSelectModoCena" class="form-control" style="font-size:12px; padding:6px 10px;">
+                        <option value="rosto-vidro">Rosto + Vidro</option>
+                        <option value="manchete">Manchete (Escurecido)</option>
+                        <option value="vidro-liquido" selected>Vidro Líquido</option>
+                        <option value="lado-a-lado">Lado a Lado</option>
+                        <option value="mundo">Mundo / Objeto (Tela Cheia)</option>
+                        <option value="camadas">Camadas 3D</option>
+                        <option value="chat">Chat / Mensagem</option>
+                        <option value="lista">Lista / Passos</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Transição & Duração</label>
+                      <div style="display:flex; gap:6px;">
+                        <select id="aiSelectTransicao" class="form-control" style="font-size:12px; padding:6px 8px;">
+                          <option value="desfoque" selected>Desfoque</option>
+                          <option value="zoom">Zoom</option>
+                          <option value="corte">Corte Seco</option>
+                        </select>
+                        <select id="aiSelectDuracao" class="form-control" style="font-size:12px; padding:6px 6px; width:75px;">
+                          <option value="0.30">0.30s</option>
+                          <option value="0.36" selected>0.36s</option>
+                          <option value="0.42">0.42s</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Estilo de Legenda</label>
+                      <select id="aiSelectLegenda" class="form-control" style="font-size:12px; padding:6px 10px;">
+                        <option value="amarelo-ouro" selected>Amarelo Ouro (#F59E0B)</option>
+                        <option value="verde-neon">Verde Neon (#10B981)</option>
+                        <option value="violeta-marca">Violeta Oficial da Marca</option>
+                        <option value="branco-bold">Branco Bold Minimalista</option>
+                        <option value="placa-escura">Com Placa Translúcida</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Voz Neural</label>
+                      <select id="aiSelectVoz" class="form-control" style="font-size:12px; padding:6px 10px;">
+                        <option value="pt-BR-AntonioNeural" selected>Antônio Neural (Masc / Autoridade)</option>
+                        <option value="pt-BR-FranciscaNeural">Francisca Neural (Fem / Dinâmica)</option>
+                        <option value="pt-BR-ThalitaMultilingualNeural">Thalita Multilingual (Fem / Jovem)</option>
+                        <option value="pt-PT-DuarteNeural">Duarte Neural (Masc Europeu)</option>
+                        <option value="pt-PT-RaquelNeural">Raquel Neural (Fem Européia)</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Trilha Sonora Real</label>
+                      <select id="aiSelectTrilha" class="form-control" style="font-size:12px; padding:6px 10px;">
+                        <option value="calma-pads-01" selected>calma-pads-01 · Calma & Foco</option>
+                        <option value="tensa-atmosfera-01">tensa-atmosfera-01 · Alertas/Notícias</option>
+                        <option value="tensa-synthwave-01">tensa-synthwave-01 · Tensão Synthwave</option>
+                        <option value="calma-lofi-01">calma-lofi-01 · Lo-Fi Suave</option>
+                        <option value="calma-lofi-02">calma-lofi-02 · Acústico</option>
+                        <option value="leve-lofi-03">leve-lofi-03 · Leve Lo-Fi</option>
+                        <option value="tech-synthwave-02">tech-synthwave-02 · Tech & IA</option>
+                        <option value="animada-synthwave-01">animada-synthwave-01 · Energia Alta</option>
+                        <option value="animada-deephouse-01">animada-deephouse-01 · Deep House</option>
+                        <option value="nenhuma">Sem Música</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label style="font-size:11px; margin-bottom:4px; color:var(--text-muted);">Efeitos Sonoros (SFX)</label>
+                      <div style="display:flex; align-items:center; height:34px; gap:8px;">
+                        <input type="checkbox" id="aiCheckSfx" checked style="width:16px; height:16px;">
+                        <span style="font-size:12px; color:var(--text-muted);">Whoosh, cliques e impactos</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ai-result-actions">
+                  <button class="btn btn-secondary" id="btnApplyAiToEditor">
+                    📋 Aplicar no Editor Passo a Passo
+                  </button>
+                  <button class="btn btn-primary" id="btnDirectAiRender" style="background: linear-gradient(135deg, #10B981, #06B6D4); font-weight:700;">
+                    🚀 Renderizar Vídeo Final 1080x1920 (MP4)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CONTAINER 2: MODO POR ETAPA (NOVO) -->
+          <div id="aiContainerModoEtapa" style="display: none;">
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:16px; border-radius:10px; margin-bottom:16px;">
+              <span style="font-size:12px; font-weight:700; color:var(--text-muted); text-transform:uppercase; display:block; margin-bottom:10px;">Escolha em qual etapa do criador você quer a ajuda da IA:</span>
+              <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px;" id="aiStepPillsContainer">
+                <button type="button" class="btn-template active" data-step-target="1" id="btnAiStep1">
+                  🎯 1. Ângulo & Formato
+                </button>
+                <button type="button" class="btn-template" data-step-target="2" id="btnAiStep2">
+                  ✍️ 2. Roteiro (5 Blocos)
+                </button>
+                <button type="button" class="btn-template" data-step-target="3" id="btnAiStep3">
+                  🎬 3. Visual & Cenas
+                </button>
+                <button type="button" class="btn-template" data-step-target="4" id="btnAiStep4">
+                  🎙️ 4. Voz & Áudio
+                </button>
+              </div>
+            </div>
+
+            <!-- Painel de Execução da Etapa Selecionada -->
+            <div class="ai-step-execution-panel glass-card" style="padding:18px; border-radius:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                <h3 id="aiStepTitle" style="font-size:1.1rem; font-weight:700; color:#fff;">🎯 Assistência para o Passo 1: Formato & Ângulo</h3>
+                <span class="badge" id="aiStepBadge" style="font-size:11px; background:rgba(139,92,246,0.2); color:#c084fc; padding:2px 8px; border-radius:999px;">Etapa Selecionada</span>
+              </div>
+              <p id="aiStepDescription" style="font-size:0.85rem; color:var(--text-muted); margin-bottom:14px;">
+                A IA analisa o seu projeto e sugere 3 ângulos de abordagem viral com formatos recomendados (Reel Narrado, Fábrica de Cortes ou Radar).
+              </p>
+
+              <div class="form-group mb-3">
+                <label for="aiStepContextInput" id="aiStepContextLabel">Foco ou Contexto da sua dúvida (Opcional):</label>
+                <textarea id="aiStepContextInput" class="form-control" rows="2" placeholder="Ex: Quero focar em atiradores que pagam caro sem saber..."></textarea>
+              </div>
+
+              <button type="button" class="btn btn-primary" id="btnExecutarAiEtapa" style="width:100%; font-weight:700; padding:12px; margin-bottom:16px;">
+                ✨ Gerar Sugestão Específica para Esta Etapa
+              </button>
+
+              <!-- Resultado da Etapa -->
+              <div id="aiStepOutputContainer" style="display:none; background:rgba(10,12,16,0.9); border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:14px; margin-top:12px;">
+                <h4 style="font-size:12px; font-weight:700; color:#34d399; margin-bottom:8px;">✓ Sugestão da IA para Esta Etapa:</h4>
+                <div id="aiStepOutputContent" style="font-size:13px; line-height:1.6; color:#e2e8f0; white-space:pre-wrap; max-height:220px; overflow-y:auto; margin-bottom:14px;"></div>
+                <div style="display:flex; justify-content:flex-end; gap:10px;">
+                  <button type="button" class="btn btn-secondary" id="btnCopiarAiEtapa">Copiar Texto</button>
+                  <button type="button" class="btn btn-primary" id="btnAplicarAiEtapa" style="background:#10b981; border:none; font-weight:700;">
+                    ✓ Aplicar no Formulário do Passo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL DE PROGRESSO DE RENDERIZAÇÃO REAL -->
+    <div class="modal-overlay" id="renderProgressOverlay" style="display: none; z-index: 99999;">
+      <div class="modal-card glass-card" style="max-width: 580px; text-align: center; padding: 36px 30px;">
+        <div style="font-size: 48px; margin-bottom: 12px; animation: pulse 1.5s infinite;">🎬</div>
+        <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">Renderizando Vídeo 1080x1920</h2>
+        <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;" id="renderProgressTitle">
+          A IA está compondo seu Reel vertical no motor gráfico com OpenCV e FFmpeg...
+        </p>
+
+        <!-- Barra de Progresso Animada -->
+        <div style="background: rgba(255,255,255,0.06); height: 10px; border-radius: 999px; overflow: hidden; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.1);">
+          <div id="renderProgressBar" style="width: 15%; height: 100%; background: linear-gradient(90deg, #8B5CF6, #EC4899, #10B981); transition: width 0.4s ease; border-radius: 999px;"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-family: monospace; font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">
+          <span id="renderStageLabel">🎙️ Sintetizando locução...</span>
+          <span id="renderTimerLabel">00:00 / ~00:45</span>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; font-family: monospace; font-size: 12px; text-align: left; color: #a3e635; min-height: 80px; max-height: 120px; overflow-y: auto;" id="renderConsoleLog">
+          &gt; Motor de vídeo Flow Reels 3.0 iniciado.<br>
+          &gt; Conectando à OpenAI GPT-4o...
+        </div>
+
+        <div style="margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+          ⚠️ O processo compõe mais de 1.500 quadros em alta resolução. Não feche esta aba.
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

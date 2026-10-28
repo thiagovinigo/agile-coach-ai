@@ -1,0 +1,1882 @@
+{
+  "anthropic-logo": {
+    "arquivo": "anthropic-logo.png",
+    "marca": "Anthropic",
+    "variante": "logo completo",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/PNG/Anthropic logo - Ivory.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "anthropic-logo-fundo-claro": {
+    "arquivo": "anthropic-logo-fundo-claro.png",
+    "marca": "Anthropic",
+    "variante": "logo completo",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Anthropic logos/1 Anthropic logo/PNG/Anthropic logo - Slate.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "anthropic-simbolo": {
+    "arquivo": "anthropic-simbolo.png",
+    "marca": "Anthropic",
+    "variante": "símbolo (A\\)",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/PNG/Anthropic symbol - Ivory.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "anthropic-simbolo-fundo-claro": {
+    "arquivo": "anthropic-simbolo-fundo-claro.png",
+    "marca": "Anthropic",
+    "variante": "símbolo (A\\)",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Anthropic logos/2 Anthropic symbol/PNG/Anthropic symbol - Slate.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "antigravity-icone": {
+    "arquivo": "antigravity-icone.png",
+    "marca": "Google Antigravity",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.google.com/antigravity",
+    "arquivo_na_fonte": "https://svgl.app/library/antigravity.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "antigravity-logo": {
+    "arquivo": "antigravity-logo.png",
+    "marca": "Google Antigravity",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.google.com/antigravity",
+    "arquivo_na_fonte": "https://svgl.app/library/antigravity-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "apple-icone": {
+    "arquivo": "apple-icone.png",
+    "marca": "Apple",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.apple.com",
+    "arquivo_na_fonte": "https://svgl.app/library/apple_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "apple-icone-fundo-claro": {
+    "arquivo": "apple-icone-fundo-claro.png",
+    "marca": "Apple",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.apple.com",
+    "arquivo_na_fonte": "https://svgl.app/library/apple.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "arc-icone": {
+    "arquivo": "arc-icone.png",
+    "marca": "Arc",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://arc.net/",
+    "arquivo_na_fonte": "https://svgl.app/library/arc_browser.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "asana-icone": {
+    "arquivo": "asana-icone.png",
+    "marca": "Asana",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://asana.com",
+    "arquivo_na_fonte": "https://svgl.app/library/asana-logo.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "asana-logo": {
+    "arquivo": "asana-logo.png",
+    "marca": "Asana",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://asana.com",
+    "arquivo_na_fonte": "https://svgl.app/library/asana-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "asana-logo-fundo-claro": {
+    "arquivo": "asana-logo-fundo-claro.png",
+    "marca": "Asana",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://asana.com",
+    "arquivo_na_fonte": "https://svgl.app/library/asana-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "aws-icone": {
+    "arquivo": "aws-icone.png",
+    "marca": "Amazon Web Services",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://aws.amazon.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/aws_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "aws-icone-fundo-claro": {
+    "arquivo": "aws-icone-fundo-claro.png",
+    "marca": "Amazon Web Services",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://aws.amazon.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/aws_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "azure-icone": {
+    "arquivo": "azure-icone.png",
+    "marca": "Microsoft Azure",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://azure.microsoft.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/azure.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "bolt-icone": {
+    "arquivo": "bolt-icone.png",
+    "marca": "bolt",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://bolt.new/",
+    "arquivo_na_fonte": "https://svgl.app/library/bolt-new_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "bolt-icone-fundo-claro": {
+    "arquivo": "bolt-icone-fundo-claro.png",
+    "marca": "bolt",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://bolt.new/",
+    "arquivo_na_fonte": "https://svgl.app/library/bolt-new.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "brave-icone": {
+    "arquivo": "brave-icone.png",
+    "marca": "Brave Browser",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://brave.com/brave-branding-assets/",
+    "arquivo_na_fonte": "https://svgl.app/library/brave.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brave.com/brave-branding-assets/",
+    "baixado_em": "2026-10-03"
+  },
+  "canva-icone": {
+    "arquivo": "canva-icone.png",
+    "marca": "Canva",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.canva.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/canva.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "chrome-icone": {
+    "arquivo": "chrome-icone.png",
+    "marca": "Chrome",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://chrome.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/chrome.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-code-logo": {
+    "arquivo": "claude-code-logo.png",
+    "marca": "Claude Code",
+    "variante": "logo completo (faísca + nome)",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/Claude Code logo - Ivory.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-code-logo-fundo-claro": {
+    "arquivo": "claude-code-logo-fundo-claro.png",
+    "marca": "Claude Code",
+    "variante": "logo completo (faísca + nome)",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/2 Claude Code logo/PNG/Claude Code logo - Slate.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-faisca": {
+    "arquivo": "claude-faisca.png",
+    "marca": "Claude",
+    "variante": "símbolo (a faísca, cor Clay)",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/3 Claude Spark/PNG/Claude Spark - Clay.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-icone": {
+    "arquivo": "claude-icone.png",
+    "marca": "Claude",
+    "variante": "ícone do app (cantos arredondados)",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/4 Claude icon/PNG/ClaudeIcon-Rounded.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-logo": {
+    "arquivo": "claude-logo.png",
+    "marca": "Claude",
+    "variante": "logo completo (faísca + nome)",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/Claude logo - Ivory.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "claude-logo-fundo-claro": {
+    "arquivo": "claude-logo-fundo-claro.png",
+    "marca": "Claude",
+    "variante": "logo completo (faísca + nome)",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.anthropic.com/news (Download press kit)",
+    "arquivo_na_fonte": "https://www-cdn.anthropic.com/ae59ca4ca194dac9c9dc3bc78c5829468cb0e8af.zip → Anthropic media resources/Anthropic logos/Claude logos/1 Claude logo/PNG/Claude logo - Slate.png",
+    "regras": "Marcas registradas da Anthropic. Uso editorial para se referir ao produto; não alterar cores nem proporções; não sugerir parceria ou endosso.",
+    "baixado_em": "2026-10-03"
+  },
+  "cloudflare-icone": {
+    "arquivo": "cloudflare-icone.png",
+    "marca": "Cloudflare",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.cloudflare.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/cloudflare.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "cursor-icone": {
+    "arquivo": "cursor-icone.png",
+    "marca": "Cursor",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://cursor.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/cursor_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://cursor.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "cursor-icone-fundo-claro": {
+    "arquivo": "cursor-icone-fundo-claro.png",
+    "marca": "Cursor",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://cursor.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/cursor_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://cursor.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "cursor-logo": {
+    "arquivo": "cursor-logo.png",
+    "marca": "Cursor",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://cursor.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/cursor_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://cursor.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "cursor-logo-fundo-claro": {
+    "arquivo": "cursor-logo-fundo-claro.png",
+    "marca": "Cursor",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://cursor.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/cursor_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://cursor.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "deepseek-icone": {
+    "arquivo": "deepseek-icone.png",
+    "marca": "DeepSeek",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://deepseek.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/deepseek.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "deepseek-logo": {
+    "arquivo": "deepseek-logo.png",
+    "marca": "DeepSeek",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://deepseek.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/deepseek_wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "discord-icone": {
+    "arquivo": "discord-icone.png",
+    "marca": "Discord",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://discord.com/branding",
+    "arquivo_na_fonte": "https://svgl.app/library/discord.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://discord.com/branding",
+    "baixado_em": "2026-10-03"
+  },
+  "docker-icone": {
+    "arquivo": "docker-icone.png",
+    "marca": "Docker",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.docker.com/company/newsroom/media-resources/",
+    "arquivo_na_fonte": "https://svgl.app/library/docker.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.docker.com/company/newsroom/media-resources/",
+    "baixado_em": "2026-10-03"
+  },
+  "edge-icone": {
+    "arquivo": "edge-icone.png",
+    "marca": "Edge",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/en-us/edge",
+    "arquivo_na_fonte": "https://svgl.app/library/edge.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "elevenlabs-icone": {
+    "arquivo": "elevenlabs-icone.png",
+    "marca": "ElevenLabs",
+    "variante": "ícone (desenho CC0 do Simple Icons na cor oficial #FFFFFF)",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://simpleicons.org/?q=elevenlabs",
+    "arquivo_na_fonte": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto.",
+    "baixado_em": "2026-10-03"
+  },
+  "elevenlabs-icone-fundo-claro": {
+    "arquivo": "elevenlabs-icone-fundo-claro.png",
+    "marca": "ElevenLabs",
+    "variante": "ícone (desenho CC0 do Simple Icons na cor oficial #000000)",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://simpleicons.org/?q=elevenlabs",
+    "arquivo_na_fonte": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/elevenlabs.svg",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto.",
+    "baixado_em": "2026-10-03"
+  },
+  "excel-icone": {
+    "arquivo": "excel-icone.png",
+    "marca": "Microsoft Excel",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/microsoft-365/excel",
+    "arquivo_na_fonte": "https://svgl.app/library/microsoft-excel.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "figma-icone": {
+    "arquivo": "figma-icone.png",
+    "marca": "Figma",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.figma.com/using-the-figma-brand/",
+    "arquivo_na_fonte": "https://svgl.app/library/figma.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.figma.com/using-the-figma-brand/",
+    "baixado_em": "2026-10-03"
+  },
+  "firebase-icone": {
+    "arquivo": "firebase-icone.png",
+    "marca": "Firebase",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://firebase.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/firebase.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "firebase-logo": {
+    "arquivo": "firebase-logo.png",
+    "marca": "Firebase",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://firebase.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/firebase-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "firefox-icone": {
+    "arquivo": "firefox-icone.png",
+    "marca": "Firefox",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://mozilla.design/firefox/",
+    "arquivo_na_fonte": "https://svgl.app/library/firefox.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://mozilla.design/firefox/",
+    "baixado_em": "2026-10-03"
+  },
+  "gemini-icone": {
+    "arquivo": "gemini-icone.png",
+    "marca": "Gemini",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://gemini.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/gemini.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "gemini-logo": {
+    "arquivo": "gemini-logo.png",
+    "marca": "Gemini",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://gemini.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/gemini_wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "github-copilot-icone": {
+    "arquivo": "github-copilot-icone.png",
+    "marca": "GitHub Copilot",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://github.com/features/copilot",
+    "arquivo_na_fonte": "https://svgl.app/library/copilot_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "github-copilot-icone-fundo-claro": {
+    "arquivo": "github-copilot-icone-fundo-claro.png",
+    "marca": "GitHub Copilot",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://github.com/features/copilot",
+    "arquivo_na_fonte": "https://svgl.app/library/copilot.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "github-icone": {
+    "arquivo": "github-icone.png",
+    "marca": "GitHub",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://brand.github.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/github_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.github.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "github-icone-fundo-claro": {
+    "arquivo": "github-icone-fundo-claro.png",
+    "marca": "GitHub",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://brand.github.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/github_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.github.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "github-logo": {
+    "arquivo": "github-logo.png",
+    "marca": "GitHub",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://brand.github.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/github_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.github.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "github-logo-fundo-claro": {
+    "arquivo": "github-logo-fundo-claro.png",
+    "marca": "GitHub",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://brand.github.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/github_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.github.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "gmail-icone": {
+    "arquivo": "gmail-icone.png",
+    "marca": "Gmail",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.gmail.com",
+    "arquivo_na_fonte": "https://svgl.app/library/gmail.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "google-cloud-icone": {
+    "arquivo": "google-cloud-icone.png",
+    "marca": "Google Cloud",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://cloud.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/google-cloud.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "google-drive-icone": {
+    "arquivo": "google-drive-icone.png",
+    "marca": "Google Drive",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.google.com/drive/",
+    "arquivo_na_fonte": "https://svgl.app/library/drive.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "google-icone": {
+    "arquivo": "google-icone.png",
+    "marca": "Google",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/google.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "google-logo": {
+    "arquivo": "google-logo.png",
+    "marca": "Google",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/google-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "google-sheets-icone": {
+    "arquivo": "google-sheets-icone.png",
+    "marca": "Google Sheets",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://sheets.google.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/google-sheets.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "grok-icone": {
+    "arquivo": "grok-icone.png",
+    "marca": "Grok",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/grok-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "grok-icone-fundo-claro": {
+    "arquivo": "grok-icone-fundo-claro.png",
+    "marca": "Grok",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/grok-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "grok-logo": {
+    "arquivo": "grok-logo.png",
+    "marca": "Grok",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/grok-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "grok-logo-fundo-claro": {
+    "arquivo": "grok-logo-fundo-claro.png",
+    "marca": "Grok",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/grok-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "groq-icone": {
+    "arquivo": "groq-icone.png",
+    "marca": "Groq",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://groq.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/groq.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "groq-logo": {
+    "arquivo": "groq-logo.png",
+    "marca": "Groq",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://groq.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/groq_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "groq-logo-fundo-claro": {
+    "arquivo": "groq-logo-fundo-claro.png",
+    "marca": "Groq",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://groq.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/groq_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "hubspot-icone": {
+    "arquivo": "hubspot-icone.png",
+    "marca": "HubSpot",
+    "variante": "ícone (desenho CC0 do Simple Icons na cor oficial #FF7A59)",
+    "fundo": "funciona nos dois",
+    "origem": "https://simpleicons.org/?q=hubspot",
+    "arquivo_na_fonte": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/hubspot.svg",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto.",
+    "baixado_em": "2026-10-03"
+  },
+  "huggingface-icone": {
+    "arquivo": "huggingface-icone.png",
+    "marca": "Hugging Face",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://huggingface.co/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/hugging_face.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://huggingface.co/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "instagram-icone": {
+    "arquivo": "instagram-icone.png",
+    "marca": "Instagram",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://about.instagram.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/instagram-icon.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://about.instagram.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "instagram-logo": {
+    "arquivo": "instagram-logo.png",
+    "marca": "Instagram",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://about.instagram.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/instagram-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://about.instagram.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "javascript-icone": {
+    "arquivo": "javascript-icone.png",
+    "marca": "JavaScript",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://developer.mozilla.org/docs/Web/JavaScript",
+    "arquivo_na_fonte": "https://svgl.app/library/javascript.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "kimi-icone": {
+    "arquivo": "kimi-icone.png",
+    "marca": "Kimi",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://kimi.ai",
+    "arquivo_na_fonte": "https://svgl.app/library/kimi-icon.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "kimi-logo": {
+    "arquivo": "kimi-logo.png",
+    "marca": "Kimi",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://kimi.ai",
+    "arquivo_na_fonte": "https://svgl.app/library/kimi-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "kimi-logo-fundo-claro": {
+    "arquivo": "kimi-logo-fundo-claro.png",
+    "marca": "Kimi",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://kimi.ai",
+    "arquivo_na_fonte": "https://svgl.app/library/kimi-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "langchain-icone": {
+    "arquivo": "langchain-icone.png",
+    "marca": "LangChain",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.langchain.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/langchain-logo.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "langchain-logo": {
+    "arquivo": "langchain-logo.png",
+    "marca": "LangChain",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.langchain.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/langchain-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "langchain-logo-fundo-claro": {
+    "arquivo": "langchain-logo-fundo-claro.png",
+    "marca": "LangChain",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.langchain.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/langchain-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "linkedin-icone": {
+    "arquivo": "linkedin-icone.png",
+    "marca": "LinkedIn",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://brand.linkedin.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/linkedin.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.linkedin.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "linux-icone": {
+    "arquivo": "linux-icone.png",
+    "marca": "Linux",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.linux.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/linux.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "lovable-icone": {
+    "arquivo": "lovable-icone.png",
+    "marca": "Lovable",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://lovable.dev/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/lovable.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://lovable.dev/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "make-icone": {
+    "arquivo": "make-icone.png",
+    "marca": "Make",
+    "variante": "ícone (desenho CC0 do Simple Icons na cor oficial #6D00CC)",
+    "fundo": "funciona nos dois",
+    "origem": "https://simpleicons.org/?q=make",
+    "arquivo_na_fonte": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/make.svg",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto.",
+    "baixado_em": "2026-10-03"
+  },
+  "manus-icone": {
+    "arquivo": "manus-icone.png",
+    "marca": "Manus",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.manus.ai/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/manus-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.manus.ai/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "manus-icone-fundo-claro": {
+    "arquivo": "manus-icone-fundo-claro.png",
+    "marca": "Manus",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.manus.ai/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/manus.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.manus.ai/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "manus-logo": {
+    "arquivo": "manus-logo.png",
+    "marca": "Manus",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.manus.ai/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/manus-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.manus.ai/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "manus-logo-fundo-claro": {
+    "arquivo": "manus-logo-fundo-claro.png",
+    "marca": "Manus",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.manus.ai/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/manus-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.manus.ai/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "mcp-icone": {
+    "arquivo": "mcp-icone.png",
+    "marca": "Model Context Protocol",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://modelcontextprotocol.io/",
+    "arquivo_na_fonte": "https://svgl.app/library/model-context-protocol-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mcp-icone-fundo-claro": {
+    "arquivo": "mcp-icone-fundo-claro.png",
+    "marca": "Model Context Protocol",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://modelcontextprotocol.io/",
+    "arquivo_na_fonte": "https://svgl.app/library/model-context-protocol-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mcp-logo": {
+    "arquivo": "mcp-logo.png",
+    "marca": "Model Context Protocol",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://modelcontextprotocol.io/",
+    "arquivo_na_fonte": "https://svgl.app/library/model-context-protocol-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mcp-logo-fundo-claro": {
+    "arquivo": "mcp-logo-fundo-claro.png",
+    "marca": "Model Context Protocol",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://modelcontextprotocol.io/",
+    "arquivo_na_fonte": "https://svgl.app/library/model-context-protocol-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "meta-icone": {
+    "arquivo": "meta-icone.png",
+    "marca": "Meta",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://about.meta.com/brand/resources/",
+    "arquivo_na_fonte": "https://svgl.app/library/meta.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://about.meta.com/brand/resources/",
+    "baixado_em": "2026-10-03"
+  },
+  "microsoft-copilot-icone": {
+    "arquivo": "microsoft-copilot-icone.png",
+    "marca": "Microsoft Copilot",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://copilot.microsoft.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/microsoft-copilot.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "microsoft-icone": {
+    "arquivo": "microsoft-icone.png",
+    "marca": "Microsoft",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/microsoft.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "midjourney-icone": {
+    "arquivo": "midjourney-icone.png",
+    "marca": "Midjourney",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.midjourney.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/midjourney-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "midjourney-icone-fundo-claro": {
+    "arquivo": "midjourney-icone-fundo-claro.png",
+    "marca": "Midjourney",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.midjourney.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/midjourney.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mistral-icone": {
+    "arquivo": "mistral-icone.png",
+    "marca": "Mistral AI",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://mistral.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/mistral-ai_logo.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mistral-logo": {
+    "arquivo": "mistral-logo.png",
+    "marca": "Mistral AI",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://mistral.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/mistral-ai_wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "mongodb-icone": {
+    "arquivo": "mongodb-icone.png",
+    "marca": "MongoDB",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.mongodb.com/company/newsroom/brand-resources",
+    "arquivo_na_fonte": "https://svgl.app/library/mongodb-icon-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.mongodb.com/company/newsroom/brand-resources",
+    "baixado_em": "2026-10-03"
+  },
+  "mongodb-icone-fundo-claro": {
+    "arquivo": "mongodb-icone-fundo-claro.png",
+    "marca": "MongoDB",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.mongodb.com/company/newsroom/brand-resources",
+    "arquivo_na_fonte": "https://svgl.app/library/mongodb-icon-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.mongodb.com/company/newsroom/brand-resources",
+    "baixado_em": "2026-10-03"
+  },
+  "mongodb-logo": {
+    "arquivo": "mongodb-logo.png",
+    "marca": "MongoDB",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.mongodb.com/company/newsroom/brand-resources",
+    "arquivo_na_fonte": "https://svgl.app/library/mongodb-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.mongodb.com/company/newsroom/brand-resources",
+    "baixado_em": "2026-10-03"
+  },
+  "mongodb-logo-fundo-claro": {
+    "arquivo": "mongodb-logo-fundo-claro.png",
+    "marca": "MongoDB",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.mongodb.com/company/newsroom/brand-resources",
+    "arquivo_na_fonte": "https://svgl.app/library/mongodb-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.mongodb.com/company/newsroom/brand-resources",
+    "baixado_em": "2026-10-03"
+  },
+  "n8n-icone": {
+    "arquivo": "n8n-icone.png",
+    "marca": "n8n",
+    "variante": "ícone (rosa #EA4B71)",
+    "fundo": "funciona nos dois",
+    "origem": "https://n8n.io/brandguidelines/",
+    "arquivo_na_fonte": "https://n8n.io/brandguidelines/n8n_logos.zip → n8n_pink+white_logo.svg",
+    "regras": "Marca da n8n. Só nas cores oficiais (rosa #EA4B71 com branco ou preto); sem sombra, sem inclinar, sem esticar, sem fundo carregado; 4x de espaço livre; nunca o nome sozinho sem o ícone; no mínimo 100 px de largura.",
+    "baixado_em": "2026-10-03"
+  },
+  "n8n-logo": {
+    "arquivo": "n8n-logo.png",
+    "marca": "n8n",
+    "variante": "logo completo (ícone + nome)",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://n8n.io/brandguidelines/",
+    "arquivo_na_fonte": "https://n8n.io/brandguidelines/n8n_logos.zip → n8n_pink+white_logo.svg",
+    "regras": "Marca da n8n. Só nas cores oficiais (rosa #EA4B71 com branco ou preto); sem sombra, sem inclinar, sem esticar, sem fundo carregado; 4x de espaço livre; nunca o nome sozinho sem o ícone; no mínimo 100 px de largura.",
+    "baixado_em": "2026-10-03"
+  },
+  "n8n-logo-fundo-claro": {
+    "arquivo": "n8n-logo-fundo-claro.png",
+    "marca": "n8n",
+    "variante": "logo completo (ícone + nome)",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://n8n.io/brandguidelines/",
+    "arquivo_na_fonte": "https://n8n.io/brandguidelines/n8n_logos.zip → n8n_pink+black_logo.svg",
+    "regras": "Marca da n8n. Só nas cores oficiais (rosa #EA4B71 com branco ou preto); sem sombra, sem inclinar, sem esticar, sem fundo carregado; 4x de espaço livre; nunca o nome sozinho sem o ícone; no mínimo 100 px de largura.",
+    "baixado_em": "2026-10-03"
+  },
+  "netlify-icone": {
+    "arquivo": "netlify-icone.png",
+    "marca": "Netlify",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.netlify.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/netlify.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "nextjs-icone": {
+    "arquivo": "nextjs-icone.png",
+    "marca": "Next.js",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://nextjs.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/nextjs_icon_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "nextjs-logo": {
+    "arquivo": "nextjs-logo.png",
+    "marca": "Next.js",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://nextjs.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/nextjs_logo_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "nextjs-logo-fundo-claro": {
+    "arquivo": "nextjs-logo-fundo-claro.png",
+    "marca": "Next.js",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://nextjs.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/nextjs_logo_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "nodejs-icone": {
+    "arquivo": "nodejs-icone.png",
+    "marca": "Node.js",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://nodejs.org/en/about/branding",
+    "arquivo_na_fonte": "https://svgl.app/library/nodejs.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://nodejs.org/en/about/branding",
+    "baixado_em": "2026-10-03"
+  },
+  "notion-icone": {
+    "arquivo": "notion-icone.png",
+    "marca": "Notion",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://notion.so/",
+    "arquivo_na_fonte": "https://svgl.app/library/notion.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "nvidia-icone": {
+    "arquivo": "nvidia-icone.png",
+    "marca": "NVIDIA",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "arquivo_na_fonte": "https://svgl.app/library/nvidia-icon-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "baixado_em": "2026-10-03"
+  },
+  "nvidia-icone-fundo-claro": {
+    "arquivo": "nvidia-icone-fundo-claro.png",
+    "marca": "NVIDIA",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "arquivo_na_fonte": "https://svgl.app/library/nvidia-icon-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "baixado_em": "2026-10-03"
+  },
+  "nvidia-logo": {
+    "arquivo": "nvidia-logo.png",
+    "marca": "NVIDIA",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "arquivo_na_fonte": "https://svgl.app/library/nvidia-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "baixado_em": "2026-10-03"
+  },
+  "nvidia-logo-fundo-claro": {
+    "arquivo": "nvidia-logo-fundo-claro.png",
+    "marca": "NVIDIA",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "arquivo_na_fonte": "https://svgl.app/library/nvidia-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.nvidia.com/en-us/about-nvidia/legal-info/logo-brand-usage",
+    "baixado_em": "2026-10-03"
+  },
+  "ollama-icone": {
+    "arquivo": "ollama-icone.png",
+    "marca": "Ollama",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.ollama.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/ollama_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "ollama-icone-fundo-claro": {
+    "arquivo": "ollama-icone-fundo-claro.png",
+    "marca": "Ollama",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.ollama.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/ollama_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "openrouter-icone": {
+    "arquivo": "openrouter-icone.png",
+    "marca": "OpenRouter",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://openrouter.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/openrouter_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "openrouter-icone-fundo-claro": {
+    "arquivo": "openrouter-icone-fundo-claro.png",
+    "marca": "OpenRouter",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://openrouter.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/openrouter_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "outlook-icone": {
+    "arquivo": "outlook-icone.png",
+    "marca": "Microsoft Outlook",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/microsoft-365/outlook/email-and-calendar-software-application",
+    "arquivo_na_fonte": "https://svgl.app/library/microsoft-outlook.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "perplexity-icone": {
+    "arquivo": "perplexity-icone.png",
+    "marca": "Perplexity AI",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://perplexity.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/perplexity.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "perplexity-logo": {
+    "arquivo": "perplexity-logo.png",
+    "marca": "Perplexity AI",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://perplexity.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/perplexity_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "perplexity-logo-fundo-claro": {
+    "arquivo": "perplexity-logo-fundo-claro.png",
+    "marca": "Perplexity AI",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://perplexity.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/perplexity_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "postgresql-icone": {
+    "arquivo": "postgresql-icone.png",
+    "marca": "PostgreSQL",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.postgresql.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/postgresql.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "postgresql-logo": {
+    "arquivo": "postgresql-logo.png",
+    "marca": "PostgreSQL",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.postgresql.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/postgresql-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "postgresql-logo-fundo-claro": {
+    "arquivo": "postgresql-logo-fundo-claro.png",
+    "marca": "PostgreSQL",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.postgresql.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/postgresql-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "postman-icone": {
+    "arquivo": "postman-icone.png",
+    "marca": "Postman",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.getpostman.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/postman.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "python-icone": {
+    "arquivo": "python-icone.png",
+    "marca": "Python",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.python.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/python.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "qwen-icone": {
+    "arquivo": "qwen-icone.png",
+    "marca": "Qwen",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://chat.qwenlm.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/qwen_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "qwen-icone-fundo-claro": {
+    "arquivo": "qwen-icone-fundo-claro.png",
+    "marca": "Qwen",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://chat.qwenlm.ai/",
+    "arquivo_na_fonte": "https://svgl.app/library/qwen_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "railway-icone": {
+    "arquivo": "railway-icone.png",
+    "marca": "Railway",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://railway.app/",
+    "arquivo_na_fonte": "https://svgl.app/library/railway_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "railway-icone-fundo-claro": {
+    "arquivo": "railway-icone-fundo-claro.png",
+    "marca": "Railway",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://railway.app/",
+    "arquivo_na_fonte": "https://svgl.app/library/railway.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "react-icone": {
+    "arquivo": "react-icone.png",
+    "marca": "React",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://react.dev/",
+    "arquivo_na_fonte": "https://svgl.app/library/react_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "react-icone-fundo-claro": {
+    "arquivo": "react-icone-fundo-claro.png",
+    "marca": "React",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://react.dev/",
+    "arquivo_na_fonte": "https://svgl.app/library/react_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "react-logo": {
+    "arquivo": "react-logo.png",
+    "marca": "React",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://react.dev/",
+    "arquivo_na_fonte": "https://svgl.app/library/react_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "react-logo-fundo-claro": {
+    "arquivo": "react-logo-fundo-claro.png",
+    "marca": "React",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://react.dev/",
+    "arquivo_na_fonte": "https://svgl.app/library/react_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "redis-icone": {
+    "arquivo": "redis-icone.png",
+    "marca": "Redis",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://redis.io/",
+    "arquivo_na_fonte": "https://svgl.app/library/redis.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "render-icone": {
+    "arquivo": "render-icone.png",
+    "marca": "Render",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://render.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/render_white.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "render-icone-fundo-claro": {
+    "arquivo": "render-icone-fundo-claro.png",
+    "marca": "Render",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://render.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/render_black.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "render-logo": {
+    "arquivo": "render-logo.png",
+    "marca": "Render",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://render.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/render_wordmark_white.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "render-logo-fundo-claro": {
+    "arquivo": "render-logo-fundo-claro.png",
+    "marca": "Render",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://render.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/render_wordmark_black.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "replit-icone": {
+    "arquivo": "replit-icone.png",
+    "marca": "Replit",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://replit.com/brandkit",
+    "arquivo_na_fonte": "https://svgl.app/library/replit.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://replit.com/brandkit",
+    "baixado_em": "2026-10-03"
+  },
+  "replit-logo": {
+    "arquivo": "replit-logo.png",
+    "marca": "Replit",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://replit.com/brandkit",
+    "arquivo_na_fonte": "https://svgl.app/library/replit-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://replit.com/brandkit",
+    "baixado_em": "2026-10-03"
+  },
+  "replit-logo-fundo-claro": {
+    "arquivo": "replit-logo-fundo-claro.png",
+    "marca": "Replit",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://replit.com/brandkit",
+    "arquivo_na_fonte": "https://svgl.app/library/replit-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://replit.com/brandkit",
+    "baixado_em": "2026-10-03"
+  },
+  "runway-icone": {
+    "arquivo": "runway-icone.png",
+    "marca": "Runway",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://runwayml.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/runway.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "safari-icone": {
+    "arquivo": "safari-icone.png",
+    "marca": "Safari",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.apple.com/safari",
+    "arquivo_na_fonte": "https://svgl.app/library/safari.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "salesforce-icone": {
+    "arquivo": "salesforce-icone.png",
+    "marca": "Salesforce",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://brand.salesforce.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/salesforce.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.salesforce.com/",
+    "baixado_em": "2026-10-03"
+  },
+  "slack-icone": {
+    "arquivo": "slack-icone.png",
+    "marca": "Slack",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.slack.com",
+    "arquivo_na_fonte": "https://svgl.app/library/slack.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "slack-logo": {
+    "arquivo": "slack-logo.png",
+    "marca": "Slack",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.slack.com",
+    "arquivo_na_fonte": "https://svgl.app/library/slack-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "stripe-icone": {
+    "arquivo": "stripe-icone.png",
+    "marca": "Stripe",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://stripe.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/stripe.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "stripe-logo": {
+    "arquivo": "stripe-logo.png",
+    "marca": "Stripe",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://stripe.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/stripe_wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "suno-icone": {
+    "arquivo": "suno-icone.png",
+    "marca": "Suno",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://suno.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/suno.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "suno-logo": {
+    "arquivo": "suno-logo.png",
+    "marca": "Suno",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://suno.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/suno_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "suno-logo-fundo-claro": {
+    "arquivo": "suno-logo-fundo-claro.png",
+    "marca": "Suno",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://suno.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/suno_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "supabase-icone": {
+    "arquivo": "supabase-icone.png",
+    "marca": "Supabase",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://supabase.com/brand-assets",
+    "arquivo_na_fonte": "https://svgl.app/library/supabase.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://supabase.com/brand-assets",
+    "baixado_em": "2026-10-03"
+  },
+  "supabase-logo": {
+    "arquivo": "supabase-logo.png",
+    "marca": "Supabase",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://supabase.com/brand-assets",
+    "arquivo_na_fonte": "https://svgl.app/library/supabase_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://supabase.com/brand-assets",
+    "baixado_em": "2026-10-03"
+  },
+  "supabase-logo-fundo-claro": {
+    "arquivo": "supabase-logo-fundo-claro.png",
+    "marca": "Supabase",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://supabase.com/brand-assets",
+    "arquivo_na_fonte": "https://svgl.app/library/supabase_wordmark_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://supabase.com/brand-assets",
+    "baixado_em": "2026-10-03"
+  },
+  "tailwind-icone": {
+    "arquivo": "tailwind-icone.png",
+    "marca": "Tailwind CSS",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://tailwindcss.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/tailwindcss.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://tailwindcss.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "tailwind-logo": {
+    "arquivo": "tailwind-logo.png",
+    "marca": "Tailwind CSS",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://tailwindcss.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/tailwindcss-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://tailwindcss.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "tailwind-logo-fundo-claro": {
+    "arquivo": "tailwind-logo-fundo-claro.png",
+    "marca": "Tailwind CSS",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://tailwindcss.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/tailwindcss-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://tailwindcss.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "teams-icone": {
+    "arquivo": "teams-icone.png",
+    "marca": "Microsoft Teams",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/microsoft-teams/group-chat-software",
+    "arquivo_na_fonte": "https://svgl.app/library/microsoft-teams.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "telegram-icone": {
+    "arquivo": "telegram-icone.png",
+    "marca": "Telegram",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://web.telegram.org/",
+    "arquivo_na_fonte": "https://svgl.app/library/telegram.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "tiktok-icone": {
+    "arquivo": "tiktok-icone.png",
+    "marca": "TikTok",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.tiktok.com",
+    "arquivo_na_fonte": "https://svgl.app/library/tiktok-icon-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "tiktok-icone-fundo-claro": {
+    "arquivo": "tiktok-icone-fundo-claro.png",
+    "marca": "TikTok",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.tiktok.com",
+    "arquivo_na_fonte": "https://svgl.app/library/tiktok-icon-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "tiktok-logo": {
+    "arquivo": "tiktok-logo.png",
+    "marca": "TikTok",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://www.tiktok.com",
+    "arquivo_na_fonte": "https://svgl.app/library/tiktok-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "tiktok-logo-fundo-claro": {
+    "arquivo": "tiktok-logo-fundo-claro.png",
+    "marca": "TikTok",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://www.tiktok.com",
+    "arquivo_na_fonte": "https://svgl.app/library/tiktok-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "trello-icone": {
+    "arquivo": "trello-icone.png",
+    "marca": "Trello",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://trello.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/trello.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://trello.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "trello-logo": {
+    "arquivo": "trello-logo.png",
+    "marca": "Trello",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://trello.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/trello-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://trello.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "trello-logo-fundo-claro": {
+    "arquivo": "trello-logo-fundo-claro.png",
+    "marca": "Trello",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://trello.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/trello-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://trello.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "typescript-icone": {
+    "arquivo": "typescript-icone.png",
+    "marca": "TypeScript",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.typescriptlang.org",
+    "arquivo_na_fonte": "https://svgl.app/library/typescript.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "ubuntu-icone": {
+    "arquivo": "ubuntu-icone.png",
+    "marca": "Ubuntu",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://design.ubuntu.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/ubuntu.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://design.ubuntu.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "vercel-icone": {
+    "arquivo": "vercel-icone.png",
+    "marca": "Vercel",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://vercel.com/geist/brands",
+    "arquivo_na_fonte": "https://svgl.app/library/vercel_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://vercel.com/geist/brands",
+    "baixado_em": "2026-10-03"
+  },
+  "vercel-icone-fundo-claro": {
+    "arquivo": "vercel-icone-fundo-claro.png",
+    "marca": "Vercel",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://vercel.com/geist/brands",
+    "arquivo_na_fonte": "https://svgl.app/library/vercel.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://vercel.com/geist/brands",
+    "baixado_em": "2026-10-03"
+  },
+  "vercel-logo": {
+    "arquivo": "vercel-logo.png",
+    "marca": "Vercel",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://vercel.com/geist/brands",
+    "arquivo_na_fonte": "https://svgl.app/library/vercel_wordmark_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://vercel.com/geist/brands",
+    "baixado_em": "2026-10-03"
+  },
+  "vercel-logo-fundo-claro": {
+    "arquivo": "vercel-logo-fundo-claro.png",
+    "marca": "Vercel",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://vercel.com/geist/brands",
+    "arquivo_na_fonte": "https://svgl.app/library/vercel_wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://vercel.com/geist/brands",
+    "baixado_em": "2026-10-03"
+  },
+  "vscode-icone": {
+    "arquivo": "vscode-icone.png",
+    "marca": "Visual Studio Code",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://code.visualstudio.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/vscode.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://code.visualstudio.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "whatsapp-icone": {
+    "arquivo": "whatsapp-icone.png",
+    "marca": "WhatsApp",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.meta.com/brand/resources/whatsapp/whatsapp-brand",
+    "arquivo_na_fonte": "https://svgl.app/library/whatsapp-icon.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.meta.com/brand/resources/whatsapp/whatsapp-brand",
+    "baixado_em": "2026-10-03"
+  },
+  "whatsapp-logo": {
+    "arquivo": "whatsapp-logo.png",
+    "marca": "WhatsApp",
+    "variante": "logo com nome",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.meta.com/brand/resources/whatsapp/whatsapp-brand",
+    "arquivo_na_fonte": "https://svgl.app/library/whatsapp-wordmark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://www.meta.com/brand/resources/whatsapp/whatsapp-brand",
+    "baixado_em": "2026-10-03"
+  },
+  "windows-icone": {
+    "arquivo": "windows-icone.png",
+    "marca": "Windows",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://www.microsoft.com/windows",
+    "arquivo_na_fonte": "https://svgl.app/library/windows.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "windsurf-icone": {
+    "arquivo": "windsurf-icone.png",
+    "marca": "Windsurf",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://windsurf.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/windsurf-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://windsurf.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "windsurf-icone-fundo-claro": {
+    "arquivo": "windsurf-icone-fundo-claro.png",
+    "marca": "Windsurf",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://windsurf.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/windsurf-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://windsurf.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "windsurf-logo": {
+    "arquivo": "windsurf-logo.png",
+    "marca": "Windsurf",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://windsurf.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/windsurf-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://windsurf.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "windsurf-logo-fundo-claro": {
+    "arquivo": "windsurf-logo-fundo-claro.png",
+    "marca": "Windsurf",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://windsurf.com/brand",
+    "arquivo_na_fonte": "https://svgl.app/library/windsurf-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://windsurf.com/brand",
+    "baixado_em": "2026-10-03"
+  },
+  "x-icone": {
+    "arquivo": "x-icone.png",
+    "marca": "X (formerly Twitter)",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://about.x.com/en/who-we-are/brand-toolkit",
+    "arquivo_na_fonte": "https://svgl.app/library/x_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://about.x.com/en/who-we-are/brand-toolkit",
+    "baixado_em": "2026-10-03"
+  },
+  "x-icone-fundo-claro": {
+    "arquivo": "x-icone-fundo-claro.png",
+    "marca": "X (formerly Twitter)",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://about.x.com/en/who-we-are/brand-toolkit",
+    "arquivo_na_fonte": "https://svgl.app/library/x.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://about.x.com/en/who-we-are/brand-toolkit",
+    "baixado_em": "2026-10-03"
+  },
+  "xai-icone": {
+    "arquivo": "xai-icone.png",
+    "marca": "xAI",
+    "variante": "ícone",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/xai_dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "xai-icone-fundo-claro": {
+    "arquivo": "xai-icone-fundo-claro.png",
+    "marca": "xAI",
+    "variante": "ícone",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://grok.com/",
+    "arquivo_na_fonte": "https://svgl.app/library/xai_light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  },
+  "youtube-icone": {
+    "arquivo": "youtube-icone.png",
+    "marca": "YouTube",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://brand.youtube",
+    "arquivo_na_fonte": "https://svgl.app/library/youtube.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.youtube",
+    "baixado_em": "2026-10-03"
+  },
+  "youtube-logo": {
+    "arquivo": "youtube-logo.png",
+    "marca": "YouTube",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo escuro",
+    "origem": "https://brand.youtube",
+    "arquivo_na_fonte": "https://svgl.app/library/youtube-wordmark-dark.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.youtube",
+    "baixado_em": "2026-10-03"
+  },
+  "youtube-logo-fundo-claro": {
+    "arquivo": "youtube-logo-fundo-claro.png",
+    "marca": "YouTube",
+    "variante": "logo com nome",
+    "fundo": "use sobre fundo claro",
+    "origem": "https://brand.youtube",
+    "arquivo_na_fonte": "https://svgl.app/library/youtube-wordmark-light.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria. Guia: https://brand.youtube",
+    "baixado_em": "2026-10-03"
+  },
+  "zapier-icone": {
+    "arquivo": "zapier-icone.png",
+    "marca": "Zapier",
+    "variante": "ícone (desenho CC0 do Simple Icons na cor oficial #FF4F00)",
+    "fundo": "funciona nos dois",
+    "origem": "https://simpleicons.org/?q=zapier",
+    "arquivo_na_fonte": "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/zapier.svg",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto.",
+    "baixado_em": "2026-10-03"
+  },
+  "zoom-icone": {
+    "arquivo": "zoom-icone.png",
+    "marca": "Zoom",
+    "variante": "ícone",
+    "fundo": "funciona nos dois",
+    "origem": "https://zoom.us/",
+    "arquivo_na_fonte": "https://svgl.app/library/zoom.svg (SVGL, svgl.app)",
+    "regras": "Marca registrada da empresa. Uso para se referir ao produto, sem alterar cor nem proporção e sem sugerir parceria.",
+    "baixado_em": "2026-10-03"
+  }
+}

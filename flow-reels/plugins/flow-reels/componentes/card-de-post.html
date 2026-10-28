@@ -1,0 +1,514 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   card-de-post  ·  post com avatar, autor, corpo e engajamento
+   -------------------------------------------------------------------------
+   Publicação de rede social. Três coisas empilhadas fazem o reconhecimento
+   em meio segundo: a fileira de cima com o círculo do avatar colado no nome,
+   o bloco de texto largo embaixo, e a régua de engajamento no rodapé com os
+   três glifos e os números. Tire a régua e vira card; tire o círculo e vira
+   citação.
+
+   A marca da plataforma entra pelo parâmetro marca, no canto do cabeçalho, e
+   é sempre o arquivo de verdade do acervo em logos/. O avatar é a inicial do
+   autor num círculo, porque rosto de pessoa a gente não inventa.
+   ========================================================================= */
+
+.fc-post {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  font-family: var(--fonte-corpo);
+}
+
+.fc-post-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.fc-post-avatar {
+  box-sizing: border-box;
+  width: 88px;
+  height: 88px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  color: var(--tinta);
+}
+
+.fc-post-quem {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fc-post-autor {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-post-arroba {
+  font-size: var(--tam-rotulo);
+  color: var(--tinta-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-post[data-apontado="autor"] .fc-post-autor { color: var(--destaque); }
+
+.fc-post-corpo {
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  /* Tres linhas e o teto do corpo, e agora ele e cumprido pela peca e nao so
+     escrito no registro. Sem o teto, um texto de nove linhas empurrava o card
+     para 873 px de altura, passava dos 636 uteis e entrava na faixa da
+     legenda, sem ninguem avisar. Reticencia aqui e sinal de frase longa
+     demais para o corte. */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.fc-post[data-apontado="corpo"] .fc-post-corpo { color: var(--destaque); }
+
+/* A mídia é uma superfície com o glifo de imagem no meio, nunca uma foto
+   inventada nem um degradê decorativo. */
+.fc-post-midia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--raio) * 0.7);
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 20%, transparent);
+  color: color-mix(in srgb, var(--tinta-suave) 70%, transparent);
+}
+
+.fc-post-regua {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-top: 20px;
+  border-top: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 22%, transparent);
+}
+
+.fc-post-medida {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: var(--tam-rotulo);
+  color: var(--tinta-suave);
+}
+
+.fc-post-medida-glifo { display: flex; }
+
+/* O coração cheio é o único lugar em que a peça pinta o destaque sozinha, e
+   ele é minúsculo: é a curtida acontecendo na frase que fala dela. */
+.fc-post-medida[data-curtido="1"] {
+  color: var(--destaque);
+}
+
+/* O acento vai para UMA medida, nunca para a régua inteira: três números
+   acesos no mesmo quadro são três manchas de destaque, e a lei do acento
+   pede exatamente uma. */
+.fc-post-medida[data-apontada="1"] {
+  color: var(--destaque);
+}
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-post-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-post-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta-suave);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-post-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-post-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-post-marca[data-erro="sim"] .fc-post-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "card-de-post";
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  /* Coração, balão de comentário, seta de compartilhar e o glifo de imagem.
+     São móveis do sistema, desenhados em traço, e não a marca de nenhuma
+     plataforma: a plataforma entra por logo de arquivo, no cabeçalho. */
+  function glifo(desenho, lado, cheio) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", lado);
+    svg.setAttribute("height", lado);
+    svg.setAttribute("fill", cheio ? "currentColor" : "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.innerHTML = desenho;
+    return svg;
+  }
+
+  var CORACAO = "<path d='M12 20.5 C6 16.5 3.5 13.5 3.5 10 A4.5 4.5 0 0 1 12 7.8 " +
+                "A4.5 4.5 0 0 1 20.5 10 C20.5 13.5 18 16.5 12 20.5 Z'/>";
+  var COMENTARIO = "<path d='M4 5.5 h16 v11 h-9 l-5 4 v-4 h-2 z'/>";
+  var COMPARTILHAR = "<path d='M4 13 V20 h16 v-7'/><path d='M12 15.5 V4'/><path d='M7.5 8.5 L12 4 L16.5 8.5'/>";
+  var IMAGEM = "<rect x='3.5' y='5' width='17' height='14' rx='2'/>" +
+               "<circle cx='9' cy='10' r='1.6'/><path d='M5 17 L10.5 12 L15 16 L17 14.2 L19.5 16.6'/>";
+
+  /* Separador de milhar em português, feito na mão para o número sair igual
+     em qualquer máquina. O renderizador exige que render(t) seja pura, e o
+     idioma do sistema não pode entrar nessa conta. */
+  function escrever(numero) {
+    var inteiro = String(Math.max(0, Math.round(numero)));
+    var saida = "";
+    for (var i = 0; i < inteiro.length; i += 1) {
+      if (i > 0 && (inteiro.length - i) % 3 === 0) { saida += "."; }
+      saida += inteiro.charAt(i);
+    }
+    return saida;
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.autor) {
+        throw new Error("card-de-post: o parâmetro autor é obrigatório.");
+      }
+      if (!p.corpo) {
+        throw new Error("card-de-post: o parâmetro corpo é obrigatório. " +
+                        "Ele é o texto da publicação.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+
+      var el = document.createElement("div");
+      el.className = "fc-post";
+      el.style.width = largura + "px";
+      el.setAttribute("data-apontado", "nenhum");
+
+      var cabeca = document.createElement("div");
+      cabeca.className = "fc-post-cabeca";
+
+      var avatar = document.createElement("div");
+      avatar.className = "fc-post-avatar";
+      avatar.textContent = String(p.autor).trim().charAt(0).toUpperCase();
+      cabeca.appendChild(avatar);
+
+      var quem = document.createElement("div");
+      quem.className = "fc-post-quem";
+
+      var autor = document.createElement("div");
+      autor.className = "fc-post-autor";
+      autor.textContent = p.autor;
+      quem.appendChild(autor);
+
+      if (p.arroba) {
+        var arroba = document.createElement("div");
+        arroba.className = "fc-post-arroba";
+        arroba.textContent = p.arroba;
+        quem.appendChild(arroba);
+      }
+
+      cabeca.appendChild(quem);
+
+      var insignia = criarMarca(p.marca, 56, "fc-post-marca");
+      if (insignia) { cabeca.appendChild(insignia); }
+
+      el.appendChild(cabeca);
+
+      var corpo = document.createElement("div");
+      corpo.className = "fc-post-corpo";
+      corpo.textContent = p.corpo;
+      el.appendChild(corpo);
+
+      var midia = null;
+      if (p.midia) {
+        midia = document.createElement("div");
+        midia.className = "fc-post-midia";
+        midia.style.height = (p.altura_midia == null ? 200 : p.altura_midia) + "px";
+        midia.appendChild(glifo(IMAGEM, 72));
+        el.appendChild(midia);
+      }
+
+      var medidas = [
+        { chave: "curtidas", desenho: CORACAO },
+        { chave: "comentarios", desenho: COMENTARIO },
+        { chave: "compartilhamentos", desenho: COMPARTILHAR }
+      ].filter(function (m) { return p[m.chave] != null; });
+
+      var regua = null;
+      var desenhadas = [];
+
+      if (medidas.length) {
+        regua = document.createElement("div");
+        regua.className = "fc-post-regua";
+
+        desenhadas = medidas.map(function (m) {
+          var no = document.createElement("div");
+          no.className = "fc-post-medida";
+
+          var caixa = document.createElement("span");
+          caixa.className = "fc-post-medida-glifo";
+          caixa.appendChild(glifo(m.desenho, 44, false));
+          no.appendChild(caixa);
+
+          var numero = document.createElement("span");
+          no.appendChild(numero);
+
+          regua.appendChild(no);
+          return { no: no, caixa: caixa, numero: numero, chave: m.chave, desenho: m.desenho, valor: p[m.chave] };
+        });
+
+        el.appendChild(regua);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var ate = e.visivel_ate || "cabecalho";
+        var proporcao = e.proporcao == null ? 1 : e.proporcao;
+        var curtido = !!e.curtido;
+
+        var ordem = ["cabecalho", "corpo", "midia", "engajamento"];
+        var nivel = ordem.indexOf(ate);
+        if (nivel < 0) { nivel = 0; }
+
+        corpo.style.display = nivel >= 1 ? "" : "none";
+        if (midia) { midia.style.display = nivel >= 2 ? "" : "none"; }
+        if (regua) { regua.style.display = nivel >= 3 ? "" : "none"; }
+
+        desenhadas.forEach(function (d) {
+          d.numero.textContent = escrever(d.valor * proporcao);
+
+          if (e.destaque === d.chave) {
+            d.no.setAttribute("data-apontada", "1");
+          } else {
+            d.no.removeAttribute("data-apontada");
+          }
+
+          if (d.chave === "curtidas") {
+            /* O coração cheio é outro desenho, não o mesmo desenho pintado:
+               trocar o glifo é o jeito honesto de mostrar a curtida dada. */
+            d.caixa.innerHTML = "";
+            d.caixa.appendChild(glifo(d.desenho, 44, curtido));
+            if (curtido) {
+              d.no.setAttribute("data-curtido", "1");
+            } else {
+              d.no.removeAttribute("data-curtido");
+            }
+          }
+        });
+
+        el.setAttribute("data-apontado", typeof e.destaque === "string" ? e.destaque : "nenhum");
+      }
+
+      definir({ visivel_ate: "cabecalho", curtido: false, proporcao: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var base = {
+      marca: "instagram",
+      autor: "Oficina de cortes",
+      arroba: "@oficinadecortes",
+      corpo: "Um corte por ideia. Se a ideia acaba em quinze segundos, o corte acaba junto.",
+      curtidas: 1240,
+      comentarios: 86,
+      compartilhamentos: 12,
+      largura: 820
+    };
+
+    function com(extra) {
+      var saida = {};
+      Object.keys(base).forEach(function (chave) { saida[chave] = base[chave]; });
+      Object.keys(extra || {}).forEach(function (chave) { saida[chave] = extra[chave]; });
+      return saida;
+    }
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Publicação de rede social com a marca da plataforma no cabeçalho. O post se revela por partes em definir({ visivel_ate }), os números sobem por proporcao, e o coração cheio é a curtida acontecendo na frase que fala dela.",
+      casos: [
+        {
+          nome: "só o autor",
+          largura: 880, altura: 460, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { visivel_ate: "cabecalho", curtido: false, proporcao: 0, destaque: null }
+        },
+        {
+          nome: "com o texto",
+          largura: 880, altura: 460, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { visivel_ate: "corpo", curtido: false, proporcao: 0, destaque: null }
+        },
+        {
+          nome: "post inteiro",
+          largura: 880, altura: 460, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { visivel_ate: "engajamento", curtido: false, proporcao: 1, destaque: null }
+        },
+        {
+          nome: "curtido",
+          largura: 880, altura: 460, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { visivel_ate: "engajamento", curtido: true, proporcao: 1, destaque: null }
+        },
+        {
+          nome: "números na metade",
+          largura: 880, altura: 460, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { visivel_ate: "engajamento", curtido: false, proporcao: 0.5, destaque: null }
+        },
+        {
+          nome: "com mídia",
+          largura: 880, altura: 700, escala: 0.44, x: 20, y: 20,
+          parametros: com({ midia: true }),
+          estado: { visivel_ate: "engajamento", curtido: false, proporcao: 1, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

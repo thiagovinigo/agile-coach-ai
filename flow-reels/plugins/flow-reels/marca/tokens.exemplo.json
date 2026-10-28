@@ -1,0 +1,113 @@
+{
+  "_nota": "Este é o exemplo. O arquivo de verdade é marca/tokens.json, e quem preenche ele é a skill `/flow-reels:marca`, conversando com você. Todo componente e todo painel leem daqui, ninguém escolhe cor no olho. Se um valor estiver errado, corrija aqui e renderize de novo: o corte inteiro muda junto.",
+  "versao": "1.0",
+  "nome": "Marca de Exemplo",
+
+  "modo": "escuro",
+  "_nota_modo": "Dois valores possíveis: \"escuro\" ou \"claro\". Define se o painel de cima nasce em fundo escuro com texto claro, ou o contrário. Não é só uma troca de cor: muda o peso do grão e a força do brilho de fundo. Escolha um e fique nele, porque alternar entre cortes quebra a identidade.",
+
+  "cores": {
+    "_nota": "Seis cores, nem uma a mais. Tudo que aparece no painel sai daqui. Os valores são hexadecimais de 6 dígitos, sempre com o #.",
+    "superficie": "#16151A",
+    "_nota_superficie": "O fundo do painel. No modo escuro é um quase preto com um pouco de cor dentro, nunca #000000 puro, que achata a imagem.",
+    "superficie_alt": "#211F28",
+    "_nota_superficie_alt": "A camada de cima: fundo de card, de caixa de comando, de tile. Precisa se separar da superfície sem virar outra cor. Regra prática: 6 a 10 pontos de luminosidade de diferença.",
+    "tinta": "#F5F2EE",
+    "_nota_tinta": "A cor do texto principal e dos traços fortes. No modo escuro é um branco quente, não #FFFFFF, que estoura sobre vídeo.",
+    "tinta_suave": "#9E99A8",
+    "_nota_tinta_suave": "Texto secundário, rótulo, apoio dentro do painel, borda discreta. É sempre a mesma tinta com menos força, nunca uma cor nova.",
+    "destaque": "#E8A33D",
+    "_nota_destaque": "O acento único da marca. É a cor que marca a ÚNICA coisa que a fala está apontando naquele momento. Se você sentir vontade de ter um segundo destaque, é sinal de que o painel está tentando dizer duas coisas ao mesmo tempo.",
+    "destaque_contraste": "#16151A",
+    "_nota_destaque_contraste": "A cor do texto que fica EM CIMA do destaque. Se o seu destaque é claro, aqui vai um escuro; se é escuro, aqui vai um claro. O onboarding mede isso e avisa se o contraste ficar abaixo de 4,5 para 1."
+  },
+
+  "fontes": {
+    "_nota": "Quatro papéis. Cada um aponta para um arquivo de verdade dentro da pasta, com caminho relativo à raiz do pacote. ATENÇÃO: fonte variável não serve para a legenda, porque o queimador de legenda ignora o eixo de peso e renderiza no padrão da fonte, que costuma ser fino. Por isso todo arquivo usado na legenda precisa ser uma instância estática, e o campo variavel precisa estar em false.",
+    "titulo": {
+      "familia": "Quicksand",
+      "arquivo": "marca/fontes/Quicksand-Bold.ttf",
+      "peso": 700,
+      "variavel": false
+    },
+    "corpo": {
+      "familia": "Quicksand",
+      "arquivo": "marca/fontes/Quicksand-Medium.ttf",
+      "peso": 500,
+      "variavel": false
+    },
+    "legenda": {
+      "familia": "Quicksand",
+      "arquivo": "marca/fontes/Quicksand-Bold.ttf",
+      "peso": 700,
+      "variavel": false,
+      "_nota": "Esta é a fonte que o ffmpeg queima no vídeo. Tem que ser estática, obrigatoriamente. Se você trouxer uma fonte variável no onboarding, a skill `/flow-reels:marca` gera a estática antes de gravar aqui, e o que aparece neste campo já é o arquivo gerado."
+    },
+    "mono": {
+      "familia": "monoespacada do sistema",
+      "arquivo": null,
+      "peso": 500,
+      "variavel": false,
+      "_nota": "Só aparece dentro da caixa-de-comando, para texto que finge ser código ou terminal. O pacote não traz uma monoespacada própria. Com arquivo em null, os componentes caem na pilha do sistema. Se você tiver uma, aponte o arquivo aqui."
+    }
+  },
+
+  "tipografia": {
+    "_nota": "Tamanhos em pixels, medidos no painel de 1080 por 956. Não invente tamanho fora desta lista: quatro degraus bastam e é o que mantém os cortes parecidos entre si. A legenda é a única medida no canvas inteiro de 1080 por 1920, porque ela é queimada depois da montagem.",
+    "titulo": 92,
+    "_nota_titulo": "O título do painel. Um por painel, no máximo dois, nunca três.",
+    "rotulo": 34,
+    "_nota_rotulo": "Etiqueta curta, número de passo, unidade, nome de coluna. Sempre em caixa alta, com espaçamento entre letras de 0,08 em.",
+    "corpo": 52,
+    "_nota_corpo": "Texto dentro de card, item de lista, conteúdo de caixa de comando. Se um texto não cabe em 52, o texto é longo demais para o painel: corte palavras em vez de diminuir a fonte.",
+    "legenda": 116,
+    "_nota_legenda": "A legenda queimada. Valor fechado e testado sobre vídeo real, em cena clara e escura. Não mexa.",
+    "entrelinha": 1.15,
+    "espacamento_rotulo": 0.08
+  },
+
+  "forma": {
+    "_nota": "A geometria das peças. Um raio só para tudo, uma borda só, um traço só. É o que faz o card, a caixa de comando e o tile parecerem irmãos.",
+    "raio_canto": 20,
+    "_nota_raio_canto": "Em pixels. Zero dá uma marca dura e técnica, 20 dá uma marca amigável, acima de 40 começa a virar pílula e some a sensação de card.",
+    "espessura_borda": 2,
+    "_nota_espessura_borda": "Em pixels. A borda das peças. Abaixo de 2 desaparece quando a plataforma comprime o vídeo.",
+    "espessura_traco": 4,
+    "_nota_espessura_traco": "Em pixels. A espessura de seta, sublinhado, divisor e qualquer linha desenhada. É sempre maior que a borda, porque traço é conteúdo e borda é contorno."
+  },
+
+  "textura": {
+    "_nota": "O que tira o painel do chapado. Superfície lisa parece slide de apresentação, e slide não prende ninguém. Grão sempre, brilho quando o fundo estiver muito vazio.",
+    "grao_intensidade": 0.14,
+    "_nota_grao_intensidade": "De 0 a 1. Abaixo de 0,06 some depois da compressão da plataforma, acima de 0,22 começa a parecer sujeira. A faixa boa fica entre 0,10 e 0,18.",
+    "grao_tamanho": 1,
+    "_nota_grao_tamanho": "Tamanho do pixel do grão, em pixels do painel. 1 é o padrão. 2 dá um ar mais impresso e mais antigo.",
+    "brilho_fundo": true,
+    "_nota_brilho_fundo": "Se true, o painel recebe uma mancha de luz suave atrás do objeto principal. Serve para separar o herói do fundo, nunca para decorar canto vazio.",
+    "brilho_cor": "#E8A33D",
+    "brilho_opacidade": 0.1,
+    "brilho_raio": 720,
+    "_nota_brilho": "A cor costuma ser a mesma do destaque. A opacidade fica entre 0,06 e 0,14: se você consegue apontar onde o brilho começa, ele está forte demais. O raio é em pixels e é o tamanho da mancha."
+  },
+
+  "logo": {
+    "_nota": "Sua marca gráfica. Entra no painel quando a fala fala dela, e no fim do corte. Não fica de enfeite no canto ocupando área que o conteúdo precisa.",
+    "tem": true,
+    "caminho": "marca/logo.png",
+    "_nota_caminho": "PNG com fundo transparente, pelo menos 512 px no lado maior. Caminho relativo à raiz do pacote.",
+    "versao_clara": "marca/logo-clara.png",
+    "_nota_versao_clara": "Opcional. É a versão que lê sobre fundo escuro. Com null, o pacote usa a mesma imagem nos dois modos.",
+    "altura_minima": 96,
+    "_nota_altura_minima": "Altura mínima em pixels dentro do painel. Abaixo disso a logo vira ruído e é melhor não colocar."
+  },
+
+  "personagem": {
+    "_nota": "Um mascote, um boneco, uma foto sua recortada, qualquer figura que represente você dentro do painel. É opcional, e a maioria das marcas não tem. Se tem, ele é um ator: aparece quando a fala pede uma reação, e não como adesivo permanente.",
+    "tem": false,
+    "caminho": null,
+    "_nota_caminho": "PNG transparente. Se você tiver várias poses, aponte para uma pasta e nomeie os arquivos pela emoção, por exemplo neutro.png, surpreso.png, aprovando.png.",
+    "poses": [],
+    "recolorir": false,
+    "_nota_recolorir": "Deixe em false. Personagem não se pinta com a cor de destaque: ele entra com as cores dele."
+  }
+}

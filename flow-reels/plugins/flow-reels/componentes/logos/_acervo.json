@@ -1,0 +1,242 @@
+{
+  "anthropic": {
+    "arquivo": "anthropic.svg",
+    "cor_oficial": "#191919",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Anthropic",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.anthropic.com"
+  },
+  "canva": {
+    "arquivo": "canva.svg",
+    "cor_oficial": "#00C4CC",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Canva",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.canva.com"
+  },
+  "claude": {
+    "arquivo": "claude.svg",
+    "cor_oficial": "#D97757",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Claude",
+    "monocromatico": true,
+    "origem_do_desenho": "https://claude.ai"
+  },
+  "cloudera": {
+    "arquivo": "cloudera.svg",
+    "cor_oficial": "#F96702",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Cloudera",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.cloudera.com"
+  },
+  "docker": {
+    "arquivo": "docker.svg",
+    "cor_oficial": "#2496ED",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Docker",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.docker.com/company/newsroom/media-resources"
+  },
+  "elevenlabs": {
+    "arquivo": "elevenlabs.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "ElevenLabs",
+    "monocromatico": true,
+    "origem_do_desenho": "https://elevenlabs.io/brand"
+  },
+  "figma": {
+    "arquivo": "figma.svg",
+    "cor_oficial": "#F24E1E",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Figma",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.figma.com/using-the-figma-brand/"
+  },
+  "firefox": {
+    "arquivo": "firefox.svg",
+    "cor_oficial": "#FF7139",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Firefox",
+    "monocromatico": true,
+    "origem_do_desenho": "https://mozilla.design/firefox/logos-usage/"
+  },
+  "github": {
+    "arquivo": "github.svg",
+    "cor_oficial": "#181717",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "GitHub",
+    "monocromatico": true,
+    "origem_do_desenho": "https://github.com/logos"
+  },
+  "google": {
+    "arquivo": "google.svg",
+    "cor_oficial": "#4285F4",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Google",
+    "monocromatico": true,
+    "origem_do_desenho": "https://partnermarketinghub.withgoogle.com"
+  },
+  "googlechrome": {
+    "arquivo": "googlechrome.svg",
+    "cor_oficial": "#4285F4",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Google Chrome",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.google.com/chrome"
+  },
+  "googledrive": {
+    "arquivo": "googledrive.svg",
+    "cor_oficial": "#4285F4",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Google Drive",
+    "monocromatico": true,
+    "origem_do_desenho": "https://developers.google.com/drive/web/branding"
+  },
+  "googlegemini": {
+    "arquivo": "googlegemini.svg",
+    "cor_oficial": "#8E75B2",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Google Gemini",
+    "monocromatico": true,
+    "origem_do_desenho": "https://gemini.google.com"
+  },
+  "huggingface": {
+    "arquivo": "huggingface.svg",
+    "cor_oficial": "#FFD21E",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Hugging Face",
+    "monocromatico": true,
+    "origem_do_desenho": "https://huggingface.co/brand"
+  },
+  "instagram": {
+    "arquivo": "instagram.svg",
+    "cor_oficial": "#FF0069",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Instagram",
+    "monocromatico": true,
+    "origem_do_desenho": "https://about.meta.com/brand/resources/instagram"
+  },
+  "n8n": {
+    "arquivo": "n8n.svg",
+    "cor_oficial": "#EA4B71",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "n8n",
+    "monocromatico": true,
+    "origem_do_desenho": "https://n8n.io/press"
+  },
+  "nextdotjs": {
+    "arquivo": "nextdotjs.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Next.js",
+    "monocromatico": true,
+    "origem_do_desenho": "https://vercel.com/design/brands#next-js"
+  },
+  "notion": {
+    "arquivo": "notion.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Notion",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.notion.so"
+  },
+  "openai": {
+    "arquivo": "openai.svg",
+    "cor_oficial": "#412991",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "OpenAI",
+    "monocromatico": true,
+    "origem_do_desenho": "https://openai.com/brand"
+  },
+  "perplexity": {
+    "arquivo": "perplexity.svg",
+    "cor_oficial": "#1FB8CD",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Perplexity",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.perplexity.ai"
+  },
+  "safari": {
+    "arquivo": "safari.svg",
+    "cor_oficial": "#006CFF",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Safari",
+    "monocromatico": true,
+    "origem_do_desenho": "https://apps.apple.com/us/app/safari/id1146562112"
+  },
+  "salesforce": {
+    "arquivo": "salesforce.svg",
+    "cor_oficial": "#00A1E0",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Salesforce",
+    "monocromatico": true,
+    "origem_do_desenho": "https://brand.salesforce.com/content/logo-guidelines"
+  },
+  "slack": {
+    "arquivo": "slack.svg",
+    "cor_oficial": "#4A154B",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Slack",
+    "monocromatico": true,
+    "origem_do_desenho": "https://slack.com/brand-guidelines"
+  },
+  "supabase": {
+    "arquivo": "supabase.svg",
+    "cor_oficial": "#3FCF8E",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Supabase",
+    "monocromatico": true,
+    "origem_do_desenho": "https://github.com/supabase/supabase/blob/4031a7549f5d46da7bc79c01d56be4177dc7c114/packages/common/assets/images/supabase-logo-wordmark--light.svg"
+  },
+  "tiktok": {
+    "arquivo": "tiktok.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "TikTok",
+    "monocromatico": true,
+    "origem_do_desenho": "https://tiktok.com"
+  },
+  "whatsapp": {
+    "arquivo": "whatsapp.svg",
+    "cor_oficial": "#25D366",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "WhatsApp",
+    "monocromatico": true,
+    "origem_do_desenho": "https://about.meta.com/brand/resources/whatsapp/whatsapp-brand"
+  },
+  "wikipedia": {
+    "arquivo": "wikipedia.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Wikipedia",
+    "monocromatico": true,
+    "origem_do_desenho": "https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2.svg"
+  },
+  "x": {
+    "arquivo": "x.svg",
+    "cor_oficial": "#000000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "X",
+    "monocromatico": true,
+    "origem_do_desenho": "https://x.com"
+  },
+  "youtube": {
+    "arquivo": "youtube.svg",
+    "cor_oficial": "#FF0000",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "YouTube",
+    "monocromatico": true,
+    "origem_do_desenho": "https://www.youtube.com/howyoutubeworks/resources/brand-resources/#logos-icons-and-colors"
+  },
+  "zoom": {
+    "arquivo": "zoom.svg",
+    "cor_oficial": "#0B5CFF",
+    "fonte": "Simple Icons (CC0 1.0)",
+    "marca": "Zoom",
+    "monocromatico": true,
+    "origem_do_desenho": "https://brand.zoom.us/media-library/"
+  }
+}

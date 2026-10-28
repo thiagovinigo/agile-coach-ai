@@ -1,0 +1,15 @@
+{
+  "_leia": "O que pede WebGL na 4.0: o compor.py liga a GPU (Metal) quando o plano usa um destes nomes. As peças da Onda 3 (nuvem, malha, objeto3d) já estão no código.",
+  "sobre": [
+    "look",
+    "energia",
+    "dolly",
+    "foco"
+  ],
+  "modos": [
+    "celular3d",
+    "parallax",
+    "telas"
+  ],
+  "transicoes": []
+}

@@ -1,0 +1,369 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   glifo-que-transforma  ·  uma forma só que vira muitas
+   -------------------------------------------------------------------------
+   Uma silhueta cheia, sozinha no painel, que atravessa uma sequência de
+   ícones de conceito. Serve para o beat de ideia abstrata em que o ponto é
+   "uma coisa virando muitas": versatilidade, a mesma ferramenta em vários
+   papéis, a faísca que vira coisa entregue.
+
+   Ela é o objeto herói do painel e não divide o palco com ninguém. Não tem
+   texto, não tem card em volta, não tem sombra própria: o fundo, o brilho e
+   o grão já vêm do base.js.
+
+   Como a transformação é feita: cada caminho é amostrado em pontos de
+   mesmo comprimento de arco, os subcaminhos dos dois lados são pareados por
+   área e alinhados pelo giro de menor percurso, e o desenho de um instante
+   é a interpolação ponto a ponto. É conta de geometria pura, sem biblioteca
+   e sem relógio: o mesmo avanço devolve sempre o mesmo pixel.
+   ========================================================================= */
+
+.fc-glifo {
+  position: relative;
+  display: block;
+}
+
+.fc-glifo svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fc-glifo-forma {
+  fill: var(--destaque);
+}
+
+.fc-glifo[data-cor="tinta"] .fc-glifo-forma {
+  fill: var(--tinta);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "glifo-que-transforma";
+  var NS = "http://www.w3.org/2000/svg";
+
+  /* O acervo de conceitos que vem de fábrica, todos na mesma caixa de
+     0 a 100. São formas genéricas de propósito: elas não representam marca
+     nenhuma, e por isso não caem na regra 7 das convenções. Um corte com
+     universo próprio passa as formas dele em `catalogo`. */
+  var FORMAS = {
+    no: "M74.6,50.2h-.2v-.4h.2a24.4 24.4 0 1 0-24.4-24.4v.2h-.4v-.2a24.4 24.4 0 1 0-24.4 24.4h.2v.4h-.2a24.4 24.4 0 1 0 24.4 24.4v-.2h.4v.2a24.4 24.4 0 1 0 24.4-24.4z",
+    balao: "M20,1 85,1 85,66 51,98 51,66 20,66z",
+    foguete: "M53.2635 68.6401C59.776 64.496 66.1405 59.7599 71.3949 54.5058C89.3043 36.5975 91.3025 20.8353 89.4523 15.2112C92.1166 12.5471 94.7808 9.8831 97.445 7.21906C98.185 6.47904 98.185 5.29502 97.445 4.55501C96.7049 3.815 95.5208 3.815 94.7807 4.55501C92.1165 7.21905 89.4523 9.8831 86.7881 12.5471C81.1637 10.6971 65.4005 12.6951 47.4911 30.6034C42.2366 35.8575 37.5003 42.2216 33.356 48.7337C27.3615 47.2537 16.9267 47.2537 9.6741 55.3198C1.38545 64.422 6.26983 73.0801 8.11997 71.3041C9.60009 69.7501 12.1163 60.6479 23.0691 67.678C21.293 71.3781 21.367 73.6721 22.5511 74.7821C24.1052 76.3362 25.6593 77.8902 27.2135 79.4442C28.3976 80.6282 30.6177 80.7762 34.392 78.9262C41.3486 89.8784 32.2459 92.3944 30.7657 93.9484C28.9156 95.7245 37.5743 100.609 46.677 92.3204C54.7436 85.0683 54.7436 74.6341 53.2635 68.6401ZM64.5864 37.4115C61.9222 34.7475 61.9222 30.3074 64.5864 27.6434C67.3246 24.9053 71.6909 24.9053 74.3552 27.6434C77.0934 30.3814 77.0934 34.6735 74.3552 37.4115C71.6909 40.0756 67.3246 40.0756 64.5864 37.4115ZM20.1089 77.0762C20.1089 77.0762 12.7083 78.4082 9.97012 92.0244C23.5872 89.3604 24.9193 81.8863 24.9193 81.8863C23.3652 80.2582 21.737 78.7042 20.1089 77.0762Z",
+    raio: "M47.1,0.8 73.3,0.8 61.9,37.2 77.1,37.2 30.7,99.4 45.8,51.9 29,51.9z",
+    joinha: "M94 44.0172C94 38.5158 89.5107 34.0458 83.9853 34.0458C83.9853 34.0458 83.2256 34.0458 82.0514 34.0458C76.5261 34.0458 60.917 33.6332 60.986 29.3009C60.986 27.9943 61.0551 26.5501 61.1932 24.9685C61.4004 23.1117 61.7458 21.255 61.8839 19.6733C62.8508 8.25788 58.845 2 55.3916 2C54.5628 2 48.2777 2.41261 48.6921 5.78223C48.8303 7.3639 49.5209 15.341 47.4489 22.149C44.1337 28.2006 33.9809 39.2722 27.834 44.2923C27.6958 43.8109 27.4886 43.2607 27.3505 42.7794C26.9361 41.3352 26.5217 39.8911 26.1073 38.447C24.5878 38.8596 23.1374 39.2722 21.687 39.7536C15.8854 41.404 10.1528 43.1232 4.35121 44.8424C2.90081 45.255 1.4504 45.6676 0 46.0802C0.414401 47.5931 0.828805 49.0372 1.24321 50.4814C5.52535 64.8539 9.73843 79.2263 14.0206 93.6676C14.435 95.1117 14.9184 96.5559 15.3328 98C16.7832 97.5874 18.2336 97.1748 19.7531 96.7622C25.4857 95.043 31.2873 93.3238 37.0198 91.6733C38.5393 91.192 39.9897 90.7794 41.4401 90.3668C41.0257 88.9226 40.6113 87.4097 40.1278 85.9656C39.1609 82.6648 38.194 79.3639 37.227 76.063C38.8156 75.6504 41.3711 75.3066 45.2388 75.3066C47.1036 75.3066 49.2447 75.3754 51.662 75.5817C58.9831 76.2693 65.8898 76.7507 69.7575 77.2321C70.6554 77.3696 71.6914 77.4384 72.7274 77.4384C76.1808 77.4384 79.9794 76.6132 81.0154 73.7249C81.3608 72.8997 81.4989 72.1433 81.637 71.3868C84.745 70.2178 87.1624 67.3983 87.3005 63.8911C87.3696 63.2034 87.3005 62.5845 87.2315 61.9656C89.5797 60.5903 91.2373 58.1146 91.3755 55.2264C91.4445 53.851 91.1683 52.5444 90.6848 51.3754C92.6877 49.5186 94 46.9742 94 44.0172ZM18.4409 92.361C14.1587 77.9885 9.94563 63.5473 5.66348 49.1748C11.4651 47.5244 17.1977 45.8052 22.9993 44.086C27.2123 58.4584 31.4945 72.8997 35.7766 87.2722C29.975 88.9226 24.1734 90.6418 18.4409 92.361Z",
+    losango: "M50,1l49,49L50,99L1,50L50,1z",
+    grade: "M2 4H34.1774V35.4113H64.8226V4H97V36.1774H65.5887V66.8226H97V99H64.8226V67.5887H34.1774V99H2V66.8226H33.4113V36.1774H2V4Z",
+    lampada: "M51.5 19.5033C56.7965 19.5033 61.6464 21.0945 65.6667 23.895C72.1757 28.3504 76.4512 35.8609 76.4512 44.3898C76.4512 51.8366 72.2395 57.5013 68.4107 62.2749C65.1562 66.2848 62.1569 69.6581 62.0931 73.0315C62.0931 74.6864 60.6254 76.1503 58.9024 76.1503C54.1802 76.1503 49.3941 76.1503 44.6719 76.1503C42.8851 76.1503 41.4812 74.6864 41.4812 73.0315C41.1622 69.0217 36.8228 65.2028 32.8664 60.2382C29.548 56.0374 26.5488 51.0092 26.5488 44.3898C26.5488 37.0702 29.7395 30.4508 34.7808 25.9318C39.2477 21.9219 45.1186 19.5033 51.5 19.5033ZM62.0931 88.8799C62.0931 90.6621 60.6892 91.9987 58.9024 91.9987C54.1802 91.9987 49.3941 91.9987 44.6719 91.9987C42.8851 91.9987 41.4812 90.6621 41.4812 88.8799C41.4812 87.1614 42.8851 85.7612 44.6719 85.7612C49.3941 85.7612 54.1802 85.7612 58.9024 85.7612C60.6892 85.7612 62.0931 87.1614 62.0931 88.8799ZM62.0931 80.9239C62.0931 82.6424 60.6892 84.0426 58.9024 84.0426C54.1802 84.0426 49.3941 84.0426 44.6719 84.0426C42.8851 84.0426 41.4812 82.6424 41.4812 80.9239C41.4812 79.2054 42.8851 77.8051 44.6719 77.8051C49.3941 77.8051 54.1802 77.8051 58.9024 77.8051C60.6892 77.8051 62.0931 79.2054 62.0931 80.9239ZM58.9024 93.7172C57.1156 96.9633 54.6269 99 51.7553 99C48.9475 99 46.3949 96.9633 44.6719 93.7172C49.3941 93.7172 54.1802 93.7172 58.9024 93.7172Z"  };
+
+  /* ----------------------------------------------------------------------
+     Amostragem: caminho de SVG vira polígono de pontos igualmente espaçados
+     ---------------------------------------------------------------------- */
+
+  var PONTOS = 240;   /* por subcaminho. Em 620 px de lado, o erro de corda
+                         contra a curva original fica abaixo de meio pixel. */
+
+  function subcaminhos(d) {
+    if (/m/.test(d)) {
+      console.error(NOME + ": subcaminho relativo (m minúsculo) não é aceito. " +
+        "Escreva o caminho com M maiúsculo em cada subcaminho.");
+    }
+    return d.split(/(?=M)/).map(function (s) { return s.trim(); })
+      .filter(function (s) { return s.length > 2; });
+  }
+
+  function amostrar(d, n) {
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("width", "0");
+    svg.setAttribute("height", "0");
+    svg.style.position = "absolute";
+    svg.style.opacity = "0";
+    var caminho = document.createElementNS(NS, "path");
+    caminho.setAttribute("d", d);
+    svg.appendChild(caminho);
+    document.body.appendChild(svg);
+
+    var total = caminho.getTotalLength();
+    var pontos = [];
+    for (var i = 0; i < n; i += 1) {
+      var q = caminho.getPointAtLength(total * i / n);
+      pontos.push([q.x, q.y]);
+    }
+    document.body.removeChild(svg);
+    return pontos;
+  }
+
+  function area(pontos) {
+    var a = 0;
+    for (var i = 0; i < pontos.length; i += 1) {
+      var b = pontos[(i + 1) % pontos.length];
+      a += pontos[i][0] * b[1] - b[0] * pontos[i][1];
+    }
+    return a / 2;
+  }
+
+  function centro(pontos) {
+    var x = 0, y = 0;
+    for (var i = 0; i < pontos.length; i += 1) { x += pontos[i][0]; y += pontos[i][1]; }
+    return [x / pontos.length, y / pontos.length];
+  }
+
+  function girar(pontos, k) {
+    return pontos.slice(k).concat(pontos.slice(0, k));
+  }
+
+  function inverter(pontos) {
+    var r = pontos.slice();
+    r.reverse();
+    return r;
+  }
+
+  function percurso(a, b) {
+    var s = 0;
+    for (var i = 0; i < a.length; i += 1) {
+      var dx = a[i][0] - b[i][0];
+      var dy = a[i][1] - b[i][1];
+      s += dx * dx + dy * dy;
+    }
+    return s;
+  }
+
+  /* Alinha b a a: mesmo sentido de giro e o ponto de partida que dá o menor
+     percurso total. Sem isto a forma chega ao destino girando, que é o
+     defeito clássico de morph amostrado. */
+  function alinhar(a, b) {
+    var c = (area(a) > 0) === (area(b) > 0) ? b : inverter(b);
+    var melhor = 0;
+    var menor = Infinity;
+    for (var k = 0; k < c.length; k += 1) {
+      var custo = percurso(a, girar(c, k));
+      if (custo < menor) { menor = custo; melhor = k; }
+    }
+    return girar(c, melhor);
+  }
+
+  function colapsado(ponto, n) {
+    var r = [];
+    for (var i = 0; i < n; i += 1) { r.push([ponto[0], ponto[1]]); }
+    return r;
+  }
+
+  /* Cada desenho é reencaixado para que o lado maior dele preencha a caixa
+     inteira. Sem isto uma forma esguia entrava como miniatura no meio do
+     painel: medido antes do ajuste, a lâmpada desenhava 445 px de largura em
+     uma peça de 620, abaixo do piso de 580 da lei do preenchimento. */
+  function encaixar(sub) {
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    sub.forEach(function (pontos) {
+      pontos.forEach(function (q) {
+        if (q[0] < minX) { minX = q[0]; }
+        if (q[0] > maxX) { maxX = q[0]; }
+        if (q[1] < minY) { minY = q[1]; }
+        if (q[1] > maxY) { maxY = q[1]; }
+      });
+    });
+    var largura = maxX - minX;
+    var altura = maxY - minY;
+    var escala = 100 / Math.max(largura, altura);
+    var deslocaX = (100 - largura * escala) / 2 - minX * escala;
+    var deslocaY = (100 - altura * escala) / 2 - minY * escala;
+    return sub.map(function (pontos) {
+      return pontos.map(function (q) {
+        return [q[0] * escala + deslocaX, q[1] * escala + deslocaY];
+      });
+    });
+  }
+
+  function ler(d) {
+    var sub = subcaminhos(d).map(function (s) { return amostrar(s, PONTOS); })
+      .sort(function (x, y) { return Math.abs(area(y)) - Math.abs(area(x)); });
+    return encaixar(sub);
+  }
+
+  /* Pareia os dois desenhos. Quem tem menos subcaminhos ganha subcaminhos
+     colapsados em um ponto, no centro do buraco que vai nascer, e por isso o
+     buraco abre no lugar certo em vez de vir voando de fora. */
+  function parear(dDe, dPara) {
+    var A = ler(dDe);
+    var B = ler(dPara);
+    while (A.length < B.length) { A.push(colapsado(centro(B[A.length]), PONTOS)); }
+    while (B.length < A.length) { B.push(colapsado(centro(A[B.length]), PONTOS)); }
+    var de = [], para = [];
+    for (var i = 0; i < A.length; i += 1) {
+      de.push(A[i]);
+      para.push(alinhar(A[i], B[i]));
+    }
+    return { de: de, para: para };
+  }
+
+  function desenhar(par, avanco) {
+    var partes = [];
+    for (var s = 0; s < par.de.length; s += 1) {
+      var A = par.de[s];
+      var B = par.para[s];
+      var trecho = "";
+      for (var i = 0; i < A.length; i += 1) {
+        var x = A[i][0] + (B[i][0] - A[i][0]) * avanco;
+        var y = A[i][1] + (B[i][1] - A[i][1]) * avanco;
+        trecho += (i ? "L" : "M") + x.toFixed(3) + " " + y.toFixed(3);
+      }
+      partes.push(trecho + "Z");
+    }
+    return partes.join("");
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var catalogo = {};
+      Object.keys(FORMAS).forEach(function (k) { catalogo[k] = FORMAS[k]; });
+      Object.keys(p.catalogo || {}).forEach(function (k) { catalogo[k] = p.catalogo[k]; });
+
+      var formas = p.formas && p.formas.length ? p.formas.slice() : Object.keys(FORMAS);
+      formas.forEach(function (nome) {
+        if (!catalogo[nome]) {
+          throw new Error(NOME + ": a forma \"" + nome + "\" não existe no catálogo. " +
+            "Passe o caminho dela em catalogo, ou use uma das de fábrica: " +
+            Object.keys(FORMAS).join(", ") + ".");
+        }
+      });
+
+      var tamanho = p.tamanho == null ? 620 : p.tamanho;
+      /* A caixa desta peça é QUADRADA, então o teto dela não é o da largura.
+         A faixa do herói vai a 870 px de largura, mas a área útil tem 636 px
+         de altura: um glifo de 870 sairia 234 px para dentro da zona quieta
+         por onde a legenda passa. Por isso o teto aqui é 636. */
+      if (tamanho < 580 || tamanho > 636) {
+        console.error(NOME + ": tamanho " + tamanho + " px fica fora da faixa desta peça " +
+          "(580 a 636 px). O piso de 580 é a lei do preenchimento, PADRAO-VISUAL.md seção 4; " +
+          "o teto de 636 é a altura da área útil, porque a caixa do glifo é quadrada e um lado " +
+          "maior que isso invade a zona quieta da legenda.");
+      }
+
+      var el = document.createElement("div");
+      el.className = "fc-glifo";
+      el.style.width = tamanho + "px";
+      el.style.height = tamanho + "px";
+      el.setAttribute("data-cor", p.cor === "tinta" ? "tinta" : "destaque");
+
+      var svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("viewBox", "0 0 100 100");
+      var forma = document.createElementNS(NS, "path");
+      forma.setAttribute("class", "fc-glifo-forma");
+      /* evenodd para que subcaminho de dentro leia como buraco: a escotilha
+         do foguete, os anéis da lâmpada, o vazado da grade. */
+      forma.setAttribute("fill-rule", "evenodd");
+      svg.appendChild(forma);
+      el.appendChild(svg);
+
+      /* O par amostrado de cada transição é caro de calcular e não muda
+         nunca, então fica guardado. Guardar não quebra a pureza: a mesma
+         entrada continua devolvendo a mesma saída. */
+      var guardados = {};
+      function par(de, para) {
+        var chave = de + ">" + para;
+        if (!guardados[chave]) { guardados[chave] = parear(catalogo[de], catalogo[para]); }
+        return guardados[chave];
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var de = e.de || formas[0];
+        var para = e.para || de;
+        var avanco = e.avanco == null ? 0 : Math.max(0, Math.min(1, e.avanco));
+        if (!catalogo[de] || !catalogo[para]) {
+          throw new Error(NOME + ": definir recebeu uma forma que não está no catálogo.");
+        }
+        forma.setAttribute("d", desenhar(par(de, para), avanco));
+      }
+
+      definir({ de: formas[0], para: formas[0], avanco: 0 });
+
+      return {
+        el: el,
+        definir: definir,
+        formas: formas,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var padrao = { formas: ["no", "balao", "foguete", "raio", "joinha", "losango", "grade", "lampada"] };
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Uma silhueta só que atravessa uma sequência de conceitos. O painel diz de qual " +
+        "forma para qual forma, e quanto da transição já andou. Os instantes do meio são o que " +
+        "importa: é neles que morph mal feito aparece.",
+      casos: [
+        {
+          nome: "nó, em repouso",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: padrao,
+          estado: { de: "no", para: "no", avanco: 0 }
+        },
+        {
+          nome: "nó para balão, meio",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: padrao,
+          estado: { de: "no", para: "balao", avanco: 0.5 }
+        },
+        {
+          nome: "foguete para raio, meio",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: padrao,
+          estado: { de: "foguete", para: "raio", avanco: 0.5 }
+        },
+        {
+          nome: "grade para lâmpada, um terço",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: padrao,
+          estado: { de: "grade", para: "lampada", avanco: 0.33 }
+        },
+        {
+          nome: "joinha, em repouso",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: padrao,
+          estado: { de: "joinha", para: "joinha", avanco: 0 }
+        },
+        {
+          nome: "lâmpada de volta ao nó, meio, em tinta",
+          largura: 700, altura: 700, escala: 0.34, x: 40, y: 40,
+          parametros: { formas: padrao.formas, cor: "tinta" },
+          estado: { de: "lampada", para: "no", avanco: 0.5 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

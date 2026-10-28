@@ -1,0 +1,137 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   rotulo  ·  etiqueta curta em caixa alta
+   -------------------------------------------------------------------------
+   Nomeia uma coisa em duas ou três palavras: unidade, categoria, nome de
+   coluna, estado. É a peça que impede o painel de escrever frase.
+   ========================================================================= */
+
+.fc-rotulo {
+  font-family: var(--fonte-corpo);
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+}
+
+.fc-rotulo[data-cor="tinta"] { color: var(--tinta); }
+.fc-rotulo[data-cor="destaque"] { color: var(--destaque); }
+
+.fc-rotulo[data-alinhamento="centro"] { text-align: center; }
+.fc-rotulo[data-alinhamento="direita"] { text-align: right; }
+
+.fc-rotulo[data-pilula="1"] {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--superficie-alt);
+}
+
+.fc-rotulo[data-pilula="1"][data-cor="destaque"] {
+  background: var(--destaque);
+  color: var(--destaque-contraste);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "rotulo";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.texto) {
+        throw new Error("rotulo: o parâmetro texto é obrigatório.");
+      }
+
+      var el = document.createElement("div");
+      el.className = "fc-rotulo";
+      el.setAttribute("data-cor", p.cor || "suave");
+      el.setAttribute("data-alinhamento", p.alinhamento || "esquerda");
+      el.setAttribute("data-pilula", p.pilula ? "1" : "0");
+      /* A caixa alta é da apresentação, não do conteúdo: o texto continua
+         escrito como veio. */
+      el.textContent = p.texto;
+
+      function definir(estado) {
+        var e = estado || {};
+        el.setAttribute("data-cor", e.cor || p.cor || "suave");
+      }
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Etiqueta curta em caixa alta, no máximo três palavras. O texto nunca muda depois de criado: rótulo que troca de texto é rótulo errado, use dois e faça um sair.",
+      casos: [
+        {
+          nome: "suave",
+          largura: 480, altura: 120, escala: 0.62, x: 24, y: 40,
+          parametros: { texto: "antes do corte" },
+          estado: {}
+        },
+        {
+          nome: "tinta",
+          largura: 480, altura: 120, escala: 0.62, x: 24, y: 40,
+          parametros: { texto: "antes do corte", cor: "tinta" },
+          estado: {}
+        },
+        {
+          nome: "apontado",
+          largura: 480, altura: 120, escala: 0.62, x: 24, y: 40,
+          parametros: { texto: "antes do corte" },
+          estado: { cor: "destaque" }
+        },
+        {
+          nome: "pílula",
+          largura: 480, altura: 120, escala: 0.62, x: 24, y: 34,
+          parametros: { texto: "passo dois", pilula: true },
+          estado: {}
+        },
+        {
+          nome: "pílula apontada",
+          largura: 480, altura: 120, escala: 0.62, x: 24, y: 34,
+          parametros: { texto: "passo dois", pilula: true },
+          estado: { cor: "destaque" }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

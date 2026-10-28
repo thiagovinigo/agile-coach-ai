@@ -1,0 +1,69 @@
+{
+  "_nota": "Modelo do plano de um reel narrado. Copie para projetos/<nome>/materiais-de-trabalho/narrado-01/tomadas.json e troque tudo. Caminhos sao relativos a pasta do projeto (ou a raiz do pacote, no caso do logo). Instantes aceitam segundos, uma palavra da fala (\"agente\"), uma sequencia (\"voce escreve\") ou um objeto {\"palavra\": \"isso\", \"ocorrencia\": 2, \"ajuste\": -0.1}. Cada campo esta explicado em referencias/TOMADAS.md. As chaves que comecam com _ sao notas e sao ignoradas.",
+
+  "titulo": "O agente que monta a planilha sozinho",
+  "palavra_chave": "AGENTE",
+  "fonte_padrao": "materiais-de-trabalho/fonte/filme-de-lancamento.mp4",
+  "credito_padrao": "Filme de lançamento · @marca",
+
+  "voz": { "take": "a-respiro" },
+
+  "abertura": {
+    "titulo": "Sua planilha agora se monta sozinha",
+    "destaque": "sozinha",
+    "ate": "sozinha.",
+    "kicker": "NOVIDADE",
+    "logo": "componentes/logos/notion.svg"
+  },
+
+  "tomadas": [
+    {
+      "id": "t01",
+      "_nota": "O gancho: o momento real mais forte da filmagem, em largura cheia. centro_y 1000 empurra a filmagem para baixo do titulo.",
+      "entrada": 41.2,
+      "centro_y": 1000,
+      "empurrao": { "alvo": [820, 300, 520, 420], "inicio": "planilha", "duracao": 1.2 },
+      "anel": { "caixa": [900, 360, 300, 140], "palavra": "sozinha" }
+    },
+    {
+      "id": "t02",
+      "inicio": "voce pede",
+      "entrada": 12.6,
+      "recorte": [240, 0, 1440, 1080],
+      "transicao": "desfoque",
+      "empurrao": { "alvo": [600, 420, 700, 260], "inicio": "frase" },
+      "anel": { "caixa": [640, 460, 560, 90], "palavra": "frase" }
+    },
+    {
+      "id": "t03",
+      "inicio": "muda",
+      "fonte": "materiais-de-trabalho/fonte/gravacao-de-tela.mp4",
+      "credito": "Gravação de tela · @marca",
+      "entrada": 3.0,
+      "recorte": [300, 120, 1200, 900],
+      "transicao": "zoom",
+      "empurrao": { "alvo": [520, 360, 600, 300], "inicio": "grafico" }
+    },
+    {
+      "id": "t04",
+      "_nota": "Resumo: prints reais em leque por cima da filmagem escurecida.",
+      "inicio": "tres",
+      "entrada": 58.0,
+      "cartas": [
+        "materiais-de-trabalho/fonte/print-planilha.png",
+        { "imagem": "materiais-de-trabalho/fonte/print-grafico.png", "inicio": "graficos" },
+        { "imagem": "materiais-de-trabalho/fonte/print-relatorio.png", "inicio": "relatorios" }
+      ]
+    }
+  ],
+
+  "fechamento": {
+    "inicio": "Comenta",
+    "palavra": "AGENTE",
+    "item": "o guia de configuração",
+    "item_palavra": "guia",
+    "cauda": 1.4
+  },
+
+  "legenda": { "destaques": ["sozinha"] }
+}

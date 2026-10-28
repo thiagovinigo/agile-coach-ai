@@ -1,0 +1,202 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   card  ·  bloco de conteúdo, item comparado
+   -------------------------------------------------------------------------
+   O recipiente genérico: sozinho como herói, ou em grupo de dois ou três
+   para comparar. Card não é parágrafo, é um bloco com título curto.
+   ========================================================================= */
+
+.fc-card {
+  box-sizing: border-box;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fc-card[data-alinhamento="centro"] {
+  align-items: center;
+  text-align: center;
+}
+
+.fc-card-icone {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+}
+
+.fc-card-titulo {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+}
+
+.fc-card-corpo {
+  font-family: var(--fonte-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta-suave);
+}
+
+/* Dois degraus de tipografia, escolhidos pela largura do card. Um card de
+   coluna estreita com título de 92 px não cabe, e diminuir a fonte na mão é
+   como a identidade começa a escorrer. */
+.fc-card[data-porte="largo"] .fc-card-titulo { font-size: var(--tam-titulo); }
+.fc-card[data-porte="largo"] .fc-card-corpo { font-size: var(--tam-corpo); }
+.fc-card[data-porte="estreito"] .fc-card-titulo { font-size: var(--tam-corpo); }
+.fc-card[data-porte="estreito"] .fc-card-corpo { font-size: var(--tam-rotulo); }
+
+/* destacado: é o card que responde à fala agora */
+.fc-card[data-estado="destacado"] {
+  border-color: var(--destaque);
+}
+
+.fc-card[data-estado="destacado"] .fc-card-titulo {
+  color: var(--destaque);
+}
+
+/* apagado: existe para o destaque do vizinho respirar */
+.fc-card[data-estado="apagado"] .fc-card-titulo { color: var(--tinta-suave); }
+.fc-card[data-estado="apagado"] { border-color: color-mix(in srgb, var(--tinta-suave) 18%, transparent); }
+
+/* riscado: a opção descartada */
+.fc-card[data-estado="riscado"] .fc-card-titulo {
+  color: var(--tinta-suave);
+  text-decoration: line-through;
+  text-decoration-thickness: var(--traco);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "card";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.titulo) {
+        throw new Error("card: o parâmetro titulo é obrigatório.");
+      }
+
+      var largura = p.largura == null ? FC.UTIL : p.largura;
+
+      var el = document.createElement("div");
+      el.className = "fc-card";
+      el.style.width = largura + "px";
+      el.setAttribute("data-estado", "neutro");
+      el.setAttribute("data-alinhamento", p.alinhamento === "centro" ? "centro" : "esquerda");
+      el.setAttribute("data-porte", largura >= 640 ? "largo" : "estreito");
+
+      if (p.icone) {
+        var icone = document.createElement("img");
+        icone.className = "fc-card-icone";
+        icone.src = p.icone;
+        icone.alt = "";
+        el.appendChild(icone);
+      }
+
+      var titulo = document.createElement("div");
+      titulo.className = "fc-card-titulo";
+      titulo.textContent = p.titulo;
+      el.appendChild(titulo);
+
+      if (p.corpo) {
+        var corpo = document.createElement("div");
+        corpo.className = "fc-card-corpo";
+        corpo.textContent = p.corpo;
+        el.appendChild(corpo);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        el.setAttribute("data-estado", e.estado || "neutro");
+      }
+
+      definir({ estado: "neutro" });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var estreito = { titulo: "Roteiro", corpo: "O que a fala precisa dizer.", largura: 304 };
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Bloco de conteúdo. Sozinho na largura útil ele é herói; em grupo de três, com 304 px cada, ele compara. Quatro estados: neutro, destacado, apagado e riscado.",
+      casos: [
+        {
+          nome: "herói, neutro",
+          largura: 1000, altura: 340, escala: 0.4, x: 16, y: 16,
+          parametros: { titulo: "Um corte por ideia", corpo: "Se a ideia acaba em quinze segundos, o corte acaba junto.", largura: 968 },
+          estado: { estado: "neutro" }
+        },
+        {
+          nome: "herói, destacado",
+          largura: 1000, altura: 340, escala: 0.4, x: 16, y: 16,
+          parametros: { titulo: "Um corte por ideia", corpo: "Se a ideia acaba em quinze segundos, o corte acaba junto.", largura: 968 },
+          estado: { estado: "destacado" }
+        },
+        {
+          nome: "estreito, neutro",
+          largura: 340, altura: 340, escala: 0.5, x: 16, y: 16,
+          parametros: estreito,
+          estado: { estado: "neutro" }
+        },
+        {
+          nome: "estreito, apagado",
+          largura: 340, altura: 340, escala: 0.5, x: 16, y: 16,
+          parametros: estreito,
+          estado: { estado: "apagado" }
+        },
+        {
+          nome: "estreito, riscado",
+          largura: 340, altura: 340, escala: 0.5, x: 16, y: 16,
+          parametros: estreito,
+          estado: { estado: "riscado" }
+        },
+        {
+          nome: "centro, sem corpo",
+          largura: 340, altura: 340, escala: 0.5, x: 16, y: 16,
+          parametros: { titulo: "Antes", largura: 304, alinhamento: "centro" },
+          estado: { estado: "neutro" }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

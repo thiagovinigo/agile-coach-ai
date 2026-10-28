@@ -1,0 +1,534 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   janela-de-navegador  ·  moldura de navegador com barra de endereço
+   -------------------------------------------------------------------------
+   Página de repositório, site da ferramenta, documentação. Três formas
+   empilhadas fazem o olho reconhecer um navegador antes de ler qualquer
+   palavra: a aba com o canto de cima arredondado sobre uma faixa mais
+   escura, a pílula do endereço, e a área de página recuada dentro da
+   janela. Tirar qualquer uma das três devolve a peça ao retângulo com texto.
+
+   A marca entra pelo parâmetro marca, vira o ícone da aba e, com
+   conteudo "logo", a marca grande no meio da página. Sempre o arquivo de
+   verdade do acervo em logos/, nunca um desenho parecido.
+   ========================================================================= */
+
+.fc-navegador {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+  font-family: var(--fonte-corpo);
+}
+
+/* A faixa das abas é mais escura que a janela, e a aba ativa tem a cor da
+   janela. É esse degrau que faz a aba parecer estar na frente. */
+.fc-navegador-abas {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 14px 18px 0;
+  background: var(--superficie);
+}
+
+.fc-navegador-aba {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 62%;
+  padding: 14px 24px;
+  background: var(--superficie-alt);
+  border-radius: calc(var(--raio) * 0.7) calc(var(--raio) * 0.7) 0 0;
+  font-size: var(--tam-rotulo);
+  color: var(--tinta);
+}
+
+.fc-navegador-aba-nome {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-navegador-aba-fantasma {
+  width: 190px;
+  height: 46px;
+  border-radius: calc(var(--raio) * 0.7) calc(var(--raio) * 0.7) 0 0;
+  background: color-mix(in srgb, var(--tinta-suave) 16%, transparent);
+}
+
+.fc-navegador-barra {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+}
+
+.fc-navegador-setas {
+  display: flex;
+  gap: 14px;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+.fc-navegador-endereco {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 14px 26px;
+  border-radius: 999px;
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 22%, transparent);
+}
+
+.fc-navegador-cadeado {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+.fc-navegador-url {
+  font-family: var(--fonte-mono);
+  font-size: var(--tam-rotulo);
+  line-height: 1.2;
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  /* Endereco que nao cabe na barra sai com reticencias, como o navegador de
+     verdade faz. Cortar no meio da letra le como render quebrado. */
+  text-overflow: ellipsis;
+}
+
+.fc-navegador-cursor {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.5em;
+  height: 1em;
+  font-size: var(--tam-rotulo);
+  background: var(--destaque);
+}
+
+.fc-navegador[data-apontado="endereco"] .fc-navegador-endereco {
+  border-color: var(--destaque);
+}
+
+.fc-navegador[data-apontado="endereco"] .fc-navegador-url { color: var(--destaque); }
+
+.fc-navegador[data-apontado="aba"] .fc-navegador-aba {
+  box-shadow: inset 0 calc(var(--traco) * -1) 0 var(--destaque);
+  color: var(--destaque);
+}
+
+/* A página é recuada por todos os lados: é o recuo que dá a sensação de
+   conteúdo dentro de um programa, em vez de mais um card. */
+.fc-navegador-tela {
+  box-sizing: border-box;
+  margin: 0 18px 18px;
+  padding: 34px;
+  border-radius: calc(var(--raio) * 0.7);
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 18%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  overflow: hidden;
+}
+
+.fc-navegador[data-apontado="tela"] .fc-navegador-tela {
+  border-color: var(--destaque);
+}
+
+.fc-navegador-manchete {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+}
+
+.fc-navegador[data-apontado="tela"] .fc-navegador-manchete { color: var(--destaque); }
+
+/* Barras, não texto miúdo. O corpo de uma página não se lê num corte: ele
+   se reconhece pelo ritmo das linhas. Escrever aqui em 20 px seria texto
+   abaixo do piso de 34 px do pacote. */
+.fc-navegador-linha {
+  height: 18px;
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--tinta-suave) 34%, transparent);
+}
+
+.fc-navegador-vitrine {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0 18px;
+}
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-navegador-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-navegador-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-navegador-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-navegador-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-navegador-marca[data-erro="sim"] .fc-navegador-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "janela-de-navegador";
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  /* Móveis do sistema, desenhados em traço: seta de voltar, seta de avançar
+     e cadeado. Não são marca de ninguém, e a regra do logo de verdade
+     continua valendo inteira para o ícone da aba. */
+  function glifo(desenho, lado) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", lado);
+    svg.setAttribute("height", lado);
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.innerHTML = desenho;
+    return svg;
+  }
+
+  var VOLTAR = "<path d='M15 5 L8 12 L15 19'/>";
+  var AVANCAR = "<path d='M9 5 L16 12 L9 19'/>";
+  var CADEADO = "<rect x='4.5' y='10.5' width='15' height='9.5' rx='2'/>" +
+                "<path d='M8 10.5 V7.5 a4 4 0 0 1 8 0 V10.5'/>";
+
+  var LARGURA_LINHA = ["100%", "92%", "68%", "84%", "56%"];
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.titulo) {
+        throw new Error("janela-de-navegador: o parâmetro titulo é obrigatório. " +
+                        "Ele é o nome escrito na aba.");
+      }
+      if (!p.endereco) {
+        throw new Error("janela-de-navegador: o parâmetro endereco é obrigatório. " +
+                        "Ele é a URL na barra.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+      var alturaTela = p.altura_tela == null ? 300 : p.altura_tela;
+      var conteudo = p.conteudo == null ? "blocos" : p.conteudo;
+      var quantasLinhas = p.linhas == null ? 3 : p.linhas;
+
+      var el = document.createElement("div");
+      el.className = "fc-navegador";
+      el.style.width = largura + "px";
+      el.setAttribute("data-apontado", "nenhum");
+
+      /* 1. as abas */
+      var abas = document.createElement("div");
+      abas.className = "fc-navegador-abas";
+
+      var aba = document.createElement("div");
+      aba.className = "fc-navegador-aba";
+
+      var icone = criarMarca(p.marca, 38, "fc-navegador-marca");
+      if (icone) { aba.appendChild(icone); }
+
+      var nomeAba = document.createElement("span");
+      nomeAba.className = "fc-navegador-aba-nome";
+      nomeAba.textContent = p.titulo;
+      aba.appendChild(nomeAba);
+      abas.appendChild(aba);
+
+      var fantasma = document.createElement("div");
+      fantasma.className = "fc-navegador-aba-fantasma";
+      abas.appendChild(fantasma);
+
+      el.appendChild(abas);
+
+      /* 2. a barra de endereço */
+      var barra = document.createElement("div");
+      barra.className = "fc-navegador-barra";
+
+      var setas = document.createElement("span");
+      setas.className = "fc-navegador-setas";
+      setas.appendChild(glifo(VOLTAR, 40));
+      setas.appendChild(glifo(AVANCAR, 40));
+      barra.appendChild(setas);
+
+      var endereco = document.createElement("div");
+      endereco.className = "fc-navegador-endereco";
+
+      var cadeado = document.createElement("span");
+      cadeado.className = "fc-navegador-cadeado";
+      cadeado.appendChild(glifo(CADEADO, 34));
+      endereco.appendChild(cadeado);
+
+      var url = document.createElement("span");
+      url.className = "fc-navegador-url";
+      endereco.appendChild(url);
+
+      var cursor = document.createElement("span");
+      cursor.className = "fc-navegador-cursor";
+      endereco.appendChild(cursor);
+
+      barra.appendChild(endereco);
+      el.appendChild(barra);
+
+      /* 3. a página */
+      var tela = document.createElement("div");
+      tela.className = "fc-navegador-tela";
+      tela.style.height = alturaTela + "px";
+      el.appendChild(tela);
+
+      var vitrine = null;
+      if (conteudo === "logo") {
+        vitrine = document.createElement("div");
+        vitrine.className = "fc-navegador-vitrine";
+        var grande = criarMarca(p.marca, Math.round(alturaTela * 0.42), "fc-navegador-marca");
+        if (!grande) {
+          throw new Error("janela-de-navegador: conteudo \"logo\" precisa do parâmetro marca, " +
+                          "porque a marca no meio da página é o arquivo do acervo, " +
+                          "nunca um desenho.");
+        }
+        vitrine.appendChild(grande);
+        tela.appendChild(vitrine);
+      }
+
+      var manchete = null;
+      if (p.manchete) {
+        manchete = document.createElement("div");
+        manchete.className = "fc-navegador-manchete";
+        manchete.textContent = p.manchete;
+        tela.appendChild(manchete);
+      }
+
+      var linhas = [];
+      if (conteudo !== "vazio") {
+        for (var i = 0; i < quantasLinhas; i += 1) {
+          var linha = document.createElement("div");
+          linha.className = "fc-navegador-linha";
+          linha.style.width = LARGURA_LINHA[i % LARGURA_LINHA.length];
+          tela.appendChild(linha);
+          linhas.push(linha);
+        }
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var caracteres = e.caracteres == null ? -1 : e.caracteres;
+        var carregada = !!e.carregada;
+
+        url.textContent = caracteres < 0 ? p.endereco : String(p.endereco).slice(0, caracteres);
+        /* O cursor só existe enquanto alguém está digitando: linha pronta com
+           cursor deixaria um segundo ponto de acento aceso o corte inteiro. */
+        cursor.style.display = caracteres >= 0 ? "" : "none";
+
+        if (vitrine) { vitrine.style.display = carregada ? "" : "none"; }
+        if (manchete) { manchete.style.display = carregada ? "" : "none"; }
+        linhas.forEach(function (linha) {
+          linha.style.display = carregada ? "" : "none";
+        });
+
+        el.setAttribute("data-apontado", e.destaque || "nenhum");
+      }
+
+      definir({ caracteres: 0, carregada: false, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        tamanhoDoEndereco: function () {
+          return String(p.endereco).length;
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var base = {
+      marca: "github",
+      titulo: "fabrica-de-cortes",
+      endereco: "github.com/fabrica/cortes",
+      largura: 820,
+      altura_tela: 300
+    };
+
+    function com(extra) {
+      var saida = {};
+      Object.keys(base).forEach(function (chave) { saida[chave] = base[chave]; });
+      Object.keys(extra || {}).forEach(function (chave) { saida[chave] = extra[chave]; });
+      return saida;
+    }
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Moldura de navegador com aba, barra de endereço e página. A URL é digitada por definir({ caracteres }) e a página só aparece com carregada true. O acento vai para a aba, para o endereço ou para a página, um por vez.",
+      casos: [
+        {
+          nome: "digitando o endereço",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { caracteres: 11, carregada: false, destaque: null }
+        },
+        {
+          nome: "endereço apontado",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({}),
+          estado: { caracteres: -1, carregada: false, destaque: "endereco" }
+        },
+        {
+          nome: "página carregada",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({ manchete: "Leia-me do projeto" }),
+          estado: { caracteres: -1, carregada: true, destaque: null }
+        },
+        {
+          nome: "página apontada",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({ manchete: "Leia-me do projeto" }),
+          estado: { caracteres: -1, carregada: true, destaque: "tela" }
+        },
+        {
+          nome: "site da ferramenta",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({ marca: "figma", titulo: "Figma", endereco: "figma.com", conteudo: "logo", linhas: 2 }),
+          estado: { caracteres: -1, carregada: true, destaque: null }
+        },
+        {
+          nome: "logo que nao existe no acervo",
+          largura: 920, altura: 560, escala: 0.44, x: 20, y: 20,
+          parametros: com({ marca: "linkedin", titulo: "Vaga aberta", endereco: "linkedin.com/jobs" }),
+          estado: { caracteres: -1, carregada: true, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

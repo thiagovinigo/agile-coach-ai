@@ -1,0 +1,530 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   tela-de-conversa  ·  celular ou janela com balões alternados
+   -------------------------------------------------------------------------
+   O mock de conversa: aplicativo de mensagem, chat de uma ferramenta de IA,
+   janela de suporte. O que faz a peça ser reconhecida em meio segundo não é
+   detalhe, é forma: o aparelho com o alto-falante, a barra de contato em
+   cima, os balões alternando de lado com o canto de baixo cortado, e a barra
+   de escrever embaixo.
+
+   A marca entra pelo parâmetro marca e é SEMPRE o arquivo de verdade do
+   acervo em logos/. Faltando o arquivo, o lugar dele fica hachurado, o
+   console grita e o caminho vai para FC.logosAusentes. Nenhum desenho de
+   reserva, nunca uma forma parecida com o logo.
+   ========================================================================= */
+
+.fc-conversa {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  font-family: var(--fonte-corpo);
+  overflow: hidden;
+}
+
+/* O aparelho tem canto muito mais redondo e moldura mais grossa que a janela.
+   É esse par de diferenças que faz o olho decidir "isso é um celular" antes
+   de ler qualquer coisa. */
+.fc-conversa[data-moldura="celular"] {
+  border-radius: calc(var(--raio) * 2.2);
+  border-width: var(--traco);
+}
+
+.fc-conversa[data-moldura="janela"] {
+  border-radius: var(--raio);
+}
+
+.fc-conversa-topo {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 2px;
+}
+
+.fc-conversa-alto-falante {
+  width: 140px;
+  height: 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--tinta-suave) 55%, transparent);
+}
+
+.fc-conversa-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  border-bottom: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+}
+
+.fc-conversa-volta {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+.fc-conversa-avatar {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  font-size: var(--tam-rotulo);
+  color: var(--tinta);
+}
+
+.fc-conversa-nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-conversa-corpo {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  padding: 20px 28px;
+}
+
+.fc-conversa-balao {
+  box-sizing: border-box;
+  max-width: 78%;
+  padding: 16px 26px;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  border: var(--borda) solid transparent;
+  border-radius: calc(var(--raio) * 1.4);
+}
+
+/* O canto de baixo cortado é o que dá o bico do balão sem desenhar bico. */
+.fc-conversa-balao[data-lado="recebida"] {
+  align-self: flex-start;
+  background: var(--superficie);
+  border-color: color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+  border-bottom-left-radius: calc(var(--raio) * 0.3);
+}
+
+.fc-conversa-balao[data-lado="enviada"] {
+  align-self: flex-end;
+  background: color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+  border-bottom-right-radius: calc(var(--raio) * 0.3);
+}
+
+/* O acento nunca vem do lado do balão: vem de definir({ destaque }), porque
+   quem aponta é a fala. */
+.fc-conversa-balao[data-apontado="1"] {
+  border-color: var(--destaque);
+  color: var(--destaque);
+}
+
+.fc-conversa-digitando {
+  align-self: flex-start;
+  display: flex;
+  gap: 12px;
+  padding: 22px 26px;
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+  border-radius: calc(var(--raio) * 1.4);
+  border-bottom-left-radius: calc(var(--raio) * 0.3);
+}
+
+/* Três pontos parados. Eles são um ESTADO, não uma animação: peça que pulsa
+   sozinha é animação perpétua, e o padrão visual proíbe. */
+.fc-conversa-ponto {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--tinta-suave);
+}
+
+.fc-conversa-escrever {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 28px 16px;
+}
+
+.fc-conversa-campo {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  padding: 16px 28px;
+  border-radius: 999px;
+  background: var(--superficie);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 22%, transparent);
+}
+
+/* Barra de sugestão, não texto: um placeholder escrito miúdo seria texto
+   ilegível, e o piso do pacote é 34 px. Como forma, ele cumpre o papel. */
+.fc-conversa-marca-dagua {
+  width: 42%;
+  height: 16px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--tinta-suave) 40%, transparent);
+}
+
+.fc-conversa-enviar {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-conversa-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-conversa-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-conversa-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-conversa-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-conversa-marca[data-erro="sim"] .fc-conversa-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "tela-de-conversa";
+
+  /* O acervo, visto pelo navegador. O servidor do painel.py serve a pasta do
+     corte, a raiz do pacote e a pasta componentes como se fossem uma só. */
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  /* Glifos de interface, desenhados em traço. Eles não são marca de ninguém:
+     seta de voltar e seta de enviar são móveis do sistema, e a regra 7 do
+     registro fala de LOGO, que aqui continua vindo sempre de arquivo. */
+  function glifo(desenho, lado) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", lado);
+    svg.setAttribute("height", lado);
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.innerHTML = desenho;
+    return svg;
+  }
+
+  var VOLTA = "<path d='M15 5 L8 12 L15 19'/>";
+  var ENVIAR = "<path d='M3.5 12 L20.5 12'/><path d='M13.5 5 L20.5 12 L13.5 19'/>";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var mensagens = p.mensagens || [];
+      if (!mensagens.length) {
+        throw new Error("tela-de-conversa: o parâmetro mensagens é obrigatório.");
+      }
+      if (!p.titulo) {
+        throw new Error("tela-de-conversa: o parâmetro titulo é obrigatório. " +
+                        "Ele é o nome no alto da conversa.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+      var moldura = p.moldura === "janela" ? "janela" : "celular";
+
+      var el = document.createElement("div");
+      el.className = "fc-conversa";
+      el.style.width = largura + "px";
+      el.setAttribute("data-moldura", moldura);
+      if (p.altura) { el.style.height = p.altura + "px"; }
+
+      if (moldura === "celular") {
+        var topo = document.createElement("div");
+        topo.className = "fc-conversa-topo";
+        var falante = document.createElement("div");
+        falante.className = "fc-conversa-alto-falante";
+        topo.appendChild(falante);
+        el.appendChild(topo);
+      }
+
+      var cabeca = document.createElement("div");
+      cabeca.className = "fc-conversa-cabeca";
+
+      var volta = document.createElement("span");
+      volta.className = "fc-conversa-volta";
+      volta.appendChild(glifo(VOLTA, 40));
+      cabeca.appendChild(volta);
+
+      /* A marca de verdade quando ela existe; senão, a inicial do nome dentro
+         de um círculo. A inicial não é marca nenhuma, é uma letra: ela não
+         finge ser o logo de ninguém. */
+      var insignia = criarMarca(p.marca, 60, "fc-conversa-marca");
+      if (!insignia) {
+        insignia = document.createElement("span");
+        insignia.className = "fc-conversa-avatar";
+        insignia.textContent = String(p.titulo).trim().charAt(0).toUpperCase();
+      }
+      cabeca.appendChild(insignia);
+
+      var nome = document.createElement("div");
+      nome.className = "fc-conversa-nome";
+      nome.textContent = p.titulo;
+      cabeca.appendChild(nome);
+
+      el.appendChild(cabeca);
+
+      var corpo = document.createElement("div");
+      corpo.className = "fc-conversa-corpo";
+      el.appendChild(corpo);
+
+      var desenhados = mensagens.map(function (mensagem) {
+        var no = document.createElement("div");
+        no.className = "fc-conversa-balao";
+        no.setAttribute("data-lado", mensagem.lado === "enviada" ? "enviada" : "recebida");
+        corpo.appendChild(no);
+        return { no: no, conteudo: mensagem.texto || "" };
+      });
+
+      var digitando = document.createElement("div");
+      digitando.className = "fc-conversa-digitando";
+      digitando.innerHTML = "<i class='fc-conversa-ponto'></i>" +
+                            "<i class='fc-conversa-ponto'></i>" +
+                            "<i class='fc-conversa-ponto'></i>";
+      corpo.appendChild(digitando);
+
+      if (p.campo !== false) {
+        var escrever = document.createElement("div");
+        escrever.className = "fc-conversa-escrever";
+
+        var campo = document.createElement("div");
+        campo.className = "fc-conversa-campo";
+        var dagua = document.createElement("div");
+        dagua.className = "fc-conversa-marca-dagua";
+        campo.appendChild(dagua);
+        escrever.appendChild(campo);
+
+        var enviar = document.createElement("span");
+        enviar.className = "fc-conversa-enviar";
+        enviar.appendChild(glifo(ENVIAR, 44));
+        escrever.appendChild(enviar);
+
+        el.appendChild(escrever);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var visiveis = e.mensagens_visiveis == null ? 0 : e.mensagens_visiveis;
+        var caracteres = e.caracteres == null ? -1 : e.caracteres;
+        var apontado = e.destaque == null ? null : e.destaque;
+
+        desenhados.forEach(function (d, i) {
+          var mostrar = i < visiveis;
+          d.no.style.display = mostrar ? "" : "none";
+
+          if (!mostrar) {
+            d.no.textContent = "";
+            d.no.removeAttribute("data-apontado");
+            return;
+          }
+
+          if (i === visiveis - 1 && caracteres >= 0) {
+            d.no.textContent = d.conteudo.slice(0, caracteres);
+          } else {
+            d.no.textContent = d.conteudo;
+          }
+
+          if (apontado === i) {
+            d.no.setAttribute("data-apontado", "1");
+          } else {
+            d.no.removeAttribute("data-apontado");
+          }
+        });
+
+        digitando.style.display = e.digitando ? "" : "none";
+      }
+
+      definir({ mensagens_visiveis: 0, caracteres: -1, digitando: false, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Ajuda o painel a temporizar a digitação sem contar caractere na mão. */
+        tamanhoDaMensagem: function (i) {
+          return desenhados[i] ? desenhados[i].conteudo.length : 0;
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var CONVERSA = [
+      { texto: "manda o resumo da call", lado: "recebida" },
+      { texto: "mandei agora", lado: "enviada" },
+      { texto: "chegou, valeu", lado: "recebida" }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Conversa de celular ou de janela, com o logo de verdade do acervo no alto. Os balões chegam por definir({ mensagens_visiveis }), a digitação da última mensagem por caracteres, e o acento sai de destaque, nunca do lado do balão. Os três pontos são um estado parado, não uma animação.",
+      casos: [
+        {
+          nome: "vazia",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { marca: "whatsapp", titulo: "Suporte", mensagens: CONVERSA, largura: 820 },
+          estado: { mensagens_visiveis: 0, caracteres: -1, digitando: false, destaque: null }
+        },
+        {
+          nome: "primeira mensagem",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { marca: "whatsapp", titulo: "Suporte", mensagens: CONVERSA, largura: 820 },
+          estado: { mensagens_visiveis: 1, caracteres: -1, digitando: false, destaque: null }
+        },
+        {
+          nome: "digitando",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { marca: "whatsapp", titulo: "Suporte", mensagens: CONVERSA, largura: 820 },
+          estado: { mensagens_visiveis: 1, caracteres: -1, digitando: true, destaque: null }
+        },
+        {
+          nome: "conversa inteira",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { marca: "whatsapp", titulo: "Suporte", mensagens: CONVERSA, largura: 820 },
+          estado: { mensagens_visiveis: 3, caracteres: -1, digitando: false, destaque: null }
+        },
+        {
+          nome: "balão apontado",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { marca: "whatsapp", titulo: "Suporte", mensagens: CONVERSA, largura: 820 },
+          estado: { mensagens_visiveis: 3, caracteres: -1, digitando: false, destaque: 1 }
+        },
+        {
+          nome: "janela, sem marca",
+          largura: 880, altura: 660, escala: 0.42, x: 20, y: 20,
+          parametros: { titulo: "Claude", moldura: "janela", mensagens: CONVERSA, largura: 820, campo: false },
+          estado: { mensagens_visiveis: 2, caracteres: -1, digitando: false, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

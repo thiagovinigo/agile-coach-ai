@@ -1,0 +1,9 @@
+{
+  "name": "flow-reels",
+  "displayName": "Flow Reels",
+  "version": "3.0.0",
+  "description": "Fábrica de Cortes 3.0: do vídeo longo ao reel vertical pronto, com a sua marca. Tendências para saber o que gravar, transcrição, ganchos aprovados por você, o reel inteiro em cenas (Liquid Glass, tela cortada, modo mundo, linguagens e efeitos), reel narrado sem rosto, revisão no navegador e publicação com sim explícito.",
+  "author": { "name": "Flowgrammers" },
+  "license": "UNLICENSED",
+  "keywords": ["reels", "shorts", "tiktok", "cortes", "video", "instagram", "pt-BR"]
+}

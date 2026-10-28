@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Motor da Fábrica de Cortes</title>
+<link rel="stylesheet" href="motor.css">
+</head>
+<body>
+<!-- A lente do vidro: ruído suavizado deslocando o que está atrás do card. A força (scale)
+     vem do token vidro.refracao, escrita pelo motor.js. Só o Chromium aplica filtro SVG em
+     backdrop-filter, e o compositor renderiza sempre no Chromium. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="lente" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.009" numOctaves="2" seed="4" result="ruido"/>
+    <feGaussianBlur in="ruido" stdDeviation="3" result="suave"/>
+    <feDisplacementMap id="lente-desloca" in="SourceGraphic" in2="suave" scale="70"
+      xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div id="palco">
+  <div id="camada-cenas"></div>
+  <div id="camada-sobre"></div>
+  <div id="camada-legenda"></div>
+  <div id="camada-transicao"></div>
+</div>
+
+<script src="/componentes/vendor/gsap/gsap.min.js"></script>
+<script src="/componentes/vendor/gsap/CustomEase.min.js"></script>
+<script src="motor.js"></script>
+<script src="legenda.js"></script>
+<script src="transicoes.js"></script>
+<script src="modos/painel-rosto.js"></script>
+<script src="modos/rosto-vidro.js"></script>
+<script src="modos/tela-bolha.js"></script>
+<script src="modos/imagem-cheia.js"></script>
+<script src="modos/lado-a-lado.js"></script>
+<script src="modos/manchete.js"></script>
+<script src="modos/lista.js"></script>
+<script src="modos/tipografia.js"></script>
+<script src="modos/vidro-liquido.js"></script>
+<script src="modos/camadas.js"></script>
+<script src="modos/mundo.js"></script>
+<script src="sobre/pilha.js"></script>
+<script src="sobre/palavra.js"></script>
+<script src="sobre/hud.js"></script>
+<script src="sobre/mocks.js"></script>
+<script src="sobre/logo-volume.js"></script>
+<script src="sobre/visao.js"></script>
+<script src="sobre/profundidade.js"></script>
+<script src="/componentes/vendor/opentype/opentype.min.js"></script>
+<script src="sobre/tres.js"></script>
+<!-- 4.0 -->
+<script src="fx/comum.js"></script>
+<script src="transicoes-4.js"></script>
+<script src="modos/frames3d.js"></script>
+<script src="sobre/look.js"></script>
+<script src="sobre/maos-fx.js"></script>
+<script src="sobre/rosto-fx.js"></script>
+<script src="sobre/frames3d.js"></script>
+<script src="sobre/estetica.js"></script>
+<!-- 4.3: o pós no quadro inteiro (sem pos no plano, não monta nada) -->
+<script src="pos.js"></script>
+<!-- o three.js (MIT, local) é módulo: carrega depois dos scripts clássicos, e só então o motor monta -->
+<script type="module">
+  import * as THREE from "/componentes/vendor/three/three.module.min.js";
+  window.THREE = THREE;
+  Motor.iniciar();
+</script>
+</body>
+</html>

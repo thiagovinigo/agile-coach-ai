@@ -1,0 +1,361 @@
+{
+  "versao": 1,
+  "fps": 30,
+  "duracao": 41.567,
+  "fonte": {
+    "video": "fala.mp4"
+  },
+  "videos": {
+    "painel": "painel-c10.mp4"
+  },
+  "legenda": {
+    "estilo": "palavra-acesa",
+    "enfase": [
+      "Salesforce",
+      "Gartner"
+    ]
+  },
+  "cenas": [
+    {
+      "id": "c1",
+      "modo": "tipografia",
+      "inicio": 0.0,
+      "fim": 1.4,
+      "conteudo": {
+        "fundo": "rosto",
+        "destaque": [
+          "Cuidado!"
+        ]
+      }
+    },
+    {
+      "id": "c2",
+      "modo": "imagem-cheia",
+      "inicio": 1.4,
+      "fim": 3.4,
+      "entrada": {
+        "transicao": "clarao"
+      },
+      "conteudo": {
+        "imagem": "assets/megafone.jpg",
+        "movimento": "aproximar",
+        "foco": [
+          0.5,
+          0.42
+        ]
+      }
+    },
+    {
+      "id": "c3",
+      "modo": "manchete",
+      "inicio": 3.4,
+      "fim": 8.95,
+      "entrada": {
+        "transicao": "bolha-encolhe"
+      },
+      "conteudo": {
+        "imagem": "assets/salesforce-pagina.png",
+        "recorte": [
+          470,
+          4560,
+          1290,
+          680
+        ],
+        "fonte": "Salesforce · novembro de 2025",
+        "marcas": [
+          {
+            "t": 5.7,
+            "ate": 7.45,
+            "caixa": [
+              1238,
+              4878,
+              122,
+              54
+            ],
+            "tipo": "contorno"
+          },
+          {
+            "t": 7.5,
+            "ate": 8.95,
+            "caixa": [
+              570,
+              4930,
+              330,
+              46
+            ],
+            "tipo": "sublinhado",
+            "rotulo": "não confiáveis"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c4",
+      "modo": "rosto-vidro",
+      "inicio": 8.95,
+      "fim": 13.25,
+      "entrada": {
+        "transicao": "bolha-expande"
+      },
+      "zoom": [
+        {
+          "t": 12.68,
+          "escala": 1.08,
+          "segura": 0.5
+        }
+      ],
+      "conteudo": {
+        "elementos": [
+          {
+            "id": "n89",
+            "tipo": "numero",
+            "valor": 89,
+            "sufixo": "%",
+            "rotulo": "já viu a IA errar em produção",
+            "fonte": "SALESFORCE · 2025",
+            "t": 8.95,
+            "ate": 12.05,
+            "acende": [
+              10.77
+            ]
+          },
+          {
+            "id": "conviccao",
+            "tipo": "selo",
+            "texto": "repete com convicção",
+            "t": 12.12
+          }
+        ]
+      }
+    },
+    {
+      "id": "c5",
+      "modo": "lista",
+      "inicio": 13.25,
+      "fim": 18.65,
+      "entrada": {
+        "transicao": "chicote"
+      },
+      "conteudo": {
+        "titulo": "Com agente, piora",
+        "itens": [
+          {
+            "t": 14.48,
+            "texto": "Aprova"
+          },
+          {
+            "t": 14.86,
+            "texto": "Paga"
+          },
+          {
+            "t": 15.16,
+            "texto": "Cancela"
+          },
+          {
+            "t": 15.74,
+            "texto": "Grava o erro no sistema"
+          },
+          {
+            "t": 17.05,
+            "texto": "Com carimbo de IA"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c6",
+      "modo": "rosto-vidro",
+      "inicio": 18.65,
+      "fim": 21.75,
+      "conteudo": {
+        "elementos": [
+          {
+            "id": "outro-time",
+            "tipo": "texto",
+            "titulo": "“Vamos arrumar todos os dados antes”",
+            "corpo": "o outro time",
+            "t": 19.65
+          },
+          {
+            "id": "tambem-nao",
+            "tipo": "selo",
+            "texto": "também não",
+            "t": 21.19
+          }
+        ]
+      }
+    },
+    {
+      "id": "c7",
+      "modo": "tela-bolha",
+      "inicio": 21.75,
+      "fim": 25.8,
+      "entrada": {
+        "transicao": "lamina"
+      },
+      "conteudo": {
+        "tela": {
+          "fonte": "imagem",
+          "imagem": "assets/gartner-pagina.png",
+          "caixa": [
+            100,
+            1000,
+            1780,
+            1100
+          ]
+        },
+        "foco": [
+          {
+            "t": 21.95,
+            "caixa": [
+              150,
+              1150,
+              1100,
+              380
+            ]
+          }
+        ],
+        "marcas": [
+          {
+            "t": 22.55,
+            "ate": 24.79,
+            "caixa": [
+              762,
+              1270,
+              176,
+              76
+            ],
+            "tipo": "contorno",
+            "rotulo": "80% vão fracassar"
+          },
+          {
+            "t": 24.79,
+            "ate": 25.8,
+            "caixa": [
+              920,
+              1350,
+              204,
+              74
+            ],
+            "tipo": "contorno",
+            "rotulo": "até 2027"
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8",
+      "modo": "rosto-vidro",
+      "inicio": 25.8,
+      "fim": 27.6,
+      "entrada": {
+        "transicao": "mascara"
+      },
+      "conteudo": {
+        "elementos": [
+          {
+            "id": "museu",
+            "tipo": "imagem",
+            "imagem": "assets/museu.jpg",
+            "legenda": "bonito, e ninguém visita",
+            "t": 25.8
+          }
+        ]
+      }
+    },
+    {
+      "id": "c9",
+      "modo": "tipografia",
+      "inicio": 27.6,
+      "fim": 31.25,
+      "conteudo": {
+        "fundo": "marca",
+        "destaque": [
+          "decisão",
+          "primeiro?"
+        ]
+      }
+    },
+    {
+      "id": "c10",
+      "modo": "painel-rosto",
+      "inicio": 31.25,
+      "fim": 34.05,
+      "zoom": [
+        {
+          "t": 33.16,
+          "escala": 1.08,
+          "segura": 0.6
+        }
+      ],
+      "conteudo": {
+        "painel": "painel"
+      }
+    },
+    {
+      "id": "c11",
+      "modo": "lado-a-lado",
+      "inicio": 34.05,
+      "fim": 37.62,
+      "conteudo": {
+        "titulo": "Aceita dado imperfeito?",
+        "esquerda": {
+          "titulo": "IA que sugere",
+          "sub": "tolera dado imperfeito",
+          "t": 34.1
+        },
+        "direita": {
+          "titulo": "Agente que paga",
+          "sub": "exige dado certo",
+          "t": 36.12
+        },
+        "vencedor": {
+          "lado": "direita",
+          "t": 36.85
+        },
+        "separador": "×"
+      }
+    },
+    {
+      "id": "c12",
+      "modo": "tipografia",
+      "inicio": 37.62,
+      "fim": 39.75,
+      "entrada": {
+        "transicao": "zoom-desfoque"
+      },
+      "conteudo": {
+        "fundo": "rosto",
+        "destaque": [
+          "agente?"
+        ]
+      }
+    },
+    {
+      "id": "c13",
+      "modo": "rosto-vidro",
+      "inicio": 39.75,
+      "fim": 41.567,
+      "zoom": [
+        {
+          "t": 40.2,
+          "escala": 1.08,
+          "segura": 1.0
+        }
+      ],
+      "conteudo": {
+        "elementos": [
+          {
+            "id": "cta",
+            "tipo": "selo",
+            "texto": "comenta aqui",
+            "t": 39.8,
+            "acende": [
+              40.2
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

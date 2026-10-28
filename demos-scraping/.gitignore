@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets (NUNCA commitar)
+.env
+*.pem
+*.key
+
+# Playwright traces / screenshots / videos
+trace.zip
+*.png
+*.mp4
+test-results/
+playwright-report/

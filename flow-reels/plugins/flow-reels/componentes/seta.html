@@ -1,0 +1,231 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   seta  ·  ligação e direção entre duas coisas
+   -------------------------------------------------------------------------
+   É como o painel mostra causa, consequência e caminho sem escrever a
+   palavra. Ela se desenha uma vez e fica. Nada de traço pontilhado andando,
+   que é animação perpétua disfarçada.
+
+   A seta ocupa o painel inteiro e não recebe clique: as coordenadas dela são
+   as coordenadas do mundo, e é o que permite que ela grude na borda de outra
+   peça e acompanhe o re-fluxo.
+   ========================================================================= */
+
+.fc-seta {
+  pointer-events: none;
+  overflow: visible;
+}
+
+.fc-seta-traco,
+.fc-seta-ponta {
+  fill: none;
+  stroke: var(--tinta-suave);
+  stroke-width: var(--traco);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fc-seta[data-cor="destaque"] .fc-seta-traco,
+.fc-seta[data-cor="destaque"] .fc-seta-ponta { stroke: var(--destaque); }
+
+.fc-seta[data-cor="tinta"] .fc-seta-traco,
+.fc-seta[data-cor="tinta"] .fc-seta-ponta { stroke: var(--tinta); }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "seta";
+  var SVG = "http://www.w3.org/2000/svg";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.de || !p.para) {
+        throw new Error("seta: os parâmetros de e para são obrigatórios.");
+      }
+
+      var curvatura = p.curvatura == null ? 0 : p.curvatura;
+      var ponta = p.ponta || "simples";
+
+      var el = document.createElementNS(SVG, "svg");
+      el.setAttribute("class", "fc-seta");
+      el.setAttribute("width", FC.LARGURA);
+      el.setAttribute("height", FC.ALTURA);
+      el.setAttribute("viewBox", "0 0 " + FC.LARGURA + " " + FC.ALTURA);
+      el.setAttribute("data-cor", "suave");
+
+      var traco = document.createElementNS(SVG, "path");
+      traco.setAttribute("class", "fc-seta-traco");
+      el.appendChild(traco);
+
+      var pontaFim = document.createElementNS(SVG, "path");
+      pontaFim.setAttribute("class", "fc-seta-ponta");
+      el.appendChild(pontaFim);
+
+      var pontaInicio = document.createElementNS(SVG, "path");
+      pontaInicio.setAttribute("class", "fc-seta-ponta");
+      el.appendChild(pontaInicio);
+
+      /* Resolve um extremo: ou é um par de coordenadas do mundo, ou é o id de
+         outra peça, e aí a seta gruda na borda dela. Como a conta é refeita a
+         cada definir, o re-fluxo do layout é acompanhado sozinho. */
+      function caixaDe(alvo) {
+        if (Array.isArray(alvo)) {
+          return { x: alvo[0], y: alvo[1], meiaL: 0, meiaA: 0 };
+        }
+        var peca = FC.buscar(String(alvo).replace(/^#/, ""));
+        if (!peca) { return { x: 0, y: 0, meiaL: 0, meiaA: 0 }; }
+
+        var r = peca.palco.getBoundingClientRect();
+        var base = el.getBoundingClientRect();
+        return {
+          x: r.left - base.left + r.width / 2,
+          y: r.top - base.top + r.height / 2,
+          meiaL: r.width / 2,
+          meiaA: r.height / 2
+        };
+      }
+
+      /* Encosta o ponto na borda da caixa, na direção do outro extremo. */
+      function naBorda(caixa, alvoX, alvoY, folga) {
+        var dx = alvoX - caixa.x;
+        var dy = alvoY - caixa.y;
+        if ((caixa.meiaL === 0 && caixa.meiaA === 0) || (dx === 0 && dy === 0)) {
+          return { x: caixa.x, y: caixa.y };
+        }
+        var escalaX = dx === 0 ? Infinity : (caixa.meiaL + folga) / Math.abs(dx);
+        var escalaY = dy === 0 ? Infinity : (caixa.meiaA + folga) / Math.abs(dy);
+        var k = Math.min(escalaX, escalaY);
+        return { x: caixa.x + dx * k, y: caixa.y + dy * k };
+      }
+
+      function geometria() {
+        var a = caixaDe(p.de);
+        var b = caixaDe(p.para);
+        var inicio = naBorda(a, b.x, b.y, 16);
+        var fim = naBorda(b, a.x, a.y, 16);
+
+        var mx = (inicio.x + fim.x) / 2;
+        var my = (inicio.y + fim.y) / 2;
+        var dx = fim.x - inicio.x;
+        var dy = fim.y - inicio.y;
+        var dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        var cx = mx + (-dy / dist) * curvatura * dist * 0.35;
+        var cy = my + (dx / dist) * curvatura * dist * 0.35;
+
+        return { inicio: inicio, fim: fim, cx: cx, cy: cy };
+      }
+
+      function pontaEm(x, y, deX, deY) {
+        var ang = Math.atan2(y - deY, x - deX);
+        var tam = 26;
+        var abertura = 0.42;
+        var x1 = x - tam * Math.cos(ang - abertura);
+        var y1 = y - tam * Math.sin(ang - abertura);
+        var x2 = x - tam * Math.cos(ang + abertura);
+        var y2 = y - tam * Math.sin(ang + abertura);
+        return "M" + x1 + " " + y1 + " L" + x + " " + y + " L" + x2 + " " + y2;
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var desenhada = e.desenhada == null ? 0 : FC.limitar(e.desenhada, 0, 1);
+        el.setAttribute("data-cor", e.cor || "suave");
+
+        var g = geometria();
+        traco.setAttribute("d",
+          "M" + g.inicio.x + " " + g.inicio.y +
+          " Q" + g.cx + " " + g.cy + " " + g.fim.x + " " + g.fim.y);
+
+        var comprimento = traco.getTotalLength();
+        traco.style.strokeDasharray = comprimento;
+        traco.style.strokeDashoffset = comprimento * (1 - desenhada);
+
+        /* A ponta é a última coisa a existir: ou o traço chegou, ou não há
+           ponta nenhuma. Nada de ponta aparecendo aos poucos. */
+        var chegou = desenhada >= 0.92;
+        var mostrarFim = chegou && ponta !== "nenhuma";
+        var mostrarInicio = chegou && ponta === "dupla";
+
+        pontaFim.style.display = mostrarFim ? "" : "none";
+        pontaInicio.style.display = mostrarInicio ? "" : "none";
+
+        if (mostrarFim) {
+          pontaFim.setAttribute("d", pontaEm(g.fim.x, g.fim.y, g.cx, g.cy));
+        }
+        if (mostrarInicio) {
+          pontaInicio.setAttribute("d", pontaEm(g.inicio.x, g.inicio.y, g.cx, g.cy));
+        }
+      }
+
+      definir({ desenhada: 0 });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: FC.LARGURA, altura: FC.ALTURA };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Liga duas coisas e diz a direção. Os extremos são coordenadas do mundo ou o id de outra peça, e nesse caso a seta gruda na borda dela e acompanha o re-fluxo. O estado desenhada vai de 0 a 1 e a ponta só existe quando o traço chegou.",
+      casos: [
+        {
+          nome: "metade do traço",
+          largura: 520, altura: 300, escala: 0.56,
+          parametros: { de: [60, 150], para: [440, 150] },
+          estado: { desenhada: 0.5 }
+        },
+        {
+          nome: "inteira",
+          largura: 520, altura: 300, escala: 0.56,
+          parametros: { de: [60, 150], para: [440, 150] },
+          estado: { desenhada: 1 }
+        },
+        {
+          nome: "curva, apontada",
+          largura: 520, altura: 300, escala: 0.56,
+          parametros: { de: [60, 220], para: [440, 90], curvatura: 0.6 },
+          estado: { desenhada: 1, cor: "destaque" }
+        },
+        {
+          nome: "ponta dupla",
+          largura: 520, altura: 300, escala: 0.56,
+          parametros: { de: [60, 150], para: [440, 150], ponta: "dupla" },
+          estado: { desenhada: 1 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

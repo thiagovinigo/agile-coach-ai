@@ -1,0 +1,394 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   campo-de-proximidade  ·  a constelação de ferramentas ao alcance
+   -------------------------------------------------------------------------
+   Um punhado de marcas espalhadas pelo painel, cada uma numa pastilha
+   redonda. Um ponteiro passeia pelo campo e o que está perto dele cresce: a
+   escala cai suave com a distância radial, então o campo responde como onda,
+   não como degrau. Quem está mais dentro do alcance ganha o contorno em cor
+   de acento, e é esse par, tamanho mais acento, que conta a história sem
+   precisar de legenda.
+
+   Irmã do dock-de-apps: o dock serve quando a ideia é LARGURA numa barra
+   familiar, o campo serve quando a ideia é um punhado espalhado que alguém
+   alcança.
+
+   A conta é analítica, feita por quadro. Não existe relógio aqui dentro:
+   quem passeia o ponteiro é a render(t) do painel, pelo estado.
+
+   REGRA DURA: marca só entra com o logo de verdade do acervo em
+   componentes/logos/. Faltou o arquivo, a pastilha vira buraco hachurado no
+   quadro e a peça grita no console. A peça não desenha marca.
+   ========================================================================= */
+
+.fc-campo {
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Cada marca anda numa pastilha: uma superfície de verdade embaixo de todo
+   elemento que se mexe, nunca a marca boiando no fundo do painel. */
+.fc-campo-pastilha {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: 50%;
+}
+
+/* O acento da peça, e o único: a pastilha que está mais dentro do alcance
+   do ponteiro. Uma por quadro, porque o acento é único. */
+.fc-campo-pastilha[data-perto="sim"] {
+  border-width: var(--traco);
+  border-color: var(--destaque);
+}
+
+/* A silhueta do acervo, pintada por máscara para receber a tinta do painel.
+   O arquivo do acervo já é de uma cor só: isto não recolore marca nenhuma. */
+.fc-campo-forma {
+  width: 58%;
+  height: 58%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* A sentinela descobre que o arquivo não veio e segura o window.PRONTO até a
+   imagem carregar, porque o base.js só espera por elementos img. */
+.fc-campo-sentinela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A falta é feia de propósito. No tamanho de pastilha não cabe texto, então
+   o que aparece é a hachura, e o caminho que falta vai para o console. */
+.fc-campo-pastilha[data-erro="sim"] {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+      transparent 8px 16px
+    ),
+    var(--superficie);
+  border-style: dashed;
+  border-color: var(--destaque);
+}
+
+.fc-campo-pastilha[data-erro="sim"] .fc-campo-forma { display: none; }
+
+/* O ponteiro é móvel de interface, não marca: por isso ele pode ser
+   desenhado em traço, com a tinta do painel. */
+.fc-campo-ponteiro {
+  position: absolute;
+  display: block;
+  z-index: 40;
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "campo-de-proximidade";
+
+  /* A geometria do campo, em pixels. PASTILHA é o diâmetro em repouso, PICO
+     é a escala no ponto exato do ponteiro, e ALCANCE é o raio de influência:
+     na borda dele a pastilha já voltou ao tamanho de repouso. */
+  var PASTILHA = 84;
+  var PICO = 1.85;
+  var ALCANCE = 250;
+  var TETO = 8;          /* quantas marcas cabem no campo sem virar sopa */
+  var LIMIAR_ACENTO = 0.5;  /* a partir daqui a pastilha conta como alcançada */
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function limitar01(v) { return v < 0 ? 0 : (v > 1 ? 1 : v); }
+
+  function avisarFalta(alvo, motivo) {
+    var FC = window.FC;
+    if (FC) {
+      FC.logosAusentes = FC.logosAusentes || [];
+      if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+    }
+    console.error(
+      NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+      "Baixe o arquivo com: flow-reels componentes/baixar-logo <marca>. " +
+      "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+      "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+    );
+  }
+
+  function criarPonteiro() {
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "fc-campo-ponteiro");
+    svg.setAttribute("viewBox", "0 0 32 32");
+    svg.setAttribute("width", "38");
+    svg.setAttribute("height", "38");
+    var forma = document.createElementNS(NS, "path");
+    forma.setAttribute("d", "M3 2 L3 27 L10 20.5 L14.5 30 L19.5 27.6 L15 18.5 L24 18 Z");
+    forma.setAttribute("fill", "var(--tinta)");
+    forma.setAttribute("stroke", "var(--superficie)");
+    forma.setAttribute("stroke-width", "2");
+    forma.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(forma);
+    return svg;
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var marcas = p.marcas;
+      if (!marcas || marcas.length < 3) {
+        throw new Error(NOME + ": o parametro marcas e obrigatorio, com pelo menos tres " +
+                        "entradas, cada uma assim: { marca: \"notion\", x: 20, y: 35 }. " +
+                        "x e y vao de 0 a 100 e sao a posicao dentro do campo.");
+      }
+      if (marcas.length > TETO) {
+        console.error(
+          NOME + ": pediram " + marcas.length + " marcas e cabem " + TETO + " no campo sem as " +
+          "pastilhas se encavalarem no pico. As " + (marcas.length - TETO) + " ultimas ficaram " +
+          "de fora. Escolha quais " + TETO + " entram, ou parta o beat em dois."
+        );
+        marcas = marcas.slice(0, TETO);
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+      var altura = p.altura == null ? 560 : p.altura;
+
+      /* A margem interna é o raio da pastilha NO PICO, não o de repouso:
+         assim a pastilha que cresce na beira do campo continua inteira
+         dentro dele, em vez de ser cortada na hora em que ela é o assunto. */
+      var margem = (PASTILHA * PICO) / 2;
+      var faixaX = Math.max(0, largura - margem * 2);
+      var faixaY = Math.max(0, altura - margem * 2);
+
+      function paraX(pc) { return margem + (limitar01(pc / 100)) * faixaX; }
+      function paraY(pc) { return margem + (limitar01(pc / 100)) * faixaY; }
+
+      var el = document.createElement("div");
+      el.className = "fc-campo";
+      el.style.width = largura + "px";
+      el.style.height = altura + "px";
+
+      var itens = marcas.map(function (it, i) {
+        var nomeMarca = it && it.marca;
+        if (!nomeMarca) {
+          throw new Error(NOME + ": a entrada " + i + " esta sem marca. Marca e o nome do " +
+                          "arquivo do acervo em componentes/logos/, sem a extensao.");
+        }
+        var alvo = PASTA + nomeMarca + ".svg";
+
+        var cx = paraX(it.x == null ? 50 : it.x);
+        var cy = paraY(it.y == null ? 50 : it.y);
+
+        var pastilha = document.createElement("div");
+        pastilha.className = "fc-campo-pastilha";
+        pastilha.style.width = PASTILHA + "px";
+        pastilha.style.height = PASTILHA + "px";
+        pastilha.style.left = (cx - PASTILHA / 2) + "px";
+        pastilha.style.top = (cy - PASTILHA / 2) + "px";
+        pastilha.setAttribute("data-erro", "nao");
+
+        if (!SLUG_VALIDO.test(String(nomeMarca))) {
+          pastilha.setAttribute("data-erro", "sim");
+          avisarFalta(alvo, "o nome da marca nao vira nome de arquivo");
+        } else {
+          var forma = document.createElement("div");
+          forma.className = "fc-campo-forma";
+          forma.style.webkitMaskImage = "url('" + alvo + "')";
+          forma.style.maskImage = "url('" + alvo + "')";
+          pastilha.appendChild(forma);
+
+          var sentinela = document.createElement("img");
+          sentinela.className = "fc-campo-sentinela";
+          sentinela.setAttribute("aria-hidden", "true");
+          sentinela.alt = "";
+          sentinela.addEventListener("error", function () {
+            pastilha.setAttribute("data-erro", "sim");
+            avisarFalta(alvo, "o arquivo do logo nao existe");
+          }, { once: true });
+          sentinela.src = alvo;
+          pastilha.appendChild(sentinela);
+        }
+
+        el.appendChild(pastilha);
+        return { el: pastilha, cx: cx, cy: cy, giro: it.inclinacao || 0 };
+      });
+
+      var ponteiro = null;
+      if (p.ponteiro !== false) {
+        ponteiro = criarPonteiro();
+        el.appendChild(ponteiro);
+      }
+
+      /* Um quadro do campo. Tudo aqui é conta em cima do estado que chegou:
+         nenhuma leitura de relógio, nenhum acúmulo do quadro anterior.
+         Chamar duas vezes com o mesmo estado dá o mesmo pixel. */
+      function definir(estado) {
+        var e = estado || {};
+        var temPonteiro = e.x != null && e.y != null;
+        /* Sem ponteiro o campo fica em REPOUSO, mesmo com intensidade pedida:
+           sem x e y nao existe de onde a onda sairia, e deixar a intensidade
+           valer fazia as pastilhas do meio crescerem sozinhas, sem ponteiro
+           nenhum na tela para explicar o crescimento. */
+        var intensidade = !temPonteiro ? 0
+          : (e.intensidade == null ? 1 : limitar01(e.intensidade));
+        var px = margem + limitar01(temPonteiro ? e.x : 0.5) * faixaX;
+        var py = margem + limitar01(temPonteiro ? e.y : 0.5) * faixaY;
+
+        /* A queda radial: 1 em cima do ponteiro, 0 na borda do alcance. O
+           suavizador tira o bico da reta e é o que faz o campo responder como
+           onda em vez de degrau. */
+        var quedas = itens.map(function (item) {
+          var d = Math.hypot(px - item.cx, py - item.cy);
+          var q = limitar01(1 - d / ALCANCE);
+          return q * q * (3 - 2 * q);
+        });
+
+        /* O acento vai para UMA pastilha por quadro: a que está mais dentro
+           do alcance, e só quando ela está mesmo dentro dele. */
+        var eleita = -1;
+        var maior = 0;
+        quedas.forEach(function (q, i) {
+          if (q * intensidade > maior) { maior = q * intensidade; eleita = i; }
+        });
+        if (maior < LIMIAR_ACENTO) { eleita = -1; }
+
+        itens.forEach(function (item, i) {
+          var q = quedas[i];
+          var escala = 1 + (PICO - 1) * q * intensidade;
+          item.el.style.transform =
+            "rotate(" + item.giro + "deg) scale(" + escala + ")";
+          /* Quem cresce passa por cima de quem ficou pequeno, e todo mundo
+             passa por baixo do ponteiro. */
+          item.el.style.zIndex = 10 + Math.round(q * intensidade * 15);
+          item.el.setAttribute("data-perto", i === eleita ? "sim" : "nao");
+        });
+
+        if (ponteiro) {
+          if (!temPonteiro) {
+            ponteiro.style.display = "none";
+          } else {
+            ponteiro.style.display = "block";
+            ponteiro.style.left = (px - 5) + "px";
+            ponteiro.style.top = (py - 4) + "px";
+          }
+        }
+      }
+
+      definir({ x: null, y: null, intensidade: 0 });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Os números conferidos da peça, para o painel posicionar sem chutar. */
+        teto: TETO,
+        pastilha: PASTILHA,
+        pico: PASTILHA * PICO
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var constelacao = [
+      { marca: "notion", x: 6, y: 10, inclinacao: -3 },
+      { marca: "slack", x: 48, y: 4, inclinacao: 2 },
+      { marca: "googledrive", x: 92, y: 14, inclinacao: 4 },
+      { marca: "figma", x: 18, y: 52, inclinacao: 3 },
+      { marca: "claude", x: 58, y: 46, inclinacao: -2 },
+      { marca: "github", x: 96, y: 62, inclinacao: 1 },
+      { marca: "youtube", x: 34, y: 94, inclinacao: -4 },
+      { marca: "canva", x: 78, y: 96, inclinacao: 2 }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "A constelação de marcas ao alcance. O que está perto do ponteiro cresce, com a escala caindo suave pela distância radial, e a pastilha mais dentro do alcance recebe o contorno em cor de acento. A peça não tem relógio: quem passeia o ponteiro é a render(t) do painel, movendo x e y de 0 a 1. Cabem oito marcas; pedindo mais, a peça avisa no console e usa as oito primeiras.",
+      casos: [
+        {
+          nome: "repouso, sem ponteiro",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: { marcas: constelacao },
+          estado: { x: null, y: null, intensidade: 0 }
+        },
+        {
+          nome: "ponteiro no alto à esquerda",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: { marcas: constelacao },
+          estado: { x: 0.06, y: 0.1, intensidade: 1 }
+        },
+        {
+          nome: "ponteiro no centro",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: { marcas: constelacao },
+          estado: { x: 0.58, y: 0.46, intensidade: 1 }
+        },
+        {
+          nome: "ponteiro embaixo à direita",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: { marcas: constelacao },
+          estado: { x: 0.78, y: 0.96, intensidade: 1 }
+        },
+        {
+          nome: "meio caminho da intensidade",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: { marcas: constelacao },
+          estado: { x: 0.34, y: 0.5, intensidade: 0.5 }
+        },
+        {
+          nome: "logo que nao existe no acervo",
+          largura: 860, altura: 600, escala: 0.42, x: 20, y: 20,
+          parametros: {
+            marcas: [
+              { marca: "notion", x: 10, y: 20 },
+              { marca: "linkedin", x: 52, y: 50 },
+              { marca: "slack", x: 90, y: 80 }
+            ]
+          },
+          estado: { x: 0.52, y: 0.5, intensidade: 1 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

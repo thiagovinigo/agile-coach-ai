@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel de exemplo</title>
+
+<!--
+  =========================================================================
+  EXEMPLO-PAINEL.html  ·  o molde
+  -------------------------------------------------------------------------
+  Um painel completo de 1080 x 956, com window.render(t) funcionando, contando
+  uma historinha genérica de 10 segundos com cinco peças da biblioteca.
+
+  Copie este arquivo para projetos/<seu vídeo>/corte-NN/painel.html e troque o
+  roteiro. O que NÃO se troca é a estrutura:
+
+    1. a marca entra por FC.aplicarTokens, e nenhuma cor é escolhida aqui
+    2. as peças são criadas uma vez, no início, e nunca recriadas
+    3. o layout sai de altura MEDIDA, não de altura chutada
+    4. render(t) só desenha o estado do instante t, e é pura
+    5. window.DURACAO e window.PRONTO existem, senão o renderizador não sabe
+       quando começar nem quando parar
+
+  Para abrir na mão: sirva a pasta componentes com um servidor local, por
+  exemplo o módulo http.server do python, e abra por localhost. Aberto direto
+  por caminho de arquivo, o navegador proíbe a página de ler as peças ao lado,
+  e a página avisa isso na tela. No render de verdade quem injeta as peças é o
+  script do painel, então esse problema não existe.
+  =========================================================================
+-->
+
+<link rel="stylesheet" href="base.css">
+<script src="base.js"></script>
+<style>
+  html, body { width: 1080px; height: 956px; overflow: hidden; }
+</style>
+</head>
+<body>
+<script>
+(function () {
+  "use strict";
+
+  /* As peças que este painel usa. */
+  var PECAS = ["rotulo", "titulo-de-painel", "caixa-de-comando", "chip-numerado", "barra-de-progresso"];
+
+  window.DURACAO = 10;
+  window.PRONTO = false;
+
+  FC.carregarPecas(PECAS, montar, function (faltando) {
+    document.body.innerHTML =
+      "<div class='fc-demo'><div class='fc-demo-aviso'>Não consegui carregar estas peças: " +
+      faltando.join(", ") +
+      ". Sirva a pasta componentes por um servidor local e abra por localhost. " +
+      "No render de verdade o script do painel injeta as peças e isto não acontece.</div></div>";
+  });
+
+  function montar() {
+    /* ------------------------------------------------------------------
+       1. A marca
+       Em produção o script de render injeta window.TOKENS com o conteúdo de
+       marca/tokens.json antes de abrir a página. Nenhuma cor é escolhida
+       aqui dentro.
+       ------------------------------------------------------------------ */
+    FC.aplicarTokens(window.TOKENS || FC.TOKENS_PADRAO, { raiz: "../" });
+
+    var mundo = FC.montarPainel({ brilho: { x: 540, y: 480 } });
+
+    /* ------------------------------------------------------------------
+       2. As peças
+       Criadas uma vez só. Trocar o herói no meio do corte é começar um
+       segundo corte dentro do primeiro.
+       ------------------------------------------------------------------ */
+    var LINHAS = [
+      { texto: "cortar aula.mp4", tipo: "comando" },
+      { texto: "fala mapeada", tipo: "saida" },
+      { texto: "3 cortes prontos", tipo: "saida" }
+    ];
+
+    var etiqueta = FC.criar("rotulo", { texto: "passo a passo" }, "etiqueta");
+
+    var manchete = FC.criar("titulo-de-painel", {
+      texto: "Do bruto ao corte",
+      destaque_em: "ao corte"
+    }, "manchete");
+
+    /* O herói. Repare que esta caixa nasce SEM barra de título: com ela, a
+       pilha inteira passava da zona quieta de baixo. Tirar um enfeite é mais
+       barato do que diminuir a fonte. */
+    var terminal = FC.criar("caixa-de-comando", {
+      linhas: LINHAS,
+      largura: 780
+    }, "terminal");
+
+    var passos = [
+      FC.criar("chip-numerado", { numero: 1, texto: "ouvir", tamanho: "p" }, "passo1"),
+      FC.criar("chip-numerado", { numero: 2, texto: "escolher", tamanho: "p" }, "passo2"),
+      FC.criar("chip-numerado", { numero: 3, texto: "montar", tamanho: "p" }, "passo3")
+    ];
+
+    var medida = FC.criar("barra-de-progresso", {
+      valor: 1,
+      largura: 780,
+      segmentos: 3,
+      altura: 40,
+      mostrar_numero: false
+    }, "medida");
+
+    var todas = [etiqueta, manchete, terminal].concat(passos).concat([medida]);
+    todas.forEach(function (peca) { FC.adicionar(peca, mundo); });
+
+    /* ------------------------------------------------------------------
+       3. O layout, a partir de altura MEDIDA
+       Dois arranjos: A é com a etiqueta em cena, B é depois que ela sai e a
+       barra entra. As duas pilhas terminam antes de y = 786, que é onde
+       começa a zona quieta por onde a legenda passa.
+       ------------------------------------------------------------------ */
+    var X = FC.MARGEM;
+    var CENTRO = FC.MARGEM + (FC.UTIL - 780) / 2;
+
+    /* Peça que cresce se mede CHEIA. A caixa de comando começa vazia e ganha
+       linha por linha: medida vazia, ela reservaria espaço de menos e os
+       chips de baixo apanhariam quando a terceira linha entrasse. */
+    terminal.definir({ linhas_visiveis: LINHAS.length, caracteres: -1, destaque: null });
+
+    var h = {
+      etiqueta: etiqueta.medir().altura,
+      manchete: manchete.medir().altura,
+      terminal: terminal.medir().altura,
+      chip: passos[0].medir().altura,
+      medida: medida.medir().altura
+    };
+
+    terminal.definir({ linhas_visiveis: 0, caracteres: 0, destaque: null });
+
+    var arranjoA = (function () {
+      var y = FC.TOPO_UTIL + 8;
+      var a = { etiqueta: [X, y] };
+      y += h.etiqueta + 24;
+      a.manchete = [X, y];
+      y += h.manchete + 36;
+      a.terminal = [CENTRO, y];
+      y += h.terminal + 36;
+      a.chips = y;
+      a.fundo = y + h.chip;
+      return a;
+    }());
+
+    var arranjoB = (function () {
+      var y = FC.TOPO_UTIL + 8;
+      var b = { etiqueta: [X, y] };
+      b.manchete = [X, y];
+      y += h.manchete + 28;
+      b.terminal = [CENTRO, y];
+      y += h.terminal + 28;
+      b.chips = y;
+      y += h.chip + 28;
+      b.medida = [CENTRO, y];
+      b.fundo = y + h.medida;
+      return b;
+    }());
+
+    arranjoA.medida = arranjoB.medida;
+
+    /* Conferência que o painel faz de si mesmo: nada pode terminar abaixo da
+       zona quieta. Se estourar, o console avisa em vez de a gente descobrir
+       no vídeo pronto. */
+    [arranjoA.fundo, arranjoB.fundo].forEach(function (fundo, i) {
+      if (fundo > FC.BASE_UTIL) {
+        console.warn("O arranjo " + (i === 0 ? "A" : "B") + " termina em y=" +
+          Math.round(fundo) + ", abaixo do limite de " + FC.BASE_UTIL + ".");
+      }
+    });
+
+    function posicaoChip(arranjo, i) {
+      return [X + i * 330, arranjo.chips];
+    }
+
+    function entre(a, b, p) {
+      return [FC.interpolar(a[0], b[0], p), FC.interpolar(a[1], b[1], p)];
+    }
+
+    /* ------------------------------------------------------------------
+       4. O roteiro, em segundos
+       Uma linha por evento. É a tradução direta do beat-sheet, e é a única
+       parte que muda de um corte para outro.
+       ------------------------------------------------------------------ */
+    var T = {
+      etiqueta: 0.0,
+      manchete: 0.5,
+      marcaManchete: 1.0,
+      terminal: 1.5,
+      passos: 1.9,
+      digitar: 2.1,
+      digitarFim: 3.2,
+      acende: 3.5,
+      saida1: 4.3,
+      saida2: 5.4,
+      apontarSaida: 6.3,
+      sairEtiqueta: 6.6,
+      refluxo: 6.9,
+      medida: 7.3,
+      medidaFim: 8.5
+    };
+
+    var LETRAS = LINHAS[0].texto.length;
+
+    /* Chegar e acender são coisas diferentes. Os três chips chegam juntos em
+       T.passos, ainda apagados, e é isso que tira o vazio do meio do painel
+       enquanto o comando é digitado. Depois cada um tem a SUA janela: antes
+       dela apagado, dentro dela aceso, depois dela concluído. */
+    var JANELAS = [
+      [T.acende, T.saida1],
+      [T.saida1, T.saida2],
+      [T.saida2, T.apontarSaida]
+    ];
+
+    /* ------------------------------------------------------------------
+       5. render(t)
+       Pura, sem relógio próprio, sem transição de CSS. Chamar duas vezes com
+       o mesmo t dá exatamente o mesmo pixel.
+       ------------------------------------------------------------------ */
+    window.render = function (t) {
+      var p = FC.refluxo(t, T.refluxo);
+
+      /* 5.1 posição de repouso: o grupo inteiro anda junto no re-fluxo */
+      var posEtiqueta = entre(arranjoA.etiqueta, arranjoB.etiqueta, p);
+      FC.posicionar(etiqueta, posEtiqueta[0], posEtiqueta[1]);
+
+      var posManchete = entre(arranjoA.manchete, arranjoB.manchete, p);
+      FC.posicionar(manchete, posManchete[0], posManchete[1]);
+
+      var posTerminal = entre(arranjoA.terminal, arranjoB.terminal, p);
+      FC.posicionar(terminal, posTerminal[0], posTerminal[1]);
+
+      passos.forEach(function (chip, i) {
+        var pos = entre(posicaoChip(arranjoA, i), posicaoChip(arranjoB, i), p);
+        FC.posicionar(chip, pos[0], pos[1]);
+      });
+
+      FC.posicionar(medida, arranjoB.medida[0], arranjoB.medida[1]);
+
+      /* 5.2 chegada e saída */
+      var estadoEtiqueta = FC.chegada(t, T.etiqueta);
+      estadoEtiqueta.wipe = FC.wipe(t, T.sairEtiqueta);
+      if (estadoEtiqueta.wipe >= 1) { estadoEtiqueta.visivel = false; }
+      FC.aplicar(etiqueta, estadoEtiqueta);
+
+      FC.aplicar(manchete, FC.chegada(t, T.manchete));
+      FC.aplicar(terminal, FC.chegada(t, T.terminal));
+
+      passos.forEach(function (chip, i) {
+        FC.aplicar(chip, FC.escalonar(t, T.passos, i));
+      });
+
+      FC.aplicar(medida, FC.chegada(t, T.medida));
+
+      /* 5.3 o acento: UM por quadro, sempre na coisa de que a fala trata.
+         Aqui ele anda assim: manchete, cursor, passo 1, passo 2, passo 3,
+         linha de saída, barra. */
+      manchete.definir({ marcado: t >= T.marcaManchete && t < T.digitar });
+
+      /* 5.4 o herói mudando de estado, nunca reiniciando */
+      var digitacao = FC.recorte(t, T.digitar, T.digitarFim - T.digitar);
+      var estadoTerminal;
+
+      if (t < T.digitar) {
+        estadoTerminal = { linhas_visiveis: 0, caracteres: 0, destaque: null };
+      } else if (digitacao.ativo) {
+        estadoTerminal = { linhas_visiveis: 1, caracteres: Math.round(digitacao.p * LETRAS), destaque: null };
+      } else if (t < T.saida1) {
+        estadoTerminal = { linhas_visiveis: 1, caracteres: -1, destaque: null };
+      } else if (t < T.saida2) {
+        estadoTerminal = { linhas_visiveis: 2, caracteres: -1, destaque: null };
+      } else if (t < T.apontarSaida) {
+        estadoTerminal = { linhas_visiveis: 3, caracteres: -1, destaque: null };
+      } else if (t < T.medida) {
+        estadoTerminal = { linhas_visiveis: 3, caracteres: -1, destaque: 2 };
+      } else {
+        estadoTerminal = { linhas_visiveis: 3, caracteres: -1, destaque: null };
+      }
+      terminal.definir(estadoTerminal);
+
+      /* 5.5 os passos acompanham o que o herói está fazendo */
+      passos.forEach(function (chip, i) {
+        var janela = JANELAS[i];
+        var estado = "apagado";
+        if (t >= janela[1]) { estado = "concluido"; }
+        else if (t >= janela[0]) { estado = "aceso"; }
+        chip.definir({ estado: estado });
+      });
+
+      /* 5.6 a barra enche dentro do beat que fala dela, e depois para */
+      var enchendo = FC.recorte(t, T.medida, T.medidaFim - T.medida);
+      medida.definir({ valor: FC.curva(FC.CURVA.chegada, enchendo.p) });
+    };
+
+    /* ------------------------------------------------------------------
+       6. Pronto
+       O renderizador espera PRONTO virar true antes de pedir o primeiro
+       quadro. Sem isso o quadro zero sai com a fonte errada.
+       ------------------------------------------------------------------ */
+    window.render(0);
+    FC.aoFicarPronto(function () {
+      window.render(0);
+    });
+  }
+}());
+</script>
+</body>
+</html>

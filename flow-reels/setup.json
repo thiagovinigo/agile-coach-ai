@@ -1,0 +1,92 @@
+{
+  "versao": "3.0.0",
+  "marca": true,
+  "idioma": "pt-BR",
+  "transcricao": "replicate",
+  "max_cortes": 5,
+  "max_paralelo": 3,
+  "aprovar_ganchos": true,
+  "porta_revisao": 8790,
+  "oferecer_publicacao": true,
+  "caminhos": {
+    "marca": "marca",
+    "componentes": "componentes",
+    "fontes": "marca/fontes",
+    "projetos": "projetos",
+    "pautas": "pautas"
+  },
+  "_notas": {
+    "marca": "false = o /flow-reels:fabrica chama o /flow-reels:marca antes de qualquer corte. Vira true depois que você aprova o painel de amostra.",
+    "transcricao": "replicate (recomendado, cobra por minuto) ou local (WhisperX, baixa ~1,5 GB na primeira vez).",
+    "max_cortes": "quantos ganchos o planejador propoe por video. Pedir menos faz ele escolher os melhores.",
+    "aprovar_ganchos": "true = voce aprova a lista de ganchos antes de qualquer render.",
+    "oferecer_publicacao": "true = depois que você aprova os cortes na revisão, o pacote oferece uma vez publicar ou agendar pelo /flow-reels:publicar. false = ele entrega o MP4 e para calado. Oferecer não é publicar: cada publicação ainda pede um sim explícito, e sem a chave ZERNIO_API_KEY no .env a etapa apenas diz o que falta.",
+    "fontes": "as fontes moram dentro de marca/, porque a marca precisa se bastar: e a unica pasta que voce nao pode perder.",
+    "max_paralelo": "quantos cortes sao produzidos ao mesmo tempo. Cada render de painel sobe um Chromium, entao numero alto deixa a maquina lenta em vez de rapida. Baixe para 2 em maquina apertada.",
+    "projetos": "uma pasta por vídeo. Dentro dela, cada corte-NN/ tem só o MP4 de entrega e a capa, e todo o material de trabalho fica em materiais-de-trabalho/. A árvore inteira está em skills/fabrica/referencias/PASTA-DO-VIDEO.md, no plugin.",
+    "pautas": "o /flow-reels:tendencias, nas duas entradas. Troque nicho, subreddits, termos e youtube pelo seu nicho: de onde buscar (subreddits), o que conta como do nicho (termos), as buscas do YouTube, a duração do roteiro em segundos e quantas pautas vão para a vitrine. As buscas ficam em pautas/; cada pauta aprovada vira projetos/<nome>/ com ROTEIRO.md.",
+    "motor": "2.0 = compositor de quadro inteiro (motor/compor.py) com os 8 modos de cena; o painel de hoje continua disponível como o modo painel-rosto.",
+    "zonas_seguras": "onde texto e logo podem ficar no quadro 1080x1920. O padrão é uma estimativa conservadora para Reels orgânico (220 em cima, 480 embaixo, 70 nas laterais). Para anúncios, o guia da Meta pede mais: topo 269, base 1248, lateral 65.",
+    "capa": "a sua foto, que toda capa de reel usa (/flow-reels:produzir, capa). O /flow-reels:marca pede a foto no onboarding; o recorte sem fundo é gerado uma vez, a partir dela.",
+    "radar": "a entrada 'tema' do /flow-reels:tendencias. profundidade: rapida, equilibrada ou funda. dias: a janela pesquisada.",
+    "caminhos": "tudo relativo a esta pasta (a pasta de trabalho). componentes/ aqui é opcional: o que você baixa (logos, trilhas, modelos) entra aqui e vale por cima do que o plugin traz."
+  },
+  "pautas": {
+    "nicho": "Nutrição inteligente, consultório e clínicas de nutrição, IA para nutricionistas, retenção de pacientes",
+    "subreddits": [
+      "nutrition",
+      "dietetics",
+      "nutritionist",
+      "HealthTech",
+      "SaaS",
+      "productivity",
+      "AI_Agents"
+    ],
+    "termos": [
+      "nutricao",
+      "nutricionista",
+      "dieta",
+      "paciente",
+      "consulta",
+      "adesao",
+      "retencao",
+      "ia",
+      "inteligencia artificial",
+      "cardapio",
+      "exames",
+      "duolingo",
+      "gamificacao",
+      "telegram",
+      "clinica"
+    ],
+    "duracao_alvo": [
+      40,
+      50
+    ],
+    "por_lote": 5,
+    "youtube": [
+      "como reter pacientes nutricao",
+      "ia para nutricionistas",
+      "consultorio de nutricao faturamento",
+      "adesao a dieta pacientes"
+    ]
+  },
+  "motor": "2.0",
+  "zonas_seguras": {
+    "topo": 220,
+    "base": 1440,
+    "lateral": 70
+  },
+  "gates": {
+    "teto_transicoes_min": 8,
+    "parado_max_s": 2.5
+  },
+  "capa": {
+    "foto": "marca/foto.jpg",
+    "recorte": "marca/foto-recorte.png"
+  },
+  "radar": {
+    "profundidade": "equilibrada",
+    "dias": 30
+  }
+}

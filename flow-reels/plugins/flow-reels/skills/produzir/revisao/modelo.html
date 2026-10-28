@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revisão de cortes</title>
+<style>
+  :root{
+    --rosa: #E0085E;
+    --rosa-claro: #FF3D8F;
+    --rosa-fraco: rgba(224, 8, 94, 0.14);
+    --preto: #08070A;
+    --preto-alt: #121016;
+    --preto-card: #15121B;
+    --branco: #F6F3F8;
+    --cinza: #A39CB0;
+    --cinza-fraco: rgba(246, 243, 248, 0.10);
+    --recusa: #C9C3D4;
+    --raio: 18px;
+    --sans: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, "Liberation Mono", monospace;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+    background: var(--preto);
+    color: var(--branco);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(760px 520px at 12% -6%, rgba(224, 8, 94, 0.30), transparent 62%),
+      radial-gradient(620px 520px at 96% 8%, rgba(150, 12, 140, 0.24), transparent 66%),
+      radial-gradient(900px 700px at 50% 110%, rgba(224, 8, 94, 0.12), transparent 70%);
+  }
+
+  .envelope{
+    position: relative;
+    z-index: 1;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 28px 160px;
+  }
+
+  /* cabeçalho */
+
+  .selo{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--rosa-claro);
+    margin: 0 0 18px;
+  }
+
+  h1{
+    font-size: clamp(34px, 5.2vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 800;
+    margin: 0 0 10px;
+  }
+
+  h1 .marca{
+    display: inline-block;
+    width: 0.20em;
+    height: 0.20em;
+    background: var(--rosa);
+    vertical-align: 0.10em;
+    margin-right: 0.26em;
+    border-radius: 5px;
+  }
+
+  .chamada{
+    font-size:clamp(34px,6vw,58px);
+    line-height:1.02;
+    font-weight:800;
+    letter-spacing:-.02em;
+    text-transform:uppercase;
+    margin:2px 0 6px;
+    background:linear-gradient(92deg,#ff2e88 0%,#ff6ab0 58%,#fff 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .subtitulo{
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cinza);
+    margin: 0 0 26px;
+  }
+
+  .introducao{
+    font-size: 18px;
+    line-height: 1.62;
+    color: #DCD6E4;
+    max-width: 66ch;
+    margin: 0 0 14px;
+    border-left: 3px solid var(--rosa);
+    padding-left: 18px;
+  }
+
+  .regra{
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--cinza);
+    max-width: 70ch;
+    margin: 22px 0 0;
+    padding: 14px 16px;
+    border: 1px solid var(--cinza-fraco);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .divisor{
+    height: 1px;
+    background: linear-gradient(90deg, var(--rosa), rgba(224, 8, 94, 0));
+    margin: 40px 0 10px;
+  }
+
+  /* aviso de file:// e de erro */
+
+  .aviso{
+    border: 1px solid var(--rosa);
+    background: var(--rosa-fraco);
+    border-radius: var(--raio);
+    padding: 26px 28px;
+    margin: 32px 0;
+  }
+
+  .aviso h2{
+    margin: 0 0 12px;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .aviso p{ margin: 0 0 12px; line-height: 1.6; color: #EDE7F2; }
+
+  .aviso code, .codigo{
+    font-family: var(--mono);
+    font-size: 13px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--cinza-fraco);
+    border-radius: 8px;
+    padding: 3px 8px;
+    color: var(--rosa-claro);
+  }
+
+  .bloco-codigo{
+    display: block;
+    padding: 14px 16px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
+  }
+
+  /* card de corte */
+
+  .corte{
+    display: grid;
+    grid-template-columns: 322px 1fr;
+    gap: 34px;
+    background: var(--preto-card);
+    border: 1px solid var(--cinza-fraco);
+    border-left: 4px solid var(--cinza-fraco);
+    border-radius: var(--raio);
+    padding: 28px;
+    margin: 26px 0;
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  .corte[data-estado="aprovado"]{
+    border-left-color: var(--rosa);
+    box-shadow: 0 0 0 1px rgba(224, 8, 94, 0.28), 0 18px 48px rgba(224, 8, 94, 0.10);
+  }
+
+  .corte[data-estado="reprovado"]{
+    border-left-color: var(--recusa);
+    opacity: 0.74;
+  }
+
+  .moldura{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background: #000;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--cinza-fraco);
+  }
+
+  .moldura video{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #000;
+  }
+
+  .sem-video{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--cinza);
+  }
+
+  .abaixo-do-player{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .abaixo-do-player a{ color: var(--rosa-claro); text-decoration: none; }
+  .abaixo-do-player a:hover{ text-decoration: underline; }
+
+  .linha-topo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .id{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--preto);
+    background: var(--rosa);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-weight: 700;
+  }
+
+  .estado{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 5px 12px;
+    border: 1px solid var(--cinza-fraco);
+    color: var(--cinza);
+  }
+
+  .corte[data-estado="aprovado"] .estado{
+    color: var(--rosa-claro);
+    border-color: var(--rosa);
+    background: var(--rosa-fraco);
+  }
+
+  .corte[data-estado="reprovado"] .estado{
+    color: var(--recusa);
+    border-color: rgba(201, 195, 212, 0.45);
+  }
+
+  .corte h2{
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin: 0 0 22px;
+  }
+
+  .rotulo{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--rosa-claro);
+    margin: 22px 0 8px;
+  }
+
+  .gancho{
+    font-size: 23px;
+    line-height: 1.38;
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    margin: 0;
+    padding: 16px 20px;
+    background: linear-gradient(92deg, var(--rosa-fraco), rgba(224, 8, 94, 0));
+    border-left: 3px solid var(--rosa);
+    border-radius: 0 12px 12px 0;
+  }
+
+  .porque{
+    font-size: 16px;
+    line-height: 1.66;
+    color: #D8D2E0;
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  ul.decisoes{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  ul.decisoes li{
+    position: relative;
+    padding: 9px 0 9px 26px;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: #D8D2E0;
+    border-bottom: 1px dashed var(--cinza-fraco);
+  }
+
+  ul.decisoes li:last-child{ border-bottom: 0; }
+
+  ul.decisoes li::before{
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 18px;
+    width: 8px;
+    height: 8px;
+    background: var(--rosa);
+    border-radius: 2px;
+  }
+
+  .ficha{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ficha span{
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--cinza);
+    border: 1px solid var(--cinza-fraco);
+    border-radius: 999px;
+    padding: 5px 11px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .ficha span b{ color: var(--branco); font-weight: 700; }
+
+  .botoes{
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 26px 0 0;
+  }
+
+  button{
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 13px 26px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 90ms ease, background 140ms ease, color 140ms ease, border-color 140ms ease;
+  }
+
+  button:active{ transform: translateY(1px); }
+
+  .btn-aprovar{
+    background: transparent;
+    border-color: var(--rosa);
+    color: var(--rosa-claro);
+  }
+
+  .btn-aprovar:hover{ background: var(--rosa-fraco); }
+
+  .corte[data-estado="aprovado"] .btn-aprovar{
+    background: var(--rosa);
+    color: #12000A;
+    border-color: var(--rosa);
+  }
+
+  .btn-reprovar{
+    background: transparent;
+    border-color: rgba(201, 195, 212, 0.4);
+    color: var(--cinza);
+  }
+
+  .btn-reprovar:hover{ border-color: var(--recusa); color: var(--branco); }
+
+  .corte[data-estado="reprovado"] .btn-reprovar{
+    background: var(--recusa);
+    color: #15121B;
+    border-color: var(--recusa);
+  }
+
+  textarea{
+    width: 100%;
+    min-height: 92px;
+    resize: vertical;
+    background: rgba(0, 0, 0, 0.42);
+    border: 1px solid var(--cinza-fraco);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--branco);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  textarea::placeholder{ color: #6E6879; }
+  textarea:focus{ outline: none; border-color: var(--rosa); box-shadow: 0 0 0 3px var(--rosa-fraco); }
+
+  /* barra do rodapé */
+
+  .barra-rodape{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    background: rgba(8, 7, 10, 0.93);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid rgba(224, 8, 94, 0.36);
+  }
+
+  .barra-interna{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .contagens{
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cinza);
+  }
+
+  .contagens b{
+    font-family: var(--sans);
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin-right: 7px;
+    color: var(--branco);
+  }
+
+  .contagens .aprov b{ color: var(--rosa-claro); }
+
+  .acoes-rodape{ display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+  .btn-copiar{
+    background: var(--rosa);
+    color: #12000A;
+    border-color: var(--rosa);
+  }
+
+  .btn-copiar:hover{ background: var(--rosa-claro); }
+
+  .btn-limpar{
+    background: transparent;
+    border-color: var(--cinza-fraco);
+    color: var(--cinza);
+    font-size: 12px;
+    padding: 11px 18px;
+  }
+
+  .btn-limpar:hover{ color: var(--branco); border-color: var(--recusa); }
+
+  .btn-novo-estudio{
+    background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+    color: #fff !important;
+    border: 1px solid #A78BFA;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .btn-novo-estudio:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+    color: #fff !important;
+  }
+
+  .btn-reprovar-novo{
+    background: rgba(239, 68, 68, 0.16);
+    color: #fca5a5;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    font-size: 13px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 120ms ease;
+  }
+  .btn-reprovar-novo:hover{
+    background: #ef4444;
+    color: #fff;
+    border-color: #ef4444;
+  }
+
+  .recado{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--rosa-claro);
+    min-height: 16px;
+  }
+
+  /* caixa de texto do feedback, quando a cópia automática falha */
+
+  dialog{
+    background: var(--preto-alt);
+    color: var(--branco);
+    border: 1px solid var(--rosa);
+    border-radius: var(--raio);
+    padding: 26px;
+    max-width: 760px;
+    width: 92vw;
+  }
+
+  dialog::backdrop{ background: rgba(0, 0, 0, 0.72); }
+  dialog h2{ margin: 0 0 14px; font-size: 22px; font-weight: 800; }
+  dialog textarea{ min-height: 340px; font-family: var(--mono); font-size: 13px; }
+  dialog .botoes{ margin-top: 16px; }
+
+  @media (max-width: 900px){
+    .envelope{ padding: 34px 16px 190px; }
+    .corte{ grid-template-columns: 1fr; gap: 22px; padding: 20px; }
+    .moldura{ max-width: 300px; }
+  }
+</style>
+</head>
+<body>
+<div class="envelope">
+
+  <p class="selo">Fábrica de Cortes</p>
+  <p class="chamada">Valide seus cortes</p>
+  <h1><span class="marca"></span><span id="titulo-lote">Revisão de cortes</span></h1>
+  <p class="subtitulo" id="subtitulo-lote">carregando</p>
+
+  <div id="topo"></div>
+  <div class="divisor"></div>
+
+  <main id="lista"></main>
+</div>
+
+<footer class="barra-rodape" id="rodape" hidden>
+  <div class="barra-interna">
+    <div class="contagens">
+      <span class="aprov"><b id="n-aprovados">0</b>aprovados</span>
+      <span><b id="n-reprovados">0</b>reprovados</span>
+      <span><b id="n-pendentes">0</b>pendentes</span>
+    </div>
+    <div class="acoes-rodape">
+      <span class="recado" id="recado"></span>
+      <a href="http://localhost:8080?novo=1" target="_blank" class="btn-novo-estudio">✨ Criar Novo Reel no Estúdio (8080)</a>
+      <button class="btn-limpar" id="btn-limpar" type="button">Zerar respostas</button>
+      <button class="btn-copiar" id="btn-copiar" type="button">Copiar feedback</button>
+    </div>
+  </div>
+</footer>
+
+<dialog id="caixa-texto">
+  <h2>Copie o texto abaixo</h2>
+  <textarea id="texto-feedback" readonly></textarea>
+  <div class="botoes">
+    <button class="btn-copiar" id="btn-fechar-caixa" type="button">Fechar</button>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  "use strict";
+
+  var ARQUIVO = "revisao.json";
+  var PREFIXO = "fabrica-de-cortes:revisao:";
+
+  var elLista = document.getElementById("lista");
+  var elTopo = document.getElementById("topo");
+  var elTitulo = document.getElementById("titulo-lote");
+  var elSubtitulo = document.getElementById("subtitulo-lote");
+  var elRodape = document.getElementById("rodape");
+  var elRecado = document.getElementById("recado");
+
+  var dados = null;
+  var chave = "";
+  var estado = {};
+  var temArmazenamento = testarArmazenamento();
+
+  iniciar();
+
+  /* ------------------------------------------------------------------ */
+
+  function iniciar(){
+    if (location.protocol === "file:") {
+      avisarFile();
+      return;
+    }
+    fetch(ARQUIVO, { cache: "no-store" })
+      .then(function(r){
+        if (!r.ok) { throw new Error("resposta " + r.status); }
+        return r.json();
+      })
+      .then(montar)
+      .catch(function(erro){ avisarFalha(erro); });
+  }
+
+  function avisarFile(){
+    elSubtitulo.textContent = "a página não abriu por um servidor";
+    elTopo.innerHTML =
+      '<div class="aviso">' +
+        '<h2>Esta página precisa de um servidor</h2>' +
+        '<p>Você abriu o arquivo direto do disco, no modo <code>file://</code>. Nesse modo o navegador ' +
+        'bloqueia a leitura do <code>revisao.json</code> e do vídeo, então a revisão não carrega. ' +
+        'Não é defeito da página.</p>' +
+        '<p>Volte ao chat e peça para subir a revisão, ou rode você mesmo, na raiz do pacote:</p>' +
+        '<code class="codigo bloco-codigo">flow-reels produzir/nova-revisao projetos/&lt;seu-video&gt;</code>' +
+        '<p>O script imprime um endereço que começa com <code>http://localhost</code>. É por ele que se aprova.</p>' +
+      '</div>';
+  }
+
+  function avisarFalha(erro){
+    elSubtitulo.textContent = "não foi possível carregar a revisão";
+    elTopo.innerHTML =
+      '<div class="aviso">' +
+        '<h2>Faltou o arquivo da revisão</h2>' +
+        '<p>A página subiu, mas não achou o <code>revisao.json</code> ao lado dela. ' +
+        'Detalhe técnico: <code>' + escapar(String(erro && erro.message ? erro.message : erro)) + '</code></p>' +
+        '<p>Gere a revisão de novo com o script e recarregue:</p>' +
+        '<code class="codigo bloco-codigo">flow-reels produzir/nova-revisao projetos/&lt;seu-video&gt;</code>' +
+      '</div>';
+  }
+
+  function montar(json){
+    dados = json;
+    var cortes = Array.isArray(json.cortes) ? json.cortes : [];
+    chave = PREFIXO + (json.chave || json.lote || "sem-nome");
+    estado = carregarEstado();
+
+    document.title = "Revisão: " + (json.lote || "cortes");
+    elTitulo.textContent = json.lote || "Revisão de cortes";
+
+    var partes = [];
+    if (json.video) { partes.push(json.video); }
+    partes.push(cortes.length + (cortes.length === 1 ? " corte" : " cortes"));
+    if (json.gerado_em) { partes.push("gerado em " + json.gerado_em); }
+    elSubtitulo.textContent = partes.join("  ·  ");
+
+    var topo = "";
+    if (json.introducao) {
+      topo += '<p class="introducao">' + escapar(json.introducao) + "</p>";
+    }
+    topo += '<p class="regra">Regra da casa: corte não se aprova por print no chat nem por lista de ' +
+      'arquivo. Assista cada um aqui, do começo ao fim, com som. Aprovar quer dizer que está pronto ' +
+      'para publicar do jeito que está. Reprovar sem anotação obriga a produção a adivinhar, então ' +
+      'escreva o que incomodou, mesmo que em três palavras. ' +
+      (temArmazenamento
+        ? "Suas respostas ficam salvas neste navegador: dá para fechar a aba e voltar depois."
+        : "Atenção: este navegador está sem armazenamento local, então nada fica salvo se você fechar a aba. Copie o feedback antes de sair.") +
+      "</p>";
+    elTopo.innerHTML = topo;
+
+    if (!cortes.length) {
+      elLista.innerHTML =
+        '<div class="aviso"><h2>Nenhum corte nesta revisão</h2>' +
+        '<p>O arquivo carregou, mas a lista de cortes está vazia. Produza pelo menos um corte antes de ' +
+        'gerar a revisão.</p></div>';
+      return;
+    }
+
+    cortes.forEach(function(corte, i){ elLista.appendChild(cartao(corte, i)); });
+    elRodape.hidden = false;
+    document.getElementById("btn-copiar").addEventListener("click", copiarFeedback);
+    document.getElementById("btn-limpar").addEventListener("click", zerar);
+    document.getElementById("btn-fechar-caixa").addEventListener("click", function(){
+      document.getElementById("caixa-texto").close();
+    });
+    atualizarContagens();
+  }
+
+  function cartao(corte, indice){
+    var id = corte.id || ("corte-" + pad(indice + 1));
+    var registro = estado[id] || { estado: "pendente", anotacao: "" };
+
+    var el = document.createElement("article");
+    el.className = "corte";
+    el.dataset.estado = registro.estado;
+    el.dataset.id = id;
+
+    var arquivo = corte.arquivo || "";
+    var player = arquivo
+      ? '<video controls preload="metadata" playsinline src="' + escapar(arquivo) + '"></video>'
+      : '<div class="sem-video">sem arquivo de vídeo neste bloco<br>preencha o campo "arquivo" no revisao.json</div>';
+
+    var ficha = "";
+    if (corte.ficha && typeof corte.ficha === "object") {
+      var chips = Object.keys(corte.ficha).map(function(k){
+        return "<span>" + escapar(k) + ": <b>" + escapar(String(corte.ficha[k])) + "</b></span>";
+      }).join("");
+      if (chips) { ficha = '<p class="rotulo">Ficha técnica</p><div class="ficha">' + chips + "</div>"; }
+    }
+
+    var decisoes = "";
+    if (Array.isArray(corte.decisoes) && corte.decisoes.length) {
+      decisoes = '<p class="rotulo">Decisões em aberto</p><ul class="decisoes">' +
+        corte.decisoes.map(function(d){ return "<li>" + escapar(d) + "</li>"; }).join("") +
+        "</ul>";
+    }
+
+    var duracao = corte.duracao_s ? formatarDuracao(corte.duracao_s) : "";
+
+    el.innerHTML =
+      '<div class="coluna-player">' +
+        '<div class="moldura">' + player + "</div>" +
+        '<div class="abaixo-do-player">' +
+          "<span>" + escapar(duracao || "duração não informada") + "</span>" +
+          (arquivo ? '<a href="' + escapar(arquivo) + '" target="_blank" rel="noopener">abrir em outra aba</a>' : "") +
+        "</div>" +
+      "</div>" +
+      '<div class="coluna-texto">' +
+        '<div class="linha-topo">' +
+          '<span class="id">' + escapar(id) + "</span>" +
+          '<span class="estado">' + nomeEstado(registro.estado) + "</span>" +
+        "</div>" +
+        "<h2>" + escapar(corte.titulo || "Sem título") + "</h2>" +
+        (corte.gancho ? '<p class="rotulo">Gancho</p><p class="gancho">' + escapar(corte.gancho) + "</p>" : "") +
+        (corte.porque ? '<p class="rotulo">Por que este corte</p><p class="porque">' + escapar(corte.porque) + "</p>" : "") +
+        decisoes +
+        ficha +
+        '<div class="botoes">' +
+          '<button type="button" class="btn-aprovar">Aprovar</button>' +
+          '<button type="button" class="btn-reprovar">Reprovar</button>' +
+          '<button type="button" class="btn-reprovar-novo">👎 Reprovar & Começar Novo Reel</button>' +
+        "</div>" +
+        '<p class="rotulo">Sua anotação</p>' +
+        '<textarea placeholder="O que mudar, o que ficou bom, onde travou. Se reprovou, diga o motivo."></textarea>' +
+      "</div>";
+
+    var campo = el.querySelector("textarea");
+    campo.value = registro.anotacao || "";
+    campo.addEventListener("input", function(){
+      gravar(id, { anotacao: campo.value });
+    });
+
+    el.querySelector(".btn-aprovar").addEventListener("click", function(){
+      alternar(el, id, "aprovado");
+    });
+    el.querySelector(".btn-reprovar").addEventListener("click", function(){
+      alternar(el, id, "reprovado");
+    });
+    el.querySelector(".btn-reprovar-novo").addEventListener("click", function(){
+      alternar(el, id, "reprovado");
+      var anotacao = (campo.value || "").trim();
+      var url = "http://localhost:8080?reprovar=1&id=" + encodeURIComponent(id);
+      if (anotacao) {
+        url += "&feedback=" + encodeURIComponent(anotacao);
+      }
+      window.open(url, "_blank");
+    });
+
+    return el;
+  }
+
+  function alternar(el, id, alvo){
+    var atual = (estado[id] && estado[id].estado) || "pendente";
+    var novo = atual === alvo ? "pendente" : alvo;
+    gravar(id, { estado: novo });
+    el.dataset.estado = novo;
+    el.querySelector(".estado").textContent = nomeEstado(novo);
+    atualizarContagens();
+  }
+
+  function gravar(id, campos){
+    var registro = estado[id] || { estado: "pendente", anotacao: "" };
+    Object.keys(campos).forEach(function(k){ registro[k] = campos[k]; });
+    estado[id] = registro;
+    salvarEstado();
+  }
+
+  function atualizarContagens(){
+    var cortes = dados.cortes || [];
+    var a = 0, r = 0, p = 0;
+    cortes.forEach(function(c, i){
+      var id = c.id || ("corte-" + pad(i + 1));
+      var e = (estado[id] && estado[id].estado) || "pendente";
+      if (e === "aprovado") { a++; } else if (e === "reprovado") { r++; } else { p++; }
+    });
+    document.getElementById("n-aprovados").textContent = a;
+    document.getElementById("n-reprovados").textContent = r;
+    document.getElementById("n-pendentes").textContent = p;
+  }
+
+  function textoDoFeedback(){
+    var cortes = dados.cortes || [];
+    var blocos = [];
+    var a = 0, r = 0, p = 0;
+
+    cortes.forEach(function(c, i){
+      var id = c.id || ("corte-" + pad(i + 1));
+      var registro = estado[id] || { estado: "pendente", anotacao: "" };
+      if (registro.estado === "aprovado") { a++; }
+      else if (registro.estado === "reprovado") { r++; }
+      else { p++; }
+
+      blocos.push("[" + nomeEstado(registro.estado).toUpperCase() + "] " + id + ": " + (c.titulo || "sem título"));
+      if (c.gancho) { blocos.push('  Gancho: "' + c.gancho + '"'); }
+      var anotacao = (registro.anotacao || "").trim();
+      blocos.push("  Anotação: " + (anotacao ? anotacao.replace(/\n/g, "\n  ") : "(nenhuma)"));
+      blocos.push("");
+    });
+
+    var linhas = ["REVISÃO: " + (dados.lote || "cortes")];
+    if (dados.video) { linhas.push("Vídeo: " + dados.video); }
+    linhas.push("Placar: " + a + " aprovados, " + r + " reprovados, " + p + " pendentes.");
+    linhas.push("");
+    linhas = linhas.concat(blocos);
+    linhas.push("Gerado pela página de revisão da Fábrica de Cortes.");
+    return linhas.join("\n");
+  }
+
+  function copiarFeedback(){
+    var texto = textoDoFeedback();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(function(){
+        recado("copiado, agora é só colar no chat");
+      }).catch(function(){ mostrarCaixa(texto); });
+    } else {
+      mostrarCaixa(texto);
+    }
+  }
+
+  function mostrarCaixa(texto){
+    var caixa = document.getElementById("caixa-texto");
+    document.getElementById("texto-feedback").value = texto;
+    if (typeof caixa.showModal === "function") { caixa.showModal(); }
+    else { window.prompt("Copie o texto:", texto); }
+    recado("a cópia automática falhou, copie da caixa");
+  }
+
+  function zerar(){
+    if (!window.confirm("Isso apaga suas respostas e anotações desta revisão. Continuar?")) { return; }
+    estado = {};
+    salvarEstado();
+    elLista.innerHTML = "";
+    (dados.cortes || []).forEach(function(c, i){ elLista.appendChild(cartao(c, i)); });
+    atualizarContagens();
+    recado("respostas zeradas");
+  }
+
+  function recado(texto){
+    elRecado.textContent = texto;
+    window.setTimeout(function(){ elRecado.textContent = ""; }, 4000);
+  }
+
+  /* utilidades ------------------------------------------------------- */
+
+  function testarArmazenamento(){
+    try {
+      window.localStorage.setItem("fdc-teste", "1");
+      window.localStorage.removeItem("fdc-teste");
+      return true;
+    } catch (e) { return false; }
+  }
+
+  function carregarEstado(){
+    if (!temArmazenamento) { return {}; }
+    try {
+      var cru = window.localStorage.getItem(chave);
+      return cru ? JSON.parse(cru) : {};
+    } catch (e) { return {}; }
+  }
+
+  function salvarEstado(){
+    if (!temArmazenamento) { return; }
+    try { window.localStorage.setItem(chave, JSON.stringify(estado)); } catch (e) {}
+  }
+
+  function nomeEstado(e){
+    if (e === "aprovado") { return "aprovado"; }
+    if (e === "reprovado") { return "reprovado"; }
+    return "pendente";
+  }
+
+  function pad(n){ return n < 10 ? "0" + n : String(n); }
+
+  function formatarDuracao(s){
+    var total = Math.round(Number(s));
+    if (!isFinite(total) || total <= 0) { return ""; }
+    var m = Math.floor(total / 60);
+    var r = total % 60;
+    return m > 0 ? (m + " min " + pad(r) + " s") : (r + " s");
+  }
+
+  function escapar(txt){
+    return String(txt)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+</script>
+</body>
+</html>

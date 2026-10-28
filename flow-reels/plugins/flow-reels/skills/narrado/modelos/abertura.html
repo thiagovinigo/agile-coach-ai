@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>abertura do reel narrado</title>
+<!--
+  O cartao de abertura do reel narrado. Fundo transparente: a filmagem roda por
+  baixo, montada pelo compor_narrado.py.
+
+  O que entra pela janela (quem injeta e o renderizar_html.py):
+    window.TOKENS  a marca, de marca/tokens.json. Nenhuma cor e escrita aqui.
+    window.DADOS   {
+      duracao:  segundos de pagina,
+      kicker:   texto curto da pilula de cima, por exemplo "NOVIDADE",
+      logo:     {url: "/componentes/logos/<marca>.svg", monocromatico: true} ou null,
+      palavras: [{texto, t, destaque}]  o titulo, palavra por palavra, com o instante
+                em que cada uma entra (o instante em que a voz diz a palavra),
+      saida:    instante em que o cartao sai com o wipe e a legenda assume,
+      topo:     y do topo da pilula (padrao 190)
+    }
+
+  Contrato de pagina igual ao do painel do pacote: window.DURACAO, window.PRONTO
+  e window.render(t), pura. Nada de transicao de CSS, nada de relogio proprio.
+-->
+<link rel="stylesheet" href="/componentes/base.css">
+<style>
+  html, body { background: transparent !important; margin: 0; overflow: hidden; }
+  #palco { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #cartao { position: absolute; left: 60px; width: 960px; }
+  .pilula {
+    position: relative; overflow: hidden;
+    display: inline-flex; align-items: center; gap: 18px;
+    padding: 14px 30px 14px 22px; border-radius: 999px;
+    background: var(--superficie); color: var(--tinta);
+    border: var(--borda) solid var(--destaque);
+    font-family: var(--fonte-titulo); font-size: var(--tam-rotulo);
+    letter-spacing: var(--espacamento-rotulo); text-transform: uppercase; line-height: 1;
+  }
+  #logo { display: flex; }
+  #logo:empty { display: none; }
+  .logo { display: block; width: 46px; height: 46px; flex: 0 0 46px; }
+  .logo.mono { background: var(--tinta); -webkit-mask-size: contain; mask-size: contain;
+               -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+               -webkit-mask-position: center; mask-position: center; }
+  .logo.cor { object-fit: contain; }
+  .placa {
+    position: relative; overflow: hidden; margin-top: 26px;
+    display: inline-block; max-width: 960px; box-sizing: border-box;
+    padding: 26px 40px 34px; border-radius: var(--raio);
+    background: var(--superficie);
+  }
+  .titulo {
+    font-family: var(--fonte-titulo); font-size: 100px; line-height: 1.04;
+    color: var(--tinta); margin: 0;
+  }
+  .p { display: inline-block; margin-right: 0.24em; will-change: transform; }
+  .p.destaque { color: var(--destaque); }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="cartao">
+    <div class="pilula" id="pilula"><span id="logo"></span><span id="kicker"></span></div><br>
+    <div class="placa" id="placa"><h1 class="titulo" id="titulo"></h1></div>
+  </div>
+</div>
+<script src="/componentes/base.js"></script>
+<script>
+(function () {
+  var D = window.DADOS || {
+    duracao: 4, kicker: "NOVIDADE", logo: null, saida: 3.6,
+    palavras: [{texto: "Exemplo", t: 0.2}, {texto: "de", t: 0.5}, {texto: "titulo", t: 0.8, destaque: true}]
+  };
+  FC.aplicarTokens(window.TOKENS || FC.TOKENS_PADRAO, { raiz: "/" });
+  window.DURACAO = D.duracao;
+  window.PRONTO = false;
+
+  var cartao = document.getElementById("cartao");
+  cartao.style.top = (D.topo || 190) + "px";
+  document.getElementById("kicker").textContent = D.kicker || "";
+  if (D.logo && D.logo.url) {
+    var alvo = document.getElementById("logo");
+    if (D.logo.monocromatico !== false) {
+      var m = document.createElement("span");
+      m.className = "logo mono";
+      m.style.webkitMaskImage = "url('" + D.logo.url + "')";
+      m.style.maskImage = "url('" + D.logo.url + "')";
+      alvo.appendChild(m);
+      var pre = new Image(); pre.src = D.logo.url;   /* so para o PRONTO esperar o arquivo */
+      pre.style.display = "none"; document.body.appendChild(pre);
+    } else {
+      var im = document.createElement("img");
+      im.className = "logo cor"; im.src = D.logo.url; alvo.appendChild(im);
+    }
+  }
+  var titulo = document.getElementById("titulo");
+  var spans = (D.palavras || []).map(function (p) {
+    var s = document.createElement("span");
+    s.className = "p" + (p.destaque ? " destaque" : "");
+    s.textContent = p.texto;
+    titulo.appendChild(s);
+    return s;
+  });
+  FC.grao(document.getElementById("pilula"));
+  FC.grao(document.getElementById("placa"));
+
+  function saida(p) { p = Math.max(0, Math.min(1, p)); return 1 - Math.pow(1 - p, 3); }
+  var pilula = document.getElementById("pilula");
+  var raio = (FC.tokens && FC.tokens.forma && FC.tokens.forma.raio_canto != null) ? FC.tokens.forma.raio_canto : 20;
+  var placa = document.getElementById("placa");
+
+  window.render = function (t) {
+    /* a pilula ja esta em cena no quadro 0, subindo 30 px */
+    var u = saida(t / 0.25);
+    pilula.style.transform = "translateY(" + (30 * (1 - u)) + "px)";
+    /* a placa nasce com a primeira palavra */
+    var t0 = D.palavras && D.palavras.length ? D.palavras[0].t : 0;
+    placa.style.visibility = t >= t0 - 0.02 ? "visible" : "hidden";
+    var fundo = 0;
+    spans.forEach(function (s, i) {
+      var ti = D.palavras[i].t;
+      if (t < ti) { s.style.visibility = "hidden"; return; }
+      s.style.visibility = "visible";
+      var v = saida((t - ti) / 0.28);
+      s.style.transform = "translateY(" + (40 * (1 - v)) + "px)";
+      fundo = Math.max(fundo, s.offsetTop + s.offsetHeight);
+    });
+    /* a placa cresce linha a linha: so mostra ate a ultima linha que ja tem palavra */
+    var corte = Math.max(0, placa.offsetHeight - (fundo + 30));
+    placa.style.clipPath = "inset(0 0 " + corte + "px 0 round " + raio + "px)";
+    /* saida: wipe de 167 ms de baixo para cima, o cartao inteiro */
+    var w = (t - D.saida) / 0.167;
+    if (w <= 0) { cartao.style.clipPath = "none"; cartao.style.visibility = "visible"; }
+    else if (w >= 1) { cartao.style.visibility = "hidden"; }
+    else { cartao.style.visibility = "visible"; cartao.style.clipPath = "inset(0 0 " + (w * 100) + "% 0)"; }
+  };
+  window.render(0);
+  FC.aoFicarPronto();
+})();
+</script>
+</body>
+</html>

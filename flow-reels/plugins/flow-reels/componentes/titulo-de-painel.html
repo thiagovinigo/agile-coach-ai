@@ -1,0 +1,140 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   titulo-de-painel  ·  a manchete do painel
+   -------------------------------------------------------------------------
+   Uma por painel, no máximo duas no corte inteiro. Ele NOMEIA o assunto; a
+   fala inteira é carregada pela legenda. Título que repete a frase da
+   legenda é defeito de painel.
+   ========================================================================= */
+
+.fc-titulo-painel {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-titulo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.fc-titulo-painel[data-alinhamento="centro"] { text-align: center; }
+
+.fc-titulo-marca {
+  color: inherit;
+}
+
+.fc-titulo-painel[data-marcado="1"] .fc-titulo-marca {
+  color: var(--destaque);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "titulo-de-painel";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.texto) {
+        throw new Error("titulo-de-painel: o parâmetro texto é obrigatório.");
+      }
+
+      var el = document.createElement("h2");
+      el.className = "fc-titulo-painel";
+      el.style.width = (p.largura == null ? FC.UTIL : p.largura) + "px";
+      el.setAttribute("data-alinhamento", p.alinhamento === "centro" ? "centro" : "esquerda");
+      el.setAttribute("data-marcado", "0");
+
+      /* O trecho de destaque_em precisa ser o texto exato, para o acento cair
+         na palavra certa e não em uma parecida. */
+      var corte = p.destaque_em ? p.texto.indexOf(p.destaque_em) : -1;
+
+      if (corte >= 0) {
+        el.appendChild(document.createTextNode(p.texto.slice(0, corte)));
+        var marca = document.createElement("span");
+        marca.className = "fc-titulo-marca";
+        marca.textContent = p.destaque_em;
+        el.appendChild(marca);
+        el.appendChild(document.createTextNode(p.texto.slice(corte + p.destaque_em.length)));
+      } else {
+        el.textContent = p.texto;
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        el.setAttribute("data-marcado", e.marcado ? "1" : "0");
+      }
+
+      definir({ marcado: false });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Conferência barata de "cabe em duas linhas": a altura medida
+           dividida pela altura de uma linha. Acima de duas, o texto é longo
+           demais para ser manchete. */
+        linhas: function () {
+          var alturaLinha = parseFloat(getComputedStyle(el).lineHeight);
+          if (!alturaLinha) { return 1; }
+          return Math.round(el.offsetHeight / alturaLinha);
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "A manchete do painel, no máximo seis palavras. Nasce inteira em tinta e, no beat em que a fala chega na ideia, o trecho de destaque_em recebe o acento.",
+      casos: [
+        {
+          nome: "sem marca",
+          largura: 1000, altura: 260, escala: 0.44, x: 16, y: 20,
+          parametros: { texto: "Um comando, três etapas", destaque_em: "três etapas", largura: 968 },
+          estado: { marcado: false }
+        },
+        {
+          nome: "marcado",
+          largura: 1000, altura: 260, escala: 0.44, x: 16, y: 20,
+          parametros: { texto: "Um comando, três etapas", destaque_em: "três etapas", largura: 968 },
+          estado: { marcado: true }
+        },
+        {
+          nome: "duas linhas, centro",
+          largura: 1000, altura: 300, escala: 0.44, x: 16, y: 20,
+          parametros: { texto: "O corte nasce da fala, não do relógio", destaque_em: "não do relógio", largura: 968, alinhamento: "centro" },
+          estado: { marcado: true }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

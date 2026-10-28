@@ -1,0 +1,231 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   cronometro  ·  tempo decorrido ou tempo economizado
+   -------------------------------------------------------------------------
+   A peça que traduz "muito mais rápido" em uma coisa que se vê. Ela não
+   corre sozinha: quem faz o número andar é a render(t) do painel, e ele para
+   quando a frase que fala dele acaba. Cronômetro correndo o corte inteiro é
+   animação perpétua e está proibido.
+   ========================================================================= */
+
+.fc-cronometro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--fonte-titulo);
+}
+
+.fc-cronometro-disco {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-cronometro-anel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotate(-90deg);
+}
+
+.fc-cronometro-trilho {
+  fill: none;
+  stroke: color-mix(in srgb, var(--tinta-suave) 34%, transparent);
+  stroke-width: calc(var(--traco) * 2);
+}
+
+.fc-cronometro-arco {
+  fill: none;
+  stroke: var(--destaque);
+  stroke-width: calc(var(--traco) * 2);
+  stroke-linecap: round;
+}
+
+.fc-cronometro-numero {
+  font-size: var(--tam-titulo);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-cronometro-rotulo {
+  font-family: var(--fonte-corpo);
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  text-align: center;
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "cronometro";
+  var SVG = "http://www.w3.org/2000/svg";
+  var LADO = 340;
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (p.de == null || p.para == null) {
+        throw new Error("cronometro: os parâmetros de e para são obrigatórios.");
+      }
+
+      var de = p.de;
+      var para = p.para;
+      var formato = p.formato || "mm:ss";
+      var temAnel = p.anel !== false;
+
+      var el = document.createElement("div");
+      el.className = "fc-cronometro";
+
+      var disco = document.createElement("div");
+      disco.className = "fc-cronometro-disco";
+      disco.style.width = temAnel ? LADO + "px" : "auto";
+      disco.style.height = temAnel ? LADO + "px" : "auto";
+      el.appendChild(disco);
+
+      var arco = null;
+      var perimetro = 0;
+
+      if (temAnel) {
+        var svg = document.createElementNS(SVG, "svg");
+        svg.setAttribute("class", "fc-cronometro-anel");
+        svg.setAttribute("width", LADO);
+        svg.setAttribute("height", LADO);
+        svg.setAttribute("viewBox", "0 0 " + LADO + " " + LADO);
+
+        var raio = (LADO - 24) / 2;
+        perimetro = 2 * Math.PI * raio;
+
+        var trilho = document.createElementNS(SVG, "circle");
+        trilho.setAttribute("class", "fc-cronometro-trilho");
+        trilho.setAttribute("cx", LADO / 2);
+        trilho.setAttribute("cy", LADO / 2);
+        trilho.setAttribute("r", raio);
+        svg.appendChild(trilho);
+
+        arco = document.createElementNS(SVG, "circle");
+        arco.setAttribute("class", "fc-cronometro-arco");
+        arco.setAttribute("cx", LADO / 2);
+        arco.setAttribute("cy", LADO / 2);
+        arco.setAttribute("r", raio);
+        arco.style.strokeDasharray = perimetro;
+        arco.style.strokeDashoffset = perimetro;
+        svg.appendChild(arco);
+
+        disco.appendChild(svg);
+      }
+
+      var numero = document.createElement("div");
+      numero.className = "fc-cronometro-numero";
+      disco.appendChild(numero);
+
+      if (p.rotulo) {
+        var rotulo = document.createElement("div");
+        rotulo.className = "fc-cronometro-rotulo";
+        rotulo.textContent = p.rotulo;
+        el.appendChild(rotulo);
+      }
+
+      function escrever(valor) {
+        var segundos = Math.max(0, Math.round(valor));
+        if (formato === "s") { return segundos + " s"; }
+        if (formato === "min") { return Math.round(segundos / 60) + " min"; }
+        var m = Math.floor(segundos / 60);
+        var s = segundos % 60;
+        return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var valor = e.valor == null ? de : e.valor;
+        numero.textContent = escrever(valor);
+
+        if (arco) {
+          var intervalo = para - de;
+          var andado = intervalo === 0 ? 1 : FC.limitar((valor - de) / intervalo, 0, 1);
+          arco.style.strokeDashoffset = perimetro * (1 - andado);
+        }
+      }
+
+      definir({ valor: de });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Açúcar para o painel: dado o p do beat, devolve o valor do número. */
+        valorEm: function (p2) {
+          return FC.interpolar(de, para, p2);
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Tempo: o que levava, o que passou a levar, o que sobrou. O anel se preenche junto com o número. O valor é sempre dado de fora, por definir({ valor }).",
+      casos: [
+        {
+          nome: "início",
+          largura: 420, altura: 460, escala: 0.5, x: 40, y: 20,
+          parametros: { de: 240, para: 30, rotulo: "por corte" },
+          estado: { valor: 240 }
+        },
+        {
+          nome: "no meio",
+          largura: 420, altura: 460, escala: 0.5, x: 40, y: 20,
+          parametros: { de: 240, para: 30, rotulo: "por corte" },
+          estado: { valor: 135 }
+        },
+        {
+          nome: "final",
+          largura: 420, altura: 460, escala: 0.5, x: 40, y: 20,
+          parametros: { de: 240, para: 30, rotulo: "por corte" },
+          estado: { valor: 30 }
+        },
+        {
+          nome: "sem anel, em minutos",
+          largura: 420, altura: 300, escala: 0.5, x: 40, y: 60,
+          parametros: { de: 0, para: 480, formato: "min", anel: false, rotulo: "economizados" },
+          estado: { valor: 480 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

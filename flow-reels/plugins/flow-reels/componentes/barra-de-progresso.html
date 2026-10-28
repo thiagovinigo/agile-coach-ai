@@ -1,0 +1,232 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   barra-de-progresso  ·  proporção, avanço, parte de um todo
+   -------------------------------------------------------------------------
+   Quanto de um todo, quanto já foi, quanto sobrou. O número escrito anda
+   junto com o preenchimento, nunca depois: número que chega atrasado faz a
+   barra parecer quebrada.
+   ========================================================================= */
+
+.fc-barra {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: var(--fonte-corpo);
+}
+
+.fc-barra-topo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.fc-barra-rotulo {
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.fc-barra-numero {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: 1;
+  color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-barra-trilho {
+  position: relative;
+  width: 100%;
+  background: var(--superficie-alt);
+  border-radius: calc(var(--raio) / 2);
+  overflow: hidden;
+}
+
+.fc-barra-preenchimento {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--destaque);
+  border-radius: calc(var(--raio) / 2);
+}
+
+.fc-barra-segmentos {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.fc-barra-segmento {
+  flex: 1 1 0;
+  background: var(--superficie-alt);
+  border-radius: calc(var(--raio) / 3);
+}
+
+.fc-barra-segmento[data-cheio="1"] {
+  background: var(--destaque);
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "barra-de-progresso";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var largura = p.largura == null ? FC.UTIL : p.largura;
+      var altura = p.altura == null ? 24 : p.altura;
+      var segmentos = p.segmentos == null ? null : p.segmentos;
+      var mostrarNumero = p.mostrar_numero !== false;
+      var alvo = p.valor == null ? 0 : p.valor;
+
+      var el = document.createElement("div");
+      el.className = "fc-barra";
+      el.style.width = largura + "px";
+
+      var numero = null;
+
+      if (p.rotulo || mostrarNumero) {
+        var topo = document.createElement("div");
+        topo.className = "fc-barra-topo";
+
+        var rotulo = document.createElement("div");
+        rotulo.className = "fc-barra-rotulo";
+        rotulo.textContent = p.rotulo || "";
+        topo.appendChild(rotulo);
+
+        if (mostrarNumero) {
+          numero = document.createElement("div");
+          numero.className = "fc-barra-numero";
+          topo.appendChild(numero);
+        }
+
+        el.appendChild(topo);
+      }
+
+      var preenchimento = null;
+      var blocos = [];
+
+      if (segmentos) {
+        var caixa = document.createElement("div");
+        caixa.className = "fc-barra-segmentos";
+        caixa.style.height = altura + "px";
+        var i;
+        for (i = 0; i < segmentos; i += 1) {
+          var bloco = document.createElement("div");
+          bloco.className = "fc-barra-segmento";
+          bloco.setAttribute("data-cheio", "0");
+          caixa.appendChild(bloco);
+          blocos.push(bloco);
+        }
+        el.appendChild(caixa);
+      } else {
+        var trilho = document.createElement("div");
+        trilho.className = "fc-barra-trilho";
+        trilho.style.height = altura + "px";
+
+        preenchimento = document.createElement("div");
+        preenchimento.className = "fc-barra-preenchimento";
+        trilho.appendChild(preenchimento);
+
+        el.appendChild(trilho);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var valor = FC.limitar(e.valor == null ? 0 : e.valor, 0, 1);
+
+        if (preenchimento) {
+          preenchimento.style.width = (valor * 100) + "%";
+        }
+
+        if (blocos.length) {
+          var cheios = Math.round(valor * blocos.length);
+          blocos.forEach(function (bloco, i) {
+            bloco.setAttribute("data-cheio", i < cheios ? "1" : "0");
+          });
+        }
+
+        if (numero) {
+          numero.textContent = Math.round(valor * 100) + "%";
+        }
+      }
+
+      definir({ valor: 0 });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* O valor de chegada declarado nos parâmetros, para o painel
+           interpolar de 0 até ele dentro do beat. */
+        alvo: alvo
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Proporção e avanço. Contínua por padrão; com segmentos, vira blocos. O preenchimento acompanha a curva de chegada e o número anda junto com ele.",
+      casos: [
+        {
+          nome: "vazia",
+          largura: 1000, altura: 180, escala: 0.42, x: 16, y: 40,
+          parametros: { valor: 0.72, rotulo: "do vídeo aproveitado", largura: 968 },
+          estado: { valor: 0 }
+        },
+        {
+          nome: "no meio",
+          largura: 1000, altura: 180, escala: 0.42, x: 16, y: 40,
+          parametros: { valor: 0.72, rotulo: "do vídeo aproveitado", largura: 968 },
+          estado: { valor: 0.38 }
+        },
+        {
+          nome: "cheia",
+          largura: 1000, altura: 180, escala: 0.42, x: 16, y: 40,
+          parametros: { valor: 0.72, rotulo: "do vídeo aproveitado", largura: 968 },
+          estado: { valor: 0.72 }
+        },
+        {
+          nome: "em blocos, sem número",
+          largura: 1000, altura: 180, escala: 0.42, x: 16, y: 40,
+          parametros: { valor: 0.6, rotulo: "cortes prontos", segmentos: 5, altura: 40, mostrar_numero: false, largura: 968 },
+          estado: { valor: 0.6 }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

@@ -1,0 +1,503 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   campo-de-busca  ·  campo com consulta digitada e resultados opcionais
+   -------------------------------------------------------------------------
+   Busca num site, busca dentro de um aplicativo, o momento em que alguém
+   procura alguma coisa. A forma que faz reconhecer é a pílula larga e alta
+   com a lupa na cabeça, e as linhas de resultado penduradas embaixo dela,
+   cada uma começando por uma lupa pequena. Sem a pílula vira caixa de texto;
+   sem a lupa vira retângulo.
+
+   A marca entra pelo parâmetro marca e fica no cabeçalho, acima do campo,
+   que é onde o buscador se identifica. Sempre o arquivo de verdade do
+   acervo em logos/.
+   ========================================================================= */
+
+.fc-busca {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  font-family: var(--fonte-corpo);
+}
+
+.fc-busca-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.fc-busca-nome {
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+}
+
+/* A pílula: alta, larga e com a lupa grande. É ela que carrega o
+   reconhecimento, então ela nunca encolhe para caber mais coisa. */
+.fc-busca-campo {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px 36px;
+  border-radius: 999px;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 34%, transparent);
+}
+
+.fc-busca-lupa {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+/* Consulta e cursor andam juntos num bloco so. Com o cursor solto dentro da
+   pilula, ele ia parar na borda direita e o acento aceso ficava a meia pilula
+   de distancia da ultima letra digitada, lendo como um retangulo laranja
+   perdido em vez de um cursor. */
+.fc-busca-texto {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.fc-busca-consulta {
+  flex: 0 1 auto;
+  min-width: 0;
+  font-size: var(--tam-corpo);
+  line-height: 1.2;
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  /* Consulta que passa da pilula sai com reticencias, como o resultado ja
+     saia. Sem isto a ultima letra era fatiada no meio pela borda, e letra
+     pela metade parece defeito de render, nao frase longa demais. */
+  text-overflow: ellipsis;
+}
+
+.fc-busca-cursor {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 0.5em;
+  height: 1em;
+  font-size: var(--tam-corpo);
+  background: var(--destaque);
+}
+
+.fc-busca-botao {
+  flex: 0 0 auto;
+  padding: 12px 28px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta);
+}
+
+.fc-busca[data-apontado="campo"] .fc-busca-campo { border-color: var(--destaque); }
+.fc-busca[data-apontado="campo"] .fc-busca-consulta { color: var(--destaque); }
+
+/* Os resultados moram numa superfície própria, pendurada embaixo do campo.
+   Soltos sobre o painel eles liam como uma lista qualquer; dentro da
+   superfície eles liam como a lista que o campo devolveu. */
+.fc-busca-resultados {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+.fc-busca-resultado {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 36px 22px 32px;
+  border-left: var(--traco) solid transparent;
+}
+
+.fc-busca-resultado + .fc-busca-resultado {
+  border-top: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 22%, transparent);
+}
+
+.fc-busca-resultado-lupa {
+  display: flex;
+  flex: 0 0 auto;
+  color: var(--tinta-suave);
+}
+
+.fc-busca-resultado-texto {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--tam-corpo);
+  line-height: var(--entrelinha);
+  color: var(--tinta);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc-busca-resultado-meta {
+  flex: 0 0 auto;
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+/* O acento é um traço na borda de entrada mais o texto: preenchimento
+   inteiro de destaque numa linha larga estoura o orçamento de 15% de área. */
+.fc-busca-resultado[data-apontado="1"] {
+  border-left-color: var(--destaque);
+}
+
+.fc-busca-resultado[data-apontado="1"] .fc-busca-resultado-texto { color: var(--destaque); }
+
+/* ---------------------------------------------------------------------
+   A marca real, do acervo
+   Mesmo mecanismo do tile-de-logo: máscara para a silhueta receber a tinta
+   do painel, sentinela para descobrir a falta e segurar o PRONTO, e buraco
+   hachurado quando o arquivo não existe.
+   --------------------------------------------------------------------- */
+
+.fc-busca-marca {
+  box-sizing: border-box;
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.fc-busca-marca-forma {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+.fc-busca-marca-sentinela {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fc-busca-marca[data-erro="sim"] {
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) * 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+.fc-busca-marca[data-erro="sim"] .fc-busca-marca-forma { display: none; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "campo-de-busca";
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function criarMarca(marca, lado, classe) {
+    if (!marca) { return null; }
+
+    var alvo = PASTA + marca + ".svg";
+    var el = document.createElement("span");
+    el.className = classe;
+    el.style.width = lado + "px";
+    el.style.height = lado + "px";
+
+    function falta(motivo) {
+      el.setAttribute("data-erro", "sim");
+      var FC = window.FC;
+      if (FC) {
+        FC.logosAusentes = FC.logosAusentes || [];
+        if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+      }
+      console.error(
+        NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+        "Baixe o arquivo com: flow-reels componentes/baixar-logo " + marca + ". " +
+        "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+        "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+      );
+    }
+
+    if (!SLUG_VALIDO.test(String(marca))) {
+      falta("o nome da marca nao vira nome de arquivo");
+      return el;
+    }
+
+    var forma = document.createElement("span");
+    forma.className = classe + "-forma";
+    forma.style.webkitMaskImage = "url('" + alvo + "')";
+    forma.style.maskImage = "url('" + alvo + "')";
+    el.appendChild(forma);
+
+    var sentinela = document.createElement("img");
+    sentinela.className = classe + "-sentinela";
+    sentinela.setAttribute("aria-hidden", "true");
+    sentinela.alt = "";
+    sentinela.addEventListener("error", function () {
+      falta("o arquivo do logo nao existe");
+    }, { once: true });
+    sentinela.src = alvo;
+    el.appendChild(sentinela);
+
+    return el;
+  }
+
+  /* A lupa é móvel do sistema, não marca de ninguém. O logo continua vindo
+     de arquivo, sempre. */
+  function glifo(desenho, lado) {
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("width", lado);
+    svg.setAttribute("height", lado);
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.innerHTML = desenho;
+    return svg;
+  }
+
+  var LUPA = "<circle cx='10.5' cy='10.5' r='6.5'/><path d='M15.4 15.4 L20.5 20.5'/>";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (!p.consulta) {
+        throw new Error("campo-de-busca: o parâmetro consulta é obrigatório. " +
+                        "Ele é o que está escrito no campo.");
+      }
+
+      var largura = p.largura == null ? 820 : p.largura;
+      var resultados = p.resultados || [];
+
+      var el = document.createElement("div");
+      el.className = "fc-busca";
+      el.style.width = largura + "px";
+      el.setAttribute("data-apontado", "nenhum");
+
+      if (p.marca || p.titulo) {
+        var cabeca = document.createElement("div");
+        cabeca.className = "fc-busca-cabeca";
+
+        var insignia = criarMarca(p.marca, 64, "fc-busca-marca");
+        if (insignia) { cabeca.appendChild(insignia); }
+
+        if (p.titulo) {
+          var nome = document.createElement("div");
+          nome.className = "fc-busca-nome";
+          nome.textContent = p.titulo;
+          cabeca.appendChild(nome);
+        }
+
+        el.appendChild(cabeca);
+      }
+
+      var campo = document.createElement("div");
+      campo.className = "fc-busca-campo";
+
+      var lupa = document.createElement("span");
+      lupa.className = "fc-busca-lupa";
+      lupa.appendChild(glifo(LUPA, 52));
+      campo.appendChild(lupa);
+
+      var texto = document.createElement("span");
+      texto.className = "fc-busca-texto";
+      campo.appendChild(texto);
+
+      var consulta = document.createElement("span");
+      consulta.className = "fc-busca-consulta";
+      texto.appendChild(consulta);
+
+      var cursor = document.createElement("span");
+      cursor.className = "fc-busca-cursor";
+      texto.appendChild(cursor);
+
+      if (p.botao) {
+        var botao = document.createElement("span");
+        botao.className = "fc-busca-botao";
+        botao.textContent = p.botao;
+        campo.appendChild(botao);
+      }
+
+      el.appendChild(campo);
+
+      var caixa = null;
+      var desenhados = [];
+
+      if (resultados.length) {
+        caixa = document.createElement("div");
+        caixa.className = "fc-busca-resultados";
+
+        desenhados = resultados.map(function (item) {
+          var dados = typeof item === "string" ? { texto: item } : (item || {});
+
+          var linha = document.createElement("div");
+          linha.className = "fc-busca-resultado";
+
+          var marcador = document.createElement("span");
+          marcador.className = "fc-busca-resultado-lupa";
+          marcador.appendChild(glifo(LUPA, 38));
+          linha.appendChild(marcador);
+
+          var texto = document.createElement("span");
+          texto.className = "fc-busca-resultado-texto";
+          texto.textContent = dados.texto || "";
+          linha.appendChild(texto);
+
+          if (dados.meta) {
+            var meta = document.createElement("span");
+            meta.className = "fc-busca-resultado-meta";
+            meta.textContent = dados.meta;
+            linha.appendChild(meta);
+          }
+
+          caixa.appendChild(linha);
+          return linha;
+        });
+
+        el.appendChild(caixa);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var caracteres = e.caracteres == null ? -1 : e.caracteres;
+        var visiveis = e.resultados_visiveis == null ? 0 : e.resultados_visiveis;
+        var apontado = e.destaque == null ? null : e.destaque;
+
+        consulta.textContent = caracteres < 0
+          ? p.consulta
+          : String(p.consulta).slice(0, caracteres);
+        cursor.style.display = caracteres >= 0 ? "" : "none";
+
+        desenhados.forEach(function (linha, i) {
+          linha.style.display = i < visiveis ? "" : "none";
+          if (apontado === i) {
+            linha.setAttribute("data-apontado", "1");
+          } else {
+            linha.removeAttribute("data-apontado");
+          }
+        });
+
+        if (caixa) { caixa.style.display = visiveis > 0 ? "" : "none"; }
+
+        el.setAttribute("data-apontado", apontado === "campo" ? "campo" : "nenhum");
+      }
+
+      definir({ caracteres: 0, resultados_visiveis: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        tamanhoDaConsulta: function () {
+          return String(p.consulta).length;
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var RESULTADOS = [
+      { texto: "cortar sem editor", meta: "guia" },
+      { texto: "tamanho do corte", meta: "fórum" },
+      { texto: "gancho em 3 seg", meta: "vídeo" }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Campo de busca com a consulta digitada por definir({ caracteres }) e os resultados chegando por resultados_visiveis. O acento vai para o campo ou para uma linha de resultado, um por vez.",
+      casos: [
+        {
+          nome: "campo vazio",
+          largura: 940, altura: 200, escala: 0.46, x: 20, y: 20,
+          parametros: { titulo: "Busca", consulta: "como cortar um vídeo", largura: 820 },
+          estado: { caracteres: 0, resultados_visiveis: 0, destaque: null }
+        },
+        {
+          nome: "digitando",
+          largura: 940, altura: 200, escala: 0.46, x: 20, y: 20,
+          parametros: { titulo: "Busca", consulta: "como cortar um vídeo", largura: 820 },
+          estado: { caracteres: 12, resultados_visiveis: 0, destaque: null }
+        },
+        {
+          nome: "com marca e botão",
+          largura: 940, altura: 300, escala: 0.46, x: 20, y: 20,
+          parametros: { marca: "youtube", titulo: "YouTube", consulta: "corte de 30 segundos", botao: "buscar", largura: 820 },
+          estado: { caracteres: -1, resultados_visiveis: 0, destaque: null }
+        },
+        {
+          nome: "resultados",
+          largura: 940, altura: 480, escala: 0.46, x: 20, y: 20,
+          parametros: { titulo: "Busca", consulta: "como cortar um vídeo", resultados: RESULTADOS, largura: 820 },
+          estado: { caracteres: -1, resultados_visiveis: 3, destaque: null }
+        },
+        {
+          nome: "resultado apontado",
+          largura: 940, altura: 480, escala: 0.46, x: 20, y: 20,
+          parametros: { titulo: "Busca", consulta: "como cortar um vídeo", resultados: RESULTADOS, largura: 820 },
+          estado: { caracteres: -1, resultados_visiveis: 3, destaque: 0 }
+        },
+        {
+          nome: "campo apontado",
+          largura: 940, altura: 480, escala: 0.46, x: 20, y: 20,
+          parametros: { titulo: "Busca", consulta: "como cortar um vídeo", resultados: RESULTADOS, largura: 820 },
+          estado: { caracteres: -1, resultados_visiveis: 1, destaque: "campo" }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

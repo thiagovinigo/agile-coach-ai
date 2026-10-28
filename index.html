@@ -80,6 +80,18 @@ window.onerror = function(msg, url, line, col, error) {
 
                 <div class="nav-group">
                     <div class="nav-group-title">Agentes & Ferramentas</div>
+                    <a href="#demos-scraping" class="nav-item" data-target="demos-scraping-view" style="color: #f59e0b; font-weight: bold;">
+                        <span class="icon">🕷️</span> Demos Playwright & Scraping
+                    </a>
+                    <a href="#demos-cicd" class="nav-item" data-target="demos-cicd-view" style="color: #38bdf8; font-weight: bold;">
+                        <span class="icon">🐙</span> Demos GitHub & CI/CD
+                    </a>
+                    <a href="#demos-rag" class="nav-item" data-target="demos-rag-view" style="color: #10b981; font-weight: bold;">
+                        <span class="icon">🗄️</span> Demos RAG & pgvector
+                    </a>
+                    <a href="#flow-reels" class="nav-item" data-target="flow-reels-view" style="color: #ec4899; font-weight: bold;">
+                        <span class="icon">🎬</span> Flow Reels 3.0
+                    </a>
                     <a href="#skills" class="nav-item" data-target="skills-view">
                         <span class="icon">💻</span> Flowgrammers Skills
                     </a>
@@ -230,6 +242,10 @@ window.onerror = function(msg, url, line, col, error) {
                 <div id="openwiki-view" class="view"></div>
                 <div id="tfs-view" class="view kb-view"><div class="kb-content-container" id="kb-tfs"></div></div>
                 <div id="skills-view" class="view kb-view"></div>
+                <div id="flow-reels-view" class="view kb-view"></div>
+                <div id="demos-rag-view" class="view kb-view"></div>
+                <div id="demos-cicd-view" class="view kb-view"></div>
+                <div id="demos-scraping-view" class="view kb-view"></div>
                 <div id="pm-skills-view" class="view kb-view"></div>
                 <div id="banana-slides-view" class="view kb-view"></div>
                 <div id="nj-mmo-view" class="view kb-view"></div>
@@ -317,6 +333,14 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="agent_skills_view.js?v=1"></script>
     <script src="ruflo-data.js?v=1"></script>
     <script src="ruflo_view.js?v=1"></script>
+    <script src="flow-reels-data.js?v=1"></script>
+    <script src="flow_reels_view.js?v=1"></script>
+    <script src="demos-rag-data.js?v=1"></script>
+    <script src="demos_rag_view.js?v=1"></script>
+    <script src="demos-cicd-data.js?v=1"></script>
+    <script src="demos_cicd_view.js?v=1"></script>
+    <script src="demos-scraping-data.js?v=1"></script>
+    <script src="demos_scraping_view.js?v=1"></script>
     <script>
         if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
         if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');

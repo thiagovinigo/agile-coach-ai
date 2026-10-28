@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>fechamento do reel narrado</title>
+<!--
+  O fechamento do reel narrado: "comenta a palavra". Uma caixa de comentario sobe,
+  a PALAVRA e digitada no instante em que a voz diz ela, o envio pulsa, e o item
+  prometido voa da caixa para um balao de mensagem direta. Fundo transparente: a
+  ultima tomada continua por baixo, desfocada e escurecida pelo compor_narrado.py.
+
+  window.TOKENS  a marca. Nenhuma cor e escrita aqui.
+  window.DADOS   {
+    duracao:      segundos de pagina (o tempo zero e o comeco do fechamento),
+    palavra:      a palavra do comentario, em caixa alta,
+    item:         o nome curto do que chega na DM, por exemplo "o guia completo",
+    t_digitar:    quando a palavra comeca a ser digitada,
+    por_letra:    segundos por letra (padrao 0.09),
+    t_enviar:     quando o envio pulsa,
+    t_voar:       quando o item sai da caixa rumo ao balao,
+    campo:        texto apagado da caixa vazia (padrao "Adicione um comentário"),
+    rotulo_dm:    rotulo pequeno do balao (padrao "na sua DM")
+  }
+-->
+<link rel="stylesheet" href="/componentes/base.css">
+<style>
+  html, body { background: transparent !important; margin: 0; overflow: hidden; }
+  #palco { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .caixa {
+    position: absolute; left: 60px; top: 1170px; width: 900px; height: 132px;
+    box-sizing: border-box; border-radius: 999px; overflow: hidden;
+    background: var(--superficie); border: var(--borda) solid var(--tinta-suave);
+    display: flex; align-items: center; padding: 0 22px 0 26px; gap: 24px;
+  }
+  .avatar { width: 76px; height: 76px; border-radius: 50%; flex: 0 0 76px;
+            background: var(--superficie-alt); border: var(--borda) solid var(--tinta-suave); box-sizing: border-box; }
+  .campo { flex: 1; font-family: var(--fonte-corpo); font-size: 46px; color: var(--tinta-suave);
+           white-space: nowrap; overflow: hidden; }
+  .digitado { font-family: var(--fonte-titulo); font-size: 58px; color: var(--destaque); letter-spacing: 0.04em; }
+  .cursor { display: inline-block; width: 5px; height: 56px; margin-left: 6px; vertical-align: -8px;
+            background: var(--destaque); }
+  .enviar { width: 88px; height: 88px; border-radius: 50%; flex: 0 0 88px; position: relative;
+            background: var(--superficie-alt); }
+  .enviar.ativo { background: var(--destaque); }
+  .enviar::after { content: ""; position: absolute; left: 34px; top: 24px; width: 0; height: 0;
+                   border-top: 20px solid transparent; border-bottom: 20px solid transparent;
+                   border-left: 30px solid var(--tinta-suave); }
+  .enviar.ativo::after { border-left-color: var(--destaque-contraste); }
+  .balao {
+    position: absolute; left: 120px; top: 560px; width: 760px; height: 400px; box-sizing: border-box;
+    border-radius: 48px 48px 48px 14px; overflow: hidden;
+    background: var(--superficie); border: var(--borda) solid var(--tinta-suave);
+  }
+  .rotulo { position: absolute; left: 44px; top: 34px; font-family: var(--fonte-titulo);
+            font-size: var(--tam-rotulo); letter-spacing: var(--espacamento-rotulo);
+            text-transform: uppercase; color: var(--tinta-suave); }
+  .item {
+    position: absolute; left: 0; top: 0; width: 640px; height: 210px; box-sizing: border-box;
+    border-radius: var(--raio); background: var(--superficie-alt);
+    border: calc(var(--borda) * 2) solid var(--tinta-suave);
+    display: flex; align-items: center; gap: 30px; padding: 0 34px; overflow: hidden;
+  }
+  .item.chegou { border-color: var(--destaque); }
+  .doc { width: 96px; height: 124px; flex: 0 0 96px; position: relative; border-radius: 10px;
+         background: var(--tinta); }
+  .doc::before { content: ""; position: absolute; right: 0; top: 0; width: 30px; height: 30px;
+                 background: var(--superficie-alt); border-bottom-left-radius: 10px; }
+  .doc i { position: absolute; left: 16px; height: 8px; border-radius: 4px; background: var(--superficie-alt); }
+  .nome { font-family: var(--fonte-titulo); font-size: 50px; line-height: 1.08; color: var(--tinta); }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div class="balao" id="balao"><div class="rotulo" id="rotulo"></div></div>
+  <div class="caixa" id="caixa">
+    <div class="avatar"></div>
+    <div class="campo" id="campo"></div>
+    <div class="enviar" id="enviar"></div>
+  </div>
+  <div class="item" id="item">
+    <div class="doc"><i style="top:46px;width:56px"></i><i style="top:66px;width:64px"></i><i style="top:86px;width:44px"></i></div>
+    <div class="nome" id="nome"></div>
+  </div>
+</div>
+<script src="/componentes/base.js"></script>
+<script>
+(function () {
+  var D = window.DADOS || { duracao: 6, palavra: "PALAVRA", item: "o guia completo",
+                            t_digitar: 1.0, t_enviar: 2.0, t_voar: 2.6 };
+  FC.aplicarTokens(window.TOKENS || FC.TOKENS_PADRAO, { raiz: "/" });
+  window.DURACAO = D.duracao;
+  window.PRONTO = false;
+
+  var porLetra = D.por_letra || 0.09;
+  var palavra = String(D.palavra || "").toUpperCase();
+  var caixa = document.getElementById("caixa");
+  var campo = document.getElementById("campo");
+  var enviar = document.getElementById("enviar");
+  var balao = document.getElementById("balao");
+  var item = document.getElementById("item");
+  document.getElementById("nome").textContent = D.item || "";
+  document.getElementById("rotulo").textContent = D.rotulo_dm || "na sua DM";
+  FC.grao(caixa); FC.grao(balao); FC.grao(item);
+
+  function sai(p) { p = Math.max(0, Math.min(1, p)); return 1 - Math.pow(1 - p, 3); }
+  function suave(p) { p = Math.max(0, Math.min(1, p)); return p * p * (3 - 2 * p); }
+
+  /* posicoes do item: dentro da caixa (partida) e dentro do balao (chegada) */
+  var X0 = 200, Y0 = 1130, X1 = 180, Y1 = 690;
+
+  window.render = function (t) {
+    /* a caixa sobe 64 px em 0,36 s, opaca desde o primeiro quadro */
+    var u = sai(t / 0.36);
+    caixa.style.transform = "translateY(" + (64 * (1 - u)) + "px)";
+
+    /* digitacao: a palavra entra letra por letra no instante da voz */
+    var n = t < D.t_digitar ? 0 : Math.min(palavra.length, Math.floor((t - D.t_digitar) / porLetra) + 1);
+    var enviado = t >= D.t_enviar + 0.12;
+    if (n === 0 || enviado) {
+      campo.innerHTML = "";
+      campo.textContent = enviado ? "" : (D.campo || "Adicione um comentário");
+    } else {
+      campo.innerHTML = '<span class="digitado"></span><span class="cursor"></span>';
+      campo.firstChild.textContent = palavra.slice(0, n);
+    }
+    /* o envio acende quando a palavra fica completa e pulsa no envio */
+    var completo = n === palavra.length && !enviado;
+    enviar.className = "enviar" + (completo || (t >= D.t_enviar && t < D.t_enviar + 0.12) ? " ativo" : "");
+    var pulso = t >= D.t_enviar && t < D.t_enviar + 0.24 ? Math.sin(Math.PI * (t - D.t_enviar) / 0.24) : 0;
+    enviar.style.transform = "scale(" + (1 + 0.14 * pulso) + ")";
+
+    /* o balao da DM sobe logo depois do envio */
+    var tb = D.t_enviar + 0.1;
+    if (t < tb) { balao.style.visibility = "hidden"; }
+    else {
+      balao.style.visibility = "visible";
+      balao.style.transform = "translateY(" + (64 * (1 - sai((t - tb) / 0.36))) + "px)";
+    }
+
+    /* o item: nasce na caixa no envio, voa em arco ate o balao em 0,5 s */
+    if (t < D.t_enviar) { item.style.visibility = "hidden"; return; }
+    item.style.visibility = "visible";
+    var v = suave((t - D.t_voar) / 0.5);
+    var x = X0 + (X1 - X0) * v;
+    var y = Y0 + (Y1 - Y0) * v - 160 * Math.sin(Math.PI * v);
+    var esc = 0.62 + 0.38 * v;
+    item.style.transform = "translate(" + x + "px," + y + "px) scale(" + esc + ")";
+    item.style.transformOrigin = "0 0";
+    item.className = "item" + (v >= 1 ? " chegou" : "");
+  };
+  window.render(0);
+  FC.aoFicarPronto();
+})();
+</script>
+</body>
+</html>

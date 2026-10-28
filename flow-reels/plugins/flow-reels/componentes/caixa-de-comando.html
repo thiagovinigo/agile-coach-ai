@@ -1,0 +1,296 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   caixa-de-comando  ·  terminal, prompt, campo de comando
+   -------------------------------------------------------------------------
+   A peça mais usada como objeto herói quando a fala é sobre FAZER alguma
+   coisa. Ela não anima nada por conta própria: quem faz a digitação andar é
+   a render(t) do painel, chamando definir({ caracteres }).
+   ========================================================================= */
+
+.fc-caixa {
+  box-sizing: border-box;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 34%, transparent);
+  border-radius: var(--raio);
+  overflow: hidden;
+  font-family: var(--fonte-mono);
+}
+
+.fc-caixa-barra {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 32px;
+  border-bottom: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 26%, transparent);
+}
+
+.fc-caixa-pontos {
+  display: flex;
+  gap: 10px;
+}
+
+.fc-caixa-ponto {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tinta-suave) 55%, transparent);
+}
+
+.fc-caixa-titulo {
+  font-family: var(--fonte-corpo);
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.fc-caixa-corpo {
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fc-caixa-linha {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-size: var(--tam-corpo);
+  line-height: 1.3;
+  white-space: pre;
+}
+
+.fc-caixa-linha[data-tipo="comando"] { color: var(--tinta); }
+.fc-caixa-linha[data-tipo="saida"] { color: var(--tinta-suave); }
+
+.fc-caixa-linha[data-tipo="erro"] {
+  color: var(--tinta);
+  border-left: var(--traco) solid color-mix(in srgb, var(--tinta-suave) 70%, transparent);
+  padding-left: 18px;
+  margin-left: -18px;
+}
+
+/* O acento nunca nasce do tipo da linha: ele vem de definir({ destaque }),
+   porque quem decide o que está sendo apontado é a fala, não a sintaxe. */
+.fc-caixa-linha[data-apontada="1"] { color: var(--destaque); }
+
+.fc-caixa-marca {
+  color: var(--tinta-suave);
+  flex: 0 0 auto;
+}
+
+.fc-caixa-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  background: var(--destaque);
+  transform: translateY(0.12em);
+  flex: 0 0 auto;
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "caixa-de-comando";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var linhas = p.linhas || [];
+      if (!linhas.length) {
+        throw new Error("caixa-de-comando: o parâmetro linhas é obrigatório.");
+      }
+
+      var mostrarCursor = p.cursor !== false;
+
+      var el = document.createElement("div");
+      el.className = "fc-caixa";
+      el.style.width = (p.largura == null || p.largura === "cheia" ? FC.UTIL : p.largura) + "px";
+
+      if (p.titulo) {
+        var barra = document.createElement("div");
+        barra.className = "fc-caixa-barra";
+
+        var pontos = document.createElement("div");
+        pontos.className = "fc-caixa-pontos";
+        pontos.innerHTML = "<i class='fc-caixa-ponto'></i><i class='fc-caixa-ponto'></i><i class='fc-caixa-ponto'></i>";
+        barra.appendChild(pontos);
+
+        var titulo = document.createElement("div");
+        titulo.className = "fc-caixa-titulo";
+        titulo.textContent = p.titulo;
+        barra.appendChild(titulo);
+
+        el.appendChild(barra);
+      }
+
+      var corpo = document.createElement("div");
+      corpo.className = "fc-caixa-corpo";
+      el.appendChild(corpo);
+
+      var desenhadas = linhas.map(function (linha) {
+        var no = document.createElement("div");
+        no.className = "fc-caixa-linha";
+        no.setAttribute("data-tipo", linha.tipo || "saida");
+
+        var marca = document.createElement("span");
+        marca.className = "fc-caixa-marca";
+        marca.textContent = (linha.tipo === "comando") ? "›" : " ";
+        no.appendChild(marca);
+
+        var texto = document.createElement("span");
+        texto.className = "fc-caixa-texto";
+        no.appendChild(texto);
+
+        var cursor = document.createElement("span");
+        cursor.className = "fc-caixa-cursor";
+        no.appendChild(cursor);
+
+        corpo.appendChild(no);
+        return { no: no, texto: texto, cursor: cursor, conteudo: linha.texto || "" };
+      });
+
+      function definir(estado) {
+        var e = estado || {};
+        var visiveis = e.linhas_visiveis == null ? 0 : e.linhas_visiveis;
+        var caracteres = e.caracteres == null ? -1 : e.caracteres;
+        var apontada = e.destaque == null ? null : e.destaque;
+
+        /* Com zero linhas escritas a caixa ainda mostra a primeira linha
+           vazia, para o cursor ter onde ficar. */
+        var ultima = visiveis - 1;
+        var linhaDoCursor = visiveis === 0 ? 0 : ultima;
+
+        desenhadas.forEach(function (d, i) {
+          var mostrar = i < visiveis || (visiveis === 0 && i === 0);
+          d.no.style.display = mostrar ? "" : "none";
+
+          if (!mostrar) {
+            d.texto.textContent = "";
+            d.cursor.style.display = "none";
+            d.no.removeAttribute("data-apontada");
+            return;
+          }
+
+          if (visiveis === 0) {
+            d.texto.textContent = "";
+          } else if (i === ultima && caracteres >= 0) {
+            d.texto.textContent = d.conteudo.slice(0, caracteres);
+          } else {
+            d.texto.textContent = d.conteudo;
+          }
+
+          /* O cursor só existe enquanto alguém está digitando. Linha inteira
+             escrita não tem cursor, senão sobraria um segundo ponto de acento
+             na tela o corte todo. */
+          var cursorAqui = mostrarCursor && i === linhaDoCursor && caracteres >= 0;
+          d.cursor.style.display = cursorAqui ? "" : "none";
+
+          if (apontada === i) {
+            d.no.setAttribute("data-apontada", "1");
+          } else {
+            d.no.removeAttribute("data-apontada");
+          }
+        });
+      }
+
+      definir({ linhas_visiveis: 0, caracteres: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Ajuda o painel a temporizar a digitação sem contar caractere na mão. */
+        tamanhoDaLinha: function (i) {
+          return desenhadas[i] ? desenhadas[i].conteudo.length : 0;
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var linhas = [
+      { texto: "cortar aula.mp4", tipo: "comando" },
+      { texto: "fala mapeada", tipo: "saida" },
+      { texto: "3 cortes prontos", tipo: "saida" }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Terminal, prompt ou resposta de máquina. A digitação é feita por definir({ caracteres }), nunca por animação própria. O cursor só aparece enquanto a linha está sendo escrita.",
+      casos: [
+        {
+          nome: "inicial",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: { titulo: "terminal", linhas: linhas, largura: 780 },
+          estado: { linhas_visiveis: 0, caracteres: 0, destaque: null }
+        },
+        {
+          nome: "digitando",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: { titulo: "terminal", linhas: linhas, largura: 780 },
+          estado: { linhas_visiveis: 1, caracteres: 9, destaque: null }
+        },
+        {
+          nome: "final",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: { titulo: "terminal", linhas: linhas, largura: 780 },
+          estado: { linhas_visiveis: 3, caracteres: -1, destaque: null }
+        },
+        {
+          nome: "linha apontada",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: { titulo: "terminal", linhas: linhas, largura: 780 },
+          estado: { linhas_visiveis: 3, caracteres: -1, destaque: 2 }
+        },
+        {
+          nome: "sem barra",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: { linhas: linhas, largura: 780, cursor: false },
+          estado: { linhas_visiveis: 3, caracteres: -1, destaque: null }
+        },
+        {
+          nome: "com erro",
+          largura: 820, altura: 420, escala: 0.44,
+          parametros: {
+            titulo: "terminal",
+            linhas: [
+              { texto: "cortar aula.mp4", tipo: "comando" },
+              { texto: "arquivo nao achado", tipo: "erro" }
+            ],
+            largura: 780
+          },
+          estado: { linhas_visiveis: 2, caracteres: -1, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

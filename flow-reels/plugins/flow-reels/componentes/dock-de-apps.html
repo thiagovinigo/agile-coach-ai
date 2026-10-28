@@ -1,0 +1,440 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   dock-de-apps  ·  a fileira de aplicativos que cresce sob o ponteiro
+   -------------------------------------------------------------------------
+   A barra familiar de ícones do sistema. O ícone que está sob o ponteiro
+   cresce e os vizinhos se afastam por uma queda de cosseno, então a fileira
+   inteira anda como líquido em vez de um ícone piscar sozinho.
+
+   Serve quando a fala trata de um CONJUNTO de ferramentas mostrado como uma
+   superfície só. A leitura acontece antes da legenda: aquilo é a barra de
+   aplicativos da máquina.
+
+   A conta é analítica, feita por quadro, e não tem relógio nenhum aqui
+   dentro: quem diz onde o ponteiro está é a render(t) do painel, pelo estado.
+
+   REGRA DURA: marca só entra com o logo de verdade do acervo em
+   componentes/logos/. Faltou o arquivo, o lugar dele vira buraco hachurado
+   no quadro e a peça grita no console. A peça não desenha marca.
+   ========================================================================= */
+
+.fc-dock {
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* A barra. Ela não tem largura fixa: a posição e a largura são recalculadas
+   a cada estado, para a barra abraçar os ícones no tamanho em que eles
+   estão agora. Assim nenhum ícone fica boiando fora da superfície. */
+.fc-dock-barra {
+  position: absolute;
+  box-sizing: border-box;
+  background: var(--superficie-alt);
+  border: var(--borda) solid color-mix(in srgb, var(--tinta-suave) 30%, transparent);
+  border-radius: var(--raio);
+}
+
+.fc-dock-icone {
+  position: absolute;
+  transform-origin: 50% 120%;
+}
+
+/* A silhueta do acervo, pintada por máscara para receber a tinta do painel.
+   O arquivo do acervo já é de uma cor só: isto não recolore marca nenhuma. */
+.fc-dock-forma {
+  width: 100%;
+  height: 100%;
+  background-color: var(--tinta);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* A sentinela descobre que o arquivo não veio e segura o window.PRONTO até a
+   imagem carregar, porque o base.js só espera por elementos img. */
+.fc-dock-sentinela {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* A falta é feia de propósito: quem produz tem que topar com ela antes do
+   público. No tamanho de ícone não cabe texto, então o que aparece é a
+   hachura, e o caminho que falta vai para o console. */
+.fc-dock-icone[data-erro="sim"] {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      color-mix(in srgb, var(--destaque) 55%, transparent) 0 8px,
+      transparent 8px 16px
+    ),
+    var(--superficie);
+  border: var(--borda) dashed var(--destaque);
+  border-radius: calc(var(--raio) / 2);
+}
+
+.fc-dock-icone[data-erro="sim"] .fc-dock-forma { display: none; }
+
+/* O ponto embaixo do aplicativo em atividade. Em repouso ele é tinta suave;
+   só o aplicativo apontado pela fala recebe a cor de acento, e só um por
+   vez, porque o acento é único. */
+.fc-dock-ponto {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--tinta-suave);
+}
+
+.fc-dock-ponto[data-aceso="sim"] { background: var(--destaque); }
+
+/* O ponteiro é móvel de interface, não marca: por isso ele pode ser
+   desenhado em traço, com a tinta do painel. */
+.fc-dock-ponteiro {
+  position: absolute;
+  display: block;
+}
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "dock-de-apps";
+
+  /* A geometria da fileira, em pixels. Os três primeiros números são a curva
+     de ampliação: caixa do ícone em repouso, largura da vaga (o que controla
+     o espaçamento dos vizinhos) e a vaga no pico. A escala de pico é a razão
+     PICO / VAGA. */
+  var ICONE = 74;
+  var VAGA = 90;
+  var PICO = 152;
+  var RECHEIO = 30;   /* respiro da barra em volta dos ícones */
+  var RECHEIO_V = 18;
+  var BASE_Y = 150;   /* a linha onde os ícones se apoiam, dentro da peça */
+  var TETO = 6;       /* quantos aplicativos cabem nos 968 px úteis */
+
+  var LIMITE = VAGA * Math.PI;
+
+  var PASTA = "logos/";
+  var SLUG_VALIDO = /^[a-z0-9._-]+$/;
+
+  function avisarFalta(alvo, motivo) {
+    var FC = window.FC;
+    if (FC) {
+      FC.logosAusentes = FC.logosAusentes || [];
+      if (FC.logosAusentes.indexOf(alvo) === -1) { FC.logosAusentes.push(alvo); }
+    }
+    console.error(
+      NOME + ": " + motivo + " (" + alvo + "). O painel NAO vai mostrar essa marca. " +
+      "Baixe o arquivo com: flow-reels componentes/baixar-logo <marca>. " +
+      "Se a marca nao existir no acervo, pegue o logo oficial na pagina de imprensa dela, " +
+      "ou tire a marca do beat e resolva com palavra. Desenhar uma forma parecida e defeito."
+    );
+  }
+
+  function criarPonteiro() {
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "fc-dock-ponteiro");
+    svg.setAttribute("viewBox", "0 0 32 32");
+    svg.setAttribute("width", "38");
+    svg.setAttribute("height", "38");
+    var forma = document.createElementNS(NS, "path");
+    forma.setAttribute("d", "M3 2 L3 27 L10 20.5 L14.5 30 L19.5 27.6 L15 18.5 L24 18 Z");
+    forma.setAttribute("fill", "var(--tinta)");
+    forma.setAttribute("stroke", "var(--superficie)");
+    forma.setAttribute("stroke-width", "2");
+    forma.setAttribute("stroke-linejoin", "round");
+    svg.appendChild(forma);
+    return svg;
+  }
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      var apps = p.apps;
+      if (!apps || !apps.length) {
+        throw new Error(NOME + ": o parametro apps e obrigatorio, com pelo menos dois " +
+                        "aplicativos, cada um assim: { marca: \"notion\", ativo: true }.");
+      }
+      if (apps.length < 2) {
+        throw new Error(NOME + ": com um aplicativo so a fileira nao le como dock. " +
+                        "Use tile-de-logo para uma marca sozinha.");
+      }
+      if (apps.length > TETO) {
+        console.error(
+          NOME + ": pediram " + apps.length + " aplicativos e cabem " + TETO + " nos 968 px " +
+          "uteis sem estourar a lei do preenchimento. Os " + (apps.length - TETO) + " ultimos " +
+          "ficaram de fora. Escolha quais " + TETO + " entram, ou parta o beat em dois."
+        );
+        apps = apps.slice(0, TETO);
+      }
+
+      var n = apps.length;
+      var fileira = n * VAGA;
+      /* A largura da peça é a do florescimento cheio: no pico os ícones de
+         fora levam um empurrão constante de 2 * (PICO - VAGA) para cada lado.
+         Reservar esse espaço aqui deixa a medida da peça estável, e é a
+         barra que anda dentro dela. */
+      var empurrao = 2 * (PICO - VAGA);
+      var larguraMax = fileira - VAGA + 2 * empurrao + ICONE + 2 * RECHEIO;
+      var picoAltura = ICONE * (PICO / VAGA);
+      var alturaMax = BASE_Y + RECHEIO_V + 16;
+
+      var el = document.createElement("div");
+      el.className = "fc-dock";
+      el.style.width = larguraMax + "px";
+      el.style.height = alturaMax + "px";
+
+      var meio = larguraMax / 2;
+      var esquerdaFileira = meio - fileira / 2;
+      function centro(i) { return esquerdaFileira + i * VAGA + VAGA / 2; }
+
+      var barra = document.createElement("div");
+      barra.className = "fc-dock-barra";
+      barra.style.height = (ICONE + RECHEIO_V * 2) + "px";
+      barra.style.top = (BASE_Y - ICONE - RECHEIO_V) + "px";
+      el.appendChild(barra);
+
+      var icones = [];
+      var pontos = [];
+
+      apps.forEach(function (app, i) {
+        var caixa = document.createElement("div");
+        caixa.className = "fc-dock-icone";
+        caixa.style.width = ICONE + "px";
+        caixa.style.height = ICONE + "px";
+        caixa.style.left = (centro(i) - ICONE / 2) + "px";
+        caixa.style.top = (BASE_Y - ICONE) + "px";
+        caixa.setAttribute("data-erro", "nao");
+
+        var marca = app && app.marca;
+        if (!marca) {
+          throw new Error(NOME + ": o aplicativo " + i + " esta sem marca. Marca e o nome do " +
+                          "arquivo do acervo em componentes/logos/, sem a extensao.");
+        }
+        var alvo = PASTA + marca + ".svg";
+
+        if (!SLUG_VALIDO.test(String(marca))) {
+          caixa.setAttribute("data-erro", "sim");
+          avisarFalta(alvo, "o nome da marca nao vira nome de arquivo");
+        } else {
+          var forma = document.createElement("div");
+          forma.className = "fc-dock-forma";
+          forma.style.webkitMaskImage = "url('" + alvo + "')";
+          forma.style.maskImage = "url('" + alvo + "')";
+          caixa.appendChild(forma);
+
+          var sentinela = document.createElement("img");
+          sentinela.className = "fc-dock-sentinela";
+          sentinela.setAttribute("aria-hidden", "true");
+          sentinela.alt = "";
+          sentinela.addEventListener("error", function () {
+            caixa.setAttribute("data-erro", "sim");
+            avisarFalta(alvo, "o arquivo do logo nao existe");
+          }, { once: true });
+          sentinela.src = alvo;
+          caixa.appendChild(sentinela);
+        }
+
+        el.appendChild(caixa);
+        icones.push(caixa);
+
+        if (app.ativo) {
+          var ponto = document.createElement("div");
+          ponto.className = "fc-dock-ponto";
+          ponto.style.top = (BASE_Y + 3) + "px";
+          ponto.setAttribute("data-aceso", "nao");
+          el.appendChild(ponto);
+          pontos[i] = ponto;
+        } else {
+          pontos[i] = null;
+        }
+      });
+
+      var ponteiro = null;
+      if (p.ponteiro !== false) {
+        ponteiro = criarPonteiro();
+        el.appendChild(ponteiro);
+      }
+
+      /* Um quadro da ampliação. Tudo aqui é conta em cima do estado que
+         chegou: nenhuma leitura de relógio, nenhum acúmulo do quadro
+         anterior. Chamar duas vezes com o mesmo estado dá o mesmo pixel. */
+      function definir(estado) {
+        var e = estado || {};
+        var intensidade = e.intensidade == null ? (e.ponteiro == null ? 0 : 1) : e.intensidade;
+        intensidade = Math.max(0, Math.min(1, intensidade));
+        var posicao = e.ponteiro == null ? 0.5 : Math.max(0, Math.min(1, e.ponteiro));
+        /* O ponteiro chega de 0 a 1 e vira pixel dentro da fileira, do centro
+           do primeiro ícone ao centro do último. */
+        var alvoPx = VAGA / 2 + posicao * (fileira - VAGA);
+
+        var deslocamentos = [];
+        var escalas = [];
+        var extEsq = Infinity;
+        var extDir = -Infinity;
+        var i;
+
+        for (i = 0; i < n; i++) {
+          var distancia = (i * VAGA + VAGA / 2) - alvoPx;
+          var x = 0;
+          var escala = 1;
+          if (distancia > -LIMITE && distancia < LIMITE) {
+            /* A queda de cosseno: o ícone sob o ponteiro cresce, e o vizinho
+               cresce menos e é empurrado para o lado pelo seno. É isto que
+               faz a fileira andar como onda em vez de degrau. */
+            var arco = (distancia / VAGA) * 0.5;
+            escala = 1 + (PICO / VAGA - 1) * Math.cos(arco);
+            x = 2 * (PICO - VAGA) * Math.sin(arco);
+          } else {
+            x = (distancia > -LIMITE ? 2 : -2) * (PICO - VAGA);
+          }
+          x = x * intensidade;
+          escala = 1 + (escala - 1) * intensidade;
+          deslocamentos[i] = x;
+          escalas[i] = escala;
+          var cx = centro(i) + x;
+          var metade = (ICONE * escala) / 2;
+          if (cx - metade < extEsq) { extEsq = cx - metade; }
+          if (cx + metade > extDir) { extDir = cx + metade; }
+        }
+
+        /* A fileira se recentra a cada quadro, então o florescimento fica
+           simétrico e nunca corre para fora da peça. */
+        var recentro = meio - (extEsq + extDir) / 2;
+
+        for (i = 0; i < n; i++) {
+          icones[i].style.transform =
+            "translateX(" + (deslocamentos[i] + recentro) + "px) scale(" + escalas[i] + ")";
+          if (pontos[i]) {
+            pontos[i].style.left = (centro(i) + deslocamentos[i] + recentro - 4.5) + "px";
+            pontos[i].setAttribute("data-aceso", e.destaque === i ? "sim" : "nao");
+          }
+        }
+
+        barra.style.left = (extEsq + recentro - RECHEIO) + "px";
+        barra.style.width = (extDir - extEsq + RECHEIO * 2) + "px";
+
+        if (ponteiro) {
+          if (e.ponteiro == null) {
+            ponteiro.style.display = "none";
+          } else {
+            ponteiro.style.display = "block";
+            var k = Math.round((alvoPx - VAGA / 2) / VAGA);
+            k = Math.max(0, Math.min(n - 1, k));
+            var topoPico = BASE_Y - ICONE * escalas[k];
+            ponteiro.style.left = (esquerdaFileira + alvoPx + recentro - 5) + "px";
+            ponteiro.style.top = (topoPico + ICONE * escalas[k] * 0.34 - 4) + "px";
+          }
+        }
+      }
+
+      definir({ ponteiro: null, intensidade: 0, destaque: null });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        },
+        /* Os números conferidos da peça, para o painel posicionar sem chutar:
+           o teto de aplicativos e a altura de um ícone no pico. */
+        teto: TETO,
+        pico: picoAltura
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    var conjunto = [
+      { marca: "notion", ativo: true },
+      { marca: "slack", ativo: true },
+      { marca: "figma", ativo: false },
+      { marca: "github", ativo: false },
+      { marca: "youtube", ativo: false },
+      { marca: "claude", ativo: true }
+    ];
+
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "A fileira de aplicativos do sistema. O ícone sob o ponteiro cresce e os vizinhos se afastam por queda de cosseno, então a barra anda como líquido. A peça não tem relógio: quem passeia o ponteiro é a render(t) do painel, movendo o estado ponteiro de 0 a 1. Cabem seis aplicativos nos 968 px úteis; pedindo mais, a peça avisa no console e usa os seis primeiros.",
+      casos: [
+        {
+          nome: "repouso, sem ponteiro",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: { apps: conjunto },
+          estado: { ponteiro: null, intensidade: 0, destaque: null }
+        },
+        {
+          nome: "ponteiro na esquerda",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: { apps: conjunto },
+          estado: { ponteiro: 0, intensidade: 1, destaque: 0 }
+        },
+        {
+          nome: "ponteiro no meio",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: { apps: conjunto },
+          estado: { ponteiro: 0.5, intensidade: 1, destaque: null }
+        },
+        {
+          nome: "ponteiro na direita, último aceso",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: { apps: conjunto },
+          estado: { ponteiro: 1, intensidade: 1, destaque: 5 }
+        },
+        {
+          nome: "meio caminho da intensidade",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: { apps: conjunto },
+          estado: { ponteiro: 0.3, intensidade: 0.5, destaque: null }
+        },
+        {
+          nome: "logo que nao existe no acervo",
+          largura: 900, altura: 240, escala: 0.55, x: 20, y: 20,
+          parametros: {
+            apps: [
+              { marca: "notion", ativo: false },
+              { marca: "linkedin", ativo: false },
+              { marca: "slack", ativo: false }
+            ]
+          },
+          estado: { ponteiro: 0.5, intensidade: 1, destaque: null }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>

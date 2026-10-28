@@ -1,0 +1,19 @@
+{
+  "_nota": "Os pedidos que o gerar_audio.py manda para a ElevenLabs, uma vez, com a chave da pessoa. A descricao em portugues diz o que cada som e e onde ele entra; o prompt fica em ingles porque e o que a API entende melhor. Trocar um prompt e rodar gerar_audio.py --forcar --so <nome> refaz so aquele arquivo.",
+  "leito": {
+    "descricao": "A musica de fundo do reel: instrumental, animada sem ser agitada, sem voz, com um comeco que funciona sob o titulo da abertura e um meio que fica quieto debaixo da narracao.",
+    "prompt": "Upbeat modern instrumental bed for a product launch reel, warm plucked synths and soft electronic drums, steady 112 bpm, bright and optimistic but calm underneath, no vocals, no big drops, no risers, clean mix that sits under a voiceover",
+    "duracao_ms": 60000,
+    "arquivo": "leito.mp3"
+  },
+  "efeitos": [
+    {"nome": "whoosh", "descricao": "Passagem de ar curta e macia, na transicao entre duas tomadas e na entrada do fechamento.", "prompt": "soft short airy whoosh transition, smooth, not harsh, clean", "duracao": 0.8},
+    {"nome": "pop", "descricao": "Estalo pequeno e redondo, quando uma palavra do titulo entra ou uma carta assenta.", "prompt": "small soft rounded UI pop, subtle, clean, short", "duracao": 0.4},
+    {"nome": "clique", "descricao": "Clique leve de botao, no toque do botao de envio do comentario.", "prompt": "light soft mouse click, single, clean, close", "duracao": 0.3},
+    {"nome": "alternar", "descricao": "Interruptor de interface, quando a pilula da abertura aparece.", "prompt": "soft UI toggle switch sound, gentle, clean, short", "duracao": 0.4},
+    {"nome": "varredura", "descricao": "Risco de marcador passando, quando o anel se desenha na tela.", "prompt": "soft marker pen sweep stroke on paper, quick, subtle", "duracao": 0.6},
+    {"nome": "assentar", "descricao": "Pouso suave de um objeto, quando o item prometido chega na mensagem direta.", "prompt": "soft gentle settle thud of a light card landing, warm, subtle, short", "duracao": 0.6},
+    {"nome": "digitar", "descricao": "Digitacao rapida num teclado de notebook, enquanto a palavra e digitada na caixa de comentario.", "prompt": "fast light typing on a laptop keyboard, close, clean, continuous", "duracao": 2.0},
+    {"nome": "enviar", "descricao": "Som de mensagem enviada, no envio do comentario.", "prompt": "soft modern message sent swoosh notification, clean, short", "duracao": 0.6}
+  ]
+}

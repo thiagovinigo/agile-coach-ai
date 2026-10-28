@@ -1,0 +1,1915 @@
+{
+ "_leia": "As linguagens do episódio da Fábrica 4.0 (camada 3 da pesquisa 04, seção 6). Cada reel tem UMA linguagem base e no máximo UMA convidada; o estilo de produção (estilos.json) diz quanto de produção, a linguagem diz com que sotaque. Os nomes de peças são o contrato da 4.0 (docs/fabrica-4-0-plano.md) e as peças da 3.0 (MOTOR.md). Quem lê: scripts/linguagem.py (sugerir, registrar, conferir) e o planejador. Contrato inteiro em motor/docs-4/variedade-e-som.md. Na 4.3, cada linguagem lista os efeitos de pós no quadro inteiro que aceita (pecas.pos; grao e vinheta valem em todas, em sempre.pos) e sugere um acabamento (LUT da marca, grão e vinheta), que o planejador põe no \"acabamento\" do cenas.json.",
+ "versao": 1,
+ "cores": "O destaque é sempre o acento chapado da marca (cores.destaque; degradê vira 3 a 6 faixas chapadas). A cor_secundaria de cada linguagem fica nas superfícies e linhas, nunca no texto, e não traz cor nova além do ciano #0099FF.",
+ "sempre": {
+  "_leia": "Valem em toda linguagem, sem contar como peça fora dela: o DNA da marca. Inclui o CTA da marca (comentario + dm) e as peças \"sempre\" do estilos.json (o linguagem.py junta as duas listas).",
+  "modos": [
+   "rosto-vidro",
+   "tipografia"
+  ],
+  "sobre": [
+   "palavra",
+   "comentario",
+   "dm"
+  ],
+  "transicoes": [
+   "corte"
+  ],
+  "legenda": [
+   "revela"
+  ],
+  "sons": [
+   "pop",
+   "clique",
+   "tick"
+  ],
+  "pos": [
+   "grao",
+   "vinheta"
+  ]
+ },
+ "eixos": {
+  "_leia": "Os três eixos da pesquisa 01 (seção 5.3). A convidada difere da base em exatamente um eixo.",
+  "tempo": [
+   "retro",
+   "presente",
+   "futuro",
+   "atemporal"
+  ],
+  "acabamento": [
+   "limpo",
+   "sujo"
+  ],
+  "energia": [
+   "baixa",
+   "media",
+   "alta"
+  ]
+ },
+ "regras": {
+  "base_e_convidada": "Uma linguagem base (pelo menos 70% das cenas) e no máximo uma convidada (1 ou 2 cenas, como pontuação: o gancho ou a virada). A convidada difere da base em exatamente um eixo e não forma par proibido.",
+  "convidada_max": 1,
+  "convidada_cenas_max": 2,
+  "base_fracao_min": 0.7,
+  "convidada_eixos_diferentes": 1,
+  "familias_transicao_max": 3,
+  "heroi": {
+   "faixa": [
+    0.55,
+    0.8
+   ],
+   "aparicoes_max": 2,
+   "nota": "Um momento-herói por reel, entre 55% e 80% da duração: é o reengate do meio. Declarado no cenas.json em \"heroi\": {\"t\": <s>, \"nome\": \"<id>\"}."
+  },
+  "curva_intensidade": [
+   {
+    "de": "0 s",
+    "ate": "3 s",
+    "nivel": "alta",
+    "o_que": "capa no quadro 0, fala em até 0,3 s, primeiro movimento até 0,5 s, primeira troca entre 1,5 e 3,5 s"
+   },
+   {
+    "de": "3 s",
+    "ate": "10 s",
+    "nivel": "baixa a média",
+    "o_que": "assentar: deixar a pessoa falar, poucas peças"
+   },
+   {
+    "de": "10 s",
+    "ate": "55%",
+    "nivel": "ondas",
+    "o_que": "um reengate (peso 3) a cada 8 a 15 s"
+   },
+   {
+    "de": "55%",
+    "ate": "80%",
+    "nivel": "pico",
+    "o_que": "o momento-herói da linguagem"
+   },
+   {
+    "de": "últimos 3 a 5 s",
+    "ate": "fim",
+    "nivel": "média",
+    "o_que": "CTA de frente, rosto em quadro, corte seco que emenda no começo"
+   }
+  ],
+  "ritmo": {
+   "mudanca_relevante_s": [
+    2,
+    4
+   ],
+   "parado_max_s": 5,
+   "teto_por_s": 0.5,
+   "nota": "Mudança relevante = evento de peso 2 ou 3. Cada linguagem ajusta o alvo dentro disso (campo ritmo)."
+  },
+  "sons": {
+   "espaco_por_peca_s": 1.5,
+   "media_min_s": 1.5,
+   "juntar_abaixo_s": 0.25,
+   "nota": "Um kit de sons por reel (o da linguagem; a convidada só nas cenas dela). Só eventos de peso 2 ou 3 ganham som. O audio.py escolhe a variação de cada família."
+  },
+  "memoria": {
+   "historico": 10,
+   "linguagem": 2,
+   "heroi": 4,
+   "trilha": 8,
+   "nota": "Não repetir a linguagem nos últimos 2 reels, o herói nos últimos 4 e a trilha nos últimos 8 (projetos/.historico-linguagens.json)."
+  },
+  "pares_proibidos": [
+   [
+    "vidro",
+    "anos-80"
+   ],
+   [
+    "vidro",
+    "terminal"
+   ],
+   [
+    "sci-fi",
+    "recorte"
+   ],
+   [
+    "anos-80",
+    "cinema"
+   ],
+   [
+    "manga",
+    "editorial"
+   ],
+   [
+    "turbo",
+    "calmo"
+   ],
+   [
+    "manga",
+    "calmo"
+   ],
+   [
+    "profundidade-3d",
+    "recorte"
+   ]
+  ]
+ },
+ "formatos": {
+  "_leia": "O formato da série (camada 2) puxa ou evita linguagens: preferidas pesam 2x no sorteio, evitadas 0,2x.",
+  "noticia": {
+   "nome": "Notícia (saiu hoje)",
+   "preferidas": [
+    "manchete",
+    "terminal",
+    "sci-fi"
+   ],
+   "evitar": [
+    "calmo"
+   ]
+  },
+  "ferramenta": {
+   "nome": "Ferramenta / demo",
+   "preferidas": [
+    "terminal",
+    "vidro",
+    "profundidade-3d"
+   ],
+   "evitar": [
+    "cinema"
+   ]
+  },
+  "tutorial": {
+   "nome": "Tutorial passo a passo",
+   "preferidas": [
+    "terminal",
+    "recorte",
+    "editorial"
+   ],
+   "evitar": [
+    "turbo"
+   ]
+  },
+  "opiniao": {
+   "nome": "Opinião / tese",
+   "preferidas": [
+    "cinema",
+    "calmo",
+    "editorial"
+   ],
+   "evitar": [
+    "turbo",
+    "recorte"
+   ]
+  },
+  "lista": {
+   "nome": "Lista (3 ferramentas)",
+   "preferidas": [
+    "recorte",
+    "turbo",
+    "manchete"
+   ],
+   "evitar": [
+    "cinema"
+   ]
+  },
+  "teste": {
+   "nome": "Teste ao vivo / bastidor",
+   "preferidas": [
+    "profundidade-3d",
+    "turbo",
+    "terminal"
+   ],
+   "evitar": [
+    "calmo"
+   ]
+  }
+ },
+ "requisitos": {
+  "_leia": "O que cada peça pede do material. visao = visao/ do corte com máscara da pessoa; profundidade = mapa que separa você do fundo; maos = mãos no quadro (visao/maos.json com mãos em parte boa do vídeo); rosto = rosto.json. O look com alvo fundo ou pessoa também pede a visão (com alvo tudo, não). Os das peças novas seguem o plano da 4.0; a frente de cada peça confirma no docs-4 dela.",
+  "modos": {
+   "camadas": [
+    "visao",
+    "profundidade"
+   ],
+   "parallax": [
+    "visao"
+   ],
+   "celular3d": [],
+   "telas": []
+  },
+  "sobre": {
+   "deteccao": [
+    "visao"
+   ],
+   "maos": [
+    "visao",
+    "maos"
+   ],
+   "contorno": [
+    "visao"
+   ],
+   "profundidade": [
+    "visao",
+    "profundidade"
+   ],
+   "nuvem": [
+    "visao",
+    "profundidade"
+   ],
+   "malha": [
+    "visao",
+    "profundidade"
+   ],
+   "faiscas": [
+    "maos"
+   ],
+   "rastro": [
+    "maos"
+   ],
+   "contar": [
+    "maos"
+   ],
+   "energia": [
+    "maos"
+   ],
+   "tela-maos": [
+    "maos"
+   ],
+   "feixe": [
+    "maos"
+   ],
+   "onda": [
+    "maos"
+   ],
+   "raio": [
+    "maos"
+   ],
+   "eco": [
+    "visao"
+   ],
+   "sombra": [
+    "visao"
+   ],
+   "aura": [
+    "visao"
+   ],
+   "dolly": [
+    "visao"
+   ],
+   "moldura-pop": [
+    "visao"
+   ],
+   "recorte": [
+    "visao"
+   ],
+   "linhas-foco": [
+    "rosto"
+   ],
+   "brilho-olhar": [
+    "visao",
+    "rosto"
+   ],
+   "laser": [
+    "visao",
+    "rosto"
+   ],
+   "piscada": [
+    "visao",
+    "rosto"
+   ],
+   "fala-onda": [
+    "visao",
+    "rosto"
+   ],
+   "emoji-reacao": [
+    "visao",
+    "rosto"
+   ],
+   "mascara-tech": [
+    "visao",
+    "rosto"
+   ],
+   "zoom-reacao": [
+    "visao",
+    "rosto"
+   ]
+  },
+  "material": {
+   "gravacao-de-tela": "gravação de tela com a webcam no canto: sem visão confiável, sem mãos, sem rosto grande"
+  }
+ },
+ "linguagens": {
+  "vidro": {
+   "nome": "Vidro",
+   "descricao": "A cara da 3.0: o vídeo vira placa de vidro que inclina e mergulha, manchete em pilha, tudo limpo e premium.",
+   "quando": "Lançamento de ferramenta, produto bonito, demo de app. Use com parcimônia: vidro em tudo cansou (pesquisa 01, seção 4).",
+   "assuntos": [
+    "lancamento",
+    "produto",
+    "app",
+    "apple",
+    "interface",
+    "design",
+    "ferramenta",
+    "novidade",
+    "premium"
+   ],
+   "eixos": {
+    "tempo": "presente",
+    "acabamento": "limpo",
+    "energia": "baixa"
+   },
+   "peso": 0.7,
+   "estilo_minimo": [
+    "liquid-glass",
+    "completo"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "vidro-liquido",
+     "rosto-vidro",
+     "lista",
+     "tipografia",
+     "celular3d",
+     "telas"
+    ],
+    "sobre": [
+     "pilha",
+     "palavra",
+     "hud",
+     "objeto3d",
+     "logo-volume",
+     "foco",
+     "moldura-pop"
+    ],
+    "look": [],
+    "palavra": [
+     "extrusao",
+     "cromado",
+     "pula",
+     "conta"
+    ],
+    "transicoes": [
+     "inclinada",
+     "mergulho",
+     "desfoque"
+    ],
+    "pos": [
+     "bloom",
+     "lente",
+     "aberracao"
+    ]
+   },
+   "legenda": {
+    "estilo": "revela",
+    "posicao": "peito",
+    "nota": "a legenda da 3.0, sem mexer"
+   },
+   "heroi": [
+    {
+     "id": "placa-que-gira",
+     "descricao": "a placa de vidro inclina, gira e mostra a cena seguinte no verso",
+     "pecas": [
+      "vidro-liquido",
+      "inclinada"
+     ],
+     "precisa": []
+    },
+    {
+     "id": "mergulho-no-celular",
+     "descricao": "a câmera mergulha na tela do celular 3D e sai dentro da demo",
+     "pecas": [
+      "celular3d",
+      "mergulho"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "whoosh",
+     "pop",
+     "clique",
+     "subida"
+    ],
+    "entra": "pop",
+    "transicao": "whoosh",
+    "heroi": "subida"
+   },
+   "trilha": {
+    "climas": [
+     "tech",
+     "leve"
+    ],
+    "nota": "eletrônica limpa"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.5,
+     3.5
+    ],
+    "transicoes_por_reel": [
+     3,
+     5
+    ],
+    "nota": "uma mudança a cada 3 s"
+   },
+   "cor_secundaria": "branco frio nas bordas do vidro",
+   "acabamento": {
+    "lut": "neutra-quente",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "terminal": {
+   "nome": "Terminal",
+   "descricao": "Monitor CRT e linha de comando: texto que decodifica, prompt digitando, glitch e pixel. Cara de quem mexe no código.",
+   "quando": "Claude Code, Codex, n8n, automação, agente, código, bastidor técnico, notícia de modelo novo.",
+   "assuntos": [
+    "codigo",
+    "claude code",
+    "codex",
+    "terminal",
+    "agente",
+    "automacao",
+    "n8n",
+    "api",
+    "dev",
+    "programacao",
+    "script",
+    "modelo",
+    "prompt",
+    "bug",
+    "hacker"
+   ],
+   "eixos": {
+    "tempo": "retro",
+    "acabamento": "sujo",
+    "energia": "media"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "tela-bolha",
+     "tipografia",
+     "lista",
+     "telas"
+    ],
+    "sobre": [
+     "look",
+     "moldura-crt",
+     "prompt",
+     "transcricao",
+     "hud",
+     "palavra",
+     "mira",
+     "chuva",
+     "diagrama",
+     "mascara-tech"
+    ],
+    "look": [
+     "crt",
+     "ascii",
+     "pixel",
+     "pontilhado"
+    ],
+    "palavra": [
+     "decodifica",
+     "digitacao",
+     "glitch",
+     "pixel"
+    ],
+    "transicoes": [
+     "glitch",
+     "pixels",
+     "persianas"
+    ],
+    "pos": [
+     "crt",
+     "ascii",
+     "glitch",
+     "pixel",
+     "aberracao"
+    ]
+   },
+   "legenda": {
+    "estilo": "revela",
+    "posicao": "base",
+    "nota": "revela na base; a pílula do caixa (acento sobre vidro translúcido) reprovou contraste e zonas nos reels reais. Nas cenas de demo, revela no topo"
+   },
+   "heroi": [
+    {
+     "id": "prompt-executa",
+     "descricao": "o prompt termina de digitar, a palavra decodifica e a cena se monta em pixels",
+     "pecas": [
+      "prompt",
+      "decodifica",
+      "pixels"
+     ],
+     "precisa": []
+    },
+    {
+     "id": "crt-desliga-e-volta",
+     "descricao": "a moldura CRT apaga num risco, chia e religa na cena da virada",
+     "pecas": [
+      "moldura-crt",
+      "look:crt"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "bip",
+     "glitch",
+     "clique",
+     "tick",
+     "estatica",
+     "whoosh"
+    ],
+    "entra": "bip",
+    "transicao": "glitch",
+    "heroi": "estatica"
+   },
+   "trilha": {
+    "climas": [
+     "tech",
+     "tensa"
+    ],
+    "nota": "synth pulsante"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.0,
+     3.0
+    ],
+    "transicoes_por_reel": [
+     3,
+     6
+    ],
+    "nota": "uma mudança a cada 2,5 s"
+   },
+   "cor_secundaria": "ciano #0099FF nas linhas e no HUD",
+   "acabamento": {
+    "lut": "fria-tech",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "cinema": {
+   "nome": "Cinema",
+   "descricao": "Película: grão, preto e branco no fundo, tarja de cinema, luz vazando e queima de filme. Pouca coisa na tela, cada uma pesando.",
+   "quando": "Opinião, tese, história pessoal, reflexão sobre o mercado, o \"por que isso importa\".",
+   "assuntos": [
+    "opiniao",
+    "tese",
+    "historia",
+    "reflexao",
+    "carreira",
+    "futuro",
+    "mercado",
+    "trabalho",
+    "medo",
+    "verdade"
+   ],
+   "eixos": {
+    "tempo": "retro",
+    "acabamento": "sujo",
+    "energia": "baixa"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "imagem-cheia",
+     "tipografia",
+     "parallax"
+    ],
+    "sobre": [
+     "look",
+     "barras",
+     "luz",
+     "poeira",
+     "foco",
+     "dolly",
+     "palavra"
+    ],
+    "look": [
+     "grao",
+     "noir",
+     "duotone"
+    ],
+    "palavra": [
+     "vazado",
+     "digitacao",
+     "conta"
+    ],
+    "transicoes": [
+     "queima",
+     "clarao",
+     "desfoque"
+    ],
+    "pos": [
+     "lente",
+     "bloom"
+    ]
+   },
+   "legenda": {
+    "estilo": "palavra-acesa",
+    "posicao": "base",
+    "nota": "frase inteira, sem quique; o grupo aparece de uma vez"
+   },
+   "heroi": [
+    {
+     "id": "dolly-na-tese",
+     "descricao": "dolly zoom falso na frase da tese, com a tarja fechando",
+     "pecas": [
+      "dolly",
+      "barras"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    },
+    {
+     "id": "queima-antes-da-tese",
+     "descricao": "a película queima, meio segundo de silêncio, e a tese entra em preto e branco",
+     "pecas": [
+      "queima",
+      "look:noir"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "impacto",
+     "subida",
+     "clarao",
+     "whoosh"
+    ],
+    "entra": null,
+    "transicao": "clarao",
+    "heroi": "impacto"
+   },
+   "trilha": {
+    "climas": [
+     "tensa",
+     "calma"
+    ],
+    "nota": "atmosférica, ambient"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     3.5,
+     5.0
+    ],
+    "transicoes_por_reel": [
+     2,
+     4
+    ],
+    "nota": "uma mudança a cada 4 a 5 s; o peso vem da imagem, não da troca"
+   },
+   "cor_secundaria": "nenhuma nova: a luz que vaza é o acento, o resto é preto e branco",
+   "acabamento": {
+    "lut": "filme",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "recorte": {
+   "nome": "Recorte / colagem",
+   "descricao": "Feito à mão: você vira adesivo com contorno branco, papel, carimbo, polaroid e tinta. Brincalhão e humano.",
+   "quando": "Lista de ferramentas, passo a passo leve, comparação, humor, bastidor.",
+   "assuntos": [
+    "lista",
+    "ferramentas",
+    "dicas",
+    "passo a passo",
+    "comparacao",
+    "humor",
+    "bastidor",
+    "rotina",
+    "checklist"
+   ],
+   "eixos": {
+    "tempo": "atemporal",
+    "acabamento": "sujo",
+    "energia": "alta"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "tela-cortada",
+    "completo"
+   ],
+   "precisa": [
+    "visao"
+   ],
+   "incompativel": [
+    "gravacao-de-tela"
+   ],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "lista",
+     "lado-a-lado",
+     "imagem-cheia",
+     "telas"
+    ],
+    "sobre": [
+     "recorte",
+     "papel",
+     "polaroid",
+     "palavra",
+     "look",
+     "moldura-pop",
+     "contar",
+     "emoji-reacao"
+    ],
+    "look": [
+     "risografia",
+     "reticula",
+     "esboco"
+    ],
+    "palavra": [
+     "carimbo",
+     "marcatexto",
+     "brutal"
+    ],
+    "transicoes": [
+     "tinta",
+     "forma",
+     "chicote"
+    ],
+    "pos": [
+     "reticula",
+     "pontilhado"
+    ]
+   },
+   "legenda": {
+    "estilo": "pop",
+    "posicao": "peito",
+    "nota": "cada palavra entra com a subida curta, como recorte colado"
+   },
+   "heroi": [
+    {
+     "id": "adesivo-descola",
+     "descricao": "a imagem congela, você vira adesivo com contorno branco e é colado ao lado da lista",
+     "pecas": [
+      "recorte",
+      "polaroid"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    },
+    {
+     "id": "carimbo-na-lista",
+     "descricao": "o item principal da lista leva o carimbo em cima, com o papel tremendo",
+     "pecas": [
+      "lista",
+      "palavra:carimbo",
+      "papel"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "carimbo",
+     "obturador",
+     "pop",
+     "whoosh",
+     "impacto",
+     "subida"
+    ],
+    "entra": "carimbo",
+    "transicao": "whoosh",
+    "heroi": "obturador"
+   },
+   "trilha": {
+    "climas": [
+     "leve",
+     "animada"
+    ],
+    "nota": "lo-fi brincalhona"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.5,
+     3.5
+    ],
+    "transicoes_por_reel": [
+     3,
+     5
+    ],
+    "nota": "uma mudança a cada 3 s"
+   },
+   "cor_secundaria": "papel escuro com fibra clara, sem cor nova",
+   "acabamento": {
+    "lut": "neutra-quente",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "sci-fi": {
+   "nome": "Sci-fi / holograma",
+   "descricao": "HUD de ficção: holograma, mira que trava, varredura térmica, tela de luz entre as mãos. A IA enxergando você.",
+   "quando": "Visão computacional, robôs, agentes que \"veem\", hardware, o futuro chegando, demo de IA multimodal.",
+   "assuntos": [
+    "visao computacional",
+    "robo",
+    "agente",
+    "futuro",
+    "multimodal",
+    "hardware",
+    "ia",
+    "holograma",
+    "camera",
+    "sensor"
+   ],
+   "eixos": {
+    "tempo": "futuro",
+    "acabamento": "limpo",
+    "energia": "media"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "tela-cortada",
+    "completo"
+   ],
+   "precisa": [
+    "visao"
+   ],
+   "incompativel": [
+    "gravacao-de-tela"
+   ],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "camadas",
+     "telas",
+     "celular3d"
+    ],
+    "sobre": [
+     "look",
+     "deteccao",
+     "maos",
+     "mira",
+     "hud",
+     "tela-maos",
+     "feixe",
+     "aura",
+     "energia",
+     "nuvem",
+     "malha",
+     "diagrama",
+     "contar",
+     "mascara-tech",
+     "laser",
+     "piscada"
+    ],
+    "look": [
+     "holograma",
+     "termico"
+    ],
+    "palavra": [
+     "decodifica",
+     "neon",
+     "cromado"
+    ],
+    "transicoes": [
+     "zoom-atraves",
+     "mergulho",
+     "desfoque"
+    ],
+    "pos": [
+     "glitch",
+     "aberracao",
+     "bloom",
+     "onda",
+     "crt"
+    ]
+   },
+   "legenda": {
+    "estilo": "revela",
+    "posicao": "topo",
+    "nota": "no alto enquanto as mãos trabalham; desvia_maos ligado"
+   },
+   "heroi": [
+    {
+     "id": "holograma-nas-maos",
+     "descricao": "uma tela de luz nasce entre as mãos e a mira trava nela",
+     "pecas": [
+      "tela-maos",
+      "mira"
+     ],
+     "precisa": [
+      "maos"
+     ]
+    },
+    {
+     "id": "varredura-holograma",
+     "descricao": "você vira holograma numa varredura de cima a baixo, com a detecção travando",
+     "pecas": [
+      "look:holograma",
+      "deteccao"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    },
+    {
+     "id": "laser-no-dado",
+     "descricao": "no número que importa, os olhos disparam o laser e o dado acende",
+     "pecas": [
+      "laser"
+     ],
+     "precisa": [
+      "rosto"
+     ]
+    }
+   ],
+   "sons": {
+    "kit": [
+     "energia",
+     "bip",
+     "whoosh",
+     "raio",
+     "subida",
+     "glitch",
+     "estatica",
+     "impacto"
+    ],
+    "entra": "bip",
+    "transicao": "whoosh",
+    "heroi": "energia"
+   },
+   "trilha": {
+    "climas": [
+     "tech",
+     "tensa"
+    ],
+    "nota": "synth frio"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.5,
+     3.5
+    ],
+    "transicoes_por_reel": [
+     3,
+     5
+    ],
+    "nota": "uma mudança a cada 3 s"
+   },
+   "cor_secundaria": "ciano #0099FF no HUD e nas linhas",
+   "acabamento": {
+    "lut": "fria-tech",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "anos-80": {
+   "nome": "Anos 80",
+   "descricao": "Synthwave e fita VHS: grade de neon atrás de você, palavra cromada, rebobinada e chiado. Retrô com energia.",
+   "quando": "Nostalgia, \"isso já existia\", comparação antes/depois, história da tecnologia, tema leve com energia.",
+   "assuntos": [
+    "nostalgia",
+    "antes e depois",
+    "historia",
+    "retro",
+    "jogo",
+    "games",
+    "volta",
+    "classico",
+    "evolucao"
+   ],
+   "eixos": {
+    "tempo": "retro",
+    "acabamento": "sujo",
+    "energia": "alta"
+   },
+   "peso": 0.9,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "tipografia",
+     "lista",
+     "parallax"
+    ],
+    "sobre": [
+     "look",
+     "grade-synthwave",
+     "moldura-crt",
+     "luz",
+     "palavra"
+    ],
+    "look": [
+     "vhs",
+     "duotone",
+     "posterizar"
+    ],
+    "palavra": [
+     "cromado",
+     "neon",
+     "extrusao"
+    ],
+    "transicoes": [
+     "vhs",
+     "persianas",
+     "chicote"
+    ],
+    "pos": [
+     "vhs",
+     "crt",
+     "bloom",
+     "aberracao",
+     "onda"
+    ]
+   },
+   "legenda": {
+    "estilo": "pop",
+    "posicao": "peito",
+    "nota": "palavra a palavra com a subida curta"
+   },
+   "heroi": [
+    {
+     "id": "grade-nasce-atras",
+     "descricao": "a grade synthwave e o sol listrado nascem atrás de você, com a palavra cromada",
+     "pecas": [
+      "grade-synthwave",
+      "palavra:cromado"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    },
+    {
+     "id": "rebobina-e-volta",
+     "descricao": "a fita rebobina com tracking e volta na frase que importa",
+     "pecas": [
+      "vhs",
+      "look:vhs"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "rebobina",
+     "estatica",
+     "whoosh",
+     "impacto"
+    ],
+    "entra": "pop",
+    "transicao": "rebobina",
+    "heroi": "impacto"
+   },
+   "trilha": {
+    "climas": [
+     "synthwave"
+    ],
+    "nota": "synthwave (as faixas com synthwave no nome)"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.0,
+     3.0
+    ],
+    "transicoes_por_reel": [
+     3,
+     6
+    ],
+    "nota": "uma mudança a cada 2,5 s"
+   },
+   "cor_secundaria": "ciano #0099FF nas linhas da grade",
+   "acabamento": {
+    "lut": "neutra-quente",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "manga": {
+   "nome": "Mangá",
+   "descricao": "Quadrinho japonês: linhas de foco no rosto, quadro de impacto, retícula, palavra brutal. Energia lá em cima.",
+   "quando": "Polêmica, reação, \"isso é absurdo\", virada forte, hype de lançamento.",
+   "assuntos": [
+    "polemica",
+    "absurdo",
+    "reacao",
+    "hype",
+    "chocante",
+    "insano",
+    "virada",
+    "treta",
+    "anime"
+   ],
+   "eixos": {
+    "tempo": "atemporal",
+    "acabamento": "sujo",
+    "energia": "alta"
+   },
+   "peso": 0.9,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "tipografia",
+     "lado-a-lado"
+    ],
+    "sobre": [
+     "linhas-foco",
+     "look",
+     "palavra",
+     "onda",
+     "eco",
+     "raio",
+     "sombra",
+     "contar",
+     "brilho-olhar",
+     "zoom-reacao",
+     "emoji-reacao",
+     "laser"
+    ],
+    "look": [
+     "reticula",
+     "esboco",
+     "posterizar",
+     "noir"
+    ],
+    "palavra": [
+     "brutal",
+     "carimbo",
+     "pula",
+     "vazado"
+    ],
+    "transicoes": [
+     "lamina",
+     "chicote",
+     "forma"
+    ],
+    "pos": [
+     "reticula",
+     "pontilhado",
+     "glitch"
+    ]
+   },
+   "legenda": {
+    "estilo": "pop",
+    "posicao": "topo",
+    "nota": "no alto, para as linhas de foco terem o rosto"
+   },
+   "heroi": [
+    {
+     "id": "quadro-de-impacto",
+     "descricao": "linhas de foco no rosto, dois quadros em negativo e a palavra brutal batendo",
+     "pecas": [
+      "linhas-foco",
+      "palavra:brutal",
+      "look:posterizar"
+     ],
+     "precisa": [
+      "rosto"
+     ]
+    },
+    {
+     "id": "onda-de-choque",
+     "descricao": "a palma bate e uma onda de choque varre o quadro",
+     "pecas": [
+      "onda",
+      "eco"
+     ],
+     "precisa": [
+      "maos"
+     ]
+    }
+   ],
+   "sons": {
+    "kit": [
+     "impacto",
+     "whoosh",
+     "carimbo",
+     "pop",
+     "raio",
+     "subida"
+    ],
+    "entra": "carimbo",
+    "transicao": "whoosh",
+    "heroi": "impacto"
+   },
+   "trilha": {
+    "climas": [
+     "animada"
+    ],
+    "nota": "batida rápida"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.0,
+     2.5
+    ],
+    "transicoes_por_reel": [
+     4,
+     6
+    ],
+    "nota": "uma mudança a cada 2 s, sem passar de 0,5 por segundo"
+   },
+   "cor_secundaria": "nenhuma: preto, branco e o acento",
+   "acabamento": {
+    "lut": "neutra-quente",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "profundidade-3d": {
+   "nome": "Profundidade 3D",
+   "descricao": "A tela cortada: você se descola do fundo em camadas, moldura que você atravessa, nuvem de pontos, câmera que anda no 3D.",
+   "quando": "Demo de IA de imagem e vídeo, visão, 3D, \"olha o que dá para fazer\", teste ao vivo.",
+   "assuntos": [
+    "3d",
+    "imagem",
+    "video",
+    "visao",
+    "profundidade",
+    "geracao",
+    "camera",
+    "efeito",
+    "teste"
+   ],
+   "eixos": {
+    "tempo": "futuro",
+    "acabamento": "limpo",
+    "energia": "baixa"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "tela-cortada",
+    "completo"
+   ],
+   "precisa": [
+    "visao",
+    "profundidade"
+   ],
+   "incompativel": [
+    "gravacao-de-tela"
+   ],
+   "pecas": {
+    "modos": [
+     "camadas",
+     "parallax",
+     "rosto-vidro",
+     "celular3d"
+    ],
+    "sobre": [
+     "profundidade",
+     "contorno",
+     "nuvem",
+     "malha",
+     "deteccao",
+     "maos",
+     "dolly",
+     "moldura-pop",
+     "foco",
+     "sombra",
+     "look",
+     "objeto3d",
+     "contar",
+     "mascara-tech"
+    ],
+    "look": [
+     "termico",
+     "holograma"
+    ],
+    "palavra": [
+     "extrusao",
+     "decodifica",
+     "conta"
+    ],
+    "transicoes": [
+     "zoom-atraves",
+     "desfoque",
+     "cubo"
+    ],
+    "pos": [
+     "lente",
+     "bloom",
+     "aberracao"
+    ]
+   },
+   "legenda": {
+    "estilo": "revela",
+    "posicao": "peito",
+    "nota": "no camadas, a altura do modo (faixa fixa)"
+   },
+   "heroi": [
+    {
+     "id": "atravessa-a-moldura",
+     "descricao": "você sai de dentro da moldura e passa por cima dela",
+     "pecas": [
+      "moldura-pop"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    },
+    {
+     "id": "camadas-com-objeto",
+     "descricao": "a imagem se separa em camadas e um objeto entra entre você e o fundo",
+     "pecas": [
+      "camadas",
+      "objeto3d"
+     ],
+     "precisa": [
+      "visao",
+      "profundidade"
+     ]
+    },
+    {
+     "id": "dolly-de-profundidade",
+     "descricao": "a câmera avança e o fundo foge (dolly zoom com o fundo limpo)",
+     "pecas": [
+      "dolly",
+      "parallax"
+     ],
+     "precisa": [
+      "visao"
+     ]
+    }
+   ],
+   "sons": {
+    "kit": [
+     "subida",
+     "impacto",
+     "whoosh",
+     "bip",
+     "energia",
+     "glitch"
+    ],
+    "entra": "pop",
+    "transicao": "whoosh",
+    "heroi": "impacto"
+   },
+   "trilha": {
+    "climas": [
+     "tensa",
+     "tech"
+    ],
+    "nota": "drone grave"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.5,
+     3.5
+    ],
+    "transicoes_por_reel": [
+     2,
+     4
+    ],
+    "nota": "uma mudança a cada 3 s"
+   },
+   "cor_secundaria": "as cores do mapa da peça profundidade, só dentro do mapa",
+   "acabamento": {
+    "lut": "fria-tech",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "editorial": {
+   "nome": "Editorial / dados",
+   "descricao": "Explicador com dados: número que cresce, diagrama que se desenha, marca-texto no acento, no print. Limpo e confiável.",
+   "quando": "Pesquisa, números, mercado, preço, comparação de planos, tendência, \"quanto custa\".",
+   "assuntos": [
+    "dados",
+    "numero",
+    "pesquisa",
+    "mercado",
+    "preco",
+    "custo",
+    "comparacao",
+    "tendencia",
+    "estatistica",
+    "relatorio",
+    "economia"
+   ],
+   "eixos": {
+    "tempo": "atemporal",
+    "acabamento": "limpo",
+    "energia": "baixa"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "lista",
+     "lado-a-lado",
+     "manchete",
+     "imagem-cheia",
+     "tipografia",
+     "painel-rosto",
+     "rosto-vidro",
+     "telas"
+    ],
+    "sobre": [
+     "diagrama",
+     "palavra",
+     "pilha",
+     "papel",
+     "foco",
+     "fala-onda"
+    ],
+    "look": [],
+    "palavra": [
+     "conta",
+     "marcatexto",
+     "vazado"
+    ],
+    "transicoes": [
+     "lamina",
+     "persianas",
+     "mascara"
+    ],
+    "pos": [
+     "reticula"
+    ]
+   },
+   "legenda": {
+    "estilo": "palavra-acesa",
+    "posicao": "base",
+    "nota": "o destaque só em número e nome"
+   },
+   "heroi": [
+    {
+     "id": "numero-que-cresce",
+     "descricao": "o número principal conta enquanto o diagrama se desenha embaixo",
+     "pecas": [
+      "palavra:conta",
+      "diagrama"
+     ],
+     "precisa": []
+    },
+    {
+     "id": "marcatexto-no-print",
+     "descricao": "zoom no trecho do print e o marca-texto no acento passando na frase",
+     "pecas": [
+      "manchete",
+      "palavra:marcatexto"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "tick",
+     "clique",
+     "pop",
+     "whoosh",
+     "subida"
+    ],
+    "entra": "pop",
+    "transicao": "whoosh",
+    "heroi": "tick"
+   },
+   "trilha": {
+    "climas": [
+     "calma",
+     "leve"
+    ],
+    "nota": "baixa, sem disputar com os números"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.5,
+     3.5
+    ],
+    "transicoes_por_reel": [
+     2,
+     4
+    ],
+    "nota": "um gráfico a cada 8 a 10 s, uma mudança a cada 3 s"
+   },
+   "cor_secundaria": "ciano #0099FF na série de comparação",
+   "acabamento": {
+    "lut": "neutra-quente",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "turbo": {
+   "nome": "Turbo",
+   "descricao": "Rápido e direto: palavra gigante que pula, congela em polaroid, chicote e zoom. A energia vem do corte.",
+   "quando": "Lista rápida, \"3 em 45\", dica relâmpago, teste ao vivo com resultado na hora.",
+   "assuntos": [
+    "rapido",
+    "dica",
+    "lista",
+    "truque",
+    "atalho",
+    "hack",
+    "resultado",
+    "teste",
+    "top"
+   ],
+   "eixos": {
+    "tempo": "presente",
+    "acabamento": "limpo",
+    "energia": "alta"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "tipografia",
+     "lista",
+     "imagem-cheia",
+     "tela-bolha",
+     "lado-a-lado"
+    ],
+    "sobre": [
+     "palavra",
+     "linhas-foco",
+     "polaroid",
+     "eco",
+     "logo-volume",
+     "moldura-pop",
+     "zoom-reacao",
+     "emoji-reacao"
+    ],
+    "look": [],
+    "palavra": [
+     "pula",
+     "brutal",
+     "extrusao",
+     "conta"
+    ],
+    "transicoes": [
+     "chicote",
+     "zoom-desfoque",
+     "cubo"
+    ],
+    "pos": [
+     "glitch",
+     "pixel",
+     "onda",
+     "aberracao",
+     "vhs"
+    ]
+   },
+   "legenda": {
+    "estilo": "pop",
+    "posicao": "peito",
+    "nota": "1 a 3 palavras, grande, karaokê forte"
+   },
+   "heroi": [
+    {
+     "id": "palavra-gigante",
+     "descricao": "a palavra-chave cresce até cobrir a tela e a cena seguinte sai de dentro dela",
+     "pecas": [
+      "palavra:brutal",
+      "zoom-desfoque"
+     ],
+     "precisa": []
+    },
+    {
+     "id": "congela-polaroid",
+     "descricao": "a imagem congela numa polaroid com o obturador e é jogada para o lado",
+     "pecas": [
+      "polaroid"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "whoosh",
+     "pop",
+     "impacto",
+     "obturador"
+    ],
+    "entra": "pop",
+    "transicao": "whoosh",
+    "heroi": "impacto"
+   },
+   "trilha": {
+    "climas": [
+     "animada"
+    ],
+    "nota": "batida rápida"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     1.8,
+     2.5
+    ],
+    "transicoes_por_reel": [
+     4,
+     6
+    ],
+    "nota": "uma mudança a cada 2 s, teto de 0,5 por segundo"
+   },
+   "cor_secundaria": "branco puro",
+   "acabamento": {
+    "lut": "fria-tech",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "calmo": {
+   "nome": "Calmo",
+   "descricao": "Quase nada na tela: fundo dessaturado, o acento como única cor, frase inteira ao lado do rosto, zoom lento.",
+   "quando": "Reflexão, conselho, tese pessoal, assunto denso que pede releitura.",
+   "assuntos": [
+    "conselho",
+    "reflexao",
+    "calma",
+    "produtividade",
+    "foco",
+    "aprendizado",
+    "rotina",
+    "carreira",
+    "saude"
+   ],
+   "eixos": {
+    "tempo": "presente",
+    "acabamento": "limpo",
+    "energia": "baixa"
+   },
+   "peso": 0.9,
+   "estilo_minimo": [
+    "essencial"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "rosto-vidro",
+     "tipografia"
+    ],
+    "sobre": [
+     "look",
+     "palavra",
+     "luz",
+     "fala-onda"
+    ],
+    "look": [
+     "duotone",
+     "noir",
+     "grao"
+    ],
+    "palavra": [
+     "digitacao",
+     "vazado"
+    ],
+    "transicoes": [
+     "desfoque"
+    ],
+    "pos": [
+     "bloom"
+    ]
+   },
+   "legenda": {
+    "estilo": "palavra-acesa",
+    "posicao": "peito",
+    "nota": "frase inteira, sem quique; o look vai só no fundo (alvo fundo, pede a visão)"
+   },
+   "heroi": [
+    {
+     "id": "zoom-lento-na-frase",
+     "descricao": "zoom lento de 100 a 108% na frase principal, com o fundo indo para o duotone",
+     "pecas": [
+      "zoom",
+      "look:duotone"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "pop",
+     "clique",
+     "whoosh"
+    ],
+    "entra": null,
+    "transicao": null,
+    "heroi": "pop",
+    "nota": "quase nenhum: 1 ou 2 no reel inteiro"
+   },
+   "trilha": {
+    "climas": [
+     "calma"
+    ],
+    "nota": "piano, lo-fi, pads"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     4.0,
+     5.0
+    ],
+    "transicoes_por_reel": [
+     1,
+     3
+    ],
+    "nota": "uma mudança a cada 4 a 6 s; nunca mais de 5 s parado"
+   },
+   "cor_secundaria": "nenhuma",
+   "acabamento": {
+    "lut": "filme",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  },
+  "manchete": {
+   "nome": "Manchete",
+   "descricao": "Notícia quente: print em tela cheia, marca-texto no acento, flash de câmera, carimbo de NOVO. Urgência sem gritar.",
+   "quando": "Saiu hoje, lançamento, anúncio de empresa, mudança de preço ou de regra.",
+   "assuntos": [
+    "noticia",
+    "saiu hoje",
+    "lancamento",
+    "anuncio",
+    "openai",
+    "google",
+    "anthropic",
+    "atualizacao",
+    "novo",
+    "urgente",
+    "regra"
+   ],
+   "eixos": {
+    "tempo": "presente",
+    "acabamento": "sujo",
+    "energia": "alta"
+   },
+   "peso": 1.0,
+   "estilo_minimo": [
+    "imagens",
+    "completo"
+   ],
+   "precisa": [],
+   "incompativel": [],
+   "pecas": {
+    "modos": [
+     "manchete",
+     "imagem-cheia",
+     "tela-bolha",
+     "rosto-vidro",
+     "celular3d",
+     "telas"
+    ],
+    "sobre": [
+     "pilha",
+     "palavra",
+     "logo-volume",
+     "polaroid",
+     "moldura-pop",
+     "hud"
+    ],
+    "look": [],
+    "palavra": [
+     "marcatexto",
+     "carimbo",
+     "brutal",
+     "conta"
+    ],
+    "transicoes": [
+     "clarao",
+     "chicote",
+     "zoom-desfoque"
+    ],
+    "pos": [
+     "reticula"
+    ]
+   },
+   "legenda": {
+    "estilo": "revela",
+    "posicao": "peito",
+    "nota": "sai ou encolhe quando o print ocupa a tela"
+   },
+   "heroi": [
+    {
+     "id": "marcatexto-na-noticia",
+     "descricao": "zoom no trecho da notícia e o marca-texto no acento desenhando na frase que importa",
+     "pecas": [
+      "manchete",
+      "palavra:marcatexto"
+     ],
+     "precisa": []
+    },
+    {
+     "id": "carimbo-de-novo",
+     "descricao": "o flash bate, o print congela e o carimbo NOVO desce",
+     "pecas": [
+      "polaroid",
+      "palavra:carimbo",
+      "clarao"
+     ],
+     "precisa": []
+    }
+   ],
+   "sons": {
+    "kit": [
+     "obturador",
+     "impacto",
+     "whoosh",
+     "carimbo",
+     "clarao"
+    ],
+    "entra": "carimbo",
+    "transicao": "whoosh",
+    "heroi": "obturador"
+   },
+   "trilha": {
+    "climas": [
+     "tensa",
+     "tech"
+    ],
+    "nota": "percussiva, tensa"
+   },
+   "ritmo": {
+    "mudanca_s": [
+     2.0,
+     3.0
+    ],
+    "transicoes_por_reel": [
+     3,
+     5
+    ],
+    "nota": "uma mudança a cada 2,5 s"
+   },
+   "cor_secundaria": "nenhuma: o print traz as cores dele, o que é nosso é o acento e o branco",
+   "acabamento": {
+    "lut": "noir",
+    "grao": 0.2,
+    "vinheta": 0.15
+   }
+  }
+ }
+}

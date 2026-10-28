@@ -1,0 +1,195 @@
+<meta charset="utf-8">
+<style>
+/* =========================================================================
+   chip-numerado  ·  passo, etapa, contagem
+   -------------------------------------------------------------------------
+   Anda em grupo de dois a quatro e é o jeito canônico de mostrar "primeiro
+   isso, depois aquilo" sem virar lista de texto. Um aceso por vez, porque o
+   acento é único.
+   ========================================================================= */
+
+.fc-chip {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-family: var(--fonte-titulo);
+}
+
+.fc-chip-disco {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: var(--borda) solid var(--tinta-suave);
+  color: var(--tinta-suave);
+  background: transparent;
+  flex: 0 0 auto;
+}
+
+.fc-chip[data-tamanho="g"] .fc-chip-disco { width: 112px; height: 112px; }
+.fc-chip[data-tamanho="p"] .fc-chip-disco { width: 72px; height: 72px; }
+
+.fc-chip-numero {
+  font-weight: 700;
+  line-height: 1;
+}
+
+.fc-chip[data-tamanho="g"] .fc-chip-numero { font-size: 56px; }
+.fc-chip[data-tamanho="p"] .fc-chip-numero { font-size: 36px; }
+
+.fc-chip-tique {
+  display: none;
+  width: 46%;
+  height: 46%;
+}
+
+.fc-chip-tique path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.fc-chip-texto {
+  font-family: var(--fonte-corpo);
+  font-size: var(--tam-rotulo);
+  letter-spacing: var(--espacamento-rotulo);
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  max-width: 420px;
+}
+
+/* aceso: o único do grupo que a fala está apontando agora */
+.fc-chip[data-estado="aceso"] .fc-chip-disco {
+  background: var(--destaque);
+  border-color: var(--destaque);
+  color: var(--destaque-contraste);
+}
+
+.fc-chip[data-estado="aceso"] .fc-chip-texto { color: var(--tinta); }
+
+/* concluído: sem cor de acento, o número vira um traço de confirmação */
+.fc-chip[data-estado="concluido"] .fc-chip-numero { display: none; }
+.fc-chip[data-estado="concluido"] .fc-chip-tique { display: block; }
+</style>
+<script>
+(function () {
+  "use strict";
+
+  var NOME = "chip-numerado";
+
+  function registrar(FC) {
+    FC.registrar(NOME, function (p) {
+      if (p.numero == null) {
+        throw new Error("chip-numerado: o parâmetro numero é obrigatório.");
+      }
+
+      var el = document.createElement("div");
+      el.className = "fc-chip";
+      el.setAttribute("data-tamanho", p.tamanho === "p" ? "p" : "g");
+      el.setAttribute("data-estado", "apagado");
+
+      var disco = document.createElement("div");
+      disco.className = "fc-chip-disco";
+
+      var numero = document.createElement("span");
+      numero.className = "fc-chip-numero";
+      numero.textContent = String(p.numero);
+      disco.appendChild(numero);
+
+      var tique = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      tique.setAttribute("class", "fc-chip-tique");
+      tique.setAttribute("viewBox", "0 0 100 100");
+      var traco = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      traco.setAttribute("d", "M12 54 L38 80 L88 22");
+      tique.appendChild(traco);
+      disco.appendChild(tique);
+
+      el.appendChild(disco);
+
+      if (p.texto) {
+        var texto = document.createElement("div");
+        texto.className = "fc-chip-texto";
+        texto.textContent = p.texto;
+        el.appendChild(texto);
+      }
+
+      function definir(estado) {
+        var e = estado || {};
+        var valor = e.estado || "apagado";
+        el.setAttribute("data-estado", valor);
+      }
+
+      definir({ estado: "apagado" });
+
+      return {
+        el: el,
+        definir: definir,
+        medir: function () {
+          return { largura: el.offsetWidth, altura: el.offsetHeight };
+        }
+      };
+    });
+  }
+
+  function demonstrar(FC) {
+    FC.demonstrar({
+      nome: NOME,
+      descricao: "Passo, etapa, posição em uma contagem. Três estados: apagado, aceso e concluído. Só um chip do grupo fica aceso por vez, porque o acento marca uma coisa só.",
+      casos: [
+        {
+          nome: "apagado",
+          largura: 520, altura: 180, escala: 0.6, x: 20, y: 30,
+          parametros: { numero: 1, texto: "gravar" },
+          estado: { estado: "apagado" }
+        },
+        {
+          nome: "aceso",
+          largura: 520, altura: 180, escala: 0.6, x: 20, y: 30,
+          parametros: { numero: 2, texto: "cortar" },
+          estado: { estado: "aceso" }
+        },
+        {
+          nome: "concluído",
+          largura: 520, altura: 180, escala: 0.6, x: 20, y: 30,
+          parametros: { numero: 3, texto: "publicar" },
+          estado: { estado: "concluido" }
+        },
+        {
+          nome: "pequeno, sem texto",
+          largura: 240, altura: 180, escala: 0.6, x: 20, y: 46,
+          parametros: { numero: 4, tamanho: "p" },
+          estado: { estado: "aceso" }
+        }
+      ]
+    });
+  }
+
+  /* Dentro do painel o montador já carregou a base e a peça só se registra.
+     Aberta sozinha no navegador, ela busca a base ao lado e monta a página
+     de demonstração. */
+  if (window.FC) {
+    registrar(window.FC);
+  } else {
+    var folha = document.createElement("link");
+    folha.rel = "stylesheet";
+    folha.href = "base.css";
+    document.head.appendChild(folha);
+
+    var base = document.createElement("script");
+    base.src = "base.js";
+    base.onload = function () {
+      registrar(window.FC);
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { demonstrar(window.FC); });
+      } else {
+        demonstrar(window.FC);
+      }
+    };
+    document.head.appendChild(base);
+  }
+}());
+</script>
