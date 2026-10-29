@@ -206,7 +206,7 @@ function initDemosRagView() {
         const targetBtn = document.querySelector(`#dr-docs-wrapper .kb-nav-btn[data-doc-id="${docId}"]`);
         if (targetBtn) {
             targetBtn.click();
-            targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (window.scrollPortalToTop) window.scrollPortalToTop(true);
         }
     };
 

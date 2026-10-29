@@ -22,6 +22,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // O portal agora é aberto.
     // Apenas os simuladores exigirão autenticação (tratado dentro da view).
 
+    // Função global para subir a página ao clicar em menus e submenus
+    window.scrollPortalToTop = function(smooth = true) {
+        const mainContentArea = document.getElementById('content-area');
+        if (mainContentArea) {
+            if (smooth && typeof mainContentArea.scrollTo === 'function') {
+                mainContentArea.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                mainContentArea.scrollTop = 0;
+            }
+        }
+        const activeView = document.querySelector('.view.active');
+        if (activeView) {
+            activeView.querySelectorAll('.kb-page-content').forEach(el => {
+                if (smooth && typeof el.scrollTo === 'function') {
+                    el.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    el.scrollTop = 0;
+                }
+            });
+        }
+        if (typeof window.scrollTo === 'function') {
+            window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+        }
+    };
+
+    // Listener global para qualquer clique real do usuário em itens de menu, submenu ou abas
+    document.addEventListener('click', (e) => {
+        if (!e.isTrusted) return;
+        const clickedNav = e.target.closest(
+            '.kb-nav-btn, .nav-item, .tool-tab-btn, .ruflo-tab-btn, .fr-mode-btn, .dr-mode-btn, .dc-mode-btn, .ds-mode-btn'
+        );
+        if (clickedNav) {
+            window.scrollPortalToTop(true);
+            setTimeout(() => window.scrollPortalToTop(true), 60);
+            setTimeout(() => window.scrollPortalToTop(true), 180);
+        }
+    });
+
     const navItems = document.querySelectorAll('.nav-item');
     const views = document.querySelectorAll('.view');
     const sectionTitle = document.getElementById('current-section-title');
@@ -45,6 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEl = document.getElementById(targetId);
         if(targetEl) {
             targetEl.classList.add('active');
+        }
+        if (window.scrollPortalToTop) {
+            window.scrollPortalToTop(false);
         }
 
         const href = item.getAttribute('href');

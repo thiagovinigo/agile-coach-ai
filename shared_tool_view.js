@@ -431,6 +431,9 @@ window.createStandardToolView = function(config) {
                 ${htmlContent ? `<div class="tool-doc-content" style="max-width:980px; margin:0 auto; line-height:1.75; font-size:1.05rem;">${htmlContent}</div>` : ''}
             </div>
         `;
+        if (container.classList.contains('active') && window.scrollPortalToTop) {
+            window.scrollPortalToTop(true);
+        }
     }
 
     // Tabs Event

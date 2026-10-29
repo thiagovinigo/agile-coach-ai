@@ -666,6 +666,9 @@ function initRufloView() {
                         </div>
                     </div>
                 `;
+                if (container.classList.contains('active') && window.scrollPortalToTop) {
+                    window.scrollPortalToTop(true);
+                }
             })
             .catch(err => {
                 contentArea.innerHTML = `
