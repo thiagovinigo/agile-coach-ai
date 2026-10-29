@@ -58,6 +58,22 @@
       "use": "@vercel/static"
     },
     {
+      "src": "flow-reels/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "demos-rag/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "demos-cicd/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "demos-scraping/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },

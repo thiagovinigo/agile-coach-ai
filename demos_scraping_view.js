@@ -461,11 +461,14 @@ function initDemosScrapingView() {
 
                 contentArea.innerHTML = '<div style="padding:40px; text-align:center; color:#64748b;">⏳ Carregando arquivo...</div>';
 
-                fetch(docItem.path + '?v=' + new Date().getTime())
-                    .then(r => {
+                const loadPromise = (typeof docItem.content === 'string')
+                    ? Promise.resolve(docItem.content)
+                    : fetch(docItem.path + '?v=' + new Date().getTime()).then(r => {
                         if (!r.ok) throw new Error('Arquivo não encontrado: ' + docItem.path);
                         return r.text();
-                    })
+                    });
+
+                loadPromise
                     .then(text => {
                         const isCodeFile = docItem.path.endsWith('.py') || docItem.path.endsWith('.json') || docItem.path.endsWith('.csv') || docItem.path.endsWith('.txt') || docItem.path.endsWith('.example');
                         let renderedBody = '';

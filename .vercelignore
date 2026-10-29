@@ -1,7 +1,6 @@
 # Ignore local scratch & temporary files
 scratch/
 temp*.js
-*.txt
 *.pdf
 __pycache__/
 .env

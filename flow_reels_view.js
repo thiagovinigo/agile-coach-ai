@@ -483,11 +483,14 @@ function initFlowReelsView() {
 
                 contentArea.innerHTML = '<div style="padding:40px; text-align:center; color:#64748b;">⏳ Carregando documento...</div>';
 
-                fetch(docItem.path + '?v=' + new Date().getTime())
-                    .then(r => {
+                const loadPromise = (typeof docItem.content === 'string')
+                    ? Promise.resolve(docItem.content)
+                    : fetch(docItem.path + '?v=' + new Date().getTime()).then(r => {
                         if (!r.ok) throw new Error('Documento não encontrado: ' + docItem.path);
                         return r.text();
-                    })
+                    });
+
+                loadPromise
                     .then(text => {
                         const isJsonOrPy = docItem.path.endsWith('.json') || docItem.path.endsWith('.py');
                         let renderedBody = '';
