@@ -70,9 +70,14 @@ function initDiscoveryView() {
                 contentArea.innerHTML = '<div style="text-align:center; padding:40px; color:#64748b;">⏳ Carregando ' + item.title + '...</div>';
                 
                 try {
-                    const response = await fetch(item.path + '?v=' + new Date().getTime());
-                    if(!response.ok) throw new Error('Falha ao carregar');
-                    const text = await response.text();
+                    let text;
+                    if (typeof item.content === 'string') {
+                        text = item.content;
+                    } else {
+                        const response = await fetch(item.path + '?v=' + new Date().getTime());
+                        if(!response.ok) throw new Error('Falha ao carregar');
+                        text = await response.text();
+                    }
                     
                     let parsed = text
                         .replace(/^### (.*$)/gim, '<h3 style="margin-top:20px; color:#0f172a;">$1</h3>')

@@ -13,6 +13,7 @@ ruflo/*
 !ruflo/.claude/
 ruflo/.claude/*
 !ruflo/.claude/agents/
+!ruflo/claude-agents/
 !ruflo/plugins/
 ruflo/plugins/*/*
 *.mcp.json

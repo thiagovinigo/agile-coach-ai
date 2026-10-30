@@ -41,7 +41,7 @@ const skillsData = {
             "dependencies": [
                 "Web Quality Audit"
             ],
-            "path": ".agents/skills/accessibility/SKILL.md"
+            "path": "agents/skills/accessibility/SKILL.md"
         },
         {
             "id": "bash-defensive-patterns",
@@ -64,7 +64,7 @@ const skillsData = {
                 "/temp1"
             ],
             "dependencies": [],
-            "path": ".agents/skills/bash-defensive-patterns/SKILL.md"
+            "path": "agents/skills/bash-defensive-patterns/SKILL.md"
         },
         {
             "id": "frontend-design",
@@ -83,7 +83,7 @@ const skillsData = {
                 "/raw"
             ],
             "dependencies": [],
-            "path": ".agents/skills/frontend-design/SKILL.md"
+            "path": "agents/skills/frontend-design/SKILL.md"
         },
         {
             "id": "seo",
@@ -150,7 +150,7 @@ const skillsData = {
                 "Core Web Vitals",
                 "Web Quality Audit"
             ],
-            "path": ".agents/skills/seo/SKILL.md"
+            "path": "agents/skills/seo/SKILL.md"
         }
     ],
     "Uncategorized": [

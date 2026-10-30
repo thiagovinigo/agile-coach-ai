@@ -587,11 +587,14 @@ function initRufloView() {
             </div>
         `;
 
-        fetch(skill.path + '?v=' + new Date().getTime())
-            .then(res => {
+        const loadPromise = (typeof skill.content === 'string')
+            ? Promise.resolve(skill.content)
+            : fetch(skill.path + '?v=' + new Date().getTime()).then(res => {
                 if (!res.ok) throw new Error(`Não foi possível carregar o arquivo (${res.status})`);
                 return res.text();
-            })
+            });
+
+        loadPromise
             .then(rawText => {
                 const htmlContent = parseMarkdown(rawText, skill.path);
 

@@ -344,11 +344,14 @@ window.createStandardToolView = function(config) {
             return;
         }
 
-        fetch(skill.path + '?v=' + new Date().getTime())
-            .then(res => {
+        const loadPromise = (typeof skill.content === 'string')
+            ? Promise.resolve(skill.content)
+            : fetch(skill.path + '?v=' + new Date().getTime()).then(res => {
                 if (!res.ok) throw new Error(`Arquivo não encontrado (${res.status})`);
                 return res.text();
-            })
+            });
+
+        loadPromise
             .then(rawText => {
                 const htmlContent = parseToolMarkdown(rawText, skill.path, themeColor);
                 renderInlineCard(skill, category, htmlContent);

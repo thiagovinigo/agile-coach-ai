@@ -21,7 +21,7 @@ const demosScrapingData = {
             title: ".env.example (Template de Ambiente)",
             description: "Arquivo modelo para configurar a ANTHROPIC_API_KEY com load_dotenv(override=True).",
             icon: "🔑",
-            path: "demos-scraping/.env.example",
+            path: "demos-scraping/env.example",
             content: "# Copie este arquivo para .env e preencha com sua chave\nANTHROPIC_API_KEY=sk-ant-xxxxx\n"
         }
     ],
