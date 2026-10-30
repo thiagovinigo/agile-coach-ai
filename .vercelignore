@@ -5,6 +5,26 @@ temp*.js
 __pycache__/
 .env
 .agents/
+node_modules/
+nutrilingo/
+Medhub/
+banana-slides/
+contexto/n8n_templates/
+
+# Ignore heavy 3D assets in nj-mmo (keep only AGENTS.md and specs/*.md)
+nj-mmo/client/
+nj-mmo/server/
+nj-mmo/shared/
+nj-mmo/tools/
+nj-mmo/scripts/
+nj-mmo/assets/
+nj-mmo/public/
+nj-mmo/*.glb
+nj-mmo/**/*.glb
+nj-mmo/**/*.png
+nj-mmo/**/*.jpg
+nj-mmo/**/*.mp3
+nj-mmo/**/*.wav
 
 # Ignore ruflo dev workspaces & build trees
 ruflo/v3/
