@@ -1,6 +1,11 @@
 const n8nTemplatesData = {
     "Custos  Tokens": [
         {
+            "title": "⚡ Flowgrammers — Jev Benchmark de Latência (Sistema 1)",
+            "file": "Flowgrammers - Jev Benchmark de Latencia (Sistema 1).json",
+            "path": "contexto/n8n_templates/Custos  Tokens/Flowgrammers - Jev Benchmark de Latencia (Sistema 1).json"
+        },
+        {
             "title": "Agent Observability -  Ouput Log__w3BPtawNpu5TUt3n",
             "file": "Agent Observability -  Ouput Log__w3BPtawNpu5TUt3n.json",
             "path": "contexto/n8n_templates/Custos  Tokens/Agent Observability -  Ouput Log__w3BPtawNpu5TUt3n.json"
@@ -51,6 +56,11 @@ const n8nTemplatesData = {
         }
     ],
     "Chatbots  Atendimento": [
+        {
+            "title": "⚡ Flowgrammers — Jev Triagem de Alunos (Sistema 1 + Sistema 2)",
+            "file": "Flowgrammers - Jev Triagem de Alunos (Sistema 1 + Sistema 2).json",
+            "path": "contexto/n8n_templates/Chatbots  Atendimento/Flowgrammers - Jev Triagem de Alunos (Sistema 1 + Sistema 2).json"
+        },
         {
             "title": "Comandos de WhatsApp para Grupo de Automação",
             "file": "Comandos de WhatsApp para Grupo de Automação.json",

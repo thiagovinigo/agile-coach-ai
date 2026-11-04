@@ -1,0 +1,739 @@
+{
+  "arquivo": "flowgrammers-jev-triagem-alunos.json",
+  "workflow": {
+    "id": "fgJevTriagemAlun",
+    "name": "Flowgrammers · Triagem de alunos com Jev (Sistema 1)",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "## Flowgrammers · Triagem de alunos com Jev\n**Sistema 1 (Jev)** decide em milissegundos. **Sistema 2 (Claude)** só entra com confiança média. **Humano** fica com o resto.\n\nFeito e testado no **n8n 2.41.6**.\n\n### Credenciais (3)\n1. **Header Auth** → Name `Authorization`, Value `Bearer SUA_CHAVE_TYPESAFE` → nó **Jev · System One**\n2. **Anthropic** → nó **Claude · rascunho**\n3. **Postgres** → nó **Grava decisão** (rode o SQL do post-it antes)\n\n### Rodar a demo\n**Execute workflow**: 5 mensagens de exemplo, uma pra cada caminho. Sem banco ou sem Claude? Desative esses nós: o item passa adiante.\n\n### Produção\nAtive o workflow e faça `POST /webhook/flowgrammers/jev-triagem` com `{ canal, aluno: {id, produto, aluno_desde}, mensagens: [{de, texto}] }`. A resposta traz `rota`, `faixa`, `prioridade`, `alertas` e o `rascunho`.\n\nShape da API do Jev conforme documentação pública de set/2026: confira em docs.typesafe.ai.",
+          "height": 560,
+          "width": 600,
+          "color": 6
+        },
+        "id": "7944b813-11f1-5e53-8f08-b0c9ed920037",
+        "name": "Leia primeiro",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -80,
+          -620
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "6d0f0891-2c09-5ebd-824f-467e90e93d3c",
+        "name": "Rodar exemplo",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "flowgrammers/jev-triagem",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "c1ceb632-dc1a-57c4-b7f6-cde94f0b99e6",
+        "name": "Webhook · mensagem do aluno",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          0,
+          220
+        ],
+        "webhookId": "6d505b2a-8f3e-5b0a-9e7c-c3c98d455f84"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 5 mensagens fictícias de alunos da Flowgrammers — uma pra cada caminho do fluxo.\n// Em produção quem alimenta o fluxo é o Webhook, com o mesmo formato de payload.\nreturn [\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'aluno_1042', email: 'mariana@exemplo.com', produto: 'n8n Expert Program', aluno_desde: '2026-02' },\n    mensagens: [\n      { de: 'aluno', texto: 'Atualizei o n8n do meu cliente e o workflow de cobrança parou: o nó HTTP Request agora volta 401. Tá em produção e o cliente já ligou. Consegue me ajudar hoje?' }\n    ]\n  }},\n  { json: {\n    canal: 'comunidade',\n    aluno: { id: 'aluno_0587', email: 'joao@exemplo.com', produto: 'Claude Code Engineering', aluno_desde: '2026-05' },\n    mensagens: [\n      { de: 'aluno', texto: 'Terminei o módulo 4 mas o certificado não aparece na minha área. Já saí e entrei de novo.' }\n    ]\n  }},\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'lead_2210', email: 'coord@seguradora-exemplo.com', produto: null, aluno_desde: null },\n    mensagens: [\n      { de: 'aluno', texto: 'Oi! Coordeno o time de automação de uma seguradora. Vocês fazem turma fechada de Claude Code pra empresa? Somos 15 analistas e queríamos começar em novembro.' }\n    ]\n  }},\n  { json: {\n    canal: 'email',\n    aluno: { id: 'aluno_0933', email: 'paulo@exemplo.com', produto: 'Harness Engineering', aluno_desde: '2026-01' },\n    mensagens: [\n      { de: 'aluno', texto: 'É a terceira live que cai no meio. Paguei à vista e sinceramente tô pensando em pedir reembolso.' },\n      { de: 'suporte', texto: 'Oi, Paulo! Sentimos muito, vamos verificar.' },\n      { de: 'aluno', texto: 'Vocês falaram isso da última vez também.' }\n    ]\n  }},\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'aluno_1311', email: 'bia@exemplo.com', produto: 'n8n Expert Program', aluno_desde: '2026-07' },\n    mensagens: [ { de: 'aluno', texto: 'oi, tudo bem?' } ]\n  }}\n];\n"
+        },
+        "id": "7f0f4c95-f2ee-5fac-bd15-94be17bbce0e",
+        "name": "5 mensagens de exemplo",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          240,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Minimização (LGPD)\nID e e-mail do aluno **ficam no n8n**. O Jev recebe só canal, produto, tempo de casa e as **10 últimas mensagens**.",
+          "height": 220,
+          "width": 300,
+          "color": 4
+        },
+        "id": "43f52b55-fc79-52df-a7de-d3b6166fb579",
+        "name": "LGPD",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          420,
+          -280
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Monta a requisição do Jev: estado + 4 perguntas tipadas, numa chamada só (fan-out).\n// LGPD / minimização: id e e-mail do aluno ficam no n8n. O Jev recebe só o que a decisão precisa.\n\nconst QUESTIONS = {\n  rota: {\n    type: 'choice',\n    instructions: 'Para qual fila da Flowgrammers esta conversa deve ir agora?',\n    criteria: {\n      suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n      acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n      comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n      conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n      indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n    }\n  },\n  urgencia: {\n    type: 'score',\n    instructions: 'Qual a urgência deste atendimento?',\n    criteria: [\n      'Nenhuma: cumprimento, elogio ou sugestão',\n      'Baixa: pode esperar até 2 dias úteis',\n      'Média: atrapalha o estudo, mas existe contorno',\n      'Alta: impede o aluno de continuar',\n      'Crítica: sistema em produção parado ou cliente do aluno impactado'\n    ]\n  },\n  risco_churn: {\n    type: 'noul',\n    instructions: 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?'\n  },\n  intencao_compra: {\n    type: 'noul',\n    instructions: 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.'\n  }\n};\n\nreturn $input.all().map((item, i) => {\n  const src = item.json.body ?? item.json;          // o Webhook entrega o payload em body\n  const aluno = src.aluno ?? {};\n  const mensagens = (src.mensagens ?? []).slice(-10).map(m => ({\n    de: m.de === 'suporte' ? 'suporte' : 'aluno',\n    texto: String(m.texto ?? '').slice(0, 2000)\n  }));\n  const state = {\n    canal: src.canal ?? 'desconhecido',\n    produto: aluno.produto ?? null,\n    aluno_desde: aluno.aluno_desde ?? null,\n    mensagens\n  };\n  return {\n    json: {\n      aluno_id: aluno.id ?? null,                    // fica no n8n, não vai pro Jev\n      canal: state.canal,\n      ultima_mensagem: mensagens.filter(m => m.de === 'aluno').at(-1)?.texto ?? '',\n      jev_request: { model: 'jev-latest', state, questions: QUESTIONS }\n    },\n    pairedItem: i\n  };\n});\n"
+        },
+        "id": "47b68a14-e849-5cba-8b1c-e2b1b8cd3063",
+        "name": "Monta state (Jev)",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          480,
+          120
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.typesafe.ai/v1/systemone",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($json.jev_request) }}",
+          "options": {
+            "timeout": 5000
+          },
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth"
+        },
+        "id": "c126bae9-2fd3-5c29-a1a5-5a4a1656d30b",
+        "name": "Jev · System One",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          720,
+          120
+        ],
+        "retryOnFail": true,
+        "maxTries": 3,
+        "waitBetweenTries": 1000,
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "content": "### Limiar é regra de negócio\n- **≥ 0,85** → ação automática\n- **0,60 a 0,85** → Claude rascunha, humano revisa\n- **< 0,60** → fila humana\n- **≥ 0,70** de evasão ou compra → alerta\n\nResposta fora do contrato ou Jev fora do ar → **humano** (fail-safe).",
+          "height": 280,
+          "width": 360,
+          "color": 3
+        },
+        "id": "d4bb47f0-0ee2-5c31-a90a-61ad1e54e9d5",
+        "name": "Limiar",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          880,
+          -320
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// Valida o contrato da resposta e transforma probabilidade em decisão de negócio.\n// Regra de ouro: resposta fora do contrato, ou Jev fora do ar, vai pro humano. Nunca pra ação automática.\n\nconst LIMIAR_AUTO   = 0.85;  // >= executa sozinho\nconst LIMIAR_S2     = 0.60;  // >= Claude rascunha e humano revisa; abaixo: fila humana\nconst LIMIAR_ALERTA = 0.70;  // evasão / compra\nconst ROTAS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\n\nconst req = $('Monta state (Jev)').item.json;\nconst res = $json;\nconst a = res.answers ?? {};\n\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\n\nfunction choiceValida(ans, ids) {\n  if (!ans || !ids.includes(ans.choice)) return false;\n  const p = ans.probabilities ?? {};\n  if (Object.keys(p).sort().join('|') !== [...ids].sort().join('|')) return false;\n  const vals = Object.values(p);\n  if (vals.some(v => num01(v) === null)) return false;\n  if (Math.abs(vals.reduce((x, y) => x + y, 0) - 1) > 0.02) return false;\n  if (p[ans.choice] < Math.max(...vals) - 1e-6) return false;\n  return num01(ans.confidence) !== null;\n}\n\nconst valida = choiceValida(a.rota, ROTAS);\nconst rota = valida ? a.rota.choice : 'indefinido';\nconst confianca = valida ? a.rota.confidence : 0;\nconst urgencia = typeof a.urgencia?.score === 'number' ? a.urgencia.score : null;\nconst risco_churn = num01(a.risco_churn?.noul);\nconst intencao_compra = num01(a.intencao_compra?.noul);\n\nlet faixa = 'humano';\nif (valida && rota !== 'indefinido') {\n  if (confianca >= LIMIAR_AUTO) faixa = 'automatico';\n  else if (confianca >= LIMIAR_S2) faixa = 'sistema_2';\n}\n\nlet motivo_humano = null;\nif (!valida) motivo_humano = res.error ? 'Jev indisponível ou erro HTTP' : 'resposta fora do contrato';\nelse if (rota === 'indefinido') motivo_humano = 'conversa sem informação suficiente';\n\nconst alertas = [];\nif ((risco_churn ?? 0) >= LIMIAR_ALERTA) alertas.push('evasao');\nif ((intencao_compra ?? 0) >= LIMIAR_ALERTA) alertas.push('comercial');\n\nconst prioridade = urgencia === null ? 'P2' : urgencia >= 3 ? 'P1' : urgencia >= 1.5 ? 'P2' : 'P3';\n\nreturn {\n  json: {\n    aluno_id: req.aluno_id,\n    canal: req.canal,\n    ultima_mensagem: req.ultima_mensagem,\n    rota,\n    confianca,\n    faixa,\n    motivo_humano,\n    prioridade,\n    urgencia,\n    risco_churn,\n    intencao_compra,\n    alertas,\n    probabilidades_rota: valida ? a.rota.probabilities : null,\n    modelo: res.model ?? null,\n    tokens_entrada: res.usage?.input_tokens ?? res.usage?.prompt_tokens ?? null,\n    decidido_em: new Date().toISOString()\n  }\n};\n"
+        },
+        "id": "baa837d6-3a8e-500f-878b-1f65238fd970",
+        "name": "Valida e normaliza",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          960,
+          120
+        ]
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "436155dd-9fa6-582b-a304-bd0bab4dc286",
+                      "leftValue": "={{ $json.faixa }}",
+                      "rightValue": "automatico",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Automático"
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "d2dcf81d-6f4e-537b-a7f6-be9d0e4a9ed0",
+                      "leftValue": "={{ $json.faixa }}",
+                      "rightValue": "sistema_2",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                },
+                "renameOutput": true,
+                "outputKey": "Sistema 2"
+              }
+            ]
+          },
+          "options": {
+            "fallbackOutput": "extra",
+            "renameFallbackOutput": "Humano"
+          }
+        },
+        "id": "18ca90dd-8acd-56a3-924f-70018ca82c38",
+        "name": "Roteia por confiança",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          1220,
+          120
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "0a08c8f2-9a8d-5b8a-84e5-a50e65437d12",
+                "name": "acao",
+                "value": "={{ 'Encaminhado para a fila ' + $json.rota + ' · ' + $json.prioridade }}",
+                "type": "string"
+              },
+              {
+                "id": "b400eea8-6263-50f2-a88b-3d43c8bab225",
+                "name": "labels",
+                "value": "={{ 'jev:' + $json.rota + ', ' + $json.prioridade }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "02290361-3f9d-565f-95e8-e3f7ec6ba497",
+        "name": "Ação automática",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1500,
+          -60
+        ]
+      },
+      {
+        "parameters": {
+          "resource": "text",
+          "operation": "message",
+          "modelId": {
+            "__rl": true,
+            "mode": "id",
+            "value": "claude-haiku-4-5-20251001"
+          },
+          "messages": {
+            "values": [
+              {
+                "content": "=Fila: {{ $json.rota }} ({{ $json.prioridade }})\nMensagem do aluno: {{ $json.ultima_mensagem }}\n\nEscreva um rascunho de resposta para um humano revisar antes de enviar.",
+                "role": "user"
+              }
+            ]
+          },
+          "simplify": true,
+          "options": {
+            "system": "Você é do time de atendimento da Flowgrammers, escola de IA e automação. Responda em português do Brasil, curto, cordial e prático. Não prometa reembolso, prazo nem desconto.",
+            "maxTokens": 500
+          }
+        },
+        "id": "93deddec-e01e-532f-931f-cab51c98ad6c",
+        "name": "Claude · rascunho",
+        "type": "@n8n/n8n-nodes-langchain.anthropic",
+        "typeVersion": 1,
+        "position": [
+          1500,
+          140
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "3e9b3db6-1856-5cd5-a828-f98e4bfaa03f",
+                "name": "acao",
+                "value": "Claude rascunhou; humano revisa e envia",
+                "type": "string"
+              },
+              {
+                "id": "fb9aa0d7-d3f3-54ac-9798-1220bbea3ed1",
+                "name": "rascunho",
+                "value": "={{ $json.content?.[0]?.text ?? '(sem rascunho: confira a credencial Anthropic)' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": false,
+          "options": {}
+        },
+        "id": "1e46876f-b054-5b38-a723-5b5f91ff0c7b",
+        "name": "Revisão com rascunho",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1740,
+          140
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "b8d3e310-a162-50d0-99be-708dc66061c1",
+                "name": "acao",
+                "value": "={{ 'Triagem manual · ' + ($json.motivo_humano ?? 'confiança de ' + Math.round($json.confianca * 100) + '%') }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "391bb622-39a5-5338-b85b-bb591c7c0ca8",
+        "name": "Fila humana",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1500,
+          360
+        ]
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// Uma linha por decisão: vira série histórica, auditoria e base pra recalibrar o limiar.\n// Sai daqui para dois lugares em paralelo: o Postgres (log) e a resposta do Webhook.\nconst d = $('Valida e normaliza').item.json;\nreturn {\n  json: {\n    decidido_em: d.decidido_em,\n    aluno_id: d.aluno_id,\n    canal: d.canal,\n    rota: d.rota,\n    confianca: d.confianca,\n    faixa: d.faixa,\n    prioridade: d.prioridade,\n    urgencia: d.urgencia,\n    risco_churn: d.risco_churn,\n    intencao_compra: d.intencao_compra,\n    alertas: d.alertas.join(','),\n    probabilidades_rota: d.probabilidades_rota ? JSON.stringify(d.probabilidades_rota) : null,\n    modelo: d.modelo,\n    tokens_entrada: d.tokens_entrada,\n    acao: $json.acao ?? null,\n    rascunho: $json.rascunho ?? null\n  }\n};\n"
+        },
+        "id": "af1ed1b0-ef1a-5c70-9973-e793210c7e90",
+        "name": "Linha de log",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2000,
+          140
+        ]
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "mode": "name",
+            "value": "jev_decisoes"
+          },
+          "columns": {
+            "mappingMode": "autoMapInputData",
+            "value": {},
+            "matchingColumns": [],
+            "schema": []
+          },
+          "options": {}
+        },
+        "id": "bd7506a8-418d-5c34-86d2-92f03c7c37f3",
+        "name": "Grava decisão (Postgres)",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.7,
+        "position": [
+          2260,
+          40
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "firstIncomingItem",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "id": "8fab704f-84df-5405-a877-0e634b97db08",
+        "name": "Responde ao atendimento",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          2260,
+          260
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Log de decisões (Postgres)\nRode uma vez no banco:\n\n```sql\ncreate table if not exists jev_decisoes (\n  id bigserial primary key,\n  decidido_em timestamptz,\n  aluno_id text, canal text,\n  rota text, confianca numeric,\n  faixa text, prioridade text,\n  urgencia numeric, risco_churn numeric,\n  intencao_compra numeric,\n  alertas text,\n  probabilidades_rota jsonb,\n  modelo text, tokens_entrada int,\n  acao text, rascunho text\n);\n```",
+          "height": 500,
+          "width": 440,
+          "color": 7
+        },
+        "id": "cb0bd6ea-3920-55fc-af0e-06608a7b6dcf",
+        "name": "Log",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2200,
+          -520
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "3d01f322-56b5-5f6c-9e9b-e5355016d1d4",
+                "leftValue": "={{ $json.risco_churn ?? 0 }}",
+                "rightValue": 0.7,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "id": "cbd0ac20-6283-5831-a715-637a1ae5ad8b",
+        "name": "Risco de evasão?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1220,
+          600
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "61b4700a-4e51-544b-a8d4-f66475cc0c37",
+                "name": "alerta",
+                "value": "={{ 'Risco de evasão ' + Math.round($json.risco_churn * 100) + '% · ' + $json.aluno_id + ' · ligar hoje' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "7fcf10e9-c1eb-5902-a034-a525828555d3",
+        "name": "Alerta pro CS",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1500,
+          580
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "dfa5f3f0-4a20-5eb0-8fe3-0c6110a36da2",
+                "leftValue": "={{ $json.intencao_compra ?? 0 }}",
+                "rightValue": 0.7,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "id": "29313552-cb10-5e38-85d5-de52bf0e8998",
+        "name": "Intenção de compra?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1220,
+          820
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "06b812e7-9ef7-5584-9f9a-cfa2a6384031",
+                "name": "alerta",
+                "value": "={{ 'Oportunidade ' + Math.round($json.intencao_compra * 100) + '% · ' + $json.aluno_id + ' · comercial assume' }}",
+                "type": "string"
+              }
+            ]
+          },
+          "includeOtherFields": true,
+          "options": {}
+        },
+        "id": "cd2d1eee-3d37-5aa8-b847-bfaad72b2608",
+        "name": "Lead pro comercial",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          1500,
+          800
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Alertas\nTroque os dois nós de alerta pelo canal do time: Slack, e-mail ou nota no Chatwoot. O campo `alertas` também volta na resposta do webhook.",
+          "height": 220,
+          "width": 340,
+          "color": 5
+        },
+        "id": "7f88f57b-b828-5487-b4c2-e74b4355a81a",
+        "name": "Alertas",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1740,
+          560
+        ]
+      }
+    ],
+    "connections": {
+      "Rodar exemplo": {
+        "main": [
+          [
+            {
+              "node": "5 mensagens de exemplo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "5 mensagens de exemplo": {
+        "main": [
+          [
+            {
+              "node": "Monta state (Jev)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook · mensagem do aluno": {
+        "main": [
+          [
+            {
+              "node": "Monta state (Jev)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Monta state (Jev)": {
+        "main": [
+          [
+            {
+              "node": "Jev · System One",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Jev · System One": {
+        "main": [
+          [
+            {
+              "node": "Valida e normaliza",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Valida e normaliza": {
+        "main": [
+          [
+            {
+              "node": "Roteia por confiança",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Risco de evasão?",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Intenção de compra?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Roteia por confiança": {
+        "main": [
+          [
+            {
+              "node": "Ação automática",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Claude · rascunho",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Fila humana",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Claude · rascunho": {
+        "main": [
+          [
+            {
+              "node": "Revisão com rascunho",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Ação automática": {
+        "main": [
+          [
+            {
+              "node": "Linha de log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Revisão com rascunho": {
+        "main": [
+          [
+            {
+              "node": "Linha de log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Fila humana": {
+        "main": [
+          [
+            {
+              "node": "Linha de log",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Linha de log": {
+        "main": [
+          [
+            {
+              "node": "Grava decisão (Postgres)",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Responde ao atendimento",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Risco de evasão?": {
+        "main": [
+          [
+            {
+              "node": "Alerta pro CS",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          []
+        ]
+      },
+      "Intenção de compra?": {
+        "main": [
+          [
+            {
+              "node": "Lead pro comercial",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          []
+        ]
+      }
+    },
+    "pinData": {},
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "meta": {
+      "templateCredsSetupCompleted": false
+    },
+    "tags": []
+  }
+}

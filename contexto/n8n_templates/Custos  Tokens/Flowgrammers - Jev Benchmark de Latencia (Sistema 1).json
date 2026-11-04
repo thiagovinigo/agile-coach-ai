@@ -1,0 +1,781 @@
+{
+  "arquivo": "flowgrammers-jev-benchmark.json",
+  "workflow": {
+    "id": "fgJevBenchmark01",
+    "name": "Flowgrammers · Benchmark Jev × LLM (Sistema 1 × Sistema 2)",
+    "nodes": [
+      {
+        "parameters": {
+          "content": "## Flowgrammers · Benchmark Jev × LLM\nGera **N mensagens de alunos com gabarito** e manda o mesmo lote pro **Jev (Sistema 1)** e pra um **LLM (Sistema 2)**, com a mesma concorrência. No fim: tempo de fila, vazão, tokens reais, custo e acurácia.\n\nFeito e testado no **n8n 2.41.6**.\n\n### Credenciais\n1. **Header Auth** → Name `Authorization`, Value `Bearer SUA_CHAVE_TYPESAFE` → nó **Jev · System One**\n2. **Anthropic** → nó **Claude Haiku · tool use**\n3. *(opcional)* **OpenAI** → nó **GPT-4.1 mini · JSON schema** e `incluir_gpt = true`\n\n### Rodar\nAjuste o nó **Configuração** e clique em **Execute workflow**. Abra **Painel do benchmark** → aba **HTML** pra ver o placar; **Tabela por modelo** tem os números.\n\n### Quanto custa rodar\n200 mensagens custam centavos de dólar. Comece com 50 pra testar as credenciais.",
+          "height": 560,
+          "width": 560,
+          "color": 6
+        },
+        "id": "2c5be859-95d1-5783-a40d-a06c9c6c0626",
+        "name": "Leia primeiro",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -80,
+          -620
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "d5f85605-0b49-5adf-9dd3-a54f3f2ebb06",
+        "name": "Rodar benchmark",
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          0,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "5f52b890-da30-5a1f-a238-cfd675a98d34",
+                "name": "registros",
+                "value": 200,
+                "type": "number"
+              },
+              {
+                "id": "6c683c0a-e5eb-5a25-9575-c490fbd78d2e",
+                "name": "lote",
+                "value": 5,
+                "type": "number"
+              },
+              {
+                "id": "6baffd8e-44b5-5fa7-ace3-94dc88e8d4cc",
+                "name": "incluir_claude",
+                "value": true,
+                "type": "boolean"
+              },
+              {
+                "id": "7d0dacdd-5d69-5c4f-84cc-0636766a99a4",
+                "name": "incluir_gpt",
+                "value": false,
+                "type": "boolean"
+              },
+              {
+                "id": "8c41211f-da6f-5b32-ab75-c75a5989bac8",
+                "name": "semente",
+                "value": 2026,
+                "type": "number"
+              },
+              {
+                "id": "0995d4d7-795c-5339-8eca-eb02147207d3",
+                "name": "limiar_alerta",
+                "value": 0.7,
+                "type": "number"
+              },
+              {
+                "id": "230735a2-1c56-5402-a3ad-0e0f893d9bb1",
+                "name": "modelo_claude",
+                "value": "claude-haiku-4-5-20251001",
+                "type": "string"
+              },
+              {
+                "id": "bc7158e9-d61c-54ef-a269-70da13efb4f6",
+                "name": "modelo_gpt",
+                "value": "gpt-4.1-mini",
+                "type": "string"
+              },
+              {
+                "id": "20dc5441-9858-59b3-9afb-6b8df3eb4dd1",
+                "name": "preco_jev_entrada",
+                "value": 0.042,
+                "type": "number"
+              },
+              {
+                "id": "98ce4b79-69ab-58b9-8908-92b20e563ac8",
+                "name": "preco_jev_saida",
+                "value": 0,
+                "type": "number"
+              },
+              {
+                "id": "c2a9f8a6-bafe-5162-8317-e06043cd5f51",
+                "name": "preco_claude_entrada",
+                "value": 1,
+                "type": "number"
+              },
+              {
+                "id": "925ed980-0110-5281-a2c8-40d330c649eb",
+                "name": "preco_claude_saida",
+                "value": 5,
+                "type": "number"
+              },
+              {
+                "id": "ce892854-df67-5f6c-9a81-200400008812",
+                "name": "preco_gpt_entrada",
+                "value": 0.4,
+                "type": "number"
+              },
+              {
+                "id": "77d82121-7f29-55d9-b7df-bca45422ac3e",
+                "name": "preco_gpt_saida",
+                "value": 1.6,
+                "type": "number"
+              }
+            ]
+          },
+          "includeOtherFields": false,
+          "options": {}
+        },
+        "id": "3ec0fc5c-d550-5da4-a508-8566705cf364",
+        "name": "Configuração",
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.5,
+        "position": [
+          220,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Configuração\n`registros` e `lote` controlam o tamanho do teste. Preços em **US$ por 1M tokens** (lista de out/2026). Ligue/desligue cada LLM com `incluir_claude` e `incluir_gpt`.",
+          "height": 300,
+          "width": 300,
+          "color": 5
+        },
+        "id": "003a8216-9780-53a6-b5d5-3360d1f2b5e9",
+        "name": "Config",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          160,
+          160
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Gera N mensagens fictícias de alunos da Flowgrammers, cada uma com GABARITO.\n// Determinístico: mesma semente, mesmo dataset. Assim a comparação é justa entre modelos e entre execuções.\nconst cfg = $('Configuração').first().json;\nconst N = Math.max(1, Math.min(5000, Number(cfg.registros) || 200));\nlet seed = (Number(cfg.semente) || 2026) >>> 0;\nconst rnd = () => {                                   // mulberry32\n  seed = (seed + 0x6D2B79F5) >>> 0;\n  let t = seed;\n  t = Math.imul(t ^ (t >>> 15), t | 1);\n  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);\n  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;\n};\nconst pick = arr => arr[Math.floor(rnd() * arr.length)];\n\nconst PRODUTOS = ['n8n Expert Program', 'Claude Code Engineering', 'Harness Engineering', 'Fábrica de SaaS ao Vivo'];\nconst CANAIS = ['whatsapp', 'comunidade', 'email'];\nconst ABERTURAS = ['Oi!', 'Bom dia, pessoal.', 'Boa tarde!', 'Oi, time.', 'Pessoal,', ''];\nconst FECHOS = ['Alguém consegue dar uma olhada?', 'Já tentei de novo e nada.', 'Consegue me ajudar?', 'Valeu!', ''];\nconst FECHOS_CRITICOS = ['Tá em produção, preciso de ajuda hoje.', 'O cliente já ligou duas vezes.', 'Tô com o cliente parado esperando.'];\nconst FRUSTRACAO = [\n  'É a terceira vez que isso acontece. Tô pensando em pedir reembolso.',\n  'Se não resolver essa semana eu vou cancelar.',\n  'Paguei à vista e tô bem frustrado, quero meu dinheiro de volta.',\n  'Sinceramente, tô quase desistindo do curso.'\n];\nconst RESPOSTAS_SUPORTE = ['Oi! Vamos verificar e já te retornamos.', 'Recebido, estamos olhando.', 'Consegue mandar um print do erro?'];\nconst FOLLOW_UPS = ['Alguma novidade?', 'Mandei o print aí.', 'Continua igual por aqui.'];\n\n// u = urgência de 0 (nenhuma) a 4 (crítica) · compra = sinal consistente de intenção de compra\nconst CATALOGO = {\n  suporte_tecnico: [\n    { u: 4, t: 'O workflow de cobrança do meu cliente parou depois da atualização do n8n e o HTTP Request agora volta 401.' },\n    { u: 4, t: 'Meu agente de atendimento em produção começou a responder errado pros clientes desde ontem.' },\n    { u: 4, t: 'O n8n do cliente caiu e a fila do Redis não volta de jeito nenhum.' },\n    { u: 4, t: 'O webhook de pagamento parou de receber eventos e o cliente tá perdendo venda.' },\n    { u: 3, t: 'O Claude Code trava no hook PreToolUse e não executa mais nenhum comando.' },\n    { u: 3, t: 'O deploy do Docker Swarm do módulo 6 falha no healthcheck e não sei sair disso.' },\n    { u: 3, t: 'O nó do Postgres dá timeout em toda execução do exercício 3.' },\n    { u: 3, t: 'Meu MCP server não aparece no Claude Code depois de configurar o settings.json.' },\n    { u: 2, t: 'O Code node retorna undefined quando uso $input.all() dentro do loop.' },\n    { u: 2, t: 'O Switch manda tudo pro fallback mesmo com a regra certa.' },\n    { u: 2, t: 'O agente responde em inglês mesmo com o system prompt em português.' },\n    { u: 2, t: 'O Merge junta os itens fora de ordem no meu fluxo de pedidos.' },\n    { u: 1, t: 'Apareceu um aviso de nó deprecated no HTTP Request, preciso me preocupar?' },\n    { u: 1, t: 'O editor do n8n fica lento quando o workflow passa de 80 nós.' }\n  ],\n  acesso_plataforma: [\n    { u: 1, t: 'Terminei o módulo 4 e o certificado não aparece na minha área.' },\n    { u: 3, t: 'Não consigo entrar na plataforma, o link de login expira na hora.' },\n    { u: 2, t: 'A aula 7 do módulo de agentes está com o vídeo travado em 0:00.' },\n    { u: 3, t: 'Comprei o curso ontem e ainda não liberou o acesso.' },\n    { u: 2, t: 'A live de hoje caiu no meio e não achei a gravação.' },\n    { u: 3, t: 'Troquei de e-mail e perdi o acesso aos cursos.' },\n    { u: 1, t: 'O player não carrega no celular, só no computador.' },\n    { u: 1, t: 'O material de apoio da aula 3 dá erro 404.' }\n  ],\n  comercial: [\n    { u: 1, compra: true, t: 'Coordeno o time de automação de uma seguradora e queremos uma turma fechada de Claude Code pra 15 analistas.' },\n    { u: 1, compra: true, t: 'Quero fazer o upgrade pro Harness Engineering, como faço o pagamento?' },\n    { u: 1, compra: true, t: 'Vocês emitem nota fiscal pra empresa? Quero comprar 3 acessos do n8n Expert Program.' },\n    { u: 1, compra: true, t: 'Tem desconto pra quem já é aluno? Se tiver eu fecho o Claude Code Engineering hoje.' },\n    { u: 1, compra: true, t: 'Qual o próximo lote da Fábrica de SaaS ao Vivo? Quero garantir minha vaga.' },\n    { u: 0, compra: false, t: 'Quanto custa?' },\n    { u: 0, compra: false, t: 'Vocês parcelam?' }\n  ],\n  conteudo: [\n    { u: 0, t: 'Sugestão: uma aula sobre como versionar workflows do n8n com Git.' },\n    { u: 0, t: 'Adorei a aula de Harness Engineering, dá pra ter uma parte 2 sobre avaliação de agentes?' },\n    { u: 0, t: 'Qual a diferença conceitual entre o AI Agent do n8n e um agente no Claude Code?' },\n    { u: 0, t: 'A explicação de RAG no módulo 5 ficou confusa pra mim, podiam refazer com um exemplo?' },\n    { u: 0, t: 'Faltou falar de custo de tokens na aula de agentes.' },\n    { u: 0, t: 'Vocês recomendam algum livro sobre arquitetura de agentes?' }\n  ],\n  indefinido: [\n    { u: 0, t: 'oi, tudo bem?' }, { u: 0, t: 'bom dia' }, { u: 0, t: 'alguém aí?' },\n    { u: 0, t: 'ok' }, { u: 0, t: 'obrigado!' }, { u: 0, t: '👍' }\n  ]\n};\nconst PESOS = [['suporte_tecnico', 0.30], ['acesso_plataforma', 0.25], ['comercial', 0.18], ['conteudo', 0.15], ['indefinido', 0.12]];\nconst sorteiaRota = () => {\n  const r = rnd(); let acc = 0;\n  for (const [rota, peso] of PESOS) { acc += peso; if (r < acc) return rota; }\n  return 'indefinido';\n};\n\nconst out = [];\nfor (let i = 0; i < N; i++) {\n  const rota = sorteiaRota();\n  const base = pick(CATALOGO[rota]);\n  let urgencia = base.u, evasao = false;\n  let texto = rota === 'indefinido'\n    ? base.t\n    : [pick(ABERTURAS), base.t, pick(base.u >= 4 ? FECHOS_CRITICOS : FECHOS)].filter(Boolean).join(' ');\n  if ((rota === 'suporte_tecnico' || rota === 'acesso_plataforma') && rnd() < 0.18) {\n    texto += ' ' + pick(FRUSTRACAO);\n    evasao = true;\n    urgencia = Math.max(urgencia, 2);\n  }\n  const mensagens = [{ de: 'aluno', texto }];\n  if (rota !== 'indefinido' && rnd() < 0.25) {\n    mensagens.push({ de: 'suporte', texto: pick(RESPOSTAS_SUPORTE) }, { de: 'aluno', texto: pick(FOLLOW_UPS) });\n  }\n  const lead = rota === 'comercial' && rnd() < 0.4;\n  out.push({ json: {\n    id: 'msg_' + String(i + 1).padStart(4, '0'),\n    canal: pick(CANAIS),\n    produto: lead ? null : pick(PRODUTOS),\n    aluno_desde: lead ? null : '2026-' + String(1 + Math.floor(rnd() * 9)).padStart(2, '0'),\n    mensagens,\n    gabarito: { rota, urgencia, evasao, compra: !!base.compra }\n  }});\n}\nreturn out;\n"
+        },
+        "id": "8cf4731e-538f-59c2-9bdf-4536cfe8b86c",
+        "name": "Gera N mensagens",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          440,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "batchSize": "={{ $('Configuração').first().json.lote }}",
+          "options": {}
+        },
+        "id": "11f9d0fa-6b04-57cd-8f8c-f8798364335d",
+        "name": "Loop Jev",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          680,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: 'jev-latest',\n  state: estado(r),\n  questions: {\n    rota: { type: 'choice', instructions: 'Para qual fila da Flowgrammers esta conversa deve ir agora?', criteria: ROTAS },\n    urgencia: { type: 'score', instructions: 'Qual a urgência deste atendimento?', criteria: URGENCIA },\n    risco_churn: { type: 'noul', instructions: P_EVASAO },\n    intencao_compra: { type: 'noul', instructions: P_COMPRA }\n  }\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_jev: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_jev = t0;\nreturn itens;\n"
+        },
+        "id": "1b9ea277-2d0b-59eb-96ff-23051ba3d886",
+        "name": "⏱ Jev início",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          880,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.typesafe.ai/v1/systemone",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($json._req_jev) }}",
+          "options": {
+            "timeout": 15000
+          },
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth"
+        },
+        "id": "c4f4c579-5dbb-5c3d-a06c-0a70c24d56f3",
+        "name": "Jev · System One",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          1100,
+          240
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ Jev início').item.json };\nconst req = rec._req_jev;\nconst res = $json;\nlet partes = null;\ntry { partes = (() => {\n  const a = res.answers ?? {};\n  const rota = a.rota ?? {};\n  const p = rota.probabilities ?? {};\n  // contrato do Choice: escolha válida, probabilidades somando ~1 e a escolha sendo a mais provável\n  const somaOk = Math.abs(Object.values(p).reduce((x, y) => x + y, 0) - 1) <= 0.02;\n  if (!ROTAS_IDS.includes(rota.choice) || !somaOk || p[rota.choice] < Math.max(...Object.values(p)) - 1e-6) return null;\n  return { rota: rota.choice, urgencia: a.urgencia?.score, risco_churn: a.risco_churn?.noul, intencao_compra: a.intencao_compra?.noul };\n})(); } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\n// Se a API não devolver usage, estimamos (≈ 4 caracteres por token) e marcamos como estimado.\nr.tokens_estimados = !(res.usage && (res.usage.input_tokens ?? res.usage.prompt_tokens) != null);\nr.t0 = rec._t0_jev;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.input_tokens ?? res.usage?.prompt_tokens ?? Math.ceil(JSON.stringify(req).length / 4));\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.output_tokens ?? res.usage?.completion_tokens ?? 0);\ndelete rec._req_jev;\ndelete rec._t0_jev;\nreturn { json: { ...rec, jev: r } };\n"
+        },
+        "id": "6ed9c3ed-0917-5578-827a-11ca7b7b953e",
+        "name": "⏱ Jev fim",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1320,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Como medimos\n- **Loop Over Items** com o mesmo `lote` pros dois lados = mesma concorrência\n- Relógio liga depois de montar o body e desliga quando o lote volta\n- **Tempo de fila** = do 1º envio à última resposta\n- **Custo** = `usage` devolvido pela API × preço da Configuração\n- **Acurácia** = rota igual ao gabarito; alertas com limiar 0,7\n- Sem retry automático: erro vira linha no relatório",
+          "height": 340,
+          "width": 420,
+          "color": 7
+        },
+        "id": "3f196b53-bcc3-5a2e-b256-98906deb88f6",
+        "name": "Como medimos",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          620,
+          -400
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "fd1bdf28-016b-5dcc-b47c-6f2f01398f26",
+                "leftValue": "={{ $('Configuração').first().json.incluir_claude }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "id": "8ed2c679-1d42-53e1-b2bb-15d1e9372594",
+        "name": "Incluir Claude?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1540,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "batchSize": "={{ $('Configuração').first().json.lote }}",
+          "options": {}
+        },
+        "id": "1cc19579-9bae-5b8e-82e0-587fbee1b925",
+        "name": "Loop Claude",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          1760,
+          -60
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: cfg.modelo_claude,\n  max_tokens: 300,\n  temperature: 0,\n  system: SYSTEM + '\\nResponda sempre chamando a ferramenta registrar_triagem.',\n  tools: [{\n    name: 'registrar_triagem',\n    description: 'Registra a triagem da conversa do aluno.',\n    input_schema: {\n      type: 'object',\n      properties: {\n        rota: { type: 'string', enum: Object.keys(ROTAS) },\n        urgencia: { type: 'integer', minimum: 0, maximum: 4 },\n        risco_churn: { type: 'number', minimum: 0, maximum: 1 },\n        intencao_compra: { type: 'number', minimum: 0, maximum: 1 }\n      },\n      required: ['rota', 'urgencia', 'risco_churn', 'intencao_compra']\n    }\n  }],\n  tool_choice: { type: 'tool', name: 'registrar_triagem' },\n  messages: [{ role: 'user', content: JSON.stringify(estado(r)) }]\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_claude: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_claude = t0;\nreturn itens;\n"
+        },
+        "id": "6dd211ad-da01-5f45-8dda-5d1c4beda124",
+        "name": "⏱ Claude início",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1960,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.anthropic.com/v1/messages",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($json._req_claude) }}",
+          "options": {
+            "timeout": 60000
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "anthropic-version",
+                "value": "2023-06-01"
+              }
+            ]
+          },
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "anthropicApi"
+        },
+        "id": "44b7413a-678b-5e97-8615-dce1880987e5",
+        "name": "Claude Haiku · tool use",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          2180,
+          240
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ Claude início').item.json };\nconst req = rec._req_claude;\nconst res = $json;\nlet partes = null;\ntry { partes = (res.content ?? []).find(c => c.type === 'tool_use')?.input ?? null; } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\nr.t0 = rec._t0_claude;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.input_tokens ?? 0);\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.output_tokens ?? 0);\ndelete rec._req_claude;\ndelete rec._t0_claude;\nreturn { json: { ...rec, claude: r } };\n"
+        },
+        "id": "ae1d8304-a424-52f1-9ae0-ca7888839133",
+        "name": "⏱ Claude fim",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2400,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "content": "### Rate limit\nTier 1 da Anthropic = 50 req/min. Se aparecer erro 429, use `lote = 1` e até 40 registros, ou suba de tier.\n\nLimites do Jev: confira no painel da TypeSafe.",
+          "height": 300,
+          "width": 380,
+          "color": 3
+        },
+        "id": "665fdc59-0ec1-5488-8fa5-33b8d2d9f69e",
+        "name": "Rate limit",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1700,
+          -400
+        ]
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "84528aa6-4a7b-54c9-9445-e268342b3e9c",
+                "leftValue": "={{ $('Configuração').first().json.incluir_gpt }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "looseTypeValidation": false,
+          "options": {}
+        },
+        "id": "d48410e4-f7ff-552e-b7ec-5bcd1d5ec975",
+        "name": "Incluir GPT?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          2620,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "batchSize": "={{ $('Configuração').first().json.lote }}",
+          "options": {}
+        },
+        "id": "5f452d36-8c7b-531c-bc20-9676e2fcb866",
+        "name": "Loop GPT",
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          2840,
+          -60
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: cfg.modelo_gpt,\n  temperature: 0,\n  messages: [\n    { role: 'system', content: SYSTEM + '\\nResponda somente com o JSON pedido.' },\n    { role: 'user', content: JSON.stringify(estado(r)) }\n  ],\n  response_format: {\n    type: 'json_schema',\n    json_schema: {\n      name: 'triagem',\n      strict: true,\n      schema: {\n        type: 'object',\n        properties: {\n          rota: { type: 'string', enum: Object.keys(ROTAS) },\n          urgencia: { type: 'integer', description: '0 a 4' },\n          risco_churn: { type: 'number', description: 'probabilidade de 0 a 1' },\n          intencao_compra: { type: 'number', description: 'probabilidade de 0 a 1' }\n        },\n        required: ['rota', 'urgencia', 'risco_churn', 'intencao_compra'],\n        additionalProperties: false\n      }\n    }\n  }\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_gpt: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_gpt = t0;\nreturn itens;\n"
+        },
+        "id": "400cf1ca-77a6-506d-adfc-885d2b88922c",
+        "name": "⏱ GPT início",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3040,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.openai.com/v1/chat/completions",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify($json._req_gpt) }}",
+          "options": {
+            "timeout": 60000
+          },
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "openAiApi"
+        },
+        "id": "2c57fd86-ff5a-5e20-ae18-d274b7409eb5",
+        "name": "GPT-4.1 mini · JSON schema",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.5,
+        "position": [
+          3260,
+          240
+        ],
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "mode": "runOnceForEachItem",
+          "jsCode": "// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ GPT início').item.json };\nconst req = rec._req_gpt;\nconst res = $json;\nlet partes = null;\ntry { partes = JSON.parse(res.choices?.[0]?.message?.content ?? 'null'); } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\nr.t0 = rec._t0_gpt;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.prompt_tokens ?? 0);\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.completion_tokens ?? 0);\ndelete rec._req_gpt;\ndelete rec._t0_gpt;\nreturn { json: { ...rec, gpt: r } };\n"
+        },
+        "id": "b7d9b492-c251-504a-91ca-ebdee13bae90",
+        "name": "⏱ GPT fim",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3480,
+          240
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Consolida o benchmark: tempo de fila, vazão, latência por lote, tokens reais, custo e acurácia.\nconst cfg = $('Configuração').first().json;\nconst rows = $input.all().map(i => i.json);\nconst LIMIAR = Number(cfg.limiar_alerta) || 0.7;\n\nconst APELIDOS = { 'claude-haiku-4-5-20251001': 'Claude Haiku 4.5', 'gpt-4.1-mini': 'GPT-4.1 mini' };\nconst MODELOS = [\n  { key: 'jev', nome: 'Jev (TypeSafe)', sistema: 'Sistema 1', pin: cfg.preco_jev_entrada, pout: cfg.preco_jev_saida },\n  { key: 'claude', nome: APELIDOS[cfg.modelo_claude] ?? cfg.modelo_claude, sistema: 'Sistema 2', pin: cfg.preco_claude_entrada, pout: cfg.preco_claude_saida },\n  { key: 'gpt', nome: APELIDOS[cfg.modelo_gpt] ?? cfg.modelo_gpt, sistema: 'Sistema 2', pin: cfg.preco_gpt_entrada, pout: cfg.preco_gpt_saida }\n];\nconst soma = a => a.reduce((x, y) => x + y, 0);\nconst pctl = (arr, p) => {\n  if (!arr.length) return null;\n  const s = [...arr].sort((x, y) => x - y);\n  return s[Math.min(s.length - 1, Math.max(0, Math.ceil(p * s.length) - 1))];\n};\nconst r2 = (v, d = 2) => (v == null || !Number.isFinite(v) ? null : Math.round(v * 10 ** d) / 10 ** d);\n\nconst stats = [];\nfor (const m of MODELOS) {\n  const rs = rows.filter(r => r[m.key]);\n  if (!rs.length) continue;\n  const ok = rs.filter(r => r[m.key].ok);\n  const t0 = Math.min(...rs.map(r => r[m.key].t0));\n  const t1 = Math.max(...rs.map(r => r[m.key].t1));\n  const lotes = {};\n  for (const r of rs) {\n    const x = r[m.key];\n    lotes[x.t0] = Math.max(lotes[x.t0] ?? 0, x.t1 - x.t0);\n  }\n  const lat = Object.values(lotes);\n  const tin = soma(ok.map(r => r[m.key].tokens_entrada || 0));\n  const tout = soma(ok.map(r => r[m.key].tokens_saida || 0));\n  const custo = tin / 1e6 * Number(m.pin || 0) + tout / 1e6 * Number(m.pout || 0);\n  const porMil = ok.length ? custo / ok.length * 1000 : null;\n  const acertoRota = ok.filter(r => r[m.key].rota === r.gabarito.rota).length;\n  const acertoAlertas = ok.filter(r =>\n    (r[m.key].risco_churn >= LIMIAR) === r.gabarito.evasao && (r[m.key].intencao_compra >= LIMIAR) === r.gabarito.compra\n  ).length;\n  const estimado = m.key === 'jev' && ok.some(r => r[m.key].tokens_estimados);\n  const erros = rs.filter(r => !r[m.key].ok);\n  const porTipo = {};\n  for (const r of erros) porTipo[r[m.key].erro] = (porTipo[r[m.key].erro] ?? 0) + 1;\n  stats.push({\n    modelo: m.nome,\n    sistema: m.sistema,\n    registros: rs.length,\n    respostas_validas: ok.length,\n    erros: erros.length,\n    tempo_fila_s: r2((t1 - t0) / 1000, 1),\n    mensagens_por_s: r2(rs.length / Math.max(0.001, (t1 - t0) / 1000), 1),\n    latencia_lote_p50_ms: pctl(lat, 0.5),\n    latencia_lote_p95_ms: pctl(lat, 0.95),\n    tokens_entrada: tin,\n    tokens_saida: tout,\n    custo_total_usd: r2(custo, 6),\n    custo_por_mil_usd: r2(porMil, 4),\n    projecao_100_mil_usd: r2(porMil == null ? null : porMil * 100, 2),\n    acuracia_rota_pct: ok.length ? r2(acertoRota / ok.length * 100, 1) : null,\n    acuracia_alertas_pct: ok.length ? r2(acertoAlertas / ok.length * 100, 1) : null,\n    observacao: [\n      estimado ? 'tokens do Jev estimados (API sem usage)' : null,\n      ...Object.entries(porTipo).map(([tipo, qtd]) => `${qtd}× ${tipo}`)\n    ].filter(Boolean).join(' · ') || null,\n    _key: m.key\n  });\n}\n\nconst jev = stats.find(s => s._key === 'jev');\nconst comparacoes = stats.filter(s => s._key !== 'jev' && jev).map(s => {\n  const both = rows.filter(r => r.jev?.ok && r[s._key]?.ok);\n  const iguais = both.filter(r => r.jev.rota === r[s._key].rota).length;\n  return {\n    comparacao: `Jev × ${s.modelo}`,\n    velocidade_x: jev.tempo_fila_s > 0 ? r2(s.tempo_fila_s / jev.tempo_fila_s, 1) : null,\n    custo_x: jev.custo_por_mil_usd > 0 ? r2(s.custo_por_mil_usd / jev.custo_por_mil_usd, 1) : null,\n    concordancia_rota_pct: both.length ? r2(iguais / both.length * 100, 1) : null\n  };\n});\n\nreturn [{ json: {\n  benchmark: {\n    registros: rows.length,\n    lote: Number(cfg.lote),\n    semente: cfg.semente,\n    executado_em: new Date().toISOString()\n  },\n  modelos: stats.map(({ _key, ...s }) => s),\n  comparacoes\n} }];\n"
+        },
+        "id": "8217ca8c-e721-5f1d-89fb-b1590e167eb3",
+        "name": "Relatório",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3720,
+          0
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Uma linha por modelo + uma linha por comparação: fica legível na visão de tabela do n8n.\nconst { modelos, comparacoes } = $json;\nreturn [...modelos, ...comparacoes].map(json => ({ json }));\n"
+        },
+        "id": "c7394b21-50e1-50e9-932d-5e1a73e3f2b0",
+        "name": "Tabela por modelo",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3960,
+          -120
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Monta o painel em HTML (o nó \"Painel do benchmark\" renderiza este HTML na aba de saída).\nconst { benchmark, modelos, comparacoes } = $json;\nconst esc = s => String(s ?? '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nconst n = (v, d = 1) => v == null ? '—' : Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });\nconst usd = v => v == null ? '—' : v < 0.01\n  ? 'US$ ' + Number(v).toLocaleString('pt-BR', { maximumSignificantDigits: 2 })\n  : 'US$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst PINK = '#e8006a', INK = '#0a0a0a', MUTED = '#5f5f6a', LINE = '#e2e2e8';\n\nconst barras = (titulo, campo, fmt, menorMelhor = true) => {\n  const vals = modelos.map(m => m[campo]).filter(v => v != null);\n  const max = Math.max(...vals, 1e-9);\n  return `<div style=\"margin:22px 0 6px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:${MUTED}\">${esc(titulo)}${menorMelhor ? ' · menor é melhor' : ' · maior é melhor'}</div>`\n    + modelos.map(m => {\n      const v = m[campo];\n      const w = v == null ? 0 : Math.max(1.5, v / max * 100);\n      const cor = m.sistema === 'Sistema 1' ? PINK : INK;\n      return `<div style=\"display:grid;grid-template-columns:200px 1fr 130px;gap:12px;align-items:center;margin:6px 0\">\n        <div style=\"font-weight:700\">${esc(m.modelo)}<div style=\"font-weight:500;font-size:12px;color:${MUTED}\">${esc(m.sistema)}</div></div>\n        <div style=\"height:22px;background:#f0f0f3;border-radius:6px;overflow:hidden\"><div style=\"height:100%;width:${w}%;background:${cor};border-radius:6px\"></div></div>\n        <div style=\"font-weight:900;font-size:18px;text-align:right;color:${cor}\">${fmt(v)}</div>\n      </div>`;\n    }).join('');\n};\n\nconst destaque = comparacoes.map(c =>\n  `<div style=\"background:${PINK};color:#fff;border-radius:12px;padding:14px 18px;margin:8px 0;font-weight:800;font-size:19px\">\n    ${esc(c.comparacao)}: Jev ${c.velocidade_x != null ? n(c.velocidade_x) + '× mais rápido' : '—'}\n    · ${c.custo_x != null ? n(c.custo_x) + '× mais barato' : '—'}\n    <span style=\"font-weight:500;font-size:14px;opacity:.9\"> · concordância de rota ${n(c.concordancia_rota_pct)}%</span>\n  </div>`).join('');\n\nconst linhas = [\n  ['Respostas válidas', m => `${m.respostas_validas}/${m.registros}`],\n  ['Erros', m => String(m.erros)],\n  ['Tempo de fila', m => n(m.tempo_fila_s) + ' s'],\n  ['Mensagens/s', m => n(m.mensagens_por_s)],\n  ['Latência por lote p50 / p95', m => `${m.latencia_lote_p50_ms ?? '—'} / ${m.latencia_lote_p95_ms ?? '—'} ms`],\n  ['Tokens entrada / saída', m => `${(m.tokens_entrada || 0).toLocaleString('pt-BR')} / ${(m.tokens_saida || 0).toLocaleString('pt-BR')}`],\n  ['Custo desta execução', m => usd(m.custo_total_usd)],\n  ['Custo por 1.000', m => usd(m.custo_por_mil_usd)],\n  ['Projeção 100 mil/mês', m => usd(m.projecao_100_mil_usd)],\n  ['Acurácia da rota', m => n(m.acuracia_rota_pct) + '%'],\n  ['Acurácia dos alertas', m => n(m.acuracia_alertas_pct) + '%']\n];\nconst tabela = `<table style=\"width:100%;border-collapse:collapse;margin-top:26px;font-size:14px\">\n  <tr><th style=\"text-align:left;padding:8px;border-bottom:2px solid ${INK};font:700 11px 'JetBrains Mono',monospace;color:${MUTED};text-transform:uppercase\">Métrica</th>\n  ${modelos.map(m => `<th style=\"text-align:right;padding:8px;border-bottom:2px solid ${INK};color:${m.sistema === 'Sistema 1' ? PINK : INK}\">${esc(m.modelo)}</th>`).join('')}</tr>\n  ${linhas.map(([rot, f]) => `<tr><td style=\"padding:7px 8px;border-bottom:1px solid ${LINE}\">${rot}</td>${modelos.map(m => `<td style=\"padding:7px 8px;border-bottom:1px solid ${LINE};text-align:right;font-weight:700\">${esc(f(m))}</td>`).join('')}</tr>`).join('')}\n</table>`;\n\nconst obs = modelos.filter(m => m.observacao).map(m => `<li>${esc(m.modelo)}: ${esc(m.observacao)}</li>`).join('');\n\nconst html = `<div style=\"font-family:Barlow,'Segoe UI',system-ui,sans-serif;color:${INK};background:#fff;padding:26px 28px;max-width:980px\">\n  <div style=\"font:700 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:${PINK}\">Flowgrammers · Benchmark Sistema 1 × Sistema 2</div>\n  <div style=\"font-weight:900;font-size:34px;line-height:1.05;margin:6px 0 4px\">${benchmark.registros} mensagens · lote de ${benchmark.lote}</div>\n  <div style=\"color:${MUTED};margin-bottom:14px\">Mesmo dataset, mesmas perguntas, mesma concorrência. Custo = tokens devolvidos pela API × preços da Configuração.</div>\n  ${destaque}\n  ${barras('Tempo de fila (s)', 'tempo_fila_s', v => n(v) + ' s')}\n  ${barras('Custo por 1.000 mensagens', 'custo_por_mil_usd', usd)}\n  ${barras('Acurácia da rota (%)', 'acuracia_rota_pct', v => n(v) + '%', false)}\n  ${tabela}\n  ${obs ? `<ul style=\"color:${MUTED};font-size:13px;margin-top:14px\">${obs}</ul>` : ''}\n  <div style=\"color:${MUTED};font-size:12px;margin-top:16px\">Gabarito sintético, semente ${esc(benchmark.semente)}. Tempos incluem a sua rede até cada API. Rode mais de uma vez antes de tirar conclusão.</div>\n</div>`;\nreturn [{ json: { html } }];\n"
+        },
+        "id": "f24d51e0-d724-59e7-8a4d-96827521a813",
+        "name": "Monta painel",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3960,
+          120
+        ]
+      },
+      {
+        "parameters": {
+          "html": "{{ $json.html }}"
+        },
+        "id": "e9ec5a79-0072-5996-a77f-27758215c6ac",
+        "name": "Painel do benchmark",
+        "type": "n8n-nodes-base.html",
+        "typeVersion": 1.2,
+        "position": [
+          4180,
+          120
+        ]
+      }
+    ],
+    "connections": {
+      "Rodar benchmark": {
+        "main": [
+          [
+            {
+              "node": "Configuração",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Configuração": {
+        "main": [
+          [
+            {
+              "node": "Gera N mensagens",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Gera N mensagens": {
+        "main": [
+          [
+            {
+              "node": "Loop Jev",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Jev": {
+        "main": [
+          [
+            {
+              "node": "Incluir Claude?",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "⏱ Jev início",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ Jev início": {
+        "main": [
+          [
+            {
+              "node": "Jev · System One",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Jev · System One": {
+        "main": [
+          [
+            {
+              "node": "⏱ Jev fim",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ Jev fim": {
+        "main": [
+          [
+            {
+              "node": "Loop Jev",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Incluir Claude?": {
+        "main": [
+          [
+            {
+              "node": "Loop Claude",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Incluir GPT?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Claude": {
+        "main": [
+          [
+            {
+              "node": "Incluir GPT?",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "⏱ Claude início",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ Claude início": {
+        "main": [
+          [
+            {
+              "node": "Claude Haiku · tool use",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Claude Haiku · tool use": {
+        "main": [
+          [
+            {
+              "node": "⏱ Claude fim",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ Claude fim": {
+        "main": [
+          [
+            {
+              "node": "Loop Claude",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Incluir GPT?": {
+        "main": [
+          [
+            {
+              "node": "Loop GPT",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Relatório",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop GPT": {
+        "main": [
+          [
+            {
+              "node": "Relatório",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "⏱ GPT início",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ GPT início": {
+        "main": [
+          [
+            {
+              "node": "GPT-4.1 mini · JSON schema",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GPT-4.1 mini · JSON schema": {
+        "main": [
+          [
+            {
+              "node": "⏱ GPT fim",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "⏱ GPT fim": {
+        "main": [
+          [
+            {
+              "node": "Loop GPT",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Relatório": {
+        "main": [
+          [
+            {
+              "node": "Tabela por modelo",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Monta painel",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Monta painel": {
+        "main": [
+          [
+            {
+              "node": "Painel do benchmark",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "pinData": {},
+    "settings": {
+      "executionOrder": "v1"
+    },
+    "meta": {
+      "templateCredsSetupCompleted": false
+    },
+    "tags": []
+  }
+}

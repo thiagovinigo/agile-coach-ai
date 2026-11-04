@@ -80,6 +80,12 @@ window.onerror = function(msg, url, line, col, error) {
 
                 <div class="nav-group">
                     <div class="nav-group-title">Agentes & Ferramentas</div>
+                    <a href="#twentyfirst-sdk" class="nav-item" data-target="twentyfirst-sdk-view" style="color: #6366f1; font-weight: bold;">
+                        <span class="icon">🧩</span> 21st Agents SDK
+                    </a>
+                    <a href="#jev" class="nav-item" data-target="jev-view" style="color: #00c9a7; font-weight: bold;">
+                        <span class="icon">⚡</span> Jev: Sistema 1 (TypeSafe)
+                    </a>
                     <a href="#strix" class="nav-item" data-target="strix-view" style="color: #10b981; font-weight: bold;">
                         <span class="icon">🦉</span> Strix (AI Pentesting)
                     </a>
@@ -181,6 +187,14 @@ window.onerror = function(msg, url, line, col, error) {
                             ⬇️
                         </a>
                     </div>
+                    <div style="display: flex; align-items: center; justify-content: space-between; padding-right: 10px;">
+                        <a href="#flowgrammers-jev" class="nav-item" data-target="flowgrammers-jev-view" style="color:#00c9a7; font-weight:bold; font-size: 13px; flex: 1;">
+                            <span class="icon">⚡</span> Jev: IA que Decide (Flowgrammers)
+                        </a>
+                        <a href="contexto/jev_ia_que_decide.html" download="Jev_A_IA_que_Decide_Flowgrammers.html" title="Baixar Apresentação" style="text-decoration: none; color: #0078d4; font-size: 16px;">
+                            ⬇️
+                        </a>
+                    </div>
                 </div>
 
                 <div class="nav-group">
@@ -262,6 +276,8 @@ window.onerror = function(msg, url, line, col, error) {
                 <div id="context7-view" class="view kb-view"></div>
                 <div id="graphify-view" class="view kb-view"></div>
                 <div id="strix-view" class="view kb-view"></div>
+                <div id="twentyfirst-sdk-view" class="view kb-view"></div>
+                <div id="jev-view" class="view kb-view"></div>
                 <div id="pm-skills-view" class="view kb-view"></div>
                 <div id="banana-slides-view" class="view kb-view"></div>
                 <div id="nj-mmo-view" class="view kb-view"></div>
@@ -274,6 +290,9 @@ window.onerror = function(msg, url, line, col, error) {
                 <div id="workshop-view" class="view"></div>
                 <div id="flowgrammers-claude-view" class="view" style="margin: -32px; height: calc(100vh - 70px); background: #0A0612;">
                     <iframe src="contexto/claude_code_flowgrammers.html" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
+                </div>
+                <div id="flowgrammers-jev-view" class="view" style="margin: -32px; height: calc(100vh - 70px); background: #07090d;">
+                    <iframe src="contexto/jev_ia_que_decide.html" style="width: 100%; height: 100%; border: none; display: block;"></iframe>
                 </div>
                 <div id="apresentacao-view" class="view kb-view"><div class="kb-content-container" id="kb-apresentacao"></div></div>
                 <div id="kanban-view" class="view kb-view"><div class="kb-content-container" id="kb-kanban"></div></div>
@@ -324,7 +343,7 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="agents.js?v=20261030"></script>
     <script src="ecc.js?v=20261030"></script>
     <script src="templates_view.js?v=20261030"></script>
-    <script src="n8n_templates_data.js?v=20261030"></script>
+    <script src="n8n_templates_data.js?v=20261104v5"></script>
     <script src="n8n_templates_view.js?v=20261030"></script>
     <script src="referencias_view.js?v=20261030"></script>
     <script src="facilitador_dinamicas_data.js?v=20261030"></script>
@@ -365,6 +384,10 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="graphify_view.js?v=20261104v4"></script>
     <script src="strix-data.js?v=20261104v4"></script>
     <script src="strix_view.js?v=20261104v4"></script>
+    <script src="twentyfirst-sdk-data.js?v=20261104v5"></script>
+    <script src="twentyfirst_sdk_view.js?v=20261104v5"></script>
+    <script src="jev-data.js?v=20261104v5"></script>
+    <script src="jev_view.js?v=20261104v5"></script>
     <script>
         if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
         if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');

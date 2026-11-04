@@ -1,0 +1,1710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jev — A IA que decide · Mastermind Flowgrammers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   FLOWGRAMMERS — VISUAL DNA
+   Brand: black #0a0a0a + pink #e8006a + white
+   Type: Barlow (display 900 / body 400-700) + JetBrains Mono
+   ============================================================ */
+:root {
+  --bg-dark: #0a0a0a;
+  --bg-dark-2: #141414;
+  --pink: #e8006a;
+  --pink-bright: #ec1872;
+  --pink-glow: rgba(232, 0, 106, 0.35);
+  --pink-soft: rgba(232, 0, 106, 0.12);
+  --white: #ffffff;
+  --gray: #b8b8b8;
+  --gray-2: #2a2a2a;
+  --green: #00d97e;
+  --yellow: #ffc107;
+
+  --font-display: "Barlow", system-ui, -apple-system, sans-serif;
+  --font-body: "Barlow", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+body {
+  font-family: var(--font-body);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   DECK + SLIDES
+   ============================================================ */
+.deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; }
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 4vh 6vw;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-out);
+  overflow: hidden;
+}
+.slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
+
+.slide-dark { background: var(--bg-dark); color: var(--white); }
+.slide-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at top left, var(--pink-glow) 0%, transparent 45%),
+    radial-gradient(ellipse at bottom right, var(--pink-soft) 0%, transparent 50%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'><g fill='none' stroke='%23e8006a' stroke-width='0.5' opacity='0.08'><polygon points='30,0 60,17 60,52 30,69 0,52 0,17'/><polygon points='90,52 120,69 120,104 90,121 60,104 60,69'/></g></svg>");
+  background-size: auto, auto, 120px 104px;
+  pointer-events: none;
+}
+
+.slide-pink { background: var(--pink); color: var(--white); }
+.slide-pink::before {
+  content: "";
+  position: absolute;
+  bottom: -10vh;
+  left: -10vw;
+  width: 60vw;
+  height: 60vw;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.burst {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23e8006a'><path d='M50 5 L55 38 L88 32 L62 52 L88 72 L55 66 L50 95 L45 66 L12 72 L38 52 L12 32 L45 38 Z'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  vertical-align: middle;
+}
+.burst.white { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%23ffffff'><path d='M50 5 L55 38 L88 32 L62 52 L88 72 L55 66 L50 95 L45 66 L12 72 L38 52 L12 32 L45 38 Z'/></svg>"); }
+.burst.dark  { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='%230a0a0a'><path d='M50 5 L55 38 L88 32 L62 52 L88 72 L55 66 L50 95 L45 66 L12 72 L38 52 L12 32 L45 38 Z'/></svg>"); }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.t-display { font-family: var(--font-display); font-weight: 900; font-size: clamp(4rem, 8vw, 8.5rem); line-height: 0.95; letter-spacing: -0.02em; text-transform: uppercase; }
+.t-h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(3rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.015em; }
+.t-h2 { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.4rem, 4.5vw, 4.5rem); line-height: 1.05; }
+.t-h3 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 2.5vw, 2.4rem); line-height: 1.15; }
+.t-body { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.05rem, 1.55vw, 1.55rem); line-height: 1.45; }
+.t-body-lg { font-family: var(--font-body); font-weight: 400; font-size: clamp(1.3rem, 2vw, 2rem); line-height: 1.4; }
+.t-mono { font-family: var(--font-mono); }
+.t-pink { color: var(--pink); }
+.t-bold { font-weight: 800; }
+
+.hl-white { background: var(--white); color: var(--bg-dark); padding: 0.05em 0.3em; display: inline-block; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hl-pink  { background: var(--pink);  color: var(--white);   padding: 0.05em 0.3em; display: inline-block; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.hl-black { background: var(--bg-dark); color: var(--white); padding: 0.05em 0.3em; display: inline-block; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+.pill { display: inline-flex; align-items: center; gap: 0.6em; padding: 0.4em 1.2em; border: 1.5px solid var(--pink); border-radius: 999px; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.pill-solid { background: var(--pink); color: var(--white); border-color: var(--pink); }
+
+.step-badge { display: inline-block; background: var(--pink); color: var(--white); font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem, 4vw, 3.8rem); padding: 0.05em 0.4em; line-height: 1.1; text-transform: uppercase; }
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+.slide-header { position: absolute; top: 3vh; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 0.6em; font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; opacity: 0.95; }
+.slide-header .burst { width: 1.3em; height: 1.3em; }
+
+.slide-footer { position: absolute; bottom: 3vh; left: 0; right: 0; display: flex; justify-content: center; align-items: center; gap: 0.7em; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.02em; opacity: 0.95; }
+.slide-footer .pipe { color: var(--pink); font-weight: 900; }
+.slide-footer .logo-mark { width: 1.3em; height: 1.3em; background: var(--pink); border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; color: var(--white); font-weight: 900; font-size: 0.85em; }
+
+.card { background: rgba(255,255,255,0.02); border: 1.5px solid var(--pink); border-radius: 16px; padding: 1.5rem 2rem; font-size: clamp(1rem, 1.4vw, 1.4rem); line-height: 1.4; }
+.card-dark { background: var(--bg-dark); color: var(--white); border: none; border-radius: 12px; padding: 1.2rem 2rem; text-align: center; font-weight: 700; font-size: clamp(1rem, 1.3vw, 1.3rem); }
+.card-light { background: #ececec; color: var(--bg-dark); border: none; border-radius: 14px; padding: 1.2rem 1.5rem; font-size: clamp(0.95rem, 1.3vw, 1.3rem); line-height: 1.4; }
+
+.slide-pink .slide-footer .pipe { color: var(--white); }
+.slide-pink .bullet-arrow::before { color: var(--white); }
+.slide-pink .divider-v { background: var(--white); }
+.slide-pink .card { border-color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.08); }
+
+.bullet-arrow { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.2rem; }
+.bullet-arrow::before { content: "→"; color: var(--pink); font-weight: 900; flex-shrink: 0; font-size: 1.2em; line-height: 1.3; }
+
+.divider-v { width: 2px; background: var(--pink); align-self: stretch; min-height: 60%; margin: 0 2rem; flex-shrink: 0; }
+
+.chat-card { background: var(--bg-dark); border-radius: 16px; padding: 1.2rem 1.4rem; max-width: 360px; font-size: 0.95rem; line-height: 1.35; position: relative; box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+.chat-card .chat-name { color: var(--pink); font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.chat-card .chat-time { font-size: 0.75rem; opacity: 0.6; text-align: right; margin-top: 0.6rem; }
+
+.terminal { background: #0d0d0d; border: 1px solid var(--gray-2); border-radius: 12px; padding: 1.5rem 2rem; font-family: var(--font-mono); font-size: clamp(0.85rem, 1.05vw, 1.05rem); line-height: 1.7; color: #d4d4d4; position: relative; box-shadow: 0 0 60px rgba(232, 0, 106, 0.15); white-space: pre-line; }
+.terminal::before { content: "● ● ●"; position: absolute; top: 0.6rem; left: 1rem; letter-spacing: 0.25em; color: #555; font-size: 0.7rem; }
+.terminal { padding-top: 2.2rem; }
+.terminal .cmd { color: var(--pink); }
+.terminal .out { color: var(--gray); }
+.terminal .ok  { color: var(--green); }
+.terminal .warn{ color: var(--yellow); }
+
+/* ============================================================
+   MOTION LIBRARY
+   ============================================================ */
+@keyframes flyUp     { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes flyDown   { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes flyLeft   { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes flyRight  { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes zoomIn    { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+@keyframes fadeIn    { from { opacity: 0; } to { opacity: 1; } }
+@keyframes drawX     { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pulse     { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes glowPulse { 0%, 100% { box-shadow: 0 0 30px var(--pink-glow); } 50% { box-shadow: 0 0 60px var(--pink-glow); } }
+@keyframes float     { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes spin360   { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+[class*="anim-"] { opacity: 0; will-change: transform, opacity; }
+
+.slide.active .anim-fly-up      { animation: flyUp 0.7s var(--ease-out) forwards;     animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-fly-down    { animation: flyDown 0.7s var(--ease-out) forwards;   animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-fly-left    { animation: flyLeft 0.7s var(--ease-out) forwards;   animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-fly-right   { animation: flyRight 0.7s var(--ease-out) forwards;  animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-zoom        { animation: zoomIn 0.6s var(--ease-bounce) forwards; animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-fade        { animation: fadeIn 0.8s var(--ease-out) forwards;    animation-delay: calc(var(--i, 0) * 100ms); }
+.slide.active .anim-draw-x      { animation: drawX 0.8s var(--ease-out) forwards;     transform-origin: left; animation-delay: calc(var(--i, 0) * 100ms); opacity: 1; }
+.slide.active .anim-pulse       { animation: pulse 2.5s ease-in-out infinite;         opacity: 1; }
+.slide.active .anim-glow        { animation: glowPulse 2.5s ease-in-out infinite;     opacity: 1; }
+.slide.active .anim-float       { animation: float 4s ease-in-out infinite;           opacity: 1; }
+.slide.active .anim-spin        { animation: spin360 18s linear infinite;             opacity: 1; }
+
+/* ============================================================
+   UI: PROGRESS BAR + COUNTER + HELP
+   ============================================================ */
+.progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: linear-gradient(90deg, var(--pink), var(--pink-bright)); z-index: 100; transition: width 0.4s var(--ease-out); box-shadow: 0 0 12px var(--pink-glow); }
+.counter { position: fixed; bottom: 1rem; right: 1.5rem; z-index: 100; font-family: var(--font-mono); font-size: 0.8rem; color: var(--white); opacity: 0.5; background: rgba(0,0,0,0.5); padding: 0.3rem 0.7rem; border-radius: 999px; letter-spacing: 0.05em; }
+.help-toggle { position: fixed; bottom: 1rem; left: 1.5rem; z-index: 100; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: var(--white); font-size: 0.85rem; opacity: 0.5; cursor: pointer; transition: opacity 0.2s; }
+.help-toggle:hover { opacity: 1; }
+.help-panel { position: fixed; bottom: 3.5rem; left: 1.5rem; z-index: 100; background: rgba(10,10,10,0.95); border: 1px solid var(--gray-2); border-radius: 12px; padding: 1rem 1.4rem; font-family: var(--font-mono); font-size: 0.78rem; line-height: 1.7; color: var(--white); display: none; backdrop-filter: blur(8px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+.help-panel.open { display: block; }
+.help-panel kbd { background: var(--gray-2); padding: 0.1em 0.5em; border-radius: 4px; font-size: 0.75rem; color: var(--pink); font-family: var(--font-mono); }
+
+/* ============================================================
+   PRINT / PDF EXPORT (one slide per page)
+   ============================================================ */
+@media print {
+  @page { size: 1920px 1080px; margin: 0; }
+  html, body, .deck { width: 1920px; height: auto; overflow: visible; }
+  .progress, .counter, .help-toggle, .help-panel { display: none !important; }
+  .slide { position: relative !important; width: 1920px; height: 1080px; page-break-after: always; opacity: 1 !important; pointer-events: auto !important; transition: none !important; }
+  [class*="anim-"] { opacity: 1 !important; animation: none !important; }
+  .slide:last-child { page-break-after: auto; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ============================================================
+   VISÃO BRANCA — LIGHT MODE
+   Camada sobre o DNA Flowgrammers: papel branco, tinta preta,
+   pink continua sendo o acento. Terminais ficam escuros.
+   ============================================================ */
+:root {
+  --paper: #ffffff;
+  --paper-2: #f4f4f6;
+  --ink: #0a0a0a;
+  --ink-2: #2b2b2f;
+  --muted: #5f5f6a;
+  --line: #e2e2e8;
+}
+html, body { background: var(--paper); }
+body { color: var(--ink); }
+
+.slide-light { background: var(--paper); color: var(--ink); }
+.slide-light::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at top left, rgba(232,0,106,0.08) 0%, transparent 42%),
+    radial-gradient(ellipse at bottom right, rgba(232,0,106,0.05) 0%, transparent 50%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='104' viewBox='0 0 120 104'><g fill='none' stroke='%23e8006a' stroke-width='0.6' opacity='0.11'><polygon points='30,0 60,17 60,52 30,69 0,52 0,17'/><polygon points='90,52 120,69 120,104 90,121 60,104 60,69'/></g></svg>");
+  background-size: auto, auto, 120px 104px;
+  pointer-events: none;
+}
+.slide-gray { background: var(--paper-2); color: var(--ink); }
+.slide > :not(.slide-header):not(.slide-footer) { position: relative; z-index: 1; }
+
+.muted { color: var(--muted); }
+.slide-pink .muted { color: rgba(255,255,255,0.85); }
+.src { font-family: var(--font-mono); font-size: clamp(0.68rem, 0.78vw, 0.85rem); color: var(--muted); line-height: 1.5; }
+.slide-pink .src { color: rgba(255,255,255,0.88); }
+
+.slide-light .card, .slide-gray .card { background: #fff; box-shadow: 0 2px 18px rgba(10,10,10,0.05); }
+.card.compact { padding: 1rem 1.4rem; font-size: clamp(0.95rem, 1.2vw, 1.25rem); }
+.card .tag { display: inline-block; font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.35rem; }
+
+.counter { color: var(--ink); background: rgba(255,255,255,0.9); border: 1px solid var(--line); opacity: 0.75; }
+.help-toggle { background: #fff; color: var(--ink); border: 1px solid var(--line); }
+.help-panel { background: rgba(255,255,255,0.98); color: var(--ink); border-color: var(--line); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+.help-panel kbd { background: #f0f0f3; }
+
+/* Code terminal: preserves indentation */
+.terminal.code { white-space: pre; font-size: clamp(0.7rem, 0.9vw, 0.98rem); line-height: 1.55; box-shadow: 0 14px 44px rgba(10,10,10,0.22); border-color: #1d1d1d; overflow: hidden; }
+.terminal.code.xs { font-size: clamp(0.64rem, 0.86vw, 0.94rem); line-height: 1.5; }
+.terminal .c { color: #7c7c86; }
+.terminal .s { color: #9fdcae; }
+.terminal .n { color: #ffc107; }
+
+/* Comparison panels (light) */
+.panel { border-radius: 16px; padding: 1.8rem 2rem; height: 100%; }
+.panel-a { background: #fff; border: 1.5px solid var(--line); }
+.panel-b { background: rgba(232,0,106,0.06); border: 1.5px solid var(--pink); }
+.panel ul { list-style: none; padding: 0; margin-top: 1rem; }
+.panel li { margin-bottom: 0.65rem; font-size: clamp(1rem, 1.35vw, 1.4rem); line-height: 1.35; }
+.panel li::before { content: "→ "; color: var(--pink); font-weight: 900; }
+
+/* Flow diagram */
+.flow { display: flex; align-items: stretch; gap: 0.5rem; }
+.node { flex: 1; border: 1.5px solid var(--ink); border-radius: 14px; padding: 0.9rem 1.1rem; background: #fff; font-size: clamp(0.85rem, 1.12vw, 1.18rem); line-height: 1.3; }
+.node .k { display: block; font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.06em; text-transform: uppercase; color: var(--pink); margin-bottom: 0.35rem; }
+.node.pink { background: var(--pink); color: #fff; border-color: var(--pink); }
+.node.pink .k { color: #fff; opacity: 0.85; }
+.node.dark { background: var(--ink); color: #fff; border-color: var(--ink); }
+.node.dark .k { color: #ff5fa2; }
+.node.ghost { border-style: dashed; border-color: #b9b9c2; }
+.arrow { align-self: center; color: var(--pink); font-weight: 900; font-size: clamp(1.2rem, 1.8vw, 1.9rem); flex: 0 0 auto; }
+.arrow-down { text-align: center; color: var(--pink); font-weight: 900; font-size: clamp(1.2rem, 1.8vw, 1.9rem); line-height: 1; margin: 0.4rem 0; }
+
+/* Bars */
+.bar-row { display: grid; grid-template-columns: minmax(9rem, 13rem) 1fr auto; align-items: center; gap: 1.2rem; margin-bottom: 1.3rem; }
+.bar-label { font-weight: 700; font-size: clamp(1rem, 1.35vw, 1.4rem); line-height: 1.15; }
+.bar-label small { display: block; font-weight: 500; font-size: 0.72em; color: var(--muted); }
+.bar-track { height: 2.4rem; background: #efeff3; border-radius: 8px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 8px; background: #2b2b2f; transform-origin: left; }
+.bar-fill.pink { background: var(--pink); }
+.bar-val { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.2rem, 1.9vw, 2.1rem); text-align: right; white-space: nowrap; min-width: 6.5em; }
+
+/* Small table */
+.tbl { width: 100%; border-collapse: collapse; font-size: clamp(0.95rem, 1.25vw, 1.3rem); }
+.tbl th { text-align: left; font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding: 0.4rem 0.6rem; border-bottom: 1.5px solid var(--ink); }
+.tbl td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); }
+.tbl td.num { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.tbl tr.hi td { color: var(--pink); font-weight: 800; }
+
+/* Chips */
+.chip { display: inline-block; font-family: var(--font-mono); font-size: clamp(0.7rem, 0.85vw, 0.9rem); padding: 0.25em 0.7em; border: 1.2px solid var(--ink); border-radius: 999px; margin: 0 0.35rem 0.45rem 0; }
+.chip.pink { border-color: var(--pink); color: var(--pink); }
+
+/* Book mock */
+.book { width: clamp(13rem, 19vw, 21rem); aspect-ratio: 2 / 3; background: var(--ink); color: #fff; border-radius: 6px 14px 14px 6px; padding: 1.8rem 1.6rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 18px 22px 0 rgba(232,0,106,0.9), 0 30px 60px rgba(0,0,0,0.18); position: relative; }
+.book::before { content: ""; position: absolute; left: 0.8rem; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,0.15); }
+.book .bt { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.7rem, 2.5vw, 2.7rem); line-height: 0.95; text-transform: uppercase; }
+.book .bs { font-weight: 600; font-size: clamp(0.9rem, 1.1vw, 1.15rem); opacity: 0.85; margin-top: 0.6rem; }
+.book .ba { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: #ff5fa2; }
+
+/* Cost-at-scale table */
+.scale-tbl { width: 100%; border-collapse: separate; border-spacing: 0; background: #fff; border: 1.5px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: 0 6px 28px rgba(10,10,10,0.06); }
+.scale-tbl th { font-family: var(--font-mono); font-size: clamp(0.72rem, 0.9vw, 0.95rem); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 700; text-align: right; padding: 1.1rem 1.8rem; border-bottom: 1.5px solid var(--line); }
+.scale-tbl th:first-child, .scale-tbl td:first-child { text-align: left; }
+.scale-tbl td { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.4rem, 2.3vw, 2.5rem); text-align: right; padding: 1rem 1.8rem; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.scale-tbl td:first-child { font-weight: 700; font-size: clamp(1.05rem, 1.5vw, 1.55rem); }
+.scale-tbl tr:last-child td { border-bottom: none; }
+.scale-tbl .jev { color: var(--pink); background: rgba(232,0,106,0.05); }
+.scale-callout { margin-top: 1.4rem; background: var(--ink); color: #fff; border-radius: 14px; padding: 1.1rem 1.6rem; text-align: center; font-weight: 800; font-size: clamp(1.1rem, 1.7vw, 1.8rem); }
+
+/* Embedded n8n workflow: download / copy buttons */
+.wf-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin: 1.3rem 0 1.4rem; }
+.wf-btn { font-family: var(--font-mono); font-size: clamp(0.78rem, 0.95vw, 1rem); font-weight: 700; padding: 0.65em 1.1em; border-radius: 999px; border: 1.5px solid var(--pink); background: var(--pink); color: #fff; cursor: pointer; transition: transform 0.15s var(--ease-out), box-shadow 0.15s; }
+.wf-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(232,0,106,0.25); }
+.wf-btn.ghost { background: #fff; color: var(--pink); }
+.wf-btn:focus-visible { outline: 3px solid rgba(232,0,106,0.35); outline-offset: 2px; }
+@media print { .wf-actions { display: none; } }
+
+/* Display text that must stay on one line inside a half-width column */
+.t-display.fit { font-size: clamp(2.6rem, 5.4vw, 6.2rem); white-space: nowrap; }
+/* Big stat numbers */
+.stat { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.4rem, 4.6vw, 5.2rem); line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+
+/* Numbered list for agenda */
+.ag-row { display: grid; grid-template-columns: 3.2rem 1fr auto; align-items: baseline; gap: 0.8rem; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: clamp(1.05rem, 1.5vw, 1.55rem); }
+.ag-row .no { font-family: var(--font-display); font-weight: 900; color: var(--pink); }
+.ag-row .min { font-family: var(--font-mono); font-size: 0.7em; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="counter" id="counter">1 / 1</div>
+<button class="help-toggle" id="helpToggle" title="Atalhos">?</button>
+<div class="help-panel" id="helpPanel">
+  <div><kbd>→</kbd> / <kbd>Espaço</kbd>  próximo</div>
+  <div><kbd>←</kbd>  anterior</div>
+  <div><kbd>Home</kbd> / <kbd>End</kbd>  início / fim</div>
+  <div><kbd>1</kbd>…<kbd>9</kbd>  ir para slide N</div>
+  <div><kbd>F</kbd>  tela cheia</div>
+  <div><kbd>P</kbd>  imprimir (PDF)</div>
+  <div><kbd>?</kbd>  esta ajuda</div>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- ===================== 01 · COVER ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; flex-direction:column; justify-content:center; width:100%; max-width:1500px; margin:auto;">
+      <div class="pill anim-zoom" style="--i:0; align-self:flex-start; margin-bottom:2.5rem;">
+        <span class="burst"></span> Mastermind Flowgrammers
+      </div>
+      <h1 class="t-display anim-fly-up" style="--i:1;">
+        Jev: a IA que<br/><span class="hl-pink">decide</span>
+      </h1>
+      <p class="t-h2 anim-fly-up" style="--i:2; margin-top:1.6rem; font-weight:600; text-transform:none;">
+        Sistema 1 para software — de Kahneman<br/>ao Claude Code e ao n8n
+      </p>
+      <p class="t-body-lg anim-fade muted" style="--i:4; margin-top:2.5rem;">
+        Ric Neves · aula de 60 min · Mastermind
+      </p>
+    </div>
+    <div class="anim-pulse" style="position:absolute; right:7vw; top:50%; margin-top:-17vh; width:34vh; height:34vh;">
+      <div class="burst" style="width:100%; height:100%;"></div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 02 · AGENDA ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.8;">
+        <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none;">
+          O mapa dos<br/><span class="t-pink">60 minutos</span>
+        </h2>
+        <p class="t-body anim-fade muted" style="--i:2; margin-top:1.5rem;">Teoria → produto → números →<br/>mão na massa.</p>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1.4;">
+        <div class="ag-row anim-fly-left" style="--i:1;"><span class="no">01</span><span>Kahneman: Sistema 1 × Sistema 2</span><span class="min">8 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:2;"><span class="no">02</span><span>Jev: o modelo que não gera texto</span><span class="min">8 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:3;"><span class="no">03</span><span>Choice, Score e Noul</span><span class="min">8 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:4;"><span class="no">04</span><span>Desempenho e custo</span><span class="min">8 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:5;"><span class="no">05</span><span>Caso: browser agent em 7 segundos</span><span class="min">5 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:6;"><span class="no">06</span><span>Jev no Claude Code</span><span class="min">8 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:7;"><span class="no">07</span><span>Jev no n8n + benchmark ao vivo</span><span class="min">11 min</span></div>
+        <div class="ag-row anim-fly-left" style="--i:8;"><span class="no">08</span><span>Quando não usar + desafio</span><span class="min">4 min</span></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 03 · STATEMENT ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> A tese da aula</div>
+    <div style="margin:auto; text-align:center; max-width:1400px;">
+      <p class="t-h2 anim-fly-up" style="--i:0; text-transform:none; font-weight:800;">
+        A maioria das chamadas de IA<br/>em produção não pede um texto.<br/>
+        Pede uma <span class="hl-pink">decisão</span>.
+      </p>
+      <p class="t-body-lg anim-fly-up muted" style="--i:2; margin-top:3rem;">
+        E a gente segue pagando um modelo de raciocínio — lento e caro —<br/>
+        pra escolher entre quatro opções.
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 04 · PARTE 1 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 1</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Duas formas<br/>de <span class="t-pink">pensar</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          Antes do modelo, o modelo mental: <span class="t-pink"><strong>Daniel Kahneman</strong></span> — psicólogo, Nobel de Economia em 2002.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 05 · O LIVRO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> A referência</div>
+    <div style="display:flex; align-items:center; gap:5rem; width:100%; max-width:1450px; margin:auto;">
+      <div class="anim-zoom" style="--i:0; flex:0 0 auto;">
+        <div class="book">
+          <div>
+            <div class="bt">Rápido<br/>e devagar</div>
+            <div class="bs">Duas formas de pensar</div>
+          </div>
+          <div class="ba">Daniel Kahneman</div>
+        </div>
+      </div>
+      <div style="flex:1;">
+        <p class="src anim-fade" style="--i:1; margin-bottom:0.8rem;">THINKING, FAST AND SLOW · 2011 · ED. BRASILEIRA: OBJETIVA, 2012</p>
+        <h2 class="t-h2 anim-fly-up" style="--i:1; text-transform:none; margin-bottom:1.8rem;">
+          A mente como <span class="hl-black">dois personagens</span>
+        </h2>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Sistema 1</strong> roda o tempo todo, no automático, e resolve a maior parte do nosso dia.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Sistema 2</strong> é o esforço consciente: caro, lento — e por isso "preguiçoso". Só entra quando é chamado.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div>Boa parte dos nossos erros nasce do S1 respondendo onde o S2 deveria ter assumido — os <strong>vieses</strong>.</div></div>
+        <p class="src anim-fade" style="--i:5; margin-top:1rem;">Paráfrase das ideias centrais do livro.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 06 · S1 vs S2 ===================== -->
+  <section class="slide slide-light">
+    <div style="margin:auto; width:100%; max-width:1450px;">
+      <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none; text-align:center; margin-bottom:2.5rem;">
+        Sistema 1 <span class="t-pink">×</span> Sistema 2
+      </h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+        <div class="anim-fly-right" style="--i:1;">
+          <div class="panel panel-b">
+            <p class="t-h3 t-pink" style="text-transform:uppercase;">Sistema 1</p>
+            <p class="t-body" style="margin-top:0.4rem;"><strong>Rápido · automático · sem esforço · intuitivo</strong></p>
+            <ul>
+              <li>Quanto é 2 + 2</li>
+              <li>Perceber hostilidade num tom de voz</li>
+              <li>Ler uma placa na sua língua</li>
+              <li>Dirigir numa estrada vazia</li>
+            </ul>
+          </div>
+        </div>
+        <div class="anim-fly-left" style="--i:2;">
+          <div class="panel panel-a">
+            <p class="t-h3" style="text-transform:uppercase;">Sistema 2</p>
+            <p class="t-body" style="margin-top:0.4rem;"><strong>Lento · deliberado · esforçado · lógico</strong></p>
+            <ul>
+              <li>Quanto é 17 × 24</li>
+              <li>Estacionar numa vaga apertada</li>
+              <li>Preencher a declaração do IR</li>
+              <li>Comparar dois contratos cláusula a cláusula</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 07 · KEY POINT ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> O que importa pra arquitetura</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-display fit">S1 decide.</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-white t-display fit">S2 audita.</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          O cérebro não pensa devagar o tempo todo.<br/>Seu software também não deveria.
+        </p>
+      </div>
+      <div style="flex:1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Atenção é escassa</strong> — o S2 é economizado por design.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>S1 é rápido</strong> porque responde dentro de padrões conhecidos.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Quando o padrão não fecha</strong> — surpresa, risco, conta difícil — o S2 assume.</div></div>
+        <p class="t-body anim-fly-up" style="--i:5; margin-top:1.5rem;">
+          <strong>Síntese.</strong> LLM com reasoning é um Sistema 2 artificial. O desperdício está em usá-lo pra trabalho de Sistema 1.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 08 · PIRÂMIDE DE DECISÃO ===================== -->
+  <section class="slide slide-gray">
+    <div class="slide-header"><span class="burst"></span> Kahneman aplicado</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <div style="display:flex; align-items:baseline; gap:1.5rem; margin-bottom:0.8rem; flex-wrap:wrap;">
+        <h2 class="t-h1 anim-fly-right" style="--i:0;">A PIRÂMIDE</h2>
+        <span class="hl-pink t-h1 anim-zoom" style="--i:1;">DE DECISÃO</span>
+      </div>
+      <p class="t-body-lg anim-fly-up" style="--i:2; margin-bottom:2.2rem;">
+        Regra: cada decisão no <strong>nível mais barato que resolve</strong> — e sobe só quando precisa.
+      </p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.2rem 2rem;">
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:3;">REFLEXO — if · regex · switch</div>
+          <p class="t-body anim-fade" style="--i:4; padding:0.7rem 1rem 0;">Grátis e instantâneo. Quebra com uma vírgula fora do lugar.</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:3; background:var(--pink);">SISTEMA 1 — Jev</div>
+          <p class="t-body anim-fade" style="--i:4; padding:0.7rem 1rem 0;">Escolhe entre opções que <strong>você</strong> definiu, em milissegundos, tolerando variação no input.</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:5;">SISTEMA 2 — LLM (Claude, GPT)</div>
+          <p class="t-body anim-fade" style="--i:6; padding:0.7rem 1rem 0;">Raciocina, planeja, escreve e explica. Custa segundos e dólares.</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:5;">HUMANO</div>
+          <p class="t-body anim-fade" style="--i:6; padding:0.7rem 1rem 0;">Baixa confiança, alto risco ou ação irreversível. Sempre tem a última palavra.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 09 · PARTE 2 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 2</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Jev: o modelo<br/>que <span class="t-pink">não gera</span><br/>texto
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          Lançado pela <span class="t-pink"><strong>TypeSafe</strong></span> em setembro de 2026: recebe estado + perguntas tipadas e devolve <strong>decisões com probabilidade</strong>.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 10 · FICHA TÉCNICA ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Ficha técnica</div>
+    <div style="display:flex; align-items:center; gap:4rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <h2 class="t-display anim-fly-right" style="--i:0; color:var(--bg-dark);">JEV</h2>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-white t-h1">SYSTEM ONE</span></div>
+        <p class="t-body-lg anim-fly-up" style="--i:2; margin-top:2rem;">
+          O nome homenageia <strong>William Stanley Jevons</strong>: quando o custo de algo despenca, o consumo explode.
+        </p>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <p class="anim-fly-left t-body-lg" style="--i:2; margin-bottom:0.8rem;"><strong style="color:var(--bg-dark);">Entrada</strong> — <em>state</em> (texto, JSON ou lista) + <em>questions</em> tipadas</p>
+        <p class="anim-fly-left t-body-lg" style="--i:3; margin-bottom:0.8rem;"><strong style="color:var(--bg-dark);">Saída</strong> — JSON validado: escolha, probabilidades e confiança</p>
+        <p class="anim-fly-left t-body-lg" style="--i:4; margin-bottom:0.8rem;"><strong style="color:var(--bg-dark);">Endpoint</strong> — <span class="t-mono" style="font-size:0.8em;">POST api.typesafe.ai/v1/systemone</span> · modelo <span class="t-mono" style="font-size:0.8em;">jev-latest</span></p>
+        <p class="anim-fly-left t-body-lg" style="--i:5; margin-bottom:0.8rem;"><strong style="color:var(--bg-dark);">Treino</strong> — RLCD: reforço para decisões <em>calibradas</em>, no lugar de RLHF</p>
+        <p class="anim-fly-left t-body-lg" style="--i:6;"><strong style="color:var(--bg-dark);">Não faz</strong> — prosa, código, explicação, imagem, áudio</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 11 · LLM vs JEV ===================== -->
+  <section class="slide slide-light">
+    <div style="margin:auto; width:100%; max-width:1450px;">
+      <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none; text-align:center; margin-bottom:2.3rem;">
+        Feito pra criar <span class="t-pink">×</span> feito pra <span class="hl-pink">decidir</span>
+      </h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+        <div class="anim-fly-right" style="--i:1;">
+          <div class="panel panel-a">
+            <p class="t-h3" style="text-transform:uppercase;">LLM generativo</p>
+            <p class="t-body muted" style="margin-top:0.3rem;">Forçado a decidir.</p>
+            <ul>
+              <li>JSON "na marra": structured output + parser + retry</li>
+              <li>Cada chamada pode variar — e o provedor troca o modelo</li>
+              <li>Paga input <strong>e</strong> output; leva segundos</li>
+              <li>Você usa uma fração do que está pagando</li>
+            </ul>
+          </div>
+        </div>
+        <div class="anim-fly-left" style="--i:2;">
+          <div class="panel panel-b">
+            <p class="t-h3 t-pink" style="text-transform:uppercase;">Jev</p>
+            <p class="t-body muted" style="margin-top:0.3rem;">Decidir é o produto.</p>
+            <ul>
+              <li><strong>Só escolhe</strong> dentro do que você definiu</li>
+              <li><strong>JSON válido de fábrica</strong>, sem output parser</li>
+              <li><strong>Consistente</strong>: input parecido, decisão parecida</li>
+              <li><strong>Output grátis</strong>; responde em milissegundos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 12 · CONSISTÊNCIA ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> O ponto que mais importa</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-h1">CONSISTÊNCIA</span></div>
+        <p class="t-h3 anim-fade" style="--i:1; margin:0.8rem 0; text-transform:none;">vale mais que</p>
+        <div class="anim-zoom" style="--i:2;"><span class="hl-black t-h1">DETERMINISMO</span></div>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Determinismo</strong> — mesma entrada, mesma saída. Uma palavra diferente e tudo pode virar.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Consistência</strong> — decisões semelhantes mesmo quando o input muda uma palavra ou outra.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div>Mais robusto que regex e cascata de <em>ifs</em>; mais estável que um LLM que "cria" a cada chamada.</div></div>
+        <p class="t-body anim-fly-up" style="--i:5; margin-top:1.5rem;">
+          <strong>Na prática:</strong> 100 chamadas não dão 100 respostas idênticas — mas dão respostas muito próximas.
+        </p>
+        <p class="src anim-fade" style="--i:6; margin-top:1rem;">Fonte: FAQ da TypeSafe (set/2026)</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 13 · CONSUMO POR SOFTWARE ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none;">
+          Quem lê<br/>a resposta<br/>é o <span class="hl-pink">software</span>
+        </h2>
+        <p class="t-body-lg anim-fade muted" style="--i:1; margin-top:1.8rem;">Nenhum humano precisa ler o output. Ele é feito pra ser consumido.</p>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1.2;">
+        <div class="card compact anim-fly-left" style="--i:2; margin-bottom:0.9rem;"><span class="tag">Switch / IF</span><br/>A probabilidade vira rota no n8n ou no seu backend.</div>
+        <div class="card compact anim-fly-left" style="--i:3; margin-bottom:0.9rem;"><span class="tag">Banco de dados</span><br/>Cada decisão vira linha no Postgres/Mongo — com série histórica (risco de evasão do aluno: 12% em agosto, 71% em setembro).</div>
+        <div class="card compact anim-fly-left" style="--i:4; margin-bottom:0.9rem;"><span class="tag">Regra de negócio</span><br/>Limiar de confiança como parâmetro: acima de X, executa sozinho.</div>
+        <div class="card compact anim-fly-left" style="--i:5;"><span class="tag">Outro agente</span><br/>Guardrail barato antes (ou depois) de um LLM agir.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 14 · PARTE 3 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 3</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Choice,<br/>Score e<br/><span class="t-pink">Noul</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          Toda pergunta vira um de <strong>três tipos</strong> — e todos voltam com <span class="t-pink"><strong>probabilidade</strong></span>.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 15 · AS 3 PRIMITIVAS ===================== -->
+  <section class="slide slide-gray">
+    <div class="slide-header"><span class="burst"></span> Tipos de resposta</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <div style="display:flex; align-items:baseline; gap:1.5rem; margin-bottom:2.2rem; flex-wrap:wrap;">
+        <h2 class="t-h1 anim-fly-right" style="--i:0;">AS 3 PERGUNTAS</h2>
+        <span class="hl-pink t-h1 anim-zoom" style="--i:1;">DO JEV</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1.6rem;">
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:2;">CHOICE — múltipla escolha</div>
+          <p class="t-body anim-fade" style="--i:3; padding:0.9rem 0.6rem 0;">Escolhe <strong>1 entre até 255 opções</strong> descritas por critérios. Devolve a escolha, a probabilidade de cada opção e a confiança.</p>
+          <p class="src anim-fade" style="--i:4; padding:0.6rem 0.6rem 0;">ex.: suporte técnico · acesso · comercial</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:3;">SCORE — nota em escala</div>
+          <p class="t-body anim-fade" style="--i:4; padding:0.9rem 0.6rem 0;">Encaixa o estado numa <strong>escala de 2 a 10 níveis</strong> que você descreve. Devolve a nota ponderada (ex.: 3,7) e a distribuição.</p>
+          <p class="src anim-fade" style="--i:5; padding:0.6rem 0.6rem 0;">ex.: urgência do atendimento de 0 a 4</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:4; background:var(--pink);">NOUL — sim/não com grau</div>
+          <p class="t-body anim-fade" style="--i:5; padding:0.9rem 0.6rem 0;">Probabilidade <strong>de 0 a 1</strong> de uma afirmação ser verdadeira. Um booleano que diz o quanto tem certeza.</p>
+          <p class="src anim-fade" style="--i:6; padding:0.6rem 0.6rem 0;">ex.: "o aluno quer pedir reembolso?"</p>
+        </div>
+      </div>
+      <p class="t-body anim-fly-up" style="--i:7; margin-top:2rem; text-align:center;">
+        <strong>Fan-out:</strong> várias perguntas na <span class="t-pink"><strong>mesma chamada</strong></span>, sobre o mesmo estado — e uma não contamina a outra.
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 16 · CASO FLOWGRAMMERS ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> O caso da aula</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:0.6rem;">
+        Caso Flowgrammers: a <span class="t-pink">caixa de entrada</span> dos alunos
+      </h2>
+      <p class="t-body anim-fade muted" style="--i:1; margin-bottom:1.8rem;">WhatsApp, comunidade e e-mail chegam misturados. Hoje alguém lê tudo e decide na mão: é suporte? acesso? venda? alguém prestes a pedir reembolso?</p>
+      <div class="anim-fly-up" style="--i:2; display:grid; grid-template-columns:repeat(4,1fr); gap:1rem;">
+        <div class="chat-card" style="max-width:none; color:#fff;"><div class="chat-name">~ Mariana · n8n Expert Program</div>Atualizei o n8n do cliente e o workflow de cobrança parou. Tá em produção!<div class="chat-time">WhatsApp</div></div>
+        <div class="chat-card" style="max-width:none; color:#fff;"><div class="chat-name">~ João · Claude Code Engineering</div>Terminei o módulo 4 e o certificado não aparece na minha área.<div class="chat-time">Comunidade</div></div>
+        <div class="chat-card" style="max-width:none; color:#fff;"><div class="chat-name">~ Coordenação · seguradora</div>Vocês fazem turma fechada de Claude Code pra 15 analistas?<div class="chat-time">WhatsApp</div></div>
+        <div class="chat-card" style="max-width:none; color:#fff;"><div class="chat-name">~ Paulo · Harness Engineering</div>Terceira live que cai no meio. Tô pensando em pedir reembolso.<div class="chat-time">E-mail</div></div>
+      </div>
+      <div class="arrow-down anim-fade" style="--i:3;">↓</div>
+      <div class="flow anim-fly-up" style="--i:4;">
+        <div class="node dark"><span class="k">Jev · 1 chamada</span>4 perguntas sobre a mesma conversa</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">Choice · rota</span>suporte técnico, acesso, comercial, conteúdo</div>
+        <div class="node"><span class="k">Score · urgência</span>de nenhuma (0) a crítica (4)</div>
+        <div class="node"><span class="k">Noul · evasão</span>quer cancelar ou pedir reembolso?</div>
+        <div class="node"><span class="k">Noul · compra</span>sinal consistente de intenção de compra?</div>
+      </div>
+      <p class="src anim-fade" style="--i:5; margin-top:1.3rem;">Mensagens fictícias: são as mesmas do workflow n8n que vocês importam na Parte 7.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 17 · REQUEST ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> A requisição</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1550px; margin:auto;">
+      <div style="flex:0.6;">
+        <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none;">
+          Uma chamada,<br/><span class="t-pink">quatro</span> decisões
+        </h2>
+        <p class="t-body anim-fade" style="--i:1; margin-top:1.4rem;">O estado é a conversa do aluno — sem e-mail, sem CPF. As perguntas são as mesmas do workflow da aula.</p>
+        <p class="src anim-fade" style="--i:2; margin-top:1.2rem;">Shape simplificado do HTTP. Confira os campos na doc da TypeSafe antes de ir pra produção.</p>
+      </div>
+      <div class="terminal code xs anim-zoom" style="--i:1; flex:1.4;"><span class="cmd">POST https://api.typesafe.ai/v1/systemone</span>
+<span class="c">Authorization: Bearer $TYPESAFE_API_KEY</span>
+
+{
+  "model": "jev-latest",
+  "state": { "canal": "whatsapp", "produto": "n8n Expert Program",
+             "mensagens": [ { "de": "aluno", "texto": <span class="s">"Atualizei o n8n do cliente e o workflow…"</span> } ] },
+  "questions": {
+    "rota": {
+      "type": <span class="s">"choice"</span>,
+      "instructions": <span class="s">"Para qual fila da Flowgrammers esta conversa vai?"</span>,
+      "criteria": {
+        "suporte_tecnico":   <span class="s">"erro técnico em n8n, agentes, código ou infra"</span>,
+        "acesso_plataforma": <span class="s">"login, aulas, certificado, live"</span>,
+        "comercial":         <span class="s">"compra, upgrade, turma para empresa"</span>,
+        "conteudo":          <span class="s">"sugestão ou dúvida conceitual"</span>,
+        "indefinido":        <span class="s">"não dá pra decidir"</span>
+      }
+    },
+    "urgencia":        { "type": <span class="s">"score"</span>, "instructions": <span class="s">"Urgência do atendimento?"</span>,
+                         "criteria": [<span class="s">"nenhuma"</span>, <span class="s">"baixa"</span>, <span class="s">"média"</span>, <span class="s">"alta"</span>, <span class="s">"crítica"</span>] },
+    "risco_churn":     { "type": <span class="s">"noul"</span>, "instructions": <span class="s">"Quer cancelar, pedir reembolso ou abandonar?"</span> },
+    "intencao_compra": { "type": <span class="s">"noul"</span>, "instructions": <span class="s">"Sinais consistentes de intenção de compra?"</span> }
+  }
+}</div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 18 · RESPONSE ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> A resposta</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1550px; margin:auto;">
+      <div class="terminal code anim-zoom" style="--i:0; flex:1.25;">{
+  "answers": {
+    "rota": {
+      "choice": <span class="s">"suporte_tecnico"</span>,
+      "confidence": <span class="n">0.89</span>,   <span class="c">// (5 × 0.91 − 1) / 4</span>
+      "probabilities": { "suporte_tecnico": <span class="n">0.91</span>, … }
+    },
+    "urgencia": {
+      "score": <span class="n">3.7</span>,          <span class="c">// escala 0–4: crítica</span>
+      "probabilities": { … }
+    },
+    "risco_churn":     { "noul": <span class="n">0.08</span> },
+    "intencao_compra": { "noul": <span class="n">0.03</span> }
+  },
+  "model": <span class="s">"jev-…"</span>,
+  "usage": { "input_tokens": … }
+}</div>
+      <div style="flex:0.8;">
+        <h2 class="t-h2 anim-fly-up" style="--i:1; text-transform:none;">
+          O que volta<br/>é <span class="hl-black">mastigado</span>
+        </h2>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2; margin-top:1.6rem;"><div><strong>Mensagem da Mariana</strong> (valores ilustrativos): 0,89 ≥ 0,85, vai sozinha pra fila de suporte técnico como <strong>P1</strong>.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Confiança</strong> mede o quão "pontuda" é a distribuição: <span class="t-mono" style="font-size:0.85em;">(n·p<sub>max</sub> − 1)/(n − 1)</span>.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Noul</strong> não tem campo de confiança — o valor já é a probabilidade.</div></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 18 · THRESHOLD ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Do número à ação</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-display fit">CONFIANÇA</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-white t-display fit">VIRA REGRA</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          Quem define o limiar é o negócio — não o modelo.
+        </p>
+      </div>
+      <div style="flex:1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>≥ 0,85</strong> — executa sozinho: tag, rota, card no pipeline.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>0,60 a 0,85</strong> — sobe pro Sistema 2: um LLM decide ou escreve.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>&lt; 0,60</strong> — fila humana.</div></div>
+        <p class="t-body anim-fly-up" style="--i:5; margin-top:1.5rem;">
+          <strong>Atenção:</strong> calibração é propriedade da população, não garantia por chamada. Os limiares acima são ponto de partida — ajuste com dados rotulados seus.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 20 · PARTE 4 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 4</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Desempenho<br/>e <span class="t-pink">custo</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          Quando a decisão custa <span class="t-pink"><strong>fração de centavo</strong></span> e sai em milissegundos, ela <strong>muda de lugar</strong> na arquitetura.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 21 · STATS PREÇO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Preço de lista</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; text-align:center; margin-bottom:3rem;">
+        A conta é <span class="t-pink">diferente</span>
+      </h2>
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:3rem; text-align:center;">
+        <div class="anim-zoom" style="--i:1;">
+          <div class="stat t-pink">US$ 0,042</div>
+          <p class="t-body-lg" style="margin-top:0.6rem;">por <strong>1 milhão de tokens</strong> de entrada</p>
+        </div>
+        <div class="anim-zoom" style="--i:2;">
+          <div class="stat">US$ 0</div>
+          <p class="t-body-lg" style="margin-top:0.6rem;"><strong>saída</strong> não é cobrada</p>
+        </div>
+        <div class="anim-zoom" style="--i:3;">
+          <div class="stat t-pink">70–500 ms</div>
+          <p class="t-body-lg" style="margin-top:0.6rem;">latência <strong>ponta a ponta</strong></p>
+        </div>
+      </div>
+      <p class="src anim-fade" style="--i:5; text-align:center; margin-top:3rem;">Valores declarados pela TypeSafe em set/2026. Preço muda — confira antes de orçar.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 22 · CUSTO COMPARADO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Conta de guardanapo, preço de lista</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:0.5rem;">
+        1.000 triagens de aluno por <span class="hl-pink">~US$ 0,11</span>
+      </h2>
+      <p class="t-body anim-fade muted" style="--i:1; margin-bottom:2.2rem;">Premissa: 2.500 tokens de entrada por triagem (contexto + 10 últimas mensagens + 4 perguntas) e 150 de saída no LLM.</p>
+      <div style="display:flex; gap:4rem; align-items:center;">
+        <div style="flex:1.35;">
+          <div class="bar-row anim-fly-right" style="--i:2;"><div class="bar-label">Jev<small>TypeSafe · só entrada</small></div><div class="bar-track"><div class="bar-fill pink" style="width:3.2%;"></div></div><div class="bar-val t-pink">~US$ 0,11</div></div>
+          <div class="bar-row anim-fly-right" style="--i:3;"><div class="bar-label">GPT-4.1 mini<small>o "barato" de sempre</small></div><div class="bar-track"><div class="bar-fill" style="width:38.2%;"></div></div><div class="bar-val">~US$ 1,24</div></div>
+          <div class="bar-row anim-fly-right" style="--i:4;"><div class="bar-label">Claude Haiku 4.5<small>o S2 mais leve</small></div><div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div><div class="bar-val">~US$ 3,25</div></div>
+        </div>
+        <div style="flex:0.9;">
+          <table class="tbl anim-fly-left" style="--i:5;">
+            <tr><th>Triagens/mês</th><th style="text-align:right;">Jev</th><th style="text-align:right;">4.1 mini</th><th style="text-align:right;">Haiku 4.5</th></tr>
+            <tr><td>10 mil</td><td class="num t-pink">~US$ 1</td><td class="num">~US$ 12</td><td class="num">~US$ 33</td></tr>
+            <tr><td>100 mil</td><td class="num t-pink">~US$ 11</td><td class="num">~US$ 124</td><td class="num">~US$ 325</td></tr>
+          </table>
+          <p class="t-body anim-fade" style="--i:6; margin-top:1.4rem;">Cache e batch baixam a conta do LLM, mas <strong>não mudam a ordem de grandeza</strong>. O Claude fica pro que ele faz melhor: escrever a resposta.</p>
+        </div>
+      </div>
+      <p class="src anim-fade" style="--i:7; margin-top:1.8rem;">Preços de lista (out/2026): Jev US$ 0,042/M entrada, saída grátis · GPT-4.1 mini US$ 0,40/1,60 por M (OpenRouter) · Claude Haiku 4.5 US$ 1/5 por M (Anthropic). Tokenizers contam diferente: na Parte 7 a gente mede com o benchmark.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 22b · CUSTO EM ESCALA ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Cenário pesado · preço de lista</div>
+    <div style="margin:auto; width:100%; max-width:1450px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:0.4rem;">
+        O custo aparece <span class="hl-pink">na escala</span>
+      </h2>
+      <p class="t-body anim-fade muted" style="--i:1; margin-bottom:1.6rem;">Cada análise lê o histórico inteiro de um aluno: mensagens, e-mails e eventos, cerca de 26 mil tokens.</p>
+      <table class="scale-tbl anim-fly-up" style="--i:2;">
+        <tr><th>Volume</th><th class="jev">Jev</th><th>Claude Haiku 4.5</th><th>GPT-4.1 mini</th></tr>
+        <tr><td>1.000 análises</td><td class="jev">US$ 1,12</td><td>US$ 22,44</td><td>US$ 8,70</td></tr>
+        <tr><td>10.000 análises</td><td class="jev">US$ 11,17</td><td>US$ 224,40</td><td>US$ 87,01</td></tr>
+        <tr><td>100.000 análises</td><td class="jev">US$ 111,74</td><td>US$ 2.244,04</td><td>US$ 870,12</td></tr>
+      </table>
+      <div class="scale-callout anim-zoom" style="--i:4;">
+        Em 100 mil análises, o Jev economiza <span class="hl-pink">US$ 2.132</span> contra o Claude Haiku 4.5 e US$ 758 contra o GPT-4.1 mini.
+      </div>
+      <p class="src anim-fade" style="--i:5; margin-top:1.1rem;">Premissas: Jev ≈ 26,6 mil tokens de entrada (saída grátis) · LLMs ≈ 19 mil de entrada + ≈ 690 de saída, já que o Jev conta ~40% mais tokens · preços de lista por 1M tokens: Jev US$ 0,042 · Haiku 4.5 US$ 1/5 · GPT-4.1 mini US$ 0,40/1,60. Tokenizers contam diferente: confirme no benchmark da Parte 7.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 23 · VELOCIDADE ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Por que velocidade importa</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-h1">SEGUNDOS</span></div>
+        <p class="t-h3 anim-fade" style="--i:1; margin:0.8rem 0; text-transform:none;">viram</p>
+        <div class="anim-zoom" style="--i:2;"><span class="hl-black t-h1">MILISSEGUNDOS</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          E a decisão sai do batch noturno pro fluxo em tempo real.
+        </p>
+      </div>
+      <div style="flex:1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div>LLM com reasoning leva <strong>segundos</strong> por item. O Jev declara 70–500 ms — e mediu <strong>178 ms</strong> de mediana no jev-ultrafast.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Fila de 20 mil contatos</strong>: de dias pra horas — e menos timeout.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div>Dá pra decidir <strong>dentro do request</strong> do usuário, não só em segundo plano.</div></div>
+        <p class="t-body anim-fly-up" style="--i:5; margin-top:1.5rem;">
+          <strong>Ceticismo saudável:</strong> a TypeSafe declara 193,6× mais rápido e 444,6× mais barato que modelos de fronteira em workflows — benchmark interno, sem validação de terceiros.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 24 · JEVONS ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> O paradoxo de Jevons</div>
+    <div style="margin:auto; text-align:center; max-width:1400px;">
+      <p class="t-h2 anim-fly-up" style="--i:0; text-transform:none; font-weight:800;">
+        Quando decidir fica barato,<br/>você para de <span class="hl-pink">racionar inteligência</span>.
+      </p>
+      <p class="t-body-lg anim-fly-up muted" style="--i:2; margin-top:2.6rem;">
+        O custo era o filtro: classificava-se uma mensagem em cada cem.<br/>
+        Agora dá pra classificar todas — e é aí que o volume (e a conta) explode.
+      </p>
+      <p class="t-body-lg anim-fly-up" style="--i:3; margin-top:1.6rem;">
+        <strong>Planeje o volume, não só o preço unitário.</strong>
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 25 · PARTE 5 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 5</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Browser agent<br/>em <span class="t-pink">7 segundos</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          Repo <span class="t-pink"><strong>browser-use/jev-ultrafast</strong></span>: o Jev escolhe ação e elemento; um LLM pequeno só escreve quando precisa digitar.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 26 · LOOP ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Uma volta do loop</div>
+    <div style="margin:auto; width:100%; max-width:1550px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:1.8rem;">
+        S1 <span class="t-pink">escolhe</span>. S2 <span class="hl-black">escreve</span> só quando precisa.
+      </h2>
+      <div class="flow anim-fly-up" style="--i:1;">
+        <div class="node"><span class="k">1 · Observa</span>Snapshot atômico do DOM numa única chamada ao browser</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">2 · Indexa</span><span class="t-mono" style="font-size:0.78em; line-height:1.5;">[1] button Round trip<br/>[2] combobox Where from?<br/>[3] combobox Where to?</span></div>
+        <div class="arrow">→</div>
+        <div class="node dark"><span class="k">3 · Jev · 1 request</span>operation<br/>+ click_target<br/>+ type_text_target<br/>+ select_target</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">4 · Executa</span>Só o alvo da operação escolhida; os outros são descartados</div>
+        <div class="arrow">→</div>
+        <div class="node pink"><span class="k">5 · Se TYPE_TEXT</span>Mercury 2.5 devolve <span class="t-mono" style="font-size:0.85em;">{"text": "Zurich"}</span></div>
+      </div>
+      <div class="anim-fade" style="--i:3; margin-top:2rem;">
+        <span class="chip pink">CLICK</span><span class="chip pink">TYPE_TEXT</span><span class="chip pink">SELECT</span><span class="chip">SCROLL_UP</span><span class="chip">SCROLL_DOWN</span><span class="chip">WAIT</span><span class="chip">DONE</span><span class="chip">BLOCKED</span>
+      </div>
+      <p class="t-body anim-fly-up" style="--i:4; margin-top:1rem;">
+        <strong>Speculative fan-out:</strong> operação e alvos perguntados em paralelo — duas decisões, <span class="t-pink"><strong>um round trip</strong></span>. Sem screenshot no loop: o modelo lê estado estruturado.
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 27 · STATS REPO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Google Flights · Zurique → Londres</div>
+    <div style="margin:auto; width:100%; max-width:1550px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; text-align:center; margin-bottom:2.8rem;">
+        Os números <span class="t-pink">do repo</span>
+      </h2>
+      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:2.4rem; text-align:center;">
+        <div class="anim-zoom" style="--i:1;">
+          <div class="stat t-pink">7,07 s</div>
+          <p class="t-body" style="margin-top:0.5rem;">tarefa completa, <strong>em 1×</strong>, com loading do Google</p>
+        </div>
+        <div class="anim-zoom" style="--i:2;">
+          <div class="stat">178 ms</div>
+          <p class="t-body" style="margin-top:0.5rem;">mediana das <strong>17 chamadas</strong> ao Jev</p>
+        </div>
+        <div class="anim-zoom" style="--i:3;">
+          <div class="stat t-pink">−25%</div>
+          <p class="t-body" style="margin-top:0.5rem;">tempo mediano: <strong>9,45 → 7,09 s</strong></p>
+        </div>
+        <div class="anim-zoom" style="--i:4;">
+          <div class="stat">−91%</div>
+          <p class="t-body" style="margin-top:0.5rem;">chamadas ao browser: <strong>1.092 → 101</strong></p>
+        </div>
+      </div>
+      <p class="t-body anim-fade" style="--i:5; text-align:center; margin-top:2.6rem;">
+        As 2 chamadas de texto custaram <strong>US$ 0,00006</strong>. Os 90.558 tokens de entrada no Jev, a preço de lista, dariam <strong>~US$ 0,004</strong> (conta nossa).
+      </p>
+      <p class="src anim-fade" style="--i:6; text-align:center; margin-top:1rem;">Fonte: docs/performance.md do repo. 3 pares de execuções, 1 tarefa, 1 perfil de browser — o próprio repo avisa que não é benchmark geral.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 28 · GUARDRAILS ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> A lição que vale pra qualquer agente</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-h1">SAÍDA DO MODELO</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-black t-h1">NÃO É COMANDO</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          O que a gente cobra em setor regulado — num repo de sete arquivos.
+        </p>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div>A saída nunca vira seletor, coordenada, shell ou JavaScript — só um <strong>índice de elemento observado</strong>.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>DONE não é prova.</strong> O resultado é verificado de forma independente.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Nunca repetir uma mutação</strong> (clique, digitação). Loga a execução antes de observar.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:5;"><div>Texto da página é <strong>dado, não instrução</strong> — defesa contra prompt injection.</div></div>
+        <p class="src anim-fade" style="--i:6; margin-top:1rem;">Fonte: AGENTS.md, README e docs/design.md do jev-ultrafast (MIT)</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 29 · PARTE 6 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 6</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Jev no<br/><span class="t-pink">Claude Code</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          O Claude é o seu <span class="t-pink"><strong>Sistema 2</strong></span>. Dê a ele um Sistema 1 pra delegar o julgamento repetitivo.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 30 · 4 CAMINHOS ===================== -->
+  <section class="slide slide-gray">
+    <div class="slide-header"><span class="burst"></span> Claude Code + Jev</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <div style="display:flex; align-items:baseline; gap:1.5rem; margin-bottom:2rem; flex-wrap:wrap;">
+        <h2 class="t-h1 anim-fly-right" style="--i:0;">4 CAMINHOS</h2>
+        <span class="hl-pink t-h1 anim-zoom" style="--i:1;">DE INTEGRAÇÃO</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.3rem 2rem;">
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:2; background:var(--pink);">1 · SKILL OFICIAL (TypeSafe)</div>
+          <p class="t-body anim-fade" style="--i:3; padding:0.7rem 1rem 0;">Ensina o Claude a escrever código que chama o Jev do jeito certo: lê a doc, agrupa perguntas numa chamada só.</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:2;">2 · MCP SERVER</div>
+          <p class="t-body anim-fade" style="--i:3; padding:0.7rem 1rem 0;">O Jev vira tool (classify, score, check). O Claude delega triagem em massa: 500 issues, 2 mil linhas de log.</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:4;">3 · HOOKS</div>
+          <p class="t-body anim-fade" style="--i:5; padding:0.7rem 1rem 0;">PreToolUse e Stop chamam o Jev como portão: o comando é arriscado? A tarefa terminou mesmo?</p>
+        </div>
+        <div>
+          <div class="card-dark anim-fly-up" style="--i:4;">4 · ROUTER DE MODELO</div>
+          <p class="t-body anim-fade" style="--i:5; padding:0.7rem 1rem 0;">Escolhe Haiku, Sonnet ou Opus por turno. <strong>Cuidado:</strong> um teste da comunidade mediu prejuízo — US$ 106,73 com router vs US$ 87,19 sem.</p>
+        </div>
+      </div>
+      <p class="src anim-fade" style="--i:6; margin-top:1.4rem;">Fontes: systemonemodels.org/integrations/claude-code · redreamality.com (Jev × Claude Code). Servidores MCP e routers listados são de comunidade.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 31 · INSTALAÇÃO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Setup em 2 minutos</div>
+    <div style="margin:auto; width:100%; max-width:1400px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:1.6rem;">
+        Instalando <span class="t-pink">skill e MCP</span>
+      </h2>
+      <div class="terminal code anim-zoom" style="--i:1; font-size:clamp(0.8rem, 1.02vw, 1.08rem); line-height:1.75;"><span class="c"># 1 · Skill oficial da TypeSafe (plugin)</span>
+<span class="cmd">$ claude plugin marketplace add typesafe-ai/skills</span>
+<span class="cmd">$ claude plugin install typesafe@typesafe-ai</span>
+
+<span class="c"># 2 · MCP de comunidade (audite o pacote antes)</span>
+<span class="cmd">$ claude mcp add jev -e TYPESAFE_API_KEY=sk-… -- npx -y @jkudish/jev-mcp</span>
+
+<span class="warn">⚠ passar a chave como argumento pode expô-la na lista de processos</span>
+<span class="warn">⚠ MCPs de comunidade não têm endosso da TypeSafe nem da Anthropic</span></div>
+      <p class="t-body anim-fly-up" style="--i:3; margin-top:1.6rem;">
+        <strong>No CLAUDE.md:</strong> "Para classificar, pontuar ou triar mais de 20 itens, use as tools <span class="t-mono" style="font-size:0.85em;">jev_*</span> em vez de raciocinar item a item."
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 32 · HOOK ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Hook PreToolUse</div>
+    <div style="display:flex; align-items:center; gap:2.6rem; width:100%; max-width:1600px; margin:auto;">
+      <div style="flex:0.55;">
+        <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none;">
+          O S1 vigia<br/>o <span class="t-pink">terminal</span>
+        </h2>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2; margin-top:1.5rem;"><div>Todo <strong>Bash</strong> passa por um Noul antes de rodar.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div>Suspeito? <strong>"ask"</strong> devolve a decisão pro humano.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Fail-open</strong> pra produtividade. Em ambiente regulado: fail-closed + allowlist.</div></div>
+      </div>
+      <div class="terminal code xs anim-zoom" style="--i:1; flex:1.45;"><span class="c">// .claude/settings.json</span>
+{ "hooks": { "PreToolUse": [ { "matcher": "Bash",
+    "hooks": [ { "type": "command", "command": "python3 .claude/hooks/jev_gate.py" } ] } ] } }
+
+<span class="c"># .claude/hooks/jev_gate.py</span>
+<span class="cmd">import</span> json, os, sys, urllib.request
+evt = json.load(sys.stdin)
+body = {"model": <span class="s">"jev-latest"</span>,
+  "state": {"command": evt["tool_input"].get("command"), "cwd": evt["cwd"]},
+  "questions": {"risco": {"type": <span class="s">"noul"</span>, "instructions":
+    <span class="s">"O comando apaga dados, mexe em produção, expõe segredo ou envia dados pra fora?"</span>}}}
+req = urllib.request.Request(<span class="s">"https://api.typesafe.ai/v1/systemone"</span>,
+  data=json.dumps(body).encode(), headers={<span class="s">"Content-Type"</span>: <span class="s">"application/json"</span>,
+  <span class="s">"Authorization"</span>: f<span class="s">"Bearer {os.environ['TYPESAFE_API_KEY']}"</span>})
+<span class="cmd">try</span>:
+    p = json.load(urllib.request.urlopen(req, timeout=<span class="n">2</span>))["answers"]["risco"]["noul"]
+<span class="cmd">except</span> Exception:
+    sys.exit(<span class="n">0</span>)                      <span class="c"># fail-open: Jev fora do ar não trava o CLI</span>
+<span class="cmd">if</span> p &gt;= <span class="n">0.7</span>:
+    print(json.dumps({"hookSpecificOutput": {"hookEventName": <span class="s">"PreToolUse"</span>,
+      "permissionDecision": <span class="s">"ask"</span>,
+      "permissionDecisionReason": f<span class="s">"Jev: risco {p:.0%}. Confirme antes de rodar."</span>}}))</div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 33 · ONDE MELHORA ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.85;">
+        <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none;">
+          Onde o S1<br/>deixa o<br/>Claude Code<br/><span class="hl-pink">melhor</span>
+        </h2>
+        <p class="t-body anim-fade" style="--i:1; margin-top:1.8rem;"><strong>Regra de bolso:</strong> Claude planeja e escreve (S2). Jev julga em volume (S1). Humano aprova o irreversível.</p>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1.2;">
+        <div class="card compact anim-fly-left" style="--i:2; margin-bottom:0.8rem;"><span class="tag">Triagem em massa · MCP</span><br/>Classificar 500 falhas de teste sem queimar o contexto do Opus item a item: é <strong>flaky</strong> ou <strong>bug real</strong>?<br/><span class="muted" style="font-size:0.88em;">Teste flaky = passa e falha com o mesmo código, sem ninguém mexer em nada. A culpa é de timing, rede ou ordem de execução, não de bug.</span></div>
+        <div class="card compact anim-fly-left" style="--i:3; margin-bottom:0.8rem;"><span class="tag">Portão de comando · PreToolUse</span><br/>Só o suspeito chega até você. O resto flui.</div>
+        <div class="card compact anim-fly-left" style="--i:4; margin-bottom:0.8rem;"><span class="tag">"Terminou mesmo?" · Stop</span><br/>Noul sobre a última mensagem: disse que concluiu sem rodar teste? Bloqueia e manda continuar.</div>
+        <div class="card compact anim-fly-left" style="--i:5;"><span class="tag">Construir produto · Skill oficial</span><br/>O Claude gera código que chama o Jev certo: perguntas em lote, limiar, fallback.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 34 · PARTE 7 ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:1;">
+        <span class="step-badge anim-zoom" style="--i:0;">PARTE 7</span>
+        <h2 class="t-h1 anim-fly-up" style="--i:1; margin-top:1.5rem; text-transform:none;">
+          Jev no<br/><span class="t-pink">n8n</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1;">
+        <p class="t-h2 anim-fly-left" style="--i:2; text-transform:none; font-weight:600;">
+          O roteador que faltava: <span class="t-pink"><strong>HTTP Request + Switch</strong></span> no lugar de AI Agent + Output Parser + retry.
+        </p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 35 · FLUXO N8N ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Arquitetura do workflow</div>
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:1.8rem;">
+        Roteamento por <span class="hl-pink">confiança</span>
+      </h2>
+      <div class="flow anim-fly-up" style="--i:1;">
+        <div class="node"><span class="k">Trigger</span>Webhook do atendimento ou as 5 mensagens de exemplo</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">Monta state</span>Minimiza dados (LGPD): id e e-mail ficam no n8n</div>
+        <div class="arrow">→</div>
+        <div class="node dark"><span class="k">Jev · System One</span>4 perguntas, 1 chamada, retry 3×</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">Valida e normaliza</span>Confere o contrato e aplica o limiar</div>
+        <div class="arrow">→</div>
+        <div class="node pink"><span class="k">Switch</span>Roteia por confiança</div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:1.4rem;">
+        <div class="anim-fly-up" style="--i:3;">
+          <div class="node" style="border-color:var(--pink);"><span class="k">≥ 0,85 · automático</span>Fila certa + labels <span class="t-mono" style="font-size:0.85em;">jev:rota</span> e prioridade</div>
+        </div>
+        <div class="anim-fly-up" style="--i:4;">
+          <div class="node"><span class="k">0,60 a 0,85 · Sistema 2</span>Claude Haiku rascunha; humano revisa e envia</div>
+        </div>
+        <div class="anim-fly-up" style="--i:5;">
+          <div class="node ghost"><span class="k">&lt; 0,60 ou erro · humano</span>Fila manual, inclusive com o Jev fora do ar</div>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:1.2rem;">
+        <div class="anim-fly-up" style="--i:6;">
+          <div class="node"><span class="k">IF · evasão ≥ 0,7</span>Alerta pro CS ligar hoje</div>
+        </div>
+        <div class="anim-fly-up" style="--i:7;">
+          <div class="node"><span class="k">IF · compra ≥ 0,7</span>Lead quente pro comercial</div>
+        </div>
+        <div class="anim-fly-up" style="--i:8;">
+          <div class="node dark"><span class="k">Log → Postgres + resposta</span>Grava a decisão e devolve tudo pro atendimento via webhook</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 36 · CONFIG N8N ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Configuração dos nós</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1550px; margin:auto;">
+      <div class="terminal code xs anim-zoom" style="--i:0; flex:1.35;"><span class="c"># Jev · System One  (HTTP Request)</span>
+Method    <span class="s">POST https://api.typesafe.ai/v1/systemone</span>
+Auth      <span class="s">Header Auth → Authorization: Bearer &lt;chave TypeSafe&gt;</span>
+Body      <span class="s">{{ JSON.stringify($json.jev_request) }}</span>
+Settings  <span class="s">Retry on Fail 3× · On Error: Continue</span>
+
+<span class="c"># Valida e normaliza  (Code, uma vez por item)</span>
+<span class="cmd">const</span> LIMIAR_AUTO = <span class="n">0.85</span>;
+<span class="cmd">const</span> LIMIAR_S2   = <span class="n">0.60</span>;
+<span class="cmd">const</span> valida = choiceValida(a.rota, ROTAS);   <span class="c">// contrato da resposta</span>
+
+<span class="cmd">let</span> faixa = <span class="s">'humano'</span>;                       <span class="c">// padrão seguro</span>
+<span class="cmd">if</span> (valida &amp;&amp; rota !== <span class="s">'indefinido'</span>) {
+  <span class="cmd">if</span> (confianca &gt;= LIMIAR_AUTO) faixa = <span class="s">'automatico'</span>;
+  <span class="cmd">else if</span> (confianca &gt;= LIMIAR_S2) faixa = <span class="s">'sistema_2'</span>;
+}
+
+<span class="c"># Roteia por confiança  (Switch)</span>
+Automático   <span class="s">faixa = automatico</span>
+Sistema 2    <span class="s">faixa = sistema_2</span>
+Humano       <span class="s">fallback</span></div>
+      <div style="flex:0.65;">
+        <h2 class="t-h2 anim-fly-up" style="--i:1; text-transform:none;">
+          Contrato,<br/>limiar e <span class="t-pink">rota</span>.
+        </h2>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2; margin-top:1.5rem;"><div>Chave do Jev numa <strong>credencial</strong> do n8n, nunca no body.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div>Erro do Jev vira item comum e <strong>cai no humano</strong>: ninguém recebe ação automática por acidente.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div>Existem nós de comunidade pro Jev. Em cliente regulado, prefira <strong>HTTP Request</strong> a pacote não auditado.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:5;"><div>Mais decisões? <strong>Mais perguntas</strong> na mesma chamada, não mais nós.</div></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 36b · MÃO NA MASSA ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Mão na massa</div>
+    <div style="display:flex; align-items:center; gap:3.5rem; width:100%; max-width:1550px; margin:auto;">
+      <div style="flex:0.85;">
+        <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; white-space:nowrap;">
+          Importe e <span class="hl-pink">rode</span>
+        </h2>
+        <div class="anim-zoom wf-actions" style="--i:1;">
+          <button class="wf-btn" type="button" data-wf-download="triagem">⬇ Baixar o workflow (.json)</button>
+          <button class="wf-btn ghost" type="button" data-wf-copy="triagem">Copiar pra colar no n8n</button>
+        </div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>1.</strong> n8n 2.41+ → Workflows → <strong>Import from File</strong>, ou copie e cole com <strong>Ctrl+V</strong> direto no canvas</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>2.</strong> Três credenciais: <strong>Header Auth</strong> (<span class="t-mono" style="font-size:0.85em;">Authorization: Bearer &lt;chave TypeSafe&gt;</span>), <strong>Anthropic</strong> e <strong>Postgres</strong></div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>3.</strong> <strong>Execute workflow</strong> e abra cada ramo. Sem banco ou Claude? Desative o nó: o item segue.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:5;"><div><strong>4.</strong> Em produção: ative e faça <strong>POST</strong> no webhook. A resposta traz rota, faixa, alertas e rascunho.</div></div>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1.15;">
+        <p class="t-h3 anim-fly-up" style="--i:2; text-transform:none; margin-bottom:1rem;">O que observar nas 5 mensagens</p>
+        <table class="tbl anim-fly-left" style="--i:3;">
+          <tr><th>Mensagem</th><th>Caminho esperado</th></tr>
+          <tr><td>Mariana · cobrança parada em produção</td><td><strong>suporte técnico · P1</strong></td></tr>
+          <tr><td>João · certificado não aparece</td><td><strong>acesso à plataforma</strong></td></tr>
+          <tr><td>Seguradora · turma pra 15 analistas</td><td><strong>comercial</strong> + lead pro comercial</td></tr>
+          <tr><td>Paulo · terceira live que cai</td><td><strong>alerta pro CS</strong></td></tr>
+          <tr><td>Bia · "oi, tudo bem?"</td><td><strong>indefinido → humano</strong></td></tr>
+        </table>
+        <p class="t-body anim-fade" style="--i:5; margin-top:1.4rem;">A <strong>faixa</strong> (automático, Sistema 2 ou humano) depende da confiança que o Jev devolver — é isso que vale discutir com a turma. Se o Jev cair, as 5 vão pro humano: é o fail-safe funcionando.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 36c · BENCHMARK AO VIVO ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Benchmark ao vivo</div>
+    <div style="margin:auto; width:100%; max-width:1550px;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; margin-bottom:1.4rem;">
+        <div>
+          <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none;">
+            200 mensagens. <span class="hl-pink">S1 × S2</span> no mesmo lote.
+          </h2>
+          <p class="t-body anim-fade muted" style="--i:1; margin-top:0.5rem;">Mesmo dataset, mesmas perguntas, mesma concorrência. Só muda quem decide.</p>
+        </div>
+        <div class="anim-zoom wf-actions" style="--i:2; margin:0;">
+          <button class="wf-btn" type="button" data-wf-download="benchmark">⬇ Baixar o benchmark (.json)</button>
+          <button class="wf-btn ghost" type="button" data-wf-copy="benchmark">Copiar pra colar no n8n</button>
+        </div>
+      </div>
+      <div class="flow anim-fly-up" style="--i:3;">
+        <div class="node"><span class="k">Configuração</span>registros, lote, modelos e preços por 1M tokens</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">Gera N mensagens</span>Alunos fictícios com <strong>gabarito</strong>: rota, urgência, evasão, compra</div>
+        <div class="arrow">→</div>
+        <div class="node pink"><span class="k">Loop · Jev</span>Lote de 5 em paralelo, relógio por lote</div>
+        <div class="arrow">→</div>
+        <div class="node dark"><span class="k">Loop · Claude Haiku 4.5</span>Mesmo lote, JSON via tool use</div>
+        <div class="arrow">→</div>
+        <div class="node ghost"><span class="k">Loop · GPT-4.1 mini</span>Opcional, JSON schema</div>
+        <div class="arrow">→</div>
+        <div class="node"><span class="k">Painel</span>Placar em HTML direto no n8n</div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1.1rem; margin-top:1.6rem;">
+        <div class="card compact anim-fly-up" style="--i:4;"><span class="tag">Velocidade</span><br/>Tempo de fila, mensagens/s e latência por lote (p50 e p95)</div>
+        <div class="card compact anim-fly-up" style="--i:5;"><span class="tag">Custo real</span><br/>Tokens que a API devolve no <span class="t-mono" style="font-size:0.85em;">usage</span> × preço de lista. Por 1.000 e projeção de 100 mil</div>
+        <div class="card compact anim-fly-up" style="--i:6;"><span class="tag">Qualidade</span><br/>Acurácia de rota e alertas contra o gabarito, e concordância Jev × LLM</div>
+        <div class="card compact anim-fly-up" style="--i:7;"><span class="tag">Robustez</span><br/>Respostas fora do contrato e erros HTTP contados, sem retry escondido</div>
+      </div>
+      <p class="t-body anim-fly-up" style="--i:8; margin-top:1.4rem;"><strong>Antes de apertar o play:</strong> peça pra turma chutar quantas vezes o Jev vai ser mais rápido e mais barato.</p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 36d · LEITURA HONESTA DO PLACAR ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Como ler o placar</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-display fit">PLACAR</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-black t-display fit">HONESTO</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          Número de fornecedor é promessa. Número do seu n8n é dado.
+        </p>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Velocidade e custo</strong> se medem aqui, na sua rede, com as suas chaves.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Acurácia</strong> em dado sintético é fácil pra todos. Pra decidir, rode 200 conversas reais rotuladas.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Erro 429</strong> no LLM também é resultado: em escala, rate limit chega antes da fatura.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:5;"><div><strong>Rode duas vezes</strong> e compare. Rede e fila do provedor variam.</div></div>
+        <p class="t-body anim-fly-up" style="--i:6; margin-top:1.2rem;"><strong>Custo de rodar:</strong> 200 mensagens custam centavos de dólar. Comece com 50 pra testar as credenciais.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 37 · ANTES / DEPOIS ===================== -->
+  <section class="slide slide-light">
+    <div style="margin:auto; width:100%; max-width:1450px;">
+      <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none; text-align:center; margin-bottom:2.3rem;">
+        O mesmo roteamento, <span class="t-pink">antes e depois</span>
+      </h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2rem;">
+        <div class="anim-fly-right" style="--i:1;">
+          <div class="panel panel-a">
+            <p class="t-h3" style="text-transform:uppercase;">Antes</p>
+            <p class="t-body muted" style="margin-top:0.3rem;">AI Agent + Structured Output Parser</p>
+            <ul>
+              <li>Prompt pedindo JSON + parser + retry</li>
+              <li>Às vezes um segundo modelo só pra validar</li>
+              <li>Segundos por item; paga entrada e saída</li>
+              <li>Quebra quando o provedor muda o modelo</li>
+            </ul>
+          </div>
+        </div>
+        <div class="anim-fly-left" style="--i:2;">
+          <div class="panel panel-b">
+            <p class="t-h3 t-pink" style="text-transform:uppercase;">Depois</p>
+            <p class="t-body muted" style="margin-top:0.3rem;">HTTP Request (Jev) + Switch</p>
+            <ul>
+              <li><strong>JSON tipado de fábrica</strong></li>
+              <li><strong>N perguntas</strong> numa chamada só</li>
+              <li><strong>Milissegundos</strong> por item; paga só a entrada</li>
+              <li><strong>Probabilidade</strong> logada pra auditar e recalibrar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 38 · WORKFLOWS ===================== -->
+  <section class="slide slide-light">
+    <div style="margin:auto; width:100%; max-width:1500px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:0.6rem;">
+        Seis decisões que a Flowgrammers <span class="hl-pink">delega ao S1</span>
+      </h2>
+      <p class="t-body anim-fade muted" style="--i:1; margin-bottom:2rem;">Volume alto, opções definidas, custo de fração de centavo. A triagem é só a primeira.</p>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem;">
+        <div class="card compact anim-fly-up" style="--i:2;"><span class="tag">Choice · o workflow da aula</span><br/><strong>Triagem de mensagens</strong> — suporte técnico, acesso, comercial ou conteúdo, no primeiro minuto.</div>
+        <div class="card compact anim-fly-up" style="--i:3;"><span class="tag">Noul semanal</span><br/><strong>Risco de evasão</strong> — atividade na plataforma + mensagens; o CS liga antes do aluno sumir.</div>
+        <div class="card compact anim-fly-up" style="--i:4;"><span class="tag">Score</span><br/><strong>Lead da aula aberta</strong> — quem veio da live e interagiu de verdade, de 0 a 4.</div>
+        <div class="card compact anim-fly-up" style="--i:5;"><span class="tag">Noul por trilha</span><br/><strong>Interesses na comunidade</strong> — n8n, agentes, Claude Code, infra: vira tag e trilha sugerida.</div>
+        <div class="card compact anim-fly-up" style="--i:6;"><span class="tag">Noul por critério</span><br/><strong>Correção de desafios</strong> — "o workflow entregue trata erro?" vira ponto na gamificação.</div>
+        <div class="card compact anim-fly-up" style="--i:7;"><span class="tag">Noul</span><br/><strong>Guardrail do tutor IA</strong> — "a resposta entrega a solução pronta do desafio?" antes de enviar.</div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 39 · QUANDO NÃO USAR ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Parte 8 · Os limites</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-display fit">NÃO É</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-black t-display fit">BALA DE PRATA</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          Sistema 1 erra rápido também. Kahneman avisou.
+        </p>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Gerar texto</strong> — e-mail, resumo, tradução, código: é trabalho de S2.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>Explicar a decisão</strong> — o Jev não justifica, só decide.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>Conhecimento fora do state</strong> — ele só julga o que você mandou.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:5;"><div><strong>Imagem, áudio, vídeo</strong> — entrada é só texto e JSON.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:6;"><div><strong>Volume baixo</strong> — poucas mil decisões por ano? Um LLM resolve.</div></div>
+        <p class="t-body anim-fly-up" style="--i:7; margin-top:1.2rem;"><strong>Números de fabricante:</strong> benchmarks internos, e a própria TypeSafe diz que não consegue provar que o preço não é subsidiado.</p>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 40 · RECAP ===================== -->
+  <section class="slide slide-light">
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.7;">
+        <h2 class="t-h1 anim-fly-up" style="--i:0; text-transform:none;">
+          Pra levar<br/><span class="t-pink">pra casa</span>
+        </h2>
+      </div>
+      <div class="divider-v"></div>
+      <div style="flex:1.4;">
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:1;"><div><strong>Kahneman:</strong> S1 rápido e automático, S2 lento e caro — o cérebro economiza S2.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:2;"><div><strong>Jev é S1 pra software:</strong> estado + perguntas tipadas → JSON com probabilidade.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:3;"><div><strong>Choice, Score, Noul</strong> — e confiança como regra de negócio.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:4;"><div><strong>Só a entrada é cobrada</strong>, resposta em ms: a decisão sai do batch e vai pro fluxo.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:5;"><div><strong>Claude Code e n8n:</strong> S2 orquestra, S1 julga em volume, humano aprova o irreversível.</div></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 41 · DESAFIO ===================== -->
+  <section class="slide slide-pink">
+    <div class="slide-header"><span class="burst white"></span> Desafio do Mastermind</div>
+    <div style="display:flex; align-items:center; gap:3rem; width:100%; max-width:1500px; margin:auto;">
+      <div style="flex:0.9;">
+        <div class="anim-zoom" style="--i:0;"><span class="hl-white t-display">LIÇÃO</span></div>
+        <div class="anim-zoom" style="--i:1; margin-top:0.5rem;"><span class="hl-white t-display">DE CASA</span></div>
+        <p class="t-h3 anim-fly-up" style="--i:3; margin-top:2rem; text-transform:none; font-weight:500;">
+          No próximo encontro, a gente compara os números.
+        </p>
+      </div>
+      <div style="flex:1.1; border-left:2px solid rgba(255,255,255,0.5); padding-left:3rem;">
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:2;"><div><strong>1.</strong> Escolha uma chamada de LLM em produção que só classifica ou roteia.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:3;"><div><strong>2.</strong> Reescreva como Choice, Score ou Noul — tudo numa chamada.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:4;"><div><strong>3.</strong> Rode 200 casos rotulados nos dois caminhos.</div></div>
+        <div class="bullet-arrow anim-fly-left t-body-lg" style="--i:5;"><div><strong>4.</strong> Traga acurácia, latência p95, custo por mil e o limiar escolhido.</div></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 42 · FONTES ===================== -->
+  <section class="slide slide-light">
+    <div class="slide-header"><span class="burst"></span> Referências</div>
+    <div style="margin:auto; width:100%; max-width:1400px;">
+      <h2 class="t-h2 anim-fly-up" style="--i:0; text-transform:none; margin-bottom:2rem;">
+        Pra <span class="t-pink">ir mais fundo</span>
+      </h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.4rem 3rem;">
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:1;"><div><strong>Daniel Kahneman</strong> — <em>Rápido e Devagar: Duas Formas de Pensar</em> (Objetiva, 2012)</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:2;"><div><strong>Workflow da aula</strong> — flowgrammers-jev-triagem-alunos.json (n8n)</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:3;"><div><strong>browser-use/jev-ultrafast</strong> — GitHub, licença MIT: README, design.md, performance.md</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:4;"><div><strong>TypeSafe</strong> — docs.typesafe.ai (introdução, padrões de fan-out)</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:6;"><div><strong>systemonemodels.org</strong> — Jev with Claude Code: MCP servers, skills e routers</div></div>
+        <div class="bullet-arrow anim-fly-left t-body" style="--i:8;"><div><strong>Claude Code docs</strong> — Hooks: PreToolUse e Stop (code.claude.com)</div></div>
+      </div>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+  <!-- ===================== 43 · CLOSING ===================== -->
+  <section class="slide slide-pink">
+    <div style="margin:auto; text-align:center; max-width:1400px;">
+      <h1 class="t-display anim-fly-up" style="--i:0;">
+        <span class="hl-white">OBRIGADO.</span>
+      </h1>
+      <p class="t-h2 anim-fly-up" style="--i:2; margin-top:2rem; text-transform:none; font-weight:500;">
+        Perguntas?
+      </p>
+      <p class="t-body-lg anim-fade" style="--i:4; margin-top:3rem; opacity:0.9;">
+        Mastermind Flowgrammers · Ric Neves
+      </p>
+    </div>
+    <div class="slide-footer"><span class="logo-mark">:D</span><span>flowgrammers</span><span class="pipe">|</span><span>ed</span></div>
+  </section>
+
+</div>
+
+<script>
+/* ============================================================
+   NAVIGATION + KEYBOARD + PROGRESS + HELP
+   ============================================================ */
+(function() {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  const progress = document.getElementById('progress');
+  const counter = document.getElementById('counter');
+  const helpToggle = document.getElementById('helpToggle');
+  const helpPanel = document.getElementById('helpPanel');
+
+  function goTo(i) {
+    if (i < 0 || i >= total) return;
+    slides[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    counter.textContent = (current + 1) + ' / ' + total;
+    void slides[current].offsetWidth;
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  function next() { goTo(Math.min(current + 1, total - 1)); }
+  function prev() { goTo(Math.max(current - 1, 0)); }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    switch (e.key) {
+      case 'ArrowRight':
+      case ' ':
+      case 'PageDown':
+        e.preventDefault(); next(); break;
+      case 'ArrowLeft':
+      case 'PageUp':
+        e.preventDefault(); prev(); break;
+      case 'Home':
+        e.preventDefault(); goTo(0); break;
+      case 'End':
+        e.preventDefault(); goTo(total - 1); break;
+      case 'f':
+      case 'F':
+        e.preventDefault();
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+        break;
+      case 'p':
+      case 'P':
+        e.preventDefault();
+        slides.forEach(s => s.classList.add('active'));
+        setTimeout(() => {
+          window.print();
+          slides.forEach((s, i) => { if (i !== current) s.classList.remove('active'); });
+        }, 300);
+        break;
+      case '?':
+      case '/':
+        e.preventDefault();
+        helpPanel.classList.toggle('open');
+        break;
+      default:
+        if (/^[1-9]$/.test(e.key)) {
+          e.preventDefault();
+          const target = parseInt(e.key, 10) - 1;
+          if (target < total) goTo(target);
+        }
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('button, a, .help-panel, .help-toggle')) return;
+    const x = e.clientX;
+    if (x > window.innerWidth * 0.6) next();
+    else if (x < window.innerWidth * 0.4) prev();
+  });
+
+  helpToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    helpPanel.classList.toggle('open');
+  });
+
+  let touchX = null;
+  document.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 60) (dx < 0 ? next : prev)();
+    touchX = null;
+  });
+
+  const hash = parseInt(location.hash.replace('#', ''), 10);
+  if (!isNaN(hash) && hash >= 1 && hash <= total) {
+    slides[0].classList.remove('active');
+    current = hash - 1;
+  }
+  slides[current].classList.add('active');
+  progress.style.width = ((current + 1) / total * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + total;
+})();
+</script>
+<!-- N8N_WORKFLOW:START -->
+<script type="application/json" id="n8n-workflows">{"triagem":{"arquivo":"flowgrammers-jev-triagem-alunos.json","workflow":{"id":"fgJevTriagemAlun","name":"Flowgrammers · Triagem de alunos com Jev (Sistema 1)","nodes":[{"parameters":{"content":"## Flowgrammers · Triagem de alunos com Jev\n**Sistema 1 (Jev)** decide em milissegundos. **Sistema 2 (Claude)** só entra com confiança média. **Humano** fica com o resto.\n\nFeito e testado no **n8n 2.41.6**.\n\n### Credenciais (3)\n1. **Header Auth** → Name `Authorization`, Value `Bearer SUA_CHAVE_TYPESAFE` → nó **Jev · System One**\n2. **Anthropic** → nó **Claude · rascunho**\n3. **Postgres** → nó **Grava decisão** (rode o SQL do post-it antes)\n\n### Rodar a demo\n**Execute workflow**: 5 mensagens de exemplo, uma pra cada caminho. Sem banco ou sem Claude? Desative esses nós: o item passa adiante.\n\n### Produção\nAtive o workflow e faça `POST /webhook/flowgrammers/jev-triagem` com `{ canal, aluno: {id, produto, aluno_desde}, mensagens: [{de, texto}] }`. A resposta traz `rota`, `faixa`, `prioridade`, `alertas` e o `rascunho`.\n\nShape da API do Jev conforme documentação pública de set/2026: confira em docs.typesafe.ai.","height":560,"width":600,"color":6},"id":"7944b813-11f1-5e53-8f08-b0c9ed920037","name":"Leia primeiro","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[-80,-620]},{"parameters":{},"id":"6d0f0891-2c09-5ebd-824f-467e90e93d3c","name":"Rodar exemplo","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0]},{"parameters":{"httpMethod":"POST","path":"flowgrammers/jev-triagem","responseMode":"responseNode","options":{}},"id":"c1ceb632-dc1a-57c4-b7f6-cde94f0b99e6","name":"Webhook · mensagem do aluno","type":"n8n-nodes-base.webhook","typeVersion":2.1,"position":[0,220],"webhookId":"6d505b2a-8f3e-5b0a-9e7c-c3c98d455f84"},{"parameters":{"jsCode":"// 5 mensagens fictícias de alunos da Flowgrammers — uma pra cada caminho do fluxo.\n// Em produção quem alimenta o fluxo é o Webhook, com o mesmo formato de payload.\nreturn [\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'aluno_1042', email: 'mariana@exemplo.com', produto: 'n8n Expert Program', aluno_desde: '2026-02' },\n    mensagens: [\n      { de: 'aluno', texto: 'Atualizei o n8n do meu cliente e o workflow de cobrança parou: o nó HTTP Request agora volta 401. Tá em produção e o cliente já ligou. Consegue me ajudar hoje?' }\n    ]\n  }},\n  { json: {\n    canal: 'comunidade',\n    aluno: { id: 'aluno_0587', email: 'joao@exemplo.com', produto: 'Claude Code Engineering', aluno_desde: '2026-05' },\n    mensagens: [\n      { de: 'aluno', texto: 'Terminei o módulo 4 mas o certificado não aparece na minha área. Já saí e entrei de novo.' }\n    ]\n  }},\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'lead_2210', email: 'coord@seguradora-exemplo.com', produto: null, aluno_desde: null },\n    mensagens: [\n      { de: 'aluno', texto: 'Oi! Coordeno o time de automação de uma seguradora. Vocês fazem turma fechada de Claude Code pra empresa? Somos 15 analistas e queríamos começar em novembro.' }\n    ]\n  }},\n  { json: {\n    canal: 'email',\n    aluno: { id: 'aluno_0933', email: 'paulo@exemplo.com', produto: 'Harness Engineering', aluno_desde: '2026-01' },\n    mensagens: [\n      { de: 'aluno', texto: 'É a terceira live que cai no meio. Paguei à vista e sinceramente tô pensando em pedir reembolso.' },\n      { de: 'suporte', texto: 'Oi, Paulo! Sentimos muito, vamos verificar.' },\n      { de: 'aluno', texto: 'Vocês falaram isso da última vez também.' }\n    ]\n  }},\n  { json: {\n    canal: 'whatsapp',\n    aluno: { id: 'aluno_1311', email: 'bia@exemplo.com', produto: 'n8n Expert Program', aluno_desde: '2026-07' },\n    mensagens: [ { de: 'aluno', texto: 'oi, tudo bem?' } ]\n  }}\n];\n"},"id":"7f0f4c95-f2ee-5fac-bd15-94be17bbce0e","name":"5 mensagens de exemplo","type":"n8n-nodes-base.code","typeVersion":2,"position":[240,0]},{"parameters":{"content":"### Minimização (LGPD)\nID e e-mail do aluno **ficam no n8n**. O Jev recebe só canal, produto, tempo de casa e as **10 últimas mensagens**.","height":220,"width":300,"color":4},"id":"43f52b55-fc79-52df-a7de-d3b6166fb579","name":"LGPD","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[420,-280]},{"parameters":{"jsCode":"// Monta a requisição do Jev: estado + 4 perguntas tipadas, numa chamada só (fan-out).\n// LGPD / minimização: id e e-mail do aluno ficam no n8n. O Jev recebe só o que a decisão precisa.\n\nconst QUESTIONS = {\n  rota: {\n    type: 'choice',\n    instructions: 'Para qual fila da Flowgrammers esta conversa deve ir agora?',\n    criteria: {\n      suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n      acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n      comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n      conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n      indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n    }\n  },\n  urgencia: {\n    type: 'score',\n    instructions: 'Qual a urgência deste atendimento?',\n    criteria: [\n      'Nenhuma: cumprimento, elogio ou sugestão',\n      'Baixa: pode esperar até 2 dias úteis',\n      'Média: atrapalha o estudo, mas existe contorno',\n      'Alta: impede o aluno de continuar',\n      'Crítica: sistema em produção parado ou cliente do aluno impactado'\n    ]\n  },\n  risco_churn: {\n    type: 'noul',\n    instructions: 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?'\n  },\n  intencao_compra: {\n    type: 'noul',\n    instructions: 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.'\n  }\n};\n\nreturn $input.all().map((item, i) => {\n  const src = item.json.body ?? item.json;          // o Webhook entrega o payload em body\n  const aluno = src.aluno ?? {};\n  const mensagens = (src.mensagens ?? []).slice(-10).map(m => ({\n    de: m.de === 'suporte' ? 'suporte' : 'aluno',\n    texto: String(m.texto ?? '').slice(0, 2000)\n  }));\n  const state = {\n    canal: src.canal ?? 'desconhecido',\n    produto: aluno.produto ?? null,\n    aluno_desde: aluno.aluno_desde ?? null,\n    mensagens\n  };\n  return {\n    json: {\n      aluno_id: aluno.id ?? null,                    // fica no n8n, não vai pro Jev\n      canal: state.canal,\n      ultima_mensagem: mensagens.filter(m => m.de === 'aluno').at(-1)?.texto ?? '',\n      jev_request: { model: 'jev-latest', state, questions: QUESTIONS }\n    },\n    pairedItem: i\n  };\n});\n"},"id":"47b68a14-e849-5cba-8b1c-e2b1b8cd3063","name":"Monta state (Jev)","type":"n8n-nodes-base.code","typeVersion":2,"position":[480,120]},{"parameters":{"method":"POST","url":"https://api.typesafe.ai/v1/systemone","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json.jev_request) }}","options":{"timeout":5000},"authentication":"genericCredentialType","genericAuthType":"httpHeaderAuth"},"id":"c126bae9-2fd3-5c29-a1a5-5a4a1656d30b","name":"Jev · System One","type":"n8n-nodes-base.httpRequest","typeVersion":4.5,"position":[720,120],"retryOnFail":true,"maxTries":3,"waitBetweenTries":1000,"onError":"continueRegularOutput"},{"parameters":{"content":"### Limiar é regra de negócio\n- **≥ 0,85** → ação automática\n- **0,60 a 0,85** → Claude rascunha, humano revisa\n- **< 0,60** → fila humana\n- **≥ 0,70** de evasão ou compra → alerta\n\nResposta fora do contrato ou Jev fora do ar → **humano** (fail-safe).","height":280,"width":360,"color":3},"id":"d4bb47f0-0ee2-5c31-a90a-61ad1e54e9d5","name":"Limiar","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[880,-320]},{"parameters":{"mode":"runOnceForEachItem","jsCode":"// Valida o contrato da resposta e transforma probabilidade em decisão de negócio.\n// Regra de ouro: resposta fora do contrato, ou Jev fora do ar, vai pro humano. Nunca pra ação automática.\n\nconst LIMIAR_AUTO   = 0.85;  // >= executa sozinho\nconst LIMIAR_S2     = 0.60;  // >= Claude rascunha e humano revisa; abaixo: fila humana\nconst LIMIAR_ALERTA = 0.70;  // evasão / compra\nconst ROTAS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\n\nconst req = $('Monta state (Jev)').item.json;\nconst res = $json;\nconst a = res.answers ?? {};\n\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\n\nfunction choiceValida(ans, ids) {\n  if (!ans || !ids.includes(ans.choice)) return false;\n  const p = ans.probabilities ?? {};\n  if (Object.keys(p).sort().join('|') !== [...ids].sort().join('|')) return false;\n  const vals = Object.values(p);\n  if (vals.some(v => num01(v) === null)) return false;\n  if (Math.abs(vals.reduce((x, y) => x + y, 0) - 1) > 0.02) return false;\n  if (p[ans.choice] < Math.max(...vals) - 1e-6) return false;\n  return num01(ans.confidence) !== null;\n}\n\nconst valida = choiceValida(a.rota, ROTAS);\nconst rota = valida ? a.rota.choice : 'indefinido';\nconst confianca = valida ? a.rota.confidence : 0;\nconst urgencia = typeof a.urgencia?.score === 'number' ? a.urgencia.score : null;\nconst risco_churn = num01(a.risco_churn?.noul);\nconst intencao_compra = num01(a.intencao_compra?.noul);\n\nlet faixa = 'humano';\nif (valida && rota !== 'indefinido') {\n  if (confianca >= LIMIAR_AUTO) faixa = 'automatico';\n  else if (confianca >= LIMIAR_S2) faixa = 'sistema_2';\n}\n\nlet motivo_humano = null;\nif (!valida) motivo_humano = res.error ? 'Jev indisponível ou erro HTTP' : 'resposta fora do contrato';\nelse if (rota === 'indefinido') motivo_humano = 'conversa sem informação suficiente';\n\nconst alertas = [];\nif ((risco_churn ?? 0) >= LIMIAR_ALERTA) alertas.push('evasao');\nif ((intencao_compra ?? 0) >= LIMIAR_ALERTA) alertas.push('comercial');\n\nconst prioridade = urgencia === null ? 'P2' : urgencia >= 3 ? 'P1' : urgencia >= 1.5 ? 'P2' : 'P3';\n\nreturn {\n  json: {\n    aluno_id: req.aluno_id,\n    canal: req.canal,\n    ultima_mensagem: req.ultima_mensagem,\n    rota,\n    confianca,\n    faixa,\n    motivo_humano,\n    prioridade,\n    urgencia,\n    risco_churn,\n    intencao_compra,\n    alertas,\n    probabilidades_rota: valida ? a.rota.probabilities : null,\n    modelo: res.model ?? null,\n    tokens_entrada: res.usage?.input_tokens ?? res.usage?.prompt_tokens ?? null,\n    decidido_em: new Date().toISOString()\n  }\n};\n"},"id":"baa837d6-3a8e-500f-878b-1f65238fd970","name":"Valida e normaliza","type":"n8n-nodes-base.code","typeVersion":2,"position":[960,120]},{"parameters":{"rules":{"values":[{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"436155dd-9fa6-582b-a304-bd0bab4dc286","leftValue":"={{ $json.faixa }}","rightValue":"automatico","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"Automático"},{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"d2dcf81d-6f4e-537b-a7f6-be9d0e4a9ed0","leftValue":"={{ $json.faixa }}","rightValue":"sistema_2","operator":{"type":"string","operation":"equals"}}],"combinator":"and"},"renameOutput":true,"outputKey":"Sistema 2"}]},"options":{"fallbackOutput":"extra","renameFallbackOutput":"Humano"}},"id":"18ca90dd-8acd-56a3-924f-70018ca82c38","name":"Roteia por confiança","type":"n8n-nodes-base.switch","typeVersion":3.4,"position":[1220,120]},{"parameters":{"assignments":{"assignments":[{"id":"0a08c8f2-9a8d-5b8a-84e5-a50e65437d12","name":"acao","value":"={{ 'Encaminhado para a fila ' + $json.rota + ' · ' + $json.prioridade }}","type":"string"},{"id":"b400eea8-6263-50f2-a88b-3d43c8bab225","name":"labels","value":"={{ 'jev:' + $json.rota + ', ' + $json.prioridade }}","type":"string"}]},"includeOtherFields":true,"options":{}},"id":"02290361-3f9d-565f-95e8-e3f7ec6ba497","name":"Ação automática","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[1500,-60]},{"parameters":{"resource":"text","operation":"message","modelId":{"__rl":true,"mode":"id","value":"claude-haiku-4-5-20251001"},"messages":{"values":[{"content":"=Fila: {{ $json.rota }} ({{ $json.prioridade }})\nMensagem do aluno: {{ $json.ultima_mensagem }}\n\nEscreva um rascunho de resposta para um humano revisar antes de enviar.","role":"user"}]},"simplify":true,"options":{"system":"Você é do time de atendimento da Flowgrammers, escola de IA e automação. Responda em português do Brasil, curto, cordial e prático. Não prometa reembolso, prazo nem desconto.","maxTokens":500}},"id":"93deddec-e01e-532f-931f-cab51c98ad6c","name":"Claude · rascunho","type":"@n8n/n8n-nodes-langchain.anthropic","typeVersion":1,"position":[1500,140],"onError":"continueRegularOutput"},{"parameters":{"assignments":{"assignments":[{"id":"3e9b3db6-1856-5cd5-a828-f98e4bfaa03f","name":"acao","value":"Claude rascunhou; humano revisa e envia","type":"string"},{"id":"fb9aa0d7-d3f3-54ac-9798-1220bbea3ed1","name":"rascunho","value":"={{ $json.content?.[0]?.text ?? '(sem rascunho: confira a credencial Anthropic)' }}","type":"string"}]},"includeOtherFields":false,"options":{}},"id":"1e46876f-b054-5b38-a723-5b5f91ff0c7b","name":"Revisão com rascunho","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[1740,140]},{"parameters":{"assignments":{"assignments":[{"id":"b8d3e310-a162-50d0-99be-708dc66061c1","name":"acao","value":"={{ 'Triagem manual · ' + ($json.motivo_humano ?? 'confiança de ' + Math.round($json.confianca * 100) + '%') }}","type":"string"}]},"includeOtherFields":true,"options":{}},"id":"391bb622-39a5-5338-b85b-bb591c7c0ca8","name":"Fila humana","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[1500,360]},{"parameters":{"mode":"runOnceForEachItem","jsCode":"// Uma linha por decisão: vira série histórica, auditoria e base pra recalibrar o limiar.\n// Sai daqui para dois lugares em paralelo: o Postgres (log) e a resposta do Webhook.\nconst d = $('Valida e normaliza').item.json;\nreturn {\n  json: {\n    decidido_em: d.decidido_em,\n    aluno_id: d.aluno_id,\n    canal: d.canal,\n    rota: d.rota,\n    confianca: d.confianca,\n    faixa: d.faixa,\n    prioridade: d.prioridade,\n    urgencia: d.urgencia,\n    risco_churn: d.risco_churn,\n    intencao_compra: d.intencao_compra,\n    alertas: d.alertas.join(','),\n    probabilidades_rota: d.probabilidades_rota ? JSON.stringify(d.probabilidades_rota) : null,\n    modelo: d.modelo,\n    tokens_entrada: d.tokens_entrada,\n    acao: $json.acao ?? null,\n    rascunho: $json.rascunho ?? null\n  }\n};\n"},"id":"af1ed1b0-ef1a-5c70-9973-e793210c7e90","name":"Linha de log","type":"n8n-nodes-base.code","typeVersion":2,"position":[2000,140]},{"parameters":{"schema":{"__rl":true,"mode":"list","value":"public"},"table":{"__rl":true,"mode":"name","value":"jev_decisoes"},"columns":{"mappingMode":"autoMapInputData","value":{},"matchingColumns":[],"schema":[]},"options":{}},"id":"bd7506a8-418d-5c34-86d2-92f03c7c37f3","name":"Grava decisão (Postgres)","type":"n8n-nodes-base.postgres","typeVersion":2.7,"position":[2260,40],"onError":"continueRegularOutput"},{"parameters":{"respondWith":"firstIncomingItem","options":{"responseCode":200}},"id":"8fab704f-84df-5405-a877-0e634b97db08","name":"Responde ao atendimento","type":"n8n-nodes-base.respondToWebhook","typeVersion":1.5,"position":[2260,260]},{"parameters":{"content":"### Log de decisões (Postgres)\nRode uma vez no banco:\n\n```sql\ncreate table if not exists jev_decisoes (\n  id bigserial primary key,\n  decidido_em timestamptz,\n  aluno_id text, canal text,\n  rota text, confianca numeric,\n  faixa text, prioridade text,\n  urgencia numeric, risco_churn numeric,\n  intencao_compra numeric,\n  alertas text,\n  probabilidades_rota jsonb,\n  modelo text, tokens_entrada int,\n  acao text, rascunho text\n);\n```","height":500,"width":440,"color":7},"id":"cb0bd6ea-3920-55fc-af0e-06608a7b6dcf","name":"Log","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[2200,-520]},{"parameters":{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"3d01f322-56b5-5f6c-9e9b-e5355016d1d4","leftValue":"={{ $json.risco_churn ?? 0 }}","rightValue":0.7,"operator":{"type":"number","operation":"gte"}}],"combinator":"and"},"looseTypeValidation":false,"options":{}},"id":"cbd0ac20-6283-5831-a715-637a1ae5ad8b","name":"Risco de evasão?","type":"n8n-nodes-base.if","typeVersion":2.3,"position":[1220,600]},{"parameters":{"assignments":{"assignments":[{"id":"61b4700a-4e51-544b-a8d4-f66475cc0c37","name":"alerta","value":"={{ 'Risco de evasão ' + Math.round($json.risco_churn * 100) + '% · ' + $json.aluno_id + ' · ligar hoje' }}","type":"string"}]},"includeOtherFields":true,"options":{}},"id":"7fcf10e9-c1eb-5902-a034-a525828555d3","name":"Alerta pro CS","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[1500,580]},{"parameters":{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"dfa5f3f0-4a20-5eb0-8fe3-0c6110a36da2","leftValue":"={{ $json.intencao_compra ?? 0 }}","rightValue":0.7,"operator":{"type":"number","operation":"gte"}}],"combinator":"and"},"looseTypeValidation":false,"options":{}},"id":"29313552-cb10-5e38-85d5-de52bf0e8998","name":"Intenção de compra?","type":"n8n-nodes-base.if","typeVersion":2.3,"position":[1220,820]},{"parameters":{"assignments":{"assignments":[{"id":"06b812e7-9ef7-5584-9f9a-cfa2a6384031","name":"alerta","value":"={{ 'Oportunidade ' + Math.round($json.intencao_compra * 100) + '% · ' + $json.aluno_id + ' · comercial assume' }}","type":"string"}]},"includeOtherFields":true,"options":{}},"id":"cd2d1eee-3d37-5aa8-b847-bfaad72b2608","name":"Lead pro comercial","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[1500,800]},{"parameters":{"content":"### Alertas\nTroque os dois nós de alerta pelo canal do time: Slack, e-mail ou nota no Chatwoot. O campo `alertas` também volta na resposta do webhook.","height":220,"width":340,"color":5},"id":"7f88f57b-b828-5487-b4c2-e74b4355a81a","name":"Alertas","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[1740,560]}],"connections":{"Rodar exemplo":{"main":[[{"node":"5 mensagens de exemplo","type":"main","index":0}]]},"5 mensagens de exemplo":{"main":[[{"node":"Monta state (Jev)","type":"main","index":0}]]},"Webhook · mensagem do aluno":{"main":[[{"node":"Monta state (Jev)","type":"main","index":0}]]},"Monta state (Jev)":{"main":[[{"node":"Jev · System One","type":"main","index":0}]]},"Jev · System One":{"main":[[{"node":"Valida e normaliza","type":"main","index":0}]]},"Valida e normaliza":{"main":[[{"node":"Roteia por confiança","type":"main","index":0},{"node":"Risco de evasão?","type":"main","index":0},{"node":"Intenção de compra?","type":"main","index":0}]]},"Roteia por confiança":{"main":[[{"node":"Ação automática","type":"main","index":0}],[{"node":"Claude · rascunho","type":"main","index":0}],[{"node":"Fila humana","type":"main","index":0}]]},"Claude · rascunho":{"main":[[{"node":"Revisão com rascunho","type":"main","index":0}]]},"Ação automática":{"main":[[{"node":"Linha de log","type":"main","index":0}]]},"Revisão com rascunho":{"main":[[{"node":"Linha de log","type":"main","index":0}]]},"Fila humana":{"main":[[{"node":"Linha de log","type":"main","index":0}]]},"Linha de log":{"main":[[{"node":"Grava decisão (Postgres)","type":"main","index":0},{"node":"Responde ao atendimento","type":"main","index":0}]]},"Risco de evasão?":{"main":[[{"node":"Alerta pro CS","type":"main","index":0}],[]]},"Intenção de compra?":{"main":[[{"node":"Lead pro comercial","type":"main","index":0}],[]]}},"pinData":{},"settings":{"executionOrder":"v1"},"meta":{"templateCredsSetupCompleted":false},"tags":[]}},"benchmark":{"arquivo":"flowgrammers-jev-benchmark.json","workflow":{"id":"fgJevBenchmark01","name":"Flowgrammers · Benchmark Jev × LLM (Sistema 1 × Sistema 2)","nodes":[{"parameters":{"content":"## Flowgrammers · Benchmark Jev × LLM\nGera **N mensagens de alunos com gabarito** e manda o mesmo lote pro **Jev (Sistema 1)** e pra um **LLM (Sistema 2)**, com a mesma concorrência. No fim: tempo de fila, vazão, tokens reais, custo e acurácia.\n\nFeito e testado no **n8n 2.41.6**.\n\n### Credenciais\n1. **Header Auth** → Name `Authorization`, Value `Bearer SUA_CHAVE_TYPESAFE` → nó **Jev · System One**\n2. **Anthropic** → nó **Claude Haiku · tool use**\n3. *(opcional)* **OpenAI** → nó **GPT-4.1 mini · JSON schema** e `incluir_gpt = true`\n\n### Rodar\nAjuste o nó **Configuração** e clique em **Execute workflow**. Abra **Painel do benchmark** → aba **HTML** pra ver o placar; **Tabela por modelo** tem os números.\n\n### Quanto custa rodar\n200 mensagens custam centavos de dólar. Comece com 50 pra testar as credenciais.","height":560,"width":560,"color":6},"id":"2c5be859-95d1-5783-a40d-a06c9c6c0626","name":"Leia primeiro","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[-80,-620]},{"parameters":{},"id":"d5f85605-0b49-5adf-9dd3-a54f3f2ebb06","name":"Rodar benchmark","type":"n8n-nodes-base.manualTrigger","typeVersion":1,"position":[0,0]},{"parameters":{"assignments":{"assignments":[{"id":"5f52b890-da30-5a1f-a238-cfd675a98d34","name":"registros","value":200,"type":"number"},{"id":"6c683c0a-e5eb-5a25-9575-c490fbd78d2e","name":"lote","value":5,"type":"number"},{"id":"6baffd8e-44b5-5fa7-ace3-94dc88e8d4cc","name":"incluir_claude","value":true,"type":"boolean"},{"id":"7d0dacdd-5d69-5c4f-84cc-0636766a99a4","name":"incluir_gpt","value":false,"type":"boolean"},{"id":"8c41211f-da6f-5b32-ab75-c75a5989bac8","name":"semente","value":2026,"type":"number"},{"id":"0995d4d7-795c-5339-8eca-eb02147207d3","name":"limiar_alerta","value":0.7,"type":"number"},{"id":"230735a2-1c56-5402-a3ad-0e0f893d9bb1","name":"modelo_claude","value":"claude-haiku-4-5-20251001","type":"string"},{"id":"bc7158e9-d61c-54ef-a269-70da13efb4f6","name":"modelo_gpt","value":"gpt-4.1-mini","type":"string"},{"id":"20dc5441-9858-59b3-9afb-6b8df3eb4dd1","name":"preco_jev_entrada","value":0.042,"type":"number"},{"id":"98ce4b79-69ab-58b9-8908-92b20e563ac8","name":"preco_jev_saida","value":0,"type":"number"},{"id":"c2a9f8a6-bafe-5162-8317-e06043cd5f51","name":"preco_claude_entrada","value":1,"type":"number"},{"id":"925ed980-0110-5281-a2c8-40d330c649eb","name":"preco_claude_saida","value":5,"type":"number"},{"id":"ce892854-df67-5f6c-9a81-200400008812","name":"preco_gpt_entrada","value":0.4,"type":"number"},{"id":"77d82121-7f29-55d9-b7df-bca45422ac3e","name":"preco_gpt_saida","value":1.6,"type":"number"}]},"includeOtherFields":false,"options":{}},"id":"3ec0fc5c-d550-5da4-a508-8566705cf364","name":"Configuração","type":"n8n-nodes-base.set","typeVersion":3.5,"position":[220,0]},{"parameters":{"content":"### Configuração\n`registros` e `lote` controlam o tamanho do teste. Preços em **US$ por 1M tokens** (lista de out/2026). Ligue/desligue cada LLM com `incluir_claude` e `incluir_gpt`.","height":300,"width":300,"color":5},"id":"003a8216-9780-53a6-b5d5-3360d1f2b5e9","name":"Config","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[160,160]},{"parameters":{"jsCode":"// Gera N mensagens fictícias de alunos da Flowgrammers, cada uma com GABARITO.\n// Determinístico: mesma semente, mesmo dataset. Assim a comparação é justa entre modelos e entre execuções.\nconst cfg = $('Configuração').first().json;\nconst N = Math.max(1, Math.min(5000, Number(cfg.registros) || 200));\nlet seed = (Number(cfg.semente) || 2026) >>> 0;\nconst rnd = () => {                                   // mulberry32\n  seed = (seed + 0x6D2B79F5) >>> 0;\n  let t = seed;\n  t = Math.imul(t ^ (t >>> 15), t | 1);\n  t ^= t + Math.imul(t ^ (t >>> 7), t | 61);\n  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;\n};\nconst pick = arr => arr[Math.floor(rnd() * arr.length)];\n\nconst PRODUTOS = ['n8n Expert Program', 'Claude Code Engineering', 'Harness Engineering', 'Fábrica de SaaS ao Vivo'];\nconst CANAIS = ['whatsapp', 'comunidade', 'email'];\nconst ABERTURAS = ['Oi!', 'Bom dia, pessoal.', 'Boa tarde!', 'Oi, time.', 'Pessoal,', ''];\nconst FECHOS = ['Alguém consegue dar uma olhada?', 'Já tentei de novo e nada.', 'Consegue me ajudar?', 'Valeu!', ''];\nconst FECHOS_CRITICOS = ['Tá em produção, preciso de ajuda hoje.', 'O cliente já ligou duas vezes.', 'Tô com o cliente parado esperando.'];\nconst FRUSTRACAO = [\n  'É a terceira vez que isso acontece. Tô pensando em pedir reembolso.',\n  'Se não resolver essa semana eu vou cancelar.',\n  'Paguei à vista e tô bem frustrado, quero meu dinheiro de volta.',\n  'Sinceramente, tô quase desistindo do curso.'\n];\nconst RESPOSTAS_SUPORTE = ['Oi! Vamos verificar e já te retornamos.', 'Recebido, estamos olhando.', 'Consegue mandar um print do erro?'];\nconst FOLLOW_UPS = ['Alguma novidade?', 'Mandei o print aí.', 'Continua igual por aqui.'];\n\n// u = urgência de 0 (nenhuma) a 4 (crítica) · compra = sinal consistente de intenção de compra\nconst CATALOGO = {\n  suporte_tecnico: [\n    { u: 4, t: 'O workflow de cobrança do meu cliente parou depois da atualização do n8n e o HTTP Request agora volta 401.' },\n    { u: 4, t: 'Meu agente de atendimento em produção começou a responder errado pros clientes desde ontem.' },\n    { u: 4, t: 'O n8n do cliente caiu e a fila do Redis não volta de jeito nenhum.' },\n    { u: 4, t: 'O webhook de pagamento parou de receber eventos e o cliente tá perdendo venda.' },\n    { u: 3, t: 'O Claude Code trava no hook PreToolUse e não executa mais nenhum comando.' },\n    { u: 3, t: 'O deploy do Docker Swarm do módulo 6 falha no healthcheck e não sei sair disso.' },\n    { u: 3, t: 'O nó do Postgres dá timeout em toda execução do exercício 3.' },\n    { u: 3, t: 'Meu MCP server não aparece no Claude Code depois de configurar o settings.json.' },\n    { u: 2, t: 'O Code node retorna undefined quando uso $input.all() dentro do loop.' },\n    { u: 2, t: 'O Switch manda tudo pro fallback mesmo com a regra certa.' },\n    { u: 2, t: 'O agente responde em inglês mesmo com o system prompt em português.' },\n    { u: 2, t: 'O Merge junta os itens fora de ordem no meu fluxo de pedidos.' },\n    { u: 1, t: 'Apareceu um aviso de nó deprecated no HTTP Request, preciso me preocupar?' },\n    { u: 1, t: 'O editor do n8n fica lento quando o workflow passa de 80 nós.' }\n  ],\n  acesso_plataforma: [\n    { u: 1, t: 'Terminei o módulo 4 e o certificado não aparece na minha área.' },\n    { u: 3, t: 'Não consigo entrar na plataforma, o link de login expira na hora.' },\n    { u: 2, t: 'A aula 7 do módulo de agentes está com o vídeo travado em 0:00.' },\n    { u: 3, t: 'Comprei o curso ontem e ainda não liberou o acesso.' },\n    { u: 2, t: 'A live de hoje caiu no meio e não achei a gravação.' },\n    { u: 3, t: 'Troquei de e-mail e perdi o acesso aos cursos.' },\n    { u: 1, t: 'O player não carrega no celular, só no computador.' },\n    { u: 1, t: 'O material de apoio da aula 3 dá erro 404.' }\n  ],\n  comercial: [\n    { u: 1, compra: true, t: 'Coordeno o time de automação de uma seguradora e queremos uma turma fechada de Claude Code pra 15 analistas.' },\n    { u: 1, compra: true, t: 'Quero fazer o upgrade pro Harness Engineering, como faço o pagamento?' },\n    { u: 1, compra: true, t: 'Vocês emitem nota fiscal pra empresa? Quero comprar 3 acessos do n8n Expert Program.' },\n    { u: 1, compra: true, t: 'Tem desconto pra quem já é aluno? Se tiver eu fecho o Claude Code Engineering hoje.' },\n    { u: 1, compra: true, t: 'Qual o próximo lote da Fábrica de SaaS ao Vivo? Quero garantir minha vaga.' },\n    { u: 0, compra: false, t: 'Quanto custa?' },\n    { u: 0, compra: false, t: 'Vocês parcelam?' }\n  ],\n  conteudo: [\n    { u: 0, t: 'Sugestão: uma aula sobre como versionar workflows do n8n com Git.' },\n    { u: 0, t: 'Adorei a aula de Harness Engineering, dá pra ter uma parte 2 sobre avaliação de agentes?' },\n    { u: 0, t: 'Qual a diferença conceitual entre o AI Agent do n8n e um agente no Claude Code?' },\n    { u: 0, t: 'A explicação de RAG no módulo 5 ficou confusa pra mim, podiam refazer com um exemplo?' },\n    { u: 0, t: 'Faltou falar de custo de tokens na aula de agentes.' },\n    { u: 0, t: 'Vocês recomendam algum livro sobre arquitetura de agentes?' }\n  ],\n  indefinido: [\n    { u: 0, t: 'oi, tudo bem?' }, { u: 0, t: 'bom dia' }, { u: 0, t: 'alguém aí?' },\n    { u: 0, t: 'ok' }, { u: 0, t: 'obrigado!' }, { u: 0, t: '👍' }\n  ]\n};\nconst PESOS = [['suporte_tecnico', 0.30], ['acesso_plataforma', 0.25], ['comercial', 0.18], ['conteudo', 0.15], ['indefinido', 0.12]];\nconst sorteiaRota = () => {\n  const r = rnd(); let acc = 0;\n  for (const [rota, peso] of PESOS) { acc += peso; if (r < acc) return rota; }\n  return 'indefinido';\n};\n\nconst out = [];\nfor (let i = 0; i < N; i++) {\n  const rota = sorteiaRota();\n  const base = pick(CATALOGO[rota]);\n  let urgencia = base.u, evasao = false;\n  let texto = rota === 'indefinido'\n    ? base.t\n    : [pick(ABERTURAS), base.t, pick(base.u >= 4 ? FECHOS_CRITICOS : FECHOS)].filter(Boolean).join(' ');\n  if ((rota === 'suporte_tecnico' || rota === 'acesso_plataforma') && rnd() < 0.18) {\n    texto += ' ' + pick(FRUSTRACAO);\n    evasao = true;\n    urgencia = Math.max(urgencia, 2);\n  }\n  const mensagens = [{ de: 'aluno', texto }];\n  if (rota !== 'indefinido' && rnd() < 0.25) {\n    mensagens.push({ de: 'suporte', texto: pick(RESPOSTAS_SUPORTE) }, { de: 'aluno', texto: pick(FOLLOW_UPS) });\n  }\n  const lead = rota === 'comercial' && rnd() < 0.4;\n  out.push({ json: {\n    id: 'msg_' + String(i + 1).padStart(4, '0'),\n    canal: pick(CANAIS),\n    produto: lead ? null : pick(PRODUTOS),\n    aluno_desde: lead ? null : '2026-' + String(1 + Math.floor(rnd() * 9)).padStart(2, '0'),\n    mensagens,\n    gabarito: { rota, urgencia, evasao, compra: !!base.compra }\n  }});\n}\nreturn out;\n"},"id":"8cf4731e-538f-59c2-9bdf-4536cfe8b86c","name":"Gera N mensagens","type":"n8n-nodes-base.code","typeVersion":2,"position":[440,0]},{"parameters":{"batchSize":"={{ $('Configuração').first().json.lote }}","options":{}},"id":"11f9d0fa-6b04-57cd-8f8c-f8798364335d","name":"Loop Jev","type":"n8n-nodes-base.splitInBatches","typeVersion":3,"position":[680,0]},{"parameters":{"jsCode":"// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: 'jev-latest',\n  state: estado(r),\n  questions: {\n    rota: { type: 'choice', instructions: 'Para qual fila da Flowgrammers esta conversa deve ir agora?', criteria: ROTAS },\n    urgencia: { type: 'score', instructions: 'Qual a urgência deste atendimento?', criteria: URGENCIA },\n    risco_churn: { type: 'noul', instructions: P_EVASAO },\n    intencao_compra: { type: 'noul', instructions: P_COMPRA }\n  }\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_jev: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_jev = t0;\nreturn itens;\n"},"id":"1b9ea277-2d0b-59eb-96ff-23051ba3d886","name":"⏱ Jev início","type":"n8n-nodes-base.code","typeVersion":2,"position":[880,240]},{"parameters":{"method":"POST","url":"https://api.typesafe.ai/v1/systemone","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json._req_jev) }}","options":{"timeout":15000},"authentication":"genericCredentialType","genericAuthType":"httpHeaderAuth"},"id":"c4f4c579-5dbb-5c3d-a06c-0a70c24d56f3","name":"Jev · System One","type":"n8n-nodes-base.httpRequest","typeVersion":4.5,"position":[1100,240],"onError":"continueRegularOutput"},{"parameters":{"mode":"runOnceForEachItem","jsCode":"// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ Jev início').item.json };\nconst req = rec._req_jev;\nconst res = $json;\nlet partes = null;\ntry { partes = (() => {\n  const a = res.answers ?? {};\n  const rota = a.rota ?? {};\n  const p = rota.probabilities ?? {};\n  // contrato do Choice: escolha válida, probabilidades somando ~1 e a escolha sendo a mais provável\n  const somaOk = Math.abs(Object.values(p).reduce((x, y) => x + y, 0) - 1) <= 0.02;\n  if (!ROTAS_IDS.includes(rota.choice) || !somaOk || p[rota.choice] < Math.max(...Object.values(p)) - 1e-6) return null;\n  return { rota: rota.choice, urgencia: a.urgencia?.score, risco_churn: a.risco_churn?.noul, intencao_compra: a.intencao_compra?.noul };\n})(); } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\n// Se a API não devolver usage, estimamos (≈ 4 caracteres por token) e marcamos como estimado.\nr.tokens_estimados = !(res.usage && (res.usage.input_tokens ?? res.usage.prompt_tokens) != null);\nr.t0 = rec._t0_jev;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.input_tokens ?? res.usage?.prompt_tokens ?? Math.ceil(JSON.stringify(req).length / 4));\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.output_tokens ?? res.usage?.completion_tokens ?? 0);\ndelete rec._req_jev;\ndelete rec._t0_jev;\nreturn { json: { ...rec, jev: r } };\n"},"id":"6ed9c3ed-0917-5578-827a-11ca7b7b953e","name":"⏱ Jev fim","type":"n8n-nodes-base.code","typeVersion":2,"position":[1320,240]},{"parameters":{"content":"### Como medimos\n- **Loop Over Items** com o mesmo `lote` pros dois lados = mesma concorrência\n- Relógio liga depois de montar o body e desliga quando o lote volta\n- **Tempo de fila** = do 1º envio à última resposta\n- **Custo** = `usage` devolvido pela API × preço da Configuração\n- **Acurácia** = rota igual ao gabarito; alertas com limiar 0,7\n- Sem retry automático: erro vira linha no relatório","height":340,"width":420,"color":7},"id":"3f196b53-bcc3-5a2e-b256-98906deb88f6","name":"Como medimos","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[620,-400]},{"parameters":{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"fd1bdf28-016b-5dcc-b47c-6f2f01398f26","leftValue":"={{ $('Configuração').first().json.incluir_claude }}","rightValue":"","operator":{"type":"boolean","operation":"true","singleValue":true}}],"combinator":"and"},"looseTypeValidation":false,"options":{}},"id":"8ed2c679-1d42-53e1-b2bb-15d1e9372594","name":"Incluir Claude?","type":"n8n-nodes-base.if","typeVersion":2.3,"position":[1540,0]},{"parameters":{"batchSize":"={{ $('Configuração').first().json.lote }}","options":{}},"id":"1cc19579-9bae-5b8e-82e0-587fbee1b925","name":"Loop Claude","type":"n8n-nodes-base.splitInBatches","typeVersion":3,"position":[1760,-60]},{"parameters":{"jsCode":"// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: cfg.modelo_claude,\n  max_tokens: 300,\n  temperature: 0,\n  system: SYSTEM + '\\nResponda sempre chamando a ferramenta registrar_triagem.',\n  tools: [{\n    name: 'registrar_triagem',\n    description: 'Registra a triagem da conversa do aluno.',\n    input_schema: {\n      type: 'object',\n      properties: {\n        rota: { type: 'string', enum: Object.keys(ROTAS) },\n        urgencia: { type: 'integer', minimum: 0, maximum: 4 },\n        risco_churn: { type: 'number', minimum: 0, maximum: 1 },\n        intencao_compra: { type: 'number', minimum: 0, maximum: 1 }\n      },\n      required: ['rota', 'urgencia', 'risco_churn', 'intencao_compra']\n    }\n  }],\n  tool_choice: { type: 'tool', name: 'registrar_triagem' },\n  messages: [{ role: 'user', content: JSON.stringify(estado(r)) }]\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_claude: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_claude = t0;\nreturn itens;\n"},"id":"6dd211ad-da01-5f45-8dda-5d1c4beda124","name":"⏱ Claude início","type":"n8n-nodes-base.code","typeVersion":2,"position":[1960,240]},{"parameters":{"method":"POST","url":"https://api.anthropic.com/v1/messages","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json._req_claude) }}","options":{"timeout":60000},"sendHeaders":true,"headerParameters":{"parameters":[{"name":"anthropic-version","value":"2023-06-01"}]},"authentication":"predefinedCredentialType","nodeCredentialType":"anthropicApi"},"id":"44b7413a-678b-5e97-8615-dce1880987e5","name":"Claude Haiku · tool use","type":"n8n-nodes-base.httpRequest","typeVersion":4.5,"position":[2180,240],"onError":"continueRegularOutput"},{"parameters":{"mode":"runOnceForEachItem","jsCode":"// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ Claude início').item.json };\nconst req = rec._req_claude;\nconst res = $json;\nlet partes = null;\ntry { partes = (res.content ?? []).find(c => c.type === 'tool_use')?.input ?? null; } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\nr.t0 = rec._t0_claude;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.input_tokens ?? 0);\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.output_tokens ?? 0);\ndelete rec._req_claude;\ndelete rec._t0_claude;\nreturn { json: { ...rec, claude: r } };\n"},"id":"ae1d8304-a424-52f1-9ae0-ca7888839133","name":"⏱ Claude fim","type":"n8n-nodes-base.code","typeVersion":2,"position":[2400,240]},{"parameters":{"content":"### Rate limit\nTier 1 da Anthropic = 50 req/min. Se aparecer erro 429, use `lote = 1` e até 40 registros, ou suba de tier.\n\nLimites do Jev: confira no painel da TypeSafe.","height":300,"width":380,"color":3},"id":"665fdc59-0ec1-5488-8fa5-33b8d2d9f69e","name":"Rate limit","type":"n8n-nodes-base.stickyNote","typeVersion":1,"position":[1700,-400]},{"parameters":{"conditions":{"options":{"caseSensitive":true,"leftValue":"","typeValidation":"strict","version":3},"conditions":[{"id":"84528aa6-4a7b-54c9-9445-e268342b3e9c","leftValue":"={{ $('Configuração').first().json.incluir_gpt }}","rightValue":"","operator":{"type":"boolean","operation":"true","singleValue":true}}],"combinator":"and"},"looseTypeValidation":false,"options":{}},"id":"d48410e4-f7ff-552e-b7ec-5bcd1d5ec975","name":"Incluir GPT?","type":"n8n-nodes-base.if","typeVersion":2.3,"position":[2620,0]},{"parameters":{"batchSize":"={{ $('Configuração').first().json.lote }}","options":{}},"id":"5f452d36-8c7b-531c-bc20-9676e2fcb866","name":"Loop GPT","type":"n8n-nodes-base.splitInBatches","typeVersion":3,"position":[2840,-60]},{"parameters":{"jsCode":"// Monta a requisição de cada mensagem do lote e marca o início do relógio.\n// O relógio fica DEPOIS de montar o body: medimos só rede + modelo.\nconst cfg = $('Configuração').first().json;\nconst ROTAS = {\n  suporte_tecnico: 'Erro ou dúvida técnica concreta em n8n, agentes de IA, Claude Code, código ou infraestrutura do aluno',\n  acesso_plataforma: 'Login, acesso a aulas, certificado, matrícula, live ou instabilidade da plataforma Flowgrammers',\n  comercial: 'Quer comprar, fazer upgrade, turma para empresa, preço ou proposta',\n  conteudo: 'Sugestão de aula, feedback sobre conteúdo ou dúvida conceitual sem erro concreto',\n  indefinido: 'A conversa não traz informação suficiente para decidir a fila'\n};\nconst URGENCIA = [\n  'Nenhuma: cumprimento, elogio ou sugestão',\n  'Baixa: pode esperar até 2 dias úteis',\n  'Média: atrapalha o estudo, mas existe contorno',\n  'Alta: impede o aluno de continuar',\n  'Crítica: sistema em produção parado ou cliente do aluno impactado'\n];\nconst P_EVASAO = 'O aluno demonstra frustração forte ou intenção de cancelar, pedir reembolso ou abandonar o curso?';\nconst P_COMPRA = 'Há sinais consistentes de intenção de compra (novo curso, upgrade ou turma para empresa)? Uma pergunta genérica isolada sobre preço não conta.';\nconst estado = r => ({ canal: r.canal, produto: r.produto, aluno_desde: r.aluno_desde, mensagens: r.mensagens });\nconst SYSTEM = [\n  'Você faz a triagem de mensagens de alunos da Flowgrammers, escola de IA e automação.',\n  'Filas possíveis (campo rota):',\n  ...Object.entries(ROTAS).map(([k, v]) => `- ${k}: ${v}`),\n  'Urgência (campo urgencia, inteiro de 0 a 4):',\n  ...URGENCIA.map((v, i) => `- ${i}: ${v}`),\n  `risco_churn: probabilidade de 0 a 1. ${P_EVASAO}`,\n  `intencao_compra: probabilidade de 0 a 1. ${P_COMPRA}`\n].join('\\n');\n\nconst corpo = r => ({\n  model: cfg.modelo_gpt,\n  temperature: 0,\n  messages: [\n    { role: 'system', content: SYSTEM + '\\nResponda somente com o JSON pedido.' },\n    { role: 'user', content: JSON.stringify(estado(r)) }\n  ],\n  response_format: {\n    type: 'json_schema',\n    json_schema: {\n      name: 'triagem',\n      strict: true,\n      schema: {\n        type: 'object',\n        properties: {\n          rota: { type: 'string', enum: Object.keys(ROTAS) },\n          urgencia: { type: 'integer', description: '0 a 4' },\n          risco_churn: { type: 'number', description: 'probabilidade de 0 a 1' },\n          intencao_compra: { type: 'number', description: 'probabilidade de 0 a 1' }\n        },\n        required: ['rota', 'urgencia', 'risco_churn', 'intencao_compra'],\n        additionalProperties: false\n      }\n    }\n  }\n});\nconst itens = $input.all().map((item, i) => ({\n  json: { ...item.json, _req_gpt: corpo(item.json) },\n  pairedItem: i\n}));\nconst t0 = Date.now();\nfor (const it of itens) it.json._t0_gpt = t0;\nreturn itens;\n"},"id":"400cf1ca-77a6-506d-adfc-885d2b88922c","name":"⏱ GPT início","type":"n8n-nodes-base.code","typeVersion":2,"position":[3040,240]},{"parameters":{"method":"POST","url":"https://api.openai.com/v1/chat/completions","sendBody":true,"specifyBody":"json","jsonBody":"={{ JSON.stringify($json._req_gpt) }}","options":{"timeout":60000},"authentication":"predefinedCredentialType","nodeCredentialType":"openAiApi"},"id":"2c57fd86-ff5a-5e20-ae18-d274b7409eb5","name":"GPT-4.1 mini · JSON schema","type":"n8n-nodes-base.httpRequest","typeVersion":4.5,"position":[3260,240],"onError":"continueRegularOutput"},{"parameters":{"mode":"runOnceForEachItem","jsCode":"// Para o relógio, valida a resposta e guarda tokens reais (usage) desta mensagem.\nconst t1 = Date.now();\nconst ROTAS_IDS = ['suporte_tecnico', 'acesso_plataforma', 'comercial', 'conteudo', 'indefinido'];\nconst num01 = v => (typeof v === 'number' && Number.isFinite(v) && v >= 0 && v <= 1 ? v : null);\nconst DICAS = { 401: 'credencial inválida', 403: 'sem permissão', 404: 'URL ou modelo errado', 429: 'rate limit: diminua o lote',\n  500: 'erro no provedor', 529: 'provedor sobrecarregado' };\nconst erroHttp = e => {\n  const m = (String(e?.stack ?? '') + ' ' + String(e?.description ?? '')).match(/status code (\\d{3})/);\n  const cod = m ? Number(m[1]) : (e?.httpCode ? Number(e.httpCode) : null);\n  return cod ? `HTTP ${cod}${DICAS[cod] ? ' · ' + DICAS[cod] : ''}` : String(e?.message ?? e).slice(0, 120);\n};\nconst resultado = (res, rec, partes) => {\n  const ok = !!partes && ROTAS_IDS.includes(partes.rota) && typeof partes.urgencia === 'number'\n    && num01(partes.risco_churn) !== null && num01(partes.intencao_compra) !== null;\n  return {\n    ok,\n    rota: ok ? partes.rota : null,\n    urgencia: ok ? partes.urgencia : null,\n    risco_churn: ok ? partes.risco_churn : null,\n    intencao_compra: ok ? partes.intencao_compra : null,\n    erro: ok ? null : (res.error ? erroHttp(res.error) : 'resposta fora do contrato')\n  };\n};\n\nconst rec = { ...$('⏱ GPT início').item.json };\nconst req = rec._req_gpt;\nconst res = $json;\nlet partes = null;\ntry { partes = JSON.parse(res.choices?.[0]?.message?.content ?? 'null'); } catch (e) { partes = null; }\nconst r = resultado(res, rec, partes);\nr.t0 = rec._t0_gpt;\nr.t1 = t1;\nr.tokens_entrada = r.erro && res.error ? 0 : (res.usage?.prompt_tokens ?? 0);\nr.tokens_saida = r.erro && res.error ? 0 : (res.usage?.completion_tokens ?? 0);\ndelete rec._req_gpt;\ndelete rec._t0_gpt;\nreturn { json: { ...rec, gpt: r } };\n"},"id":"b7d9b492-c251-504a-91ca-ebdee13bae90","name":"⏱ GPT fim","type":"n8n-nodes-base.code","typeVersion":2,"position":[3480,240]},{"parameters":{"jsCode":"// Consolida o benchmark: tempo de fila, vazão, latência por lote, tokens reais, custo e acurácia.\nconst cfg = $('Configuração').first().json;\nconst rows = $input.all().map(i => i.json);\nconst LIMIAR = Number(cfg.limiar_alerta) || 0.7;\n\nconst APELIDOS = { 'claude-haiku-4-5-20251001': 'Claude Haiku 4.5', 'gpt-4.1-mini': 'GPT-4.1 mini' };\nconst MODELOS = [\n  { key: 'jev', nome: 'Jev (TypeSafe)', sistema: 'Sistema 1', pin: cfg.preco_jev_entrada, pout: cfg.preco_jev_saida },\n  { key: 'claude', nome: APELIDOS[cfg.modelo_claude] ?? cfg.modelo_claude, sistema: 'Sistema 2', pin: cfg.preco_claude_entrada, pout: cfg.preco_claude_saida },\n  { key: 'gpt', nome: APELIDOS[cfg.modelo_gpt] ?? cfg.modelo_gpt, sistema: 'Sistema 2', pin: cfg.preco_gpt_entrada, pout: cfg.preco_gpt_saida }\n];\nconst soma = a => a.reduce((x, y) => x + y, 0);\nconst pctl = (arr, p) => {\n  if (!arr.length) return null;\n  const s = [...arr].sort((x, y) => x - y);\n  return s[Math.min(s.length - 1, Math.max(0, Math.ceil(p * s.length) - 1))];\n};\nconst r2 = (v, d = 2) => (v == null || !Number.isFinite(v) ? null : Math.round(v * 10 ** d) / 10 ** d);\n\nconst stats = [];\nfor (const m of MODELOS) {\n  const rs = rows.filter(r => r[m.key]);\n  if (!rs.length) continue;\n  const ok = rs.filter(r => r[m.key].ok);\n  const t0 = Math.min(...rs.map(r => r[m.key].t0));\n  const t1 = Math.max(...rs.map(r => r[m.key].t1));\n  const lotes = {};\n  for (const r of rs) {\n    const x = r[m.key];\n    lotes[x.t0] = Math.max(lotes[x.t0] ?? 0, x.t1 - x.t0);\n  }\n  const lat = Object.values(lotes);\n  const tin = soma(ok.map(r => r[m.key].tokens_entrada || 0));\n  const tout = soma(ok.map(r => r[m.key].tokens_saida || 0));\n  const custo = tin / 1e6 * Number(m.pin || 0) + tout / 1e6 * Number(m.pout || 0);\n  const porMil = ok.length ? custo / ok.length * 1000 : null;\n  const acertoRota = ok.filter(r => r[m.key].rota === r.gabarito.rota).length;\n  const acertoAlertas = ok.filter(r =>\n    (r[m.key].risco_churn >= LIMIAR) === r.gabarito.evasao && (r[m.key].intencao_compra >= LIMIAR) === r.gabarito.compra\n  ).length;\n  const estimado = m.key === 'jev' && ok.some(r => r[m.key].tokens_estimados);\n  const erros = rs.filter(r => !r[m.key].ok);\n  const porTipo = {};\n  for (const r of erros) porTipo[r[m.key].erro] = (porTipo[r[m.key].erro] ?? 0) + 1;\n  stats.push({\n    modelo: m.nome,\n    sistema: m.sistema,\n    registros: rs.length,\n    respostas_validas: ok.length,\n    erros: erros.length,\n    tempo_fila_s: r2((t1 - t0) / 1000, 1),\n    mensagens_por_s: r2(rs.length / Math.max(0.001, (t1 - t0) / 1000), 1),\n    latencia_lote_p50_ms: pctl(lat, 0.5),\n    latencia_lote_p95_ms: pctl(lat, 0.95),\n    tokens_entrada: tin,\n    tokens_saida: tout,\n    custo_total_usd: r2(custo, 6),\n    custo_por_mil_usd: r2(porMil, 4),\n    projecao_100_mil_usd: r2(porMil == null ? null : porMil * 100, 2),\n    acuracia_rota_pct: ok.length ? r2(acertoRota / ok.length * 100, 1) : null,\n    acuracia_alertas_pct: ok.length ? r2(acertoAlertas / ok.length * 100, 1) : null,\n    observacao: [\n      estimado ? 'tokens do Jev estimados (API sem usage)' : null,\n      ...Object.entries(porTipo).map(([tipo, qtd]) => `${qtd}× ${tipo}`)\n    ].filter(Boolean).join(' · ') || null,\n    _key: m.key\n  });\n}\n\nconst jev = stats.find(s => s._key === 'jev');\nconst comparacoes = stats.filter(s => s._key !== 'jev' && jev).map(s => {\n  const both = rows.filter(r => r.jev?.ok && r[s._key]?.ok);\n  const iguais = both.filter(r => r.jev.rota === r[s._key].rota).length;\n  return {\n    comparacao: `Jev × ${s.modelo}`,\n    velocidade_x: jev.tempo_fila_s > 0 ? r2(s.tempo_fila_s / jev.tempo_fila_s, 1) : null,\n    custo_x: jev.custo_por_mil_usd > 0 ? r2(s.custo_por_mil_usd / jev.custo_por_mil_usd, 1) : null,\n    concordancia_rota_pct: both.length ? r2(iguais / both.length * 100, 1) : null\n  };\n});\n\nreturn [{ json: {\n  benchmark: {\n    registros: rows.length,\n    lote: Number(cfg.lote),\n    semente: cfg.semente,\n    executado_em: new Date().toISOString()\n  },\n  modelos: stats.map(({ _key, ...s }) => s),\n  comparacoes\n} }];\n"},"id":"8217ca8c-e721-5f1d-89fb-b1590e167eb3","name":"Relatório","type":"n8n-nodes-base.code","typeVersion":2,"position":[3720,0]},{"parameters":{"jsCode":"// Uma linha por modelo + uma linha por comparação: fica legível na visão de tabela do n8n.\nconst { modelos, comparacoes } = $json;\nreturn [...modelos, ...comparacoes].map(json => ({ json }));\n"},"id":"c7394b21-50e1-50e9-932d-5e1a73e3f2b0","name":"Tabela por modelo","type":"n8n-nodes-base.code","typeVersion":2,"position":[3960,-120]},{"parameters":{"jsCode":"// Monta o painel em HTML (o nó \"Painel do benchmark\" renderiza este HTML na aba de saída).\nconst { benchmark, modelos, comparacoes } = $json;\nconst esc = s => String(s ?? '').replace(/[&<>\"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;' }[c]));\nconst n = (v, d = 1) => v == null ? '—' : Number(v).toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });\nconst usd = v => v == null ? '—' : v < 0.01\n  ? 'US$ ' + Number(v).toLocaleString('pt-BR', { maximumSignificantDigits: 2 })\n  : 'US$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });\nconst PINK = '#e8006a', INK = '#0a0a0a', MUTED = '#5f5f6a', LINE = '#e2e2e8';\n\nconst barras = (titulo, campo, fmt, menorMelhor = true) => {\n  const vals = modelos.map(m => m[campo]).filter(v => v != null);\n  const max = Math.max(...vals, 1e-9);\n  return `<div style=\"margin:22px 0 6px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:${MUTED}\">${esc(titulo)}${menorMelhor ? ' · menor é melhor' : ' · maior é melhor'}<\/div>`\n    + modelos.map(m => {\n      const v = m[campo];\n      const w = v == null ? 0 : Math.max(1.5, v / max * 100);\n      const cor = m.sistema === 'Sistema 1' ? PINK : INK;\n      return `<div style=\"display:grid;grid-template-columns:200px 1fr 130px;gap:12px;align-items:center;margin:6px 0\">\n        <div style=\"font-weight:700\">${esc(m.modelo)}<div style=\"font-weight:500;font-size:12px;color:${MUTED}\">${esc(m.sistema)}<\/div><\/div>\n        <div style=\"height:22px;background:#f0f0f3;border-radius:6px;overflow:hidden\"><div style=\"height:100%;width:${w}%;background:${cor};border-radius:6px\"><\/div><\/div>\n        <div style=\"font-weight:900;font-size:18px;text-align:right;color:${cor}\">${fmt(v)}<\/div>\n      <\/div>`;\n    }).join('');\n};\n\nconst destaque = comparacoes.map(c =>\n  `<div style=\"background:${PINK};color:#fff;border-radius:12px;padding:14px 18px;margin:8px 0;font-weight:800;font-size:19px\">\n    ${esc(c.comparacao)}: Jev ${c.velocidade_x != null ? n(c.velocidade_x) + '× mais rápido' : '—'}\n    · ${c.custo_x != null ? n(c.custo_x) + '× mais barato' : '—'}\n    <span style=\"font-weight:500;font-size:14px;opacity:.9\"> · concordância de rota ${n(c.concordancia_rota_pct)}%<\/span>\n  <\/div>`).join('');\n\nconst linhas = [\n  ['Respostas válidas', m => `${m.respostas_validas}/${m.registros}`],\n  ['Erros', m => String(m.erros)],\n  ['Tempo de fila', m => n(m.tempo_fila_s) + ' s'],\n  ['Mensagens/s', m => n(m.mensagens_por_s)],\n  ['Latência por lote p50 / p95', m => `${m.latencia_lote_p50_ms ?? '—'} / ${m.latencia_lote_p95_ms ?? '—'} ms`],\n  ['Tokens entrada / saída', m => `${(m.tokens_entrada || 0).toLocaleString('pt-BR')} / ${(m.tokens_saida || 0).toLocaleString('pt-BR')}`],\n  ['Custo desta execução', m => usd(m.custo_total_usd)],\n  ['Custo por 1.000', m => usd(m.custo_por_mil_usd)],\n  ['Projeção 100 mil/mês', m => usd(m.projecao_100_mil_usd)],\n  ['Acurácia da rota', m => n(m.acuracia_rota_pct) + '%'],\n  ['Acurácia dos alertas', m => n(m.acuracia_alertas_pct) + '%']\n];\nconst tabela = `<table style=\"width:100%;border-collapse:collapse;margin-top:26px;font-size:14px\">\n  <tr><th style=\"text-align:left;padding:8px;border-bottom:2px solid ${INK};font:700 11px 'JetBrains Mono',monospace;color:${MUTED};text-transform:uppercase\">Métrica<\/th>\n  ${modelos.map(m => `<th style=\"text-align:right;padding:8px;border-bottom:2px solid ${INK};color:${m.sistema === 'Sistema 1' ? PINK : INK}\">${esc(m.modelo)}<\/th>`).join('')}<\/tr>\n  ${linhas.map(([rot, f]) => `<tr><td style=\"padding:7px 8px;border-bottom:1px solid ${LINE}\">${rot}<\/td>${modelos.map(m => `<td style=\"padding:7px 8px;border-bottom:1px solid ${LINE};text-align:right;font-weight:700\">${esc(f(m))}<\/td>`).join('')}<\/tr>`).join('')}\n<\/table>`;\n\nconst obs = modelos.filter(m => m.observacao).map(m => `<li>${esc(m.modelo)}: ${esc(m.observacao)}<\/li>`).join('');\n\nconst html = `<div style=\"font-family:Barlow,'Segoe UI',system-ui,sans-serif;color:${INK};background:#fff;padding:26px 28px;max-width:980px\">\n  <div style=\"font:700 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:${PINK}\">Flowgrammers · Benchmark Sistema 1 × Sistema 2<\/div>\n  <div style=\"font-weight:900;font-size:34px;line-height:1.05;margin:6px 0 4px\">${benchmark.registros} mensagens · lote de ${benchmark.lote}<\/div>\n  <div style=\"color:${MUTED};margin-bottom:14px\">Mesmo dataset, mesmas perguntas, mesma concorrência. Custo = tokens devolvidos pela API × preços da Configuração.<\/div>\n  ${destaque}\n  ${barras('Tempo de fila (s)', 'tempo_fila_s', v => n(v) + ' s')}\n  ${barras('Custo por 1.000 mensagens', 'custo_por_mil_usd', usd)}\n  ${barras('Acurácia da rota (%)', 'acuracia_rota_pct', v => n(v) + '%', false)}\n  ${tabela}\n  ${obs ? `<ul style=\"color:${MUTED};font-size:13px;margin-top:14px\">${obs}<\/ul>` : ''}\n  <div style=\"color:${MUTED};font-size:12px;margin-top:16px\">Gabarito sintético, semente ${esc(benchmark.semente)}. Tempos incluem a sua rede até cada API. Rode mais de uma vez antes de tirar conclusão.<\/div>\n<\/div>`;\nreturn [{ json: { html } }];\n"},"id":"f24d51e0-d724-59e7-8a4d-96827521a813","name":"Monta painel","type":"n8n-nodes-base.code","typeVersion":2,"position":[3960,120]},{"parameters":{"html":"{{ $json.html }}"},"id":"e9ec5a79-0072-5996-a77f-27758215c6ac","name":"Painel do benchmark","type":"n8n-nodes-base.html","typeVersion":1.2,"position":[4180,120]}],"connections":{"Rodar benchmark":{"main":[[{"node":"Configuração","type":"main","index":0}]]},"Configuração":{"main":[[{"node":"Gera N mensagens","type":"main","index":0}]]},"Gera N mensagens":{"main":[[{"node":"Loop Jev","type":"main","index":0}]]},"Loop Jev":{"main":[[{"node":"Incluir Claude?","type":"main","index":0}],[{"node":"⏱ Jev início","type":"main","index":0}]]},"⏱ Jev início":{"main":[[{"node":"Jev · System One","type":"main","index":0}]]},"Jev · System One":{"main":[[{"node":"⏱ Jev fim","type":"main","index":0}]]},"⏱ Jev fim":{"main":[[{"node":"Loop Jev","type":"main","index":0}]]},"Incluir Claude?":{"main":[[{"node":"Loop Claude","type":"main","index":0}],[{"node":"Incluir GPT?","type":"main","index":0}]]},"Loop Claude":{"main":[[{"node":"Incluir GPT?","type":"main","index":0}],[{"node":"⏱ Claude início","type":"main","index":0}]]},"⏱ Claude início":{"main":[[{"node":"Claude Haiku · tool use","type":"main","index":0}]]},"Claude Haiku · tool use":{"main":[[{"node":"⏱ Claude fim","type":"main","index":0}]]},"⏱ Claude fim":{"main":[[{"node":"Loop Claude","type":"main","index":0}]]},"Incluir GPT?":{"main":[[{"node":"Loop GPT","type":"main","index":0}],[{"node":"Relatório","type":"main","index":0}]]},"Loop GPT":{"main":[[{"node":"Relatório","type":"main","index":0}],[{"node":"⏱ GPT início","type":"main","index":0}]]},"⏱ GPT início":{"main":[[{"node":"GPT-4.1 mini · JSON schema","type":"main","index":0}]]},"GPT-4.1 mini · JSON schema":{"main":[[{"node":"⏱ GPT fim","type":"main","index":0}]]},"⏱ GPT fim":{"main":[[{"node":"Loop GPT","type":"main","index":0}]]},"Relatório":{"main":[[{"node":"Tabela por modelo","type":"main","index":0},{"node":"Monta painel","type":"main","index":0}]]},"Monta painel":{"main":[[{"node":"Painel do benchmark","type":"main","index":0}]]}},"pinData":{},"settings":{"executionOrder":"v1"},"meta":{"templateCredsSetupCompleted":false},"tags":[]}}}</script>
+<script>
+/* Workflows n8n embutidos: cada botão baixa ou copia o workflow indicado em data-wf-download / data-wf-copy */
+(function () {
+  const bundle = JSON.parse(document.getElementById('n8n-workflows').textContent);
+  const texto = key => JSON.stringify(bundle[key].workflow, null, 2);
+  document.querySelectorAll('[data-wf-download]').forEach(btn => btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const key = btn.dataset.wfDownload;
+    const url = URL.createObjectURL(new Blob([texto(key)], { type: 'application/json' }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: bundle[key].arquivo });
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }));
+  document.querySelectorAll('[data-wf-copy]').forEach(btn => btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+    const value = texto(btn.dataset.wfCopy);
+    try { await navigator.clipboard.writeText(value); }
+    catch (_) {
+      const t = Object.assign(document.createElement('textarea'), { value });
+      t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
+    }
+    const label = btn.textContent;
+    btn.textContent = 'Copiado ✓ cole no canvas do n8n';
+    setTimeout(() => { btn.textContent = label; }, 2200);
+  }));
+})();
+</script>
+<!-- N8N_WORKFLOW:END -->
+</body>
+</html>

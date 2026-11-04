@@ -90,6 +90,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "21st-sdk/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "jev/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
