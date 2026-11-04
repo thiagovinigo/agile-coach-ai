@@ -80,6 +80,9 @@ window.onerror = function(msg, url, line, col, error) {
 
                 <div class="nav-group">
                     <div class="nav-group-title">Agentes & Ferramentas</div>
+                    <a href="#project-nomad" class="nav-item" data-target="project-nomad-view" style="color: #0284c7; font-weight: bold;">
+                        <span class="icon">🧭</span> Project NOMAD (Offline AI)
+                    </a>
                     <a href="#demos-scraping" class="nav-item" data-target="demos-scraping-view" style="color: #f59e0b; font-weight: bold;">
                         <span class="icon">🕷️</span> Demos Playwright & Scraping
                     </a>
@@ -246,6 +249,7 @@ window.onerror = function(msg, url, line, col, error) {
                 <div id="demos-rag-view" class="view kb-view"></div>
                 <div id="demos-cicd-view" class="view kb-view"></div>
                 <div id="demos-scraping-view" class="view kb-view"></div>
+                <div id="project-nomad-view" class="view kb-view"></div>
                 <div id="pm-skills-view" class="view kb-view"></div>
                 <div id="banana-slides-view" class="view kb-view"></div>
                 <div id="nj-mmo-view" class="view kb-view"></div>
@@ -341,6 +345,8 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="demos_cicd_view.js?v=20261030"></script>
     <script src="demos-scraping-data.js?v=20261030"></script>
     <script src="demos_scraping_view.js?v=20261030"></script>
+    <script src="project-nomad-data.js?v=20261104"></script>
+    <script src="project_nomad_view.js?v=20261104"></script>
     <script>
         if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
         if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');

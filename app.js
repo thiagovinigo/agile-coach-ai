@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (!e.isTrusted) return;
         const clickedNav = e.target.closest(
-            '.kb-nav-btn, .nav-item, .tool-tab-btn, .ruflo-tab-btn, .fr-mode-btn, .dr-mode-btn, .dc-mode-btn, .ds-mode-btn'
+            '.kb-nav-btn, .nav-item, .tool-tab-btn, .ruflo-tab-btn, .fr-mode-btn, .dr-mode-btn, .dc-mode-btn, .ds-mode-btn, .pn-mode-btn'
         );
         if (clickedNav) {
             window.scrollPortalToTop(true);

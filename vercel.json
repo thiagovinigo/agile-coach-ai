@@ -74,6 +74,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "project-nomad/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
