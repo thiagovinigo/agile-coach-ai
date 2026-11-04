@@ -82,6 +82,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "graphify/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "strix/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },

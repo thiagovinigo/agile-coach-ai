@@ -80,6 +80,12 @@ window.onerror = function(msg, url, line, col, error) {
 
                 <div class="nav-group">
                     <div class="nav-group-title">Agentes & Ferramentas</div>
+                    <a href="#strix" class="nav-item" data-target="strix-view" style="color: #10b981; font-weight: bold;">
+                        <span class="icon">🦉</span> Strix (AI Pentesting)
+                    </a>
+                    <a href="#graphify" class="nav-item" data-target="graphify-view" style="color: #8b5cf6; font-weight: bold;">
+                        <span class="icon">🕸️</span> Graphify (Knowledge Graph)
+                    </a>
                     <a href="#context7" class="nav-item" data-target="context7-view" style="color: #10b981; font-weight: bold;">
                         <span class="icon">📚</span> Context7 (Upstash Docs)
                     </a>
@@ -254,6 +260,8 @@ window.onerror = function(msg, url, line, col, error) {
                 <div id="demos-scraping-view" class="view kb-view"></div>
                 <div id="project-nomad-view" class="view kb-view"></div>
                 <div id="context7-view" class="view kb-view"></div>
+                <div id="graphify-view" class="view kb-view"></div>
+                <div id="strix-view" class="view kb-view"></div>
                 <div id="pm-skills-view" class="view kb-view"></div>
                 <div id="banana-slides-view" class="view kb-view"></div>
                 <div id="nj-mmo-view" class="view kb-view"></div>
@@ -353,6 +361,10 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="project_nomad_view.js?v=20261104v2"></script>
     <script src="context7-data.js?v=20261104v3"></script>
     <script src="context7_view.js?v=20261104v3"></script>
+    <script src="graphify-data.js?v=20261104v4"></script>
+    <script src="graphify_view.js?v=20261104v4"></script>
+    <script src="strix-data.js?v=20261104v4"></script>
+    <script src="strix_view.js?v=20261104v4"></script>
     <script>
         if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
         if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');
