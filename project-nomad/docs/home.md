@@ -8,7 +8,7 @@ Your personal offline knowledge server is ready to use.
 
 Think of it as having Wikipedia, Khan Academy, an AI assistant, and offline maps all in one place, running on hardware you control.
 
-![Command Center Dashboard](/docs/dashboard.webp)
+![Command Center Dashboard](dashboard.webp)
 
 ## What Can You Do?
 
@@ -50,7 +50,7 @@ Run a System Benchmark to see how your hardware performs and compare your NOMAD 
 
 **[Run Easy Setup →](/easy-setup)**
 
-Or explore the **[Getting Started Guide](/docs/getting-started)** for a walkthrough of all features.
+Or explore the **[Getting Started Guide](getting-started)** for a walkthrough of all features.
 
 ---
 
@@ -80,6 +80,6 @@ NOMAD works best when kept up to date while you have internet access. This ensur
 
 When you go offline, you'll have everything you need — the last synced versions of all your content.
 
-You can update on demand, or turn on **automatic updates** so NOMAD keeps its software, apps, and content current on its own while you have internet. See the **[Updates guide](/docs/updates)** for how it works.
+You can update on demand, or turn on **automatic updates** so NOMAD keeps its software, apps, and content current on its own while you have internet. See the **[Updates guide](updates)** for how it works.
 
 **[Check for Updates →](/settings/update)**

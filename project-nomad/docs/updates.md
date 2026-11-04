@@ -64,4 +64,4 @@ Want new features before they reach the stable release? Enable the **Early Acces
 
 Whatever you choose, the habit that matters most is simple: **update while you still have internet.** Whether you do it by hand or let automatic updates handle it, make sure your software and content are current before you head somewhere without a connection. When you're offline, you'll have the last synced versions of everything ready to go.
 
-**[Check for Updates →](/settings/update)** · **[See what's new in each version →](/docs/release-notes)**
+**[Check for Updates →](/settings/update)** · **[See what's new in each version →](release-notes)**

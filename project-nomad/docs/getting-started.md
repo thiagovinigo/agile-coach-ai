@@ -59,14 +59,14 @@ If this is your first time using NOMAD, the Easy Setup wizard will help you get 
 
 **[Launch Easy Setup →](/easy-setup)**
 
-![Easy Setup Wizard — Step 1: Choose your capabilities](/docs/easy-setup-step1.webp)
+![Easy Setup Wizard — Step 1: Choose your capabilities](easy-setup-step1.webp)
 
 The wizard walks you through four simple steps:
 1. **Capabilities** — Choose what to enable: Information Library, AI Assistant, Education Platform, Maps, Data Tools, and Notes
 2. **Maps** — Select geographic regions for offline maps
 3. **Content** — Choose curated content collections with Essential, Standard, or Comprehensive tiers
 
-![Content tiers — Essential, Standard, and Comprehensive](/docs/easy-setup-tiers.webp)
+![Content tiers — Essential, Standard, and Comprehensive](easy-setup-tiers.webp)
 4. **Review** — Confirm your selections and start downloading
 
 Depending on what you selected, downloads may take a while. You can monitor progress in the Settings area, continue using features that are already installed, or leave your server running overnight for large downloads.
@@ -113,7 +113,7 @@ The Education Platform provides complete educational courses that work offline.
 
 ### AI Assistant — Built-in Chat
 
-![AI Chat interface](/docs/ai-chat.webp)
+![AI Chat interface](ai-chat.webp)
 
 NOMAD includes a built-in AI chat interface powered by Ollama. It runs entirely on your server — no internet needed, no data sent anywhere.
 
@@ -139,7 +139,7 @@ NOMAD includes a built-in AI chat interface powered by Ollama. It runs entirely 
 
 ### Knowledge Base — Document-Aware AI
 
-![Knowledge Base upload interface](/docs/knowledge-base.webp)
+![Knowledge Base upload interface](knowledge-base.webp)
 
 The Knowledge Base lets you upload documents so the AI can reference them when answering your questions. It uses semantic search (RAG via Qdrant) to find relevant information from your uploaded files.
 
@@ -164,7 +164,7 @@ The Knowledge Base lets you upload documents so the AI can reference them when a
 
 ### Maps — Offline Navigation
 
-![Offline maps viewer](/docs/maps.webp)
+![Offline maps viewer](maps.webp)
 
 View maps without internet. Download the regions you need before going offline.
 
@@ -197,7 +197,7 @@ As your needs change, you can add more content anytime:
 
 ### Wikipedia Selector
 
-![Content Explorer — browse and download Wikipedia packages and curated collections](/docs/content-explorer.webp)
+![Content Explorer — browse and download Wikipedia packages and curated collections](content-explorer.webp)
 
 NOMAD includes a dedicated Wikipedia content management tool for browsing and downloading Wikipedia packages.
 
@@ -210,7 +210,7 @@ NOMAD includes a dedicated Wikipedia content management tool for browsing and do
 
 ### System Benchmark
 
-![System Benchmark with NOMAD Score and Builder Tag](/docs/benchmark.webp)
+![System Benchmark with NOMAD Score and Builder Tag](benchmark.webp)
 
 Test your hardware performance and see how your NOMAD build stacks up against the community.
 
@@ -233,7 +233,7 @@ While you have internet, periodically check for updates:
 
 Content updates (Wikipedia, maps, etc.) can be managed separately from software updates.
 
-**Automatic updates:** NOMAD can also keep itself current without you having to check. Software, installed apps, and content can each be set to update automatically on an opt-in basis, with safety checks and a time window you control. See the **[Updates guide](/docs/updates)** for the full picture.
+**Automatic updates:** NOMAD can also keep itself current without you having to check. Software, installed apps, and content can each be set to update automatically on an opt-in basis, with safety checks and a time window you control. See the **[Updates guide](updates)** for the full picture.
 
 **Early Access Channel:** Want the latest features before they hit stable? Enable the Early Access Channel from the Check for Updates page to receive release candidate builds. You can switch back to stable anytime.
 

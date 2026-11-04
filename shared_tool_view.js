@@ -52,6 +52,20 @@ function renderToolMarkdownTable(rows) {
 }
 
 function parseToolMarkdown(text, docPath, themeColor) {
+    text = (text || '').replace(/\r\n/g, '\n');
+    if (docPath && /\.(sh|yaml|yml|ts|js|py|sql|json)$/i.test(docPath)) {
+        const ext = docPath.split('.').pop().toLowerCase();
+        const escapedCode = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        return `
+            <div class="tool-code-container">
+                <div class="tool-code-header">
+                    <span>${ext} • ${docPath.split('/').pop()}</span>
+                    <button class="tool-copy-btn" onclick="copyToolCodeSnippet(this)">Copiar</button>
+                </div>
+                <pre class="tool-code-block"><code>${escapedCode}</code></pre>
+            </div>
+        `;
+    }
     text = text.replace(/^---[\s\S]*?---\s*/, '');
 
     const codeBlocks = [];
