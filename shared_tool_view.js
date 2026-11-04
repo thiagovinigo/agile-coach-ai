@@ -409,7 +409,7 @@ window.createStandardToolView = function(config) {
 
                 <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px;">
                     ${skill.path ? `
-                    <a href="${skill.path}" download="${skill.id}.md" style="background:${themeColor}; color:#fff; padding:9px 18px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.9rem; box-shadow:0 2px 4px ${themeColor}40; display:inline-flex; align-items:center; gap:6px;">
+                    <a href="${skill.path}" download="${skill.path.split('/').pop()}" style="background:${themeColor}; color:#fff; padding:9px 18px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.9rem; box-shadow:0 2px 4px ${themeColor}40; display:inline-flex; align-items:center; gap:6px;">
                         ⬇️ Baixar Arquivo
                     </a>
                     <a href="${skill.path}" target="_blank" style="background:#fff; color:#334155; padding:9px 18px; border-radius:6px; text-decoration:none; font-weight:700; font-size:0.9rem; border:1px solid #cbd5e1; display:inline-flex; align-items:center; gap:6px;">
