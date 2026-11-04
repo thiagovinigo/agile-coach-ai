@@ -78,6 +78,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "context7/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },
