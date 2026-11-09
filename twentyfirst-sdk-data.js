@@ -1,5 +1,5 @@
 // Dados completos do 21st Agents SDK (https://github.com/21st-dev/21st-sdk)
-const twentyFirstSdkData = {
+var twentyFirstSdkData = {
   "1. Início & Conceitos (Getting Started)": [
     {
       "id": "21st-readme",
@@ -532,3 +532,5 @@ const twentyFirstSdkData = {
     }
   ]
 };
+if (typeof window !== "undefined") window.twentyFirstSdkData = twentyFirstSdkData;
+if (typeof module !== "undefined") module.exports = twentyFirstSdkData;

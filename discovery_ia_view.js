@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initDiscoveryIaView();
-});
-
 function initDiscoveryIaView() {
-    if (typeof discoveryIaData === 'undefined' || !window.createStandardToolView) return;
+    const data = typeof discoveryIaData !== 'undefined' ? discoveryIaData : window.discoveryIaData;
+    if (!data || !window.createStandardToolView) return;
 
     window.createStandardToolView({
         containerId: 'discovery-ia-view',
@@ -35,7 +32,7 @@ function initDiscoveryIaView() {
             { id: '7. Downloads', label: '📦 Downloads & Skills (1)' },
             { id: 'cheatsheet', label: '🚀 Checklist Rápido de 2 Horas' }
         ],
-        data: discoveryIaData,
+        data: data,
         cheatsheetHtml: `
             <div style="padding:10px 20px 40px; background:#fff; min-height:100%; border-radius:12px;">
                 <div style="margin-bottom:24px; border-bottom:2px solid #e2e8f0; padding-bottom:16px;">
@@ -110,3 +107,10 @@ B8 · Fechamento (5 min)             -> Recap 3 achados + agendamento de 15 min<
         `
     });
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDiscoveryIaView);
+} else {
+    initDiscoveryIaView();
+}
+window.renderDiscoveryIaView = initDiscoveryIaView;

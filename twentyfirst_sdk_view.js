@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initTwentyFirstSdkView();
-});
-
 function initTwentyFirstSdkView() {
-    if (typeof twentyFirstSdkData === 'undefined' || !window.createStandardToolView) return;
+    const data = typeof twentyFirstSdkData !== 'undefined' ? twentyFirstSdkData : window.twentyFirstSdkData;
+    if (!data || !window.createStandardToolView) return;
 
     window.createStandardToolView({
         containerId: 'twentyfirst-sdk-view',
@@ -35,7 +32,7 @@ function initTwentyFirstSdkView() {
             { id: '7. Pacotes SDK', label: '📦 Pacotes SDK & Runtime (19)' },
             { id: 'cheatsheet', label: '⚡ Quickstart, CLI & Self-Hosting' }
         ],
-        data: twentyFirstSdkData,
+        data: data,
         cheatsheetHtml: `
             <div style="padding:10px 20px 40px; background:#fff; min-height:100%; border-radius:12px;">
                 <div style="margin-bottom:24px; border-bottom:2px solid #e2e8f0; padding-bottom:16px;">
@@ -122,3 +119,10 @@ pnpm --filter agents-web dev</code></pre>
         `
     });
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTwentyFirstSdkView);
+} else {
+    initTwentyFirstSdkView();
+}
+window.renderTwentyFirstSdkView = initTwentyFirstSdkView;

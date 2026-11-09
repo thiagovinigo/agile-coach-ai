@@ -1,5 +1,5 @@
 // Dados completos da metodologia de Discovery de IA e Automação (Flow Mastermind · Ric Neves)
-const discoveryIaData = {
+var discoveryIaData = {
   "1. Metodologia & Guia do Consultor": [
     {
       "id": "disc-visao-geral",
@@ -137,5 +137,5 @@ const discoveryIaData = {
     }
   ]
 };
-
 if (typeof window !== "undefined") window.discoveryIaData = discoveryIaData;
+if (typeof module !== "undefined") module.exports = discoveryIaData;

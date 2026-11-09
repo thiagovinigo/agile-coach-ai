@@ -1,5 +1,5 @@
 // Dados completos do Jev — A IA que Decide (TypeSafe System One · Mastermind Flowgrammers)
-const jevData = {
+var jevData = {
   "1. Fundamentos: Sistema 1 vs Sistema 2 (Kahneman)": [
     {
       "id": "jev-readme",
@@ -119,3 +119,5 @@ const jevData = {
     }
   ]
 };
+if (typeof window !== "undefined") window.jevData = jevData;
+if (typeof module !== "undefined") module.exports = jevData;

@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initJevView();
-});
-
 function initJevView() {
-    if (typeof jevData === 'undefined' || !window.createStandardToolView) return;
+    const data = typeof jevData !== 'undefined' ? jevData : window.jevData;
+    if (!data || !window.createStandardToolView) return;
 
     window.createStandardToolView({
         containerId: 'jev-view',
@@ -32,7 +29,7 @@ function initJevView() {
             { id: '4. Workflows n8n', label: '⚙️ Workflows n8n & Regra de Ouro (3)' },
             { id: 'cheatsheet', label: '🚀 Cheatsheet cURL, Hook & n8n' }
         ],
-        data: jevData,
+        data: data,
         cheatsheetHtml: `
             <div style="padding:10px 20px 40px; background:#fff; min-height:100%; border-radius:12px;">
                 <div style="margin-bottom:24px; border-bottom:2px solid #e2e8f0; padding-bottom:16px;">
@@ -108,3 +105,10 @@ chmod +x .claude/hooks/jev_gate.py</code></pre>
         `
     });
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initJevView);
+} else {
+    initJevView();
+}
+window.renderJevView = initJevView;

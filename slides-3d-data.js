@@ -1,5 +1,5 @@
 // Dados completos do ecossistema de Preparação de Slides 3D & Apresentações Cinematográficas
-const slides3dData = {
+var slides3dData = {
   "1. Framework Cinematográfico (Cinematic Slides)": [
     {
       "id": "cs-skill-main",
@@ -333,5 +333,5 @@ const slides3dData = {
     }
   ]
 };
-
 if (typeof window !== "undefined") window.slides3dData = slides3dData;
+if (typeof module !== "undefined") module.exports = slides3dData;

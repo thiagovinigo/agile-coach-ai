@@ -1,9 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initSlides3dView();
-});
-
 function initSlides3dView() {
-    if (typeof slides3dData === 'undefined' || !window.createStandardToolView) return;
+    const data = typeof slides3dData !== 'undefined' ? slides3dData : window.slides3dData;
+    if (!data || !window.createStandardToolView) return;
 
     window.createStandardToolView({
         containerId: 'slides-3d-view',
@@ -34,7 +31,7 @@ function initSlides3dView() {
             { id: '6. Demo', label: '⚡ Demo Star Wars (5)' },
             { id: 'cheatsheet', label: '🚀 Cheatsheet de Criação 3D' }
         ],
-        data: slides3dData,
+        data: data,
         cheatsheetHtml: `
             <div style="padding:10px 20px 40px; background:#fff; min-height:100%; border-radius:12px;">
                 <div style="margin-bottom:24px; border-bottom:2px solid #e2e8f0; padding-bottom:16px;">
@@ -115,3 +112,10 @@ python iniciar.py
         `
     });
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlides3dView);
+} else {
+    initSlides3dView();
+}
+window.renderSlides3dView = initSlides3dView;
