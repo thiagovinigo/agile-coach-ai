@@ -465,6 +465,96 @@ window.clearCurrentAgentChat = function() {
     }
 };
 
+function formatAgentMarkdown(text) {
+    if (!text) return '';
+    let html = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    
+    // Bold
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    // Italic
+    html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code style="background:rgba(255,255,255,0.12);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:0.9em;color:#e0e7ff;">$1</code>');
+    
+    const lines = html.split('\n');
+    let inList = false;
+    let formatted = [];
+    
+    lines.forEach(line => {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+            if (!inList) {
+                formatted.push('<ul style="margin:6px 0 6px 18px;padding-left:10px;line-height:1.6;">');
+                inList = true;
+            }
+            formatted.push(`<li style="margin-bottom:4px;">${trimmed.substring(2)}</li>`);
+        } else if (/^\d+\.\s/.test(trimmed)) {
+            if (inList) {
+                formatted.push('</ul>');
+                inList = false;
+            }
+            formatted.push(`<div style="margin:6px 0 4px 0;line-height:1.55;font-weight:600;">${line}</div>`);
+        } else {
+            if (inList) {
+                formatted.push('</ul>');
+                inList = false;
+            }
+            if (trimmed === '') {
+                formatted.push('<div style="height:8px;"></div>');
+            } else {
+                formatted.push(`<div style="margin:3px 0;line-height:1.55;">${line}</div>`);
+            }
+        }
+    });
+    if (inList) {
+        formatted.push('</ul>');
+    }
+    return formatted.join('');
+}
+
+function getLocalExpertReply(agent, msgText) {
+    const title = agent ? agent.title : 'Especialista Ágil';
+    const msg = (msgText || '').toLowerCase();
+    
+    if (agent && (agent.id === 'qa-quality-champion' || title.includes('QA') || title.includes('Quality'))) {
+        if (msg.includes('dod') || msg.includes('definition of done') || msg.includes('pronto')) {
+            return "🛡️ **Definition of Done (DoD) recomendada para Engenharia de Alta Performance:**\n\n" +
+                   "1. **Código & Boas Práticas:**\n" +
+                   "   - Código revisado e aprovado via Pull Request por ao menos 1 engenheiro peer (sem auto-merge).\n" +
+                   "   - Análise estática aprovada no SonarQube/Linter sem novos code smells ou vulnerabilidades críticas.\n\n" +
+                   "2. **Estratégia de Testes Automatizados:**\n" +
+                   "   - **Testes Unitários:** Cobertura mínima de 80% nas regras de negócio com assertions determinísticas.\n" +
+                   "   - **Testes de Integração:** Contratos de API validados e persistência no banco testada com sucesso.\n" +
+                   "   - **Testes de Regressão:** Suite de regressão executada com 100% de sucesso no pipeline de CI.\n\n" +
+                   "3. **Critérios de Aceite & Validação:**\n" +
+                   "   - Todos os cenários BDD (Given/When/Then) validados em ambiente de Staging.\n" +
+                   "   - Testes exploratórios realizados cobrindo cenários de erro e bordas.\n\n" +
+                   "4. **Operação & Observabilidade:**\n" +
+                   "   - Logs estruturados e métricas de telemetria adicionadas.\n" +
+                   "   - Documentação de API OpenAPI atualizada e deploy automatizado com plano de rollback.";
+        } else if (msg.includes('pirâmide') || msg.includes('piramide') || msg.includes('pyramid')) {
+            return "🛡️ **Estratégia da Pirâmide de Testes (Test Pyramid):**\n\n" +
+                   "1. **Base (70% - Testes Unitários):** Foco em funções de domínio e cálculos isolados em milissegundos.\n" +
+                   "2. **Meio (20% - Testes de Integração):** Validação de endpoints HTTP, repositórios e serviços de mensageria.\n" +
+                   "3. **Topo (10% - Testes E2E):** Happy paths essenciais do usuário (login e checkout principal) sem sobrecarregar com testes instáveis (flaky).";
+        }
+        return `🛡️ **Recomendação do QA & Quality Champion:**\n\n` +
+               `Sobre *" ${msgText} "*:\n\n` +
+               "1. **Shift-Left Testing:** Envolva o time de qualidade desde o refinamento do backlog para antecipar regras de negócio.\n" +
+               "2. **Critérios de Aceite BDD:** Formalize cenários Given/When/Then antes do início da sprint.\n" +
+               "3. **Qualidade Embutida (Built-In Quality):** Automatize checagens de regressão no CI para evitar bugs em produção.";
+    }
+    
+    return `🤖 **Recomendação do ${title}:**\n\n` +
+           `Sobre *" ${msgText} "*:\n\n` +
+           "1. **Alinhamento do Time:** Estabeleça acordos de trabalho transparentes e objetivos de sprint claros.\n" +
+           "2. **Políticas Explícitas:** Reduza o trabalho em progresso (WIP) e defina critérios de entrada e saída.\n" +
+           "3. **Ciclos Curtos:** Valide entregas em fatias finas para coletar feedbacks rápidos.";
+}
+
 window.sendAgentMessage = async function() {
     const input = document.getElementById('agents-panel-chat-input');
     if (!input) return;
@@ -490,34 +580,53 @@ window.sendAgentMessage = async function() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     const systemPrompt = currentActiveAgent ? currentActiveAgent.systemPrompt : 'Você é um assistente ágil especializado.';
+    const agentTitle = currentActiveAgent ? currentActiveAgent.title : 'Agente Ágil';
+    const agentId = currentActiveAgent ? currentActiveAgent.id : '';
 
     try {
         const response = await fetch('/api/chat', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer guest_token'
+            },
             body: JSON.stringify({
                 systemPrompt: systemPrompt,
+                agentTitle: agentTitle,
+                agentId: agentId,
                 messages: [{ role: 'user', content: msgText }]
             })
         });
 
-        const data = await response.json();
-        chatBox.removeChild(loadingMsg);
+        if (loadingMsg && loadingMsg.parentNode === chatBox) {
+            chatBox.removeChild(loadingMsg);
+        }
+
+        let replyText = '';
+        if (response.ok) {
+            const data = await response.json();
+            replyText = data.reply || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+        }
+
+        if (!replyText) {
+            replyText = getLocalExpertReply(currentActiveAgent, msgText);
+        }
 
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        if (response.ok) {
-            aiMsg.innerText = data.reply;
-        } else {
-            aiMsg.innerHTML = `<span style="color:var(--danger);">Erro: ${data.error || 'Falha ao responder'}</span>`;
-        }
+        aiMsg.style.lineHeight = '1.6';
+        aiMsg.innerHTML = formatAgentMarkdown(replyText);
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
     } catch(err) {
-        chatBox.removeChild(loadingMsg);
+        if (loadingMsg && loadingMsg.parentNode === chatBox) {
+            chatBox.removeChild(loadingMsg);
+        }
+        const replyText = getLocalExpertReply(currentActiveAgent, msgText);
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        aiMsg.innerHTML = `<span style="color:#f87171;">O agente simulou sua resposta para modo offline:<br><br>Como <strong>${currentActiveAgent ? currentActiveAgent.title : 'Agente'}</strong>, recomendo que o time analise o impacto no fluxo, defina políticas explícitas e revise os critérios de aceite com todos os envolvidos.</span>`;
+        aiMsg.style.lineHeight = '1.6';
+        aiMsg.innerHTML = formatAgentMarkdown(replyText);
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
     }

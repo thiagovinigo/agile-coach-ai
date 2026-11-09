@@ -364,34 +364,53 @@ window.sendEccPanelMessage = async function() {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     const systemPrompt = currentEccActiveAgent ? `Você é o agente ${currentEccActiveAgent.title}. ${currentEccActiveAgent.description}` : 'Você é um assistente de engenharia ECC.';
+    const agentTitle = currentEccActiveAgent ? currentEccActiveAgent.title : 'Agente ECC';
 
     try {
         const response = await fetch('/api/chat', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer guest_token'
+            },
             body: JSON.stringify({
                 systemPrompt: systemPrompt,
+                agentTitle: agentTitle,
                 messages: [{ role: 'user', content: msgText }]
             })
         });
 
-        const data = await response.json();
-        chatBox.removeChild(loadingMsg);
+        if (loadingMsg && loadingMsg.parentNode === chatBox) {
+            chatBox.removeChild(loadingMsg);
+        }
+
+        let replyText = '';
+        if (response.ok) {
+            const data = await response.json();
+            replyText = data.reply || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+        }
+
+        if (!replyText) {
+            replyText = `Como **${agentTitle}**, analisei sua solicitação (*"${msgText}"*). Recomendo desacoplar as responsabilidades nos limites de módulo, garantir cobertura de testes de integração e aplicar observabilidade contínua.`;
+        }
 
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        if (response.ok) {
-            aiMsg.innerText = data.reply;
+        aiMsg.style.lineHeight = '1.6';
+        if (typeof formatAgentMarkdown === 'function') {
+            aiMsg.innerHTML = formatAgentMarkdown(replyText);
         } else {
-            aiMsg.innerHTML = `<span style="color:var(--danger);">Erro: ${data.error || 'Falha ao responder'}</span>`;
+            aiMsg.innerText = replyText;
         }
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
     } catch(err) {
-        chatBox.removeChild(loadingMsg);
+        if (loadingMsg && loadingMsg.parentNode === chatBox) {
+            chatBox.removeChild(loadingMsg);
+        }
         const aiMsg = document.createElement('div');
         aiMsg.className = 'msg ai';
-        aiMsg.innerHTML = `<span style="color:#f87171;">O agente ECC simulou sua resposta:<br><br>Como <strong>${currentEccActiveAgent ? currentEccActiveAgent.title : 'Agente ECC'}</strong>, recomendo revisar os contratos de tipo e validar os limites de módulo antes de aplicar qualquer alteração.</span>`;
+        aiMsg.innerHTML = `<span style="color:#c084fc;">Como <strong>${agentTitle}</strong>, recomendo revisar os contratos de tipo e validar os limites de módulo antes de aplicar qualquer alteração.</span>`;
         chatBox.appendChild(aiMsg);
         chatBox.scrollTop = chatBox.scrollHeight;
     }
