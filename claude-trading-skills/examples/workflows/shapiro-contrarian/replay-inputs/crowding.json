@@ -1,0 +1,38 @@
+{
+  "human_approved": true,
+  "fictional": true,
+  "report": {
+    "schema_version": "1.0",
+    "skill": "cot-contrarian-detector",
+    "run_context": {
+      "schema_version": "1.0",
+      "as_of": "2026-08-12",
+      "data_date": "2026-08-07"
+    },
+    "markets": [
+      {
+        "symbol": "B6",
+        "status": "ok",
+        "data_date": "2026-08-07",
+        "classification": "CROWDED_SHORT"
+      }
+    ],
+    "skipped": [],
+    "data_provenance": {
+      "schema_version": "1.0",
+      "provider": "fictional-fixture",
+      "endpoint": "synthetic-cot-crowding",
+      "retrieved_at": "2026-08-12T12:00:00Z",
+      "as_of": "2026-08-07",
+      "timezone": "America/New_York",
+      "adjusted": false,
+      "point_in_time": false,
+      "survivorship_free": false,
+      "corporate_actions_handled": false,
+      "as_of_basis": "oldest_analyzed_market_report",
+      "market_data_dates": {
+        "B6": "2026-08-07"
+      }
+    }
+  }
+}

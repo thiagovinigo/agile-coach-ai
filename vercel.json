@@ -5,7 +5,7 @@
       "src": "api/index.py",
       "use": "@vercel/python",
       "config": {
-        "excludeFiles": "{slides-3d/**,contexto/**,images/**,assets/**,strix/**,graphify/**,project-nomad/**,21st-sdk/**,jev/**,context7/**,banana-slides/**,openwiki/**,nj-mmo/**,flow-reels/**,demos-rag/**,demos-cicd/**,demos-scraping/**,agent-skills/**,pm-skills-claude-code/**,flowgrammers-skills-main/**,templates/**,spec-driven/**,ruflo/**,discovery-ia/**}"
+        "excludeFiles": "{claude-trading-skills/**,slides-3d/**,contexto/**,images/**,assets/**,strix/**,graphify/**,project-nomad/**,21st-sdk/**,jev/**,context7/**,banana-slides/**,openwiki/**,nj-mmo/**,flow-reels/**,demos-rag/**,demos-cicd/**,demos-scraping/**,agent-skills/**,pm-skills-claude-code/**,flowgrammers-skills-main/**,templates/**,spec-driven/**,ruflo/**,discovery-ia/**}"
       }
     },
     {
@@ -106,6 +106,10 @@
     },
     {
       "src": "discovery-ia/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "claude-trading-skills/**/*",
       "use": "@vercel/static"
     },
     {
