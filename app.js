@@ -83,6 +83,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetEl = document.getElementById(targetId);
         if(targetEl) {
             targetEl.classList.add('active');
+            if (targetId === 'agents-view' && typeof window.initAgentsView === 'function') {
+                if (targetEl.children.length === 0) {
+                    window.initAgentsView();
+                }
+            }
         }
         if (window.scrollPortalToTop) {
             window.scrollPortalToTop(false);

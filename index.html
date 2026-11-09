@@ -374,11 +374,11 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="superpowers_view.js?v=20261030"></script>
     <script src="gsd_view.js?v=20261030"></script>
     <script src="discovery_view.js?v=20261030"></script>
-    <script src="agents.js?v=20261030"></script>
+    <script src="agents.js?v=20261109v5"></script>
     <script src="ecc.js?v=20261030"></script>
-    <script src="templates_view.js?v=20261030"></script>
+    <script src="templates_view.js?v=20261109v5"></script>
     <script src="n8n_templates_data.js?v=20261104v5"></script>
-    <script src="n8n_templates_view.js?v=20261030"></script>
+    <script src="n8n_templates_view.js?v=20261109v5"></script>
     <script src="referencias_view.js?v=20261030"></script>
     <script src="facilitador_dinamicas_data.js?v=20261030"></script>
     <script src="facilitador_dinamicas_view.js?v=20261030"></script>
@@ -429,6 +429,7 @@ window.onerror = function(msg, url, line, col, error) {
     <script src="claude-trading-skills-data.js?v=20261109v1"></script>
     <script src="claude_trading_skills_view.js?v=20261109v1"></script>
     <script>
+        if (window.initAgentsView) window.initAgentsView();
         if (window.renderEccSkillsView) window.renderEccSkillsView('ecc-skills-view');
         if (window.renderSpecDrivenView) window.renderSpecDrivenView('spec-driven-view');
         if (window.renderRufloView) window.renderRufloView('ruflo-view');

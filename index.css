@@ -996,3 +996,20 @@ body {
 .tool-markdown-table tr:nth-child(even) td {
     background: #f8fafc;
 }
+
+/* RESPONSIVIDADE PARA KB-LAYOUT E SIDEBAR (MOBILE & TABLET) */
+@media (max-width: 900px) {
+    .kb-layout {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+    .kb-sidebar {
+        width: 100% !important;
+        max-height: 300px !important;
+        overflow-y: auto !important;
+    }
+    .kb-page-content {
+        width: 100% !important;
+        padding: 16px !important;
+    }
+}

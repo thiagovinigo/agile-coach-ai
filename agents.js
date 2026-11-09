@@ -1,6 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        initAgentsView();
+    });
+} else {
     initAgentsView();
-});
+}
 
 const agileAgentsCatalog = {
     "FACILITAÇÃO & AGILIDADE": [
@@ -315,6 +319,9 @@ function initAgentsView() {
                     document.querySelectorAll('#agents-view .kb-nav-btn').forEach(b => b.classList.remove('active'));
                     btn.classList.add('active');
                     loadAgentProfile(agent);
+                    if (window.innerWidth <= 900) {
+                        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
                 };
 
                 linkList.appendChild(btn);
@@ -331,16 +338,6 @@ function initAgentsView() {
 
     function loadAgentProfile(agent) {
         currentActiveAgent = agent;
-
-        let promptChips = '';
-        agent.suggestedPrompts.forEach(p => {
-            promptChips += `
-                <div style="background:#f1f5f9; border:1px solid #cbd5e1; border-radius:6px; padding:10px 14px; margin-bottom:8px; font-size:13.5px; color:#334155; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:space-between; gap:10px;" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'" onclick="sendSuggestedAgentPrompt('${p.replace(/'/g, "\\'")}')">
-                    <span>💡 <em>"${p}"</em></span>
-                    <span style="font-size:11px; font-weight:700; color:#6366f1; background:#e0e7ff; padding:3px 8px; border-radius:4px; white-space:nowrap;">Perguntar ➔</span>
-                </div>
-            `;
-        });
 
         contentArea.innerHTML = `
             <div style="padding:10px 20px 40px; background:#fff; min-height:100%; border-radius:12px;">
@@ -381,7 +378,7 @@ function initAgentsView() {
                         <h4 style="margin:0 0 10px 0; color:#0f172a; font-size:0.95rem; display:flex; align-items:center; gap:6px;">
                             <span>💡</span> Perguntas Sugeridas (Clique para Enviar)
                         </h4>
-                        ${promptChips}
+                        <div id="agent-suggested-chips-container"></div>
                     </div>
                 </div>
 
@@ -407,6 +404,19 @@ function initAgentsView() {
                 </div>
             </div>
         `;
+
+        const chipsBox = contentArea.querySelector('#agent-suggested-chips-container');
+        if (chipsBox && agent.suggestedPrompts) {
+            agent.suggestedPrompts.forEach(p => {
+                const chip = document.createElement('div');
+                chip.style.cssText = "background:#f1f5f9; border:1px solid #cbd5e1; border-radius:6px; padding:10px 14px; margin-bottom:8px; font-size:13.5px; color:#334155; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:space-between; gap:10px;";
+                chip.innerHTML = `<span>💡 <em>"${p.replace(/</g, '&lt;').replace(/>/g, '&gt;')}"</em></span><span style="font-size:11px; font-weight:700; color:#6366f1; background:#e0e7ff; padding:3px 8px; border-radius:4px; white-space:nowrap;">Perguntar ➔</span>`;
+                chip.onmouseover = () => chip.style.background = '#e2e8f0';
+                chip.onmouseout = () => chip.style.background = '#f1f5f9';
+                chip.onclick = () => window.sendSuggestedAgentPrompt(p);
+                chipsBox.appendChild(chip);
+            });
+        }
     }
 
     // Filter Buttons

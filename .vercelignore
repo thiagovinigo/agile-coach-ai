@@ -1,6 +1,7 @@
 # Ignore local scratch & temporary files
 scratch/
-temp*.js
+temp_*.js
+!templates_view.js
 *.pdf
 !contexto/discovery/*.pdf
 __pycache__/
