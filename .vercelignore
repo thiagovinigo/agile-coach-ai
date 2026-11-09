@@ -2,6 +2,7 @@
 scratch/
 temp*.js
 *.pdf
+!contexto/discovery/*.pdf
 __pycache__/
 .env
 .agents/
