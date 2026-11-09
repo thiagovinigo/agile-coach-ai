@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual do slide"
+  short_description: "Escolha como mostrar a mensagem de cada slide"

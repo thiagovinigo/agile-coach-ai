@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mensagem do slide"
+  short_description: "Defina mensagem, título e conteúdo de cada slide"

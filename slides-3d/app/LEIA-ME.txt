@@ -1,0 +1,1 @@
+Para abrir: extraia todos os arquivos e execute “Abrir no Mac.command” ou “Abrir no Windows.bat”. É necessário Python 3 instalado. O navegador abrirá automaticamente; mantenha a janela do inicializador aberta. Feche-a para encerrar.

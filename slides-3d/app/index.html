@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Galáctico — Cinco mundos de Star Wars</title>
+<meta name="description" content="Uma viagem cinematográfica interativa por cinco planetas icônicos de Star Wars.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="universe" aria-hidden="true"></canvas>
+<canvas id="hyperspace-intro" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<header class="topbar"><a class="brand" href="#" id="home" aria-label="Voltar à capa"><span class="brand-mark">✦</span><span>ATLAS<br>GALÁCTICO</span></a><div class="top-center">UMA VIAGEM POR CINCO MUNDOS</div><div class="top-right"><span class="live-dot"></span> ARQUIVO ESTELAR <span class="edition">/ 001</span></div></header>
+<main id="content" aria-live="polite"></main>
+<div class="planet-counter" id="counter">00 <span>/</span> 05</div>
+<div class="progress" id="progress"><span></span></div>
+<footer class="footer"><div class="hint"><span class="key">←</span><span class="key">→</span><span>NAVEGAR</span><span class="hint-sep">·</span><span>ROLE PARA VIAJAR</span></div><div class="controls"><button id="prev" aria-label="Cena anterior">←</button><button id="next" aria-label="Próxima cena">PRÓXIMO <span>→</span></button></div></footer>
+<div class="travel-label" id="travelLabel" aria-hidden="true"><span>HIPERESPAÇO</span><div class="travel-line"></div><small>TRAJETÓRIA EM CURSO</small></div>
+<script type="module" src="app.js"></script>
+</body></html>

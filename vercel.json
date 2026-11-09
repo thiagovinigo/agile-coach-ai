@@ -98,6 +98,14 @@
       "use": "@vercel/static"
     },
     {
+      "src": "slides-3d/**/*",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "discovery-ia/**/*",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.css",
       "use": "@vercel/static"
     },

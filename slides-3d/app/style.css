@@ -1,0 +1,91 @@
+:root{color-scheme:dark;--ink:#f4f0e7;--muted:#aca9a8;--accent:#e8c78c}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040a;color:var(--ink)}body{font-family:'Barlow Condensed',Impact,'Arial Narrow',sans-serif}button{font:inherit}#universe{position:fixed;inset:0;width:100%;height:100%;display:block}.vignette{pointer-events:none;position:fixed;inset:0}.vignette{z-index:2;background:radial-gradient(ellipse at 52% 48%,transparent 42%,rgba(0,0,0,.2) 68%,rgba(0,0,0,.72) 100%)}.topbar,.footer{position:fixed;left:0;right:0;z-index:10;display:flex;align-items:center;justify-content:space-between}.topbar{top:0;padding:28px 4.4vw}.brand{text-decoration:none;color:var(--ink);display:flex;align-items:center;gap:13px;font-size:15px;font-weight:700;line-height:.86;letter-spacing:.19em}.brand-mark{font:28px Georgia,serif;color:var(--accent)}.top-center,.top-right,.hint,.planet-counter,.eyebrow,.orbit-tag,.fact-label,.facts-kicker,.travel-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em}.top-center{color:#b2b5bb}.top-right{color:#b2b5bb;display:flex;align-items:center;gap:8px}.live-dot{height:5px;width:5px;border-radius:50%;background:#e7d6b8;box-shadow:0 0 12px #ffdda0}.edition{color:#777e88}main{position:fixed;inset:0;z-index:5;pointer-events:none}.panel{position:absolute;inset:0;opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .9s ease;display:flex;flex-direction:column;pointer-events:none}.panel.active{opacity:1;transform:translateY(0)}.panel.exit{opacity:0;transform:translateY(-15px)}.cover{justify-content:center;padding:0 9vw}.eyebrow{color:var(--accent);display:flex;align-items:center;gap:12px;margin-bottom:24px}.eyebrow:before{content:'';height:1px;width:24px;background:var(--accent)}h1,h2,p{margin:0}.cover h1{font-size:clamp(74px,11vw,194px);font-weight:500;letter-spacing:-.055em;line-height:.75;max-width:9ch;text-shadow:0 12px 40px #000}.cover h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(248,242,222,.85)}.cover-sub{font:12px/1.7 'DM Mono',monospace;letter-spacing:.12em;color:#b9b7b4;max-width:390px;margin-top:37px}.cover .cue{margin-top:45px;font:11px 'DM Mono',monospace;letter-spacing:.16em;color:var(--accent)}.cover .cue span{display:inline-block;margin-right:12px;font-size:18px;vertical-align:-2px}.intro{justify-content:center;padding-left:8vw}.intro .eyebrow{margin-bottom:12px}.intro h2{font-size:clamp(105px,15vw,270px);font-weight:500;letter-spacing:-.065em;line-height:.82;text-transform:uppercase;text-shadow:0 12px 55px rgba(0,0,0,.75)}.intro .intro-line{height:1px;width:170px;background:var(--accent);margin:24px 0 17px}.intro .deck{font-size:clamp(16px,2vw,25px);font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:#ded9ce}.intro .coords{position:absolute;bottom:19%;left:8vw;color:#9dabb5;font:10px 'DM Mono',monospace;letter-spacing:.17em;line-height:2}.intro .orbit-tag{position:absolute;right:7%;top:49%;color:#d6d2cd;display:flex;align-items:center;gap:14px;text-shadow:0 2px 20px #000}.orbit-tag:before{content:'';width:40px;height:1px;background:currentColor}.facts{justify-content:center;align-items:flex-end;padding-right:10vw}.facts-inner{width:min(430px,36vw)}.facts-kicker{color:var(--accent);margin-bottom:16px}.facts h2{font-size:clamp(66px,8vw,132px);font-weight:500;line-height:.85;text-transform:uppercase;letter-spacing:-.055em;margin-bottom:28px;text-shadow:0 4px 30px #000}.fact-list{list-style:none;padding:0;margin:0;border-top:1px solid rgba(242,232,215,.28)}.fact-list li{display:grid;grid-template-columns:95px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid rgba(242,232,215,.22);align-items:start}.fact-label{color:var(--accent);font-size:9px;padding-top:4px}.fact-value{font-size:clamp(17px,1.5vw,23px);font-weight:300;letter-spacing:.035em;line-height:1.15}.facts .chapter{margin-top:24px;color:#a4a7aa;font:10px 'DM Mono',monospace;letter-spacing:.13em}.ending{justify-content:center;align-items:center;text-align:center}.ending .eyebrow:before{display:none}.ending h2{font-size:clamp(80px,13vw,220px);line-height:.82;font-weight:500;letter-spacing:-.06em;text-shadow:0 8px 50px #000}.ending p{font:12px/1.8 'DM Mono',monospace;color:#c2c0bf;letter-spacing:.15em;margin-top:30px}.planet-counter{position:fixed;z-index:9;left:4.4vw;bottom:105px;color:#fff;font-size:14px}.planet-counter span{color:#6c7077;margin:0 7px}.progress{position:fixed;z-index:9;bottom:0;left:0;right:0;height:2px;background:#34383e}.progress span{display:block;width:0;height:100%;background:var(--accent);transition:width .6s ease}.footer{bottom:0;height:80px;padding:0 4.4vw}.hint{color:#9ca0a5;display:flex;align-items:center;gap:8px}.key{border:1px solid #777a7d;padding:5px 8px;line-height:1}.hint-sep{margin:0 8px;color:#5e646a}.controls{display:flex;gap:8px}.controls button{pointer-events:auto;cursor:pointer;border:1px solid rgba(242,236,225,.45);background:rgba(1,4,10,.36);color:var(--ink);height:45px;min-width:46px;padding:0 20px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.13em;transition:background .2s,border-color .2s}.controls button:hover{background:rgba(230,204,159,.15);border-color:var(--accent)}.controls button:disabled{opacity:.3;cursor:default}.controls button span{font-size:17px;margin-left:13px;vertical-align:-1px}.travel-label{z-index:8;position:fixed;left:50%;top:51%;transform:translate(-50%,-50%);text-align:center;color:#f5e5c9;opacity:0;transition:opacity .35s;pointer-events:none;text-shadow:0 2px 15px #000}.travel-label.visible{opacity:1}.travel-label span{font-size:12px;letter-spacing:.5em}.travel-line{width:100px;height:1px;background:#c6aa79;margin:16px auto}.travel-label small{font-size:9px;color:#aaa;letter-spacing:.25em}@media(max-width:700px){.topbar{padding:20px 5vw}.top-center,.top-right,.hint-sep,.hint span:last-child{display:none}.brand{font-size:12px}.cover{padding:0 7vw;justify-content:flex-end;padding-bottom:25vh}.cover h1{font-size:clamp(78px,19vw,142px)}.cover-sub{font-size:10px;margin-top:25px}.intro{padding:0 6vw;justify-content:flex-end;padding-bottom:24vh}.intro h2{font-size:clamp(72px,16vw,120px)}.intro .coords{bottom:19%;left:6vw}.intro .orbit-tag{display:none}.facts{padding:0 7vw;justify-content:flex-end;padding-bottom:15vh}.facts-inner{width:100%}.facts h2{font-size:74px;margin-bottom:18px}.fact-list li{grid-template-columns:82px 1fr;padding:9px 0}.fact-value{font-size:17px}.footer{height:65px;padding:0 5vw}.planet-counter{left:5vw;bottom:80px}.ending h2{font-size:20vw}}
+.model-credits{position:absolute;left:4.4vw;bottom:105px;max-width:640px;font:10px/1.6 'DM Mono',monospace;letter-spacing:.06em;color:#aeb4bd}.model-credits a{color:#e6c992;text-decoration:underline;pointer-events:auto}
+.show-planet-hero .topbar,.show-planet-hero .footer,.show-planet-hero .planet-counter,.show-planet-hero .progress{display:none}
+.planet-hero{align-items:center;justify-content:flex-start;padding:clamp(70px,9vh,130px) 5vw 0;pointer-events:auto;cursor:pointer}
+.planet-hero h2{margin:0;color:#f4f0e7;font-size:clamp(64px,8vw,142px);font-weight:700;letter-spacing:-.045em;line-height:1;text-transform:uppercase;text-align:center;text-shadow:0 8px 40px rgba(0,0,0,.9)}
+.planet-hero:focus-visible{outline:2px solid var(--accent);outline-offset:-8px}
+@media(max-width:700px){.planet-hero{padding-top:13vh}.planet-hero h2{font-size:clamp(60px,14vw,100px)}}
+/* Composição editorial do atlas: capa com mapa, planeta isolado e ficha lateral. */
+:root{--ink:#f5f2ea;--accent:#c9e1ac}
+body{background:#03060b}
+.vignette{background:radial-gradient(ellipse at 51% 47%,transparent 38%,rgba(0,0,0,.2) 74%,rgba(0,0,0,.67) 100%)}
+.topbar{padding:clamp(22px,3vw,42px) 5vw}
+.brand{font-size:clamp(13px,1.2vw,19px);letter-spacing:.1em}
+.brand-mark{font-size:clamp(23px,2.4vw,36px)}
+.top-center,.top-right{font-size:10px;letter-spacing:.23em}
+.cover{padding:0 7vw;justify-content:flex-start}
+.cover-copy{position:absolute;left:7vw;top:24%;z-index:2;width:min(60vw,980px)}
+.cover .eyebrow{color:#b6d99e;margin-bottom:clamp(22px,3vh,40px)}
+.cover h1{font-size:clamp(76px,10.5vw,200px);line-height:.78;letter-spacing:-.055em;max-width:none;white-space:nowrap}
+.cover h1 em{-webkit-text-stroke:1px rgba(215,229,231,.58)}
+.cover-sub{font-family:'DM Mono',monospace;font-size:clamp(10px,.9vw,14px);line-height:1.8;letter-spacing:.07em;color:#aeb9c1;margin-top:clamp(26px,4vh,50px);max-width:600px}
+.cover .cue{pointer-events:auto;cursor:pointer;border:0;border-bottom:1px solid rgba(194,221,165,.55);background:none;padding:0 0 13px;margin-top:clamp(20px,3vh,38px);color:#c9e4aa;text-align:left;transition:color .2s,border-color .2s}
+.cover .cue:hover{color:#fff;border-color:#fff}
+.cover .cue span{float:right;margin-left:28px;margin-right:0}
+.cover-worlds{position:absolute;z-index:3;left:13%;right:7%;bottom:12%;height:22%;display:grid;grid-template-columns:repeat(5,1fr);align-items:center;gap:2vw;pointer-events:auto}
+.cover-world{appearance:none;border:0;background:none;padding:0;color:#c1c6cc;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:10px;font:10px 'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase;transition:transform .25s,color .25s}
+.cover-world:nth-child(2){transform:translateY(25px)}
+.cover-world:nth-child(3){transform:translateY(-12px)}
+.cover-world:nth-child(4){transform:translateY(18px)}
+.cover-world:nth-child(5){transform:translateY(-28px)}
+.cover-world:hover{color:#fff;transform:translateY(-12px) scale(1.12)}
+.cover-orb{display:block;width:clamp(48px,6.5vw,118px);aspect-ratio:1}
+.facts{align-items:flex-end;padding-right:7vw}
+.facts-inner{width:min(540px,39vw);padding:30px 0;background:linear-gradient(90deg,rgba(3,6,11,0),rgba(3,6,11,.28))}
+.facts-kicker{color:#b8d99f;letter-spacing:.28em}
+.facts h2{font-size:clamp(62px,7.2vw,140px);line-height:.9;margin-bottom:30px}
+.fact-list{border-top:1px solid rgba(176,203,215,.25)}
+.fact-list li{grid-template-columns:105px 1fr;gap:20px;padding:18px 0;border-color:rgba(176,203,215,.22)}
+.fact-label{color:#a5c7a8}
+.fact-value{font-size:clamp(18px,1.45vw,25px);color:#eef1ef}
+.facts .chapter{color:#8da4af;margin-top:28px}
+.footer{height:88px;padding:0 5vw}
+.controls{gap:10px}
+.controls button{border-radius:50%;width:48px;min-width:48px;height:48px;padding:0;display:flex;align-items:center;justify-content:center;border-color:rgba(170,190,203,.35);background:rgba(5,11,18,.6);font-size:14px}
+.controls button:last-child{width:64px;min-width:64px;background:#d8e8c7;color:#0c1710;border-color:#d8e8c7;font-size:0}
+.controls button:last-child span{font-size:25px;margin:0;vertical-align:0}
+.controls button:last-child:hover{background:#f2ffe4}
+.planet-counter{left:auto;right:calc(5vw + 142px);bottom:37px;font-size:12px;color:#dfe3dc}
+.progress{left:50%;right:auto;bottom:42px;transform:translateX(-50%);width:min(30vw,520px);height:2px;background:repeating-linear-gradient(90deg,#394956 0 18px,transparent 18px 24px)}
+.progress span{background:#c5e5a8;box-shadow:0 0 9px #bfe997}
+.hint{letter-spacing:.14em}
+@media(max-width:900px){.cover{padding:0 6vw}.cover-copy{left:6vw;top:17%;width:90vw}.cover h1{font-size:clamp(66px,15vw,110px)}.cover-sub{font-size:10px;max-width:280px;margin-top:22px}.cover .cue{margin-top:20px}.cover-worlds{left:4%;right:4%;bottom:12%;height:15%;gap:1vw}.cover-world{font-size:7px;letter-spacing:.06em}.cover-orb{width:clamp(42px,10vw,72px)}.cover-world:nth-child(n){transform:none}.facts{padding:0 7vw 16vh;justify-content:flex-end}.facts-inner{width:100%;padding:18px;background:rgba(3,6,11,.7);backdrop-filter:blur(10px)}.facts h2{font-size:clamp(58px,13vw,86px)}.fact-list li{padding:10px 0;grid-template-columns:80px 1fr}.fact-value{font-size:17px}.footer{height:65px}.progress{bottom:32px;width:24vw}.planet-counter{right:calc(5vw + 115px);bottom:25px;font-size:10px}.controls button{height:39px;width:39px;min-width:39px}.controls button:last-child{height:44px;width:44px;min-width:44px}.hint{font-size:8px}}
+.cover{pointer-events:auto}
+.show-cover main,.show-planet-hero main{pointer-events:auto}
+@media(max-width:900px){.facts-inner{background:linear-gradient(90deg,rgba(3,7,13,.96),rgba(3,7,13,.84));border:1px solid rgba(180,204,212,.18);box-shadow:0 14px 40px rgba(0,0,0,.36)}.facts{padding-bottom:12vh}.facts h2{margin-bottom:12px}.fact-list li{padding:8px 0}}
+@media(max-width:900px){body:not(.show-cover):not(.show-planet-hero) .topbar{background:linear-gradient(180deg,rgba(2,5,11,.94),rgba(2,5,11,.55) 70%,transparent);padding-bottom:38px}body:not(.show-cover):not(.show-planet-hero) .footer{background:linear-gradient(0deg,rgba(2,5,11,.95),transparent)}}
+.death-star-tag{position:absolute;z-index:2;top:45%;right:10%;display:flex;flex-direction:column;gap:5px;align-items:flex-start;color:#cad5d8;font:10px 'DM Mono',monospace;letter-spacing:.18em;text-shadow:0 2px 10px #000}.death-star-tag:before{content:'';width:42px;height:1px;background:#889fac;margin-bottom:7px}.death-star-tag small{font-size:8px;letter-spacing:.1em;color:#8796a2}@media(max-width:900px){.death-star-tag{top:43%;right:7%;font-size:8px}.death-star-tag small{font-size:7px}}
+
+/* A câmera e a Falcon ficam livres durante a travessia. */
+.is-travelling .topbar,.is-travelling .footer,.is-travelling .planet-counter,.is-travelling .progress{opacity:0;pointer-events:none}
+.is-travelling .travel-label{left:7vw;top:auto;bottom:16vh;transform:none;text-align:left;align-items:flex-start}
+.is-travelling .travel-label>span{font-size:9px;letter-spacing:.26em;color:#a8b9c6}
+.is-travelling .travel-label>small{display:block;margin-top:16px;font:24px 'Barlow Condensed',sans-serif;letter-spacing:0;color:#f4f0e7}
+.is-travelling .travel-line{margin-left:0;width:180px}
+
+/* Fontes locais fornecidas para o atlas. */
+@font-face{font-family:'Star Jedi';src:url('./assets/fonts/star-jedi.ttf') format('truetype');font-display:swap}
+@font-face{font-family:'Jabba the Font';src:url('./assets/fonts/jabba-the-font.ttf') format('truetype');font-display:swap}
+body,button{font-family:'Jabba the Font',sans-serif}
+.cover h1,.planet-hero h2,.facts h2,.ending h2{font-family:'Star Jedi',sans-serif;font-weight:400;letter-spacing:.005em}
+.cover h1{font-size:clamp(58px,7.2vw,132px);line-height:1.02}
+.cover h1 em{font-style:normal}
+.planet-hero h2{font-size:clamp(52px,6.4vw,110px);line-height:1.15}
+.facts h2{font-size:clamp(50px,5.5vw,100px);line-height:1.15}
+.ending h2{font-size:clamp(58px,8.5vw,150px);line-height:1.15}
+.top-center,.top-right,.hint,.planet-counter,.eyebrow,.orbit-tag,.fact-label,.facts-kicker,.travel-label,.cover-sub,.cover .cue,.intro .coords,.facts .chapter,.ending p,.model-credits,.cover-world,.controls button,.death-star-tag,.is-travelling .travel-label>small{font-family:'Jabba the Font',sans-serif}
+@media(max-width:900px){.cover h1{font-size:clamp(47px,9vw,82px)}.planet-hero h2{font-size:clamp(45px,9vw,78px)}.facts h2{font-size:clamp(46px,9vw,76px)}}
+@media(max-width:700px){.cover h1{font-size:clamp(42px,10vw,65px)}.ending h2{font-size:clamp(48px,12vw,85px)}}
+
+#hyperspace-intro{position:fixed;inset:0;z-index:30;width:100%;height:100%;background:#01040b;pointer-events:auto;opacity:1;transition:opacity .7s ease}
+#hyperspace-intro.is-ending{opacity:0;pointer-events:none}
+
+/* Abertura cinematográfica: interface revelada apenas ao sair do salto. */
+.opening-active #content,.opening-active .topbar,.opening-active .footer,.opening-active .planet-counter,.opening-active .progress{opacity:0;pointer-events:none}
+.opening-active::before,.opening-active::after{content:'';position:fixed;left:0;right:0;height:6vh;background:#050608;z-index:25;pointer-events:none}
+.opening-active::before{top:0}.opening-active::after{bottom:0}
+
+.opening-active .travel-label{left:7vw;top:auto;bottom:16vh;transform:none;text-align:left;align-items:flex-start}
+.opening-active .travel-label>span{font:9px monospace;letter-spacing:.26em;color:#a8b9c6}
+.opening-active .travel-label>small{display:block;margin-top:16px;font:24px sans-serif;letter-spacing:0;color:#f4f0e7}
+.opening-active .travel-line{margin-left:0;width:180px}
