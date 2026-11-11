@@ -41,4 +41,21 @@ loader.load('slides-3d/app/assets/millennium-falcon.glb', (gltf) => {
 });
 ```
 
-> **Créditos:** Modelos de planetas e assets adaptados (Purple Planet por Yo.Ri e Green Planet por jimmyn64, CC BY 4.0).
+> **Créditos:** Modelos de planetas e assets adaptados do [Sketchfab](https://sketchfab.com/) (Purple Planet por Yo.Ri e Green Planet por jimmyn64, CC BY 4.0).
+
+---
+
+## 🌐 Onde Encontrar Novos Modelos e Referências de Design
+
+### 1. Sketchfab (sketchfab.com) — Repositório de Modelos 3D GLB
+O **[Sketchfab](https://sketchfab.com/)** é a principal fonte global de modelos 3D em tempo real para WebGL:
+- **Filtro Recomendado:** Busque pelo tema (ex: `spaceship`, `drone`, `cyberpunk city`, `gadget`), ative o filtro **Downloadable** e selecione licenças **CC Attribution**.
+- **Formato:** Baixe sempre a opção **glTF / GLB** (formato binário com geometria, materiais e texturas embutidos em um único arquivo).
+- **Inspeção Prévia:** Use o visualizador 3D do Sketchfab e aperte `5` ou acesse o menu de Wireframe para inspecionar a contagem de polígonos (ideal: menos de 80.000 triângulos para apresentações web a 60 FPS).
+- **Sketchfab Viewer API:** Se preferir não hospedar o arquivo `.glb`, você pode incorporar o modelo diretamente no slide usando a [Sketchfab Viewer API](https://sketchfab.com/developers/viewer) e controlar animações e câmeras via JavaScript.
+
+### 2. Behance (behance.net) — Direção de Arte & Apresentações Visuais
+O **[Behance](https://www.behance.net/)** é a referência máxima para direção de arte, composição editorial e slides de estúdio:
+- **Pesquisas Recomendadas:** `Presentation Design`, `Keynote Presentation`, `Pitch Deck 3D`, `Kinetic Typography`, `Brand Identity Deck`.
+- **O que observar:** Relação de escala entre números monumentais e legendas pequenas, paletas restritas (máximo 3 cores dominantes), ritmo de respiração visual e grids assimétricos.
+- **Aplicação no Deck:** Use o Behance para montar o *moodboard* na Pergunta 8/10 (Identidade Visual) e desenhar layouts autorais que escapam do padrão genérico de 3 cards corporativos.

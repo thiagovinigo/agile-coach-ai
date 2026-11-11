@@ -12,9 +12,15 @@ Pesquise depois de compreender conceito, uso e limites de movimento, antes de fe
 
 Mapeie também shaders dentro dos slides, conforme [direcao-shaders.md](direcao-shaders.md): atmosfera, revelação e explicação, além de transições. Não pare no primeiro efeito incorporado quando outras cenas tenham oportunidades pertinentes.
 
-## Catálogo — 18 referências
+## Catálogo — 21 referências oficiais
 
 Os links são pontos de entrada oficiais. Capacidades, APIs, integrações, requisitos e licenças devem ser confirmados na versão consultada. Não trate descrição do catálogo como garantia de compatibilidade.
+
+### Modelos 3D, Assets Espaciais & Cenas Interativas
+
+| Referência | O que procurar | Adaptação ao slide |
+| --- | --- | --- |
+| [Sketchfab](https://sketchfab.com/) · [Viewer API](https://sketchfab.com/developers/viewer) | Maior repositório mundial de modelos 3D em formato GLTF/GLB, texturas PBR, animações e API de visualização web. | Objeto protagonista 3D (naves, produtos industriais, gadgets, arquitetura, anatomia, esculturas). Baixar assets GLB otimizados com licença Creative Commons para carregar via Three.js `GLTFLoader`, ou incorporar diretamente no slide via Sketchfab Viewer API controlando câmera, anotações e animação via JavaScript. |
 
 ### Efeitos e componentes para adaptar
 
@@ -41,10 +47,12 @@ Os links são pontos de entrada oficiais. Capacidades, APIs, integrações, requ
 | [React Three Fiber](https://r3f.docs.pmnd.rs/getting-started/introduction) + [Drei](https://drei.docs.pmnd.rs/) | Integração React com Three.js, utilitários e materiais. | Produto, vidro ou iluminação dirigida; confirmar compatibilidade entre as versões. |
 | [PixiJS](https://pixijs.com/) + [PixiJS Filters](https://pixijs.io/filters/docs/) | Composição 2D e filtros adicionais. | Tratamento de imagens, texto e pós-processamento; escolher filtros pelo tema. |
 
-### Exploração visual e técnicas
+### Exploração visual, Direção de Arte & Técnicas
 
 | Referência | O que procurar | Adaptação ao slide |
 | --- | --- | --- |
+| [Behance](https://www.behance.net/) | Curadoria global de pitch decks, direção de arte, motion design, tipografia editorial e identidades visuais de estúdios internacionais. | Pesquisa de moodboards, composições assimétricas, tratamento de luz, grades editoriais e ritmo visual antes de desenhar o deck. Buscar por termos como "Presentation Design", "Keynote Deck", "3D Motion", "Editorial Layout" e "Brand Guidelines" para escapar de clichês e compor slides com estética autoral de estúdio. |
+| [DaFont](https://www.dafont.com/) | Catálogo mundial de tipografia display, fontes temáticas (Sci-Fi, Cyberpunk, Retro, Brutalismo, Gótica, Manuscrita) para títulos monumentais. | Pesquisa de fontes de impacto para capas e palavras-chave. Baixar arquivos `.ttf`/`.otf` gratuitos/CC, converter para `.woff2` e declarar via `@font-face` local para funcionamento autônomo offline em apresentações ao vivo. |
 | [Unicorn Studio](https://www.unicorn.studio/) | Exemplos e documentação de composição visual, exportação e incorporação. | Experimentar uma direção e verificar o caminho real de entrega; não presumir exportação gratuita ou acesso a um projeto. |
 | [cables.gl](https://cables.gl/) | Patches, exemplos e documentação de exportação/incorporação. | Combinar formas, materiais e interação, conferindo dependências do patch escolhido. |
 | [Codrops](https://tympanus.net/codrops/category/tutorials/) | Tutoriais com demos e código de desenvolvimento criativo. | Adaptar uma técnica menos convencional ao argumento; verificar a licença do código e dos assets separadamente. |

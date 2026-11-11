@@ -190,6 +190,87 @@ def generate_expert_agent_reply(agent_title: str, system_prompt: str, user_messa
             "3. **Gestão Ativa do Débito Técnico:** Reserve tempo de engenharia contínuo para refatorações preventivas e atualização de dependências."
         )
 
+    # 8. Cinematic Slides & 3D Director / Slides 3D / Sketchfab / Behance / DaFont
+    elif (
+        "slide" in title_lower 
+        or "cinematic" in title_lower 
+        or "3d" in title_lower 
+        or agent_id == "cinematic-slides-director" 
+        or any(k in msg_lower for k in ["sketchfab", "behance", "dafont", "slide 3d", "three.js", "apresentação 3d", "apresentacao 3d"])
+    ):
+        if any(w in msg_lower for w in ["sketchfab", "modelo", "glb", "gltf", "3d"]):
+            return (
+                "🪐 **Direção de Arte & Modelos 3D — Sketchfab.com Hub:**\n\n"
+                "Para integrar modelos 3D nas suas apresentações com Three.js utilizando o **Sketchfab**:\n\n"
+                "1. **Curadoria & Filtros no Sketchfab:**\n"
+                "   - Acesse [sketchfab.com](https://sketchfab.com) e pesquise pelo tema (ex: *cyberpunk terminal*, *drone*, *server rack*, *spacecraft*).\n"
+                "   - Marque o filtro **'Downloadable'** e selecione licenças compatíveis (ex: **CC Attribution**).\n"
+                "   - Prefira arquivos nativos em formato **`.glb` / `.gltf`** (binários compactos com malha e texturas embutidas).\n\n"
+                "2. **Pipeline de Carregamento WebGL (Three.js):**\n"
+                "   ```javascript\n"
+                "   import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';\n"
+                "   const loader = new GLTFLoader();\n"
+                "   loader.load('path/to/model.glb', (gltf) => {\n"
+                "       const model = gltf.scene;\n"
+                "       model.scale.set(1.5, 1.5, 1.5);\n"
+                "       scene.add(model);\n"
+                "   });\n"
+                "   ```\n\n"
+                "3. **Iluminação Cinematográfica (Three-Point Lighting):**\n"
+                "   - **Key Light:** DirectionalLight quente (intensidade 2.5, ângulo de 45°).\n"
+                "   - **Fill Light:** AmbientLight suave ou azulada (intensidade 0.6) para suavizar sombras profundas.\n"
+                "   - **Rim/Back Light:** PointLight ciano ou magenta atrás do modelo para destacar as silhuetas em fundos escuros."
+            )
+        elif any(w in msg_lower for w in ["behance", "pitch deck", "arte", "layout", "visual", "grid"]):
+            return (
+                "🎨 **Direção de Arte & Layouts Editoriais — Behance.net Inspo:**\n\n"
+                "Para criar apresentações no nível dos maiores estúdios globais de design:\n\n"
+                "1. **Curadoria Estratégica no Behance:**\n"
+                "   - Acesse [behance.net](https://www.behance.net) e filtre por campos criativos: *'Motion Graphics'*, *'Branding'*, *'Interaction Design'* e termos como *'Pitch Deck Design'* e *'Kinetic Typography'*.\n"
+                "   - Crie um Moodboard de referências com: (a) Grid assimétrico, (b) Hierarquia de contraste 60-30-10, (c) Tratamento monocromático com acento neon.\n\n"
+                "2. **Regras de Ouro de Apresentações Cinematográficas:**\n"
+                "   - **Máximo 3 Cores Ativas:** Fundo escuro profundo (`#050811`), texto neutro (`#f8fafc`) e uma cor de ênfase dramática (`#6366f1` ou `#e11d48`).\n"
+                "   - **Regra de Um Ponto Focal:** Cada slide deve ter apenas um elemento dominante (ex: a estatística principal ou o modelo 3D central).\n"
+                "   - **Espaço Negativo Proposital:** Pelo menos 40% da tela livre para permitir respiro e elegância executiva."
+            )
+        elif any(w in msg_lower for w in ["dafont", "fonte", "tipografia", "font", "display"]):
+            return (
+                "🔤 **Curadoria Tipográfica & Fontes Display — DaFont.com:**\n\n"
+                "Para selecionar e configurar tipografias de alto impacto sem quebrar a apresentação offline:\n\n"
+                "1. **Seleção no DaFont:**\n"
+                "   - Acesse [dafont.com](https://www.dafont.com) e explore categorias temáticas: *Techno > Sci-Fi*, *Gothic/Brutalist*, *Retro* ou *Bitmap*.\n"
+                "   - Utilize o campo de visualização (*Preview*) com o texto exato do título do seu deck.\n"
+                "   - Filtre por **'100% Free'** ou **'Free for personal use'** conforme a finalidade do seu projeto.\n\n"
+                "2. **Instalação Local e Zero Dependência de Rede (@font-face):**\n"
+                "   ```css\n"
+                "   @font-face {\n"
+                "       font-family: 'SciFiDisplay';\n"
+                "       src: url('fonts/scifi-display.ttf') format('truetype');\n"
+                "       font-display: swap;\n"
+                "   }\n"
+                "   .slide-title {\n"
+                "       font-family: 'SciFiDisplay', sans-serif;\n"
+                "       font-size: clamp(3rem, 7vw, 6rem);\n"
+                "       letter-spacing: 0.08em;\n"
+                "       text-transform: uppercase;\n"
+                "   }\n"
+                "   ```\n\n"
+                "3. **Hierarquia Tipográfica Segura:**\n"
+                "   - **Títulos Display (DaFont):** Máximo 4 a 6 palavras. Puro impacto e personalidade.\n"
+                "   - **Corpo do Texto & Métricas (Sans-Serif Neutra):** Utilize *Inter*, *Plus Jakarta Sans* ou *Space Grotesk* para garantir legibilidade instantânea."
+            )
+        else:
+            return (
+                f"🪐 **Diretriz do Cinematic Slides & 3D Director:**\n\n"
+                f"Para atender sua necessidade visual (*\"{user_message}\"*):\n\n"
+                "1. **Tríade de Recursos Visuais:**\n"
+                "   - 🪐 **Sketchfab.com:** Pesquise modelos 3D `.glb` com texturas PBR e filtros de licença CC para baixar e renderizar via Three.js.\n"
+                "   - 🎨 **Behance.net:** Inspire-se nos melhores pitch decks e diretórios editoriais para definir contrastes de cores e grids cinematográficos.\n"
+                "   - 🔤 **DaFont.com:** Escolha fontes display de forte identidade visual (Sci-Fi, Cyberpunk, Retrô) e carregue offline com `@font-face`.\n\n"
+                "2. **Storytelling em 5 Atos:** Contexto inicial -> Tensão/Problema -> Clímax da Solução -> Prova de Tração/Métricas -> Chamada para Ação (CTA).\n\n"
+                "3. **WebGL & Efeitos de Câmera:** Mantenha a renderização a 60 FPS com Three.js e use interpolações de câmera (Tween/GSAP) sincronizadas com as trocas de slide."
+            )
+
     # Resposta padrão inteligente
     return (
         f"🤖 **Recomendação Especializada ({agent_title or 'Agente Ágil'}):**\n\n"

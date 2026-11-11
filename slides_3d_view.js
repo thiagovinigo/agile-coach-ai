@@ -17,17 +17,19 @@ function initSlides3dView() {
             { text: '🪐 Abrir Apresentação 3D ao Vivo', link: '#slides-3d-demo-view' },
             { text: '🎬 6 Skills de Slides Cinematográficos' },
             { text: '🚀 6 Modelos 3D (.glb) Prontos para Download' },
+            { text: '🪐 Sketchfab (Modelos 3D)', link: 'https://sketchfab.com', isExternal: true },
+            { text: '🎨 Behance (Pitch Decks)', link: 'https://www.behance.net', isExternal: true },
+            { text: '🔤 DaFont (Tipografia Display)', link: 'https://www.dafont.com', isExternal: true },
             { text: '🔮 Shaders GLSL & Efeito Hiperespaço' },
-            { text: '📐 14 Layouts & Curadoria de Fontes' },
             { text: '⚡ Three.js + WebGL 60 FPS' }
         ],
         tabs: [
-            { id: 'all', label: '🌟 Catálogo Completo 3D (27)' },
+            { id: 'all', label: '🌟 Catálogo Completo 3D (30)' },
             { id: '1. Framework', label: '🎬 Framework Cinematográfico (5)' },
-            { id: '2. Direção', label: '🔮 Shaders & Movimento (4)' },
+            { id: '2. Direção', label: '🔮 Shaders, Movimento & Behance (5)' },
             { id: '3. Pipeline', label: '📜 Roteiro, Mensagem & Público (3)' },
-            { id: '4. Design', label: '🎨 Design & Tipografia (5)' },
-            { id: '5. Modelos', label: '🪐 Modelos 3D GLB (7)' },
+            { id: '4. Design', label: '🎨 Design, Tipografia & DaFont (6)' },
+            { id: '5. Modelos', label: '🪐 Modelos 3D GLB & Sketchfab (8)' },
             { id: '6. Demo', label: '⚡ Demo Star Wars (5)' },
             { id: 'cheatsheet', label: '🚀 Cheatsheet de Criação 3D' }
         ],
@@ -107,7 +109,46 @@ python iniciar.py
                         <a href="slides-3d/app/assets/jedi-starfighter.glb" download="jedi-starfighter.glb" style="background:#0f172a; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:13px;">⬇️ Jedi Starfighter (30.2MB)</a>
                         <a href="slides-3d/app/assets/naboo-base.glb" download="naboo-base.glb" style="background:#0f172a; color:#fff; padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:700; font-size:13px;">⬇️ Naboo Base (43.5MB)</a>
                     </div>
+                
+                <!-- 4. Tríade Criativa: Sketchfab, Behance e DaFont -->
+                <div class="ruflo-cheatsheet-card" style="border-left: 4px solid #f59e0b;">
+                    <div class="ruflo-cheatsheet-title">
+                        <span>🌟</span> 4. Tríade de Referências: Sketchfab (3D), Behance (Direção de Arte) e DaFont (Tipografia)
+                    </div>
+                    <p style="color:#475569; font-size:14px; margin-bottom:12px;">
+                        Acelere a criação visual das suas apresentações integrando estes três acervos globais:
+                    </p>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:14px; margin-top:10px;">
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px;">
+                            <h4 style="margin:0 0 8px 0; color:#0f172a; display:flex; align-items:center; gap:8px;">
+                                <span>🪐</span> <a href="https://sketchfab.com" target="_blank" style="color:#e11d48; text-decoration:none; font-weight:700;">Sketchfab.com ↗</a>
+                            </h4>
+                            <p style="margin:0 0 8px 0; font-size:13px; color:#475569; line-height:1.45;">
+                                Milhões de modelos 3D em formato <code>.glb</code> com texturas PBR. Filtre por "Downloadable" e licença "CC Attribution" para baixar e carregar via <code>GLTFLoader</code> no Three.js ou incorporar via Viewer API.
+                            </p>
+                            <span style="font-size:11px; background:#ffe4e6; color:#9f1239; padding:2px 8px; border-radius:4px; font-weight:600;">Assets 3D WebGL</span>
+                        </div>
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px;">
+                            <h4 style="margin:0 0 8px 0; color:#0f172a; display:flex; align-items:center; gap:8px;">
+                                <span>🎨</span> <a href="https://www.behance.net" target="_blank" style="color:#2563eb; text-decoration:none; font-weight:700;">Behance.net ↗</a>
+                            </h4>
+                            <p style="margin:0 0 8px 0; font-size:13px; color:#475569; line-height:1.45;">
+                                A maior vitrine de pitch decks e direção de arte de estúdios internacionais. Busque por <em>"Presentation Design"</em> e <em>"Editorial Layout"</em> para inspirar grids assimétricos e paletas com no máximo 3 cores.
+                            </p>
+                            <span style="font-size:11px; background:#dbeafe; color:#1e40af; padding:2px 8px; border-radius:4px; font-weight:600;">Direção de Arte & Moodboards</span>
+                        </div>
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px;">
+                            <h4 style="margin:0 0 8px 0; color:#0f172a; display:flex; align-items:center; gap:8px;">
+                                <span>🔤</span> <a href="https://www.dafont.com" target="_blank" style="color:#d97706; text-decoration:none; font-weight:700;">DaFont.com ↗</a>
+                            </h4>
+                            <p style="margin:0 0 8px 0; font-size:13px; color:#475569; line-height:1.45;">
+                                Mais de 80.000 fontes temáticas (Sci-Fi, Cyberpunk, Retro, Brutalista). Baixe os arquivos <code>.ttf</code> gratuitos e declare no CSS via <code>@font-face</code> para títulos monumentais sem depender de conexão externa.
+                            </p>
+                            <span style="font-size:11px; background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:4px; font-weight:600;">Tipografia Display</span>
+                        </div>
+                    </div>
                 </div>
+</div>
             </div>
         `
     });

@@ -164,6 +164,24 @@ const agileAgentsCatalog = {
                 "Crie um checklist de pré e pós-release para garantir estabilidade da aplicação."
             ]
         }
+    ],
+    "DESIGN & APRESENTAÇÕES 3D": [
+        {
+            id: "cinematic-slides-director",
+            title: "Cinematic Slides & 3D Director",
+            icon: "🪐",
+            category: "DESIGN & APRESENTAÇÕES 3D",
+            tagline: "Diretor de arte 3D, slides cinematográficos, Sketchfab, Behance e DaFont",
+            description: "Especialista em apresentações de alto impacto visual, Three.js, shaders GLSL, tipografia display e curadoria em Sketchfab.com, Behance.net e DaFont.com.",
+            systemPrompt: "Você é o Cinematic Slides & 3D Director, autoridade em apresentações cinematográficas, storytelling visual e WebGL/Three.js. Você guia o usuário na criação de decks inesquecíveis utilizando a tríade essencial: 1) Sketchfab.com para assets 3D (.glb/gltf) e Viewer API; 2) Behance.net para referências de arte, pitch decks e grids editoriais; 3) DaFont.com para tipografia display e fontes de impacto offline via @font-face. Forneça instruções práticas, snippets de código Three.js, paletas de cores e estruturas de roteiro.",
+            whenToUse: "Use para criar apresentações de impacto para diretoria/investidores, animar modelos 3D com Three.js, escolher fontes no DaFont, buscar referências no Behance ou baixar modelos no Sketchfab.",
+            suggestedPrompts: [
+                "Como integrar um modelo .glb do Sketchfab.com em uma apresentação Three.js com iluminação cinematográfica?",
+                "Quais referências de pitch decks no Behance.net você recomenda analisar para um lançamento de produto SaaS?",
+                "Como escolher e configurar uma fonte display do DaFont.com via @font-face garantindo contraste e legibilidade?",
+                "Crie um roteiro em 5 atos com transições 3D para apresentar os resultados da transformação ágil para o C-level."
+            ]
+        }
     ]
 };
 
@@ -192,7 +210,7 @@ function initAgentsView() {
                     <span class="tool-hero-badge" style="background:rgba(99, 102, 241, 0.25); color:#818cf8; border:1px solid rgba(99, 102, 241, 0.6);">Agile Fleet</span>
                 </h2>
                 <div style="font-size:13px; color:#c7d2fe; font-weight:600; margin-top:2px;">
-                    10 Agentes Especializados em Papéis Ágeis · Facilitação, Métricas, Produto e Engenharia
+                    11 Agentes Especializados em Papéis Ágeis e Criativos · Facilitação, Métricas, Produto, Engenharia e Slides 3D
                 </div>
             </div>
         </div>
@@ -201,7 +219,8 @@ function initAgentsView() {
             Selecione qualquer agente para consultar sua missão, ver exemplos de prompts e <strong>conversar em tempo real no console interativo</strong>.
         </p>
         <div class="tool-pill-bar">
-            <span class="tool-pill">🤖 10 Agentes Prontos para Conversar</span>
+            <span class="tool-pill">🤖 11 Agentes Prontos para Conversar</span>
+            <span class="tool-pill">🪐 Slides 3D & Direção de Arte</span>
             <span class="tool-pill">🧙‍♂️ Scrum & Facilitação</span>
             <span class="tool-pill">📊 Métricas de Fluxo & Previsibilidade</span>
             <span class="tool-pill">🧑‍💼 PO & Gestão de Produto</span>
@@ -209,11 +228,12 @@ function initAgentsView() {
             <span class="tool-pill">💬 Chat Embutido em Tempo Real</span>
         </div>
         <div class="tool-tabs-nav" id="agents-tabs-filter">
-            <button class="tool-tab-btn active" data-filter="all" style="background:#6366f1; border-color:#6366f1; color:#fff;">🌟 Todos os Agentes (10)</button>
+            <button class="tool-tab-btn active" data-filter="all" style="background:#6366f1; border-color:#6366f1; color:#fff;">🌟 Todos os Agentes (11)</button>
             <button class="tool-tab-btn" data-filter="FACILITAÇÃO & AGILIDADE">🧙‍♂️ Facilitação & Agilidade</button>
             <button class="tool-tab-btn" data-filter="MÉTRICAS & FLUXO">📊 Métricas & Fluxo</button>
             <button class="tool-tab-btn" data-filter="PRODUTO & ESTRATÉGIA">🧑‍💼 Produto & Estratégia</button>
             <button class="tool-tab-btn" data-filter="ENGENHARIA & QUALIDADE">🛠️ Engenharia & Qualidade</button>
+            <button class="tool-tab-btn" data-filter="DESIGN & APRESENTAÇÕES 3D">🪐 Slides 3D & Design</button>
         </div>
     `;
     container.appendChild(hero);

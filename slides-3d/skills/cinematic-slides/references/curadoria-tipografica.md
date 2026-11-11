@@ -22,6 +22,13 @@ Evite se fixar numa dupla favorita em projetos diferentes. Isso não exige uma m
 
 Os pares da lista são hipóteses de direção, não regras de categoria. Um documentário pode usar uma display incomum se a narrativa sustentar isso; uma apresentação de tecnologia não precisa de letras futuristas. Ajuste ou recombine pares quando melhorar a composição, mantendo leitura e unidade.
 
+## Fontes Display & Títulos de Impacto — DaFont (dafont.com)
+
+Quando o briefing exigir um título protagonista com identidade visual temática forte (ficção científica, space opera, terror, brutalismo, estética cyberpunk, editorial vintage, anos 70 ou lettering artesanal), utilize o **[DaFont](https://www.dafont.com/)** como catálogo de descoberta tipográfica display:
+- **Busca por Temas:** Explore categorias como *Techno > Sci-Fi*, *Bitmap / Pixel*, *Fancy > Retro*, *Gothic* ou *Script*.
+- **Licenciamento:** Filtre por "100% Grátis" ou "Domínio Público" para uso corporativo, ou verifique as condições da licença nos arquivos `.txt` inclusos no `.zip`.
+- **Uso em Slides HTML:** Baixe o arquivo `.ttf` ou `.otf`, converta para `.woff2` e declare no CSS via `@font-face` com caminhos locais (`./assets/fonts/...`), garantindo que o deck funcione 100% offline em telões de eventos sem dependência de rede externa.
+
 ## Fora da caixa com controle
 
 - Construa uma cena em torno de uma palavra: tamanho monumental, quebra de linha intencional, recorte ou alinhamento inesperado. Preserve o reconhecimento da mensagem; ornamentação não deve exigir adivinhação.
